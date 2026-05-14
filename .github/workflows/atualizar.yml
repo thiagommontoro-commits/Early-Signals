@@ -1,0 +1,36 @@
+name: AEM Data Receipt Daily Run
+
+on:
+  schedule:
+    # Roda de Segunda a Sexta às 07:15 da manhã (Horário de Brasília)
+    - cron: '15 10 * * 1-5'
+  workflow_dispatch: # Isso é o que cria o botão para rodarmos agora!
+
+jobs:
+  atualizar-dados:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v3
+
+      - name: Configurar Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Instalar biblioteca do Gemini
+        run: pip install google-generativeai
+
+      - name: Rodar Extração de Inteligência
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python atualizar_dados.py
+
+      - name: Salvar novo Painel HTML
+        run: |
+          git config --global user.name "AEM Bot"
+          git config --global user.email "bot@agco.com"
+          git add index.html
+          git commit -m "⚙️ Atualização Executiva: $(date)" || exit 0
+          git push
