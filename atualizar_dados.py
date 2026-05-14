@@ -6,7 +6,7 @@ import google.generativeai as genai
 # 1. Conecta com a Inteligência Artificial usando a chave que você salvou
 CHAVE_API = os.environ.get("GEMINI_API_KEY")
 genai.configure(api_key=CHAVE_API)
-modelo = genai.GenerativeModel('gemini-1.5-pro')
+modelo = genai.GenerativeModel('gemini-1.5-flash')
 
 # 2. O comando exato para extrair os dados
 prompt = """
