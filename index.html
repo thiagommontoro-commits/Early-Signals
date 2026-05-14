@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Early warning AGCO</title>
+    <style>
+        /* AGCO Corporate Identity Colors */
+        :root {
+            --agco-red: #cc0000;
+            --agco-black: #111111;
+            --agco-dark-gray: #333333;
+            --agco-light-gray: #f4f4f4;
+            --text-main: #222222;
+            --white: #ffffff;
+        }
+
+        body { font-family: 'Arial', sans-serif; background-color: #e9ecef; color: var(--text-main); margin: 0; padding: 20px; }
+        .container { max-width: 1000px; margin: 0 auto; background-color: var(--white); box-shadow: 0 10px 25px rgba(0,0,0,0.15); }
+        
+        .header { background-color: var(--agco-black); color: var(--white); padding: 35px 40px; border-bottom: 6px solid var(--agco-red); display: flex; justify-content: space-between; align-items: center; background-image: url('https://images.unsplash.com/photo-1592982537447-7440770cbfc9?q=80&w=2000&auto=format&fit=crop'); background-size: cover; background-position: center; background-blend-mode: multiply; }
+        .header-text h1 { margin: 0; font-size: 34px; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 900; }
+        .header-text p { margin: 5px 0 0 0; font-size: 14px; color: #d0d0d0; text-transform: uppercase; letter-spacing: 0.5px; }
+        .date-badge { background-color: var(--agco-red); padding: 10px 20px; font-weight: bold; font-size: 14px; letter-spacing: 1px; border-radius: 2px; }
+
+        .content-wrapper { padding: 30px 40px; }
+        .alert-banner { background-color: var(--agco-light-gray); border-left: 5px solid var(--agco-red); padding: 15px 20px; margin-bottom: 35px; font-size: 13px; color: var(--agco-dark-gray); text-transform: uppercase; letter-spacing: 0.5px; font-weight: bold; }
+
+        .country-section { margin-bottom: 50px; }
+        .country-title { font-size: 24px; color: var(--agco-black); margin-top: 0; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid #dddddd; display: flex; align-items: center; font-weight: 800; text-transform: uppercase; }
+        .highlight-tag { display: inline-block; background-color: var(--agco-black); color: var(--white); padding: 4px 8px; font-size: 11px; margin-left: 15px; vertical-align: middle; letter-spacing: 1px; }
+
+        /* Grid for multiple news items side-by-side */
+        .news-grid { display: grid; grid-template-columns: 1fr; gap: 30px; }
+        
+        .news-item { background-color: var(--white); border: 1px solid #e0e0e0; box-shadow: 0 2px 4px rgba(0,0,0,0.02); display: flex; flex-direction: column;}
+        .news-header { background-color: var(--agco-light-gray); padding: 15px 20px; border-left: 5px solid var(--agco-black); }
+        .news-headline { font-size: 16px; font-weight: bold; color: var(--agco-black); margin: 0; text-transform: uppercase; }
+        .news-content { padding: 20px; font-size: 14px; color: var(--agco-dark-gray); line-height: 1.6; flex-grow: 1;}
+
+        .impact-box { margin: 0 20px 20px 20px; border-top: 3px solid var(--agco-red); background-color: #fafafa; padding: 15px; }
+        .impact-title { font-weight: 900; color: var(--agco-red); margin-bottom: 10px; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; }
+        
+        .impact-list { list-style: none; padding: 0; margin: 0; font-size: 13px; }
+        .impact-list li { margin-bottom: 8px; padding-bottom: 8px; border-bottom: 1px dashed #ddd; }
+        .impact-list li:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+        .impact-list strong { color: var(--agco-black); text-transform: uppercase; }
+
+        .source-link { display: block; margin-top: 15px; font-size: 11px; color: var(--agco-red); text-decoration: none; font-weight: bold; text-align: right; letter-spacing: 1px; }
+        .source-link:hover { color: var(--agco-black); }
+
+        .footer { background-color: var(--agco-black); color: #777777; text-align: center; padding: 25px; font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- HEADER -->
+        <div class="header">
+            <div class="header-text">
+                <h1>Early warning AGCO</h1>
+                <p>LATAM Market Intelligence & Sales Estimation</p>
+            </div>
+            <div class="date-badge">MAY 14, 2026</div>
+        </div>
+
+        <div class="content-wrapper">
+            <div class="alert-banner">
+                // EXECUTIVE ALIGNMENT: High-density daily market signals synthesized to mitigate time constraints for detailed product and market analysis. Minimum 4 metrics per strategic region.
+            </div>
+
+            <!-- 🇧🇷 BRAZIL SECTION (4 News) -->
+            <div class="country-section">
+                <h2 class="country-title">🇧🇷 Brazil <span class="highlight-tag">4 INSIGHTS</span></h2>
+                
+                <div class="news-grid">
+                    <!-- BR News 1 -->
+                    <div class="news-item">
+                        <div class="news-header"><h3 class="news-headline">1. Safrinha Corn Yield Erosion in Center-West</h3></div>
+                        <div class="news-content">Recent heatwaves in Mato Grosso and Goiás have led to a 10% drop in expected production. Farmers are reporting premature grain maturation, altering cash flow.</div>
+                        <div class="impact-box">
+                            <div class="impact-title">⚙️ Machinery Impact</div>
+                            <ul class="impact-list">
+                                <li><strong>Tractors (>200HP):</strong> Highly Negative. Cash flow concerns freezing high-CAPEX.</li>
+                                <li><strong>Harvesters:</strong> Delayed fleet expansion due to lower volume.</li>
+                            </ul>
+                            <a href="#" class="source-link">NOTÍCIAS AGRÍCOLAS ➔</a>
+                        </div>
+                    </div>
+
+                    <!-- BR News 2 -->
+                    <div class="news-item">
+                        <div class="news-header"><h3 class="news-headline">2. Anfavea Reports 13.1% Drop in Q1 Sales</h3></div>
+                        <div class="news-content">Higher interest rates are pushing farmers toward the second-hand market and increasing the market share of Chinese/Indian equipment imports by 48%.</div>
+                        <div class="impact-box">
+                            <div class="impact-title">⚙️ Machinery Impact</div>
+                            <ul class="impact-list">
+                                <li><strong>All Tractors:</strong> Shift from new sales to Aftermarket & Parts to extend lifecycles.</li>
+                                <li><strong>Planters:</strong> Focus on precision retrofits.</li>
+                            </ul>
+                            <a href="#" class="source-link">CANAL RURAL ➔</a>
+                        </div>
+                    </div>
+
+                    <!-- BR News 3 -->
+                    <div class="news-item">
+                        <div class="news-header"><h3 class="news-headline">3. Agrotins 2026: Focus on Bio-Inputs</h3></div>
+                        <div class="news-content">The fair in Tocantins is driving massive adoption of "Green Bio-Inputs", requiring new application standards to avoid equipment damage.</div>
+                        <div class="impact-box">
+                            <div class="impact-title">⚙️ Machinery Impact</div>
+                            <ul class="impact-list">
+                                <li><strong>Sprayers:</strong> Highly Positive. Urgent need for new nozzle tech and agitation systems for biologicals.</li>
+                            </ul>
+                            <a href="#" class="source-link">GLOBO RURAL ➔</a>
+                        </div>
+                    </div>
+
+                    <!-- BR News 4 -->
+                    <div class="news-item">
+                        <div class="news-header"><h3 class="news-headline">4. Plano Safra Moderfrota Projections</h3></div>
+                        <div class="news-content">Preliminary discussions indicate Moderfrota interest rates may rise to 9.5%, while Pronaf remains at 4%.</div>
+                        <div class="impact-box">
+                            <div class="impact-title">⚙️ Machinery Impact</div>
+                            <ul class="impact-list">
+                                <li><strong>Tractors (<100HP):</strong> Positive surge in family farming.</li>
+                                <li><strong>Harvesters:</strong> Negative for large-scale renewals.</li>
+                            </ul>
+                            <a href="#" class="source-link">VALOR ECONÔMICO ➔</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 🇦🇷 ARGENTINA SECTION (4 News) -->
+            <div class="country-section">
+                <h2 class="country-title">🇦🇷 Argentina <span class="highlight-tag">4 INSIGHTS</span></h2>
+                <div class="news-grid">
+                    <!-- AR News 1 -->
+                    <div class="news-item">
+                        <div class="news-header"><h3 class="news-headline">1. The "Chicharrita" Phytosanitary Crisis</h3></div>
+                        <div class="news-content">Corn estimates in Córdoba slashed daily. Farmers aggressively altering chemical strategies to mitigate vector spreading.</div>
+                        <div class="impact-box">
+                            <div class="impact-title">⚙️ Machinery Impact</div>
+                            <ul class="impact-list">
+                                <li><strong>Sprayers:</strong> Extreme Demand. High-clearance needed.</li>
+                                <li><strong>Harvesters:</strong> Shift to draper headers (soy).</li>
+                            </ul>
+                            <a href="#" class="source-link">CLARÍN RURAL ➔</a>
+                        </div>
+                    </div>
+                    
+                    <!-- AR News 2, 3, 4 placeholders for automation -->
+                    <div class="news-item"><div class="news-header"><h3 class="news-headline">2. Exporta Simple Regime Caps</h3></div><div class="news-content">New limits on exports subject to retenciones.</div><div class="impact-box"><div class="impact-title">⚙️ Machinery Impact</div><ul class="impact-list"><li><strong>Tractors (100-200HP):</strong> Moderate positive for SMEs.</li></ul><a href="#" class="source-link">LA NACIÓN ➔</a></div></div>
+                    
+                    <div class="news-item"><div class="news-header"><h3 class="news-headline">3. Wheat Sowing Hits Record</h3></div><div class="news-content">24.5M tons projected for 25/26.</div><div class="impact-box"><div class="impact-title">⚙️ Machinery Impact</div><ul class="impact-list"><li><strong>Planters:</strong> Growth in fine-grain orders.</li></ul><a href="#" class="source-link">BOLSA DE CEREALES ➔</a></div></div>
+                    
+                    <div class="news-item"><div class="news-header"><h3 class="news-headline">4. Local Bank Subsidies</h3></div><div class="news-content">Banco Nación offering 25% rates for domestic equipment.</div><div class="impact-box"><div class="impact-title">⚙️ Machinery Impact</div><ul class="impact-list"><li><strong>All Equipment:</strong> High competition from local brands.</li></ul><a href="#" class="source-link">INFOCAMPO ➔</a></div></div>
+                </div>
+            </div>
+
+            <!-- 🇵🇾 🇺🇾 🇨🇱 CONE SUR & PACIFIC SECTION (4 News) -->
+            <div class="country-section">
+                <h2 class="country-title">🇺🇾 🇵🇾 🇨🇱 Cone Sur & Pacific <span class="highlight-tag">4 INSIGHTS</span></h2>
+                <div class="news-grid">
+                    
+                    <!-- PY News -->
+                    <div class="news-item">
+                        <div class="news-header"><h3 class="news-headline">1. Paraguay: Hidrovía Logistics Alert</h3></div>
+                        <div class="news-content">Low river levels are tripling export freight costs, forcing grain retention in silo bags.</div>
+                        <div class="impact-box">
+                            <div class="impact-title">⚙️ Machinery Impact</div>
+                            <ul class="impact-list">
+                                <li><strong>Harvesters/Tractors:</strong> Delayed payments and stalled fleet expansion.</li>
+                            </ul>
+                            <a href="#" class="source-link">CAPECO ➔</a>
+                        </div>
+                    </div>
+
+                    <!-- UY News -->
+                    <div class="news-item">
+                        <div class="news-header"><h3 class="news-headline">2. Uruguay: Rural Parity Agreement</h3></div>
+                        <div class="news-content">New labor costs are impacting the bottom line of cattle ranches and dairy farms.</div>
+                        <div class="impact-box">
+                            <div class="impact-title">⚙️ Machinery Impact</div>
+                            <ul class="impact-list">
+                                <li><strong>Automation:</strong> Surge in robotic milking and feeding mixers to replace manual labor.</li>
+                            </ul>
+                            <a href="#" class="source-link">RURALES EL PAÍS ➔</a>
+                        </div>
+                    </div>
+
+                    <!-- CL News -->
+                    <div class="news-item">
+                        <div class="news-header"><h3 class="news-headline">3. Chile: Table Grape CAPEX Shift</h3></div>
+                        <div class="news-content">High margins in the US market are funding massive water desalination projects in northern valleys.</div>
+                        <div class="impact-box">
+                            <div class="impact-title">⚙️ Machinery Impact</div>
+                            <ul class="impact-list">
+                                <li><strong>Tractors (<100HP):</strong> High demand for narrow orchard models.</li>
+                            </ul>
+                            <a href="#" class="source-link">PORTAL FRUTÍCOLA ➔</a>
+                        </div>
+                    </div>
+
+                    <!-- PY News 2 -->
+                    <div class="news-item">
+                        <div class="news-header"><h3 class="news-headline">4. Paraguay: Chaco Greenfield Expansion</h3></div>
+                        <div class="news-content">Over 50,000 new hectares being prepared for soybeans in the western region.</div>
+                        <div class="impact-box">
+                            <div class="impact-title">⚙️ Machinery Impact</div>
+                            <ul class="impact-list">
+                                <li><strong>Tractors (>200HP):</strong> Massive demand for heavy-duty clearing power.</li>
+                            </ul>
+                            <a href="#" class="source-link">VALOR AGRO ➔</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <!-- FOOTER -->
+        <div class="footer">
+            CONFIDENTIAL - For Internal Executive Alignment<br>
+            Powered by AEM Data Receipt
+        </div>
+    </div>
+
+</body>
+</html>
