@@ -4,7 +4,7 @@ on:
   schedule:
     # Roda de Segunda a Sexta às 07:15 da manhã (Horário de Brasília)
     - cron: '15 10 * * 1-5'
-  workflow_dispatch: # Isso é o que cria o botão para rodarmos agora!
+  workflow_dispatch: 
 
 jobs:
   atualizar-dados:
@@ -12,15 +12,15 @@ jobs:
     
     steps:
       - name: Checkout do código
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Configurar Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
-          python-version: '3.10'
+          python-version: '3.11' # Atualizado para resolver o aviso
 
-      - name: Instalar biblioteca do Gemini
-        run: pip install google-generativeai
+      - name: Instalar NOVA biblioteca do Gemini
+        run: pip install google-genai
 
       - name: Rodar Extração de Inteligência
         env:
