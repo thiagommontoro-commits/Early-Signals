@@ -6,7 +6,7 @@ from google import genai
 CHAVE_API = os.environ.get("GEMINI_API_KEY")
 client = genai.Client(api_key=CHAVE_API)
 
-# 2. O Prompt Executivo Definitivo (Culturas + Política/Economia)
+# 2. O Prompt Executivo Definitivo (Completo: Culturas + Macro + Todos os Países)
 prompt = """
 Atue como um analista sênior de inteligência de mercado focado em maquinário agrícola para a América Latina.
 Gere um relatório denso com as principais notícias oficiais e factuais.
@@ -14,10 +14,10 @@ Gere um relatório denso com as principais notícias oficiais e factuais.
 REGRAS OBRIGATÓRIAS:
 1. FOCO DUPLO: Você deve rastrear:
    - COMMODITIES: Soja, Milho, Cana-de-açúcar, Algodão, Café, Pecuária e Laranja.
-   - POLÍTICA E ECONOMIA: Taxas de juros, disponibilidade de crédito/subsídios (ex: Plano Safra), flutuações cambiais severas, barreiras comerciais, greves logísticas ou políticas governamentais que afetem DIRETAMENTE o CAPEX e a intenção de compra de máquinas agrícolas.
-2. PAÍSES ALVO: Brasil, Argentina, Chile, Uruguai, Paraguai, Peru e Bolívia. Agrupe em blocos lógicos se necessário.
+   - POLÍTICA E ECONOMIA: Taxas de juros, disponibilidade de crédito/subsídios, flutuações cambiais severas, barreiras comerciais, greves ou políticas governamentais que afetem o CAPEX.
+2. PAÍSES ALVO: Brasil, Argentina, México, Colômbia, Chile, Uruguai, Paraguai, Peru e Bolívia. Agrupe em blocos lógicos.
 3. REGRA DE TEMPO: Priorize notícias de HOJE. Se não houver, busque as mais impactantes da ÚLTIMA SEMANA.
-4. VOLUME: Mínimo de 3 a 4 notícias separadas por país/bloco, mesclando atualizações de campo (culturas) com cenário macro (política/economia).
+4. VOLUME: Mínimo de 3 a 4 notícias separadas por país/bloco, mesclando atualizações de campo com cenário macro.
 5. IDIOMA: Inglês corporativo.
 
 Retorne APENAS código HTML puro, sem blocos markdown.
@@ -61,7 +61,7 @@ Use EXATAMENTE esta estrutura de HTML:
 </div>
 """
 
-print("Consultando o mercado (Culturas + Macroeconomia)...")
+print("Consultando o mercado (Varredura Total LATAM)...")
 resposta = client.models.generate_content(
     model='gemini-2.5-flash',
     contents=prompt
