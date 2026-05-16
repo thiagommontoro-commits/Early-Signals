@@ -14,321 +14,220 @@
             --white: #ffffff;
         }
         body { font-family: 'Arial', sans-serif; background-color: #e9ecef; color: var(--text-main); margin: 0; padding: 20px; }
+        
+        /* Esconde a barra do Google Tradutor do topo */
+        body > .skiptranslate { display: none; }
+        .goog-te-banner-frame.skiptranslate { display: none !important; }
+        body { top: 0px !important; }
+        
         .container { max-width: 1200px; margin: 0 auto; background-color: var(--white); box-shadow: 0 10px 25px rgba(0,0,0,0.15); }
+        
         .header { background-color: var(--agco-black); color: var(--white); padding: 35px 40px; border-bottom: 6px solid var(--agco-red); display: flex; justify-content: space-between; align-items: center; background-image: url('https://images.unsplash.com/photo-1592982537447-7440770cbfc9?q=80&w=2000&auto=format&fit=crop'); background-size: cover; background-position: center; background-blend-mode: multiply; }
         .header-text h1 { margin: 0; font-size: 34px; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 900; }
         .header-text p { margin: 5px 0 0 0; font-size: 14px; color: #d0d0d0; text-transform: uppercase; letter-spacing: 0.5px; }
-        .date-badge { background-color: var(--agco-red); padding: 10px 20px; font-weight: bold; font-size: 14px; letter-spacing: 1px; border-radius: 2px; }
+        
+        .header-controls { display: flex; flex-direction: column; align-items: flex-end; gap: 10px; }
+        .date-badge { background-color: var(--agco-red); padding: 8px 16px; font-weight: bold; font-size: 14px; letter-spacing: 1px; border-radius: 2px; text-align: center; width: 100%; box-sizing: border-box;}
+        
+        /* Estilo dos botões de idioma */
+        .lang-switcher { display: flex; gap: 5px; }
+        .lang-switcher button { background-color: rgba(255, 255, 255, 0.1); color: var(--white); border: 1px solid rgba(255, 255, 255, 0.3); padding: 5px 10px; font-size: 11px; font-weight: bold; cursor: pointer; transition: all 0.2s; text-transform: uppercase; border-radius: 2px; }
+        .lang-switcher button:hover { background-color: var(--agco-red); border-color: var(--agco-red); }
+        
         .content-wrapper { padding: 30px 40px; }
         .alert-banner { background-color: var(--agco-light-gray); border-left: 5px solid var(--agco-red); padding: 15px 20px; margin-bottom: 35px; font-size: 13px; color: var(--agco-dark-gray); text-transform: uppercase; letter-spacing: 0.5px; font-weight: bold; }
+        
         .country-section { margin-bottom: 50px; }
         .country-title { font-size: 24px; color: var(--agco-black); margin-top: 0; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid #dddddd; display: flex; align-items: center; font-weight: 800; text-transform: uppercase; }
         .highlight-tag { display: inline-block; background-color: var(--agco-black); color: var(--white); padding: 4px 8px; font-size: 11px; margin-left: 15px; vertical-align: middle; letter-spacing: 1px; }
+        
         .news-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); gap: 30px; }
         .news-item { background-color: var(--white); border: 1px solid #e0e0e0; box-shadow: 0 2px 4px rgba(0,0,0,0.02); display: flex; flex-direction: column; }
         .news-header { background-color: var(--agco-light-gray); padding: 15px 20px; border-left: 5px solid var(--agco-black); }
         .news-headline { font-size: 16px; font-weight: bold; color: var(--agco-black); margin: 0; text-transform: uppercase; }
         .news-content { padding: 20px; font-size: 14px; color: var(--agco-dark-gray); line-height: 1.6; flex-grow: 1; }
+        
         .impact-box { margin: 0 20px 20px 20px; border-top: 3px solid var(--agco-red); background-color: #fafafa; padding: 15px; }
         .impact-title { font-weight: 900; color: var(--agco-red); margin-bottom: 10px; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; }
         .impact-list { list-style: none; padding: 0; margin: 0; font-size: 13px; }
         .impact-list li { margin-bottom: 8px; padding-bottom: 8px; border-bottom: 1px dashed #ddd; }
         .impact-list li:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
         .impact-list strong { color: var(--agco-black); text-transform: uppercase; }
+        
         .source-link { display: block; margin-top: 15px; font-size: 11px; color: var(--agco-red); text-decoration: none; font-weight: bold; text-align: right; letter-spacing: 1px; }
         .source-link:hover { color: var(--agco-black); }
+        
         .footer { background-color: var(--agco-black); color: #777777; text-align: center; padding: 25px; font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="header">
+        <div class="header" translate="no">
             <div class="header-text">
                 <h1>Early warning AGCO</h1>
                 <p>LATAM Market Intelligence & Sales Estimation</p>
             </div>
-            <div class="date-badge">MAY 15, 2026</div>
+            <div class="header-controls">
+                <div class="lang-switcher">
+                    <button onclick="changeLanguage('en')">EN</button>
+                    <button onclick="changeLanguage('pt')">PT</button>
+                    <button onclick="changeLanguage('es')">ES</button>
+                </div>
+                <div class="date-badge">MAY 16, 2026</div>
+            </div>
         </div>
 
         <div class="content-wrapper">
-            <div class="alert-banner">
-                // EXECUTIVE ALIGNMENT: High-density daily market signals synthesized to mitigate time constraints for detailed product and market analysis.
+            <div class="alert-banner" translate="no">
+                // AEM DATA RECEIPT: High-density daily market signals synthesized to mitigate time constraints for detailed product and market analysis.
             </div>
 
             <div class="country-section">
-    <h2 class="country-title">🇧🇷 BRAZIL <span class="highlight-tag">MULTI-CROP ALERTS</span></h2>
-    <div class="news-grid">
-        <div class="news-item">
-            <div class="news-header"><h3 class="news-headline">SOY - RECORD SAFRINHA PLANTING OPTIMISM HIGH DESPITE WEATHER UNCERTAINTIES</h3></div>
-            <div class="news-content">Brazilian farmers are accelerating Safrinha (second crop) soybean planting, with initial estimates pointing to a record area, driven by favorable prices and a successful main crop harvest. However, sporadic rainfall and forecasts for drier periods in parts of Mato Grosso and Paraná introduce some volatility into yield expectations, keeping commodity traders vigilant. This aggressive planting pace underscores farmer confidence but highlights the ever-present climate risks in the region.</div>
-            <div class="impact-box">
-                <div class="impact-title">⚙️ Machinery Impact</div>
-                <ul class="impact-list">
-                    <li><strong>Tractors:</strong> High demand for medium (100-200HP) and high (>200HP) HP tractors for rapid field preparation and seeding. Increased utilization for transport of inputs and eventual harvest.</li>
-                    <li><strong>Harvesters:</strong> Main crop soybean harvest completed, indicating a robust maintenance cycle and potential for early trade-ins for next season's equipment, especially for high-capacity models.</li>
-                    <li><strong>Sprayers:</strong> Intensified use of self-propelled and trailed sprayers for quick application of herbicides and fungicides in early growth stages. Precision sprayers for optimal input efficiency.</li>
-                    <li><strong>Planters:</strong> Significant demand for high-speed and large-row planters to meet tight Safrinha planting windows. Adoption of precision planting technologies is crucial for optimizing seed placement and emergence.</li>
-                </ul>
-                <a href="https://www.conab.gov.br/" class="source-link">CONAB ➔</a>
-            </div>
-        </div>
-        <div class="news-item">
-            <div class="news-header"><h3 class="news-headline">SUGARCANE - ETHANOL DEMAND SURGES, MILLS MAXIMIZE CRUSHING CAPACITY</h3></div>
-            <div class="news-content">The Brazilian sugarcane industry is experiencing a significant surge in ethanol demand, driven by rising gasoline prices and government incentives for biofuels. This has prompted mills in the Center-South region to maximize crushing operations, extending their harvest season and optimizing industrial yields to meet the robust market appetite. The strong performance signals sustained profitability for the sector.</div>
-            <div class="impact-box">
-                <div class="impact-title">⚙️ Machinery Impact</div>
-                <ul class="impact-list">
-                    <li><strong>Tractors:</strong> High utilization of high (>200HP) HP tractors for cane transport from fields to mills, operating heavy trailers. Increased demand for maintenance and replacement parts.</li>
-                    <li><strong>Harvesters:</strong> Intensive operation of specialized sugarcane harvesters, leading to accelerated wear and tear. This creates demand for advanced, more robust models and a shortened replacement cycle.</li>
-                    <li><strong>Sprayers:</strong> Consistent use for pest and disease control, and nutrient application in sugarcane fields, supporting healthy crop growth for sustained crushing.</li>
-                    <li><strong>Planters:</strong> Sustained investment in new planting cycles. Mechanized planters for sugarcane are in consistent demand as mills aim to renew fields and expand areas for future seasons.</li>
-                </ul>
-                <a href="https://www.unica.com.br/" class="source-link">UNICA ➔</a>
-            </div>
-        </div>
-        <div class="news-item">
-            <div class="news-header"><h3 class="news-headline">LIVESTOCK - BEEF EXPORTS REMAIN STRONG, DOMESTIC MARKET FACES INFLATIONARY PRESSURES</h3></div>
-            <div class="news-content">Brazilian beef exports continue their strong trajectory, supported by global demand and favorable exchange rates, positioning the country as a major global supplier. Domestically, however, producers face rising input costs, particularly for feed and fuel, which are squeezing margins despite stable consumer demand. The industry balances export opportunities with internal challenges.</div>
-            <div class="impact-box">
-                <div class="impact-title">⚙️ Machinery Impact</div>
-                <ul class="impact-list">
-                    <li><strong>Tractors:</strong> Consistent demand for small (<100HP) and medium (100-200HP) HP tractors for pasture management, feed preparation, and general farm maintenance in cattle operations.</li>
-                    <li><strong>Harvesters:</strong> Forage harvesters see steady demand for silage and hay production, critical for feedlot operations and supplementary feeding in pastures.</li>
-                    <li><strong>Sprayers:</strong> Used for pasture maintenance, weed control, and potentially for localized pest treatment, ensuring healthy grazing land.</li>
-                    <li><strong>Planters:</strong> Limited direct impact, but planters for forage crops (e.g., oats, sorghum for silage) are in demand to support feed production.</li>
-                </ul>
-                <a href="https://www.embrapa.br/" class="source-link">EMBRAPA ➔</a>
-            </div>
-        </div>
-        <div class="news-item">
-            <div class="news-header"><h3 class="news-headline">ORANGE - CITRUS GREENING THREAT INTENSIFIES, DRIVING MODERNIZATION AND RESEARCH</h3></div>
-            <div class="news-content">The ongoing battle against Citrus Greening (HLB) continues to be a major concern for Brazil's orange industry, particularly in São Paulo, the leading producing state. The disease is prompting significant investments in research, early detection technologies, and farm modernization efforts aimed at mitigating its spread and safeguarding future harvests. This ongoing threat highlights the need for resilient and adaptable agricultural practices.</div>
-            <div class="impact-box">
-                <div class="impact-title">⚙️ Machinery Impact</div>
-                <ul class="impact-list">
-                    <li><strong>Tractors:</strong> Small (<100HP) and medium (100-200HP) HP tractors are critical for orchard maintenance, pruning, and applying treatments in dense citrus groves.</li>
-                    <li><strong>Harvesters:</strong> Hand harvesting remains prevalent, but mechanized harvesters for processing oranges could see increased adoption to reduce labor costs and improve efficiency, especially in non-fresh markets.</li>
-                    <li><strong>Sprayers:</strong> High demand for specialized sprayers (e.g., air-blast sprayers) for precise and effective application of insecticides to control disease vectors and nutrient foliar applications.</li>
-                    <li><strong>Planters:</strong> Limited direct impact on traditional planters, but specialized tree transplanters might see increased use for replacing affected trees with disease-tolerant varieties.</li>
-                </ul>
-                <a href="https://www.fundecitrus.com.br/" class="source-link">FUNDECITRUS ➔</a>
-            </div>
-        </div>
-    </div>
-</div>
+                <h2 class="country-title">🇧🇷 BRAZIL <span class="highlight-tag">MULTI-CROP ALERTS</span></h2>
+                <div class="news-grid">
+                    <div class="news-item">
+                        <div class="news-header"><h3 class="news-headline">CORN - PARANAGUÁ PORT STRIKE THREAT DELAYS SAFRINHA EXPORT LOGISTICS</h3></div>
+                        <div class="news-content">A potential strike by stevedores at the Port of Paranaguá is causing a bottleneck in early safrinha corn export scheduling. Domestic basis is widening as local elevators reach capacity, squeezing short-term farmer cash flow.</div>
+                        <div class="impact-box">
+                            <div class="impact-title">⚙️ Machinery Impact</div>
+                            <ul class="impact-list">
+                                <li><strong>Tractors:</strong> High (>200HP): Negative. Delayed payments will pause large capital expenditures for the upcoming quarter.</li>
+                                <li><strong>Harvesters:</strong> Neutral. Harvest operations continue, but fleet renewal is paused.</li>
+                                <li><strong>Sprayers:</strong> Stable.</li>
+                                <li><strong>Planters:</strong> Negative. Delay in securing funds for early 26/27 planter purchases.</li>
+                            </ul>
+                            <a href="https://www.cepea.esalq.usp.br/" class="source-link">CEPEA ➔</a>
+                        </div>
+                    </div>
 
-<div class="country-section">
-    <h2 class="country-title">🇦🇷 ARGENTINA <span class="highlight-tag">MULTI-CROP ALERTS</span></h2>
-    <div class="news-grid">
-        <div class="news-item">
-            <div class="news-header"><h3 class="news-headline">SOY - PLANTING PROGRESS SOLID, BUT NORTHERN REGIONS FACE DROUGHT CONCERNS</h3></div>
-            <div class="news-content">Argentine soybean planting continues at a robust pace across the Pampas region, with favorable early moisture conditions supporting germination and initial crop development. However, persistent dry weather in northern growing areas is starting to raise concerns about potential yield reductions if rainfall does not improve soon. Farmers are closely monitoring meteorological forecasts for the coming weeks.</div>
-            <div class="impact-box">
-                <div class="impact-title">⚙️ Machinery Impact</div>
-                <ul class="impact-list">
-                    <li><strong>Tractors:</strong> High utilization of medium (100-200HP) and high (>200HP) HP tractors for planting and initial field operations. Demand for maintenance services is high.</li>
-                    <li><strong>Harvesters:</strong> Harvester sales are in a cyclical low post-wheat harvest, but upcoming soy season could drive pre-season inspections and potential early orders for 2025 models.</li>
-                    <li><strong>Sprayers:</strong> Increased demand for self-propelled and trailed sprayers for early season weed control and pest management. Precision sprayers for optimal input use, especially critical under dry conditions.</li>
-                    <li><strong>Planters:</strong> Planters, particularly large-scale no-till models, are operating at peak capacity. Farmers are focused on maximizing planting efficiency within optimal windows.</li>
-                </ul>
-                <a href="https://www.bcr.com.ar/" class="source-link">BCR ➔</a>
-            </div>
-        </div>
-        <div class="news-item">
-            <div class="news-header"><h3 class="news-headline">CORN - FAVORABLE EARLY GROWTH, BUT FERTILIZER COSTS IMPACTING INVESTMENT</h3></div>
-            <div class="news-content">Corn crops in Argentina are showing strong early season development, benefiting from good planting conditions and adequate soil moisture in the main producing regions. Despite the positive outlook for yields, high international fertilizer prices and local economic instability are causing some farmers to optimize or reduce fertilizer application, potentially impacting final production quality and volume.</div>
-            <div class="impact-box">
-                <div class="impact-title">⚙️ Machinery Impact</div>
-                <ul class="impact-list">
-                    <li><strong>Tractors:</strong> Medium (100-200HP) and high (>200HP) HP tractors are essential for tillage, planting, and subsequent fertilizer application. Continued demand for efficient models.</li>
-                    <li><strong>Harvesters:</strong> Future demand for corn harvesters will be closely tied to yield forecasts. Farmers are prioritizing maintenance to extend equipment lifespan given economic uncertainties.</li>
-                    <li><strong>Sprayers:</strong> Demand for sprayers capable of precise, variable-rate nutrient application is growing as farmers seek to optimize expensive fertilizer inputs and manage weeds.</li>
-                    <li><strong>Planters:</strong> Continued high usage of precision corn planters, with a focus on maximizing seed singulation and depth control to ensure uniform emergence and yield potential.</li>
-                </ul>
-                <a href="https://www.bolsadecereales.com/" class="source-link">Bolsa de Cereales ➔</a>
-            </div>
-        </div>
-        <div class="news-item">
-            <div class="news-header"><h3 class="news-headline">LIVESTOCK - BEEF EXPORTS MAINTAIN MOMENTUM, DRIVING PASTURE MANAGEMENT INVESTMENT</h3></div>
-            <div class="news-content">Argentina's beef sector continues to demonstrate robust export performance, driven by strong international demand and strategic market access. This sustained demand is encouraging cattle producers to invest in improving pasture management, genetic upgrades, and feedlot efficiencies to boost productivity and meet quality standards for export markets.</div>
-            <div class="impact-box">
-                <div class="impact-title">⚙️ Machinery Impact</div>
-                <ul class="impact-list">
-                    <li><strong>Tractors:</strong> Consistent demand for small (<100HP) and medium (100-200HP) HP tractors for pasture renovation, forage harvesting, and feed mixing.</li>
-                    <li><strong>Harvesters:</strong> Forage harvesters and balers are in high demand as producers focus on ensuring quality feed supplies for both pastured and feedlot cattle.</li>
-                    <li><strong>Sprayers:</strong> Used for weed control in pastures to enhance forage quality and quantity, and potentially for targeted pest control in livestock areas.</li>
-                    <li><strong>Planters:</strong> Limited direct impact, but planters for cover crops and improved pastures see steady demand to support rotational grazing systems.</li>
-                </ul>
-                <a href="https://www.magyp.gob.ar/" class="source-link">MAGyP ➔</a>
-            </div>
-        </div>
-    </div>
-</div>
+                    <div class="news-item">
+                        <div class="news-header"><h3 class="news-headline">SUGARCANE - RIBEIRÃO PRETO MILLS MAXIMIZE CRUSHING BEFORE COLD FRONT</h3></div>
+                        <div class="news-content">Anticipating an early frost event next week, mills in the Ribeirão Preto region are running at 100% capacity. The aggressive pace is testing operational limits and increasing wear and tear on logistical equipment.</div>
+                        <div class="impact-box">
+                            <div class="impact-title">⚙️ Machinery Impact</div>
+                            <ul class="impact-list">
+                                <li><strong>Tractors:</strong> Medium (100-200HP): Highly Positive. Max capacity utilization drives urgent need for transbordo tractors and immediate aftermarket support.</li>
+                                <li><strong>Harvesters:</strong> Highly Positive. Extreme engine hours accelerating parts consumption and replacement cycles.</li>
+                                <li><strong>Sprayers:</strong> Neutral.</li>
+                                <li><strong>Planters:</strong> Stable.</li>
+                            </ul>
+                            <a href="https://www.unica.com.br/" class="source-link">UNICA ➔</a>
+                        </div>
+                    </div>
 
-<div class="country-section">
-    <h2 class="country-title">🇲🇽 MEXICO <span class="highlight-tag">MULTI-CROP ALERTS</span></h2>
-    <div class="news-grid">
-        <div class="news-item">
-            <div class="news-header"><h3 class="news-headline">CORN - GOVERNMENT INITIATIVES AIM TO BOOST DOMESTIC CORN PRODUCTION</h3></div>
-            <div class="news-content">The Mexican government is intensifying efforts to bolster domestic corn production, aiming to reduce the country's reliance on imports, particularly for white corn. New programs are offering financial aid, technical assistance, and access to improved seeds for small and medium-sized farmers. This strategic focus seeks to enhance food security and support rural economies.</div>
-            <div class="impact-box">
-                <div class="impact-title">⚙️ Machinery Impact</div>
-                <ul class="impact-list">
-                    <li><strong>Tractors:</strong> Increased demand for small (<100HP) and medium (100-200HP) HP tractors, especially by smallholders receiving support, driving first-time purchases and upgrades.</li>
-                    <li><strong>Harvesters:</strong> Potential for increased demand for smaller, more versatile corn harvesters suitable for varied farm sizes, or for custom harvesting services.</li>
-                    <li><strong>Sprayers:</strong> Growing need for affordable and efficient sprayers for weed and pest control. Simplified designs for easy operation by less mechanized farmers.</li>
-                    <li><strong>Planters:</strong> Significant opportunity for planters tailored for smaller plots, including multi-crop planters. Focus on robustness and ease of maintenance to support wider adoption.</li>
-                </ul>
-                <a href="https://www.sader.gob.mx/" class="source-link">SADER ➔</a>
+                    <div class="news-item">
+                        <div class="news-header"><h3 class="news-headline">ORANGE - DROUGHT IN SÃO PAULO CITRUS BELT IMPACTS FRUIT CALIBER</h3></div>
+                        <div class="news-content">The ongoing dry spell in the primary citrus belt is reducing overall fruit caliber. While disease management remains priority, growers are pausing heavy capital investments due to expected lower juice yields per hectare.</div>
+                        <div class="impact-box">
+                            <div class="impact-title">⚙️ Machinery Impact</div>
+                            <ul class="impact-list">
+                                <li><strong>Tractors:</strong> Small (<100HP): Neutral. Fleet usage remains stable for basic orchard maintenance.</li>
+                                <li><strong>Harvesters:</strong> N/A.</li>
+                                <li><strong>Sprayers:</strong> Positive. Focus shifts to critical foliar nutrition applications.</li>
+                                <li><strong>Planters:</strong> N/A.</li>
+                            </ul>
+                            <a href="https://www.fundecitrus.com.br/" class="source-link">FUNDECITRUS ➔</a>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="news-item">
-            <div class="news-header"><h3 class="news-headline">COFFEE - ORGANIC AND SPECIALTY COFFEE SECTORS EXPANDING WITH SUSTAINABILITY FOCUS</h3></div>
-            <div class="news-content">Mexico's coffee sector is witnessing a strong expansion in organic and specialty coffee production, driven by global consumer demand for high-quality, sustainably sourced beans. Farmers in regions like Chiapas and Oaxaca are adopting eco-friendly practices and investing in certifications, requiring a shift towards more sustainable agricultural inputs and methods. This trend promises higher returns but demands specific investments.</div>
-            <div class="impact-box">
-                <div class="impact-title">⚙️ Machinery Impact</div>
-                <ul class="impact-list">
-                    <li><strong>Tractors:</strong> Small (<100HP) HP tractors suitable for mountainous terrain and tight orchard spacing. Focus on low-impact, fuel-efficient models.</li>
-                    <li><strong>Harvesters:</strong> Hand harvesting remains predominant for quality, but specialized coffee depulpers and processing equipment are in demand for quality enhancement.</li>
-                    <li><strong>Sprayers:</strong> Precision sprayers for targeted application of organic pest controls and foliar nutrients, minimizing environmental impact and maximizing effectiveness.</li>
-                    <li><strong>Planters:</strong> Limited direct impact, but small-scale soil preparation equipment for nursery establishment and replanting programs.</li>
-                </ul>
-                <a href="https://amecafe.org.mx/" class="source-link">AMECAFE ➔</a>
-            </div>
-        </div>
-        <div class="news-item">
-            <div class="news-header"><h3 class="news-headline">LIVESTOCK - MODERNIZATION DRIVE IN DAIRY AND BEEF OPERATIONS FOR EFFICIENCY</h3></div>
-            <div class="news-content">Mexican livestock producers, particularly in the dairy and beef sectors, are increasingly investing in modernization to enhance efficiency, productivity, and meet evolving market demands. This includes adopting improved feeding systems, genetic programs, and technological upgrades in farm management, driven by domestic consumption growth and export opportunities to the US.</div>
-            <div class="impact-box">
-                <div class="impact-title">⚙️ Machinery Impact</div>
-                <ul class="impact-list">
-                    <li><strong>Tractors:</strong> Medium (100-200HP) HP tractors for feed mixing, forage handling, and general farm utility. Small (<100HP) HP tractors for daily chores and facility maintenance.</li>
-                    <li><strong>Harvesters:</strong> Forage harvesters and balers see consistent demand to produce high-quality silage and hay for improved animal nutrition.</li>
-                    <li><strong>Sprayers:</strong> Used for pasture maintenance, insect control around facilities, and potentially for specific animal health applications.</li>
-                    <li><strong>Planters:</strong> Planters for silage corn, alfalfa, and other feed crops are in demand as operations strive for self-sufficiency in feed production.</li>
-                </ul>
-                <a href="https://www.comecarne.org/" class="source-link">COMECARNE ➔</a>
-            </div>
-        </div>
-    </div>
-</div>
 
-<div class="country-section">
-    <h2 class="country-title">🇨🇴 COLOMBIA <span class="highlight-tag">MULTI-CROP ALERTS</span></h2>
-    <div class="news-grid">
-        <div class="news-item">
-            <div class="news-header"><h3 class="news-headline">COFFEE - HIGHER ARABICA PRICES STIMULATING REPLANTING AND RENOVATION PROGRAMS</h3></div>
-            <div class="news-content">Favorable international prices for high-quality Arabica coffee are revitalizing Colombia's coffee sector. Farmers are responding by initiating widespread replanting and renovation programs for aging coffee trees, aiming to boost productivity and ensure future yields. This investment is crucial for maintaining Colombia's reputation as a top producer of specialty coffee.</div>
-            <div class="impact-box">
-                <div class="impact-title">⚙️ Machinery Impact</div>
-                <ul class="impact-list">
-                    <li><strong>Tractors:</strong> Increased demand for small (<100HP) HP tractors, specifically tailored for steep, mountainous terrain and narrow coffee rows, for land preparation and maintenance.</li>
-                    <li><strong>Harvesters:</strong> Primarily hand-harvested, but demand for efficient coffee depulpers and processing equipment is growing to enhance quality control and processing speed.</li>
-                    <li><strong>Sprayers:</strong> Consistent need for knapsack and small-scale boom sprayers for targeted application of fertilizers, fungicides, and insecticides, crucial for young plants.</li>
-                    <li><strong>Planters:</strong> Demand for specialized small-scale planting equipment or hand-held tools to facilitate efficient replanting of coffee seedlings in challenging topographies.</li>
-                </ul>
-                <a href="https://www.federaciondecafeteros.org/" class="source-link">FNC ➔</a>
-            </div>
-        </div>
-        <div class="news-item">
-            <div class="news-header"><h3 class="news-headline">SUGARCANE - BIOFUEL EXPANSION PLANS DRIVE NEW INVESTMENTS IN CAUCA VALLEY</h3></div>
-            <div class="news-content">Colombia's biofuel industry is pushing for significant expansion, particularly in the Cauca Valley, driven by government mandates and growing environmental consciousness. This has spurred new investments in sugarcane cultivation and processing infrastructure, as mills aim to increase ethanol production capacity. The sector anticipates sustained growth and technological upgrades.</div>
-            <div class="impact-box">
-                <div class="impact-title">⚙️ Machinery Impact</div>
-                <ul class="impact-list">
-                    <li><strong>Tractors:</strong> High utilization of high (>200HP) HP tractors for heavy tillage, cane transport, and field preparation. Increased demand for robust and durable models.</li>
-                    <li><strong>Harvesters:</strong> Significant demand for specialized sugarcane harvesters. Mills are likely to invest in newer, more efficient models to keep pace with increased crushing capacity.</li>
-                    <li><strong>Sprayers:</strong> Consistent use for pest, disease, and weed control, as well as nutrient application in large sugarcane fields, vital for maximizing yields.</li>
-                    <li><strong>Planters:</strong> Mechanized sugarcane planters are in demand for rapid and efficient establishment of new plantations, critical for meeting expansion targets.</li>
-                </ul>
-                <a href="https://www.asocana.org/" class="source-link">ASOCANA ➔</a>
-            </div>
-        </div>
-        <div class="news-item">
-            <div class="news-header"><h3 class="news-headline">LIVESTOCK - FOCUS ON PASTURE IMPROVEMENT AND GENETIC UPGRADING FOR EXPORT POTENTIAL</h3></div>
-            <div class="news-content">Colombian livestock producers are increasingly focusing on improving pasture quality and implementing genetic enhancement programs to boost animal productivity and meet international standards for beef and dairy exports. Government support and private initiatives are driving these modernization efforts, aiming to position Colombia as a competitive player in global markets.</div>
-            <div class="impact-box">
-                <div class="impact-title">⚙️ Machinery Impact</div>
-                <ul class="impact-list">
-                    <li><strong>Tractors:</strong> Medium (100-200HP) HP tractors are crucial for pasture renovation, forage production, and feed distribution. Small (<100HP) HP tractors for general farm tasks.</li>
-                    <li><strong>Harvesters:</strong> Forage harvesters and balers are in high demand as farmers invest in improved feed quality and storage for their herds.</li>
-                    <li><strong>Sprayers:</strong> Used for weed control in pastures, promoting healthier and denser forage growth, and potentially for localized parasite control.</li>
-                    <li><strong>Planters:</strong> Demand for planters suitable for forage crops (e.g., improved grasses, legumes) to establish more productive and resilient pastures.</li>
-                </ul>
-                <a href="https://www.fedegan.org.co/" class="source-link">FEDEGAN ➔</a>
-            </div>
-        </div>
-    </div>
-</div>
+            <div class="country-section">
+                <h2 class="country-title">🇦🇷 ARGENTINA <span class="highlight-tag">MULTI-CROP ALERTS</span></h2>
+                <div class="news-grid">
+                    <div class="news-item">
+                        <div class="news-header"><h3 class="news-headline">SOYBEAN - ROSARIO BOARD CONFIRMS MASSIVE ACREAGE SHIFT FROM CORN</h3></div>
+                        <div class="news-content">Following the Spiroplasma disaster in late corn, the BCR has finalized its initial forecast for 2026/27, confirming a historic acreage transfer to soybeans. Seed and specific input demand is drastically realigning.</div>
+                        <div class="impact-box">
+                            <div class="impact-title">⚙️ Machinery Impact</div>
+                            <ul class="impact-list">
+                                <li><strong>Tractors:</strong> Stable. Slight reduction in high-HP traction requirements.</li>
+                                <li><strong>Harvesters:</strong> Positive for draper headers.</li>
+                                <li><strong>Sprayers:</strong> Highly Positive. Anticipated surge in pre-emergent herbicide application.</li>
+                                <li><strong>Planters:</strong> Highly Positive. Urgent re-tooling and acquisition of fine-grain/soybean planters.</li>
+                            </ul>
+                            <a href="https://www.bcr.com.ar/" class="source-link">BOLSA DE COMERCIO DE ROSARIO ➔</a>
+                        </div>
+                    </div>
 
-<div class="country-section">
-    <h2 class="country-title">🇺🇾🇵🇾🇵🇪🇨🇱 SOUTHERN CONE & PACIFIC <span class="highlight-tag">MULTI-CROP ALERTS</span></h2>
-    <div class="news-grid">
-        <div class="news-item">
-            <div class="news-header"><h3 class="news-headline">SOY (URUGUAY/PARAGUAY) - ROBUST PLANTING SEASON WITH RECORD AREA FORECAST FOR PARAGUAY</h3></div>
-            <div class="news-content">The Southern Cone nations of Paraguay and Uruguay are experiencing a robust soybean planting season, with Paraguay forecasting a record area thanks to favorable weather and strong commodity prices. Uruguay is also progressing well, with good soil moisture supporting early crop development. The region anticipates a strong harvest, driven by continuous expansion and farmer confidence.</div>
-            <div class="impact-box">
-                <div class="impact-title">⚙️ Machinery Impact</div>
-                <ul class="impact-list">
-                    <li><strong>Tractors:</strong> High demand for high (>200HP) HP tractors in both countries for efficient land preparation, planting, and transport, reflecting large-scale operations.</li>
-                    <li><strong>Harvesters:</strong> Pre-season checks and maintenance for existing harvesters are critical. Potential for new harvester investments ahead of the next harvest, especially in Paraguay.</li>
-                    <li><strong>Sprayers:</strong> Intensive use of large-capacity self-propelled and trailed sprayers for broad-acre weed and pest management, with a focus on quick application windows.</li>
-                    <li><strong>Planters:</strong> Significant demand for large, high-precision planters. Farmers are upgrading to models with advanced features like individual row shut-offs and variable rate technology.</li>
-                </ul>
-                <a href="https://www.cap.org.py/" class="source-link">CAP (Paraguay) / MGAP (Uruguay) ➔</a>
+                    <div class="news-item">
+                        <div class="news-header"><h3 class="news-headline">LIVESTOCK - FEEDLOT OCCUPANCY HITS 2-YEAR HIGH ON EXPORT DEMAND</h3></div>
+                        <div class="news-content">With Asian export quotas fully relaxed, domestic feedlot occupancy has surged to 74%. Margins are heavily positive, triggering structural investments in large-scale animal feeding operations.</div>
+                        <div class="impact-box">
+                            <div class="impact-title">⚙️ Machinery Impact</div>
+                            <ul class="impact-list">
+                                <li><strong>Tractors:</strong> Medium (100-200HP): Highly Positive. Front-loader and mixer-wagon capable tractors are leading sales in the Pampas.</li>
+                                <li><strong>Harvesters:</strong> Positive for localized forage/silage equipment.</li>
+                                <li><strong>Sprayers:</strong> N/A.</li>
+                                <li><strong>Planters:</strong> N/A.</li>
+                            </ul>
+                            <a href="https://www.magyp.gob.ar/" class="source-link">SEC. BIOECONOMÍA ➔</a>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="news-item">
-            <div class="news-header"><h3 class="news-headline">COFFEE (PERU) - SPECIALTY COFFEE DEMAND BOOSTING INVESTMENT IN HIGH-ALTITUDE FARMS</h3></div>
-            <div class="news-content">Peru's specialty coffee sector continues to gain international recognition, driving increased investment in high-altitude, organic farms. Farmers are focusing on sustainable practices, improving processing infrastructure, and enhancing quality control to meet the stringent demands of niche markets. This growth trajectory is supporting rural development in key coffee-producing regions.</div>
-            <div class="impact-box">
-                <div class="impact-title">⚙️ Machinery Impact</div>
-                <ul class="impact-list">
-                    <li><strong>Tractors:</strong> Small (<100HP) HP tractors adapted for steep, uneven terrain are in demand for inter-row cultivation, pruning, and localized transport.</li>
-                    <li><strong>Harvesters:</strong> Largely hand-harvested to maintain quality, but investments in specialized processing equipment (depulpers, dryers) are growing.</li>
-                    <li><strong>Sprayers:</strong> Knapsack and small-boom sprayers for precise, organic-approved treatments, critical for disease prevention and nutrient application on specialty crops.</li>
-                    <li><strong>Planters:</strong> Limited direct impact, but small-scale equipment for nursery management and replanting of coffee seedlings to enhance farm productivity.</li>
-                </ul>
-                <a href="https://www.minagri.gob.pe/" class="source-link">MINAGRI (Peru) ➔</a>
-            </div>
-        </div>
-        <div class="news-item">
-            <div class="news-header"><h3 class="news-headline">FRUIT (CHILE) - WATER SCARCITY ACCELERATES ADOPTION OF PRECISION IRRIGATION TECHNOLOGIES</h3></div>
-            <div class="news-content">Chile's fruit sector, a major global exporter, faces intensifying challenges from persistent water scarcity, particularly in central and northern regions. This has spurred accelerated adoption of advanced precision irrigation systems (drip, micro-sprinkler) and related technologies to optimize water usage and maintain productivity. Investment in water-efficient machinery is now a top priority.</div>
-            <div class="impact-box">
-                <div class="impact-title">⚙️ Machinery Impact</div>
-                <ul class="impact-list">
-                    <li><strong>Tractors:</strong> Small (<100HP) and medium (100-200HP) HP tractors for orchard and vineyard maintenance, pruning, and applying specialized treatments in varied terrain.</li>
-                    <li><strong>Harvesters:</strong> Mechanized fruit harvesters see continued investment for certain fruit types, focusing on gentle handling and efficiency to maintain quality.</li>
-                    <li><strong>Sprayers:</strong> Highly specialized sprayers (e.g., air-blast, electrostatic) for precise and efficient application of fungicides, insecticides, and foliar nutrients, reducing drift and optimizing input use.</li>
-                    <li><strong>Planters:</strong> Specialized tree/vine planters for new orchard/vineyard establishments, focusing on precision and optimal spacing for high-value fruit crops.</li>
-                </ul>
-                <a href="https://www.odepec.gob.cl/" class="source-link">ODEPAC (Chile) ➔</a>
-            </div>
-        </div>
-        <div class="news-item">
-            <div class="news-header"><h3 class="news-headline">LIVESTOCK (REGIONAL) - FOCUS ON SUSTAINABLE PRACTICES AND PASTURE MODERNIZATION</h3></div>
-            <div class="news-content">Across the Southern Cone and Pacific regions, the livestock sector is increasingly emphasizing sustainable production practices, including improved pasture management, rotational grazing, and genetic upgrades. This push is driven by consumer demand for responsibly sourced products and the need to enhance efficiency while minimizing environmental impact. Investments aim for long-term productivity and resilience.</div>
-            <div class="impact-box">
-                <div class="impact-title">⚙️ Machinery Impact</div>
-                <ul class="impact-list">
-                    <li><strong>Tractors:</strong> Consistent demand for medium (100-200HP) HP tractors for pasture renovation, forage production, and feeding operations. Small (<100HP) HP for routine tasks.</li>
-                    <li><strong>Harvesters:</strong> Forage harvesters and balers are in high demand, reflecting regional efforts to improve feed quality and manage fodder efficiently.</li>
-                    <li><strong>Sprayers:</strong> Used for targeted weed control and nutrient application in pastures, supporting sustainable grazing and forage growth.</li>
-                    <li><strong>Planters:</strong> Planters for improved pasture species and forage crops see steady demand, crucial for implementing modern grazing systems and enhancing soil health.</li>
-                </ul>
-                <a href="https://www.ipca.org.uy/" class="source-link">IPCA (Regional) ➔</a>
-            </div>
-        </div>
-    </div>
-</div>
 
-        </div>
+            <div class="country-section">
+                <h2 class="country-title">🇨🇴 COLOMBIA <span class="highlight-tag">MULTI-CROP ALERTS</span></h2>
+                <div class="news-grid">
+                    <div class="news-item">
+                        <div class="news-header"><h3 class="news-headline">COFFEE - HIGH TEMPERATURES ACCELERATE MATURATION IN ANDEAN REGION</h3></div>
+                        <div class="news-content">Unexpected heatwaves have caused simultaneous cherry maturation in the Eje Cafetero. This compresses the harvest window, exacerbating the structural labor shortage and creating a logistical scramble.</div>
+                        <div class="impact-box">
+                            <div class="impact-title">⚙️ Machinery Impact</div>
+                            <ul class="impact-list">
+                                <li><strong>Tractors:</strong> Small (<100HP): Positive. Intensive use for internal farm logistics and hauling.</li>
+                                <li><strong>Harvesters:</strong> Highly Positive. Unprecedented spike in short-term rentals and rushed acquisitions of mechanical harvesters.</li>
+                                <li><strong>Sprayers:</strong> Negative.</li>
+                                <li><strong>Planters:</strong> N/A.</li>
+                            </ul>
+                            <a href="https://federaciondecafeteros.org/" class="source-link">FNC ➔</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-        <div class="footer">
+            <div class="country-section">
+                <h2 class="country-title">🇺🇾 🇵🇾 🇵🇪 🇨🇱 CONE SUR & PACIFIC <span class="highlight-tag">MULTI-CROP ALERTS</span></h2>
+                <div class="news-grid">
+                    <div class="news-item">
+                        <div class="news-header"><h3 class="news-headline">SOYBEAN (PY) - LOW WATER LEVELS TRAP CAPITAL IN SILO BAGS</h3></div>
+                        <div class="news-content">Despite a massive harvest, the logistics crisis on the Paraguay River is forcing farmers to store record volumes of soybeans in on-farm silo bags. Delayed export liquidations are halting near-term machinery purchases.</div>
+                        <div class="impact-box">
+                            <div class="impact-title">⚙️ Machinery Impact</div>
+                            <ul class="impact-list">
+                                <li><strong>Tractors:</strong> High (>200HP): Negative (Temporary). Purchases deferred to Q4 until liquidity returns.</li>
+                                <li><strong>Harvesters:</strong> Neutral. Harvest is complete; focus is on storage.</li>
+                                <li><strong>Sprayers:</strong> Neutral.</li>
+                                <li><strong>Planters:</strong> Stable. Early quoting continues, but closed deals are delayed.</li>
+                            </ul>
+                            <a href="https://capeco.org.py/" class="source-link">CAPECO ➔</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+
+        <div class="footer" translate="no">
             CONFIDENTIAL - For Internal Executive Alignment<br>
             Powered by AEM Data Receipt
         </div>
     </div>
+
+    <div id="google_translate_element" style="display:none;"></div>
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({pageLanguage: 'en', autoDisplay: false}, 'google_translate_element');
+        }
+        function changeLanguage(langCode) {
+            var selectField = document.querySelector("select.goog-te-combo");
+            if (selectField) {
+                selectField.value = langCode;
+                selectField.dispatchEvent(new Event('change'));
+            }
+        }
+    </script>
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
 </body>
 </html>
