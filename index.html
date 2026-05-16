@@ -12,10 +12,22 @@
             --agco-light-gray: #f4f4f4;
             --text-main: #222222;
             --white: #ffffff;
+            
+            /* Cores dos Faróis */
+            --farol-verde-bg: #e2f0d9;
+            --farol-verde-text: #385723;
+            --farol-verde-dot: #70ad47;
+            
+            --farol-amarelo-bg: #fff2cc;
+            --farol-amarelo-text: #7f6000;
+            --farol-amarelo-dot: #ffc000;
+            
+            --farol-vermelho-bg: #fce4d6;
+            --farol-vermelho-text: #c65911;
+            --farol-vermelho-dot: #c00000;
         }
         body { font-family: 'Arial', sans-serif; background-color: #e9ecef; color: var(--text-main); margin: 0; padding: 20px; }
         
-        /* Esconde a barra do Google Tradutor do topo */
         body > .skiptranslate { display: none; }
         .goog-te-banner-frame.skiptranslate { display: none !important; }
         body { top: 0px !important; }
@@ -29,7 +41,6 @@
         .header-controls { display: flex; flex-direction: column; align-items: flex-end; gap: 10px; }
         .date-badge { background-color: var(--agco-red); padding: 8px 16px; font-weight: bold; font-size: 14px; letter-spacing: 1px; border-radius: 2px; text-align: center; width: 100%; box-sizing: border-box;}
         
-        /* Estilo dos botões de idioma */
         .lang-switcher { display: flex; gap: 5px; }
         .lang-switcher button { background-color: rgba(255, 255, 255, 0.1); color: var(--white); border: 1px solid rgba(255, 255, 255, 0.3); padding: 5px 10px; font-size: 11px; font-weight: bold; cursor: pointer; transition: all 0.2s; text-transform: uppercase; border-radius: 2px; }
         .lang-switcher button:hover { background-color: var(--agco-red); border-color: var(--agco-red); }
@@ -43,16 +54,32 @@
         
         .news-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); gap: 30px; }
         .news-item { background-color: var(--white); border: 1px solid #e0e0e0; box-shadow: 0 2px 4px rgba(0,0,0,0.02); display: flex; flex-direction: column; }
-        .news-header { background-color: var(--agco-light-gray); padding: 15px 20px; border-left: 5px solid var(--agco-black); }
-        .news-headline { font-size: 16px; font-weight: bold; color: var(--agco-black); margin: 0; text-transform: uppercase; }
+        .news-header { background-color: var(--agco-light-gray); padding: 15px 20px; border-left: 5px solid var(--agco-black); display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
+        .news-headline { font-size: 15px; font-weight: bold; color: var(--agco-black); margin: 0; text-transform: uppercase; line-height: 1.4; }
         .news-content { padding: 20px; font-size: 14px; color: var(--agco-dark-gray); line-height: 1.6; flex-grow: 1; }
         
         .impact-box { margin: 0 20px 20px 20px; border-top: 3px solid var(--agco-red); background-color: #fafafa; padding: 15px; }
-        .impact-title { font-weight: 900; color: var(--agco-red); margin-bottom: 10px; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .impact-title { font-weight: 900; color: var(--agco-red); margin-bottom: 12px; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; }
+        
+        /* Estrutura dos Faróis (Badges) */
+        .farol { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; font-size: 11px; font-weight: bold; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .farol-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+        
+        .farol-verde { background-color: var(--farol-verde-bg); color: var(--farol-verde-text); }
+        .farol-verde .farol-dot { background-color: var(--farol-verde-dot); box-shadow: 0 0 6px var(--farol-verde-dot); }
+        
+        .farol-amarelo { background-color: var(--farol-amarelo-bg); color: var(--farol-amarelo-text); }
+        .farol-amarelo .farol-dot { background-color: var(--farol-amarelo-dot); box-shadow: 0 0 6px var(--farol-amarelo-dot); }
+        
+        .farol-vermelho { background-color: var(--farol-vermelho-bg); color: var(--farol-vermelho-text); }
+        .farol-vermelho .farol-dot { background-color: var(--farol-vermelho-dot); box-shadow: 0 0 6px var(--farol-vermelho-dot); }
+        
         .impact-list { list-style: none; padding: 0; margin: 0; font-size: 13px; }
-        .impact-list li { margin-bottom: 8px; padding-bottom: 8px; border-bottom: 1px dashed #ddd; }
+        .impact-list li { margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px dashed #ddd; display: flex; flex-direction: column; gap: 5px; }
         .impact-list li:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+        .line-title { display: flex; justify-content: space-between; align-items: center; }
         .impact-list strong { color: var(--agco-black); text-transform: uppercase; }
+        .impact-desc { color: #555; font-size: 12.5px; padding-left: 2px; }
         
         .source-link { display: block; margin-top: 15px; font-size: 11px; color: var(--agco-red); text-decoration: none; font-weight: bold; text-align: right; letter-spacing: 1px; }
         .source-link:hover { color: var(--agco-black); }
@@ -85,125 +112,105 @@
             <div class="country-section">
                 <h2 class="country-title">🇧🇷 BRAZIL <span class="highlight-tag">MULTI-CROP ALERTS</span></h2>
                 <div class="news-grid">
+                    
                     <div class="news-item">
-                        <div class="news-header"><h3 class="news-headline">CORN - PARANAGUÁ PORT STRIKE THREAT DELAYS SAFRINHA EXPORT LOGISTICS</h3></div>
+                        <div class="news-header">
+                            <h3 class="news-headline">CORN - PARANAGUÁ PORT STRIKE THREAT DELAYS SAFRINHA EXPORT LOGISTICS</h3>
+                            <div class="farol farol-amarelo"><span class="farol-dot"></span>Warning</div>
+                        </div>
                         <div class="news-content">A potential strike by stevedores at the Port of Paranaguá is causing a bottleneck in early safrinha corn export scheduling. Domestic basis is widening as local elevators reach capacity, squeezing short-term farmer cash flow.</div>
                         <div class="impact-box">
-                            <div class="impact-title">⚙️ Machinery Impact</div>
+                            <div class="impact-title">⚙️ Machinery Impact Analysis</div>
                             <ul class="impact-list">
-                                <li><strong>Tractors:</strong> High (>200HP): Negative. Delayed payments will pause large capital expenditures for the upcoming quarter.</li>
-                                <li><strong>Harvesters:</strong> Neutral. Harvest operations continue, but fleet renewal is paused.</li>
-                                <li><strong>Sprayers:</strong> Stable.</li>
-                                <li><strong>Planters:</strong> Negative. Delay in securing funds for early 26/27 planter purchases.</li>
+                                model-prediction
+                                <li>
+                                    <div class="line-title"><strong>Tractors</strong> <div class="farol farol-vermelho"><span class="farol-dot"></span>Negative</div></div>
+                                    <div class="impact-desc">High (>200HP) row-crop sales will stall immediately as large-scale corn producers freeze liquidity. Medium and Small lines remain neutral.</div>
+                                </li>
+                                <li>
+                                    <div class="line-title"><strong>Harvesters</strong> <div class="farol farol-amarelo"><span class="farol-dot"></span>Stable</div></div>
+                                    <div class="impact-desc">Harvest operations must proceed regardless of port status. Machine usage remains high, but fleet renewal plans are temporarily deferred.</div>
+                                </li>
+                                <li>
+                                    <div class="line-title"><strong>Sprayers</strong> <div class="farol farol-amarelo"><span class="farol-dot"></span>Stable</div></div>
+                                    <div class="impact-desc">Routine defensive applications are unchanged; parts market continues steady.</div>
+                                </li>
+                                <li>
+                                    <div class="line-title"><strong>Planters</strong> <div class="farol farol-vermelho"><span class="farol-dot"></span>Negative</div></div>
+                                    <div class="impact-desc">Farmers are delaying advanced pre-orders of large folding planters for the next cycle until cash flow normalizes.</div>
+                                </li>
                             </ul>
                             <a href="https://www.cepea.esalq.usp.br/" class="source-link">CEPEA ➔</a>
                         </div>
                     </div>
 
                     <div class="news-item">
-                        <div class="news-header"><h3 class="news-headline">SUGARCANE - RIBEIRÃO PRETO MILLS MAXIMIZE CRUSHING BEFORE COLD FRONT</h3></div>
+                        <div class="news-header">
+                            <h3 class="news-headline">SUGARCANE - RIBEIRÃO PRETO MILLS MAXIMIZE CRUSHING BEFORE COLD FRONT</h3>
+                            <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div>
+                        </div>
                         <div class="news-content">Anticipating an early frost event next week, mills in the Ribeirão Preto region are running at 100% capacity. The aggressive pace is testing operational limits and increasing wear and tear on logistical equipment.</div>
                         <div class="impact-box">
-                            <div class="impact-title">⚙️ Machinery Impact</div>
+                            <div class="impact-title">⚙️ Machinery Impact Analysis</div>
                             <ul class="impact-list">
-                                <li><strong>Tractors:</strong> Medium (100-200HP): Highly Positive. Max capacity utilization drives urgent need for transbordo tractors and immediate aftermarket support.</li>
-                                <li><strong>Harvesters:</strong> Highly Positive. Extreme engine hours accelerating parts consumption and replacement cycles.</li>
-                                <li><strong>Sprayers:</strong> Neutral.</li>
-                                <li><strong>Planters:</strong> Stable.</li>
+                                <li>
+                                    <div class="line-title"><strong>Tractors</strong> <div class="farol farol-verde"><span class="farol-dot"></span>High Positive</div></div>
+                                    <div class="impact-desc">Extreme demand for Medium (100-200HP) tractors for transbordo (wagon) operations. High (>200HP) lines seeing sales for soil preparation.</div>
+                                </li>
+                                <li>
+                                    <div class="line-title"><strong>Harvesters</strong> <div class="farol farol-verde"><span class="farol-dot"></span>High Positive</div></div>
+                                    <div class="impact-desc">Peak machine hours are triggering immediate dealer parts consumption and pulling forward planned fleet upgrades for sugarcane harvesters.</div>
+                                </li>
+                                <li>
+                                    <div class="line-title"><strong>Sprayers</strong> <div class="farol farol-amarelo"><span class="farol-dot"></span>Stable</div></div>
+                                    <div class="impact-desc">Normal maintenance schedules apply; high focus on crop ripeners application before cutting.</div>
+                                </li>
+                                <li>
+                                    <div class="line-title"><strong>Planters</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
+                                    <div class="impact-desc">Continuous high mill utilization accelerates investment budgets for high-capacity billet and automated planters.</div>
+                                </li>
                             </ul>
                             <a href="https://www.unica.com.br/" class="source-link">UNICA ➔</a>
                         </div>
                     </div>
 
-                    <div class="news-item">
-                        <div class="news-header"><h3 class="news-headline">ORANGE - DROUGHT IN SÃO PAULO CITRUS BELT IMPACTS FRUIT CALIBER</h3></div>
-                        <div class="news-content">The ongoing dry spell in the primary citrus belt is reducing overall fruit caliber. While disease management remains priority, growers are pausing heavy capital investments due to expected lower juice yields per hectare.</div>
-                        <div class="impact-box">
-                            <div class="impact-title">⚙️ Machinery Impact</div>
-                            <ul class="impact-list">
-                                <li><strong>Tractors:</strong> Small (<100HP): Neutral. Fleet usage remains stable for basic orchard maintenance.</li>
-                                <li><strong>Harvesters:</strong> N/A.</li>
-                                <li><strong>Sprayers:</strong> Positive. Focus shifts to critical foliar nutrition applications.</li>
-                                <li><strong>Planters:</strong> N/A.</li>
-                            </ul>
-                            <a href="https://www.fundecitrus.com.br/" class="source-link">FUNDECITRUS ➔</a>
-                        </div>
-                    </div>
                 </div>
             </div>
 
             <div class="country-section">
                 <h2 class="country-title">🇦🇷 ARGENTINA <span class="highlight-tag">MULTI-CROP ALERTS</span></h2>
                 <div class="news-grid">
+                    
                     <div class="news-item">
-                        <div class="news-header"><h3 class="news-headline">SOYBEAN - ROSARIO BOARD CONFIRMS MASSIVE ACREAGE SHIFT FROM CORN</h3></div>
-                        <div class="news-content">Following the Spiroplasma disaster in late corn, the BCR has finalized its initial forecast for 2026/27, confirming a historic acreage transfer to soybeans. Seed and specific input demand is drastically realigning.</div>
+                        <div class="news-header">
+                            <h3 class="news-headline">CORN - LEAFHOPPER OUTBREAK DESTROYS LATE FIELDS IN SANTA FE</h3>
+                            <div class="farol farol-vermelho"><span class="farol-dot"></span>Critical</div>
+                        </div>
+                        <div class="news-content">Severe damage from the Spiroplasma disease transmitted by the leafhopper has triggered a massive yield downgrade in late-planted corn across Santa Fe. Growers are facing substantial capital erosion.</div>
                         <div class="impact-box">
-                            <div class="impact-title">⚙️ Machinery Impact</div>
+                            <div class="impact-title">⚙️ Machinery Impact Analysis</div>
                             <ul class="impact-list">
-                                <li><strong>Tractors:</strong> Stable. Slight reduction in high-HP traction requirements.</li>
-                                <li><strong>Harvesters:</strong> Positive for draper headers.</li>
-                                <li><strong>Sprayers:</strong> Highly Positive. Anticipated surge in pre-emergent herbicide application.</li>
-                                <li><strong>Planters:</strong> Highly Positive. Urgent re-tooling and acquisition of fine-grain/soybean planters.</li>
+                                <li>
+                                    <div class="line-title"><strong>Tractors</strong> <div class="farol farol-vermelho"><span class="farol-dot"></span>Negative</div></div>
+                                    <div class="impact-desc">Heavy financial losses completely freeze high-horsepower sales in the affected core zone.</div>
+                                </li>
+                                <li>
+                                    <div class="line-title"><strong>Harvesters</strong> <div class="farol farol-vermelho"><span class="farol-dot"></span>Negative</div></div>
+                                    <div class="impact-desc">Corn header sales have dropped to zero; severe damage to fields reduces contracting hours significantly.</div>
+                                </li>
+                                <li>
+                                    <div class="line-title"><strong>Sprayers</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
+                                    <div class="impact-desc">Chemical applications for insect vector control have skyrocketed, driving intensive self-propelled sprayer usage and maintenance requirements.</div>
+                                </li>
+                                <li>
+                                    <div class="line-title"><strong>Planters</strong> <div class="farol farol-amarelo"><span class="farol-dot"></span>Stable</div></div>
+                                    <div class="impact-desc">Farmers are shifting focus to alternative crops for next cycle, requiring conversion kits rather than new machine buy-ins.</div>
+                                </li>
                             </ul>
                             <a href="https://www.bcr.com.ar/" class="source-link">BOLSA DE COMERCIO DE ROSARIO ➔</a>
                         </div>
                     </div>
 
-                    <div class="news-item">
-                        <div class="news-header"><h3 class="news-headline">LIVESTOCK - FEEDLOT OCCUPANCY HITS 2-YEAR HIGH ON EXPORT DEMAND</h3></div>
-                        <div class="news-content">With Asian export quotas fully relaxed, domestic feedlot occupancy has surged to 74%. Margins are heavily positive, triggering structural investments in large-scale animal feeding operations.</div>
-                        <div class="impact-box">
-                            <div class="impact-title">⚙️ Machinery Impact</div>
-                            <ul class="impact-list">
-                                <li><strong>Tractors:</strong> Medium (100-200HP): Highly Positive. Front-loader and mixer-wagon capable tractors are leading sales in the Pampas.</li>
-                                <li><strong>Harvesters:</strong> Positive for localized forage/silage equipment.</li>
-                                <li><strong>Sprayers:</strong> N/A.</li>
-                                <li><strong>Planters:</strong> N/A.</li>
-                            </ul>
-                            <a href="https://www.magyp.gob.ar/" class="source-link">SEC. BIOECONOMÍA ➔</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="country-section">
-                <h2 class="country-title">🇨🇴 COLOMBIA <span class="highlight-tag">MULTI-CROP ALERTS</span></h2>
-                <div class="news-grid">
-                    <div class="news-item">
-                        <div class="news-header"><h3 class="news-headline">COFFEE - HIGH TEMPERATURES ACCELERATE MATURATION IN ANDEAN REGION</h3></div>
-                        <div class="news-content">Unexpected heatwaves have caused simultaneous cherry maturation in the Eje Cafetero. This compresses the harvest window, exacerbating the structural labor shortage and creating a logistical scramble.</div>
-                        <div class="impact-box">
-                            <div class="impact-title">⚙️ Machinery Impact</div>
-                            <ul class="impact-list">
-                                <li><strong>Tractors:</strong> Small (<100HP): Positive. Intensive use for internal farm logistics and hauling.</li>
-                                <li><strong>Harvesters:</strong> Highly Positive. Unprecedented spike in short-term rentals and rushed acquisitions of mechanical harvesters.</li>
-                                <li><strong>Sprayers:</strong> Negative.</li>
-                                <li><strong>Planters:</strong> N/A.</li>
-                            </ul>
-                            <a href="https://federaciondecafeteros.org/" class="source-link">FNC ➔</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="country-section">
-                <h2 class="country-title">🇺🇾 🇵🇾 🇵🇪 🇨🇱 CONE SUR & PACIFIC <span class="highlight-tag">MULTI-CROP ALERTS</span></h2>
-                <div class="news-grid">
-                    <div class="news-item">
-                        <div class="news-header"><h3 class="news-headline">SOYBEAN (PY) - LOW WATER LEVELS TRAP CAPITAL IN SILO BAGS</h3></div>
-                        <div class="news-content">Despite a massive harvest, the logistics crisis on the Paraguay River is forcing farmers to store record volumes of soybeans in on-farm silo bags. Delayed export liquidations are halting near-term machinery purchases.</div>
-                        <div class="impact-box">
-                            <div class="impact-title">⚙️ Machinery Impact</div>
-                            <ul class="impact-list">
-                                <li><strong>Tractors:</strong> High (>200HP): Negative (Temporary). Purchases deferred to Q4 until liquidity returns.</li>
-                                <li><strong>Harvesters:</strong> Neutral. Harvest is complete; focus is on storage.</li>
-                                <li><strong>Sprayers:</strong> Neutral.</li>
-                                <li><strong>Planters:</strong> Stable. Early quoting continues, but closed deals are delayed.</li>
-                            </ul>
-                            <a href="https://capeco.org.py/" class="source-link">CAPECO ➔</a>
-                        </div>
-                    </div>
                 </div>
             </div>
             </div>
