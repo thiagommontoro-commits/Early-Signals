@@ -6,24 +6,24 @@ from google import genai
 CHAVE_API = os.environ.get("GEMINI_API_KEY")
 client = genai.Client(api_key=CHAVE_API)
 
-# 2. O Prompt Executivo Definitivo (Completo: Culturas + Macro + Todos os Países)
+# 2. O Prompt Executivo Definitivo com Regra Estrita de Volume (Mínimo 3 notícias por país)
 prompt = """
 Atue como um analista sênior de inteligência de mercado focado em maquinário agrícola para a América Latina.
 Gere um relatório denso com as principais notícias oficiais e factuais.
 
-REGRAS OBRIGATÓRIAS:
-1. FOCO DUPLO: Você deve rastrear:
+REGRAS OBRIGATÓRIAS DE CONTEÚDO E VOLUME:
+1. VOLUME E BACKFILL (REGRA CRÍTICA): Você deve trazer OBRIGATORIAMENTE no mínimo 3 notícias separadas e profundas para CADA UM dos países/blocos listados. Se não houver notícias do dia de hoje para um determinado país, busque e utilize notícias dos dias anteriores da última semana para preencher rigorosamente a cota mínima de 3 notícias.
+2. FOCO DUPLO: Cada notícia deve mesclar ou focar em:
    - COMMODITIES: Soja, Milho, Cana-de-açúcar, Algodão, Café, Pecuária e Laranja.
-   - POLÍTICA E ECONOMIA: Taxas de juros, disponibilidade de crédito/subsídios, flutuações cambiais severas, barreiras comerciais, greves ou políticas governamentais que afetem o CAPEX.
-2. PAÍSES ALVO: Brasil, Argentina, México, Colômbia, Chile, Uruguai, Paraguai, Peru e Bolívia. Agrupe em blocos lógicos.
-3. REGRA DE TEMPO: Priorize notícias de HOJE. Se não houver, busque as mais impactantes da ÚLTIMA SEMANA.
-4. VOLUME: Mínimo de 3 a 4 notícias separadas por país/bloco, mesclando atualizações de campo com cenário macro.
-5. IDIOMA: Inglês corporativo.
+   - POLÍTICA E ECONOMIA: Taxas de juros, disponibilidade de crédito/subsídios, flutuações cambiais severas, barreiras comerciais, greves ou políticas governamentais que afetem o CAPEX de maquinário.
+3. PAÍSES ALVO: Brasil, Argentina, México, Colômbia, Chile, Uruguai, Paraguai, Peru e Bolívia. Agrupe em blocos lógicos se necessário (ex: Cone Sur ou Região Andina), mas garanta que todos os nomes apareçam e tenham sua cota de notícias preenchida.
+4. ESTRUTURA DE ANÁLISE: Para cada notícia, você deve incluir explicitamente a pergunta: 'What market segment does this information impact?' e responder analisando o impacto específico em Tractors (Small <100HP, Medium 100-200HP, High >200HP), Harvesters, Sprayers e Planters.
+5. IDIOMA: Inglês corporativo (Executive Summary).
 
 Retorne APENAS código HTML puro, sem blocos markdown.
-Classifique o impacto usando cores: 'farol-verde' (Positive), 'farol-amarelo' (Warning/Stable), 'farol-vermelho' (Critical/Negative).
+Classifique o impacto usando as cores dos faróis: 'farol-verde' (Positive), 'farol-amarelo' (Warning/Stable), 'farol-vermelho' (Critical/Negative).
 
-Use EXATAMENTE esta estrutura de HTML:
+Use EXATAMENTE esta estrutura de HTML para os containers:
 
 <div class="country-section">
     <h2 class="country-title">[BANDEIRA E NOME DO PAÍS/BLOCO] <span class="highlight-tag">MARKET & MACRO ALERTS</span></h2>
@@ -33,25 +33,26 @@ Use EXATAMENTE esta estrutura de HTML:
                 <h3 class="news-headline">[CULTURA ou MACRO/POLÍTICA] - [TÍTULO DA NOTÍCIA EM MAIÚSCULO]</h3>
                 <div class="farol farol-[verde/amarelo/vermelho]"><span class="farol-dot"></span>[Positive/Warning/Critical]</div>
             </div>
-            <div class="news-content">[Resumo executivo de 3 linhas sobre o fato e a política econômica associada]</div>
+            <div class="news-content">[Resumo executivo sobre o fato e as variáveis econômicas]</div>
             <div class="impact-box">
                 <div class="impact-title">⚙️ Machinery Impact Analysis</div>
+                <p class="impact-question" style="font-size: 12px; font-style: italic; color: #666; margin-top: -5px; margin-bottom: 10px;">What market segment does this information impact?</p>
                 <ul class="impact-list">
                     <li>
                         <div class="line-title"><strong>Tractors</strong> <div class="farol farol-[verde/amarelo/vermelho]"><span class="farol-dot"></span>[Status]</div></div>
-                        <div class="impact-desc">[Impact on Small <100HP, Medium 100-200HP, High >200HP]</div>
+                        <div class="impact-desc">[Impact details]</div>
                     </li>
                     <li>
                         <div class="line-title"><strong>Harvesters</strong> <div class="farol farol-[verde/amarelo/vermelho]"><span class="farol-dot"></span>[Status]</div></div>
-                        <div class="impact-desc">[Specific impact on replacement cycles]</div>
+                        <div class="impact-desc">[Impact details]</div>
                     </li>
                     <li>
                         <div class="line-title"><strong>Sprayers</strong> <div class="farol farol-[verde/amarelo/vermelho]"><span class="farol-dot"></span>[Status]</div></div>
-                        <div class="impact-desc">[Specific impact on application needs]</div>
+                        <div class="impact-desc">[Impact details]</div>
                     </li>
                     <li>
                         <div class="line-title"><strong>Planters</strong> <div class="farol farol-[verde/amarelo/vermelho]"><span class="farol-dot"></span>[Status]</div></div>
-                        <div class="impact-desc">[Specific impact on planting windows]</div>
+                        <div class="impact-desc">[Impact details]</div>
                     </li>
                 </ul>
                 <a href="[LINK REAL DA FONTE]" class="source-link">[NOME DA FONTE] ➔</a>
@@ -61,17 +62,15 @@ Use EXATAMENTE esta estrutura de HTML:
 </div>
 """
 
-print("Consultando o mercado (Varredura Total LATAM)...")
+print("Consultando o mercado com a regra estrita de cota mínima por país...")
 resposta = client.models.generate_content(
     model='gemini-2.5-flash',
     contents=prompt
 )
 noticias_html = resposta.text.replace("```html", "").replace("```", "")
 
-# 3. Data de hoje
 data_hoje = datetime.now().strftime("%b %d, %Y").upper()
 
-# 4. Reconstrói o arquivo HTML
 html_completo = f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -176,8 +175,7 @@ html_completo = f"""<!DOCTYPE html>
 </html>
 """
 
-# 5. Salva o arquivo
 with open('index.html', 'w', encoding='utf-8') as arquivo:
     arquivo.write(html_completo)
 
-print("Painel gerado com sucesso!")
+print("Painel gerado com sucesso respeitando a cota mínima de 3 notícias por país!")
