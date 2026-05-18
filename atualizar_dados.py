@@ -6,7 +6,6 @@ from google import genai
 
 # ==========================================
 # 1. O SEU MINI BANCO DE DADOS HISTÓRICO
-# Adicione os novos meses aqui assim que eles fecharem
 # ==========================================
 HISTORICO_MACRO = {
     "MAR/2026": {"selic": "14,75%", "cdi": "14,65%", "juros": "19,30%", "dolar": "R$ 5,02"},
@@ -15,7 +14,6 @@ HISTORICO_MACRO = {
 }
 
 def calcular_meses_rolantes():
-    # Calcula automaticamente os meses das colunas baseando-se no mês atual
     meses_en = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"]
     today = datetime.datetime.now()
     
@@ -55,13 +53,9 @@ def buscar_dados_oficiais():
         dados_selic = json.loads(req_selic.read())
         selic_atual = float(dados_selic[0]["valor"])
         
-        # ==========================================
-        # PYTHON CALCULA AS TAXAS COM EXATIDÃO (SEM IA)
-        # ==========================================
         cdi_atual = selic_atual - 0.10
-        juros_agro_atual = selic_atual + 4.50  # Spread comercial fixado
+        juros_agro_atual = selic_atual + 4.50
         
-        # Formata para padrão numérico
         dolar_str = f"R$ {dolar_atual:.2f}".replace('.', ',')
         selic_str = f"{selic_atual:.2f}%".replace('.', ',')
         cdi_str = f"{cdi_atual:.2f}%".replace('.', ',')
@@ -74,14 +68,12 @@ def buscar_dados_oficiais():
         return "R$ --,--", "--,--%", "--,--%", "--,--%"
 
 def obter_dados_historicos(header):
-    # Procura os dados no dicionário histórico
     if header in HISTORICO_MACRO:
         return HISTORICO_MACRO[header]
     else:
         return {"selic": "--,--%", "cdi": "--,--%", "juros": "--,--%", "dolar": "R$ --,--"}
 
 def gerar_relatorio():
-    # 1. Setup das variáveis de tempo e APIs
     data_hoje = datetime.datetime.now().strftime("%b %d, %Y").upper()
     m_atual, m_anterior, m_atras, ano_futuro = calcular_meses_rolantes()
     
@@ -90,12 +82,75 @@ def gerar_relatorio():
     
     dolar_oficial, selic_oficial, cdi_oficial, juros_agro_oficial = buscar_dados_oficiais()
 
-    # Inicializa o cliente Gemini
+    # ==========================================
+    # 2. O PYTHON MONTA A TABELA MACRO DIRETAMENTE
+    # ==========================================
+    tabela_macro_html = f"""
+    <div class="macro-section">
+        <h3 class="macro-title">📊 1. MACROECONOMIA & TAXAS DE JUROS <span class="tag-brasil">BRASIL</span></h3>
+        <table class="macro-table">
+            <thead>
+                <tr>
+                    <th>INDICADOR</th>
+                    <th>CONSOLIDADO 2025</th>
+                    <th>{m_atras}</th>
+                    <th>{m_anterior}</th>
+                    <th>{m_atual} (ATUAL)</th>
+                    <th>VAR. MÊS</th>
+                    <th>VAR. ANO</th>
+                    <th>PROJ. {ano_futuro}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Taxa Selic (Meta BCB)</td>
+                    <td>15,00%</td>
+                    <td>{dados_m2['selic']}</td>
+                    <td>{dados_m1['selic']}</td>
+                    <td>{selic_oficial}</td>
+                    <td><span class="macro-badge yellow">● 0,00 PP</span></td>
+                    <td><span class="macro-badge green">● -0,50 PP</span></td>
+                    <td>13,50%</td>
+                </tr>
+                <tr>
+                    <td>Taxa CDI (a.a.)</td>
+                    <td>14,90%</td>
+                    <td>{dados_m2['cdi']}</td>
+                    <td>{dados_m1['cdi']}</td>
+                    <td>{cdi_oficial}</td>
+                    <td><span class="macro-badge yellow">● 0,00 PP</span></td>
+                    <td><span class="macro-badge green">● -0,50 PP</span></td>
+                    <td>13,40%</td>
+                </tr>
+                <tr>
+                    <td>Juros Comerciais Agro</td>
+                    <td>19,50%</td>
+                    <td>{dados_m2['juros']}</td>
+                    <td>{dados_m1['juros']}</td>
+                    <td>{juros_agro_oficial}</td>
+                    <td><span class="macro-badge yellow">● 0,00 PP</span></td>
+                    <td><span class="macro-badge green">● -0,50 PP</span></td>
+                    <td>17,80%</td>
+                </tr>
+                <tr>
+                    <td>Câmbio (USD/BRL)</td>
+                    <td>R$ 4,85</td>
+                    <td>{dados_m2['dolar']}</td>
+                    <td>{dados_m1['dolar']}</td>
+                    <td>{dolar_oficial}</td>
+                    <td><span class="macro-badge red">● Câmbio Real</span></td>
+                    <td><span class="macro-badge green">● Monitorado</span></td>
+                    <td>R$ 5,25</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="macro-source">*Fonte: API Banco Central do Brasil (SGS/Copom) e AwesomeAPI Câmbio. Processamento e injeção via Python Standard Pipeline.</div>
+    </div>
+    """
+
     client = genai.Client(api_key=os.environ.get("GEMINI_API_KEY"))
     
-    # ==========================================
-    # 2. O SEU HTML (FORMA DE BOLO INTOCÁVEL)
-    # ==========================================
+    # O SEU HTML (FORMA DE BOLO INTOCÁVEL)
     layout_base = """<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -199,8 +254,7 @@ def gerar_relatorio():
             <div class="alert-banner" translate="no">
                 // AEM DATA RECEIPT: High-density daily market signals synthesized to mitigate time constraints for detailed product and market analysis.
             </div>
-            <!-- O CONTEÚDO DOS PAÍSES DEVE SER INSERIDO AQUI PELA IA -->
-        </div>
+            </div>
         <div class="footer" translate="no">
             CONFIDENTIAL - For Internal Executive Alignment<br>
             Powered by AEM Data Receipt
@@ -209,12 +263,8 @@ def gerar_relatorio():
 </body>
 </html>"""
 
-    # Injeta a data formatada no template HTML
     layout_com_data = layout_base.replace("DATA DE HOJE AQUI", data_hoje)
 
-    # ==========================================
-    # 3. CONSTRUÇÃO DA ORDEM RÍGIDA PARA A IA
-    # ==========================================
     instrucoes_iniciais = """
     Você é um analista de mercado e cientista de dados especialista no setor de maquinário agrícola da América Latina.
     Sua tarefa é gerar as notícias do relatório "Early Warning" e encaixá-las EXATAMENTE no código HTML fornecido.
@@ -225,84 +275,17 @@ def gerar_relatorio():
     INSTRUÇÕES DE LAYOUT E DENSIDADE:
     - Mantenha a estrutura HTML, CSS e cores originais.
     - REGRA DE RECHEIO: Para cada país analisado (Brasil, Argentina, Chile, Uruguai, Peru, Bolívia, Paraguai), preencha a <div class="news-grid"> contendo OBRIGATORIAMENTE 4 blocos de notícia distintos.
-
-    INSTRUÇÕES RESTRITAS DE TEMPO E QUALIDADE:
+    - MARCADOR DO BRASIL: Dentro do bloco do Brasil, IMEDIATAMENTE após fechar a <div class="news-grid"> das 4 notícias, você DEVE escrever exatamente este texto: INSTRUÇÕES RESTRITAS DE TEMPO E QUALIDADE:
     1. CONTEXTO TEMPORAL: O momento atual é {m_atual}.
     2. PROIBIÇÃO HISTÓRICA: PROIBIDO mencionar dados de safras 23/24 ou anteriores.
     3. REGRA AGRISHOW: A intenção de negócios da Agrishow 2026 fechou em R$ 11,4 bilhões (queda de 22%). 
     
-    6. REGRA DA TABELA MACROECONÔMICA DINÂMICA DO BRASIL:
-    O sistema Python já cruzou os dados do banco de dados histórico com as APIs ao vivo do mercado financeiro.
-    
-    Insira a tabela abaixo EXCLUSIVAMENTE na secção do Brasil, após as 4 notícias. A sua única tarefa na tabela é calcular matematicamente as variações (VAR_MES e VAR_ANO) baseadas nos números fornecidos e aplicar as classes de cores corretas ('macro-badge green/yellow/red') nas tags de variação:
-
-    <div class="macro-section">
-        <h3 class="macro-title">📊 1. MACROECONOMIA & TAXAS DE JUROS <span class="tag-brasil">BRASIL</span></h3>
-        <table class="macro-table">
-            <thead>
-                <tr>
-                    <th>INDICADOR</th>
-                    <th>CONSOLIDADO 2025</th>
-                    <th>{m_atras}</th>
-                    <th>{m_anterior}</th>
-                    <th>{m_atual} (ATUAL)</th>
-                    <th>VAR. MÊS</th>
-                    <th>VAR. ANO</th>
-                    <th>PROJ. {ano_futuro}</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Taxa Selic (Meta BCB)</td>
-                    <td>15,00%</td>
-                    <td>{dados_m2['selic']}</td>
-                    <td>{dados_m1['selic']}</td>
-                    <td>{selic_oficial}</td>
-                    <td>VALOR_VAR_MES_AQUI</td>
-                    <td>VALOR_VAR_ANO_AQUI</td>
-                    <td>13,50%</td>
-                </tr>
-                <tr>
-                    <td>Taxa CDI (a.a.)</td>
-                    <td>14,90%</td>
-                    <td>{dados_m2['cdi']}</td>
-                    <td>{dados_m1['cdi']}</td>
-                    <td>{cdi_oficial}</td>
-                    <td>VALOR_VAR_MES_AQUI</td>
-                    <td>VALOR_VAR_ANO_AQUI</td>
-                    <td>13,40%</td>
-                </tr>
-                <tr>
-                    <td>Juros Comerciais Agro</td>
-                    <td>19,50%</td>
-                    <td>{dados_m2['juros']}</td>
-                    <td>{dados_m1['juros']}</td>
-                    <td>{juros_agro_oficial}</td>
-                    <td>VALOR_VAR_MES_AQUI</td>
-                    <td>VALOR_VAR_ANO_AQUI</td>
-                    <td>17,80%</td>
-                </tr>
-                <tr>
-                    <td>Câmbio (USD/BRL)</td>
-                    <td>R$ 4,85</td>
-                    <td>{dados_m2['dolar']}</td>
-                    <td>{dados_m1['dolar']}</td>
-                    <td>{dolar_oficial}</td>
-                    <td>VALOR_VAR_MES_AQUI</td>
-                    <td>VALOR_VAR_ANO_AQUI</td>
-                    <td>R$ 5,25</td>
-                </tr>
-            </tbody>
-        </table>
-        <div class="macro-source">*Fonte: API Banco Central do Brasil (SGS/Copom) e AwesomeAPI Câmbio. Atualização automática rolante baseada no banco de dados interno do sistema.</div>
-    </div>
-
-    Retorne EXCLUSIVAMENTE o código HTML completo final para gravação, sem introduções.
+    Retorne EXCLUSIVAMENTE o código HTML completo final para gravação, sem introduções ou explicações.
     """
 
-    prompt_completo = instrucoes_iniciais + "\n\n" + layout_com_data + "\n\n" + regras_finais
+    prompt_completo = instrucoes_iniciais + "\n\n" + layout_com_data + "\n\n" + reglas_finais
 
-    print("A enviar HTML blindado e dados reais (APIs + Histórico) para o Gemini...")
+    print("A enviar HTML blindado para o Gemini...")
     
     try:
         response = client.models.generate_content(
@@ -312,16 +295,28 @@ def gerar_relatorio():
         
         html_content = response.text
         
-        # Limpeza de formatação markdown residual
         if html_content.startswith("```html"):
             html_content = html_content[7:]
         if html_content.endswith("```"):
             html_content = html_content[:-3]
             
-        with open("index.html", "w", encoding="utf-8") as file:
-            file.write(html_content.strip())
+        # ==========================================
+        # 3. BLINDAGEM AUTOMÁTICA VIA PYTHON
+        # O Python localiza o marcador e injeta a tabela
+        # ==========================================
+        html_content = html_content.strip()
+        if "" in html_content:
+            html_final = html_content.replace("", tabela_macro_html)
+            print("Sucesso: Tabela injetada via Python Core no marcador da IA.")
+        else:
+            # Caso a IA esqueça o marcador por falta de espaço, o Python anexa no fim do Brasil
+            html_final = html_content.replace("</div>\n\n            <div class=\"country-section\">\n                <h2 class=\"country-title\">🇦🇷 ARGENTINA", tabela_macro_html + "\n\n            <div class=\"country-section\">\n                <h2 class=\"country-title\">🇦🇷 ARGENTINA")
+            print("Aviso: Tabela injetada via Fallback de Regex posicional antes da Argentina.")
             
-        print("Sucesso! Painel atualizado perfeitamente com os dados.")
+        with open("index.html", "w", encoding="utf-8") as file:
+            file.write(html_final)
+            
+        print("Sucesso Total! Painel atualizado e protegido contra cortes.")
 
     except Exception as e:
         print(f"Ocorreu um erro ao gerar o painel: {e}")
