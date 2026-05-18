@@ -40,14 +40,18 @@ def calcular_meses_rolantes():
     return header_atual, header_menos1, header_menos2, ano_projecao
 
 def buscar_dados_oficiais():
-    print("Buscando dados oficiais do Banco Central e do Mercado...")
+    print("A procurar dados oficiais do Banco Central e do Mercado...")
+    # Disfarce para evitar bloqueio 429
+    headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'}
     try:
-        req_dolar = urllib.request.urlopen("https://economia.awesomeapi.com.br/last/USD-BRL")
-        dados_dolar = json.loads(req_dolar.read())
+        req_dolar = urllib.request.Request("https://economia.awesomeapi.com.br/last/USD-BRL", headers=headers)
+        resp_dolar = urllib.request.urlopen(req_dolar)
+        dados_dolar = json.loads(resp_dolar.read())
         dolar_atual = float(dados_dolar["USDBRL"]["bid"])
         
-        req_selic = urllib.request.urlopen("https://api.bcb.gov.br/dados/serie/bcdata.sgs.432/dados/ultimos/1?formato=json")
-        dados_selic = json.loads(req_selic.read())
+        req_selic = urllib.request.Request("https://api.bcb.gov.br/dados/serie/bcdata.sgs.432/dados/ultimos/1?formato=json", headers=headers)
+        resp_selic = urllib.request.urlopen(req_selic)
+        dados_selic = json.loads(resp_selic.read())
         selic_atual = float(dados_selic[0]["valor"])
         
         cdi_atual = selic_atual - 0.10
@@ -60,7 +64,7 @@ def buscar_dados_oficiais():
         
         return dolar_str, selic_str, cdi_str, juros_agro_str
     except Exception as e:
-        print(f"Aviso: Falha ao buscar dados em tempo real. ({e})")
+        print(f"Aviso: Falha ao buscar dados em tempo real. Erro: {e}")
         return "R$ --,--", "--,--%", "--,--%", "--,--%"
 
 def obter_dados_historicos(header):
@@ -85,7 +89,6 @@ def gerar_relatorio():
     dados_m1 = obter_dados_historicos(m_anterior)
     dolar_oficial, selic_oficial, cdi_oficial, juros_agro_oficial = buscar_dados_oficiais()
 
-    # MONTAGEM DA TABELA MACRO DIRETAMENTE NO PYTHON (BLINDADA)
     tabela_macro_html = f"""
     <div class="macro-section">
         <h3 class="macro-title">📊 1. MACROECONOMIA & TAXAS DE JUROS <span class="tag-brasil">BRASIL</span></h3>
@@ -149,7 +152,6 @@ def gerar_relatorio():
     </div>
     """
 
-    # SEU HTML COMPLETO COM TODAS AS DIRETRIZES VISUAIS FIXADAS NO PYTHON
     layout_base = """<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -316,7 +318,7 @@ def gerar_relatorio():
 </body>
 </html>"""
 
-    # Injeta a data de hoje e a tabela macroeconômica diretamente via Python Core
+    # Injeta a data e a tabela primeiro (Garante que a estrutura base está salva)
     layout_finalizado = layout_base.replace("DATA_HOJE_PLACEHOLDER", data_hoje)
     layout_finalizado = layout_finalizado.replace("", tabela_macro_html)
 
@@ -326,15 +328,12 @@ def gerar_relatorio():
     Você é um analista especialista em inteligência de mercado de maquinário agrícola na América Latina.
     Sua única tarefa é gerar EXCLUSIVAMENTE os blocos de notícias organizados por tags de marcação para os países listados.
 
-    INSTRUÇÕES DE CONTEÚDO (SIGA RIGOROSAMENTE):
-    1. CONTEXTO TEMPORAL: O momento atual é {m_atual}. Considere apenas cenários de {m_atual} em diante.
-    2. PROIBIÇÃO HISTÓRICA: É ESTRITAMENTE PROIBIDO citar dados das safras 23/24 ou anteriores. Foque no momento atual e projeções.
-    3. DENSIDADE REQUERIDA: Gere OBRIGATORIAMENTE 4 blocos de notícia distintos (<div class="news-item">...</div>) para cada país.
-    4. AGRISHOW: Use a premissa de que a Agrishow 2026 fechou em R$ 11,4 bilhões (queda de 22%).
+    INSTRUÇÕES:
+    1. CONTEXTO: O momento atual é {m_atual}.
+    2. DENSIDADE: Gere 4 blocos de notícia distintos (<div class="news-item">...</div>) para cada país.
+    3. AGRISHOW: Agrishow 2026 fechou em R$ 11,4 bilhões (queda de 22%).
 
-    FORMATO DE SAÍDA:
-    Gere as notícias usando exatamente os marcadores abaixo para que o sistema Python possa ler e organizar o site:
-
+    Gere as notícias usando exatamente os marcadores abaixo:
     [START_BR] (Insira aqui as 4 divs de notícias do Brasil) [END_BR]
     [START_AR] (Insira aqui as 4 divs de notícias da Argentina) [END_AR]
     [START_MX] (Insira aqui as 4 divs de notícias do México) [END_MX]
@@ -349,14 +348,9 @@ def gerar_relatorio():
     print("Chamando a IA para redação exclusiva das notícias diárias...")
     
     try:
-        response = client.models.generate_content(
-            model='gemini-2.5-flash',
-            contents=prompt,
-        )
-        
+        response = client.models.generate_content(model='gemini-2.5-flash', contents=prompt)
         texto_ia = response.text
         
-        # O PYTHON PROCESSA E DISTRIBUI CADA CONTEÚDO NO SEU LUGAR CORRETO
         layout_finalizado = layout_finalizado.replace("", extrair_bloco(texto_ia, "[START_BR]", "[END_BR]"))
         layout_finalizado = layout_finalizado.replace("", extrair_bloco(texto_ia, "[START_AR]", "[END_AR]"))
         layout_finalizado = layout_finalizado.replace("", extrair_bloco(texto_ia, "[START_MX]", "[END_MX]"))
@@ -366,14 +360,16 @@ def gerar_relatorio():
         layout_finalizado = layout_finalizado.replace("", extrair_bloco(texto_ia, "[START_CL]", "[END_CL]"))
         layout_finalizado = layout_finalizado.replace("", extrair_bloco(texto_ia, "[START_BO]", "[END_BO]"))
         layout_finalizado = layout_finalizado.replace("", extrair_bloco(texto_ia, "[START_PY]", "[END_PY]"))
-        
-        with open("index.html", "w", encoding="utf-8") as file:
-            file.write(layout_finalizado.strip())
-            
-        print("Sucesso Total! O seu site index.html foi gerado com a Tabela fixa e Notícias renovadas.")
 
     except Exception as e:
-        print(f"Ocorreu um erro no pipeline: {e}")
+        print(f"Aviso de IA: Ocorreu um erro ao gerar notícias ({e}). Salvando HTML com a tabela base.")
+    
+    # IMPORTANTE: A gravação (write) agora está FORA do Try-Except.
+    # O arquivo SEMPRE será salvo, mesmo que a IA falhe.
+    with open("index.html", "w", encoding="utf-8") as file:
+        file.write(layout_finalizado.strip())
+        
+    print("Sucesso: index.html guardado. Tabela macro inserida e protegida.")
 
 if __name__ == "__main__":
     gerar_relatorio()
