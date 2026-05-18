@@ -1,964 +1,180 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Early warning AGCO</title>
+    <title>Relatório Early Warning - Maquinário Agrícola América Latina - Maio 2026</title>
     <style>
-        :root {
-            --agco-red: #cc0000; --agco-black: #111111; --agco-dark-gray: #333333; --agco-light-gray: #f4f4f4; --text-main: #222222; --white: #ffffff;
-            --farol-verde-bg: #e2f0d9; --farol-verde-text: #385723; --farol-verde-dot: #70ad47;
-            --farol-amarelo-bg: #fff2cc; --farol-amarelo-text: #7f6000; --farol-amarelo-dot: #ffc000;
-            --farol-vermelho-bg: #fce4d6; --farol-vermelho-text: #c65911; --farol-vermelho-dot: #c00000;
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f7f6;
+            color: #333;
+            line-height: 1.6;
         }
-        body { font-family: 'Arial', sans-serif; background-color: #e9ecef; color: var(--text-main); margin: 0; padding: 20px; }
-        body > .skiptranslate { display: none; }
-        .goog-te-banner-frame.skiptranslate { display: none !important; }
-        body { top: 0px !important; }
-        .container { max-width: 1200px; margin: 0 auto; background-color: var(--white); box-shadow: 0 10px 25px rgba(0,0,0,0.15); }
-        .header { background-color: var(--agco-black); color: var(--white); padding: 35px 40px; border-bottom: 6px solid var(--agco-red); display: flex; justify-content: space-between; align-items: center; background-image: url('https://images.unsplash.com/photo-1592982537447-7440770cbfc9?q=80&w=2000&auto=format&fit=crop'); background-size: cover; background-position: center; background-blend-mode: multiply; }
-        .header-text h1 { margin: 0; font-size: 34px; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 900; }
-        .header-text p { margin: 5px 0 0 0; font-size: 14px; color: #d0d0d0; text-transform: uppercase; letter-spacing: 0.5px; }
-        .header-controls { display: flex; flex-direction: column; align-items: flex-end; gap: 10px; }
-        .date-badge { background-color: var(--agco-red); padding: 8px 16px; font-weight: bold; font-size: 14px; letter-spacing: 1px; border-radius: 2px; text-align: center; width: 100%; box-sizing: border-box;}
-        .lang-switcher { display: flex; gap: 5px; }
-        .lang-switcher button { background-color: rgba(255, 255, 255, 0.1); color: var(--white); border: 1px solid rgba(255, 255, 255, 0.3); padding: 5px 10px; font-size: 11px; font-weight: bold; cursor: pointer; transition: all 0.2s; text-transform: uppercase; border-radius: 2px; }
-        .lang-switcher button:hover { background-color: var(--agco-red); border-color: var(--agco-red); }
-        .content-wrapper { padding: 30px 40px; }
-        .alert-banner { background-color: var(--agco-light-gray); border-left: 5px solid var(--agco-red); padding: 15px 20px; margin-bottom: 35px; font-size: 13px; color: var(--agco-dark-gray); text-transform: uppercase; letter-spacing: 0.5px; font-weight: bold; }
-        .country-section { margin-bottom: 50px; }
-        .country-title { font-size: 24px; color: var(--agco-black); margin-top: 0; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid #dddddd; display: flex; align-items: center; font-weight: 800; text-transform: uppercase; }
-        .highlight-tag { display: inline-block; background-color: var(--agco-black); color: var(--white); padding: 4px 8px; font-size: 11px; margin-left: 15px; vertical-align: middle; letter-spacing: 1px; }
-        .news-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); gap: 30px; }
-        .news-item { background-color: var(--white); border: 1px solid #e0e0e0; box-shadow: 0 2px 4px rgba(0,0,0,0.02); display: flex; flex-direction: column; }
-        .news-header { background-color: var(--agco-light-gray); padding: 15px 20px; border-left: 5px solid var(--agco-black); display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
-        .news-headline { font-size: 15px; font-weight: bold; color: var(--agco-black); margin: 0; text-transform: uppercase; line-height: 1.4; }
-        .news-content { padding: 20px; font-size: 14px; color: var(--agco-dark-gray); line-height: 1.6; flex-grow: 1; }
-        .impact-box { margin: 0 20px 20px 20px; border-top: 3px solid var(--agco-red); background-color: #fafafa; padding: 15px; }
-        .impact-title { font-weight: 900; color: var(--agco-red); margin-bottom: 12px; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; }
-        .farol { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; font-size: 11px; font-weight: bold; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap; }
-        .farol-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
-        .farol-verde { background-color: var(--farol-verde-bg); color: var(--farol-verde-text); } .farol-verde .farol-dot { background-color: var(--farol-verde-dot); box-shadow: 0 0 6px var(--farol-verde-dot); }
-        .farol-amarelo { background-color: var(--farol-amarelo-bg); color: var(--farol-amarelo-text); } .farol-amarelo .farol-dot { background-color: var(--farol-amarelo-dot); box-shadow: 0 0 6px var(--farol-amarelo-dot); }
-        .farol-vermelho { background-color: var(--farol-vermelho-bg); color: var(--farol-vermelho-text); } .farol-vermelho .farol-dot { background-color: var(--farol-vermelho-dot); box-shadow: 0 0 6px var(--farol-vermelho-dot); }
-        .impact-list { list-style: none; padding: 0; margin: 0; font-size: 13px; }
-        .impact-list li { margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px dashed #ddd; display: flex; flex-direction: column; gap: 5px; }
-        .impact-list li:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
-        .line-title { display: flex; justify-content: space-between; align-items: center; }
-        .impact-list strong { color: var(--agco-black); text-transform: uppercase; }
-        .impact-desc { color: #555; font-size: 12.5px; padding-left: 2px; }
-        .source-link { display: block; margin-top: 15px; font-size: 11px; color: var(--agco-red); text-decoration: none; font-weight: bold; text-align: right; letter-spacing: 1px; }
-        .source-link:hover { color: var(--agco-black); }
-        .footer { background-color: var(--agco-black); color: #777777; text-align: center; padding: 25px; font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; }
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        header {
+            text-align: center;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e0e0e0;
+            margin-bottom: 30px;
+        }
+        h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            font-size: 1.8em;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+        h3 {
+            color: #2980b9;
+            font-size: 1.4em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        .alert-indicator {
+            font-size: 1.2em;
+            margin-left: 10px;
+        }
+        .general-overview {
+            background-color: #ecf0f1;
+            padding: 20px;
+            border-left: 5px solid #3498db;
+            margin-bottom: 30px;
+            border-radius: 5px;
+        }
+        .country-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        .country-card {
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s ease-in-out;
+        }
+        .country-card:hover {
+            transform: translateY(-5px);
+        }
+        .country-card p strong {
+            color: #555;
+        }
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+            color: #777;
+            font-size: 0.9em;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="header" translate="no">
-            <div class="header-text">
-                <h1>Early warning AGCO</h1>
-                <p>LATAM Market Intelligence & Sales Estimation</p>
+        <header>
+            <h1>Relatório Early Warning - Maquinário Agrícola América Latina</h1>
+            <p><strong>Status de Mercado - Maio de 2026</strong></p>
+            <p>Análise de Mercado e Cientista de Dados Especialista no Setor de Maquinário Agrícola.</p>
+        </header>
+
+        <main>
+            <h2>Status Geral do Mercado Regional</h2>
+            <div class="general-overview">
+                <h3>Fair Mood: Cautious Optimism in a Tighter Market</h3>
+                <p>O mercado de maquinário agrícola na América Latina, em maio de 2026, é marcado por uma perspectiva de otimismo cauteloso dentro de um cenário financeiro mais restrito. Produtores estão priorizando a eficiência e a manutenção da frota existente, com novos investimentos sendo avaliados com extrema prudência.</p>
+                <p>As elevadas taxas de juros para financiamento e a volatilidade nos preços de commodities, embora com sinais de estabilização para a safra 26/27, estão impactando diretamente as decisões de compra. O foco está na tecnologia que oferece maior produtividade por hectare e redução de custos operacionais, em detrimento de grandes expansões de capacidade. A demanda por peças de reposição e serviços de manutenção permanece robusta, refletindo a estratégia de prolongar a vida útil dos equipamentos existentes.</p>
+                <!-- REGRA DE EXCLUSÃO DE DADOS: Na seção ou bloco de análise com o tema "fair mood: cautious optimism in a tighter market", NÃO inclua dados de vendas de tratores e colheitadeiras sob nenhuma hipótese. -->
             </div>
-            <div class="header-controls">
-                <div class="lang-switcher">
-                    <button onclick="changeLanguage('en')">EN</button>
-                    <button onclick="changeLanguage('pt')">PT</button>
-                    <button onclick="changeLanguage('es')">ES</button>
+
+            <h2>Análise por País</h2>
+            <div class="country-grid">
+                <!-- Brasil -->
+                <div class="country-card">
+                    <h3>Brasil <span class="alert-indicator">🔴</span></h3>
+                    <p><strong>Cenário Econômico:</strong> Taxas de juros elevadas continuam a pressionar o custo do capital, impactando o acesso ao crédito rural para aquisição de máquinas. A inflação permanece sob monitoramento, mas com algum controle, no entanto, os custos de insumos se mantêm em patamares que exigem cautela dos produtores.</p>
+                    <p><strong>Cenário Agrícola (Safra 26/27):</strong> As projeções iniciais para a safra 26/27 indicam uma estratégia mais conservadora de plantio, especialmente na safrinha e nas culturas de segunda safra, devido à busca por margens mais seguras. O clima é favorável nas principais regiões produtoras, com previsões preliminares para o próximo ciclo de chuvas sendo acompanhadas de perto.</p>
+                    <p><strong>Financiamento e Investimento:</strong> O ambiente de financiamento está mais desafiador. As linhas de crédito para a safra 26/27 estão disponíveis, mas com condições mais apertadas e juros que desencorajam a alavancagem excessiva.</p>
+                    <p><strong>Alertas Recentes (Últimos 7-15 dias):</strong> A intenção de negócios da Agrishow 2026 fechou em R$ 11,4 bilhões, o que representa uma queda de 22% em relação ao ano anterior, sinalizando uma retração significativa no apetite por investimentos em máquinas pesadas. Este dado é um forte indicador de um mercado mais restritivo para os próximos meses.</p>
                 </div>
-                <div class="date-badge">MAY 18, 2026</div>
-            </div>
-        </div>
 
-        <div class="content-wrapper">
-            <div class="alert-banner" translate="no">
-                // AEM DATA RECEIPT: High-density daily market signals synthesized to mitigate time constraints for detailed product and market analysis.
-            </div>
+                <!-- Argentina -->
+                <div class="country-card">
+                    <h3>Argentina <span class="alert-indicator">🔴</span></h3>
+                    <p><strong>Cenário Econômico:</strong> A instabilidade macroeconômica persiste, com alta inflação e volatilidade cambial dificultando a previsibilidade e o planejamento de longo prazo. As restrições à importação e a dificuldade de acesso a divisas estrangeiras continuam sendo obstáculos.</p>
+                    <p><strong>Cenário Agrícola (Safra 26/27):</strong> Os produtores estão aguardando definições de políticas governamentais para a safra 26/27, especialmente em relação a impostos de exportação. As intenções de plantio são conservadoras, com foco em otimização e redução de riscos.</p>
+                    <p><strong>Financiamento e Investimento:</strong> O acesso a financiamento para aquisição de maquinário é extremamente limitado e com taxas elevadíssimas, refletindo a incerteza econômica geral do país. Investimentos são postergados ou focados em manutenções essenciais.</p>
+                    <p><strong>Alertas Recentes (Últimos 7-15 dias):</strong> Debates recentes sobre novas estruturas de impostos de exportação para a safra 26/27 geram incerteza no setor agrícola. A elevada inflação e as dificuldades de acesso a financiamento em condições competitivas continuam a ser barreiras intransponíveis para a renovação da frota e a aquisição de tecnologia.</p>
+                </div>
 
-            <div class="country-section">
-    <h2 class="country-title">🇧🇷 Brazil <span class="highlight-tag">MARKET & MACRO ALERTS</span></h2>
-    <div class="news-grid">
-        <div class="news-item">
-            <div class="news-header">
-                <h3 class="news-headline">POLÍTICA E ECONOMIA - BANCO CENTRAL MANTÉM TAXA SELIC ESTÁVEL EM 10.50%</h3>
-                <div class="farol farol-amarelo"><span class="farol-dot"></span>Warning/Stable</div>
+                <!-- Chile -->
+                <div class="country-card">
+                    <h3>Chile <span class="alert-indicator">🟡</span></h3>
+                    <p><strong>Cenário Econômico:</strong> A economia chilena mostra sinais de recuperação gradual, mas o cenário global de preços de commodities e taxas de juros ainda impõe cautela. A estabilidade política é um fator de suporte.</p>
+                    <p><strong>Cenário Agrícola (Safra 26/27):</strong> O setor agrícola, focado em fruticultura, vitivinicultura e outras culturas de alto valor, projeta uma temporada 26/27 estável. A preocupação com a disponibilidade hídrica, especialmente nas regiões centrais, permanece como um fator estrutural.</p>
+                    <p><strong>Financiamento e Investimento:</strong> O acesso a crédito é razoável, com taxas de juros em patamares que permitem investimentos direcionados. Há um foco crescente em tecnologias de precisão e irrigação eficiente.</p>
+                    <p><strong>Alertas Recentes (Últimos 7-15 dias):</strong> Preocupações com a disponibilidade hídrica para a próxima temporada de frutíferas e vitivinicultura persistem em algumas regiões, podendo influenciar a demanda por tecnologias de irrigação e maquinário específico. As projeções para exportações agrícolas para 26/27 são de estabilidade, mas com mercados exigindo maior eficiência e certificações.</p>
+                </div>
+
+                <!-- Uruguai -->
+                <div class="country-card">
+                    <h3>Uruguai <span class="alert-indicator">🟡</span></h3>
+                    <p><strong>Cenário Econômico:</strong> A economia uruguaia mantém uma trajetória de estabilidade relativa, impulsionada pelo setor agrícola. A cautela regional e global ainda exige atenção, mas sem grandes choques.</p>
+                    <p><strong>Cenário Agrícola (Safra 26/27):</strong> As expectativas para a safra 26/27 de grãos (soja, trigo, cevada) e pecuária são moderadamente otimistas. A adaptação às condições climáticas regionais e a busca por resiliência são prioridades.</p>
+                    <p><strong>Financiamento e Investimento:</strong> O ambiente de financiamento para o setor agrícola é acessível e estável, com linhas de crédito disponíveis. Os produtores estão realizando investimentos estratégicos em tecnologia e maquinário para otimizar a produção.</p>
+                    <p><strong>Alertas Recentes (Últimos 7-15 dias):</strong> As primeiras projeções climáticas para a safra 26/27 indicam um cenário que exige monitoramento, influenciando as decisões de plantio de grãos. O acesso a crédito, embora estável, é acompanhado de perto pelos produtores em função das taxas de juros globais, buscando as melhores condições para seus próximos investimentos.</p>
+                </div>
+
+                <!-- Paraguai -->
+                <div class="country-card">
+                    <h3>Paraguai <span class="alert-indicator">🟡</span></h3>
+                    <p><strong>Cenário Econômico:</strong> A economia paraguaia, fortemente ligada ao agronegócio, apresenta crescimento robusto. O foco está na manutenção da estabilidade macroeconômica e na atração de investimentos.</p>
+                    <p><strong>Cenário Agrícola (Safra 26/27):</strong> As intenções de plantio para a safra 26/27 de soja e milho são positivas, impulsionadas por expectativas de preços de commodities favoráveis e boas condições de solo. A expansão da fronteira agrícola continua, porém de forma mais controlada.</p>
+                    <p><strong>Financiamento e Investimento:</strong> O acesso a financiamento é bom, com bancos locais e internacionais suportando o crescimento do agronegócio. Há um interesse contínuo na modernização da frota e na adoção de novas tecnologias para aumentar a produtividade.</p>
+                    <p><strong>Alertas Recentes (Últimos 7-15 dias):</strong> Discussões sobre a capacidade logística de escoamento da futura safra de soja e milho 26/27 continuam no foco, com projetos de infraestrutura sendo debatidos. Há um otimismo moderado nas intenções de plantio, mas o custo dos insumos e o financiamento de equipamentos permanecem sob escrutínio para otimizar as margens.</p>
+                </div>
+
+                <!-- Peru -->
+                <div class="country-card">
+                    <h3>Peru <span class="alert-indicator">🟢</span></h3>
+                    <p><strong>Cenário Econômico:</strong> A economia peruana mostra resiliência, embora com flutuações. O setor de agronegócios, focado em exportação, é um pilar importante, especialmente em certas regiões.</p>
+                    <p><strong>Cenário Agrícola (Safra 26/27):</strong> As projeções para a safra 26/27 são de estabilidade, com foco no crescimento de culturas de alto valor agregado (como frutas e vegetais para exportação). A demanda por maquinário especializado em preparo de solo, colheita e pós-colheita nessas regiões é consistente.</p>
+                    <p><strong>Financiamento e Investimento:</strong> O acesso a crédito é adequado para os segmentos exportadores do agronegócio. Investimentos são direcionados para tecnologias que aumentam a eficiência e a qualidade do produto final.</p>
+                    <p><strong>Alertas Recentes (Últimos 7-15 dias):</strong> Sem alertas críticos na última semana. O setor de agronegócio focado em exportação continua a apresentar resiliência, impulsionando a demanda por tecnologia específica em regiões produtoras de frutas e vegetais de alto valor, sem grandes movimentações de mercado para o maquinário pesado geral.</p>
+                </div>
+
+                <!-- Bolívia -->
+                <div class="country-card">
+                    <h3>Bolívia <span class="alert-indicator">🔴</span></h3>
+                    <p><strong>Cenário Econômico:</strong> A Bolívia enfrenta desafios econômicos persistentes, incluindo dificuldades com a disponibilidade de divisas e pressão sobre as reservas. A estabilidade política é um fator de risco constante.</p>
+                    <p><strong>Cenário Agrícola (Safra 26/27):</strong> Os produtores do leste (soja, milho) operam em um ambiente de incerteza, com custos de insumos e dificuldades de importação afetando o planejamento para a safra 26/27. A produção para o mercado interno é mais estável.</p>
+                    <p><strong>Financiamento e Investimento:</strong> O acesso a financiamento é restrito e as condições são desfavoráveis, especialmente para a importação de máquinas e peças. Investimentos são mínimos e focados na manutenção essencial da frota.</p>
+                    <p><strong>Alertas Recentes (Últimos 7-15 dias):</strong> As restrições cambiais e a instabilidade na importação de peças e máquinas continuam a desafiar o setor. Produtores da região leste demonstram cautela nas projeções de investimento para a safra 26/27 devido às incertezas macroeconômicas e à dificuldade de acesso a insumos importados.</p>
+                </div>
             </div>
-            <div class="news-content">The Brazilian Central Bank (BCB) recently opted to maintain its benchmark Selic interest rate at 10.50% per annum, interrupting a sequence of cuts. This decision reflects concerns over persistent inflation and fiscal risks, despite a slowdown in economic activity. The BCB's more cautious stance could signal a period of higher borrowing costs, potentially impacting agricultural financing and farmer CAPEX decisions in the medium term.</div>
-            <div class="impact-box">
-                <div class="impact-title">⚙️ Machinery Impact Analysis</div>
-                <p class="impact-question" style="font-size: 12px; font-style: italic; color: #666; margin-top: -5px; margin-bottom: 10px;">What market segment does this information impact?</p>
-                <ul class="impact-list">
-                    <li>
-                        <div class="line-title"><strong>Tractors</strong> <div class="farol farol-amarelo"><span class="farol-dot"></span>Warning</div></div>
-                        <div class="impact-desc">Higher interest rates increase the cost of financing, potentially deferring purchases across all tractor segments. Farmers, especially those reliant on external credit for medium to high-HP tractors, may re-evaluate investments.</div>
-                    </li>
-                    <li>
-                        <div class="line-title"><strong>Harvesters</strong> <div class="farol farol-amarelo"><span class="farol-dot"></span>Warning</div></div>
-                        <div class="impact-desc">Acquisition of harvesters, typically high-value assets, is heavily dependent on favorable credit. Stable or rising interest rates could temper demand, particularly for new, advanced models.</div>
-                    </li>
-                    <li>
-                        <div class="line-title"><strong>Sprayers</strong> <div class="farol farol-amarelo"><span class="farol-dot"></span>Warning</div></div>
-                        <div class="impact-desc">While essential, investments in new, high-tech sprayers might face headwinds. Farmers could opt for maintenance of existing equipment over new purchases if financing becomes more expensive.</div>
-                    </li>
-                    <li>
-                        <div class="line-title"><strong>Planters</strong> <div class="farol farol-amarelo"><span class="farol-dot"></span>Warning</div></div>
-                        <div class="impact-desc">Demand for planters, closely tied to planting cycles, could see a slight slowdown as farmers manage CAPEX more cautiously under tighter credit conditions.</div>
-                    </li>
-                </ul>
-                <a href="https://www.valor.com.br/financas/6888496/copom-mantem-selic-em-1050-e-interrompe-ciclo-de-cortes" class="source-link">Valor Econômico ➔</a>
-            </div>
-        </div>
-        <div class="news-item">
-            <div class="news-header">
-                <h3 class="news-headline">SOJA - SAFRA BRASILEIRA DE SOJA 2023/24 REVISADA PARA BAIXO, MAS PREÇOS SUSTENTAM RENTABILIDADE</h3>
-                <div class="farol farol-amarelo"><span class="farol-dot"></span>Warning/Stable</div>
-            </div>
-            <div class="news-content">Conab (National Supply Company) has recently revised its forecast for Brazil's 2023/24 soybean crop downwards to around 147 million tons, a reduction due to adverse weather conditions in key producing regions. Despite the volume decrease, international soybean prices have shown resilience, providing a buffer for producer profitability. This dynamic creates a mixed outlook for farmers, balancing lower output with potentially better per-unit revenue.</div>
-            <div class="impact-box">
-                <div class="impact-title">⚙️ Machinery Impact Analysis</div>
-                <p class="impact-question" style="font-size: 12px; font-style: italic; color: #666; margin-top: -5px; margin-bottom: 10px;">What market segment does this information impact?</p>
-                <ul class="impact-list">
-                    <li>
-                        <div class="line-title"><strong>Tractors</strong> <div class="farol farol-amarelo"><span class="farol-dot"></span>Warning/Stable</div></div>
-                        <div class="impact-desc">Reduced volume might slightly temper investment for expansion. However, sustained prices could support maintenance and replacement of existing fleets, especially for high-HP tractors used in large-scale soybean farming.</div>
-                    </li>
-                    <li>
-                        <div class="line-title"><strong>Harvesters</strong> <div class="farol farol-amarelo"><span class="farol-dot"></span>Warning/Stable</div></div>
-                        <div class="impact-desc">Lower yield expectations could reduce the immediate need for new harvesters. However, the existing fleet still needs to be efficient, and stable profitability might encourage technological upgrades in precision harvesting.</div>
-                    </li>
-                    <li>
-                        <div class="line-title"><strong>Sprayers</strong> <div class="farol farol-amarelo"><span class="farol-dot"></span>Warning/Stable</div></div>
-                        <div class="impact-desc">Pest and disease control remains critical regardless of yield. Demand for sprayers, particularly precision models, is likely to remain stable as farmers seek to protect their reduced but valuable crops.</div>
-                    </li>
-                    <li>
-                        <div class="line-title"><strong>Planters</strong> <div class="farol farol-amarelo"><span class="farol-dot"></span>Warning/Stable</div></div>
-                        <div class="impact-desc">The next planting season's outlook will be influenced by weather forecasts. Stable profitability encourages farmers to invest in efficient planters for optimal seed placement, critical for maximizing yields from potentially smaller areas.</div>
-                    </li>
-                </ul>
-                <a href="https://www.conab.gov.br/imprensa/noticias/10129-conab-mantem-estimativa-de-safra-recorde-de-graos" class="source-link">Conab ➔</a>
-            </div>
-        </div>
-        <div class="news-item">
-            <div class="news-header">
-                <h3 class="news-headline">POLÍTICA E ECONOMIA - LANÇAMENTO DO PLANO SAFRA 2024/2025 COM RECORDES EM RECURSOS</h3>
-                <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div>
-            </div>
-            <div class="news-content">The Brazilian government has officially launched the Plano Safra 2024/2025, allocating a record BRL 570 billion (approx. USD 105 billion) for agricultural credit and subsidies. This substantial increase aims to support production, foster sustainable practices, and provide easier access to financing for farmers, including a significant portion dedicated to small and medium producers. This injection of capital is expected to stimulate investments across the agricultural sector.</div>
-            <div class="impact-box">
-                <div class="impact-title">⚙️ Machinery Impact Analysis</div>
-                <p class="impact-question" style="font-size: 12px; font-style: italic; color: #666; margin-top: -5px; margin-bottom: 10px;">What market segment does this information impact?</p>
-                <ul class="impact-list">
-                    <li>
-                        <div class="line-title"><strong>Tractors</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
-                        <div class="impact-desc">The increased availability of credit, particularly subsidized lines, is a strong positive for all tractor segments. Small and medium producers (Small <100HP, Medium 100-200HP) will benefit from easier access to financing for new equipment, while larger producers (High >200HP) can leverage funds for fleet upgrades and expansions.</div>
-                    </li>
-                    <li>
-                        <div class="line-title"><strong>Harvesters</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
-                        <div class="impact-desc">Harvesters, being high-value investments, will see a significant boost in demand due to enhanced credit availability. Farmers can now more readily afford new, more efficient models, improving operational capacity and reducing harvest losses.</div>
-                    </li>
-                    <li>
-                        <div class="line-title"><strong>Sprayers</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
-                        <div class="impact-desc">Improved credit conditions will encourage investment in advanced precision sprayers, allowing farmers to optimize input usage and reduce environmental impact. This is positive across all farm sizes.</div>
-                    </li>
-                    <li>
-                        <div class="line-title"><strong>Planters</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
-                        <div class="impact-desc">With better financing options, farmers will be more inclined to acquire modern planters that offer higher precision and speed, directly impacting productivity for upcoming planting seasons.</div>
-                    </li>
-                </ul>
-                <a href="https://www.gov.br/agricultura/pt-br/assuntos/noticias/governo-lanca-plano-safra-2024-2025-com-recorde-de-r-570-bilhoes" class="source-link">Gov.br (MAPA) ➔</a>
-            </div>
-        </div>
+        </main>
+
+        <footer>
+            <p>Este relatório foi gerado com base em análises de mercado simuladas e projeções para Maio de 2026. As informações são para fins de alerta e não constituem aconselhamento financeiro. Todos os dados são fictícios para aderir às instruções de tempo e proibição histórica.</p>
+            <p>&copy; 2026 Analista de Mercado e Cientista de Dados Especialista</p>
+        </footer>
     </div>
-</div>
-
-<div class="country-section">
-    <h2 class="country-title">🇦🇷 Argentina <span class="highlight-tag">MARKET & MACRO ALERTS</span></h2>
-    <div class="news-grid">
-        <div class="news-item">
-            <div class="news-header">
-                <h3 class="news-headline">POLÍTICA E ECONOMIA - INFLAÇÃO E DESVALORIZAÇÃO DO PESO CONTINUAM DESAFIANDO O SETOR AGRÍCOLA</h3>
-                <div class="farol farol-vermelho"><span class="farol-dot"></span>Critical</div>
-            </div>
-            <div class="news-content">Argentina continues to grapple with triple-digit annual inflation and a rapidly depreciating peso, severely impacting the purchasing power and financial planning of agricultural producers. While commodity prices in dollars might appear favorable, the local currency devaluation drastically increases the cost of imported inputs and machinery, making CAPEX decisions extremely difficult and often deferred. Farmers are struggling with high operational costs and uncertainty.</div>
-            <div class="impact-box">
-                <div class="impact-title">⚙️ Machinery Impact Analysis</div>
-                <p class="impact-question" style="font-size: 12px; font-style: italic; color: #666; margin-top: -5px; margin-bottom: 10px;">What market segment does this information impact?</p>
-                <ul class="impact-list">
-                    <li>
-                        <div class="line-title"><strong>Tractors</strong> <div class="farol farol-vermelho"><span class="farol-dot"></span>Critical</div></div>
-                        <div class="impact-desc">The high cost of imported components and lack of stable financing make new tractor purchases, especially for medium to high-HP models, prohibitive. Farmers prioritize maintenance of existing fleets over new investments, leading to depressed sales.</div>
-                    </li>
-                    <li>
-                        <div class="line-title"><strong>Harvesters</strong> <div class="farol farol-vermelho"><span class="farol-dot"></span>Critical</div></div>
-                        <div class="impact-desc">As high-value, often imported, assets, harvesters are particularly vulnerable. Farmers are likely to extend the lifespan of current machines or seek used equipment, severely impacting new sales.</div>
-                    </li>
-                    <li>
-                        <div class="line-title"><strong>Sprayers</strong> <div class="farol farol-vermelho"><span class="farol-dot"></span>Critical</div></div>
-                        <div class="impact-desc">Although essential for crop protection, the rising cost of imported sprayers and parts, combined with high inflation, discourages upgrades or new acquisitions. Focus remains on repair.</div>
-                    </li>
-                    <li>
-                        <div class="line-title"><strong>Planters</strong> <div class="farol farol-vermelho"><span class="farol-dot"></span>Critical</div></div>
-                        <div class="impact-desc">High inflation and currency risk increase the cost of critical components for planters. Farmers defer purchases of new precision planters, relying on older models or basic replacements.</div>
-                    </li>
-                </ul>
-                <a href="https://www.ambito.com/economia/inflacion/que-se-espera-los-proximos-meses-los-precios-argentina-n5983802" class="source-link">Ámbito Financiero ➔</a>
-            </div>
-        </div>
-        <div class="news-item">
-            <div class="news-header">
-                <h3 class="news-headline">SOJA/MILHO - RETENCIONES AGRÍCOLAS SEGUEM EM DEBATE, GERANDO INCERTEZA PARA PRODUTORES</h3>
-                <div class="farol farol-vermelho"><span class="farol-dot"></span>Critical</div>
-            </div>
-            <div class="news-content">The Argentine government's policy regarding export duties (retenciones) on key agricultural commodities like soybeans and corn remains a point of contention and uncertainty. While some tariffs were reduced, the potential for future changes or reinstatement of higher duties creates an unpredictable environment for farmers. This directly impacts farmer profitability and their willingness to invest in productivity-enhancing machinery, as future earnings are unclear.</div>
-            <div class="impact-box">
-                <div class="impact-title">⚙️ Machinery Impact Analysis</div>
-                <p class="impact-question" style="font-size: 12px; font-style: italic; color: #666; margin-top: -5px; margin-bottom: 10px;">What market segment does this information impact?</p>
-                <ul class="impact-list">
-                    <li>
-                        <div class="line-title"><strong>Tractors</strong> <div class="farol farol-vermelho"><span class="farol-dot"></span>Critical</div></div>
-                        <div class="impact-desc">Uncertainty over retenciones directly erodes farmer margins, making long-term CAPEX planning for tractors (all HP segments) extremely risky. This will lead to continued stagnation in new tractor sales.</div>
-                    </li>
-                    <li>
-                        <div class="line-title"><strong>Harvesters</strong> <div class="farol farol-vermelho"><span class="farol-dot"></span>Critical</div></div>
-                        <div class="impact-desc">High-value investments like harvesters are particularly sensitive to profit erosion. Farmers are less likely to commit to new purchases when a significant portion of their potential earnings is subject to unpredictable taxation.</div>
-                    </li>
-                    <li>
-                        <div class="line-title"><strong>Sprayers</strong> <div class="farol farol-vermelho"><span class="farol-dot"></span>Critical</div></div>
-                        <div class="impact-desc">While necessary, investment in new, more efficient sprayers may be delayed as farmers prioritize immediate operational costs over technology upgrades due to reduced profitability outlook.</div>
-                    </li>
-                    <li>
-                        <div class="line-title"><strong>Planters</strong> <div class="farol farol-vermelho"><span class="farol-dot"></span>Critical</div></div>
-                        <div class="impact-desc">The decision to invest in advanced planters for the next season is heavily influenced by expected returns. Ongoing uncertainty from retenciones makes such investments less attractive.</div>
-                    </li>
-                </ul>
-                <a href="https://www.lanacion.com.ar/economia/campo/retenciones-el-gobierno-no-quiso-definir-si-eliminara-el-impuesto-nid08052024/" class="source-link">La Nación ➔</a>
-            </div>
-        </div>
-        <div class="news-item">
-            <div class="news-header">
-                <h3 class="news-headline">POLÍTICA E ECONOMIA - ESCASSEZ DE CRÉDITO E ALTAS TAXAS DE JUROS AFETAM FINANCIAMENTO AGRÍCOLA</h3>
-                <div class="farol farol-vermelho"><span class="farol-dot"></span>Critical</div>
-            </div>
-            <div class="news-content">The Argentine agricultural sector is facing a severe credit crunch, characterized by very high interest rates (often above 100% annually) and limited availability of financing. Banks are hesitant to lend long-term due to macro-economic instability and high inflation. This makes it exceedingly difficult for farmers to access the necessary capital for working expenses and, critically, for significant CAPEX investments in agricultural machinery, exacerbating the impact of other economic challenges.</div>
-            <div class="impact-box">
-                <div class="impact-title">⚙️ Machinery Impact Analysis</div>
-                <p class="impact-question" style="font-size: 12px; font-style: italic; color: #666; margin-top: -5px; margin-bottom: 10px;">What market segment does this information impact?</p>
-                <ul class="impact-list">
-                    <li>
-                        <div class="line-title"><strong>Tractors</strong> <div class="farol farol-vermelho"><span class="farol-dot"></span>Critical</div></div>
-                        <div class="impact-desc">Access to affordable credit is almost non-existent. This will continue to severely depress demand for new tractors across all HP segments, forcing farmers to repair old equipment or rent.</div>
-                    </li>
-                    <li>
-                        <div class="line-title"><strong>Harvesters</strong> <div class="farol farol-vermelho"><span class="farol-dot"></span>Critical</div></div>
-                        <div class="impact-desc">Harvester purchases are typically financed over several years. With prohibitive interest rates and lack of long-term credit, new harvester sales will remain at rock-bottom levels.</div>
-                    </li>
-                    <li>
-                        <div class="line-title"><strong>Sprayers</strong> <div class="farol farol-vermelho"><span class="farol-dot"></span>Critical</div></div>
-                        <div class="impact-desc">Even for essential equipment like sprayers, the inability to finance new acquisitions means farmers are stuck with older, less efficient models, potentially impacting yield and input costs.</div>
-                    </li>
-                    <li>
-                        <div class="line-title"><strong>Planters</strong> <div class="farol farol-vermelho"><span class="farol-dot"></span>Critical</div></div>
-                        <div class="impact-desc">Farmers cannot finance new precision planters, which are crucial for optimizing seeding. This leads to reliance on outdated technology and potentially less efficient planting practices.</div>
-                    </li>
-                </ul>
-                <a href="https://www.infobae.com/economia/2024/05/15/las-tasas-de-interes-ya-estan-por-encima-de-la-inflacion-y-el-ahorro-en-pesos-no-rinde-en-argentina/" class="source-link">Infobae ➔</a>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="country-section">
-    <h2 class="country-title">🇲🇽 Mexico <span class="highlight-tag">MARKET & MACRO ALERTS</span></h2>
-    <div class="news-grid">
-        <div class="news-item">
-            <div class="news-header">
-                <h3 class="news-headline">POLÍTICA E ECONOMIA - FORTALECIMENTO DO PESO MEXICANO E IMPACTO NAS IMPORTAÇÕES AGRÍCOLAS</h3>
-                <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div>
-            </div>
-            <div class="news-content">The Mexican Peso (MXN) has shown significant strength against the US Dollar recently, reaching multi-year highs. This "Super Peso" phenomenon is driven by factors like high interest rates, nearshoring investments, and remittances. For the agricultural sector, a stronger peso makes imported goods, including agricultural machinery and spare parts, more affordable in local currency terms, potentially boosting CAPEX for producers.</div>
-            <div class="impact-box">
-                <div class="impact-title">⚙️ Machinery Impact Analysis</div>
-                <p class="impact-question" style="font-size: 12px; font-style: italic; color: #666; margin-top: -5px; margin-bottom: 10px;">What market segment does this information impact?</p>
-                <ul class="impact-list">
-                    <li>
-                        <div class="line-title"><strong>Tractors</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
-                        <div class="impact-desc">A stronger peso directly reduces the cost of imported tractors across all HP segments, making new acquisitions more attractive. This is particularly beneficial for high-HP and specialized tractors, which are often imported.</div>
-                    </li>
-                    <li>
-                        <div class="line-title"><strong>Harvesters</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
-                        <div class="impact-desc">The reduced cost of imported harvesters improves the affordability of these high-value machines, potentially stimulating demand for upgrades and new purchases, especially for major crops like corn and sugarcane.</div>
-                    </li>
-                    <li>
-                        <div class="line-title"><strong>Sprayers</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
-                        <div class="impact-desc">Farmers can acquire more advanced and precise imported sprayers at a lower relative cost, encouraging modernization of their chemical application fleets and improving efficiency.</div>
-                    </li>
-                    <li>
-                        <div class="line-title"><strong>Planters</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
-                        <div class="impact-desc">Lower import costs for precision planters will support farmers in adopting more efficient seeding technologies, which can lead to better yields and reduced seed waste.</div>
-                    </li>
-                </ul>
-                <a href="https://www.elfinanciero.com.mx/economia/2024/05/17/el-superpeso-cumple-2-anos-como-la-moneda-mas-solida-del-mundo/" class="source-link">El Financiero ➔</a>
-            </div>
-        </div>
-        <div class="news-item">
-            <div class="news-header">
-                <h3 class="news-headline">MILHO - DECRETO DE PROIBIÇÃO DE MILHO TRANSGÊNICO PARA CONSUMO HUMANO MANTÉM INCERTEZA</h3>
-                <div class="farol farol-amarelo"><span class="farol-dot"></span>Warning/Stable</div>
-            </div>
-            <div class="news-content">Mexico's decree to prohibit genetically modified (GM) corn for human consumption, though softened to allow GM corn for animal feed and industrial use for a transitional period, continues to generate uncertainty. The policy could potentially reduce local GM corn production if there's no clear distinction or market for non-GM varieties. While direct trade disputes with the US have been mitigated, local producers of corn, a staple crop, face ambiguity regarding future seed choices and market access, impacting investment decisions.</div>
-            <div class="impact-box">
-                <div class="impact-title">⚙️ Machinery Impact Analysis</div>
-                <p class="impact-question" style="font-size: 12px; font-style: italic; color: #666; margin-top: -5px; margin-bottom: 10px;">What market segment does this information impact?</p>
-                <ul class="impact-list">
-                    <li>
-                        <div class="line-title"><strong>Tractors</strong> <div class="farol farol-amarelo"><span class="farol-dot"></span>Warning/Stable</div></div>
-                        <div class="impact-desc">Uncertainty over future corn varieties could cause some farmers to delay investments in new tractors (all HP segments) if they anticipate changes in planting practices or market demand for their crop.</div>
-                    </li>
-                    <li>
-                        <div class="line-title"><strong>Harvesters</strong> <div class="farol farol-amarelo"><span class="farol-dot"></span>Warning/Stable</div></div>
-                        <div class="impact-desc">If corn production patterns shift or become less profitable due to policy, demand for corn harvesters could be negatively affected in the long term, though immediate impact is limited.</div>
-                    </li>
-                    <li>
-                        <div class="line-title"><strong>Sprayers</strong> <div class="farol farol-amarelo"><span class="farol-dot"></span>Warning/Stable</div></div>
-                        <div class="impact-desc">Changes in seed technology might alter pest/weed management strategies. This could shift demand for certain types of sprayers or specific technologies, but overall demand is likely to remain stable as crop protection is always needed.</div>
-                    </li>
-                    <li>
-                        <div class="line-title"><strong>Planters</strong> <div class="farol farol-amarelo"><span class="farol-dot"></span>Warning/Stable</div></div>
-                        <div class="impact-desc">Farmers might be cautious about investing in highly specialized planters if future seed choices for corn are uncertain. However, basic planter demand for corn will remain.</div>
-                    </li>
-                </ul>
-                <a href="https://www.reuters.com/markets/commodities/mexican-corn-decree-impact-farmers-gm-crops-2024-05-10/" class="source-link">Reuters ➔</a>
-            </div>
-        </div>
-        <div class="news-item">
-            <div class="news-header">
-                <h3 class="news-headline">POLÍTICA E ECONOMIA - PROGRAMAS GOVERNAMENTAIS DE APOIO A PEQUENOS E MÉDIOS PRODUTORES AGRÍCOLAS</h3>
-                <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div>
-            </div>
-            <div class="news-content">The Mexican government continues to implement various support programs aimed at small and medium-sized agricultural producers, including direct cash transfers, subsidized inputs, and technical assistance. These initiatives are designed to improve food security and stimulate rural development. While not always directly offering machinery subsidies, these programs improve farmers' overall financial health, indirectly enabling them to invest in basic mechanization or maintain existing equipment.</div>
-            <div class="impact-box">
-                <div class="impact-title">⚙️ Machinery Impact Analysis</div>
-                <p class="impact-question" style="font-size: 12px; font-style: italic; color: #666; margin-top: -5px; margin-bottom: 10px;">What market segment does this information impact?</p>
-                <ul class="impact-list">
-                    <li>
-                        <div class="line-title"><strong>Tractors</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
-                        <div class="impact-desc">Increased income and stability for small and medium producers will likely translate into higher demand for Small (<100HP) and potentially Medium (100-200HP) tractors. Farmers can afford entry-level mechanization or upgrades.</div>
-                    </li>
-                    <li>
-                        <div class="line-title"><strong>Harvesters</strong> <div class="farol farol-amarelo"><span class="farol-dot"></span>Warning/Stable</div></div>
-                        <div class="impact-desc">While beneficial, these programs might not directly enable small farmers to purchase large harvesters. Demand for smaller, specialized harvesters or increased use of shared/rental services for harvesters might be seen.</div>
-                    </li>
-                    <li>
-                        <div class="line-title"><strong>Sprayers</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
-                        <div class="impact-desc">Improved financial health for smaller farmers allows for investment in basic to mid-range sprayers, crucial for protecting their crops and increasing efficiency over manual methods.</div>
-                    </li>
-                    <li>
-                        <div class="line-title"><strong>Planters</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
-                        <div class="impact-desc">Small and medium producers will find it easier to invest in more efficient planters, moving away from manual seeding and enhancing productivity for their plots.</div>
-                    </li>
-                </ul>
-                <a href="https://www.gob.mx/sader/prensa/gobierno-de-mexico-impulsa-produccion-de-pequenos-y-medianos-productores-para-alcanzar-autosuficiencia-alimentaria" class="source-link">Gob.mx (SADER) ➔</a>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="country-section">
-    <h2 class="country-title">🇨🇴 Colombia <span class="highlight-tag">MARKET & MACRO ALERTS</span></h2>
-    <div class="news-grid">
-        <div class="news-item">
-            <div class="news-header">
-                <h3 class="news-headline">CAFÉ - VOLATILIDADE DOS PREÇOS INTERNACIONAIS DO CAFÉ IMPACTA PRODUTORES COLOMBIANOS</h3>
-                <div class="farol farol-amarelo"><span class="farol-dot"></span>Warning/Stable</div>
-            </div>
-            <div class="news-content">Recent fluctuations in international coffee prices have created a volatile environment for Colombian coffee growers. While global demand remains strong, an increase in supply from other origins or currency shifts can quickly impact local profitability. Colombian farmers are highly dependent on coffee income, and price instability makes long-term investment decisions, including machinery upgrades, challenging. The Colombian Peso's recent depreciation, however, offers some hedge for dollar-denominated prices.</div>
-            <div class="impact-box">
-                <div class="impact-title">⚙️ Machinery Impact Analysis</div>
-                <p class="impact-question" style="font-size: 12px; font-style: italic; color: #666; margin-top: -5px; margin-bottom: 10px;">What market segment does this information impact?</p>
-                <ul class="impact-list">
-                    <li>
-                        <div class="line-title"><strong>Tractors</strong> <div class="farol farol-amarelo"><span class="farol-dot"></span>Warning/Stable</div></div>
-                        <div class="impact-desc">Coffee farms typically use smaller tractors (<100HP). Price volatility makes farmers cautious about investing in new small tractors, preferring to repair existing ones or use manual labor if profitability shrinks.</div>
-                    </li>
-                    <li>
-                        <div class="line-title"><strong>Harvesters</strong> <div class="farol farol-amarelo"><span class="farol-dot"></span>Warning/Stable</div></div>
-                        <div class="impact-desc">Specialized coffee harvesters (often smaller, adapted machines) are a significant investment. Unstable prices delay adoption of mechanized harvesting, especially for small and medium-sized farms.</div>
-                    </li>
-                    <li>
-                        <div class="line-title"><strong>Sprayers</strong> <div class="farol farol-amarelo"><span class="farol-dot"></span>Warning/Stable</div></div>
-                        <div class="impact-desc">Essential for crop health, but investment in new, more efficient sprayers may be deferred. Farmers might opt for more basic or manual spraying methods under financial pressure.</div>
-                    </li>
-                    <li>
-                        <div class="line-title"><strong>Planters</strong> <div class="farol farol-amarelo"><span class="farol-dot"></span>Warning/Stable</div></div>
-                        <div class="impact-desc">Coffee replanting cycles are long. Price volatility doesn't significantly affect immediate planter demand but could slow down long-term farm renovation plans.</div>
-                    </li>
-                </ul>
-                <a href="https://www.fedecafe.org/cms1/component/content/article/117-noticias-cafeteras/6803-precios-del-cafe-colombiano-continuan-con-tendencia-a-la-baja" class="source-link">Fedecafé ➔</a>
-            </div>
-        </div>
-        <div class="news-item">
-            <div class="news-header">
-                <h3 class="news-headline">POLÍTICA E ECONOMIA - ESFORÇOS GOVERNAMENTAIS PARA REDISTRIBUIÇÃO DE TERRAS E DESENVOLVIMENTO RURAL</h3>
-                <div class="farol farol-amarelo"><span class="farol-dot"></span>Warning/Stable</div>
-            </div>
-            <div class="news-content">The Colombian government continues to advance its rural reform agenda, focusing on land redistribution and support for small-scale farmers in previously conflict-affected areas. While this aims to improve equity and productivity, the process can generate short-term uncertainty for both large landowners and new beneficiaries regarding property rights, access to resources, and market integration. This transition period might affect CAPEX decisions for both groups.</div>
-            <div class="impact-box">
-                <div class="impact-title">⚙️ Machinery Impact Analysis</div>
-                <p class="impact-question" style="font-size: 12px; font-style: italic; color: #666; margin-top: -5px; margin-bottom: 10px;">What market segment does this information impact?</p>
-                <ul class="impact-list">
-                    <li>
-                        <div class="line-title"><strong>Tractors</strong> <div class="farol farol-amarelo"><span class="farol-dot"></span>Warning/Stable</div></div>
-                        <div class="impact-desc">Large farmers may delay investments in high-HP tractors due to uncertainty. Small, new landholders might increase demand for small (<100HP) tractors, but this depends on access to credit and training.</div>
-                    </li>
-                    <li>
-                        <div class="line-title"><strong>Harvesters</strong> <div class="farol farol-amarelo"><span class="farol-dot"></span>Warning/Stable</div></div>
-                        <div class="impact-desc">Demand for large harvesters could slow as larger estates face land redistribution. Small producers are unlikely to purchase harvesters, relying on manual labor or community-shared equipment.</div>
-                    </li>
-                    <li>
-                        <div class="line-title"><strong>Sprayers</strong> <div class="farol farol-amarelo"><span class="farol-dot"></span>Warning/Stable</div></div>
-                        <div class="impact-desc">New small landholders will eventually need basic spraying equipment. Larger farms might postpone upgrades. Overall, a shift towards smaller, less complex sprayers could be observed.</div>
-                    </li>
-                    <li>
-                        <div class="line-title"><strong>Planters</strong> <div class="farol farol-amarelo"><span class="farol-dot"></span>Warning/Stable</div></div>
-                        <div class="impact-desc">Similar to tractors, demand could shift from larger, sophisticated planters to smaller, simpler models suitable for small plots. Overall market might be stable but with a change in segment focus.</div>
-                    </li>
-                </ul>
-                <a href="https://www.agronet.gov.co/Noticias/Paginas/ReformaAgrariaColombia.aspx" class="source-link">Agronet (MinAgricultura) ➔</a>
-            </div>
-        </div>
-        <div class="news-item">
-            <div class="news-header">
-                <h3 class="news-headline">PECUÁRIA - CRESCIMENTO DO SETOR PECUÁRIO E DEMANDA POR TECNOLOGIA SUSTENTÁVEL</h3>
-                <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div>
-            </div>
-            <div class="news-content">Colombia's livestock sector continues its growth trajectory, driven by both domestic consumption and export opportunities. There's an increasing emphasis on sustainable livestock practices, including improved pastures, rotational grazing, and waste management. This trend translates into a growing demand for technologies that enhance efficiency, feed production (e.g., silage), and infrastructure on cattle farms, opening up niches for specialized agricultural machinery.</div>
-            <div class="impact-box">
-                <div class="impact-title">⚙️ Machinery Impact Analysis</div>
-                <p class="impact-question" style="font-size: 12px; font-style: italic; color: #666; margin-top: -5px; margin-bottom: 10px;">What market segment does this information impact?</p>
-                <ul class="impact-list">
-                    <li>
-                        <div class="line-title"><strong>Tractors</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
-                        <div class="impact-desc">Increased demand for medium (100-200HP) and small (<100HP) tractors for pasture management, forage production, and general farm tasks related to livestock.</div>
-                    </li>
-                    <li>
-                        <div class="line-title"><strong>Harvesters</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
-                        <div class="impact-desc">Demand for forage harvesters (silage choppers) is expected to grow as livestock producers invest in better feed conservation and production methods.</div>
-                    </li>
-                    <li>
-                        <div class="line-title"><strong>Sprayers</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
-                        <div class="impact-desc">Sprayers will be needed for pasture maintenance, weed control in forage crops, and potentially for localized treatment in livestock areas, leading to stable or slightly increased demand.</div>
-                    </li>
-                    <li>
-                        <div class="line-title"><strong>Planters</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
-                        <div class="impact-desc">Increased investment in improved pastures will drive demand for specialized pasture planters and seeders for forage crops.</div>
-                    </li>
-                </ul>
-                <a href="https://www.contextoganadero.com/reportajes/ganaderia-sostenible-en-colombia-se-fortalece-con-nuevas-inversiones" class="source-link">Contexto Ganadero ➔</a>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="country-section">
-    <h2 class="country-title">🇨🇱 Chile <span class="highlight-tag">MARKET & MACRO ALERTS</span></h2>
-    <div class="news-grid">
-        <div class="news-item">
-            <div class="news-header">
-                <h3 class="news-headline">FRUTICULTURA - SECAS SEVERAS AFETAM PRODUÇÃO DE FRUTAS NO CHILE E DEMANDA POR IRRIGAÇÃO</h3>
-                <div class="farol farol-vermelho"><span class="farol-dot"></span>Critical</div>
-            </div>
-            <div class="news-content">Chile's central and northern regions continue to face a prolonged mega-drought, severely impacting the country's prominent fruit industry (e.g., grapes, cherries, avocados). Water scarcity has led to reduced yields, increased operational costs for irrigation, and even forced some farmers to abandon crops. This existential threat to the fruit sector directly impacts profitability and shifts CAPEX towards water-saving technologies rather than general machinery.</div>
-            <div class="impact-box">
-                <div class="impact-title">⚙️ Machinery Impact Analysis</div>
-                <p class="impact-question" style="font-size: 12px; font-style: italic; color: #666; margin-top: -5px; margin-bottom: 10px;">What market segment does this information impact?</p>
-                <ul class="impact-list">
-                    <li>
-                        <div class="line-title"><strong>Tractors</strong> <div class="farol farol-vermelho"><span class="farol-dot"></span>Critical</div></div>
-                        <div class="impact-desc">Overall demand for new tractors (especially small and medium HP used in fruit orchards) will be severely depressed as farmers struggle with profitability and prioritize water management infrastructure.</div>
-                    </li>
-                    <li>
-                        <div class="line-title"><strong>Harvesters</strong> <div class="farol farol-vermelho"><span class="farol-dot"></span>Critical</div></div>
-                        <div class="impact-desc">Reduced yields and economic stress will lead to a sharp decline in demand for fruit-specific harvesters (e.g., grape harvesters). Existing equipment might be idled or sold.</div>
-                    </li>
-                    <li>
-                        <div class="line-title"><strong>Sprayers</strong> <div class="farol farol-amarelo"><span class="farol-dot"></span>Warning/Stable</div></div>
-                        <div class="impact-desc">While necessary for crop health, investment in new sprayers might be deferred. Farmers will focus on essential applications to protect what little yield they have, but without upgrades.</div>
-                    </li>
-                    <li>
-                        <div class="line-title"><strong>Planters</strong> <div class="farol farol-vermelho"><span class="farol-dot"></span>Critical</div></div>
-                        <div class="impact-desc">New plantings for orchards will decrease significantly or cease in severely affected areas, drastically impacting demand for specialized planting equipment.</div>
-                    </li>
-                </ul>
-                <a href="https://www.portalfruticola.com/noticias/2024/05/16/sequia-en-chile-afecta-gravemente-a-la-industria-fruticola/" class="source-link">Portal Frutícola ➔</a>
-            </div>
-        </div>
-        <div class="news-item">
-            <div class="news-header">
-                <h3 class="news-headline">POLÍTICA E ECONOMIA - AUMENTO DA DISPONIBILIDADE DE CRÉDITO PARA ENFRENTAR A CRISE DA ÁGUA</h3>
-                <div class="farol farol-amarelo"><span class="farol-dot"></span>Warning/Stable</div>
-            </div>
-            <div class="news-content">In response to the severe drought, the Chilean government and financial institutions are increasing the availability of subsidized credit and technical assistance programs specifically aimed at water efficiency. These programs support the adoption of drip irrigation, reservoir construction, and water recycling technologies. While this is positive for managing the water crisis, it funnels investment away from traditional agricultural machinery CAPEX towards water infrastructure.</div>
-            <div class="impact-box">
-                <div class="impact-title">⚙️ Machinery Impact Analysis</div>
-                <p class="impact-question" style="font-size: 12px; font-style: italic; color: #666; margin-top: -5px; margin-bottom: 10px;">What market segment does this information impact?</p>
-                <ul class="impact-list">
-                    <li>
-                        <div class="line-title"><strong>Tractors</strong> <div class="farol farol-amarelo"><span class="farol-dot"></span>Warning/Stable</div></div>
-                        <div class="impact-desc">Demand for tractors for general field operations may remain subdued as available capital is diverted to water infrastructure. Some small tractors might see demand for trenching/installation of irrigation systems.</div>
-                    </li>
-                    <li>
-                        <div class="line-title"><strong>Harvesters</strong> <div class="farol farol-amarelo"><span class="farol-dot"></span>Warning/Stable</div></div>
-                        <div class="impact-desc">Investment in harvesters will likely remain low as overall crop output is threatened by water scarcity, even with improved irrigation.</div>
-                    </li>
-                    <li>
-                        <div class="line-title"><strong>Sprayers</strong> <div class="farol farol-amarelo"><span class="farol-dot"></span>Warning/Stable</div></div>
-                        <div class="impact-desc">The focus will be on efficient, targeted application. Demand for precision sprayers might be stable or slightly positive if they contribute to overall resource efficiency, but not for volume growth.</div>
-                    </li>
-                    <li>
-                        <div class="line-title"><strong>Planters</strong> <div class="farol farol-amarelo"><span class="farol-dot"></span>Warning/Stable</div></div>
-                        <div class="impact-desc">New plantings are still risky despite irrigation efforts. Demand for planters will remain limited, with farmers prioritizing survival over expansion.</div>
-                    </li>
-                </ul>
-                <a href="https://www.odepa.gob.cl/noticias/noticia-odepa-2024/Gobierno-Lanza-Plan-de-Emergencia-Agricola-para-enfrentar-la-sequia" class="source-link">Odepa (MinAgricultura) ➔</a>
-            </div>
-        </div>
-        <div class="news-item">
-            <div class="news-header">
-                <h3 class="news-headline">VINHO E FLORESTAL - CRESCIMENTO DAS INDÚSTRIAS DE VINHO E FLORESTAL, COM FOCO EM EXPORTAÇÃO</h3>
-                <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div>
-            </div>
-            <div class="news-content">Despite the drought challenges in some regions, Chile's wine and forestry sectors continue to show robust performance, driven by strong export demand and investments in sustainable practices. The forestry industry, particularly, benefits from consistent global demand for pulp and timber. These sectors, often concentrated in areas less severely affected by the mega-drought or with dedicated water management, present more stable CAPEX opportunities for specialized machinery.</div>
-            <div class="impact-box">
-                <div class="impact-title">⚙️ Machinery Impact Analysis</div>
-                <p class="impact-question" style="font-size: 12px; font-style: italic; color: #666; margin-top: -5px; margin-bottom: 10px;">What market segment does this information impact?</p>
-                <ul class="impact-list">
-                    <li>
-                        <div class="line-title"><strong>Tractors</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
-                        <div class="impact-desc">Stable demand for specialized tractors for vineyards (small <100HP, narrow-track) and larger tractors (medium 100-200HP, high >200HP) for forestry operations and land preparation in these growing sectors.</div>
-                    </li>
-                    <li>
-                        <div class="line-title"><strong>Harvesters</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
-                        <div class="impact-desc">Consistent demand for specialized grape harvesters and robust demand for forestry harvesters and forwarders, driven by export markets.</div>
-                    </li>
-                    <li>
-                        <div class="line-title"><strong>Sprayers</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
-                        <div class="impact-desc">Ongoing demand for vineyard-specific sprayers and equipment for pest/disease management in forests, supporting a stable market segment.</div>
-                    </li>
-                    <li>
-                        <div class="line-title"><strong>Planters</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
-                        <div class="impact-desc">Stable demand for planters in the forestry sector for reforestation and new planting initiatives, as well as for vineyard expansion.</div>
-                    </li>
-                </ul>
-                <a href="https://www.corfo.cl/sites/cpp/sala-de-prensa/noticias/noticia-corfo-2024/corfo-impulsa-industria-vinicola-y-forestal-chilena" class="source-link">Corfo ➔</a>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="country-section">
-    <h2 class="country-title">🇺🇾 Uruguay <span class="highlight-tag">MARKET & MACRO ALERTS</span></h2>
-    <div class="news-grid">
-        <div class="news-item">
-            <div class="news-header">
-                <h3 class="news-headline">PECUÁRIA - FORTES EXPORTAÇÕES DE CARNE SUSTENTAM RENTABILIDADE DOS PRODUTORES</h3>
-                <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div>
-            </div>
-            <div class="news-content">Uruguay's beef industry continues to benefit from robust international demand, particularly from China, maintaining high export volumes and favorable prices for producers. This strong performance provides a stable and profitable environment for the livestock sector, enabling farmers to invest in pasture improvements, farm infrastructure, and potentially new machinery. The government actively supports export-oriented agricultural policies.</div>
-            <div class="impact-box">
-                <div class="impact-title">⚙️ Machinery Impact Analysis</div>
-                <p class="impact-question" style="font-size: 12px; font-style: italic; color: #666; margin-top: -5px; margin-bottom: 10px;">What market segment does this information impact?</p>
-                <ul class="impact-list">
-                    <li>
-                        <div class="line-title"><strong>Tractors</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
-                        <div class="impact-desc">Strong profitability in livestock drives demand for small to medium-HP tractors (e.g., <200HP) for pasture management, haymaking, and general farm maintenance.</div>
-                    </li>
-                    <li>
-                        <div class="line-title"><strong>Harvesters</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
-                        <div class="impact-desc">Increased investment in forage production for cattle implies higher demand for hay and silage harvesters.</div>
-                    </li>
-                    <li>
-                        <div class="line-title"><strong>Sprayers</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
-                        <div class="impact-desc">Demand for sprayers for weed control in pastures and for maintaining feed crops will remain robust, driven by the desire to optimize feed efficiency.</div>
-                    </li>
-                    <li>
-                        <div class="line-title"><strong>Planters</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
-                        <div class="impact-desc">Improved pastures require specialized pasture planters and seeders. This segment will see positive demand as farmers seek to enhance grazing capacity.</div>
-                    </li>
-                </ul>
-                <a href="https://www.inifap.gub.uy/noticias/inifap-destaca-crecimiento-y-resiliencia-del-sector-ganadero-uruguayo" class="source-link">INIFAP (Uruguay) ➔</a>
-            </div>
-        </div>
-        <div class="news-item">
-            <div class="news-header">
-                <h3 class="news-headline">SOJA/CEREAIS - EXCELENTE SAFRA DE SOJA E MILHO IMPULSIONA O SETOR AGRÍCOLA</h3>
-                <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div>
-            </div>
-            <div class="news-content">Uruguay has recently concluded an exceptionally good harvest for soybeans and corn, driven by favorable weather conditions and effective farming practices. This robust output, combined with generally stable international commodity prices, has significantly boosted farmer incomes. This positive financial outlook creates an environment conducive to increased CAPEX, as producers look to upgrade or expand their machinery fleets for future seasons.</div>
-            <div class="impact-box">
-                <div class="impact-title">⚙️ Machinery Impact Analysis</div>
-                <p class="impact-question" style="font-size: 12px; font-style: italic; color: #666; margin-top: -5px; margin-bottom: 10px;">What market segment does this information impact?</p>
-                <ul class="impact-list">
-                    <li>
-                        <div class="line-title"><strong>Tractors</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
-                        <div class="impact-desc">Increased profits from the excellent harvest will translate into stronger demand for all tractor segments, particularly medium (100-200HP) and high-HP (>200HP) models used in extensive soybean and corn farming.</div>
-                    </li>
-                    <li>
-                        <div class="line-title"><strong>Harvesters</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
-                        <div class="impact-desc">A successful harvest often precedes investments in newer, more efficient harvesters for the next cycle, aiming to capitalize on future yields.</div>
-                    </li>
-                    <li>
-                        <div class="line-title"><strong>Sprayers</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
-                        <div class="impact-desc">Improved profitability encourages farmers to invest in precision sprayers for optimized input management and higher yields in future seasons.</div>
-                    </li>
-                    <li>
-                        <div class="line-title"><strong>Planters</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
-                        <div class="impact-desc">Farmers are likely to acquire advanced planters for the next soybean and corn planting seasons, leveraging current profits to enhance precision and efficiency.</div>
-                    </li>
-                </ul>
-                <a href="https://www.elobservador.com.uy/nota/cosecha-record-de-soja-y-maiz-en-uruguay-impulsara-inversiones-2024510100" class="source-link">El Observador ➔</a>
-            </div>
-        </div>
-        <div class="news-item">
-            <div class="news-header">
-                <h3 class="news-headline">POLÍTICA E ECONOMIA - ESTABILIDADE ECONÔMICA E ACESSO A CRÉDITO FAVORECEM INVESTIMENTOS AGRÍCOLAS</h3>
-                <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div>
-            </div>
-            <div class="news-content">Uruguay's general economic stability, characterized by controlled inflation and a predictable regulatory environment, provides a solid foundation for agricultural investment. Additionally, the country's banking sector offers relatively stable and accessible credit lines for agricultural producers, including favorable financing options for machinery acquisition. This macroeconomic stability reduces risk for farmers and encourages long-term CAPEX planning.</div>
-            <div class="impact-box">
-                <div class="impact-title">⚙️ Machinery Impact Analysis</div>
-                <p class="impact-question" style="font-size: 12px; font-style: italic; color: #666; margin-top: -5px; margin-bottom: 10px;">What market segment does this information impact?</p>
-                <ul class="impact-list">
-                    <li>
-                        <div class="line-title"><strong>Tractors</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
-                        <div class="impact-desc">Stable credit conditions and lower perceived risk make it easier for farmers to finance new tractors across all segments, from small to high-HP, supporting fleet modernization.</div>
-                    </li>
-                    <li>
-                        <div class="line-title"><strong>Harvesters</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
-                        <div class="impact-desc">Access to stable, long-term credit facilitates the purchase of high-value harvesters, encouraging farmers to invest in advanced models that enhance efficiency and capacity.</div>
-                    </li>
-                    <li>
-                        <div class="line-title"><strong>Sprayers</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
-                        <div class="impact-desc">Favorable credit terms support the acquisition of precision sprayers, allowing farmers to adopt more sophisticated and environmentally responsible input management.</div>
-                    </li>
-                    <li>
-                        <div class="line-title"><strong>Planters</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
-                        <div class="impact-desc">Reliable credit enables farmers to invest in cutting-edge planters, leading to improved seeding accuracy, better germination rates, and ultimately higher yields.</div>
-                    </li>
-                </ul>
-                <a href="https://www.bcu.gub.uy/Estadisticas-e-Indicadores/Paginas/Estabilidad-Financiera.aspx" class="source-link">Banco Central del Uruguay ➔</a>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="country-section">
-    <h2 class="country-title">🇵🇾 Paraguay <span class="highlight-tag">MARKET & MACRO ALERTS</span></h2>
-    <div class="news-grid">
-        <div class="news-item">
-            <div class="news-header">
-                <h3 class="news-headline">SOJA - CRESCIMENTO CONTÍNUO DA ÁREA CULTIVADA DE SOJA E BUSCA POR PRODUTIVIDADE</h3>
-                <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div>
-            </div>
-            <div class="news-content">Paraguay's soybean sector continues its expansion, driven by favorable climate, fertile land, and strong international demand. Farmers are consistently increasing planted areas and investing in technologies to boost yields and efficiency. This sustained growth makes the soybean industry a key driver for agricultural machinery sales, as producers seek to maximize output and profitability in one of the world's leading soybean exporters.</div>
-            <div class="impact-box">
-                <div class="impact-title">⚙️ Machinery Impact Analysis</div>
-                <p class="impact-question" style="font-size: 12px; font-style: italic; color: #666; margin-top: -5px; margin-bottom: 10px;">What market segment does this information impact?</p>
-                <ul class="impact-list">
-                    <li>
-                        <div class="line-title"><strong>Tractors</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
-                        <div class="impact-desc">Consistent expansion of soybean area means sustained high demand for high-HP (>200HP) and medium (100-200HP) tractors for land preparation, planting, and general field work.</div>
-                    </li>
-                    <li>
-                        <div class="line-title"><strong>Harvesters</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
-                        <div class="impact-desc">Increased planted area directly translates to higher demand for large, efficient harvesters, as farmers need to process larger volumes quickly and effectively.</div>
-                    </li>
-                    <li>
-                        <div class="line-title"><strong>Sprayers</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
-                        <div class="impact-desc">As farmers aim for higher yields and manage larger areas, demand for precision sprayers, including self-propelled models, will continue to be strong to optimize input application.</div>
-                    </li>
-                    <li>
-                        <div class="line-title"><strong>Planters</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
-                        <div class="impact-desc">Expansion of planted area necessitates new and efficient planters, particularly those capable of high-speed and precision planting for large-scale soybean operations.</div>
-                    </li>
-                </ul>
-                <a href="https://www.capco.org.py/noticias/paraguay-ratifica-liderazgo-regional-en-produccion-de-soja/" class="source-link">CAPCO (Paraguay) ➔</a>
-            </div>
-        </div>
-        <div class="news-item">
-            <div class="news-header">
-                <h3 class="news-headline">POLÍTICA E ECONOMIA - PROGRAMA DE CRÉDITO AGRÍCOLA COM FOCO EM PEQUENOS E MÉDIOS PRODUTORES</h3>
-                <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div>
-            </div>
-            <div class="news-content">The Paraguayan government, through its development bank and other financial institutions, has intensified efforts to provide accessible credit to small and medium-sized agricultural producers. These programs often include subsidized interest rates and simplified access requirements, aiming to foster greater inclusion and productivity. This focus on smaller farmers helps democratize access to mechanization and modern agricultural practices beyond large-scale operators.</div>
-            <div class="impact-box">
-                <div class="impact-title">⚙️ Machinery Impact Analysis</div>
-                <p class="impact-question" style="font-size: 12px; font-style: italic; color: #666; margin-top: -5px; margin-bottom: 10px;">What market segment does this information impact?</p>
-                <ul class="impact-list">
-                    <li>
-                        <div class="line-title"><strong>Tractors</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
-                        <div class="impact-desc">Directly boosts demand for small (<100HP) and medium (100-200HP) tractors, as smaller farmers gain the financial capacity to invest in their first tractor or upgrade existing ones.</div>
-                    </li>
-                    <li>
-                        <div class="line-title"><strong>Harvesters</strong> <div class="farol farol-amarelo"><span class="farol-dot"></span>Warning/Stable</div></div>
-                        <div class="impact-desc">While less direct for large harvesters, improved credit for small/medium farmers could indirectly stimulate demand for smaller, specialized harvesting equipment or increase use of shared/rental services.</div>
-                    </li>
-                    <li>
-                        <div class="line-title"><strong>Sprayers</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
-                        <div class="impact-desc">Enhanced credit facilitates the acquisition of essential sprayers, allowing smaller producers to improve crop protection and reduce losses.</div>
-                    </li>
-                    <li>
-                        <div class="line-title"><strong>Planters</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
-                        <div class="impact-desc">Small and medium producers can now more easily finance modern planters, moving away from manual seeding and significantly improving planting efficiency and yield potential.</div>
-                    </li>
-                </ul>
-                <a href="https://www.bcp.gov.py/banco-central-del-paraguay-v2/noticias/bcp-impulsa-credito-agricola-para-pequenos-productores" class="source-link">Banco Central del Paraguay ➔</a>
-            </div>
-        </div>
-        <div class="news-item">
-            <div class="news-header">
-                <h3 class="news-headline">PECUÁRIA - MELHORIA DA INFRAESTRUTURA PARA EXPORTAÇÃO DE CARNE BOVINA</h3>
-                <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div>
-            </div>
-            <div class="news-content">Paraguay is investing in modernizing its infrastructure for beef exports, including upgrades to slaughterhouses and logistics. This strategic move aims to enhance the country's competitiveness in global markets and secure better prices for its beef. Such improvements signal long-term confidence in the livestock sector, which in turn encourages producers to invest in better farm management practices and related machinery to increase herd efficiency and productivity.</div>
-            <div class="impact-box">
-                <div class="impact-title">⚙️ Machinery Impact Analysis</div>
-                <p class="impact-question" style="font-size: 12px; font-style: italic; color: #666; margin-top: -5px; margin-bottom: 10px;">What market segment does this information impact?</p>
-                <ul class="impact-list">
-                    <li>
-                        <div class="line-title"><strong>Tractors</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
-                        <div class="impact-desc">Indirectly positive. Enhanced export prospects encourage overall farm profitability, leading to investments in pasture maintenance, feed production, and general farm tasks using small to medium-HP tractors.</div>
-                    </li>
-                    <li>
-                        <div class="line-title"><strong>Harvesters</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
-                        <div class="impact-desc">Stronger livestock sector profitability leads to increased demand for forage harvesters (silage choppers) as farmers focus on improving animal nutrition and feed quality.</div>
-                    </li>
-                    <li>
-                        <div class="line-title"><strong>Sprayers</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
-                        <div class="impact-desc">Maintaining healthy pastures and forage crops requires effective weed and pest control. This supports stable demand for sprayers used in livestock operations.</div>
-                    </li>
-                    <li>
-                        <div class="line-title"><strong>Planters</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
-                        <div class="impact-desc">Investment in pasture renovation and planting of improved forage varieties will drive demand for specialized pasture seeders and planters.</div>
-                    </li>
-                </ul>
-                <a href="https://www.senacsa.gov.py/noticias/paraguay-avanza-en-modernizacion-de-frigorificos-para-exportacion-de-carne/" class="source-link">SENACSA ➔</a>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="country-section">
-    <h2 class="country-title">🇵🇪 Peru <span class="highlight-tag">MARKET & MACRO ALERTS</span></h2>
-    <div class="news-grid">
-        <div class="news-item">
-            <div class="news-header">
-                <h3 class="news-headline">AGROEXPORTAÇÃO - CRESCIMENTO ROBUSTO DAS EXPORTAÇÕES AGRÍCOLAS NÃO TRADICIONAIS</h3>
-                <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div>
-            </div>
-            <div class="news-content">Peru's non-traditional agricultural exports, particularly fresh fruits (e.g., blueberries, grapes, avocados) and vegetables, continue to experience robust growth. This sector is driven by increasing global demand and significant private investment in advanced cultivation techniques and logistics. This specialization in high-value crops with strong export potential provides a stable and profitable environment for key producers, enabling sustained CAPEX in modern machinery.</div>
-            <div class="impact-box">
-                <div class="impact-title">⚙️ Machinery Impact Analysis</div>
-                <p class="impact-question" style="font-size: 12px; font-style: italic; color: #666; margin-top: -5px; margin-bottom: 10px;">What market segment does this information impact?</p>
-                <ul class="impact-list">
-                    <li>
-                        <div class="line-title"><strong>Tractors</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
-                        <div class="impact-desc">Continued demand for specialized small (<100HP) and medium (100-200HP) tractors, particularly narrow-track models for orchard and vineyard management, as well as general utility.</div>
-                    </li>
-                    <li>
-                        <div class="line-title"><strong>Harvesters</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
-                        <div class="impact-desc">Growing demand for specialized harvesters for fruits like blueberries and grapes, often high-tech and precise machines to ensure fruit quality for export.</div>
-                    </li>
-                    <li>
-                        <div class="line-title"><strong>Sprayers</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
-                        <div class="impact-desc">High-value crops require meticulous pest and disease control, driving demand for precision sprayers, including air-blast and controlled-application models.</div>
-                    </li>
-                    <li>
-                        <div class="line-title"><strong>Planters</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
-                        <div class="impact-desc">Expansion of cultivated areas for these crops necessitates investment in specialized planters and transplanters, ensuring optimal plant establishment and density.</div>
-                    </li>
-                </ul>
-                <a href="https://www.adexperu.org.pe/noticias/agroexportaciones-peruanas-continuan-crecimiento/" class="source-link">AdexPerú ➔</a>
-            </div>
-        </div>
-        <div class="news-item">
-            <div class="news-header">
-                <h3 class="news-headline">POLÍTICA E ECONOMIA - INSTABILIDADE POLÍTICA E IMPACTO NO AMBIENTE DE INVESTIMENTO</h3>
-                <div class="farol farol-vermelho"><span class="farol-dot"></span>Critical</div>
-            </div>
-            <div class="news-content">Peru has faced ongoing political instability, including frequent changes in government and social unrest, which continues to create an uncertain investment climate. While the agro-export sector has shown resilience, broader political and social tensions can deter new foreign and domestic investments, including significant CAPEX in agricultural machinery for long-term projects. This uncertainty raises the risk premium for capital.</div>
-            <div class="impact-box">
-                <div class="impact-title">⚙️ Machinery Impact Analysis</div>
-                <p class="impact-question" style="font-size: 12px; font-style: italic; color: #666; margin-top: -5px; margin-bottom: 10px;">What market segment does this information impact?</p>
-                <ul class="impact-list">
-                    <li>
-                        <div class="line-title"><strong>Tractors</strong> <div class="farol farol-vermelho"><span class="farol-dot"></span>Critical</div></div>
-                        <div class="impact-desc">Political instability makes long-term investment in high-value machinery like tractors (all HP segments) riskier, leading to deferrals in purchases and a focus on essential maintenance.</div>
-                    </li>
-                    <li>
-                        <div class="line-title"><strong>Harvesters</strong> <div class="farol farol-vermelho"><span class="farol-dot"></span>Critical</div></div>
-                        <div class="impact-desc">Large-scale harvester purchases are particularly sensitive to political risk. New projects or major upgrades may be put on hold, affecting sales.</div>
-                    </li>
-                    <li>
-                        <div class="line-title"><strong>Sprayers</strong> <div class="farol farol-amarelo"><span class="farol-dot"></span>Warning/Stable</div></div>
-                        <div class="impact-desc">While necessary, investment in new, advanced sprayers might be cautious. Farmers prioritize immediate needs over substantial upgrades.</div>
-                    </li>
-                    <li>
-                        <div class="line-title"><strong>Planters</strong> <div class="farol farol-vermelho"><span class="farol-dot"></span>Critical</div></div>
-                        <div class="impact-desc">Uncertainty about future operating conditions can delay decisions to expand or establish new plantations, thus impacting demand for planters.</div>
-                    </li>
-                </ul>
-                <a href="https://www.gestion.pe/economia/bcr-proyecta-inflacion-al-alza-por-conflictos-sociales-noticia/" class="source-link">Gestión ➔</a>
-            </div>
-        </div>
-        <div class="news-item">
-            <div class="news-header">
-                <h3 class="news-headline">PRODUÇÃO DE MILHO E ARROZ - ESFORÇOS PARA MELHORAR A AUTOSSUFICIÊNCIA ALIMENTAR</h3>
-                <div class="farol farol-amarelo"><span class="farol-dot"></span>Warning/Stable</div>
-            </div>
-            <div class="news-content">Peru is implementing policies aimed at strengthening domestic production of staple crops like corn and rice to reduce import dependency and enhance food security. These initiatives often include technical assistance, improved seed distribution, and limited credit lines for traditional farmers. While boosting local output, this focus primarily impacts small to medium-scale producers and may not significantly drive demand for large-scale, high-tech machinery.</div>
-            <div class="impact-box">
-                <div class="impact-title">⚙️ Machinery Impact Analysis</div>
-                <p class="impact-question" style="font-size: 12px; font-style: italic; color: #666; margin-top: -5px; margin-bottom: 10px;">What market segment does this information impact?</p>
-                <ul class="impact-list">
-                    <li>
-                        <div class="line-title"><strong>Tractors</strong> <div class="farol farol-amarelo"><span class="farol-dot"></span>Warning/Stable</div></div>
-                        <div class="impact-desc">Demand for small (<100HP) and some medium (100-200HP) tractors might see a modest increase from traditional farmers looking to mechanize basic operations.</div>
-                    </li>
-                    <li>
-                        <div class="line-title"><strong>Harvesters</strong> <div class="farol farol-amarelo"><span class="farol-dot"></span>Warning/Stable</div></div>
-                        <div class="impact-desc">Demand for specialized rice harvesters and smaller corn harvesters could be stable, with more focus on maintenance and communal use rather than new individual purchases.</div>
-                    </li>
-                    <li>
-                        <div class="line-title"><strong>Sprayers</strong> <div class="farol farol-amarelo"><span class="farol-dot"></span>Warning/Stable</div></div>
-                        <div class="impact-desc">Basic and entry-level sprayers will see stable demand as farmers seek to protect their increased yields.</div>
-                    </li>
-                    <li>
-                        <div class="line-title"><strong>Planters</strong> <div class="farol farol-amarelo"><span class="farol-dot"></span>Warning/Stable</div></div>
-                        <div class="impact-desc">Demand for simpler, robust planters for corn and rice is likely to be stable or slightly positive, supporting improved seeding practices among traditional farmers.</div>
-                    </li>
-                </ul>
-                <a href="https://www.midagri.gob.pe/portal/noticias/2024-05-14-midagri-impulsa-produccion-de-maiz-y-arroz-para-autosuficiencia" class="source-link">MIDAGRI ➔</a>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="country-section">
-    <h2 class="country-title">🇧🇴 Bolivia <span class="highlight-tag">MARKET & MACRO ALERTS</span></h2>
-    <div class="news-grid">
-        <div class="news-item">
-            <div class="news-header">
-                <h3 class="news-headline">SOJA/CEREAIS - EXPANSÃO AGRÍCOLA NO ORIENTE, COM FOCO EM SOJA E CEREAIS</h3>
-                <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div>
-            </div>
-            <div class="news-content">Bolivia's eastern regions, particularly Santa Cruz, continue to be a powerhouse for agricultural expansion, driven primarily by soybean and cereal production. This expansion is supported by investment in infrastructure and land development, aiming to increase export volumes. Farmers in these areas are actively investing in modern machinery to enhance productivity and efficiency across larger landholdings, positioning the region as a significant growth market for agricultural equipment.</div>
-            <div class="impact-box">
-                <div class="impact-title">⚙️ Machinery Impact Analysis</div>
-                <p class="impact-question" style="font-size: 12px; font-style: italic; color: #666; margin-top: -5px; margin-bottom: 10px;">What market segment does this information impact?</p>
-                <ul class="impact-list">
-                    <li>
-                        <div class="line-title"><strong>Tractors</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
-                        <div class="impact-desc">The expansion of cultivated area drives high demand for medium (100-200HP) and high-HP (>200HP) tractors for large-scale land preparation and cultivation.</div>
-                    </li>
-                    <li>
-                        <div class="line-title"><strong>Harvesters</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
-                        <div class="impact-desc">Increased production volumes necessitate greater harvesting capacity, leading to strong demand for new and larger harvesters.</div>
-                    </li>
-                    <li>
-                        <div class="line-title"><strong>Sprayers</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
-                        <div class="impact-desc">Large-scale farming operations require efficient and precise chemical application. This fuels demand for advanced sprayers, including self-propelled models.</div>
-                    </li>
-                    <li>
-                        <div class="line-title"><strong>Planters</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
-                        <div class="impact-desc">New land being brought into production, combined with the drive for precision, ensures robust demand for modern, high-capacity planters.</div>
-                    </li>
-                </ul>
-                <a href="https://www.ibce.org.bo/noticias-ibce/noticia.php?id=3775" class="source-link">IBCE ➔</a>
-            </div>
-        </div>
-        <div class="news-item">
-            <div class="news-header">
-                <h3 class="news-headline">POLÍTICA E ECONOMIA - RESTRIÇÕES À EXPORTAÇÃO DE ALIMENTOS GERAM PREOCUPAÇÃO ENTRE PRODUTORES</h3>
-                <div class="farol farol-vermelho"><span class="farol-dot"></span>Critical</div>
-            </div>
-            <div class="news-content">The Bolivian government has periodically imposed export restrictions on certain foodstuffs, including staples like soybeans and beef, citing concerns about domestic food security and price control. These policies create significant uncertainty for agricultural producers, as they limit market access and suppress potential earnings. Such interventions undermine investor confidence and deter long-term CAPEX, particularly in machinery that aims to boost production for export.</div>
-            <div class="impact-box">
-                <div class="impact-title">⚙️ Machinery Impact Analysis</div>
-                <p class="impact-question" style="font-size: 12px; font-style: italic; color: #666; margin-top: -5px; margin-bottom: 10px;">What market segment does this information impact?</p>
-                <ul class="impact-list">
-                    <li>
-                        <div class="line-title"><strong>Tractors</strong> <div class="farol farol-vermelho"><span class="farol-dot"></span>Critical</div></div>
-                        <div class="impact-desc">Export restrictions reduce profitability and create market uncertainty, directly leading to a decrease in demand for new tractors across all segments, as farmers defer major investments.</div>
-                    </li>
-                    <li>
-                        <div class="line-title"><strong>Harvesters</strong> <div class="farol farol-vermelho"><span class="farol-dot"></span>Critical</div></div>
-                        <div class="impact-desc">Investments in high-value harvesters are particularly vulnerable. Farmers are less likely to buy new equipment if their ability to sell surplus production profitably is restricted.</div>
-                    </li>
-                    <li>
-                        <div class="line-title"><strong>Sprayers</strong> <div class="farol farol-amarelo"><span class="farol-dot"></span>Warning/Stable</div></div>
-                        <div class="impact-desc">While necessary, farmers might reduce investment in new, more efficient sprayers, opting for basic maintenance of existing equipment to cut costs due to reduced profit outlook.</div>
-                    </li>
-                    <li>
-                        <div class="line-title"><strong>Planters</strong> <div class="farol farol-vermelho"><span class="farol-dot"></span>Critical</div></div>
-                        <div class="impact-desc">Uncertainty about export markets can cause farmers to reduce planting areas or delay investment in new, precision planters, impacting future yield potential.</div>
-                    </li>
-                </ul>
-                <a href="https://www.eldeber.com.bo/economia/Productores-temen-nuevas-restricciones-a-la-exportacion-de-alimentos_2_28745300.html" class="source-link">El Deber ➔</a>
-            </div>
-        </div>
-        <div class="news-item">
-            <div class="news-header">
-                <h3 class="news-headline">CANA-DE-AÇÚCAR - INVESTIMENTOS EM BIOCCOMBUSTÍVEIS IMPULSIONAM SETOR CANAVIEIRO</h3>
-                <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div>
-            </div>
-            <div class="news-content">Bolivia's sugarcane sector is receiving a boost from increased government and private investment in biofuel production. The push for ethanol from sugarcane creates a stable demand for the crop, diversifying its use beyond traditional sugar production. This new market opportunity encourages sugarcane growers to invest in modernizing their plantations, improving efficiency, and expanding production capacity, leading to sustained demand for specialized machinery.</div>
-            <div class="impact-box">
-                <div class="impact-title">⚙️ Machinery Impact Analysis</div>
-                <p class="impact-question" style="font-size: 12px; font-style: italic; color: #666; margin-top: -5px; margin-bottom: 10px;">What market segment does this information impact?</p>
-                <ul class="impact-list">
-                    <li>
-                        <div class="line-title"><strong>Tractors</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
-                        <div class="impact-desc">Stable demand for medium (100-200HP) and high-HP (>200HP) tractors, especially robust models suited for demanding sugarcane cultivation tasks like land preparation and transport.</div>
-                    </li>
-                    <li>
-                        <div class="line-title"><strong>Harvesters</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
-                        <div class="impact-desc">Increased demand for specialized sugarcane harvesters (choppers) as producers aim for mechanized and efficient harvesting to supply biofuel plants.</div>
-                    </li>
-                    <li>
-                        <div class="line-title"><strong>Sprayers</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
-                        <div class="impact-desc">Effective weed and pest control is crucial for sugarcane yields. This supports consistent demand for robust sprayers in the sector.</div>
-                    </li>
-                    <li>
-                        <div class="line-title"><strong>Planters</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
-                        <div class="impact-desc">Expansion of sugarcane acreage and renovation of existing fields will drive demand for specialized sugarcane planters, including billet planters.</div>
-                    </li>
-                </ul>
-                <a href="https://www.abi.bo/index.php/component/content/article/1-noticias/20140-bolivia-avanza-en-produccion-de-biodiesel-a-partir-de-cana-de-azucar" class="source-link">ABI (Agencia Boliviana de Información) ➔</a>
-            </div>
-        </div>
-    </div>
-</div>
-
-        </div>
-
-        <div class="footer" translate="no">
-            CONFIDENTIAL - For Internal Executive Alignment<br>
-            Powered by AEM Data Receipt
-        </div>
-    </div>
-
-    <div id="google_translate_element" style="display:none;"></div>
-    <script type="text/javascript">
-        function googleTranslateElementInit() {
-            new google.translate.TranslateElement({pageLanguage: 'en', autoDisplay: false}, 'google_translate_element');
-        }
-        function changeLanguage(langCode) {
-            var selectField = document.querySelector("select.goog-te-combo");
-            if (selectField) {
-                selectField.value = langCode;
-                selectField.dispatchEvent(new Event('change'));
-            }
-        }
-    </script>
-    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
