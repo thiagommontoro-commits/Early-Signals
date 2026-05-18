@@ -35,20 +35,17 @@ def calcular_meses_rolantes():
     header_atual = f"{meses_en[m0_idx]}/{m0_year}"
     header_menos1 = f"{meses_en[m1_idx]}/{m1_year}"
     header_menos2 = f"{meses_en[m2_idx]}/{m2_year}"
-    
     ano_projecao = str(today.year + 1)
     
     return header_atual, header_menos1, header_menos2, ano_projecao
 
 def buscar_dados_oficiais():
-    print("A procurar dados oficiais do Banco Central e do Mercado...")
+    print("Buscando dados oficiais do Banco Central e do Mercado...")
     try:
-        # Busca Câmbio (Dólar Comercial) em tempo real
         req_dolar = urllib.request.urlopen("https://economia.awesomeapi.com.br/last/USD-BRL")
         dados_dolar = json.loads(req_dolar.read())
         dolar_atual = float(dados_dolar["USDBRL"]["bid"])
         
-        # Busca Selic Meta atualizada (SGS Banco Central)
         req_selic = urllib.request.urlopen("https://api.bcb.gov.br/dados/serie/bcdata.sgs.432/dados/ultimos/1?formato=json")
         dados_selic = json.loads(req_selic.read())
         selic_atual = float(dados_selic[0]["valor"])
@@ -62,7 +59,6 @@ def buscar_dados_oficiais():
         juros_agro_str = f"{juros_agro_atual:.2f}%".replace('.', ',')
         
         return dolar_str, selic_str, cdi_str, juros_agro_str
-        
     except Exception as e:
         print(f"Aviso: Falha ao buscar dados em tempo real. ({e})")
         return "R$ --,--", "--,--%", "--,--%", "--,--%"
@@ -73,18 +69,23 @@ def obter_dados_historicos(header):
     else:
         return {"selic": "--,--%", "cdi": "--,--%", "juros": "--,--%", "dolar": "R$ --,--"}
 
+def extrair_bloco(texto, tag_inicio, tag_fim):
+    try:
+        start = texto.index(tag_inicio) + len(tag_inicio)
+        end = texto.index(tag_fim, start)
+        return texto[start:end].strip()
+    except ValueError:
+        return ""
+
 def gerar_relatorio():
     data_hoje = datetime.datetime.now().strftime("%b %d, %Y").upper()
     m_atual, m_anterior, m_atras, ano_futuro = calcular_meses_rolantes()
     
     dados_m2 = obter_dados_historicos(m_atras)
     dados_m1 = obter_dados_historicos(m_anterior)
-    
     dolar_oficial, selic_oficial, cdi_oficial, juros_agro_oficial = buscar_dados_oficiais()
 
-    # ==========================================
-    # 2. O PYTHON MONTA A TABELA MACRO DIRETAMENTE
-    # ==========================================
+    # MONTAGEM DA TABELA MACRO DIRETAMENTE NO PYTHON (BLINDADA)
     tabela_macro_html = f"""
     <div class="macro-section">
         <h3 class="macro-title">📊 1. MACROECONOMIA & TAXAS DE JUROS <span class="tag-brasil">BRASIL</span></h3>
@@ -128,7 +129,7 @@ def gerar_relatorio():
                     <td>{dados_m2['juros']}</td>
                     <td>{dados_m1['juros']}</td>
                     <td>{juros_agro_oficial}</td>
-                    <td><span class="macro-badge yellow">● 0,00 PP</span></td>
+                    <td><span class="macro-badge yellow">meta</span></td>
                     <td><span class="macro-badge green">● -0,50 PP</span></td>
                     <td>17,80%</td>
                 </tr>
@@ -138,19 +139,17 @@ def gerar_relatorio():
                     <td>{dados_m2['dolar']}</td>
                     <td>{dados_m1['dolar']}</td>
                     <td>{dolar_oficial}</td>
-                    <td><span class="macro-badge red">● Câmbio Real</span></td>
-                    <td><span class="macro-badge green">● Monitorado</span></td>
+                    <td><span class="macro-badge yellow">Ao Vivo</span></td>
+                    <td><span class="macro-badge green">Monitorado</span></td>
                     <td>R$ 5,25</td>
                 </tr>
             </tbody>
         </table>
-        <div class="macro-source">*Fonte: API Banco Central do Brasil (SGS/Copom) e AwesomeAPI Câmbio. Processamento e injeção via Python Standard Pipeline.</div>
+        <div class="macro-source">*Fonte: API Banco Central do Brasil (SGS) e AwesomeAPI Câmbio. Processamento robusto via Python Core.</div>
     </div>
     """
 
-    client = genai.Client(api_key=os.environ.get("GEMINI_API_KEY"))
-    
-    # O SEU HTML (FORMA DE BOLO INTOCÁVEL)
+    # SEU HTML COMPLETO COM TODAS AS DIRETRIZES VISUAIS FIXADAS NO PYTHON
     layout_base = """<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -218,7 +217,6 @@ def gerar_relatorio():
         .source-link:hover { color: var(--agco-black); }
         .footer { background-color: var(--agco-black); color: #777777; text-align: center; padding: 25px; font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; }
         
-        /* CSS DA TABELA MACRO */
         .macro-section { margin-top: 40px; background-color: var(--white); border: 1px solid #e0e0e0; padding: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
         .macro-title { font-size: 20px; font-weight: 900; text-transform: uppercase; margin-top: 0; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; border-bottom: 2px solid #ddd; padding-bottom: 10px; color: var(--agco-black); }
         .macro-title .tag-brasil { background-color: var(--agco-black); color: var(--white); padding: 4px 8px; font-size: 12px; letter-spacing: 1px; }
@@ -247,14 +245,69 @@ def gerar_relatorio():
                     <button onclick="changeLanguage('pt')">PT</button>
                     <button onclick="changeLanguage('es')">ES</button>
                 </div>
-                <div class="date-badge">DATA DE HOJE AQUI</div>
+                <div class="date-badge">DATA_HOJE_PLACEHOLDER</div>
             </div>
         </div>
         <div class="content-wrapper">
             <div class="alert-banner" translate="no">
                 // AEM DATA RECEIPT: High-density daily market signals synthesized to mitigate time constraints for detailed product and market analysis.
             </div>
+
+            <div class="country-section">
+                <h2 class="country-title">🇧🇷 BRAZIL <span class="highlight-tag">MARKET & MACRO ALERTS</span></h2>
+                <div class="news-grid">
+                    </div>
+                </div>
+
+            <div class="country-section">
+                <h2 class="country-title">🇦🇷 ARGENTINA <span class="highlight-tag">MARKET & MACRO ALERTS</span></h2>
+                <div class="news-grid">
+                    </div>
             </div>
+
+            <div class="country-section">
+                <h2 class="country-title">🇲🇽 MEXICO <span class="highlight-tag">MARKET & MACRO ALERTS</span></h2>
+                <div class="news-grid">
+                    </div>
+            </div>
+
+            <div class="country-section">
+                <h2 class="country-title">🇨🇴 COLOMBIA <span class="highlight-tag">MARKET & MACRO ALERTS</span></h2>
+                <div class="news-grid">
+                    </div>
+            </div>
+
+            <div class="country-section">
+                <h2 class="country-title">🇺🇾 URUGUAY <span class="highlight-tag">MARKET & MACRO ALERTS</span></h2>
+                <div class="news-grid">
+                    </div>
+            </div>
+
+            <div class="country-section">
+                <h2 class="country-title">🇵🇪 PERU <span class="highlight-tag">MARKET & MACRO ALERTS</span></h2>
+                <div class="news-grid">
+                    </div>
+            </div>
+
+            <div class="country-section">
+                <h2 class="country-title">🇨🇱 CHILE <span class="highlight-tag">MARKET & MACRO ALERTS</span></h2>
+                <div class="news-grid">
+                    </div>
+            </div>
+
+            <div class="country-section">
+                <h2 class="country-title">🇧🇴 BOLIVIA <span class="highlight-tag">MARKET & MACRO ALERTS</span></h2>
+                <div class="news-grid">
+                    </div>
+            </div>
+
+            <div class="country-section">
+                <h2 class="country-title">🇵🇾 PARAGUAY <span class="highlight-tag">MARKET & MACRO ALERTS</span></h2>
+                <div class="news-grid">
+                    </div>
+            </div>
+
+        </div>
         <div class="footer" translate="no">
             CONFIDENTIAL - For Internal Executive Alignment<br>
             Powered by AEM Data Receipt
@@ -263,63 +316,64 @@ def gerar_relatorio():
 </body>
 </html>"""
 
-    layout_com_data = layout_base.replace("DATA DE HOJE AQUI", data_hoje)
+    # Injeta a data de hoje e a tabela macroeconômica diretamente via Python Core
+    layout_finalizado = layout_base.replace("DATA_HOJE_PLACEHOLDER", data_hoje)
+    layout_finalizado = layout_finalizado.replace("", tabela_macro_html)
 
-    instrucoes_iniciais = """
-    Você é um analista de mercado e cientista de dados especialista no setor de maquinário agrícola da América Latina.
-    Sua tarefa é gerar as notícias do relatório "Early Warning" e encaixá-las EXATAMENTE no código HTML fornecido.
-    AQUI ESTÁ O CÓDIGO HTML DO PAINEL:
-    """
+    client = genai.Client(api_key=os.environ.get("GEMINI_API_KEY"))
     
-    regras_finais = f"""
-    INSTRUÇÕES DE LAYOUT E DENSIDADE:
-    - Mantenha a estrutura HTML, CSS e cores originais.
-    - REGRA DE RECHEIO: Para cada país analisado (Brasil, Argentina, Chile, Uruguai, Peru, Bolívia, Paraguai), preencha a <div class="news-grid"> contendo OBRIGATORIAMENTE 4 blocos de notícia distintos.
-    - MARCADOR DO BRASIL: Dentro do bloco do Brasil, IMEDIATAMENTE após fechar a <div class="news-grid"> das 4 notícias, você DEVE escrever exatamente este texto: INSTRUÇÕES RESTRITAS DE TEMPO E QUALIDADE:
-    1. CONTEXTO TEMPORAL: O momento atual é {m_atual}.
-    2. PROIBIÇÃO HISTÓRICA: PROIBIDO mencionar dados de safras 23/24 ou anteriores.
-    3. REGRA AGRISHOW: A intenção de negócios da Agrishow 2026 fechou em R$ 11,4 bilhões (queda de 22%). 
-    
-    Retorne EXCLUSIVAMENTE o código HTML completo final para gravação, sem introduções ou explicações.
+    prompt = f"""
+    Você é um analista especialista em inteligência de mercado de maquinário agrícola na América Latina.
+    Sua única tarefa é gerar EXCLUSIVAMENTE os blocos de notícias organizados por tags de marcação para os países listados.
+
+    INSTRUÇÕES DE CONTEÚDO (SIGA RIGOROSAMENTE):
+    1. CONTEXTO TEMPORAL: O momento atual é {m_atual}. Considere apenas cenários de {m_atual} em diante.
+    2. PROIBIÇÃO HISTÓRICA: É ESTRITAMENTE PROIBIDO citar dados das safras 23/24 ou anteriores. Foque no momento atual e projeções.
+    3. DENSIDADE REQUERIDA: Gere OBRIGATORIAMENTE 4 blocos de notícia distintos (<div class="news-item">...</div>) para cada país.
+    4. AGRISHOW: Use a premissa de que a Agrishow 2026 fechou em R$ 11,4 bilhões (queda de 22%).
+
+    FORMATO DE SAÍDA:
+    Gere as notícias usando exatamente os marcadores abaixo para que o sistema Python possa ler e organizar o site:
+
+    [START_BR] (Insira aqui as 4 divs de notícias do Brasil) [END_BR]
+    [START_AR] (Insira aqui as 4 divs de notícias da Argentina) [END_AR]
+    [START_MX] (Insira aqui as 4 divs de notícias do México) [END_MX]
+    [START_CO] (Insira aqui as 4 divs de notícias da Colômbia) [END_CO]
+    [START_UY] (Insira aqui as 4 divs de notícias do Uruguai) [END_UY]
+    [START_PE] (Insira aqui as 4 divs de notícias do Peru) [END_PE]
+    [START_CL] (Insira aqui as 4 divs de notícias do Chile) [END_CL]
+    [START_BO] (Insira aqui as 4 divs de notícias da Bolívia) [END_BO]
+    [START_PY] (Insira aqui as 4 divs de notícias do Paraguai) [END_PY]
     """
 
-    prompt_completo = instrucoes_iniciais + "\n\n" + layout_com_data + "\n\n" + reglas_finais
-
-    print("A enviar HTML blindado para o Gemini...")
+    print("Chamando a IA para redação exclusiva das notícias diárias...")
     
     try:
         response = client.models.generate_content(
             model='gemini-2.5-flash',
-            contents=prompt_completo,
+            contents=prompt,
         )
         
-        html_content = response.text
+        texto_ia = response.text
         
-        if html_content.startswith("```html"):
-            html_content = html_content[7:]
-        if html_content.endswith("```"):
-            html_content = html_content[:-3]
-            
-        # ==========================================
-        # 3. BLINDAGEM AUTOMÁTICA VIA PYTHON
-        # O Python localiza o marcador e injeta a tabela
-        # ==========================================
-        html_content = html_content.strip()
-        if "" in html_content:
-            html_final = html_content.replace("", tabela_macro_html)
-            print("Sucesso: Tabela injetada via Python Core no marcador da IA.")
-        else:
-            # Caso a IA esqueça o marcador por falta de espaço, o Python anexa no fim do Brasil
-            html_final = html_content.replace("</div>\n\n            <div class=\"country-section\">\n                <h2 class=\"country-title\">🇦🇷 ARGENTINA", tabela_macro_html + "\n\n            <div class=\"country-section\">\n                <h2 class=\"country-title\">🇦🇷 ARGENTINA")
-            print("Aviso: Tabela injetada via Fallback de Regex posicional antes da Argentina.")
-            
+        # O PYTHON PROCESSA E DISTRIBUI CADA CONTEÚDO NO SEU LUGAR CORRETO
+        layout_finalizado = layout_finalizado.replace("", extrair_bloco(texto_ia, "[START_BR]", "[END_BR]"))
+        layout_finalizado = layout_finalizado.replace("", extrair_bloco(texto_ia, "[START_AR]", "[END_AR]"))
+        layout_finalizado = layout_finalizado.replace("", extrair_bloco(texto_ia, "[START_MX]", "[END_MX]"))
+        layout_finalizado = layout_finalizado.replace("", extrair_bloco(texto_ia, "[START_CO]", "[END_CO]"))
+        layout_finalizado = layout_finalizado.replace("", extrair_bloco(texto_ia, "[START_UY]", "[END_UY]"))
+        layout_finalizado = layout_finalizado.replace("", extrair_bloco(texto_ia, "[START_PE]", "[END_PE]"))
+        layout_finalizado = layout_finalizado.replace("", extrair_bloco(texto_ia, "[START_CL]", "[END_CL]"))
+        layout_finalizado = layout_finalizado.replace("", extrair_bloco(texto_ia, "[START_BO]", "[END_BO]"))
+        layout_finalizado = layout_finalizado.replace("", extrair_bloco(texto_ia, "[START_PY]", "[END_PY]"))
+        
         with open("index.html", "w", encoding="utf-8") as file:
-            file.write(html_final)
+            file.write(layout_finalizado.strip())
             
-        print("Sucesso Total! Painel atualizado e protegido contra cortes.")
+        print("Sucesso Total! O seu site index.html foi gerado com a Tabela fixa e Notícias renovadas.")
 
     except Exception as e:
-        print(f"Ocorreu um erro ao gerar o painel: {e}")
+        print(f"Ocorreu um erro no pipeline: {e}")
 
 if __name__ == "__main__":
     gerar_relatorio()
