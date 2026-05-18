@@ -149,7 +149,7 @@ def gerar_relatorio():
     # O Python substitui a data no molde antes de enviar para a IA
     layout_com_data = layout_base.replace("DATA DE HOJE AQUI", data_hoje)
 
-    # INSTRUÇÕES DE PREENCHIMENTO E REGRAS RÍGIDAS
+    # INSTRUÇÕES DE PREENCHIMENTO E REGRAS RÍGIDAS (ATUALIZADO PARA EXIGIR 4 NOTÍCIAS)
     instrucoes_iniciais = """
     Você é um analista de mercado e cientista de dados especialista no setor de maquinário agrícola da América Latina.
     Sua tarefa é gerar as notícias do relatório "Early Warning" e encaixá-las EXATAMENTE no código HTML fornecido.
@@ -158,16 +158,16 @@ def gerar_relatorio():
     """
     
     regras_finais = """
-    INSTRUÇÕES DE LAYOUT (OBRIGATÓRIO):
+    INSTRUÇÕES DE LAYOUT E DENSIDADE (OBRIGATÓRIO):
     - Mantenha EXATAMENTE a mesma estrutura HTML, classes CSS, tags, cores e design visual do código fornecido.
     - A data já foi preenchida corretamente pelo sistema na tag <div class="date-badge">. NÃO ALTERE A DATA.
-    - Preencha a div <div class="content-wrapper"> com as seções <div class="country-section"> para cada país analisado (Brasil, Argentina, Chile, Uruguai, Peru, Bolívia, Paraguai).
+    - REGRA DE RECHEIO DA GRID: Para cada país analisado (Brasil, Argentina, Chile, Uruguai, Peru, Bolívia, Paraguai), preencha o bloco da respectiva <div class="news-grid"> contendo OBRIGATORIAMENTE 4 blocos de notícia distintos (<div class="news-item">). Nem mais, nem menos. Mantenha essa densidade padrão fixa.
     - NÃO altere a estrutura do CSS (<style>) nem os scripts do final da página.
 
     INSTRUÇÕES RESTRITAS DE TEMPO E QUALIDADE (SIGA RIGOROSAMENTE):
-    1. CONTEXTO TEMPORAL: O momento atual é maio de 2026. Considere APENAS o cenário de maio de 2026 em diante.
+    1. CONTEXTO TEMPORAL: O momento atual é maio de 2026. Considere APENAS o cenário econômico, de commodities e político de maio de 2026 em diante.
     2. PROIBIÇÃO HISTÓRICA: É ESTRITAMENTE PROIBIDO mencionar dados ou análises das safras 23/24, 24/25 ou anteriores. Concentre-se no agora e nas projeções para a safra 26/27.
-    3. RIGOR DE NOTÍCIAS: Utilize apenas fatos e notícias dos últimos 7 a 15 dias. Se não houver movimentação crítica recente para um país, escreva apenas: "Sem alertas críticos na última semana." e use o farol Amarelo (Stable) nas categorias.
+    3. RIGOR DE NOTÍCIAS: Utilize fatos e notícias recentes do setor agro e macroeconômico (últimos 7 a 15 dias) para alimentar os 4 blocos de cada país. Caso o cenário em algum país menor esteja excessivamente estável, traga ramificações de tendências recentes de crédito, logística interna, clima atual ou câmbio para compor as 4 análises, mas NUNCA recue o calendário para safras antigas.
     4. REGRA AGRISHOW: Sempre que o cenário brasileiro for citado, a premissa fixa é que a intenção de negócios da Agrishow 2026 fechou em R$ 11,4 bilhões (queda de 22% em relação ao ano anterior). 
     5. REGRA DE EXCLUSÃO: Se usar o tema "fair mood: cautious optimism in a tighter market", NÃO inclua dados de vendas de tratores e colheitadeiras sob nenhuma hipótese.
 
@@ -178,7 +178,7 @@ def gerar_relatorio():
     # Junta as partes em uma única instrução estruturada
     prompt_completo = instrucoes_iniciais + "\n\n" + layout_com_data + "\n\n" + regras_finais
 
-    print("Enviando layout fixo e instruções para o Gemini...")
+    print("Enviando layout fixo e instruções de alta densidade para o Gemini...")
     
     try:
         response = client.models.generate_content(
@@ -198,7 +198,7 @@ def gerar_relatorio():
         with open("index.html", "w", encoding="utf-8") as file:
             file.write(html_content.strip())
             
-        print("Painel atualizado: Layout blindado, data automática e notícias purificadas para 2026!")
+        print("Painel atualizado: Layout mantido, data automática e 4 notícias padrão por país inseridas!")
 
     except Exception as e:
         print(f"Ocorreu um erro: {e}")
