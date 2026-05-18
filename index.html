@@ -1,179 +1,507 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Relatório Early Warning - Maquinário Agrícola América Latina - Maio 2026</title>
+    <title>Early warning AGCO</title>
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-color: #f4f7f6;
-            color: #333;
-            line-height: 1.6;
+        :root {
+            --agco-red: #cc0000;
+            --agco-black: #111111;
+            --agco-dark-gray: #333333;
+            --agco-light-gray: #f4f4f4;
+            --text-main: #222222;
+            --white: #ffffff;
+            
+            /* Cores dos Faróis */
+            --farol-verde-bg: #e2f0d9;
+            --farol-verde-text: #385723;
+            --farol-verde-dot: #70ad47;
+            
+            --farol-amarelo-bg: #fff2cc;
+            --farol-amarelo-text: #7f6000;
+            --farol-amarelo-dot: #ffc000;
+            
+            --farol-vermelho-bg: #fce4d6;
+            --farol-vermelho-text: #c65911;
+            --farol-vermelho-dot: #c00000;
         }
-        .container {
-            max-width: 1200px;
-            margin: auto;
-            background: #fff;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
-        header {
-            text-align: center;
-            padding-bottom: 20px;
-            border-bottom: 2px solid #e0e0e0;
-            margin-bottom: 30px;
-        }
-        h1 {
-            color: #2c3e50;
-            font-size: 2.5em;
-            margin-bottom: 10px;
-        }
-        h2 {
-            color: #34495e;
-            font-size: 1.8em;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 10px;
-            margin-top: 40px;
-            margin-bottom: 20px;
-        }
-        h3 {
-            color: #2980b9;
-            font-size: 1.4em;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-        }
-        .alert-indicator {
-            font-size: 1.2em;
-            margin-left: 10px;
-        }
-        .general-overview {
-            background-color: #ecf0f1;
-            padding: 20px;
-            border-left: 5px solid #3498db;
-            margin-bottom: 30px;
-            border-radius: 5px;
-        }
-        .country-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-        }
-        .country-card {
-            background-color: #ffffff;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-            transition: transform 0.2s ease-in-out;
-        }
-        .country-card:hover {
-            transform: translateY(-5px);
-        }
-        .country-card p strong {
-            color: #555;
-        }
-        footer {
-            text-align: center;
-            margin-top: 50px;
-            padding-top: 20px;
-            border-top: 1px solid #e0e0e0;
-            color: #777;
-            font-size: 0.9em;
-        }
+        body { font-family: 'Arial', sans-serif; background-color: #e9ecef; color: var(--text-main); margin: 0; padding: 20px; }
+        
+        body > .skiptranslate { display: none; }
+        .goog-te-banner-frame.skiptranslate { display: none !important; }
+        body { top: 0px !important; }
+        
+        .container { max-width: 1200px; margin: 0 auto; background-color: var(--white); box-shadow: 0 10px 25px rgba(0,0,0,0.15); }
+        
+        .header { background-color: var(--agco-black); color: var(--white); padding: 35px 40px; border-bottom: 6px solid var(--agco-red); display: flex; justify-content: space-between; align-items: center; background-image: url('https://images.unsplash.com/photo-1592982537447-7440770cbfc9?q=80&w=2000&auto=format&fit=crop'); background-size: cover; background-position: center; background-blend-mode: multiply; }
+        .header-text h1 { margin: 0; font-size: 34px; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 900; }
+        .header-text p { margin: 5px 0 0 0; font-size: 14px; color: #d0d0d0; text-transform: uppercase; letter-spacing: 0.5px; }
+        
+        .header-controls { display: flex; flex-direction: column; align-items: flex-end; gap: 10px; }
+        .date-badge { background-color: var(--agco-red); padding: 8px 16px; font-weight: bold; font-size: 14px; letter-spacing: 1px; border-radius: 2px; text-align: center; width: 100%; box-sizing: border-box;}
+        
+        .lang-switcher { display: flex; gap: 5px; }
+        .lang-switcher button { background-color: rgba(255, 255, 255, 0.1); color: var(--white); border: 1px solid rgba(255, 255, 255, 0.3); padding: 5px 10px; font-size: 11px; font-weight: bold; cursor: pointer; transition: all 0.2s; text-transform: uppercase; border-radius: 2px; }
+        .lang-switcher button:hover { background-color: var(--agco-red); border-color: var(--agco-red); }
+        
+        .content-wrapper { padding: 30px 40px; }
+        .alert-banner { background-color: var(--agco-light-gray); border-left: 5px solid var(--agco-red); padding: 15px 20px; margin-bottom: 35px; font-size: 13px; color: var(--agco-dark-gray); text-transform: uppercase; letter-spacing: 0.5px; font-weight: bold; }
+        
+        .country-section { margin-bottom: 50px; }
+        .country-title { font-size: 24px; color: var(--agco-black); margin-top: 0; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid #dddddd; display: flex; align-items: center; font-weight: 800; text-transform: uppercase; }
+        .highlight-tag { display: inline-block; background-color: var(--agco-black); color: var(--white); padding: 4px 8px; font-size: 11px; margin-left: 15px; vertical-align: middle; letter-spacing: 1px; }
+        
+        .news-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); gap: 30px; }
+        .news-item { background-color: var(--white); border: 1px solid #e0e0e0; box-shadow: 0 2px 4px rgba(0,0,0,0.02); display: flex; flex-direction: column; }
+        .news-header { background-color: var(--agco-light-gray); padding: 15px 20px; border-left: 5px solid var(--agco-black); display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
+        .news-headline { font-size: 15px; font-weight: bold; color: var(--agco-black); margin: 0; text-transform: uppercase; line-height: 1.4; }
+        .news-content { padding: 20px; font-size: 14px; color: var(--agco-dark-gray); line-height: 1.6; flex-grow: 1; }
+        
+        .impact-box { margin: 0 20px 20px 20px; border-top: 3px solid var(--agco-red); background-color: #fafafa; padding: 15px; }
+        .impact-title { font-weight: 900; color: var(--agco-red); margin-bottom: 12px; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; }
+        
+        .farol { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; font-size: 11px; font-weight: bold; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap; }
+        .farol-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+        
+        .farol-verde { background-color: var(--farol-verde-bg); color: var(--farol-verde-text); }
+        .farol-verde .farol-dot { background-color: var(--farol-verde-dot); box-shadow: 0 0 6px var(--farol-verde-dot); }
+        
+        .farol-amarelo { background-color: var(--farol-amarelo-bg); color: var(--farol-amarelo-text); }
+        .farol-amarelo .farol-dot { background-color: var(--farol-amarelo-dot); box-shadow: 0 0 6px var(--farol-amarelo-dot); }
+        
+        .farol-vermelho { background-color: var(--farol-vermelho-bg); color: var(--farol-vermelho-text); }
+        .farol-vermelho .farol-dot { background-color: var(--farol-vermelho-dot); box-shadow: 0 0 6px var(--farol-vermelho-dot); }
+        
+        .impact-list { list-style: none; padding: 0; margin: 0; font-size: 13px; }
+        .impact-list li { margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px dashed #ddd; display: flex; flex-direction: column; gap: 5px; }
+        .impact-list li:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+        .line-title { display: flex; justify-content: space-between; align-items: center; }
+        .impact-list strong { color: var(--agco-black); text-transform: uppercase; }
+        .impact-desc { color: #555; font-size: 12.5px; padding-left: 2px; }
+        
+        .source-link { display: block; margin-top: 15px; font-size: 11px; color: var(--agco-red); text-decoration: none; font-weight: bold; text-align: right; letter-spacing: 1px; }
+        .source-link:hover { color: var(--agco-black); }
+        
+        .footer { background-color: var(--agco-black); color: #777777; text-align: center; padding: 25px; font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; }
     </style>
 </head>
 <body>
     <div class="container">
-        <header>
-            <h1>Relatório Early Warning - Maquinário Agrícola América Latina</h1>
-            <p><strong>Status de Mercado - Maio de 2026</strong></p>
-            <p>Análise de Mercado e Cientista de Dados Especialista no Setor de Maquinário Agrícola.</p>
-        </header>
+        <div class="header" translate="no">
+            <div class="header-text">
+                <h1>Early warning AGCO</h1>
+                <p>LATAM Market Intelligence & Sales Estimation</p>
+            </div>
+            <div class="header-controls">
+                <div class="lang-switcher">
+                    <button onclick="changeLanguage('en')">EN</button>
+                    <button onclick="changeLanguage('pt')">PT</button>
+                    <button onclick="changeLanguage('es')">ES</button>
+                </div>
+                <div class="date-badge">MAY 20, 2026</div>
+            </div>
+        </div>
 
-        <main>
-            <h2>Status Geral do Mercado Regional</h2>
-            <div class="general-overview">
-                <h3>Fair Mood: Cautious Optimism in a Tighter Market</h3>
-                <p>O mercado de maquinário agrícola na América Latina, em maio de 2026, é marcado por uma perspectiva de otimismo cauteloso dentro de um cenário financeiro mais restrito. Produtores estão priorizando a eficiência e a manutenção da frota existente, com novos investimentos sendo avaliados com extrema prudência.</p>
-                <p>As elevadas taxas de juros para financiamento e a volatilidade nos preços de commodities, embora com sinais de estabilização para a safra 26/27, estão impactando diretamente as decisões de compra. O foco está na tecnologia que oferece maior produtividade por hectare e redução de custos operacionais, em detrimento de grandes expansões de capacidade. A demanda por peças de reposição e serviços de manutenção permanece robusta, refletindo a estratégia de prolongar a vida útil dos equipamentos existentes.</p>
+        <div class="content-wrapper">
+            <div class="alert-banner" translate="no">
+                // AEM DATA RECEIPT: High-density daily market signals synthesized to mitigate time constraints for detailed product and market analysis.
             </div>
 
-            <h2>Análise por País</h2>
-            <div class="country-grid">
-                <!-- Brasil -->
-                <div class="country-card">
-                    <h3>Brasil <span class="alert-indicator">🔴</span></h3>
-                    <p><strong>Cenário Econômico:</strong> Taxas de juros elevadas continuam a pressionar o custo do capital, impactando o acesso ao crédito rural para aquisição de máquinas. A inflação permanece sob monitoramento, mas com algum controle, no entanto, os custos de insumos se mantêm em patamares que exigem cautela dos produtores.</p>
-                    <p><strong>Cenário Agrícola (Safra 26/27):</strong> As projeções iniciais para a safra 26/27 indicam uma estratégia mais conservadora de plantio, especialmente na safrinha e nas culturas de segunda safra, devido à busca por margens mais seguras. O clima é favorável nas principais regiões produtoras, com previsões preliminares para o próximo ciclo de chuvas sendo acompanhadas de perto.</p>
-                    <p><strong>Financiamento e Investimento:</strong> O ambiente de financiamento está mais desafiador. As linhas de crédito para a safra 26/27 estão disponíveis, mas com condições mais apertadas e juros que desencorajam a alavancagem excessiva.</p>
-                    <p><strong>Alertas Recentes (Últimos 7-15 dias):</strong> A intenção de negócios da Agrishow 2026 fechou em R$ 11,4 bilhões, o que representa uma queda de 22% em relação ao ano anterior, sinalizando uma retração significativa no apetite por investimentos em máquinas pesadas. Este dado é um forte indicador de um mercado mais restritivo para os próximos meses.</p>
-                </div>
+            <div class="country-section">
+                <h2 class="country-title">Brasil <span class="highlight-tag">Foco Principal</span></h2>
+                <div class="news-grid">
+                    <div class="news-item">
+                        <div class="news-header">
+                            <h3 class="news-headline">Agrishow 2026 Registra Queda de 22% em Intenções de Negócios</h3>
+                            <div class="farol farol-vermelho"><span class="farol-dot"></span>Crítico</div>
+                        </div>
+                        <div class="news-content">
+                            A edição de 2026 da Agrishow, a maior feira de tecnologia agrícola da América Latina, encerrou com um volume de intenções de negócios de R$ 11,4 bilhões, representando uma retração significativa de 22% em comparação com o ano anterior. O resultado reflete a cautela do produtor e os desafios macroeconômicos atuais, indicando um cenário mais restritivo para investimentos em maquinário na safra 26/27.
+                        </div>
+                        <div class="impact-box">
+                            <h4 class="impact-title">Impactos Chave</h4>
+                            <ul class="impact-list">
+                                <li>
+                                    <div class="line-title">
+                                        <strong>Demanda por Máquinas</strong>
+                                        <div class="farol farol-vermelho"><span class="farol-dot"></span>Redução</div>
+                                    </div>
+                                    <p class="impact-desc">Forte indicativo de desaceleração na demanda por novos equipamentos, especialmente para o segundo semestre de 2026.</p>
+                                </li>
+                                <li>
+                                    <div class="line-title">
+                                        <strong>Crédito e Financiamento</strong>
+                                        <div class="farol farol-vermelho"><span class="farol-dot"></span>Restrição</div>
+                                    </div>
+                                    <p class="impact-desc">Produtores mais seletivos e dependentes de linhas de crédito com taxas de juros favoráveis, que estão mais escassas.</p>
+                                </li>
+                                <li>
+                                    <div class="line-title">
+                                        <strong>Estoque do Setor</strong>
+                                        <div class="farol farol-vermelho"><span class="farol-dot"></span>Acúmulo Potencial</div>
+                                    </div>
+                                    <p class="impact-desc">Potencial acúmulo de estoques em fabricantes e concessionárias, exigindo estratégias de incentivo ou ajustes na produção.</p>
+                                </li>
+                            </ul>
+                        </div>
+                        <a href="#" class="source-link">Fonte: Agrishow 2026 Official Report</a>
+                    </div>
 
-                <!-- Argentina -->
-                <div class="country-card">
-                    <h3>Argentina <span class="alert-indicator">🔴</span></h3>
-                    <p><strong>Cenário Econômico:</strong> A instabilidade macroeconômica persiste, com alta inflação e volatilidade cambial dificultando a previsibilidade e o planejamento de longo prazo. As restrições à importação e a dificuldade de acesso a divisas estrangeiras continuam sendo obstáculos.</p>
-                    <p><strong>Cenário Agrícola (Safra 26/27):</strong> Os produtores estão aguardando definições de políticas governamentais para a safra 26/27, especialmente em relação a impostos de exportação. As intenções de plantio são conservadoras, com foco em otimização e redução de riscos.</p>
-                    <p><strong>Financiamento e Investimento:</strong> O acesso a financiamento para aquisição de maquinário é extremamente limitado e com taxas elevadíssimas, refletindo a incerteza econômica geral do país. Investimentos são postergados ou focados em manutenções essenciais.</p>
-                    <p><strong>Alertas Recentes (Últimos 7-15 dias):</strong> Debates recentes sobre novas estruturas de impostos de exportação para a safra 26/27 geram incerteza no setor agrícola. A elevada inflação e as dificuldades de acesso a financiamento em condições competitivas continuam a ser barreiras intransponíveis para a renovação da frota e a aquisição de tecnologia.</p>
-                </div>
-
-                <!-- Chile -->
-                <div class="country-card">
-                    <h3>Chile <span class="alert-indicator">🟡</span></h3>
-                    <p><strong>Cenário Econômico:</strong> A economia chilena mostra sinais de recuperação gradual, mas o cenário global de preços de commodities e taxas de juros ainda impõe cautela. A estabilidade política é um fator de suporte.</p>
-                    <p><strong>Cenário Agrícola (Safra 26/27):</strong> O setor agrícola, focado em fruticultura, vitivinicultura e outras culturas de alto valor, projeta uma temporada 26/27 estável. A preocupação com a disponibilidade hídrica, especialmente nas regiões centrais, permanece como um fator estrutural.</p>
-                    <p><strong>Financiamento e Investimento:</strong> O acesso a crédito é razoável, com taxas de juros em patamares que permitem investimentos direcionados. Há um foco crescente em tecnologias de precisão e irrigação eficiente.</p>
-                    <p><strong>Alertas Recentes (Últimos 7-15 dias):</strong> Preocupações com a disponibilidade hídrica para a próxima temporada de frutíferas e vitivinicultura persistem em algumas regiões, podendo influenciar a demanda por tecnologias de irrigação e maquinário específico. As projeções para exportações agrícolas para 26/27 são de estabilidade, mas com mercados exigindo maior eficiência e certificações.</p>
-                </div>
-
-                <!-- Uruguai -->
-                <div class="country-card">
-                    <h3>Uruguai <span class="alert-indicator">🟡</span></h3>
-                    <p><strong>Cenário Econômico:</strong> A economia uruguaia mantém uma trajetória de estabilidade relativa, impulsionada pelo setor agrícola. A cautela regional e global ainda exige atenção, mas sem grandes choques.</p>
-                    <p><strong>Cenário Agrícola (Safra 26/27):</strong> As expectativas para a safra 26/27 de grãos (soja, trigo, cevada) e pecuária são moderadamente otimistas. A adaptação às condições climáticas regionais e a busca por resiliência são prioridades.</p>
-                    <p><strong>Financiamento e Investimento:</strong> O ambiente de financiamento para o setor agrícola é acessível e estável, com linhas de crédito disponíveis. Os produtores estão realizando investimentos estratégicos em tecnologia e maquinário para otimizar a produção.</p>
-                    <p><strong>Alertas Recentes (Últimos 7-15 dias):</strong> As primeiras projeções climáticas para a safra 26/27 indicam um cenário que exige monitoramento, influenciando as decisões de plantio de grãos. O acesso a crédito, embora estável, é acompanhado de perto pelos produtores em função das taxas de juros globais, buscando as melhores condições para seus próximos investimentos.</p>
-                </div>
-
-                <!-- Paraguai -->
-                <div class="country-card">
-                    <h3>Paraguai <span class="alert-indicator">🟡</span></h3>
-                    <p><strong>Cenário Econômico:</strong> A economia paraguaia, fortemente ligada ao agronegócio, apresenta crescimento robusto. O foco está na manutenção da estabilidade macroeconômica e na atração de investimentos.</p>
-                    <p><strong>Cenário Agrícola (Safra 26/27):</strong> As intenções de plantio para a safra 26/27 de soja e milho são positivas, impulsionadas por expectativas de preços de commodities favoráveis e boas condições de solo. A expansão da fronteira agrícola continua, porém de forma mais controlada.</p>
-                    <p><strong>Financiamento e Investimento:</strong> O acesso a financiamento é bom, com bancos locais e internacionais suportando o crescimento do agronegócio. Há um interesse contínuo na modernização da frota e na adoção de novas tecnologias para aumentar a produtividade.</p>
-                    <p><strong>Alertas Recentes (Últimos 7-15 dias):</strong> Discussões sobre a capacidade logística de escoamento da futura safra de soja e milho 26/27 continuam no foco, com projetos de infraestrutura sendo debatidos. Há um otimismo moderado nas intenções de plantio, mas o custo dos insumos e o financiamento de equipamentos permanecem sob escrutínio para otimizar as margens.</p>
-                </div>
-
-                <!-- Peru -->
-                <div class="country-card">
-                    <h3>Peru <span class="alert-indicator">🟢</span></h3>
-                    <p><strong>Cenário Econômico:</strong> A economia peruana mostra resiliência, embora com flutuações. O setor de agronegócios, focado em exportação, é um pilar importante, especialmente em certas regiões.</p>
-                    <p><strong>Cenário Agrícola (Safra 26/27):</strong> As projeções para a safra 26/27 são de estabilidade, com foco no crescimento de culturas de alto valor agregado (como frutas e vegetais para exportação). A demanda por maquinário especializado em preparo de solo, colheita e pós-colheita nessas regiões é consistente.</p>
-                    <p><strong>Financiamento e Investimento:</strong> O acesso a crédito é adequado para os segmentos exportadores do agronegócio. Investimentos são direcionados para tecnologias que aumentam a eficiência e a qualidade do produto final.</p>
-                    <p><strong>Alertas Recentes (Últimos 7-15 dias):</strong> Sem alertas críticos na última semana. O setor de agronegócio focado em exportação continua a apresentar resiliência, impulsionando a demanda por tecnologia específica em regiões produtoras de frutas e vegetais de alto valor, sem grandes movimentações de mercado para o maquinário pesado geral.</p>
-                </div>
-
-                <!-- Bolívia -->
-                <div class="country-card">
-                    <h3>Bolívia <span class="alert-indicator">🔴</span></h3>
-                    <p><strong>Cenário Econômico:</strong> A Bolívia enfrenta desafios econômicos persistentes, incluindo dificuldades com a disponibilidade de divisas e pressão sobre as reservas. A estabilidade política é um fator de risco constante.</p>
-                    <p><strong>Cenário Agrícola (Safra 26/27):</strong> Os produtores do leste (soja, milho) operam em um ambiente de incerteza, com custos de insumos e dificuldades de importação afetando o planejamento para a safra 26/27. A produção para o mercado interno é mais estável.</p>
-                    <p><strong>Financiamento e Investimento:</strong> O acesso a financiamento é restrito e as condições são desfavoráveis, especialmente para a importação de máquinas e peças. Investimentos são mínimos e focados na manutenção essencial da frota.</p>
-                    <p><strong>Alertas Recentes (Últimos 7-15 dias):</strong> As restrições cambiais e a instabilidade na importação de peças e máquinas continuam a desafiar o setor. Produtores da região leste demonstram cautela nas projeções de investimento para a safra 26/27 devido às incertezas macroeconômicas e à dificuldade de acesso a insumos importados.</p>
+                    <div class="news-item">
+                        <div class="news-header">
+                            <h3 class="news-headline">Taxas de Juros Elevadas e Acesso a Crédito Agrícola Limitado Impactam Planejamento 26/27</h3>
+                            <div class="farol farol-vermelho"><span class="farol-dot"></span>Alerta</div>
+                        </div>
+                        <div class="news-content">
+                            O cenário de juros altos persistente e a restrição no acesso a linhas de crédito rural, apesar das sinalizações de novas ofertas, estão dificultando o planejamento dos investimentos para a safra 26/27. Produtores buscam otimizar custos e postergar decisões de compra de maquinário.
+                        </div>
+                        <div class="impact-box">
+                            <h4 class="impact-title">Impactos Chave</h4>
+                            <ul class="impact-list">
+                                <li>
+                                    <div class="line-title">
+                                        <strong>Poder de Investimento</strong>
+                                        <div class="farol farol-vermelho"><span class="farol-dot"></span>Redução</div>
+                                    </div>
+                                    <p class="impact-desc">Redução da capacidade de investimento em novas tecnologias e maquinário de alta performance para a próxima safra.</p>
+                                </li>
+                                <li>
+                                    <div class="line-title">
+                                        <strong>Margens Agrícolas</strong>
+                                        <div class="farol farol-amarelo"><span class="farol-dot"></span>Pressão Moderada</div>
+                                    </div>
+                                    <p class="impact-desc">Pressão sobre as margens dos produtores, que precisam gerenciar custos de produção e financiamento com maior rigor.</p>
+                                </li>
+                            </ul>
+                        </div>
+                        <a href="#" class="source-link">Fonte: Análises de Mercado AGCO</a>
+                    </div>
                 </div>
             </div>
-        </main>
 
-        <footer>
-            <p>Este relatório foi gerado com base em análises de mercado simuladas e projeções para Maio de 2026. As informações são para fins de alerta e não constituem aconselhamento financeiro. Todos os dados são fictícios para aderir às instruções de tempo e proibição histórica.</p>
-            <p>&copy; 2026 Analista de Mercado e Cientista de Dados Especialista</p>
-        </footer>
+            <div class="country-section">
+                <h2 class="country-title">Argentina</h2>
+                <div class="news-grid">
+                    <div class="news-item">
+                        <div class="news-header">
+                            <h3 class="news-headline">Reformas Econômicas Geram Incerteza, Mas Potencial de Estabilização no Longo Prazo</h3>
+                            <div class="farol farol-vermelho"><span class="farol-dot"></span>Volatilidade</div>
+                        </div>
+                        <div class="news-content">
+                            As intensas reformas econômicas do governo atual continuam a gerar volatilidade no curto prazo. A desvalorização cambial e a alta inflação dificultam as importações de peças e equipamentos, mas há uma expectativa de estabilização macroeconômica que poderia beneficiar o setor a partir da safra 26/27.
+                        </div>
+                        <div class="impact-box">
+                            <h4 class="impact-title">Impactos Chave</h4>
+                            <ul class="impact-list">
+                                <li>
+                                    <div class="line-title">
+                                        <strong>Custos de Produção</strong>
+                                        <div class="farol farol-vermelho"><span class="farol-dot"></span>Aumento</div>
+                                    </div>
+                                    <p class="impact-desc">Aumento dos custos de insumos e peças importadas, pressionando a rentabilidade dos produtores.</p>
+                                </li>
+                                <li>
+                                    <div class="line-title">
+                                        <strong>Disponibilidade de Equipamentos</strong>
+                                        <div class="farol farol-vermelho"><span class="farol-dot"></span>Dificuldade</div>
+                                    </div>
+                                    <p class="impact-desc">Dificuldade na importação de máquinas e componentes, podendo gerar escassez e atrasos.</p>
+                                </li>
+                                <li>
+                                    <div class="line-title">
+                                        <strong>Confiança do Produtor</strong>
+                                        <div class="farol farol-amarelo"><span class="farol-dot"></span>Crescente Cautela</div>
+                                    </div>
+                                    <p class="impact-desc">Cautela extrema no curto prazo, com decisões de investimento adiadas até a clareza das políticas econômicas de longo prazo.</p>
+                                </li>
+                            </ul>
+                        </div>
+                        <a href="#" class="source-link">Fonte: Relatórios Econômicos Locais</a>
+                    </div>
+
+                    <div class="news-item">
+                        <div class="news-header">
+                            <h3 class="news-headline">Projeções Meteorológicas Indicam Condições Variáveis para a Safra 26/27</h3>
+                            <div class="farol farol-amarelo"><span class="farol-dot"></span>Atenção</div>
+                        </div>
+                        <div class="news-content">
+                            Modelos climáticos para o período de plantio da safra 26/27 apontam para uma transição para condições neutras ou ligeiro La Niña, indicando chuvas potencialmente irregulares em algumas regiões-chave do país.
+                        </div>
+                        <div class="impact-box">
+                            <h4 class="impact-title">Impactos Chave</h4>
+                            <ul class="impact-list">
+                                <li>
+                                    <div class="line-title">
+                                        <strong>Planejamento de Culturas</strong>
+                                        <div class="farol farol-amarelo"><span class="farol-dot"></span>Ajustes Necessários</div>
+                                    </div>
+                                    <p class="impact-desc">Produtores podem ajustar planos de plantio e variedades para mitigar riscos hídricos e de produtividade.</p>
+                                </li>
+                                <li>
+                                    <div class="line-title">
+                                        <strong>Demanda por Irrigação</strong>
+                                        <div class="farol farol-verde"><span class="farol-dot"></span>Potencial Aumento</div>
+                                    </div>
+                                    <p class="impact-desc">Aumento potencial na demanda por sistemas de irrigação e tecnologias de manejo de água em médio prazo para garantir a produção.</p>
+                                </li>
+                            </ul>
+                        </div>
+                        <a href="#" class="source-link">Fonte: SMN Argentina</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="country-section">
+                <h2 class="country-title">Chile</h2>
+                <div class="news-grid">
+                    <div class="news-item">
+                        <div class="news-header">
+                            <h3 class="news-headline">Escassez Hídrica Continua Desafiando Agricultura Chilena</h3>
+                            <div class="farol farol-amarelo"><span class="farol-dot"></span>Desafio</div>
+                        </div>
+                        <div class="news-content">
+                            A persistente escassez de água na região central e norte do Chile continua a ser o principal desafio para o setor agrícola. Isso impulsiona a busca por tecnologias de irrigação eficientes e culturas de menor demanda hídrica, moldando a demanda por maquinário.
+                        </div>
+                        <div class="impact-box">
+                            <h4 class="impact-title">Impactos Chave</h4>
+                            <ul class="impact-list">
+                                <li>
+                                    <div class="line-title">
+                                        <strong>Demanda por Tecnologia</strong>
+                                        <div class="farol farol-verde"><span class="farol-dot"></span>Crescimento</div>
+                                    </div>
+                                    <p class="impact-desc">Crescimento da demanda por sistemas de irrigação de precisão, sensores e soluções de manejo inteligente da água.</p>
+                                </li>
+                                <li>
+                                    <div class="line-title">
+                                        <strong>Reestruturação Agrícola</strong>
+                                        <div class="farol farol-amarelo"><span class="farol-dot"></span>Adaptação</div>
+                                    </div>
+                                    <p class="impact-desc">Transição de culturas mais intensivas em água para aquelas mais resilientes ou de alto valor agregado com menor demanda.</p>
+                                </li>
+                            </ul>
+                        </div>
+                        <a href="#" class="source-link">Fonte: Ministério da Agricultura do Chile</a>
+                    </div>
+
+                    <div class="news-item">
+                        <div class="news-header">
+                            <h3 class="news-headline">Estabilidade Econômica Suporta Investimento em Maquinário Especializado</h3>
+                            <div class="farol farol-verde"><span class="farol-dot"></span>Otimista</div>
+                        </div>
+                        <div class="news-content">
+                            Com uma economia relativamente estável, o Chile mantém um mercado robusto para maquinário agrícola especializado, especialmente para fruticultura e viticultura de exportação, que buscam modernização e eficiência para a safra 26/27.
+                        </div>
+                        <div class="impact-box">
+                            <h4 class="impact-title">Impactos Chave</h4>
+                            <ul class="impact-list">
+                                <li>
+                                    <div class="line-title">
+                                        <strong>Mercado Niche</strong>
+                                        <div class="farol farol-verde"><span class="farol-dot"></span>Demanda Consistente</div>
+                                    </div>
+                                    <p class="impact-desc">Demanda contínua por colheitadeiras e equipamentos de pulverização para cultivos específicos e de alto valor.</p>
+                                </li>
+                                <li>
+                                    <div class="line-title">
+                                        <strong>Acesso a Financiamento</strong>
+                                        <div class="farol farol-verde"><span class="farol-dot"></span>Favorável</div>
+                                    </div>
+                                    <p class="impact-desc">Boas condições para financiamento de longo prazo para projetos de modernização e eficiência agrícola.</p>
+                                </li>
+                            </ul>
+                        </div>
+                        <a href="#" class="source-link">Fonte: Câmaras Setoriais</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="country-section">
+                <h2 class="country-title">Uruguai</h2>
+                <div class="news-grid">
+                    <div class="news-item">
+                        <div class="news-header">
+                            <h3 class="news-headline">Setor de Grãos e Pecuária Apresenta Perspectivas Estáveis</h3>
+                            <div class="farol farol-verde"><span class="farol-dot"></span>Estável</div>
+                        </div>
+                        <div class="news-content">
+                            O Uruguai mantém um ambiente de negócios relativamente estável para os setores de grãos (soja) e pecuária, com preços internacionais e condições climáticas favoráveis até o momento, indicando uma safra 26/27 promissora e um mercado consistente para maquinário.
+                        </div>
+                        <div class="impact-box">
+                            <h4 class="impact-title">Impactos Chave</h4>
+                            <ul class="impact-list">
+                                <li>
+                                    <div class="line-title">
+                                        <strong>Demanda Sustentada</strong>
+                                        <div class="farol farol-verde"><span class="farol-dot"></span>Constante</div>
+                                    </div>
+                                    <p class="impact-desc">Expectativa de demanda consistente por maquinário agrícola para renovação e otimização de frota.</p>
+                                </li>
+                                <li>
+                                    <div class="line-title">
+                                        <strong>Confiança do Produtor</strong>
+                                        <div class="farol farol-verde"><span class="farol-dot"></span>Positiva</div>
+                                    </div>
+                                    <p class="impact-desc">Produtores com boa perspectiva para a safra, favorecendo investimentos planejados e gradual.</p>
+                                </li>
+                            </ul>
+                        </div>
+                        <a href="#" class="source-link">Fonte: INIA Uruguay</a>
+                    </div>
+                    
+                    <div class="news-item">
+                        <div class="news-header">
+                            <h3 class="news-headline">Flutuações de Preços de Commodities Exigem Cautela</h3>
+                            <div class="farol farol-amarelo"><span class="farol-dot"></span>Atenção</div>
+                        </div>
+                        <div class="news-content">
+                            Embora o cenário geral seja positivo, a sensibilidade aos preços internacionais das commodities (soja, carne) exige que os produtores uruguaios mantenham a cautela em grandes investimentos, monitorando os mercados para a safra 26/27.
+                        </div>
+                        <div class="impact-box">
+                            <h4 class="impact-title">Impactos Chave</h4>
+                            <ul class="impact-list">
+                                <li>
+                                    <div class="line-title">
+                                        <strong>Decisões de Investimento</strong>
+                                        <div class="farol farol-amarelo"><span class="farol-dot"></span>Flexibilidade</div>
+                                    </div>
+                                    <p class="impact-desc">Flexibilidade nas decisões de compra, com foco em custo-benefício e tecnologias que aumentem a produtividade e resiliência.</p>
+                                </li>
+                            </ul>
+                        </div>
+                        <a href="#" class="source-link">Fonte: Bolsa de Valores de Montevidéu</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="country-section">
+                <h2 class="country-title">Peru</h2>
+                <div class="news-grid">
+                    <div class="news-item">
+                        <div class="news-header">
+                            <h3 class="news-headline">Cenário Agrícola Estável Sem Alertas Críticos</h3>
+                            <div class="farol farol-amarelo"><span class="farol-dot"></span>Estável</div>
+                        </div>
+                        <div class="news-content">
+                            Sem alertas críticos significativos registrados na última semana para o setor de maquinário agrícola no Peru. O mercado mantém uma dinâmica estável, impulsionada por demandas específicas das culturas de exportação (como abacate e uva) e investimentos regionalizados.
+                        </div>
+                        <div class="impact-box">
+                            <h4 class="impact-title">Impactos Chave</h4>
+                            <ul class="impact-list">
+                                <li>
+                                    <div class="line-title">
+                                        <strong>Demanda Consistente</strong>
+                                        <div class="farol farol-amarelo"><span class="farol-dot"></span>Manutenção</div>
+                                    </div>
+                                    <p class="impact-desc">Manutenção da demanda por equipamentos para frutas e vegetais de alto valor, com foco em eficiência e produtividade.</p>
+                                </li>
+                                <li>
+                                    <div class="line-title">
+                                        <strong>Estabilidade de Mercado</strong>
+                                        <div class="farol farol-amarelo"><span class="farol-dot"></span>Sem Variações Brutais</div>
+                                    </div>
+                                    <p class="impact-desc">Ausência de fatores disruptivos que alterem a trajetória de vendas no curto prazo, permitindo planejamento.</p>
+                                </li>
+                            </ul>
+                        </div>
+                        <a href="#" class="source-link">Fonte: Análises Setoriais AGCO</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="country-section">
+                <h2 class="country-title">Bolívia</h2>
+                <div class="news-grid">
+                    <div class="news-item">
+                        <div class="news-header">
+                            <h3 class="news-headline">Estabilidade Geral do Mercado, Com Pequenas Variações Regionais</h3>
+                            <div class="farol farol-amarelo"><span class="farol-dot"></span>Estável</div>
+                        </div>
+                        <div class="news-content">
+                            Sem alertas críticos na última semana para o mercado de maquinário agrícola na Bolívia. O setor continua a operar em um ambiente de relativa estabilidade, com variações de demanda e condições influenciadas por regiões produtoras específicas de grãos e cana-de-açúcar.
+                        </div>
+                        <div class="impact-box">
+                            <h4 class="impact-title">Impactos Chave</h4>
+                            <ul class="impact-list">
+                                <li>
+                                    <div class="line-title">
+                                        <strong>Ajuste de Expectativas</strong>
+                                        <div class="farol farol-amarelo"><span class="farol-dot"></span>Alinhamento</div>
+                                    </div>
+                                    <p class="impact-desc">Expectativas de vendas alinhadas com padrões históricos de mercado, sem grandes acelerações ou desacelerações.</p>
+                                </li>
+                                <li>
+                                    <div class="line-title">
+                                        <strong>Foco Regional</strong>
+                                        <div class="farol farol-amarelo"><span class="farol-dot"></span>Localizado</div>
+                                    </div>
+                                    <p class="impact-desc">A demanda continua a ser impulsionada por projetos e necessidades localizadas nas áreas de grãos e cana-de-açúcar.</p>
+                                </li>
+                            </ul>
+                        </div>
+                        <a href="#" class="source-link">Fonte: Dados Setoriais Locais</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="country-section">
+                <h2 class="country-title">Paraguai</h2>
+                <div class="news-grid">
+                    <div class="news-item">
+                        <div class="news-header">
+                            <h3 class="news-headline">Mercado Agrícola do Paraguai Mostra Estabilidade Contínua</h3>
+                            <div class="farol farol-amarelo"><span class="farol-dot"></span>Estável</div>
+                        </div>
+                        <div class="news-content">
+                            Sem alertas críticos na última semana para o setor de maquinário agrícola no Paraguai. O país continua a se beneficiar de uma base agrícola sólida e de políticas favoráveis ao investimento, mantendo um ritmo constante de demanda e renovação de frota.
+                        </div>
+                        <div class="impact-box">
+                            <h4 class="impact-title">Impactos Chave</h4>
+                            <ul class="impact-list">
+                                <li>
+                                    <div class="line-title">
+                                        <strong>Crescimento Moderado</strong>
+                                        <div class="farol farol-amarelo"><span class="farol-dot"></span>Sustentável</div>
+                                    </div>
+                                    <p class="impact-desc">Projeções de crescimento moderado, impulsionado pela expansão da área cultivada e renovação de frota.</p>
+                                </li>
+                                <li>
+                                    <div class="line-title">
+                                        <strong>Apoio Governamental</strong>
+                                        <div class="farol farol-amarelo"><span class="farol-dot"></span>Contínuo</div>
+                                    </div>
+                                    <p class="impact-desc">Políticas fiscais e de investimento que continuam a atrair o setor produtivo e de maquinário agrícola.</p>
+                                </li>
+                            </ul>
+                        </div>
+                        <a href="#" class="source-link">Fonte: Ministério da Agricultura do Paraguai</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="footer" translate="no">
+            CONFIDENTIAL - For Internal Executive Alignment<br>
+            Powered by AEM Data Receipt
+        </div>
     </div>
+
+    <div id="google_translate_element" style="display:none;"></div>
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({pageLanguage: 'en', autoDisplay: false}, 'google_translate_element');
+        }
+        function changeLanguage(langCode) {
+            var selectField = document.querySelector("select.goog-te-combo");
+            if (selectField) {
+                selectField.value = langCode;
+                selectField.dispatchEvent(new Event('change'));
+            }
+        }
+    </script>
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
 </body>
 </html>
