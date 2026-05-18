@@ -1,7 +1,11 @@
 import os
+import datetime
 from google import genai
 
 def gerar_relatorio():
+    # Pega a data exata de hoje e formata (Ex: MAY 18, 2026)
+    data_hoje = datetime.datetime.now().strftime("%b %d, %Y").upper()
+
     # Inicializa o cliente da IA
     client = genai.Client(api_key=os.environ.get("GEMINI_API_KEY"))
     
@@ -142,19 +146,22 @@ def gerar_relatorio():
 </body>
 </html>"""
 
+    # O Python substitui a data no molde antes de enviar para a IA
+    layout_com_data = layout_base.replace("DATA DE HOJE AQUI", data_hoje)
+
     # INSTRUÇÕES DE PREENCHIMENTO E REGRAS RÍGIDAS
     instrucoes_iniciais = """
     Você é um analista de mercado e cientista de dados especialista no setor de maquinário agrícola da América Latina.
     Sua tarefa é gerar as notícias do relatório "Early Warning" e encaixá-las EXATAMENTE no código HTML fornecido.
 
-    AQUI ESTÁ O CÓDIGO HTML DO PAINEL (O SEU MOLDE INTOCÁVEL):
+    AQUI ESTÁ O CÓDIGO HTML DO PAINEL (O SEU MOLDE INTOCÁVEL JÁ COM A DATA DE HOJE PREENCHIDA):
     """
     
     regras_finais = """
     INSTRUÇÕES DE LAYOUT (OBRIGATÓRIO):
     - Mantenha EXATAMENTE a mesma estrutura HTML, classes CSS, tags, cores e design visual do código fornecido.
+    - A data já foi preenchida corretamente pelo sistema na tag <div class="date-badge">. NÃO ALTERE A DATA.
     - Preencha a div <div class="content-wrapper"> com as seções <div class="country-section"> para cada país analisado (Brasil, Argentina, Chile, Uruguai, Peru, Bolívia, Paraguai).
-    - Substitua "DATA DE HOJE AQUI" pela data atual formatada (Ex: MAY 18, 2026).
     - NÃO altere a estrutura do CSS (<style>) nem os scripts do final da página.
 
     INSTRUÇÕES RESTRITAS DE TEMPO E QUALIDADE (SIGA RIGOROSAMENTE):
@@ -169,7 +176,7 @@ def gerar_relatorio():
     """
 
     # Junta as partes em uma única instrução estruturada
-    prompt_completo = instrucoes_iniciais + "\n\n" + layout_base + "\n\n" + regras_finais
+    prompt_completo = instrucoes_iniciais + "\n\n" + layout_com_data + "\n\n" + regras_finais
 
     print("Enviando layout fixo e instruções para o Gemini...")
     
@@ -191,7 +198,7 @@ def gerar_relatorio():
         with open("index.html", "w", encoding="utf-8") as file:
             file.write(html_content.strip())
             
-        print("Painel atualizado: Layout blindado e notícias purificadas para 2026!")
+        print("Painel atualizado: Layout blindado, data automática e notícias purificadas para 2026!")
 
     except Exception as e:
         print(f"Ocorreu um erro: {e}")
