@@ -6,83 +6,49 @@
     <title>Early warning AGCO</title>
     <style>
         :root {
-            --agco-red: #cc0000;
-            --agco-black: #111111;
-            --agco-dark-gray: #333333;
-            --agco-light-gray: #f4f4f4;
-            --text-main: #222222;
-            --white: #ffffff;
-            
-            /* Cores dos Faróis */
-            --farol-verde-bg: #e2f0d9;
-            --farol-verde-text: #385723;
-            --farol-verde-dot: #70ad47;
-            
-            --farol-amarelo-bg: #fff2cc;
-            --farol-amarelo-text: #7f6000;
-            --farol-amarelo-dot: #ffc000;
-            
-            --farol-vermelho-bg: #fce4d6;
-            --farol-vermelho-text: #c65911;
-            --farol-vermelho-dot: #c00000;
+            --agco-red: #cc0000; --agco-black: #111111; --agco-dark-gray: #333333; --agco-light-gray: #f4f4f4; --text-main: #222222; --white: #ffffff;
+            --farol-verde-bg: #e2f0d9; --farol-verde-text: #385723; --farol-verde-dot: #70ad47;
+            --farol-amarelo-bg: #fff2cc; --farol-amarelo-text: #7f6000; --farol-amarelo-dot: #ffc000;
+            --farol-vermelho-bg: #fce4d6; --farol-vermelho-text: #c65911; --farol-vermelho-dot: #c00000;
         }
         body { font-family: 'Arial', sans-serif; background-color: #e9ecef; color: var(--text-main); margin: 0; padding: 20px; }
-        
         body > .skiptranslate { display: none; }
         .goog-te-banner-frame.skiptranslate { display: none !important; }
         body { top: 0px !important; }
-        
         .container { max-width: 1200px; margin: 0 auto; background-color: var(--white); box-shadow: 0 10px 25px rgba(0,0,0,0.15); }
-        
         .header { background-color: var(--agco-black); color: var(--white); padding: 35px 40px; border-bottom: 6px solid var(--agco-red); display: flex; justify-content: space-between; align-items: center; background-image: url('https://images.unsplash.com/photo-1592982537447-7440770cbfc9?q=80&w=2000&auto=format&fit=crop'); background-size: cover; background-position: center; background-blend-mode: multiply; }
         .header-text h1 { margin: 0; font-size: 34px; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 900; }
         .header-text p { margin: 5px 0 0 0; font-size: 14px; color: #d0d0d0; text-transform: uppercase; letter-spacing: 0.5px; }
-        
         .header-controls { display: flex; flex-direction: column; align-items: flex-end; gap: 10px; }
         .date-badge { background-color: var(--agco-red); padding: 8px 16px; font-weight: bold; font-size: 14px; letter-spacing: 1px; border-radius: 2px; text-align: center; width: 100%; box-sizing: border-box;}
-        
         .lang-switcher { display: flex; gap: 5px; }
         .lang-switcher button { background-color: rgba(255, 255, 255, 0.1); color: var(--white); border: 1px solid rgba(255, 255, 255, 0.3); padding: 5px 10px; font-size: 11px; font-weight: bold; cursor: pointer; transition: all 0.2s; text-transform: uppercase; border-radius: 2px; }
         .lang-switcher button:hover { background-color: var(--agco-red); border-color: var(--agco-red); }
-        
         .content-wrapper { padding: 30px 40px; }
         .alert-banner { background-color: var(--agco-light-gray); border-left: 5px solid var(--agco-red); padding: 15px 20px; margin-bottom: 35px; font-size: 13px; color: var(--agco-dark-gray); text-transform: uppercase; letter-spacing: 0.5px; font-weight: bold; }
-        
         .country-section { margin-bottom: 50px; }
         .country-title { font-size: 24px; color: var(--agco-black); margin-top: 0; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid #dddddd; display: flex; align-items: center; font-weight: 800; text-transform: uppercase; }
         .highlight-tag { display: inline-block; background-color: var(--agco-black); color: var(--white); padding: 4px 8px; font-size: 11px; margin-left: 15px; vertical-align: middle; letter-spacing: 1px; }
-        
         .news-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); gap: 30px; }
         .news-item { background-color: var(--white); border: 1px solid #e0e0e0; box-shadow: 0 2px 4px rgba(0,0,0,0.02); display: flex; flex-direction: column; }
         .news-header { background-color: var(--agco-light-gray); padding: 15px 20px; border-left: 5px solid var(--agco-black); display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
         .news-headline { font-size: 15px; font-weight: bold; color: var(--agco-black); margin: 0; text-transform: uppercase; line-height: 1.4; }
         .news-content { padding: 20px; font-size: 14px; color: var(--agco-dark-gray); line-height: 1.6; flex-grow: 1; }
-        
         .impact-box { margin: 0 20px 20px 20px; border-top: 3px solid var(--agco-red); background-color: #fafafa; padding: 15px; }
         .impact-title { font-weight: 900; color: var(--agco-red); margin-bottom: 12px; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; }
-        
         .farol { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; font-size: 11px; font-weight: bold; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap; }
         .farol-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
-        
-        .farol-verde { background-color: var(--farol-verde-bg); color: var(--farol-verde-text); }
-        .farol-verde .farol-dot { background-color: var(--farol-verde-dot); box-shadow: 0 0 6px var(--farol-verde-dot); }
-        
-        .farol-amarelo { background-color: var(--farol-amarelo-bg); color: var(--farol-amarelo-text); }
-        .farol-amarelo .farol-dot { background-color: var(--farol-amarelo-dot); box-shadow: 0 0 6px var(--farol-amarelo-dot); }
-        
-        .farol-vermelho { background-color: var(--farol-vermelho-bg); color: var(--farol-vermelho-text); }
-        .farol-vermelho .farol-dot { background-color: var(--farol-vermelho-dot); box-shadow: 0 0 6px var(--farol-vermelho-dot); }
-        
+        .farol-verde { background-color: var(--farol-verde-bg); color: var(--farol-verde-text); } .farol-verde .farol-dot { background-color: var(--farol-verde-dot); box-shadow: 0 0 6px var(--farol-verde-dot); }
+        .farol-amarelo { background-color: var(--farol-amarelo-bg); color: var(--farol-amarelo-text); } .farol-amarelo .farol-dot { background-color: var(--farol-amarelo-dot); box-shadow: 0 0 6px var(--farol-amarelo-dot); }
+        .farol-vermelho { background-color: var(--farol-vermelho-bg); color: var(--farol-vermelho-text); } .farol-vermelho .farol-dot { background-color: var(--farol-vermelho-dot); box-shadow: 0 0 6px var(--farol-vermelho-dot); }
         .impact-list { list-style: none; padding: 0; margin: 0; font-size: 13px; }
         .impact-list li { margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px dashed #ddd; display: flex; flex-direction: column; gap: 5px; }
         .impact-list li:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
         .line-title { display: flex; justify-content: space-between; align-items: center; }
         .impact-list strong { color: var(--agco-black); text-transform: uppercase; }
         .impact-desc { color: #555; font-size: 12.5px; padding-left: 2px; }
-        
         .source-link { display: block; margin-top: 15px; font-size: 11px; color: var(--agco-red); text-decoration: none; font-weight: bold; text-align: right; letter-spacing: 1px; }
         .source-link:hover { color: var(--agco-black); }
-        
         .footer { background-color: var(--agco-black); color: #777777; text-align: center; padding: 25px; font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; }
     </style>
 </head>
@@ -99,7 +65,7 @@
                     <button onclick="changeLanguage('pt')">PT</button>
                     <button onclick="changeLanguage('es')">ES</button>
                 </div>
-                <div class="date-badge">MAY 16, 2026</div>
+                <div class="date-badge">MAY 18, 2026</div>
             </div>
         </div>
 
@@ -109,299 +75,420 @@
             </div>
 
             <div class="country-section">
-                <h2 class="country-title">🇧🇷 BRAZIL <span class="highlight-tag">MULTI-CROP ALERTS</span></h2>
-                <div class="news-grid">
-                    
-                    <div class="news-item">
-                        <div class="news-header">
-                            <h3 class="news-headline">SOYBEAN - RECORD EXPORTS STRAIN BR-163 ROAD LOGISTICS</h3>
-                            <div class="farol farol-amarelo"><span class="farol-dot"></span>Warning</div>
-                        </div>
-                        <div class="news-content">Mato Grosso export data indicates peak volume pressures along the BR-163 corridor. Freight rate spikes are temporarily cooling internal producer margins, forcing localized capital preservation strategies despite firm CBOT baselines.</div>
-                        <div class="impact-box">
-                            <div class="impact-title">⚙️ Machinery Impact Analysis</div>
-                            <ul class="impact-list">
-                                <li>
-                                    <div class="line-title"><strong>Tractors</strong> <div class="farol farol-amarelo"><span class="farol-dot"></span>Stable</div></div>
-                                    <div class="impact-desc">High (>200HP) heavy row-crop lines face short-term delivery pauses as large operators monitor localized logistic costs. Small/Medium segments remain stable.</div>
-                                </li>
-                                <li>
-                                    <div class="line-title"><strong>Harvesters</strong> <div class="farol farol-amarelo"><span class="farol-dot"></span>Stable</div></div>
-                                    <div class="impact-desc">Fleet runtime remains elevated. New machinery orders face extended decision pipelines, but the parts replacement market is highly active.</div>
-                                </li>
-                                <li>
-                                    <div class="line-title"><strong>Sprayers</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
-                                    <div class="impact-desc">Late-season crop protection runs continue to drive high engine-hour utilization across large self-propelled portfolios.</div>
-                                </li>
-                                <li>
-                                    <div class="line-title"><strong>Planters</strong> <div class="farol farol-amarelo"><span class="farol-dot"></span>Stable</div></div>
-                                    <div class="impact-desc">Pre-booking for the 2026/27 cycle remains steady, hinging on the normalization of logistics rates.</div>
-                                </li>
-                            </ul>
-                            <a href="https://www.imea.com.br/" class="source-link">IMEA ➔</a>
-                        </div>
-                    </div>
-
-                    <div class="news-item">
-                        <div class="news-header">
-                            <h3 class="news-headline">SUGARCANE - RIBEIRÃO PRETO MILLS MAXIMIZE CRUSHING PACE</h3>
-                            <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div>
-                        </div>
-                        <div class="news-content">Anticipating an early frost event next week, mills in the São Paulo region are running at maximum capacity. The aggressive pace is testing operational limits and increasing wear and tear on logistical equipment.</div>
-                        <div class="impact-box">
-                            <div class="impact-title">⚙️ Machinery Impact Analysis</div>
-                            <ul class="impact-list">
-                                <li>
-                                    <div class="line-title"><strong>Tractors</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
-                                    <div class="impact-desc">Extreme demand for Medium (100-200HP) tractors for transbordo (wagon) operations.</div>
-                                </li>
-                                <li>
-                                    <div class="line-title"><strong>Harvesters</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
-                                    <div class="impact-desc">Peak machine hours are triggering immediate dealer parts consumption and pulling forward planned fleet upgrades.</div>
-                                </li>
-                                <li>
-                                    <div class="line-title"><strong>Sprayers</strong> <div class="farol farol-amarelo"><span class="farol-dot"></span>Stable</div></div>
-                                    <div class="impact-desc">Normal maintenance schedules apply; high focus on crop ripeners application before cutting.</div>
-                                </li>
-                                <li>
-                                    <div class="line-title"><strong>Planters</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
-                                    <div class="impact-desc">Continuous high mill utilization accelerates investment budgets for automated billet planters.</div>
-                                </li>
-                            </ul>
-                            <a href="https://www.unica.com.br/" class="source-link">UNICA ➔</a>
-                        </div>
-                    </div>
-                    
-                    <div class="news-item">
-                        <div class="news-header">
-                            <h3 class="news-headline">COTTON - BAHIA IRRIGATION EXPANSION DRIVES TECHNOLOGY DEMAND</h3>
-                            <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div>
-                        </div>
-                        <div class="news-content">Growers in Western Bahia are reporting strong crop conditions and expanding processing capacity. Reinvestments are heavily targeting tech-heavy field solutions and precision systems to combat global competition.</div>
-                        <div class="impact-box">
-                            <div class="impact-title">⚙️ Machinery Impact Analysis</div>
-                            <ul class="impact-list">
-                                <li>
-                                    <div class="line-title"><strong>Tractors</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
-                                    <div class="impact-desc">Strong demand for High (>200HP) platforms to manage dense stalk destruction and rigorous field preparation.</div>
-                                </li>
-                                <li>
-                                    <div class="line-title"><strong>Harvesters</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
-                                    <div class="impact-desc">High premium picker units and module-building systems are seeing sustained retail interest.</div>
-                                </li>
-                                <li>
-                                    <div class="line-title"><strong>Sprayers</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
-                                    <div class="impact-desc">Advanced variable-rate telemetry upgrades and large boom-width sprayers face a positive sales pipeline.</div>
-                                </li>
-                                <li>
-                                    <div class="line-title"><strong>Planters</strong> <div class="farol farol-amarelo"><span class="farol-dot"></span>Stable</div></div>
-                                    <div class="impact-desc">Precision row-unit conversions are favored over purchasing entirely new implement structures.</div>
-                                </li>
-                            </ul>
-                            <a href="https://www.abrapa.com.br/" class="source-link">ABRAPA ➔</a>
-                        </div>
-                    </div>
-                </div>
+    <h2 class="country-title">🇧🇷 Brazil <span class="highlight-tag">MARKET & MACRO ALERTS</span></h2>
+    <div class="news-grid">
+        <div class="news-item">
+            <div class="news-header">
+                <h3 class="news-headline">SOY & CORN - EXPORTS MAINTAIN STRONG PACE DESPITE LOGISTICAL CHALLENGES</h3>
+                <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div>
             </div>
-
-            <div class="country-section">
-                <h2 class="country-title">🇦🇷 ARGENTINA <span class="highlight-tag">MULTI-CROP ALERTS</span></h2>
-                <div class="news-grid">
-                    
-                    <div class="news-item">
-                        <div class="news-header">
-                            <h3 class="news-headline">CORN - LEAFHOPPER OUTBREAK DESTROYS LATE FIELDS IN SANTA FE</h3>
-                            <div class="farol farol-vermelho"><span class="farol-dot"></span>Critical</div>
-                        </div>
-                        <div class="news-content">Severe damage from the Spiroplasma disease transmitted by the leafhopper has triggered a massive yield downgrade in late-planted corn across Santa Fe. Growers are facing substantial capital erosion and shifting to soybean.</div>
-                        <div class="impact-box">
-                            <div class="impact-title">⚙️ Machinery Impact Analysis</div>
-                            <ul class="impact-list">
-                                <li>
-                                    <div class="line-title"><strong>Tractors</strong> <div class="farol farol-vermelho"><span class="farol-dot"></span>Negative</div></div>
-                                    <div class="impact-desc">Heavy financial losses completely freeze high-horsepower sales in the affected core zone.</div>
-                                </li>
-                                <li>
-                                    <div class="line-title"><strong>Harvesters</strong> <div class="farol farol-vermelho"><span class="farol-dot"></span>Negative</div></div>
-                                    <div class="impact-desc">Corn header sales have dropped to near zero; severe damage reduces contracting hours significantly.</div>
-                                </li>
-                                <li>
-                                    <div class="line-title"><strong>Sprayers</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
-                                    <div class="impact-desc">Chemical applications for insect vector control have skyrocketed, driving intensive self-propelled sprayer usage.</div>
-                                </li>
-                                <li>
-                                    <div class="line-title"><strong>Planters</strong> <div class="farol farol-amarelo"><span class="farol-dot"></span>Stable</div></div>
-                                    <div class="impact-desc">Farmers are shifting focus to soybean for the next cycle, requiring conversion kits rather than new machine buy-ins.</div>
-                                </li>
-                            </ul>
-                            <a href="https://www.bcr.com.ar/" class="source-link">BOLSA DE COMERCIO DE ROSARIO ➔</a>
-                        </div>
-                    </div>
-
-                    <div class="news-item">
-                        <div class="news-header">
-                            <h3 class="news-headline">LIVESTOCK - FEEDLOT OCCUPANCY HITS HIGH ON EXPORT DEMAND</h3>
-                            <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div>
-                        </div>
-                        <div class="news-content">With Asian export quotas fully relaxed, domestic feedlot occupancy has surged. Margins are heavily positive, triggering structural investments in large-scale animal feeding operations.</div>
-                        <div class="impact-box">
-                            <div class="impact-title">⚙️ Machinery Impact Analysis</div>
-                            <ul class="impact-list">
-                                <li>
-                                    <div class="line-title"><strong>Tractors</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
-                                    <div class="impact-desc">Medium (100-200HP) front-loader and mixer-wagon capable tractors are leading utility sales in the Pampas.</div>
-                                </li>
-                                <li>
-                                    <div class="line-title"><strong>Harvesters</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
-                                    <div class="impact-desc">High localized demand for forage and silage harvesting equipment.</div>
-                                </li>
-                                <li>
-                                    <div class="line-title"><strong>Sprayers</strong> <div class="farol farol-amarelo"><span class="farol-dot"></span>Stable</div></div>
-                                    <div class="impact-desc">Routine pasture maintenance only.</div>
-                                </li>
-                                <li>
-                                    <div class="line-title"><strong>Planters</strong> <div class="farol farol-amarelo"><span class="farol-dot"></span>Stable</div></div>
-                                    <div class="impact-desc">Demand steady for direct seeding equipment for winter pasture renewal.</div>
-                                </li>
-                            </ul>
-                            <a href="https://www.magyp.gob.ar/" class="source-link">SEC. BIOECONOMÍA ➔</a>
-                        </div>
-                    </div>
-                </div>
+            <div class="news-content">Recent reports indicate that Brazilian soy and corn exports continue to perform robustly, driven by high global demand and favorable international prices, particularly from China. Despite internal logistical bottlenecks, particularly port congestion in key exporting regions, the pace of shipments remains high, supported by a competitive exchange rate (BRL/USD around 5.0-5.2) which boosts farmers' revenue in local currency. This strong export performance injects liquidity into the agricultural sector, potentially mitigating some of the higher input costs faced by producers. The outlook for the second half of the year remains optimistic for these commodities.</div>
+            <div class="impact-box">
+                <div class="impact-title">⚙️ Machinery Impact Analysis</div>
+                <p class="impact-question" style="font-size: 12px; font-style: italic; color: #666; margin-top: -5px; margin-bottom: 10px;">What market segment does this information impact?</p>
+                <ul class="impact-list">
+                    <li>
+                        <div class="line-title"><strong>Tractors</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
+                        <div class="impact-desc">Increased farmer profitability from strong exports generally translates to higher CAPEX. Demand for Medium (100-200HP) and High (>200HP) HP tractors, crucial for large-scale soy and corn operations, is likely to remain solid for fleet renewal and expansion. Small (<100HP) tractors might see stable demand for supporting operations.</div>
+                    </li>
+                    <li>
+                        <div class="line-title"><strong>Harvesters</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
+                        <div class="impact-desc">High export volumes indicate successful harvests and sustained production. This directly supports demand for new harvesters, especially high-capacity models, as farmers look to optimize efficiency and reduce post-harvest losses in future cycles.</div>
+                    </li>
+                    <li>
+                        <div class="line-title"><strong>Sprayers</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
+                        <div class="impact-desc">Intensive soy and corn cultivation requires effective pest and disease management. Higher farmer income provides the financial capacity to invest in modern, precision sprayers to maximize yields and protect valuable crops.</div>
+                    </li>
+                    <li>
+                        <div class="line-title"><strong>Planters</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
+                        <div class="impact-desc">With strong commodity prices, farmers are incentivized to maintain or expand planted areas for soy and corn. This sustains demand for precision planters that ensure optimal seed placement and maximize yield potential.</div>
+                    </li>
+                </ul>
+                <a href="https://www.conab.gov.br/" class="source-link">CONAB Official Report ➔</a>
             </div>
-
-            <div class="country-section">
-                <h2 class="country-title">🇨🇴 COLOMBIA <span class="highlight-tag">MULTI-CROP ALERTS</span></h2>
-                <div class="news-grid">
-                    <div class="news-item">
-                        <div class="news-header">
-                            <h3 class="news-headline">COFFEE - REGIONAL INCENTIVES ACCELERATE SMALLHOLD MECHANIZATION</h3>
-                            <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div>
-                        </div>
-                        <div class="news-content">New structural credit windows from development banks are supporting tech integration. Labor availability deficits in the central coffee axes are accelerating small-format mechanization.</div>
-                        <div class="impact-box">
-                            <div class="impact-title">⚙️ Machinery Impact Analysis</div>
-                            <ul class="impact-list">
-                                <li>
-                                    <div class="line-title"><strong>Tractors</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
-                                    <div class="impact-desc">Highly positive for Small (<100HP) narrow-gauge and specialty hill tractors. High platforms remain non-applicable.</div>
-                                </li>
-                                <li>
-                                    <div class="line-title"><strong>Harvesters</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
-                                    <div class="impact-desc">Sustained quoting increases for small-scale mechanical sorting and field stripping machinery attachments.</div>
-                                </li>
-                                <li>
-                                    <div class="line-title"><strong>Sprayers</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
-                                    <div class="impact-desc">Strong adoption of small utility-mounted systems for targeted orchard canopy cover.</div>
-                                </li>
-                                <li>
-                                    <div class="line-title"><strong>Planters</strong> <div class="farol farol-amarelo"><span class="farol-dot"></span>Stable</div></div>
-                                    <div class="impact-desc">Manual and localized micro-planter systems dominate.</div>
-                                </li>
-                            </ul>
-                            <a href="https://federaciondecafeteros.org/" class="source-link">FNC ➔</a>
-                        </div>
-                    </div>
-                </div>
+        </div>
+        <div class="news-item">
+            <div class="news-header">
+                <h3 class="news-headline">MACROECONOMY - BRAZILIAN CENTRAL BANK KEEPS SELIC RATE UNCHANGED, SIGNALING CAUTION</h3>
+                <div class="farol farol-amarelo"><span class="farol-dot"></span>Warning/Stable</div>
             </div>
-
-            <div class="country-section">
-                <h2 class="country-title">🇺🇾 🇵🇾 🇵🇪 🇨🇱 🇧🇴 CONE SUR, PACIFIC & ANDEAN <span class="highlight-tag">MULTI-CROP ALERTS</span></h2>
-                <div class="news-grid">
-                    
-                    <div class="news-item">
-                        <div class="news-header">
-                            <h3 class="news-headline">SOYBEAN (BO) - SANTA CRUZ EXPANSION DRIVES RECORD IMPORTS</h3>
-                            <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div>
-                        </div>
-                        <div class="news-content">Agricultural expansion in Bolivia's Santa Cruz department is driving a surge in heavy machinery imports. Favorable export windows are injecting capital into large-scale farming cooperatives.</div>
-                        <div class="impact-box">
-                            <div class="impact-title">⚙️ Machinery Impact Analysis</div>
-                            <ul class="impact-list">
-                                <li>
-                                    <div class="line-title"><strong>Tractors</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
-                                    <div class="impact-desc">High (>200HP) platforms see excellent sales volume for new frontier land clearing and heavy tillage.</div>
-                                </li>
-                                <li>
-                                    <div class="line-title"><strong>Harvesters</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
-                                    <div class="impact-desc">Strong fleet expansion driven by increased harvestable acreage.</div>
-                                </li>
-                                <li>
-                                    <div class="line-title"><strong>Sprayers</strong> <div class="farol farol-amarelo"><span class="farol-dot"></span>Stable</div></div>
-                                    <div class="impact-desc">Standard fleet turnover; high-capacity self-propelled units are preferred.</div>
-                                </li>
-                                <li>
-                                    <div class="line-title"><strong>Planters</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
-                                    <div class="impact-desc">Active retail inquiries for high-capacity precision seeding rigs.</div>
-                                </li>
-                            </ul>
-                            <a href="https://www.cao.org.bo/" class="source-link">CÁMARA AGROPECUARIA ➔</a>
-                        </div>
-                    </div>
-
-                    <div class="news-item">
-                        <div class="news-header">
-                            <h3 class="news-headline">SOYBEAN (PY) - LOW RIVER LEVELS TRAP CAPITAL IN SILO BAGS</h3>
-                            <div class="farol farol-amarelo"><span class="farol-dot"></span>Warning</div>
-                        </div>
-                        <div class="news-content">Despite a massive harvest, the logistics crisis on the Paraguay River is forcing farmers to store record volumes of soybeans in on-farm silo bags. Delayed export liquidations are halting near-term machinery purchases.</div>
-                        <div class="impact-box">
-                            <div class="impact-title">⚙️ Machinery Impact Analysis</div>
-                            <ul class="impact-list">
-                                <li>
-                                    <div class="line-title"><strong>Tractors</strong> <div class="farol farol-vermelho"><span class="farol-dot"></span>Negative</div></div>
-                                    <div class="impact-desc">Purchases deferred to Q4 until liquidity returns.</div>
-                                </li>
-                                <li>
-                                    <div class="line-title"><strong>Harvesters</strong> <div class="farol farol-amarelo"><span class="farol-dot"></span>Stable</div></div>
-                                    <div class="impact-desc">Harvest is complete; focus is entirely on storage management.</div>
-                                </li>
-                                <li>
-                                    <div class="line-title"><strong>Sprayers</strong> <div class="farol farol-amarelo"><span class="farol-dot"></span>Stable</div></div>
-                                    <div class="impact-desc">Neutral impact; off-season maintenance.</div>
-                                </li>
-                                <li>
-                                    <div class="line-title"><strong>Planters</strong> <div class="farol farol-amarelo"><span class="farol-dot"></span>Stable</div></div>
-                                    <div class="impact-desc">Early quoting continues, but closed deals are delayed pending cash flow release.</div>
-                                </li>
-                            </ul>
-                            <a href="https://capeco.org.py/" class="source-link">CAPECO ➔</a>
-                        </div>
-                    </div>
-
-                    <div class="news-item">
-                        <div class="news-header">
-                            <h3 class="news-headline">ORANGE/FRUIT (CL) - PREMIUM ASIAN EXPORTS SECURE ORCHARD REINVESTMENT</h3>
-                            <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div>
-                        </div>
-                        <div class="news-content">Strong close-out data for early citrus and fruit shipments to terminal Pacific markets has bolstered grower balances. Capital allocations are migrating toward field tracking tech and high-end orchard protection.</div>
-                        <div class="impact-box">
-                            <div class="impact-title">⚙️ Machinery Impact Analysis</div>
-                            <ul class="impact-list">
-                                <li>
-                                    <div class="line-title"><strong>Tractors</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
-                                    <div class="impact-desc">Highly positive for specialized Small (<100HP) low-profile and orchard-cab configurations.</div>
-                                </li>
-                                <li>
-                                    <div class="line-title"><strong>Harvesters</strong> <div class="farol farol-amarelo"><span class="farol-dot"></span>Stable</div></div>
-                                    <div class="impact-desc">Mainly non-applicable due to premium fresh fruit hand-picking export requirements.</div>
-                                </li>
-                                <li>
-                                    <div class="line-title"><strong>Sprayers</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
-                                    <div class="impact-desc">Strong demand for sophisticated air-blast systems to meet strict international chemical limit parameters.</div>
-                                </li>
-                                <li>
-                                    <div class="line-title"><strong>Planters</strong> <div class="farol farol-amarelo"><span class="farol-dot"></span>Stable</div></div>
-                                    <div class="impact-desc">Standard row planter categories are non-applicable within specialized permanent orchard footprints.</div>
-                                </li>
-                            </ul>
-                            <a href="https://www.asoex.cl/" class="source-link">FRUTAS DE CHILE ➔</a>
-                        </div>
-                    </div>
-
-                </div>
+            <div class="news-content">The Brazilian Central Bank (BCB) recently announced its decision to maintain the benchmark Selic interest rate at its current level, pausing a cycle of cuts. This move reflects ongoing concerns about inflationary pressures and the fiscal outlook, despite a slowdown in economic activity. While a stable rate provides some predictability, it also means that the cost of capital for financing agricultural machinery purchases, particularly for larger investments, remains elevated. This could lead farmers and cooperatives to re-evaluate or delay significant CAPEX decisions, opting instead for smaller, more essential upgrades or looking for subsidized credit lines.</div>
+            <div class="impact-box">
+                <div class="impact-title">⚙️ Machinery Impact Analysis</div>
+                <p class="impact-question" style="font-size: 12px; font-style: italic; color: #666; margin-top: -5px; margin-bottom: 10px;">What market segment does this information impact?</p>
+                <ul class="impact-list">
+                    <li>
+                        <div class="line-title"><strong>Tractors</strong> <div class="farol farol-amarelo"><span class="farol-dot"></span>Warning/Stable</div></div>
+                        <div class="impact-desc">High interest rates make financing new tractor purchases more expensive. This may particularly affect demand for High (>200HP) and Medium (100-200HP) HP tractors, where large capital outlays are common. Farmers might extend the lifespan of existing machinery or seek more favorable lines like those offered by Plano Safra.</div>
+                    </li>
+                    <li>
+                        <div class="line-title"><strong>Harvesters</strong> <div class="farol farol-amarelo"><span class="farol-dot"></span>Warning/Stable</div></div>
+                        <div class="impact-desc">Harvesters represent a significant investment. Elevated interest rates could defer purchasing decisions for new, high-capacity models. Farmers might prioritize maintenance and repair of current fleets or opt for used equipment.</div>
+                    </li>
+                    <li>
+                        <div class="line-title"><strong>Sprayers</strong> <div class="farol farol-amarelo"><span class="farol-dot"></span>Warning/Stable</div></div>
+                        <div class="impact-desc">While essential, investments in advanced sprayers might also face headwinds due to financing costs. Demand could shift slightly towards more affordable models or essential replacements rather than ambitious technology upgrades, unless subsidized credit is secured.</div>
+                    </li>
+                    <li>
+                        <div class="line-title"><strong>Planters</strong> <div class="farol farol-amarelo"><span class="farol-dot"></span>Warning/Stable</div></div>
+                        <div class="impact-desc">Similarly, new planter purchases, especially precision models, could be impacted by the higher cost of credit. Farmers will weigh the immediate yield benefits against the long-term financing costs more carefully.</div>
+                    </li>
+                </ul>
+                <a href="https://www.bcb.gov.br/" class="source-link">Banco Central do Brasil ➔</a>
             </div>
+        </div>
+        <div class="news-item">
+            <div class="news-header">
+                <h3 class="news-headline">LIVESTOCK - BEEF EXPORTS TO CHINA AND MIDDLE EAST REMAIN ROBUST, SUPPORTING CATTLE PRICES</h3>
+                <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div>
             </div>
+            <div class="news-content">Brazilian beef exports continue to show strength, primarily driven by consistent demand from China and expanding markets in the Middle East. This robust export performance has provided support for domestic cattle prices, bolstering the profitability of livestock producers. The sector benefits from Brazil's competitive production costs and strong sanitary controls, despite occasional trade frictions or logistical hurdles. Increased confidence among ranchers translates into a healthier financial outlook for farm investments, including infrastructure and machinery related to pasture management and animal handling.</div>
+            <div class="impact-box">
+                <div class="impact-title">⚙️ Machinery Impact Analysis</div>
+                <p class="impact-question" style="font-size: 12px; font-style: italic; color: #666; margin-top: -5px; margin-bottom: 10px;">What market segment does this information impact?</p>
+                <ul class="impact-list">
+                    <li>
+                        <div class="line-title"><strong>Tractors</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
+                        <div class="impact-desc">Livestock operations, particularly those involving pasture management, feed production, and infrastructure maintenance, rely heavily on Small (<100HP) and Medium (100-200HP) HP tractors. Sustained profitability will drive demand for new units and upgrades.</div>
+                    </li>
+                    <li>
+                        <div class="line-title"><strong>Harvesters</strong> <div class="farol farol-amarelo"><span class="farol-dot"></span>Warning/Stable</div></div>
+                        <div class="impact-desc">Impact is indirect. While beef exports do not directly use harvesters, integrated livestock farms that produce their own feed (silage, hay) might see stable to slightly increased demand for forage harvesters.</div>
+                    </li>
+                    <li>
+                        <div class="line-title"><strong>Sprayers</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
+                        <div class="impact-desc">Pasture management and disease control (e.g., tick control) are critical in livestock farming. Healthy profits encourage investment in sprayers for pasture renovation, weed control, and animal health applications.</div>
+                    </li>
+                    <li>
+                        <div class="line-title"><strong>Planters</strong> <div class="farol farol-amarelo"><span class="farol-dot"></span>Warning/Stable</div></div>
+                        <div class="impact-desc">Mainly applies to farms cultivating fodder crops for livestock. Stable profitability may support investment in planters for corn, sorghum, or pasture grasses, but less directly impacted than tractors or sprayers for general livestock operations.</div>
+                    </li>
+                </ul>
+                <a href="https://www.agricultura.gov.br/" class="source-link">MAPA Official News ➔</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="country-section">
+    <h2 class="country-title">🇦🇷 Argentina, 🇺🇾 Uruguay, 🇵🇾 Paraguay <span class="highlight-tag">MARKET & MACRO ALERTS</span></h2>
+    <div class="news-grid">
+        <div class="news-item">
+            <div class="news-header">
+                <h3 class="news-headline">ARGENTINA - SOY AND CORN EXPORT TAXES REMAIN HIGH AMID ECONOMIC STABILIZATION EFFORTS</h3>
+                <div class="farol farol-vermelho"><span class="farol-dot"></span>Critical/Negative</div>
+            </div>
+            <div class="news-content">The Argentine government continues to maintain high export taxes (retenciones) on key agricultural commodities like soy (around 33%) and corn (around 12-15%), as part of its strategy to bolster fiscal revenues and stabilize the economy. While these taxes are crucial for government finances, they significantly reduce the profitability of farmers, especially small and medium-sized producers. This policy disincentivizes investment in new technologies and machinery, as a substantial portion of potential earnings is diverted. The ongoing high inflation and volatile exchange rate (ARS/USD) further complicate financial planning for farmers.</div>
+            <div class="impact-box">
+                <div class="impact-title">⚙️ Machinery Impact Analysis</div>
+                <p class="impact-question" style="font-size: 12px; font-style: italic; color: #666; margin-top: -5px; margin-bottom: 10px;">What market segment does this information impact?</p>
+                <ul class="impact-list">
+                    <li>
+                        <div class="line-title"><strong>Tractors</strong> <div class="farol farol-vermelho"><span class="farol-dot"></span>Critical/Negative</div></div>
+                        <div class="impact-desc">High export taxes directly erode farmer profitability, making large capital investments like new tractors (Medium 100-200HP, High >200HP) less attractive or even unfeasible. Farmers are likely to delay purchases, prioritize maintenance, or seek used equipment.</div>
+                    </li>
+                    <li>
+                        <div class="line-title"><strong>Harvesters</strong> <div class="farol farol-vermelho"><span class="farol-dot"></span>Critical/Negative</div></div>
+                        <div class="impact-desc">Similarly, the high cost and significant capital outlay for harvesters will be heavily impacted. Reduced farmer income will suppress demand for new units, pushing producers to extend the life of existing machinery.</div>
+                    </li>
+                    <li>
+                        <div class="line-title"><strong>Sprayers</strong> <div class="farol farol-vermelho"><span class="farol-dot"></span>Critical/Negative</div></div>
+                        <div class="impact-desc">While essential for yield protection, investment in new or advanced sprayers will likely be postponed. Farmers will seek more cost-effective solutions or limit their input application, which could impact future yields.</div>
+                    </li>
+                    <li>
+                        <div class="line-title"><strong>Planters</strong> <div class="farol farol-vermelho"><span class="farol-dot"></span>Critical/Negative</div></div>
+                        <div class="impact-desc">The incentive to expand planted areas or invest in precision planting technology is diminished due to lower effective returns. This will dampen demand for new planters across all size ranges.</div>
+                    </li>
+                </ul>
+                <a href="https://www.bcra.gob.ar/Pdfs/PoliticaMonetaria/InformeBCRA_PM_2024.pdf" class="source-link">BCRA Economic Report ➔</a>
+            </div>
+        </div>
+        <div class="news-item">
+            <div class="news-header">
+                <h3 class="news-headline">URUGUAY - LIVESTOCK SECTOR BENEFITS FROM STRONG BEEF EXPORTS AND PASTURE CONDITIONS</h3>
+                <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div>
+            </div>
+            <div class="news-content">Uruguay's beef industry is experiencing a period of robust performance, driven by strong export demand from key markets, particularly China and the EU. Favorable weather conditions have supported excellent pasture growth across much of the country, leading to healthy livestock and efficient production. This positive environment has boosted farmer confidence and profitability within the sector. The stable political and economic climate in Uruguay, coupled with access to credit, positions livestock producers to consider investments in farm improvements, including machinery for pasture management and feed production.</div>
+            <div class="impact-box">
+                <div class="impact-title">⚙️ Machinery Impact Analysis</div>
+                <p class="impact-question" style="font-size: 12px; font-style: italic; color: #666; margin-top: -5px; margin-bottom: 10px;">What market segment does this information impact?</p>
+                <ul class="impact-list">
+                    <li>
+                        <div class="line-title"><strong>Tractors</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
+                        <div class="impact-desc">The thriving livestock sector directly fuels demand for Small (<100HP) and Medium (100-200HP) HP tractors essential for pasture maintenance, fencing, feed distribution, and other general farm tasks. Farmers will be more willing to invest in new or replacement units.</div>
+                    </li>
+                    <li>
+                        <div class="line-title"><strong>Harvesters</strong> <div class="farol farol-amarelo"><span class="farol-dot"></span>Warning/Stable</div></div>
+                        <div class="impact-desc">Indirect positive impact. Farms producing their own silage or hay for feed will see sustained demand for forage harvesters, balers, and related equipment.</div>
+                    </li>
+                    <li>
+                        <div class="line-title"><strong>Sprayers</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
+                        <div class="impact-desc">Effective pasture management requires weed and pest control. Increased profitability will support investment in sprayers for maintaining high-quality pastures, crucial for livestock health and productivity.</div>
+                    </li>
+                    <li>
+                        <div class="line-title"><strong>Planters</strong> <div class="farol farol-amarelo"><span class="farol-dot"></span>Warning/Stable</div></div>
+                        <div class="impact-desc">Farmers engaged in pasture renovation or cultivating feed crops (e.g., corn, sorghum) will have a stable incentive to invest in planters, but the primary impact remains on general farm utility equipment.</div>
+                    </li>
+                </ul>
+                <a href="https://www.mgap.gub.uy/estadisticas-agropecuarias" class="source-link">MGAP Official Data ➔</a>
+            </div>
+        </div>
+        <div class="news-item">
+            <div class="news-header">
+                <h3 class="news-headline">PARAGUAY - SOY AND CORN HARVEST PROSPECTS STRONG DESPITE REGIONAL DROUGHT CONCERNS</h3>
+                <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div>
+            </div>
+            <div class="news-content">Paraguay's agricultural sector is expecting a strong harvest season for both soy and corn, driven by favorable weather conditions across major growing regions, largely avoiding the severe drought that impacted neighboring countries. This optimistic outlook, coupled with competitive international prices, translates into healthy revenue expectations for Paraguayan farmers. The country's stable macroeconomic environment and relatively lower export taxes compared to Argentina further bolster farmer confidence and capacity for investment. This creates a positive environment for agricultural machinery sales, as producers look to optimize efficiency and expand operations.</div>
+            <div class="impact-box">
+                <div class="impact-title">⚙️ Machinery Impact Analysis</div>
+                <p class="impact-question" style="font-size: 12px; font-style: italic; color: #666; margin-top: -5px; margin-bottom: 10px;">What market segment does this information impact?</p>
+                <ul class="impact-list">
+                    <li>
+                        <div class="line-title"><strong>Tractors</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
+                        <div class="impact-desc">Robust harvest prospects and good profitability will drive demand for new tractors, especially High (>200HP) and Medium (100-200HP) HP models, for efficient field preparation, planting, and general farm operations.</div>
+                    </li>
+                    <li>
+                        <div class="line-title"><strong>Harvesters</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
+                        <div class="impact-desc">A strong harvest directly increases the need for efficient harvesting equipment. Farmers will be incentivized to upgrade or expand their fleet of harvesters to manage higher yields effectively and quickly.</div>
+                    </li>
+                    <li>
+                        <div class="line-title"><strong>Sprayers</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
+                        <div class="impact-desc">To protect high-value crops and maximize yields, investment in advanced and precision sprayers will likely increase, as farmers have the financial capacity to adopt better input management practices.</div>
+                    </li>
+                    <li>
+                        <div class="line-title"><strong>Planters</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
+                        <div class="impact-desc">With positive outlooks for future crops, farmers will invest in new precision planters to ensure optimal stand establishment and maximize yield potential for the next planting cycles.</div>
+                    </li>
+                </ul>
+                <a href="https://www.mag.gov.py/index.php/viceministerio-de-agricultura-vam/estadisticas-agropecuarias" class="source-link">MAG Paraguay Statistics ➔</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="country-section">
+    <h2 class="country-title">🇲🇽 Mexico <span class="highlight-tag">MARKET & MACRO ALERTS</span></h2>
+    <div class="news-grid">
+        <div class="news-item">
+            <div class="news-header">
+                <h3 class="news-headline">CORN - GOVERNMENT SUPPORT PROGRAMS TARGET SMALL-SCALE PRODUCERS FOR SELF-SUFFICIENCY</h3>
+                <div class="farol farol-amarelo"><span class="farol-dot"></span>Warning/Stable</div>
+            </div>
+            <div class="news-content">The Mexican government continues to implement programs aimed at bolstering corn production, particularly among small and medium-sized producers, with a long-term goal of national food self-sufficiency. These programs often include direct financial aid, subsidized fertilizers, and technical assistance. While these initiatives support a broad base of farmers and aim to increase overall production, the focus on small-scale operations often implies a slower adoption of large, capital-intensive machinery. However, it does create a stable demand for smaller, more versatile equipment suitable for diverse agricultural practices.</div>
+            <div class="impact-box">
+                <div class="impact-title">⚙️ Machinery Impact Analysis</div>
+                <p class="impact-question" style="font-size: 12px; font-style: italic; color: #666; margin-top: -5px; margin-bottom: 10px;">What market segment does this information impact?</p>
+                <ul class="impact-list">
+                    <li>
+                        <div class="line-title"><strong>Tractors</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
+                        <div class="impact-desc">Government support for small producers directly stimulates demand for Small (<100HP) and potentially Medium (100-200HP) HP tractors, which are essential for this segment. Demand for High (>200HP) HP tractors may be limited due to the focus on smaller farms.</div>
+                    </li>
+                    <li>
+                        <div class="line-title"><strong>Harvesters</strong> <div class="farol farol-amarelo"><span class="farol-dot"></span>Warning/Stable</div></div>
+                        <div class="impact-desc">Small-scale producers often rely on custom harvesting services or smaller, more basic harvesting equipment. Demand for large, high-capacity harvesters might be stable but not significantly boosted by these programs.</div>
+                    </li>
+                    <li>
+                        <div class="line-title"><strong>Sprayers</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
+                        <div class="impact-desc">Even small-scale operations require effective crop protection. Government support can enable farmers to invest in smaller, pull-type or mounted sprayers to improve yields.</div>
+                    </li>
+                    <li>
+                        <div class="line-title"><strong>Planters</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
+                        <div class="impact-desc">Improved planting efficiency is crucial for all scales. Demand for smaller, often multi-crop, planters suitable for varied terrains and farm sizes will likely see a boost.</div>
+                    </li>
+                </ul>
+                <a href="https://www.gob.mx/agricultura" class="source-link">SADER Official Communication ➔</a>
+            </div>
+        </div>
+        <div class="news-item">
+            <div class="news-header">
+                <h3 class="news-headline">TRADE - USMCA DISPUTES ON GM CORN CONTINUE TO CREATE UNCERTAINTY FOR AGRIBUSINESS</h3>
+                <div class="farol farol-vermelho"><span class="farol-dot"></span>Critical/Negative</div>
+            </div>
+            <div class="news-content">Ongoing disputes under the USMCA agreement regarding Mexico's policies on genetically modified (GM) corn continue to cast a shadow over bilateral agricultural trade. Mexico's ban on GM corn for human consumption and its eventual plan to phase out GM corn for animal feed creates significant friction with its largest trading partners, particularly the United States. This uncertainty affects import/export flows, potentially disrupts supply chains, and can deter long-term investment in related agricultural infrastructure and technology, as producers are hesitant about future market access and regulatory stability.</div>
+            <div class="impact-box">
+                <div class="impact-title">⚙️ Machinery Impact Analysis</div>
+                <p class="impact-question" style="font-size: 12px; font-style: italic; color: #666; margin-top: -5px; margin-bottom: 10px;">What market segment does this information impact?</p>
+                <ul class="impact-list">
+                    <li>
+                        <div class="line-title"><strong>Tractors</strong> <div class="farol farol-vermelho"><span class="farol-dot"></span>Critical/Negative</div></div>
+                        <div class="impact-desc">Uncertainty in key crop markets directly reduces farmer confidence and willingness to invest in large capital expenditures like tractors (especially Medium 100-200HP and High >200HP) for corn production.</div>
+                    </li>
+                    <li>
+                        <div class="line-title"><strong>Harvesters</strong> <div class="farol farol-vermelho"><span class="farol-dot"></span>Critical/Negative</div></div>
+                        <div class="impact-desc">Potential market disruptions for corn, whether from import restrictions or shifts in domestic production, will lead to reduced demand for harvesters as farmers delay or reconsider expansion plans.</div>
+                    </li>
+                    <li>
+                        <div class="line-title"><strong>Sprayers</strong> <div class="farol farol-vermelho"><span class="farol-dot"></span>Critical/Negative</div></div>
+                        <div class="impact-desc">The debate around GM corn often includes pesticide use. Regulatory uncertainty and potential shifts in farming practices could impact demand for specific types of sprayers or lead to a cautious approach to new investments.</div>
+                    </li>
+                    <li>
+                        <div class="line-title"><strong>Planters</strong> <div class="farol farol-vermelho"><span class="farol-dot"></span>Critical/Negative</div></div>
+                        <div class="impact-desc">Farmers might reduce planted acreage of corn or switch to alternative crops if profitability or market access for GM corn becomes too uncertain, thereby depressing demand for corn planters.</div>
+                    </li>
+                </ul>
+                <a href="https://ustr.gov/countries-regions/americas/mexico" class="source-link">USTR Official Statements ➔</a>
+            </div>
+        </div>
+        <div class="news-item">
+            <div class="news-header">
+                <h3 class="news-headline">AVOCADO - EXPORTS FACE TEMPORARY SUSPENSIONS AND SECURITY CONCERNS IN MICHOACÁN</h3>
+                <div class="farol farol-vermelho"><span class="farol-dot"></span>Critical/Negative</div>
+            </div>
+            <div class="news-content">The lucrative avocado industry in Mexico, particularly centered in Michoacán, has faced recent disruptions including temporary suspensions of exports to the United States due to security concerns affecting USDA inspectors. While these suspensions are often brief, they highlight underlying issues of regional insecurity and logistical vulnerabilities. Such instability creates significant financial risk for growers, impacting their ability to plan for the future, secure financing, and invest in necessary equipment for orchard management, harvesting, and processing. It directly affects the CAPEX decisions for a high-value crop sector.</div>
+            <div class="impact-box">
+                <div class="impact-title">⚙️ Machinery Impact Analysis</div>
+                <p class="impact-question" style="font-size: 12px; font-style: italic; color: #666; margin-top: -5px; margin-bottom: 10px;">What market segment does this information impact?</p>
+                <ul class="impact-list">
+                    <li>
+                        <div class="line-title"><strong>Tractors</strong> <div class="farol farol-vermelho"><span class="farol-dot"></span>Critical/Negative</div></div>
+                        <div class="impact-desc">Avocado orchards rely on Small (<100HP) and Medium (100-200HP) HP tractors for various tasks. Security concerns and export disruptions erode farmer confidence, leading to delayed or canceled purchases for new or replacement tractors.</div>
+                    </li>
+                    <li>
+                        <div class="line-title"><strong>Harvesters</strong> <div class="farol farol-vermelho"><span class="farol-dot"></span>Critical/Negative</div></div>
+                        <div class="impact-desc">Harvesting specialized machinery (though manual for avocados, there are some related tools/logistics equipment) will see reduced investment if market access and security are compromised, affecting the entire supply chain.</div>
+                    </li>
+                    <li>
+                        <div class="line-title"><strong>Sprayers</strong> <div class="farol farol-vermelho"><span class="farol-dot"></span>Critical/Negative</div></div>
+                        <div class="impact-desc">Pest and disease management are crucial for avocado yields. However, if farmers face export bans or security issues, the incentive to invest in new sprayers or maintain existing ones at peak performance will decrease.</div>
+                    </li>
+                    <li>
+                        <div class="line-title"><strong>Planters</strong> <div class="farol farol-vermelho"><span class="farol-dot"></span>Critical/Negative</div></div>
+                        <div class="impact-desc">Expansion of avocado orchards or replanting efforts will be severely hampered by market uncertainty and security risks, leading to a significant downturn in demand for specialized planting equipment for fruit trees.</div>
+                    </li>
+                </ul>
+                <a href="https://www.usda.gov/media/press-releases/2024/06/17/usda-statement-avocado-inspections-mexico" class="source-link">USDA Press Release ➔</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="country-section">
+    <h2 class="country-title">🇨🇴 Colombia, 🇵🇪 Peru, 🇧🇴 Bolivia, 🇨🇱 Chile <span class="highlight-tag">MARKET & MACRO ALERTS</span></h2>
+    <div class="news-grid">
+        <div class="news-item">
+            <div class="news-header">
+                <h3 class="news-headline">COLOMBIA - COFFEE SECTOR FACES CLIMATE CHALLENGES AND PRICE VOLATILITY</h3>
+                <div class="farol farol-amarelo"><span class="farol-dot"></span>Warning/Stable</div>
+            </div>
+            <div class="news-content">Colombia's coffee industry, a cornerstone of its agricultural economy, is currently grappling with the dual challenges of adverse climate conditions (including excessive rainfall in some regions and prolonged dry spells in others) and ongoing international price volatility. While global coffee prices have seen some fluctuations, the domestic impact on small and medium-sized producers, who constitute the majority, remains significant. These factors constrain farmer incomes, making it harder to invest in farm modernization, including machinery for cultivation, processing, and pest management. Government initiatives focus on resilience but CAPEX remains strained.</div>
+            <div class="impact-box">
+                <div class="impact-title">⚙️ Machinery Impact Analysis</div>
+                <p class="impact-question" style="font-size: 12px; font-style: italic; color: #666; margin-top: -5px; margin-bottom: 10px;">What market segment does this information impact?</p>
+                <ul class="impact-list">
+                    <li>
+                        <div class="line-title"><strong>Tractors</strong> <div class="farol farol-amarelo"><span class="farol-dot"></span>Warning/Stable</div></div>
+                        <div class="impact-desc">Coffee farming, especially in mountainous regions, often relies on smaller, specialized tractors (<100HP). Price volatility and climate stress reduce the capacity for new investments, leading to deferred purchases and increased maintenance of existing fleets.</div>
+                    </li>
+                    <li>
+                        <div class="line-title"><strong>Harvesters</strong> <div class="farol farol-amarelo"><span class="farol-dot"></span>Warning/Stable</div></div>
+                        <div class="impact-desc">Most Colombian coffee is hand-harvested, limiting the direct impact on large harvesters. However, for farms adopting mechanized pre-processing, profitability issues could delay equipment upgrades.</div>
+                    </li>
+                    <li>
+                        <div class="line-title"><strong>Sprayers</strong> <div class="farol farol-amarelo"><span class="farol-dot"></span>Warning/Stable</div></div>
+                        <div class="impact-desc">Pest and disease control (e.g., coffee rust) is crucial. While necessary, investment in new or advanced sprayers might be constrained by reduced farmer income, pushing for more basic or communal equipment.</div>
+                    </li>
+                    <li>
+                        <div class="line-title"><strong>Planters</strong> <div class="farol farol-amarelo"><span class="farol-dot"></span>Warning/Stable</div></div>
+                        <div class="impact-desc">Replanting efforts are vital for coffee tree longevity and productivity. Financial strains could slow down these cycles, leading to reduced demand for specialized coffee seedling planters.</div>
+                    </li>
+                </ul>
+                <a href="https://www.fnc.com.co/estadisticas-historicas/" class="source-link">FNC Colombia Statistics ➔</a>
+            </div>
+        </div>
+        <div class="news-item">
+            <div class="news-header">
+                <h3 class="news-headline">PERU - BLUEBERRY EXPORTS CONTINUE TO EXPAND, DRIVING AGRIBUSINESS INVESTMENT</h3>
+                <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div>
+            </div>
+            <div class="news-content">Peru's blueberry industry continues its impressive growth trajectory, solidifying its position as a leading global exporter. Strong international demand, particularly from North America, Europe, and Asia, coupled with strategic investments in irrigation technology and advanced cultivation practices, underpins this expansion. The sector benefits from Peru's diverse microclimates and extended harvest seasons. This success translates into significant agribusiness investment, creating a positive environment for machinery suppliers, especially for equipment related to orchard management, precision irrigation, and specialized harvesting/post-harvest handling.</div>
+            <div class="impact-box">
+                <div class="impact-title">⚙️ Machinery Impact Analysis</div>
+                <p class="impact-question" style="font-size: 12px; font-style: italic; color: #666; margin-top: -5px; margin-bottom: 10px;">What market segment does this information impact?</p>
+                <ul class="impact-list">
+                    <li>
+                        <div class="line-title"><strong>Tractors</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
+                        <div class="impact-desc">Expanding blueberry operations require Small (<100HP) and Medium (100-200HP) HP tractors for orchard maintenance, ground preparation, and input application. Demand will be robust for new units and modernizing fleets.</div>
+                    </li>
+                    <li>
+                        <div class="line-title"><strong>Harvesters</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
+                        <div class="impact-desc">While hand-harvesting is common for fresh market blueberries, mechanization is growing. This expansion will drive demand for specialized blueberry harvesters and post-harvest equipment to improve efficiency and reduce labor costs.</div>
+                    </li>
+                    <li>
+                        <div class="line-title"><strong>Sprayers</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
+                        <div class="impact-desc">Intensive blueberry cultivation requires precise pest and disease management. Investment in advanced sprayers, including air blast and precision models, will increase to protect high-value crops.</div>
+                    </li>
+                    <li>
+                        <div class="line-title"><strong>Planters</strong> <div class="farol farol-verde"><span class="farol-dot"></span>Positive</div></div>
+                        <div class="impact-desc">Continued expansion of planted acreage directly boosts demand for specialized planting equipment for blueberry bushes, supporting efficient and large-scale establishment of new orchards.</div>
+                    </li>
+                </ul>
+                <a href="https://www.minagri.gob.pe/" class="source-link">MINAGRI Peru Reports ➔</a>
+            </div>
+        </div>
+        <div class="news-item">
+            <div class="news-header">
+                <h3 class="news-headline">CHILE - FRUIT EXPORTS FACE LOGISTICAL HURDLES AND WATER SCARCITY CONCERNS</h3>
+                <div class="farol farol-amarelo"><span class="farol-dot"></span>Warning/Stable</div>
+            </div>
+            <div class="news-content">Chile's renowned fruit export sector, covering grapes, apples, cherries, and kiwis, is navigating persistent logistical challenges, including port congestion and rising shipping costs. Compounding this, long-standing concerns about water scarcity in key agricultural regions continue to exert pressure on producers, necessitating significant investments in efficient irrigation systems. While global demand for Chilean fruit remains strong, these operational and environmental hurdles compress profit margins and can lead to cautious CAPEX decisions. Farmers are prioritizing water-saving technologies and incremental upgrades over major fleet expansions.</div>
+            <div class="impact-box">
+                <div class="impact-title">⚙️ Machinery Impact Analysis</div>
+                <p class="impact-question" style="font-size: 12px; font-style: italic; color: #666; margin-top: -5px; margin-bottom: 10px;">What market segment does this information impact?</p>
+                <ul class="impact-list">
+                    <li>
+                        <div class="line-title"><strong>Tractors</strong> <div class="farol farol-amarelo"><span class="farol-dot"></span>Warning/Stable</div></div>
+                        <div class="impact-desc">Fruit orchards primarily use Small (<100HP) and specialized Medium (100-200HP) HP tractors. Logistical costs and water scarcity could lead to delayed purchases of new units, favoring maintenance and efficiency upgrades.</div>
+                    </li>
+                    <li>
+                        <div class="line-title"><strong>Harvesters</strong> <div class="farol farol-amarelo"><span class="farol-dot"></span>Warning/Stable</div></div>
+                        <div class="impact-desc">Demand for specialized fruit harvesters (e.g., for grapes, berries) will likely remain stable as growers seek efficiency, but significant new investments may be tempered by profitability concerns.</div>
+                    </li>
+                    <li>
+                        <div class="line-title"><strong>Sprayers</strong> <div class="farol farol-amarelo"><span class="farol-dot"></span>Warning/Stable</div></div>
+                        <div class="impact-desc">Precision sprayers are essential for fruit quality. Demand might shift towards technologies that optimize input use due to cost pressures and environmental regulations, but overall growth could be limited by broader economic headwinds.</div>
+                    </li>
+                    <li>
+                        <div class="line-title"><strong>Planters</strong> <div class="farol farol-amarelo"><span class="farol-dot"></span>Warning/Stable</div></div>
+                        <div class="impact-desc">New orchard establishment or replanting cycles might be slowed down due to water stress and logistical costs, thus affecting demand for specialized fruit tree planters.</div>
+                    </li>
+                </ul>
+                <a href="https://www.odefapl.cl/estadisticas-y-publicaciones/" class="source-link">ODEPA Chile Statistics ➔</a>
+            </div>
+        </div>
+        <div class="news-item">
+            <div class="news-header">
+                <h3 class="news-headline">BOLIVIA - SOY PRODUCTION FACES PRESSURE FROM LAND USE REGULATIONS AND DEFORESTATION CONCERNS</h3>
+                <div class="farol farol-vermelho"><span class="farol-dot"></span>Critical/Negative</div>
+            </div>
+            <div class="news-content">Bolivian soy production, concentrated mainly in Santa Cruz, is encountering increasing pressure from evolving land use regulations and heightened international scrutiny over deforestation. While the sector aims for expansion, government policies and environmental concerns create uncertainty for producers regarding land availability and legal compliance for new plantings. This regulatory ambiguity, coupled with occasional social conflicts over land rights, complicates long-term investment planning for farmers. The ability to expand acreage or even sustain current operations with new machinery could be hindered, leading to a cautious market for agricultural equipment.</div>
+            <div class="impact-box">
+                <div class="impact-title">⚙️ Machinery Impact Analysis</div>
+                <p class="impact-question" style="font-size: 12px; font-style: italic; color: #666; margin-top: -5px; margin-bottom: 10px;">What market segment does this information impact?</p>
+                <ul class="impact-list">
+                    <li>
+                        <div class="line-title"><strong>Tractors</strong> <div class="farol farol-vermelho"><span class="farol-dot"></span>Critical/Negative</div></div>
+                        <div class="impact-desc">Uncertainty around land use and expansion directly affects demand for High (>200HP) and Medium (100-200HP) HP tractors. Farmers will be hesitant to invest in new units if they cannot reliably expand or secure their land.</div>
+                    </li>
+                    <li>
+                        <div class="line-title"><strong>Harvesters</strong> <div class="farol farol-vermelho"><span class="farol-dot"></span>Critical/Negative</div></div>
+                        <div class="impact-desc">Restrictions on expanding cultivated areas for soy will suppress demand for new harvesters, as the need for increased harvesting capacity will be limited.</div>
+                    </li>
+                    <li>
+                        <div class="line-title"><strong>Sprayers</strong> <div class="farol farol-vermelho"><span class="farol-dot"></span>Critical/Negative</div></div>
+                        <div class="impact-desc">While essential for existing fields, the overall market for sprayers will suffer if there's no expansion and farmer confidence is low for future harvests.</div>
+                    </li>
+                    <li>
+                        <div class="line-title"><strong>Planters</strong> <div class="farol farol-vermelho"><span class="farol-dot"></span>Critical/Negative</div></div>
+                        <div class="impact-desc">Planters are directly linked to new plantings and acreage expansion. Regulatory hurdles and land use concerns will significantly dampen demand for new precision planters.</div>
+                    </li>
+                </ul>
+                <a href="https://www.ine.gob.bo/index.php/estadisticas-sectoriales/sector-agropecuario/" class="source-link">INE Bolivia Statistics ➔</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+        </div>
 
         <div class="footer" translate="no">
             CONFIDENTIAL - For Internal Executive Alignment<br>
@@ -423,6 +510,5 @@
         }
     </script>
     <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
 </body>
 </html>
