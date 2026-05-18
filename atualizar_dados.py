@@ -2,54 +2,63 @@ import os
 from google import genai
 
 def gerar_relatorio():
-    # Inicializa o cliente usando a chave que está configurada no GitHub Secrets
+    # Inicializa o cliente usando a chave do GitHub Secrets
     client = genai.Client(api_key=os.environ.get("GEMINI_API_KEY"))
     
-    # O prompt (instrução) com as regras rigorosas de tempo e qualidade
-    prompt = """
+    # 1. Lê o layout atual do seu painel para não perder o design
+    try:
+        with open("index.html", "r", encoding="utf-8") as file:
+            layout_atual = file.read()
+    except FileNotFoundError:
+        layout_atual = "Crie um layout básico de HTML, pois o arquivo original não foi encontrado."
+
+    # 2. O prompt com o layout fixo e as regras rigorosas
+    prompt = f"""
     Você é um analista de mercado e cientista de dados especialista no setor de maquinário agrícola da América Latina.
-    Sua tarefa é gerar um relatório "Early Warning" atualizado em formato HTML com o status de mercado para os seguintes países: 
-    Brasil, Argentina, Chile, Uruguai, Paraguai, Peru e Bolívia.
+    Sua tarefa é atualizar os dados do relatório "Early Warning" abaixo.
+
+    AQUI ESTÁ O CÓDIGO HTML ATUAL DO PAINEL (O SEU MOLDE):
+    {layout_atual}
+
+    INSTRUÇÕES DE LAYOUT (OBRIGATÓRIO):
+    - Mantenha EXATAMENTE a mesma estrutura HTML, classes CSS, cores e design visual do código acima.
+    - Atualize APENAS os textos das análises, os semáforos e as datas. NÃO altere o estilo, as tags ou a estrutura da página.
 
     INSTRUÇÕES RESTRITAS DE TEMPO E QUALIDADE (SIGA RIGOROSAMENTE):
-    1. CONTEXTO TEMPORAL: O momento atual é maio de 2026. Considere APENAS o cenário econômico, agrícola, financeiro e de commodities de maio de 2026 em diante.
-    2. PROIBIÇÃO HISTÓRICA: É ESTRITAMENTE PROIBIDO mencionar dados, volumes, clima ou análises das safras 23/24, 24/25 ou anteriores. Concentre-se no momento atual e nas projeções para a próxima safra (26/27).
-    3. RIGOR DE NOTÍCIAS: Utilize apenas fatos e notícias dos últimos 7 a 15 dias. Se não houver nenhuma movimentação crítica ou notícia relevante recente para um determinado país, não invente ou busque histórico antigo. Apenas escreva: "Sem alertas críticos na última semana."
-    4. REGRA DE NEGÓCIOS - AGRISHOW: Sempre que analisar o cenário brasileiro, utilize como premissa fixa que a intenção de negócios da Agrishow 2026 fechou em R$ 11,4 bilhões, o que representa uma queda de 22% em relação ao ano anterior. 
-    5. REGRA DE EXCLUSÃO DE DADOS: Na seção ou bloco de análise com o tema "fair mood: cautious optimism in a tighter market", NÃO inclua dados de vendas de tratores e colheitadeiras sob nenhuma hipótese.
+    1. CONTEXTO TEMPORAL: O momento atual é maio de 2026. Considere APENAS o cenário de maio de 2026 em diante.
+    2. PROIBIÇÃO HISTÓRICA: É ESTRITAMENTE PROIBIDO mencionar dados ou análises das safras 23/24, 24/25 ou anteriores. Concentre-se no agora e nas projeções para a safra 26/27.
+    3. RIGOR DE NOTÍCIAS: Utilize apenas fatos e notícias dos últimos 7 a 15 dias. Se não houver movimentação crítica recente, escreva apenas: "Sem alertas críticos na última semana."
+    4. REGRA AGRISHOW: Sempre que o cenário brasileiro for citado, a premissa fixa é que a intenção de negócios da Agrishow 2026 fechou em R$ 11,4 bilhões (queda de 22% em relação ao ano anterior). 
+    5. REGRA DE EXCLUSÃO: No bloco de análise "fair mood: cautious optimism in a tighter market", NÃO inclua dados de vendas de tratores e colheitadeiras sob nenhuma hipótese.
 
     FORMATO DE SAÍDA:
-    - Retorne EXCLUSIVAMENTE o código HTML completo.
-    - O painel deve usar um sistema de semáforo (Traffic Light System: 🟢 Verde, 🟡 Amarelo, 🔴 Vermelho) para indicar o nível de alerta de cada país.
-    - Não inclua explicações antes ou depois do código, retorne apenas o HTML puro para que seja salvo diretamente no arquivo index.html.
+    - Retorne EXCLUSIVAMENTE o código HTML completo. Não inclua texto antes ou depois.
     """
 
-    print("Enviando instruções rígidas de análise para o Gemini...")
+    print("Enviando layout e instruções rígidas para o Gemini...")
     
     try:
-        # Chama a inteligência artificial para gerar o texto
         response = client.models.generate_content(
             model='gemini-2.5-flash',
             contents=prompt,
         )
         
-        # Recebe o texto gerado
         html_content = response.text
         
-        # Limpeza de segurança caso a IA coloque marcadores de código Markdown no texto
+        # Limpeza de formatação
         if html_content.startswith("```html"):
             html_content = html_content[7:]
         if html_content.endswith("```"):
             html_content = html_content[:-3]
             
-        # Salva o arquivo HTML que será lido pelo painel
+        # Salva mantendo o mesmo arquivo
         with open("index.html", "w", encoding="utf-8") as file:
             file.write(html_content.strip())
             
-        print("Painel HTML atualizado com sucesso e regras de qualidade aplicadas!")
+        print("Painel atualizado: Layout mantido e notícias refinadas!")
 
     except Exception as e:
-        print(f"Ocorreu um erro ao gerar a inteligência: {e}")
+        print(f"Ocorreu um erro: {e}")
 
 if __name__ == "__main__":
     gerar_relatorio()
