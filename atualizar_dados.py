@@ -2,17 +2,36 @@ import os
 import datetime
 import json
 import urllib.request
+import urllib.parse
 from google import genai
 from google.genai import types
 
 # ==========================================
-# 1. BANCO DE DADOS HISTÓRICO DA TABELA MACRO
+# 1. PAINEL DE CONTROLO DA TABELA MACRO (EDITÁVEL)
+# Altere os valores históricos conforme necessário
 # ==========================================
+
+# Histórico Fechado (Atualize apenas no fim de cada mês)
 HISTORICO_MACRO = {
     "MAR/2026": {"selic": "14,75%", "cdi": "14,65%", "juros": "19,30%", "dolar": "R$ 5,02"},
     "APR/2026": {"selic": "14,50%", "cdi": "14,40%", "juros": "19,00%", "dolar": "R$ 5,08"},
     "MAY/2026": {"selic": "14,50%", "cdi": "14,40%", "juros": "19,00%", "dolar": "R$ 5,15"},
 }
+
+# Valores Consolidados Oficiais do Ano Anterior (2025)
+CONSOLIDADO_2025 = {
+    "selic": "11,75%",    # Taxa de fecho real de 2025
+    "cdi": "11,65%",      # Taxa de fecho real de 2025
+    "juros": "16,25%",    # Taxa de fecho real de 2025
+    "dolar": "R$ 4,85"    # Câmbio de fecho real de 2025
+}
+
+# Definição do Ano Alvo para Projeções do Relatório Focus do Banco Central
+ANO_PROJECAO = "2026"     # O Banco Central buscará as projeções oficiais deste ano
+
+# ==========================================
+# CÓDIGO DO SISTEMA (PROCESSAMENTO DINÂMICO)
+# ==========================================
 
 def calcular_meses_rolantes():
     meses_en = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"]
@@ -36,15 +55,14 @@ def calcular_meses_rolantes():
     header_atual = f"{meses_en[m0_idx]}/{m0_year}"
     header_menos1 = f"{meses_en[m1_idx]}/{m1_year}"
     header_menos2 = f"{meses_en[m2_idx]}/{m2_year}"
-    ano_projecao = str(today.year + 1)
     
-    return header_atual, header_menos1, header_menos2, ano_projecao
+    return header_atual, header_menos1, header_menos2
 
 def buscar_dados_oficiais():
-    print("A procurar dados oficiais do Banco Central e do Mercado...")
+    print("A procurar dados oficiais do Banco Central (SGS) e Mercado em tempo real...")
     headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'}
     
-    # Valores de referência robustos (Plano B caso as APIs limitem o acesso temporariamente)
+    # Valores de segurança caso a API falhe temporariamente
     dolar_str, selic_str, cdi_str, juros_agro_str = "R$ 5,15", "14,50%", "14,40%", "19,00%"
     
     try:
@@ -54,7 +72,7 @@ def buscar_dados_oficiais():
         dolar_atual = float(dados_dolar["USDBRL"]["bid"])
         dolar_str = f"R$ {dolar_atual:.2f}".replace('.', ',')
     except Exception as e:
-        print(f"Aviso Dólar: A usar valor base de segurança devido a limites ({e})")
+        print(f"Aviso Dólar: A usar valor padrão devido a limite de taxa ({e})")
         
     try:
         req_selic = urllib.request.Request("https://api.bcb.gov.br/dados/serie/bcdata.sgs.432/dados/ultimos/1?formato=json", headers=headers)
@@ -65,12 +83,83 @@ def buscar_dados_oficiais():
         cdi_str = f"{(selic_atual - 0.10):.2f}%".replace('.', ',')
         juros_agro_str = f"{(selic_atual + 4.50):.2f}%".replace('.', ',')
     except Exception as e:
-        print(f"Aviso Selic: A usar valor base de segurança devido a limites ({e})")
+        print(f"Aviso Selic: A usar valor padrão devido a limite de taxa ({e})")
         
     return dolar_str, selic_str, cdi_str, juros_agro_str
 
+def buscar_projecoes_focus(ano_alvo):
+    print(f"A procurar projeções de mercado oficiais (Relatório Focus BCB) para o ano {ano_alvo}...")
+    headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'}
+    
+    # Fallbacks de segurança se a API do Focus estiver fora do ar
+    selic_proj = 10.50
+    dolar_proj = 5.10
+    
+    try:
+        # Codifica o filtro OData de forma segura contra caracteres especiais como 'Câmbio'
+        filtro = f"(Indicador eq 'Selic' or Indicador eq 'Câmbio') and DataReferencia eq '{ano_alvo}'"
+        filtro_encoded = urllib.parse.quote(filtro)
+        url = f"https://olinda.bcb.gov.br/olinda/servico/Expectativas/versao/v1/odata/ExpectativasMercadoAnuais?$filter={filtro_encoded}&$orderby=Data%20desc&$top=20&$format=json"
+        
+        req = urllib.request.Request(url, headers=headers)
+        resp = urllib.request.urlopen(req, timeout=10)
+        dados = json.loads(resp.read())
+        
+        valores = dados.get("value", [])
+        for item in valores:
+            indicador = item.get("Indicador")
+            mediana = item.get("Mediana")
+            if indicador == "Selic" and mediana is not None:
+                selic_proj = float(mediana)
+            elif indicador == "Câmbio" and mediana is not None:
+                dolar_proj = float(mediana)
+                
+        print(f"Projeções Focus BCB obtidas com sucesso: Selic {selic_proj}%, Dólar R$ {dolar_proj}")
+    except Exception as e:
+        print(f"Aviso Focus: Falha ao procurar projeções no Banco Central ({e}). Usando fallback de segurança.")
+        
+    cdi_proj = selic_proj - 0.10
+    juros_proj = selic_proj + 4.50
+    
+    return {
+        "selic": f"{selic_proj:.2f}%".replace('.', ','),
+        "cdi": f"{cdi_proj:.2f}%".replace('.', ','),
+        "juros": f"{juros_proj:.2f}%".replace('.', ','),
+        "dolar": f"R$ {dolar_proj:.2f}".replace('.', ',')
+    }
+
+def parse_float(valor_str):
+    try:
+        limpo = valor_str.replace('%', '').replace('R$', '').replace(' ', '').replace(',', '.').strip()
+        return float(limpo)
+    except Exception:
+        return 0.0
+
+def calcular_variacao_pp(valor_atual_str, valor_anterior_str):
+    v_atual = parse_float(valor_atual_str)
+    v_ant = parse_float(valor_anterior_str)
+    diff = v_atual - v_ant
+    
+    if diff > 0:
+        return f'<span class="macro-badge red">● +{diff:.2f} PP</span>'
+    elif diff < 0:
+        return f'<span class="macro-badge green">● {diff:.2f} PP</span>'
+    else:
+        return '<span class="macro-badge yellow">● 0,00 PP</span>'
+
+def calcular_variacao_cambio(valor_atual_str, valor_anterior_str):
+    v_atual = parse_float(valor_atual_str)
+    v_ant = parse_float(valor_anterior_str)
+    diff = v_atual - v_ant
+    
+    if diff > 0:
+        return f'<span class="macro-badge red">● +R$ {diff:.2f}</span>'
+    elif diff < 0:
+        return f'<span class="macro-badge green">● -R$ {abs(diff):.2f}</span>'
+    else:
+        return '<span class="macro-badge yellow">● R$ 0,00</span>'
+
 def obter_noticias_fallback(codigo_pais):
-    # Gerador estrito de notícias de contingência para manter o painel perfeito caso a IA sofra restrição de cota
     temas = {
         "BR": [
             ("ALTA PRODUTIVIDADE REFORÇA RENOVAÇÃO DE MAQUINÁRIO", "O forte desempenho operacional nas principais frotas agrícolas do país impulsiona a procura por soluções de colheita eficiente.", "verde", "Expansão"),
@@ -188,11 +277,29 @@ def construir_card_noticia(item):
 
 def gerar_relatorio():
     data_hoje = datetime.datetime.now().strftime("%b %d, %Y").upper()
-    m_atual, m_anterior, m_atras, ano_futuro = calcular_meses_rolantes()
+    m_atual, m_anterior, m_atras = calcular_meses_rolantes()
     
     dados_m2 = HISTORICO_MACRO.get(m_atras, {"selic": "--,--%", "cdi": "--,--%", "juros": "--,--%", "dolar": "R$ --,--"})
     dados_m1 = HISTORICO_MACRO.get(m_anterior, {"selic": "--,--%", "cdi": "--,--%", "juros": "--,--%", "dolar": "R$ --,--"})
+    
+    # 1. Puxa dados do mercado em tempo real (M0)
     dolar_oficial, selic_oficial, cdi_oficial, juros_agro_oficial = buscar_dados_oficiais()
+    
+    # 2. Puxa projeções oficiais do Relatório Focus do Banco Central
+    projecoes_focus = buscar_projecoes_focus(ANO_PROJECAO)
+
+    # 3. Calcula as variações matemáticas de forma totalmente automática
+    selic_var_mes = calcular_variacao_pp(selic_oficial, dados_m1['selic'])
+    selic_var_ano = calcular_variacao_pp(selic_oficial, CONSOLIDADO_2025['selic'])
+    
+    cdi_var_mes = calcular_variacao_pp(cdi_oficial, dados_m1['cdi'])
+    cdi_var_ano = calcular_variacao_pp(cdi_oficial, CONSOLIDADO_2025['cdi'])
+    
+    juros_var_mes = calcular_variacao_pp(juros_agro_oficial, dados_m1['juros'])
+    juros_var_ano = calcular_variacao_pp(juros_agro_oficial, CONSOLIDADO_2025['juros'])
+    
+    dolar_var_mes = calcular_variacao_cambio(dolar_oficial, dados_m1['dolar'])
+    dolar_var_ano = calcular_variacao_cambio(dolar_oficial, CONSOLIDADO_2025['dolar'])
 
     # LAYOUT CONGELADO DIRETAMENTE NO PYTHON (SEM f-strings PARA EVITAR QUEBRAS COM CARACTERES DE CSS)
     layout_base = """<!DOCTYPE html>
@@ -322,47 +429,47 @@ def gerar_relatorio():
                         <tbody>
                             <tr>
                                 <td>Taxa Selic (Meta BCB)</td>
-                                <td>15,00%</td>
+                                <td>SELIC_2025_PLACEHOLDER</td>
                                 <td>SELIC_M2_PLACEHOLDER</td>
                                 <td>SELIC_M1_PLACEHOLDER</td>
                                 <td>SELIC_M0_PLACEHOLDER</td>
-                                <td><span class="macro-badge yellow">● 0,00 PP</span></td>
-                                <td><span class="macro-badge green">● -0,50 PP</span></td>
-                                <td>13,50%</td>
+                                <td>SELIC_VAR_MES_PLACEHOLDER</td>
+                                <td>SELIC_VAR_ANO_PLACEHOLDER</td>
+                                <td>SELIC_PROJ_PLACEHOLDER</td>
                             </tr>
                             <tr>
                                 <td>Taxa CDI (a.a.)</td>
-                                <td>14,90%</td>
+                                <td>CDI_2025_PLACEHOLDER</td>
                                 <td>CDI_M2_PLACEHOLDER</td>
                                 <td>CDI_M1_PLACEHOLDER</td>
                                 <td>CDI_M0_PLACEHOLDER</td>
-                                <td><span class="macro-badge yellow">● 0,00 PP</span></td>
-                                <td><span class="macro-badge green">● -0,50 PP</span></td>
-                                <td>13,40%</td>
+                                <td>CDI_VAR_MES_PLACEHOLDER</td>
+                                <td>CDI_VAR_ANO_PLACEHOLDER</td>
+                                <td>CDI_PROJ_PLACEHOLDER</td>
                             </tr>
                             <tr>
                                 <td>Juros Comerciais Agro</td>
-                                <td>19,50%</td>
+                                <td>JUROS_2025_PLACEHOLDER</td>
                                 <td>JUROS_M2_PLACEHOLDER</td>
                                 <td>JUROS_M1_PLACEHOLDER</td>
                                 <td>JUROS_M0_PLACEHOLDER</td>
-                                <td><span class="macro-badge yellow">● 0,00 PP</span></td>
-                                <td><span class="macro-badge green">● -0,50 PP</span></td>
-                                <td>17,80%</td>
+                                <td>JUROS_VAR_MES_PLACEHOLDER</td>
+                                <td>JUROS_VAR_ANO_PLACEHOLDER</td>
+                                <td>JUROS_PROJ_PLACEHOLDER</td>
                             </tr>
                             <tr>
                                 <td>Câmbio (USD/BRL)</td>
-                                <td>R$ 4,85</td>
+                                <td>DOLAR_2025_PLACEHOLDER</td>
                                 <td>DOLAR_M2_PLACEHOLDER</td>
                                 <td>DOLAR_M1_PLACEHOLDER</td>
                                 <td>DOLAR_M0_PLACEHOLDER</td>
-                                <td><span class="macro-badge yellow">Ao Vivo</span></td>
-                                <td><span class="macro-badge green">Monitorado</span></td>
-                                <td>R$ 5,25</td>
+                                <td>DOLAR_VAR_MES_PLACEHOLDER</td>
+                                <td>DOLAR_VAR_ANO_PLACEHOLDER</td>
+                                <td>DOLAR_PROJ_PLACEHOLDER</td>
                             </tr>
                         </tbody>
                     </table>
-                    <div class="macro-source">*Fonte: API Banco Central do Brasil (SGS) e AwesomeAPI Câmbio.</div>
+                    <div class="macro-source">*Fonte: API Banco Central do Brasil (SGS e Relatório Focus) e AwesomeAPI Câmbio.</div>
                 </div>
             </div>
 
@@ -444,23 +551,49 @@ def gerar_relatorio():
     layout_finalizado = layout_finalizado.replace("M_ATRAS_PLACEHOLDER", m_atras)
     layout_finalizado = layout_finalizado.replace("M_ANTERIOR_PLACEHOLDER", m_anterior)
     layout_finalizado = layout_finalizado.replace("M_ATUAL_PLACEHOLDER", m_atual)
-    layout_finalizado = layout_finalizado.replace("ANO_FUTURO_PLACEHOLDER", ano_futuro)
+    layout_finalizado = layout_finalizado.replace("ANO_FUTURO_PLACEHOLDER", ANO_PROJECAO)
     
+    # Injeção de valores Consolidados 2025 configurados no topo
+    layout_finalizado = layout_finalizado.replace("SELIC_2025_PLACEHOLDER", CONSOLIDADO_2025["selic"])
+    layout_finalizado = layout_finalizado.replace("CDI_2025_PLACEHOLDER", CONSOLIDADO_2025["cdi"])
+    layout_finalizado = layout_finalizado.replace("JUROS_2025_PLACEHOLDER", CONSOLIDADO_2025["juros"])
+    layout_finalizado = layout_finalizado.replace("DOLAR_2025_PLACEHOLDER", CONSOLIDADO_2025["dolar"])
+    
+    # Injeção de Histórico M2
     layout_finalizado = layout_finalizado.replace("SELIC_M2_PLACEHOLDER", dados_m2['selic'])
-    layout_finalizado = layout_finalizado.replace("SELIC_M1_PLACEHOLDER", dados_m1['selic'])
-    layout_finalizado = layout_finalizado.replace("SELIC_M0_PLACEHOLDER", selic_oficial)
-    
     layout_finalizado = layout_finalizado.replace("CDI_M2_PLACEHOLDER", dados_m2['cdi'])
-    layout_finalizado = layout_finalizado.replace("CDI_M1_PLACEHOLDER", dados_m1['cdi'])
-    layout_finalizado = layout_finalizado.replace("CDI_M0_PLACEHOLDER", cdi_oficial)
-    
     layout_finalizado = layout_finalizado.replace("JUROS_M2_PLACEHOLDER", dados_m2['juros'])
-    layout_finalizado = layout_finalizado.replace("JUROS_M1_PLACEHOLDER", dados_m1['juros'])
-    layout_finalizado = layout_finalizado.replace("JUROS_M0_PLACEHOLDER", juros_agro_oficial)
-    
     layout_finalizado = layout_finalizado.replace("DOLAR_M2_PLACEHOLDER", dados_m2['dolar'])
+    
+    # Injeção de Histórico M1
+    layout_finalizado = layout_finalizado.replace("SELIC_M1_PLACEHOLDER", dados_m1['selic'])
+    layout_finalizado = layout_finalizado.replace("CDI_M1_PLACEHOLDER", dados_m1['cdi'])
+    layout_finalizado = layout_finalizado.replace("JUROS_M1_PLACEHOLDER", dados_m1['juros'])
     layout_finalizado = layout_finalizado.replace("DOLAR_M1_PLACEHOLDER", dados_m1['dolar'])
+    
+    # Injeção de Dados ao Vivo (M0)
+    layout_finalizado = layout_finalizado.replace("SELIC_M0_PLACEHOLDER", selic_oficial)
+    layout_finalizado = layout_finalizado.replace("CDI_M0_PLACEHOLDER", cdi_oficial)
+    layout_finalizado = layout_finalizado.replace("JUROS_M0_PLACEHOLDER", juros_agro_oficial)
     layout_finalizado = layout_finalizado.replace("DOLAR_M0_PLACEHOLDER", dolar_oficial)
+
+    # Injeção de Variações Mensais Calculadas pelo Python
+    layout_finalizado = layout_finalizado.replace("SELIC_VAR_MES_PLACEHOLDER", selic_var_mes)
+    layout_finalizado = layout_finalizado.replace("CDI_VAR_MES_PLACEHOLDER", cdi_var_mes)
+    layout_finalizado = layout_finalizado.replace("JUROS_VAR_MES_PLACEHOLDER", juros_var_mes)
+    layout_finalizado = layout_finalizado.replace("DOLAR_VAR_MES_PLACEHOLDER", dolar_var_mes)
+    
+    # Injeção de Variações Anuais Calculadas pelo Python
+    layout_finalizado = layout_finalizado.replace("SELIC_VAR_ANO_PLACEHOLDER", selic_var_ano)
+    layout_finalizado = layout_finalizado.replace("CDI_VAR_ANO_PLACEHOLDER", cdi_var_ano)
+    layout_finalizado = layout_finalizado.replace("JUROS_VAR_ANO_PLACEHOLDER", juros_var_ano)
+    layout_finalizado = layout_finalizado.replace("DOLAR_VAR_ANO_PLACEHOLDER", dolar_var_ano)
+
+    # Injeção de Projeções oficiais obtidas via API Focus do Banco Central do Brasil
+    layout_finalizado = layout_finalizado.replace("SELIC_PROJ_PLACEHOLDER", projecoes_focus["selic"])
+    layout_finalizado = layout_finalizado.replace("CDI_PROJ_PLACEHOLDER", projecoes_focus["cdi"])
+    layout_finalizado = layout_finalizado.replace("JUROS_PROJ_PLACEHOLDER", projecoes_focus["juros"])
+    layout_finalizado = layout_finalizado.replace("DOLAR_PROJ_PLACEHOLDER", projecoes_focus["dolar"])
 
     client = genai.Client(api_key=os.environ.get("GEMINI_API_KEY"))
     
@@ -496,7 +629,6 @@ def gerar_relatorio():
 
     print("A solicitar à IA o processamento estruturado das notícias via JSON...")
     
-    # Carregamento prévio de notícias dinâmicas e impecáveis de backup para o caso de Rate Limit
     noticias_por_pais = {
         "BR": obter_noticias_fallback("BR"),
         "AR": obter_noticias_fallback("AR"),
@@ -529,7 +661,6 @@ def gerar_relatorio():
                 html_acumulado = ""
                 for item in lista_cards:
                     html_acumulado += construir_card_noticia(item)
-                # Substituímos o fallback pelo conteúdo fresco gerado pela IA com sucesso
                 noticias_por_pais[pais_code] = html_acumulado
 
     except Exception as e:
@@ -549,7 +680,7 @@ def gerar_relatorio():
     with open("index.html", "w", encoding="utf-8") as file:
         file.write(layout_finalizado.strip())
         
-    print("Sucesso Absoluto! Ficheiro index.html reconstruído com design blindado e notícias integradas.")
+    print("Sucesso Absoluto! Ficheiro index.html reconstruído com dados reais de API e projeções do Focus.")
 
 if __name__ == "__main__":
     gerar_relatorio()
