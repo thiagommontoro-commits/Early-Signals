@@ -47,14 +47,14 @@ def buscar_dados_oficiais():
     except: pass
         
     try:
-        selic_atual = float(json.loads(urllib.request.urlopen(urllib.request.Request(https://api.bcb.gov.br/dados/serie/bcdata.sgs.432/dados/ultimos/1?formato=json, headers=headers), timeout=8).read())[0]["valor"])
+        selic_atual = float(json.loads(urllib.request.urlopen(urllib.request.Request("https://api.bcb.gov.br/dados/serie/bcdata.sgs.432/dados/ultimos/1?formato=json", headers=headers), timeout=8).read())[0]["valor"])
         selic_str = f"{selic_atual:.2f}%".replace('.', ',')
         cdi_str = f"{(selic_atual - 0.10):.2f}%".replace('.', ',')
         juros_agro_str = f"{(selic_atual + 4.50):.2f}%".replace('.', ',')
     except: pass
 
     try:
-        ipca_atual = float(json.loads(urllib.request.urlopen(urllib.request.Request(https://api.bcb.gov.br/dados/serie/bcdata.sgs.13522/dados/ultimos/1?formato=json, headers=headers), timeout=8).read())[0]['valor'])
+        ipca_atual = float(json.loads(urllib.request.urlopen(urllib.request.Request("https://api.bcb.gov.br/dados/serie/bcdata.sgs.13522/dados/ultimos/1?formato=json", headers=headers), timeout=8).read())[0]['valor'])
         ipca_str = f"{ipca_atual:.2f}%".replace('.', ',')
     except: pass
         
