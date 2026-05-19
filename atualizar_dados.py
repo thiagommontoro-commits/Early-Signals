@@ -42,54 +42,41 @@ def buscar_dados_oficiais():
     dolar_str, selic_str, cdi_str, juros_agro_str, ipca_str = "R$ 5,15", "14,50%", "14,40%", "19,00%", "4,20%"
     
     try:
-        dados_dolar = json.loads(urllib.request.urlopen(urllib.request.Request("https://economia.awesomeapi.com.br/last/USD-BRL", headers=headers), timeout=8).read())
+        dados_dolar = json.loads(urllib.request.urlopen(urllib.request.Request(https://economia.awesomeapi.com.br/last/USD-BRL, headers=headers), timeout=8).read())
         dolar_str = f"R$ {float(dados_dolar['USDBRL']['bid']):.2f}".replace('.', ',')
     except: pass
         
     try:
-        selic_atual = float(json.loads(urllib.request.urlopen(urllib.request.Request("https://api.bcb.gov.br/dados/serie/bcdata.sgs.432/dados/ultimos/1?formato=json", headers=headers), timeout=8).read())[0]["valor"])
+        selic_atual = float(json.loads(urllib.request.urlopen(urllib.request.Request(https://api.bcb.gov.br/dados/serie/bcdata.sgs.432/dados/ultimos/1?formato=json, headers=headers), timeout=8).read())[0]["valor"])
         selic_str = f"{selic_atual:.2f}%".replace('.', ',')
         cdi_str = f"{(selic_atual - 0.10):.2f}%".replace('.', ',')
         juros_agro_str = f"{(selic_atual + 4.50):.2f}%".replace('.', ',')
     except: pass
 
     try:
-        ipca_atual = float(json.loads(urllib.request.urlopen(urllib.request.Request("https://api.bcb.gov.br/dados/serie/bcdata.sgs.13522/dados/ultimos/1?formato=json", headers=headers), timeout=8).read())[0]['valor'])
+        ipca_atual = float(json.loads(urllib.request.urlopen(urllib.request.Request(https://api.bcb.gov.br/dados/serie/bcdata.sgs.13522/dados/ultimos/1?formato=json, headers=headers), timeout=8).read())[0]['valor'])
         ipca_str = f"{ipca_atual:.2f}%".replace('.', ',')
     except: pass
         
     return dolar_str, selic_str, cdi_str, juros_agro_str, ipca_str
 
 def buscar_projecoes_focus(ano_alvo):
-    print(f"A extrair expectativas MEDIANAS do Focus BCB para {ano_alvo}...")
+    print(f"A extrair expectativas MEDIANAS de mercado (Focus BCB) para {ano_alvo}...")
     selic_proj, dolar_proj, ipca_proj, pib_proj = 10.50, 5.10, 4.10, 2.00
-    
-    # Lógica para encontrar a data da última sexta-feira
-    hoje = datetime.date.today()
-    offset = (hoje.weekday() - 4) % 7
-    ultima_sexta = hoje - datetime.timedelta(days=offset)
-    if hoje.weekday() < 4: 
-       ultima_sexta = hoje - datetime.timedelta(days=(hoje.weekday() + 3))
-    
-    data_focus = ultima_sexta.strftime("%Y-%m-%d")
-    print(f"Data Base Focus utilizada: {data_focus} (Fecho do mercado)")
-
     try:
-        # Filtra especificamente PELA DATA DA SEXTA-FEIRA, garantindo alinhamento com o PDF do Focus
-        filtro = f"(Indicador eq 'Selic' or Indicador eq 'Câmbio' or Indicador eq 'IPCA' or Indicador eq 'PIB Total') and DataReferencia eq '{ano_alvo}' and Data eq '{data_focus}'"
+        filtro = f"(Indicador eq 'Selic' or Indicador eq 'Câmbio' or Indicador eq 'IPCA' or Indicador eq 'PIB Total') and DataReferencia eq '{ano_alvo}'"
         filtro_encoded = urllib.parse.quote(filtro)
-        url = f"https://olinda.bcb.gov.br/olinda/servico/Expectativas/versao/v1/odata/ExpectativasMercadoAnuais?$filter={filtro_encoded}&$format=json"
+        url = fhttps://olinda.bcb.gov.br/olinda/servico/Expectativas/versao/v1/odata/ExpectativasMercadoAnuais?$filter={filtro_encoded}&$orderby=Data%20desc&$top=40&$format=json
         
-        req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
-        dados = json.loads(urllib.request.urlopen(req, timeout=10).read())
-        
+        dados = json.loads(urllib.request.urlopen(urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'}), timeout=10).read())
         for item in dados.get("value", []):
+            # Voltando a usar a MEDIANA para bater exatamente com as manchetes oficiais do Focus
             if item.get("Indicador") == "Selic" and item.get("Mediana"): selic_proj = float(item["Mediana"])
             elif item.get("Indicador") == "Câmbio" and item.get("Mediana"): dolar_proj = float(item["Mediana"])
             elif item.get("Indicador") == "IPCA" and item.get("Mediana"): ipca_proj = float(item["Mediana"])
             elif item.get("Indicador") == "PIB Total" and item.get("Mediana"): pib_proj = float(item["Mediana"])
     except Exception as e: 
-        print(f"Aviso Focus: {e}. Usando valores padrão.")
+        print(f"Aviso Focus: {e}")
 
     return {
         "selic": f"{selic_proj:.2f}%".replace('.', ','), 
@@ -109,13 +96,13 @@ def buscar_precos_soja(dolar_proj_str, ano_proj):
         dol_proj = 5.25
 
     try:
-        text_fis = re.sub(r'<[^>]+>', ' ', urllib.request.urlopen(urllib.request.Request("https://www.noticiasagricolas.com.br/cotacoes/soja/soja-porto-paranagua-pr", headers=headers), timeout=8).read().decode('utf-8'))
+        text_fis = re.sub(r'<[^>]+>', ' ', urllib.request.urlopen(urllib.request.Request(https://www.noticiasagricolas.com.br/cotacoes/soja/soja-porto-paranagua-pr, headers=headers), timeout=8).read().decode('utf-8'))
         matches_fis = re.findall(r'R\$\s*(\d{3}[,.]\d{2})', text_fis)
         if matches_fis: soja_hoje_brl = f"R$ {matches_fis[0].replace('.', ',')}"
     except: pass
 
     try:
-        text_b3 = re.sub(r'<[^>]+>', ' ', urllib.request.urlopen(urllib.request.Request("https://www.noticiasagricolas.com.br/cotacoes/soja/soja-b3", headers=headers), timeout=8).read().decode('utf-8'))
+        text_b3 = re.sub(r'<[^>]+>', ' ', urllib.request.urlopen(urllib.request.Request(https://www.noticiasagricolas.com.br/cotacoes/soja/soja-b3, headers=headers), timeout=8).read().decode('utf-8'))
         matches_b3 = re.findall(r'[A-Za-z]{3}/' + str(ano_proj)[-2:] + r'\s+([\d]{2}[,.]\d{2})', text_b3, re.IGNORECASE)
         if matches_b3: 
             soja_futuro_brl = f"R$ {(float(matches_b3[0].replace(',', '.')) * dol_proj):.2f}".replace('.', ',')
@@ -460,6 +447,7 @@ def gerar_relatorio():
                 // AEM DATA RECEIPT: SCHEDULED RUN ACTIVE. FOCUS ESTIMATES SHIFTED TO HISTORICAL MEDIAN TRACKING. CROSS-RATE COMMODITY INGESTION OPERATIONAL FOR TARGET YEAR ANO_FUTURO_PLACEHOLDER.
             </div>
 
+            <!-- Navegação por Abas -->
             <div class="tabs-nav" translate="no">
                 <button class="tab-btn active" onclick="openCountry(event, 'brazil')">🇧🇷 Brasil</button>
                 <button class="tab-btn" onclick="openCountry(event, 'argentina')">🇦🇷 Argentina</button>
@@ -474,7 +462,7 @@ def gerar_relatorio():
 
             <div id="brazil" class="tab-content active">
                 <h2 class="country-title">🇧🇷 BRAZIL <span class="highlight-tag">MARKET & MACRO ALERTS</span></h2>
-                <div class="news-grid"></div>
+                <div class="news-grid"><!-- NOTICIAS_BR --></div>
                 
                 <div class="macro-section">
                     <h3 class="macro-title">📊 1. MACROECONOMIA & COMMODITIES <span class="tag-brasil">BRASIL</span></h3>
@@ -570,35 +558,35 @@ def gerar_relatorio():
 
             <div id="argentina" class="tab-content">
                 <h2 class="country-title">🇦🇷 ARGENTINA <span class="highlight-tag">MARKET & MACRO ALERTS</span></h2>
-                <div class="news-grid"></div>
+                <div class="news-grid"><!-- NOTICIAS_AR --></div>
             </div>
             <div id="chile" class="tab-content">
                 <h2 class="country-title">🇨🇱 CHILE <span class="highlight-tag">MARKET & MACRO ALERTS</span></h2>
-                <div class="news-grid"></div>
+                <div class="news-grid"><!-- NOTICIAS_CL --></div>
             </div>
             <div id="uruguay" class="tab-content">
                 <h2 class="country-title">🇺🇾 URUGUAY <span class="highlight-tag">MARKET & MACRO ALERTS</span></h2>
-                <div class="news-grid"></div>
+                <div class="news-grid"><!-- NOTICIAS_UY --></div>
             </div>
             <div id="paraguay" class="tab-content">
                 <h2 class="country-title">🇵🇾 PARAGUAY <span class="highlight-tag">MARKET & MACRO ALERTS</span></h2>
-                <div class="news-grid"></div>
+                <div class="news-grid"><!-- NOTICIAS_PY --></div>
             </div>
             <div id="peru" class="tab-content">
                 <h2 class="country-title">🇵🇪 PERU <span class="highlight-tag">MARKET & MACRO ALERTS</span></h2>
-                <div class="news-grid"></div>
+                <div class="news-grid"><!-- NOTICIAS_PE --></div>
             </div>
             <div id="bolivia" class="tab-content">
                 <h2 class="country-title">🇧🇴 BOLIVIA <span class="highlight-tag">MARKET & MACRO ALERTS</span></h2>
-                <div class="news-grid"></div>
+                <div class="news-grid"><!-- NOTICIAS_BO --></div>
             </div>
             <div id="mexico" class="tab-content">
                 <h2 class="country-title">🇲🇽 MEXICO <span class="highlight-tag">MARKET & MACRO ALERTS</span></h2>
-                <div class="news-grid"></div>
+                <div class="news-grid"><!-- NOTICIAS_MX --></div>
             </div>
             <div id="colombia" class="tab-content">
                 <h2 class="country-title">🇨🇴 COLOMBIA <span class="highlight-tag">MARKET & MACRO ALERTS</span></h2>
-                <div class="news-grid"></div>
+                <div class="news-grid"><!-- NOTICIAS_CO --></div>
             </div>
 
         </div>
@@ -636,7 +624,7 @@ def gerar_relatorio():
             }
         }
     </script>
-    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <script type="text/javascript" src=https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit></script>
 </body>
 </html>"""
 
@@ -746,7 +734,7 @@ def gerar_relatorio():
         print(f"Aviso de IA: O sistema irá utilizar o banco de segurança robusto de contingência. Erro: {e}")
 
     for k in ["BR", "AR", "MX", "CO", "UY", "PE", "CL", "BO", "PY"]:
-        layout_finalizado = layout_finalizado.replace(f"", noticias_por_pais[k])
+        layout_finalizado = layout_finalizado.replace(f"<!-- NOTICIAS_{k} -->", noticias_por_pais[k])
     
     with open("index.html", "w", encoding="utf-8") as file:
         file.write(layout_finalizado.strip())
