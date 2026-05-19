@@ -96,13 +96,13 @@ def buscar_precos_soja(dolar_proj_str, ano_proj):
         dol_proj = 5.25
 
     try:
-        text_fis = re.sub(r'<[^>]+>', ' ', urllib.request.urlopen(urllib.request.Request(https://www.noticiasagricolas.com.br/cotacoes/soja/soja-porto-paranagua-pr, headers=headers), timeout=8).read().decode('utf-8'))
+        text_fis = re.sub(r'<[^>]+>', ' ', urllib.request.urlopen(urllib.request.Request("https://www.noticiasagricolas.com.br/cotacoes/soja/soja-porto-paranagua-pr", headers=headers), timeout=8).read().decode('utf-8'))
         matches_fis = re.findall(r'R\$\s*(\d{3}[,.]\d{2})', text_fis)
         if matches_fis: soja_hoje_brl = f"R$ {matches_fis[0].replace('.', ',')}"
     except: pass
 
     try:
-        text_b3 = re.sub(r'<[^>]+>', ' ', urllib.request.urlopen(urllib.request.Request(https://www.noticiasagricolas.com.br/cotacoes/soja/soja-b3, headers=headers), timeout=8).read().decode('utf-8'))
+        text_b3 = re.sub(r'<[^>]+>', ' ', urllib.request.urlopen(urllib.request.Request("https://www.noticiasagricolas.com.br/cotacoes/soja/soja-b3", headers=headers), timeout=8).read().decode('utf-8'))
         matches_b3 = re.findall(r'[A-Za-z]{3}/' + str(ano_proj)[-2:] + r'\s+([\d]{2}[,.]\d{2})', text_b3, re.IGNORECASE)
         if matches_b3: 
             soja_futuro_brl = f"R$ {(float(matches_b3[0].replace(',', '.')) * dol_proj):.2f}".replace('.', ',')
