@@ -42,7 +42,7 @@ def buscar_dados_oficiais():
     dolar_str, selic_str, cdi_str, juros_agro_str, ipca_str = "R$ 5,15", "14,50%", "14,40%", "19,00%", "4,20%"
     
     try:
-        dados_dolar = json.loads(urllib.request.urlopen(urllib.request.Request(https://economia.awesomeapi.com.br/last/USD-BRL, headers=headers), timeout=8).read())
+        dados_dolar = json.loads(urllib.request.urlopen(urllib.request.Request("https://economia.awesomeapi.com.br/last/USD-BRL", headers=headers), timeout=8).read())
         dolar_str = f"R$ {float(dados_dolar['USDBRL']['bid']):.2f}".replace('.', ',')
     except: pass
         
