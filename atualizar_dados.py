@@ -61,7 +61,7 @@ def buscar_dados_oficiais():
     return dolar_str, selic_str, cdi_str, juros_agro_str, ipca_str
 
 def buscar_projecoes_focus(ano_alvo):
-    print(f"A extrair expectativas MÉDIAS de mercado (Focus BCB) para {ano_alvo}...")
+    print(f"A extrair expectativas MEDIANAS de mercado (Focus BCB) para {ano_alvo}...")
     selic_proj, dolar_proj, ipca_proj, pib_proj = 10.50, 5.10, 4.10, 2.00
     try:
         filtro = f"(Indicador eq 'Selic' or Indicador eq 'Câmbio' or Indicador eq 'IPCA' or Indicador eq 'PIB Total') and DataReferencia eq '{ano_alvo}'"
@@ -70,10 +70,11 @@ def buscar_projecoes_focus(ano_alvo):
         
         dados = json.loads(urllib.request.urlopen(urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'}), timeout=10).read())
         for item in dados.get("value", []):
-            if item.get("Indicador") == "Selic" and item.get("Media"): selic_proj = float(item["Media"])
-            elif item.get("Indicador") == "Câmbio" and item.get("Media"): dolar_proj = float(item["Media"])
-            elif item.get("Indicador") == "IPCA" and item.get("Media"): ipca_proj = float(item["Media"])
-            elif item.get("Indicador") == "PIB Total" and item.get("Media"): pib_proj = float(item["Media"])
+            # Voltando a usar a MEDIANA para bater exatamente com as manchetes oficiais do Focus
+            if item.get("Indicador") == "Selic" and item.get("Mediana"): selic_proj = float(item["Mediana"])
+            elif item.get("Indicador") == "Câmbio" and item.get("Mediana"): dolar_proj = float(item["Mediana"])
+            elif item.get("Indicador") == "IPCA" and item.get("Mediana"): ipca_proj = float(item["Mediana"])
+            elif item.get("Indicador") == "PIB Total" and item.get("Mediana"): pib_proj = float(item["Mediana"])
     except Exception as e: 
         print(f"Aviso Focus: {e}")
 
@@ -202,7 +203,6 @@ def obter_noticias_fallback(codigo_pais):
         ]
     }
 
-    # Template dinâmico de 6 Impactos para MX, CO, UY, PE, CL, BO, PY
     paises_restantes = ["MX", "CO", "UY", "PE", "CL", "BO", "PY"]
     nomes_paises = {"MX": "México", "CO": "Colômbia", "UY": "Uruguai", "PE": "Peru", "CL": "Chile", "BO": "Bolívia", "PY": "Paraguai"}
     
@@ -444,7 +444,7 @@ def gerar_relatorio():
         </div>
         <div class="content-wrapper">
             <div class="alert-banner" translate="no">
-                // AEM DATA RECEIPT: SCHEDULED RUN ACTIVE. FOCUS ESTIMATES SHIFTED TO HISTORICAL MEAN TRACKING. CROSS-RATE COMMODITY INGESTION OPERATIONAL FOR TARGET YEAR ANO_FUTURO_PLACEHOLDER.
+                // AEM DATA RECEIPT: SCHEDULED RUN ACTIVE. FOCUS ESTIMATES SHIFTED TO HISTORICAL MEDIAN TRACKING. CROSS-RATE COMMODITY INGESTION OPERATIONAL FOR TARGET YEAR ANO_FUTURO_PLACEHOLDER.
             </div>
 
             <!-- Navegação por Abas -->
@@ -476,7 +476,7 @@ def gerar_relatorio():
                                 <th>M_ATUAL_PLACEHOLDER (ATUAL)</th>
                                 <th>VAR. MÊS</th>
                                 <th>VAR. ANO</th>
-                                <th>PROJ. MÉDIA FOCUS ANO_FUTURO_PLACEHOLDER</th>
+                                <th>ANO_FUTURO_PLACEHOLDER</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -552,7 +552,7 @@ def gerar_relatorio():
                             </tr>
                         </tbody>
                     </table>
-                    <div class="macro-source">*Fonte: B3 Futuros, Notícias Agrícolas, Cepea, API SGS e Relatório Focus (Média de Mercado). Processamento via AGCO Core Pipeline.</div>
+                    <div class="macro-source">*Fonte: B3 Futuros, Notícias Agrícolas, Cepea, API SGS e Relatório Focus (Mediana de Mercado). Processamento via AGCO Core Pipeline.</div>
                 </div>
             </div>
 
