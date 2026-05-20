@@ -321,7 +321,7 @@ def gerar_relatorio():
     
     dolar_oficial, selic_oficial, cdi_oficial, juros_agro_oficial, ipca_oficial = buscar_dados_oficiais()
     
-    # Puxar dados do Focus para o ano atual (para obter o PIB do ano corrente dinamicamente)
+    # Puxar dados do Focus para o ano atual
     projecoes_atual = buscar_projecoes_focus(ano_atual)
     pib_oficial = projecoes_atual['pib']
     
@@ -744,13 +744,23 @@ def gerar_relatorio():
     except Exception as e:
         print(f"Aviso de IA: O sistema irá utilizar o banco de segurança robusto de contingência. Erro: {e}")
 
-    for k in ["BR", "AR", "MX", "CO", "UY", "PE", "CL", "BO", "PY"]:
-        layout_finalizado = layout_finalizado.replace(f"", noticias_por_pais[k])
-    
+    # ===== CORREÇÃO DO CRASH DO REPLACE =====
+    # Substituições explícitas e diretas (nada de f-strings dinâmicas na variável de busca)
+    layout_finalizado = layout_finalizado.replace("", noticias_por_pais["BR"])
+    layout_finalizado = layout_finalizado.replace("", noticias_por_pais["AR"])
+    layout_finalizado = layout_finalizado.replace("", noticias_por_pais["MX"])
+    layout_finalizado = layout_finalizado.replace("", noticias_por_pais["CO"])
+    layout_finalizado = layout_finalizado.replace("", noticias_por_pais["UY"])
+    layout_finalizado = layout_finalizado.replace("", noticias_por_pais["PE"])
+    layout_finalizado = layout_finalizado.replace("", noticias_por_pais["CL"])
+    layout_finalizado = layout_finalizado.replace("", noticias_por_pais["BO"])
+    layout_finalizado = layout_finalizado.replace("", noticias_por_pais["PY"])
+    # ========================================
+
     with open("index.html", "w", encoding="utf-8") as file:
         file.write(layout_finalizado.strip())
         
-    print("Sucesso! Painel updated e HTML guardado em index.html.")
+    print("Sucesso! Painel atualizado e HTML guardado em index.html.")
 
 if __name__ == "__main__":
     gerar_relatorio()
