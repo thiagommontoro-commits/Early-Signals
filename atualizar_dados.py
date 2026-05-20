@@ -318,7 +318,6 @@ def gerar_relatorio():
     data_hoje = datetime.datetime.now().strftime("%b %d, %Y").upper()
     m_atual, m_anterior, m_atras = calcular_meses_rolantes()
     
-    # Determinar o ano atual dinamicamente para o Focus
     ano_atual = str(datetime.datetime.now().year)
     
     dados_m2 = HISTORICO_MACRO.get(m_atras, {"selic": "--,--%", "cdi": "--,--%", "juros": "--,--%", "dolar": "R$ --,--", "ipca": "--,--%", "pib": "--,--%", "soja": "R$ --,--"})
@@ -326,11 +325,9 @@ def gerar_relatorio():
     
     dolar_oficial, selic_oficial, cdi_oficial, juros_agro_oficial, ipca_oficial = buscar_dados_oficiais()
     
-    # Puxar dados do Focus para o ano atual
     projecoes_atual = buscar_projecoes_focus(ano_atual)
     pib_oficial = projecoes_atual['pib']
     
-    # Puxar dados do Focus para o ano de projeção futura (2027)
     projecoes_focus = buscar_projecoes_focus(ANO_PROJECAO)
     soja_hoje, soja_proj = buscar_precos_soja(projecoes_focus['dolar'], ANO_PROJECAO)
 
@@ -349,7 +346,7 @@ def gerar_relatorio():
     soja_var_mes = calcular_variacao_cambio(soja_hoje, dados_m1['soja'])
     soja_var_ano = calcular_variacao_cambio(soja_hoje, CONSOLIDADO_2025['soja'])
 
-    # ATENÇÃO AQUI: Foram adicionadas as tags no HTML para o replace funcionar com segurança
+    # ATENÇÃO AQUI: As tags agora são [[NOTICIAS_BR]], [[NOTICIAS_AR]], etc.
     layout_base = """<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -479,7 +476,7 @@ def gerar_relatorio():
 
             <div id="brazil" class="tab-content active">
                 <h2 class="country-title">🇧🇷 BRAZIL <span class="highlight-tag">MARKET & MACRO ALERTS</span></h2>
-                <div class="news-grid"></div>
+                <div class="news-grid">[[NOTICIAS_BR]]</div>
                 
                 <div class="macro-section">
                     <h3 class="macro-title">📊 1. MACROECONOMIA & COMMODITIES <span class="tag-brasil">BRASIL</span></h3>
@@ -575,35 +572,35 @@ def gerar_relatorio():
 
             <div id="argentina" class="tab-content">
                 <h2 class="country-title">🇦🇷 ARGENTINA <span class="highlight-tag">MARKET & MACRO ALERTS</span></h2>
-                <div class="news-grid"></div>
+                <div class="news-grid">[[NOTICIAS_AR]]</div>
             </div>
             <div id="chile" class="tab-content">
                 <h2 class="country-title">🇨🇱 CHILE <span class="highlight-tag">MARKET & MACRO ALERTS</span></h2>
-                <div class="news-grid"></div>
+                <div class="news-grid">[[NOTICIAS_CL]]</div>
             </div>
             <div id="uruguay" class="tab-content">
                 <h2 class="country-title">🇺🇾 URUGUAY <span class="highlight-tag">MARKET & MACRO ALERTS</span></h2>
-                <div class="news-grid"></div>
+                <div class="news-grid">[[NOTICIAS_UY]]</div>
             </div>
             <div id="paraguay" class="tab-content">
                 <h2 class="country-title">🇵🇾 PARAGUAY <span class="highlight-tag">MARKET & MACRO ALERTS</span></h2>
-                <div class="news-grid"></div>
+                <div class="news-grid">[[NOTICIAS_PY]]</div>
             </div>
             <div id="peru" class="tab-content">
                 <h2 class="country-title">🇵🇪 PERU <span class="highlight-tag">MARKET & MACRO ALERTS</span></h2>
-                <div class="news-grid"></div>
+                <div class="news-grid">[[NOTICIAS_PE]]</div>
             </div>
             <div id="bolivia" class="tab-content">
                 <h2 class="country-title">🇧🇴 BOLIVIA <span class="highlight-tag">MARKET & MACRO ALERTS</span></h2>
-                <div class="news-grid"></div>
+                <div class="news-grid">[[NOTICIAS_BO]]</div>
             </div>
             <div id="mexico" class="tab-content">
                 <h2 class="country-title">🇲🇽 MEXICO <span class="highlight-tag">MARKET & MACRO ALERTS</span></h2>
-                <div class="news-grid"></div>
+                <div class="news-grid">[[NOTICIAS_MX]]</div>
             </div>
             <div id="colombia" class="tab-content">
                 <h2 class="country-title">🇨🇴 COLOMBIA <span class="highlight-tag">MARKET & MACRO ALERTS</span></h2>
-                <div class="news-grid"></div>
+                <div class="news-grid">[[NOTICIAS_CO]]</div>
             </div>
 
         </div>
@@ -750,17 +747,17 @@ def gerar_relatorio():
     except Exception as e:
         print(f"Aviso de IA: O sistema irá utilizar o banco de segurança robusto de contingência. Erro: {e}")
 
-    # ===== CORREÇÃO DO CRASH DO REPLACE =====
-    # Estas tags correspondem EXATAMENTE ao que coloquei no layout_base acima.
-    layout_finalizado = layout_finalizado.replace("", noticias_por_pais.get("BR", ""))
-    layout_finalizado = layout_finalizado.replace("", noticias_por_pais.get("AR", ""))
-    layout_finalizado = layout_finalizado.replace("", noticias_por_pais.get("MX", ""))
-    layout_finalizado = layout_finalizado.replace("", noticias_por_pais.get("CO", ""))
-    layout_finalizado = layout_finalizado.replace("", noticias_por_pais.get("UY", ""))
-    layout_finalizado = layout_finalizado.replace("", noticias_por_pais.get("PE", ""))
-    layout_finalizado = layout_finalizado.replace("", noticias_por_pais.get("CL", ""))
-    layout_finalizado = layout_finalizado.replace("", noticias_por_pais.get("BO", ""))
-    layout_finalizado = layout_finalizado.replace("", noticias_por_pais.get("PY", ""))
+    # ===== CORREÇÃO BLINDADA DO REPLACE =====
+    # A variável agora puxa diretamente os marcadores de COLCHETES em vez de tags HTML
+    layout_finalizado = layout_finalizado.replace("[[NOTICIAS_BR]]", noticias_por_pais.get("BR", ""))
+    layout_finalizado = layout_finalizado.replace("[[NOTICIAS_AR]]", noticias_por_pais.get("AR", ""))
+    layout_finalizado = layout_finalizado.replace("[[NOTICIAS_MX]]", noticias_por_pais.get("MX", ""))
+    layout_finalizado = layout_finalizado.replace("[[NOTICIAS_CO]]", noticias_por_pais.get("CO", ""))
+    layout_finalizado = layout_finalizado.replace("[[NOTICIAS_UY]]", noticias_por_pais.get("UY", ""))
+    layout_finalizado = layout_finalizado.replace("[[NOTICIAS_PE]]", noticias_por_pais.get("PE", ""))
+    layout_finalizado = layout_finalizado.replace("[[NOTICIAS_CL]]", noticias_por_pais.get("CL", ""))
+    layout_finalizado = layout_finalizado.replace("[[NOTICIAS_BO]]", noticias_por_pais.get("BO", ""))
+    layout_finalizado = layout_finalizado.replace("[[NOTICIAS_PY]]", noticias_por_pais.get("PY", ""))
     # ========================================
 
     with open("index.html", "w", encoding="utf-8") as file:
