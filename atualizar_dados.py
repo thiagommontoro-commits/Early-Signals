@@ -69,12 +69,16 @@ def buscar_projecoes_focus(ano_alvo):
         url = f"https://olinda.bcb.gov.br/olinda/servico/Expectativas/versao/v1/odata/ExpectativasMercadoAnuais?$filter={filtro_encoded}&$orderby=Data%20desc&$top=40&$format=json"
         
         dados = json.loads(urllib.request.urlopen(urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'}), timeout=10).read())
+        
+        encontrados = set()
         for item in dados.get("value", []):
-            # Voltando a usar a MEDIANA para bater exatamente com as manchetes oficiais do Focus
-            if item.get("Indicador") == "Selic" and item.get("Mediana"): selic_proj = float(item["Mediana"])
-            elif item.get("Indicador") == "Câmbio" and item.get("Mediana"): dolar_proj = float(item["Mediana"])
-            elif item.get("Indicador") == "IPCA" and item.get("Mediana"): ipca_proj = float(item["Mediana"])
-            elif item.get("Indicador") == "PIB Total" and item.get("Mediana"): pib_proj = float(item["Mediana"])
+            ind = item.get("Indicador")
+            if ind not in encontrados and item.get("Mediana") is not None:
+                if ind == "Selic": selic_proj = float(item["Mediana"])
+                elif ind == "Câmbio": dolar_proj = float(item["Mediana"])
+                elif ind == "IPCA": ipca_proj = float(item["Mediana"])
+                elif ind == "PIB Total": pib_proj = float(item["Mediana"])
+                encontrados.add(ind)
     except Exception as e: 
         print(f"Aviso Focus: {e}")
 
@@ -309,13 +313,21 @@ def gerar_relatorio():
     data_hoje = datetime.datetime.now().strftime("%b %d, %Y").upper()
     m_atual, m_anterior, m_atras = calcular_meses_rolantes()
     
+    # Determinar o ano atual dinamicamente para o Focus
+    ano_atual = str(datetime.datetime.now().year)
+    
     dados_m2 = HISTORICO_MACRO.get(m_atras, {"selic": "--,--%", "cdi": "--,--%", "juros": "--,--%", "dolar": "R$ --,--", "ipca": "--,--%", "pib": "--,--%", "soja": "R$ --,--"})
     dados_m1 = HISTORICO_MACRO.get(m_anterior, {"selic": "--,--%", "cdi": "--,--%", "juros": "--,--%", "dolar": "R$ --,--", "ipca": "--,--%", "pib": "--,--%", "soja": "R$ --,--"})
     
     dolar_oficial, selic_oficial, cdi_oficial, juros_agro_oficial, ipca_oficial = buscar_dados_oficiais()
+    
+    # Puxar dados do Focus para o ano atual (para obter o PIB do ano corrente dinamicamente)
+    projecoes_atual = buscar_projecoes_focus(ano_atual)
+    pib_oficial = projecoes_atual['pib']
+    
+    # Puxar dados do Focus para o ano de projeção futura (2027)
     projecoes_focus = buscar_projecoes_focus(ANO_PROJECAO)
     soja_hoje, soja_proj = buscar_precos_soja(projecoes_focus['dolar'], ANO_PROJECAO)
-    pib_oficial = "2,30%"
 
     selic_var_mes = calcular_variacao_pp(selic_oficial, dados_m1['selic'])
     selic_var_ano = calcular_variacao_pp(selic_oficial, CONSOLIDADO_2025['selic'])
@@ -447,7 +459,6 @@ def gerar_relatorio():
                 // AEM DATA RECEIPT: SCHEDULED RUN ACTIVE. FOCUS ESTIMATES SHIFTED TO HISTORICAL MEDIAN TRACKING. CROSS-RATE COMMODITY INGESTION OPERATIONAL FOR TARGET YEAR ANO_FUTURO_PLACEHOLDER.
             </div>
 
-            <!-- Navegação por Abas -->
             <div class="tabs-nav" translate="no">
                 <button class="tab-btn active" onclick="openCountry(event, 'brazil')">🇧🇷 Brasil</button>
                 <button class="tab-btn" onclick="openCountry(event, 'argentina')">🇦🇷 Argentina</button>
@@ -462,7 +473,7 @@ def gerar_relatorio():
 
             <div id="brazil" class="tab-content active">
                 <h2 class="country-title">🇧🇷 BRAZIL <span class="highlight-tag">MARKET & MACRO ALERTS</span></h2>
-                <div class="news-grid"><!-- NOTICIAS_BR --></div>
+                <div class="news-grid"></div>
                 
                 <div class="macro-section">
                     <h3 class="macro-title">📊 1. MACROECONOMIA & COMMODITIES <span class="tag-brasil">BRASIL</span></h3>
@@ -558,35 +569,35 @@ def gerar_relatorio():
 
             <div id="argentina" class="tab-content">
                 <h2 class="country-title">🇦🇷 ARGENTINA <span class="highlight-tag">MARKET & MACRO ALERTS</span></h2>
-                <div class="news-grid"><!-- NOTICIAS_AR --></div>
+                <div class="news-grid"></div>
             </div>
             <div id="chile" class="tab-content">
                 <h2 class="country-title">🇨🇱 CHILE <span class="highlight-tag">MARKET & MACRO ALERTS</span></h2>
-                <div class="news-grid"><!-- NOTICIAS_CL --></div>
+                <div class="news-grid"></div>
             </div>
             <div id="uruguay" class="tab-content">
                 <h2 class="country-title">🇺🇾 URUGUAY <span class="highlight-tag">MARKET & MACRO ALERTS</span></h2>
-                <div class="news-grid"><!-- NOTICIAS_UY --></div>
+                <div class="news-grid"></div>
             </div>
             <div id="paraguay" class="tab-content">
                 <h2 class="country-title">🇵🇾 PARAGUAY <span class="highlight-tag">MARKET & MACRO ALERTS</span></h2>
-                <div class="news-grid"><!-- NOTICIAS_PY --></div>
+                <div class="news-grid"></div>
             </div>
             <div id="peru" class="tab-content">
                 <h2 class="country-title">🇵🇪 PERU <span class="highlight-tag">MARKET & MACRO ALERTS</span></h2>
-                <div class="news-grid"><!-- NOTICIAS_PE --></div>
+                <div class="news-grid"></div>
             </div>
             <div id="bolivia" class="tab-content">
                 <h2 class="country-title">🇧🇴 BOLIVIA <span class="highlight-tag">MARKET & MACRO ALERTS</span></h2>
-                <div class="news-grid"><!-- NOTICIAS_BO --></div>
+                <div class="news-grid"></div>
             </div>
             <div id="mexico" class="tab-content">
                 <h2 class="country-title">🇲🇽 MEXICO <span class="highlight-tag">MARKET & MACRO ALERTS</span></h2>
-                <div class="news-grid"><!-- NOTICIAS_MX --></div>
+                <div class="news-grid"></div>
             </div>
             <div id="colombia" class="tab-content">
                 <h2 class="country-title">🇨🇴 COLOMBIA <span class="highlight-tag">MARKET & MACRO ALERTS</span></h2>
-                <div class="news-grid"><!-- NOTICIAS_CO --></div>
+                <div class="news-grid"></div>
             </div>
 
         </div>
@@ -624,7 +635,7 @@ def gerar_relatorio():
             }
         }
     </script>
-    <script type="text/javascript" src=https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit></script>
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>"""
 
@@ -734,12 +745,12 @@ def gerar_relatorio():
         print(f"Aviso de IA: O sistema irá utilizar o banco de segurança robusto de contingência. Erro: {e}")
 
     for k in ["BR", "AR", "MX", "CO", "UY", "PE", "CL", "BO", "PY"]:
-        layout_finalizado = layout_finalizado.replace(f"<!-- NOTICIAS_{k} -->", noticias_por_pais[k])
+        layout_finalizado = layout_finalizado.replace(f"", noticias_por_pais[k])
     
     with open("index.html", "w", encoding="utf-8") as file:
         file.write(layout_finalizado.strip())
         
-    print("Sucesso! Painel atualizado e HTML guardado em index.html.")
+    print("Sucesso! Painel updated e HTML guardado em index.html.")
 
 if __name__ == "__main__":
     gerar_relatorio()
