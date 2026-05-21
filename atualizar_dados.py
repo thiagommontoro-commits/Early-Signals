@@ -1,37 +1,11 @@
 import os
 import datetime
 import json
-import urllib.request
-import urllib.parse
-import re
 from google import genai
 from google.genai import types
 
 # ==========================================
-# 1. DADOS ESTÁTICOS DO PASSADO (Dados reais oficiais BCB/IBGE/Cepea)
-# ==========================================
-HISTORICO_MACRO = {
-    "MAR/2026": {"selic": "14,50%", "cdi": "14,40%", "juros": "19,00%", "dolar": "R$ 5,34", "ipca": "4,14%", "pib": "2,20%", "soja": "R$ 113,52"},
-    "APR/2026": {"selic": "14,50%", "cdi": "14,40%", "juros": "19,00%", "dolar": "R$ 5,11", "ipca": "4,39%", "pib": "2,20%", "soja": "R$ 112,70"},
-    "MAY/2026": {"selic": "14,75%", "cdi": "14,65%", "juros": "19,25%", "dolar": "R$ 5,28", "ipca": "4,39%", "pib": "2,00%", "soja": "R$ 129,25"},
-}
-
-CONSOLIDADO_2025 = {
-    "selic": "14,25%", "cdi": "14,15%", "juros": "18,75%", "dolar": "R$ 5,63", 
-    "ipca": "4,26%", "pib": "2,90%", "soja": "R$ 124,14"
-}
-
-ANO_PROJECAO = "2027"
-
-# Cabeçalhos corporativos de rede para evitar bloqueios de segurança do GitHub Actions
-HEADERS_ANTI_BLOCK = {
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36',
-    'Accept': 'text/html,application/json,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-    'Accept-Language': 'pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7',
-}
-
-# ==========================================
-# 2. CAPTURA DE DADOS DINÂMICOS (APIs & SCRAPING)
+# 1. FUNÇÕES BASE
 # ==========================================
 
 def calcular_meses_rolantes():
@@ -42,117 +16,8 @@ def calcular_meses_rolantes():
     m2_idx, m2_year = (m1_idx - 1) if m1_idx > 0 else 11, m1_year if m1_idx > 0 else m1_year - 1
     return f"{meses_en[m0_idx]}/{m0_year}", f"{meses_en[m1_idx]}/{m1_year}", f"{meses_en[m2_idx]}/{m2_year}"
 
-def buscar_dados_oficiais():
-    print("A procurar indicadores macroeconómicos em tempo real (Brasil API e AwesomeAPI)...")
-    dolar_str, selic_str, cdi_str, juros_agro_str, ipca_str = "R$ 5,28", "14,75%", "14,65%", "19,25%", "4,39%"
-    
-    # 1. Câmbio Spot USD/BRL via AwesomeAPI
-    try:
-        url_usd = "https://economia.awesomeapi.com.br/last/USD-BRL"
-        req = urllib.request.Request(url_usd, headers=HEADERS_ANTI_BLOCK)
-        dados_dolar = json.loads(urllib.request.urlopen(req, timeout=10).read())
-        dolar_str = f"R$ {float(dados_dolar['USDBRL']['bid']):.2f}".replace('.', ',')
-    except Exception as e:
-        print(f"Aviso AwesomeAPI (Mantendo Fallback): {e}")
-        
-    # 2. Selic e IPCA via Brasil API (Ultra estável para nuvem)
-    try:
-        url_taxas = "https://brasilapi.com.br/api/taxas/v1"
-        req = urllib.request.Request(url_taxas, headers=HEADERS_ANTI_BLOCK)
-        dados_taxas = json.loads(urllib.request.urlopen(req, timeout=10).read())
-        for taxa in dados_taxas:
-            if taxa.get('nome') == 'Selic':
-                s = float(taxa['valor'])
-                selic_str = f"{s:.2f}%".replace('.', ',')
-                cdi_str = f"{(s - 0.10):.2f}%".replace('.', ',')
-                juros_agro_str = f"{(s + 4.50):.2f}%".replace('.', ',')
-            elif taxa.get('nome') == 'IPCA':
-                ipca_str = f"{float(taxa['valor']):.2f}%".replace('.', ',')
-    except Exception as e:
-        print(f"Aviso Brasil API (Mantendo Fallback): {e}")
-        
-    return dolar_str, selic_str, cdi_str, juros_agro_str, ipca_str
-
-def buscar_projecoes_focus(ano_alvo):
-    print(f"A extrair expectativas MEDIANAS de mercado (Focus BCB) para {ano_alvo}...")
-    selic_proj, dolar_proj, ipca_proj, pib_proj = 10.50, 5.10, 4.10, 2.00
-    try:
-        filtro = f"(Indicador eq 'Selic' or Indicador eq 'Câmbio' or Indicador eq 'IPCA' or Indicador eq 'PIB Total') and DataReferencia eq '{ano_alvo}'"
-        url = f"https://olinda.bcb.gov.br/olinda/servico/Expectativas/versao/v1/odata/ExpectativasMercadoAnuais?$filter={urllib.parse.quote(filtro)}&$orderby=Data%20desc&$top=40&$format=json"
-        
-        req = urllib.request.Request(url, headers=HEADERS_ANTI_BLOCK)
-        dados = json.loads(urllib.request.urlopen(req, timeout=15).read())
-        
-        encontrados = set()
-        for item in dados.get("value", []):
-            ind = item.get("Indicador")
-            if ind not in encontrados and item.get("Mediana") is not None:
-                if ind == "Selic": selic_proj = float(item["Mediana"])
-                elif ind == "Câmbio": dolar_proj = float(item["Mediana"])
-                elif ind == "IPCA": ipca_proj = float(item["Mediana"])
-                elif ind == "PIB Total": pib_proj = float(item["Mediana"])
-                encontrados.add(ind)
-    except Exception as e: 
-        print(f"Aviso Focus BCB: {e}")
-
-    return {
-        "selic": f"{selic_proj:.2f}%".replace('.', ','), 
-        "cdi": f"{(selic_proj - 0.10):.2f}%".replace('.', ','),
-        "juros": f"{(selic_proj + 4.50):.2f}%".replace('.', ','), 
-        "dolar": f"R$ {dolar_proj:.2f}".replace('.', ','),
-        "ipca": f"{ipca_proj:.2f}%".replace('.', ','), 
-        "pib": f"{pib_proj:.2f}%".replace('.', ',')
-    }
-
-def buscar_precos_soja(dolar_proj_str, ano_proj):
-    print(f"A executar Motor de Scraping: Soja Físico e Soja B3 Futuro ({ano_proj})...")
-    soja_hoje_brl, soja_futuro_brl = "R$ 129,25", "R$ 136,40"
-    try: 
-        dol_proj = float(dolar_proj_str.replace('R$', '').replace(',', '.').strip())
-    except: 
-        dol_proj = 5.25
-
-    try:
-        url_soja = "https://www.noticiasagricolas.com.br/cotacoes/soja/soja-porto-paranagua-pr"
-        req = urllib.request.Request(url_soja, headers=HEADERS_ANTI_BLOCK)
-        text_fis = re.sub(r'<[^>]+>', ' ', urllib.request.urlopen(req, timeout=10).read().decode('utf-8'))
-        matches_fis = re.findall(r'R\$\s*(\d{3}[,.]\d{2})', text_fis)
-        if matches_fis: soja_hoje_brl = f"R$ {matches_fis[0].replace('.', ',')}"
-    except Exception as e:
-        print(f"Aviso Scraping Soja Físico: {e}")
-
-    try:
-        url_b3 = "https://www.noticiasagricolas.com.br/cotacoes/soja/soja-b3"
-        req = urllib.request.Request(url_b3, headers=HEADERS_ANTI_BLOCK)
-        text_b3 = re.sub(r'<[^>]+>', ' ', urllib.request.urlopen(req, timeout=10).read().decode('utf-8'))
-        matches_b3 = re.findall(r'[A-Za-z]{3}/' + str(ano_proj)[-2:] + r'\s+([\d]{2}[,.]\d{2})', text_b3, re.IGNORECASE)
-        if matches_b3: 
-            soja_futuro_brl = f"R$ {(float(matches_b3[0].replace(',', '.')) * dol_proj):.2f}".replace('.', ',')
-        else: 
-            soja_futuro_brl = f"R$ {(float(soja_hoje_brl.replace('R$', '').replace(',', '.').strip()) * 1.05):.2f}".replace('.', ',')
-    except Exception as e:
-        print(f"Aviso Scraping Soja Futuro: {e}")
-    
-    return soja_hoje_brl, soja_futuro_brl
-
-def parse_float(valor_str):
-    try: return float(valor_str.replace('%', '').replace('R$', '').replace(' ', '').replace(',', '.').strip())
-    except: return 0.0
-
-def calcular_variacao_pp(v_atual, v_ant):
-    diff = parse_float(v_atual) - parse_float(v_ant)
-    if diff > 0: return f'<span class="macro-badge red">● +{diff:.2f} PP</span>'
-    elif diff < 0: return f'<span class="macro-badge green">● {diff:.2f} PP</span>'
-    else: return '<span class="macro-badge yellow">● 0,00 PP</span>'
-
-def calcular_variacao_cambio(v_atual, v_ant):
-    diff = parse_float(v_atual) - parse_float(v_ant)
-    if diff > 0: return f'<span class="macro-badge red">● +R$ {diff:.2f}</span>'
-    elif diff < 0: return f'<span class="macro-badge green">● -R$ {abs(diff):.2f}</span>'
-    else: return '<span class="macro-badge yellow">● R$ 0,00</span>'
-
 # ==========================================
-# 3. BASE DE DADOS DE NOTÍCIAS DE CONTINGÊNCIA (FALLBACK)
+# 2. BASE DE DADOS DE NOTÍCIAS DE CONTINGÊNCIA (FALLBACK)
 # ==========================================
 def obter_noticias_fallback(codigo_pais):
     temas = {
@@ -220,41 +85,13 @@ def construir_card_noticia(item):
     return f"<div class='news-item'><div class='news-header'><h3 class='news-headline'>{item.get('headline')}</h3><span class='farol farol-{item.get('farol_texto', 'warning').lower()}'><span class='farol-dot'></span>{item.get('farol_texto', 'Warning')}</span></div><div class='news-content'>{item.get('content')}</div><div class='impact-box'><div class='impact-title'>⚠️ Impacto Estimado Vendas AGCO</div><ul class='impact-list'>{impacts_html}</ul><a href='#' class='source-link'>Fonte: {item.get('source')}</a></div></div>"
 
 # ==========================================
-# 4. COMPOSIÇÃO FINAL DO RELATÓRIO (BLINDADA CONTRA MEMORY ERROR)
+# 3. COMPOSIÇÃO FINAL DO RELATÓRIO
 # ==========================================
 def gerar_relatorio():
     data_hoje = datetime.datetime.now().strftime("%b %d, %Y").upper()
     m_atual, m_anterior, m_atras = calcular_meses_rolantes()
-    ano_atual = str(datetime.datetime.now().year)
-    
-    dados_m2 = HISTORICO_MACRO.get(m_atras)
-    dados_m1 = HISTORICO_MACRO.get(m_anterior)
-    
-    # Execução das chamadas de API de forma encadeada e segura
-    dolar_oficial, selic_oficial, cdi_oficial, juros_agro_oficial, ipca_oficial = buscar_dados_oficiais()
-    projecoes_atual = buscar_projecoes_focus(ano_atual)
-    pib_oficial = projecoes_atual['pib']
-    
-    projecoes_focus = buscar_projecoes_focus(ANO_PROJECAO)
-    soja_hoje, soja_proj = buscar_precos_soja(projecoes_focus['dolar'], ANO_PROJECAO)
 
-    # Geração dos badges de variação percentual / cambial real
-    selic_var_mes = calcular_variacao_pp(selic_oficial, dados_m1['selic'])
-    selic_var_ano = calcular_variacao_pp(selic_oficial, CONSOLIDADO_2025['selic'])
-    cdi_var_mes = calcular_variacao_pp(cdi_oficial, dados_m1['cdi'])
-    cdi_var_ano = calcular_variacao_pp(cdi_oficial, CONSOLIDADO_2025['cdi'])
-    juros_var_mes = calcular_variacao_pp(juros_agro_oficial, dados_m1['juros'])
-    juros_var_ano = calcular_variacao_pp(juros_agro_oficial, CONSOLIDADO_2025['juros'])
-    dolar_var_mes = calcular_variacao_cambio(dolar_oficial, dados_m1['dolar'])
-    dolar_var_ano = calcular_variacao_cambio(dolar_oficial, CONSOLIDADO_2025['dolar'])
-    ipca_var_mes = calcular_variacao_pp(ipca_oficial, dados_m1['ipca'])
-    ipca_var_ano = calcular_variacao_pp(ipca_oficial, CONSOLIDADO_2025['ipca'])
-    pib_var_mes = calcular_variacao_pp(pib_oficial, dados_m1['pib'])
-    pib_var_ano = calcular_variacao_pp(pib_oficial, CONSOLIDADO_2025['pib'])
-    soja_var_mes = calcular_variacao_cambio(soja_hoje, dados_m1['soja'])
-    soja_var_ano = calcular_variacao_cambio(soja_hoje, CONSOLIDADO_2025['soja'])
-
-    # Estrutura do Layout HTML Corporativo Integrada (Blindagem com Marcadores de Colchetes)
+    # Estrutura do Layout HTML SEM A TABELA MACRO/COMMODITIES
     layout_base = """<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -332,20 +169,6 @@ def gerar_relatorio():
         .source-link { display: block; margin-top: 15px; font-size: 11px; color: var(--agco-red); text-decoration: none; font-weight: bold; text-align: right; letter-spacing: 1px; text-transform: uppercase; }
         .source-link:hover { color: var(--agco-black); }
         
-        .macro-section { margin-top: 40px; background-color: var(--white); border: 1px solid #e0e0e0; padding: 25px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); border-radius: 4px; }
-        .macro-title { font-size: 20px; font-weight: 900; text-transform: uppercase; margin-top: 0; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; border-bottom: 2px solid #ddd; padding-bottom: 10px; color: var(--agco-black); }
-        .macro-title .tag-brasil { background-color: var(--agco-black); color: var(--white); padding: 4px 8px; font-size: 12px; letter-spacing: 1px; }
-        .macro-table { width: 100%; border-collapse: collapse; font-size: 13px; text-align: center; }
-        .macro-table th { background-color: var(--agco-black); color: var(--white); padding: 14px 10px; font-weight: bold; border-bottom: 4px solid var(--agco-red); text-transform: uppercase; }
-        .macro-table td { padding: 12px 10px; border-bottom: 1px solid #eee; color: var(--agco-dark-gray); }
-        .macro-table tr:last-child td { border-bottom: none; }
-        .macro-table td:first-child { text-align: left; font-weight: bold; color: var(--agco-black); width: 25%; }
-        .macro-badge { display: inline-block; padding: 4px 8px; border-radius: 4px; font-weight: bold; font-size: 11px; text-transform: uppercase; }
-        .macro-badge.yellow { background-color: var(--farol-amarelo-bg); color: var(--farol-amarelo-text); }
-        .macro-badge.green { background-color: var(--farol-verde-bg); color: var(--farol-verde-text); }
-        .macro-badge.red { background-color: var(--farol-vermelho-bg); color: var(--farol-vermelho-text); }
-        .macro-source { font-size: 11px; color: #777; margin-top: 15px; font-style: italic; }
-        
         .footer { background-color: var(--agco-black); color: #777777; text-align: center; padding: 25px; font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; border-top: 4px solid var(--agco-red); }
     </style>
 </head>
@@ -367,7 +190,7 @@ def gerar_relatorio():
         </div>
         <div class="content-wrapper">
             <div class="alert-banner" translate="no">
-                // AEM DATA RECEIPT: SCHEDULED RUN ACTIVE. FOCUS ESTIMATES SHIFTED TO HISTORICAL MEDIAN TRACKING. AGRISHOW 2026 BUSINESS INTENTIONS CONSOLIDATED AT R$ 11.4B. CROSS-RATE COMMODITY INGESTION OPERATIONAL FOR TARGET YEAR ANO_FUTURO_PLACEHOLDER.
+                // AEM DATA RECEIPT: SCHEDULED RUN ACTIVE. AGRISHOW 2026 BUSINESS INTENTIONS CONSOLIDATED AT R$ 11.4B.
             </div>
 
             <div class="tabs-nav" translate="no">
@@ -385,97 +208,6 @@ def gerar_relatorio():
             <div id="brazil" class="tab-content active">
                 <h2 class="country-title">🇧🇷 BRAZIL <span class="highlight-tag">MARKET & MACRO ALERTS</span></h2>
                 <div class="news-grid">[[NOTICIAS_BR]]</div>
-                
-                <div class="macro-section">
-                    <h3 class="macro-title">📊 1. MACROECONOMIA & COMMODITIES <span class="tag-brasil">BRASIL</span></h3>
-                    <table class="macro-table">
-                        <thead>
-                            <tr>
-                                <th>INDICADOR</th>
-                                <th>CONSOLIDADO 2025</th>
-                                <th>M_ATRAS_PLACEHOLDER</th>
-                                <th>M_ANTERIOR_PLACEHOLDER</th>
-                                <th>M_ATUAL_PLACEHOLDER (ATUAL)</th>
-                                <th>VAR. MÊS</th>
-                                <th>VAR. ANO</th>
-                                <th>ANO_FUTURO_PLACEHOLDER</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Taxa Selic (Meta BCB)</td>
-                                <td>SELIC_2025_PLACEHOLDER</td>
-                                <td>SELIC_M2_PLACEHOLDER</td>
-                                <td>SELIC_M1_PLACEHOLDER</td>
-                                <td>SELIC_M0_PLACEHOLDER</td>
-                                <td>SELIC_VAR_MES_PLACEHOLDER</td>
-                                <td>SELIC_VAR_ANO_PLACEHOLDER</td>
-                                <td>SELIC_PROJ_PLACEHOLDER</td>
-                            </tr>
-                            <tr>
-                                <td>Taxa CDI (a.a.)</td>
-                                <td>CDI_2025_PLACEHOLDER</td>
-                                <td>CDI_M2_PLACEHOLDER</td>
-                                <td>CDI_M1_PLACEHOLDER</td>
-                                <td>CDI_M0_PLACEHOLDER</td>
-                                <td>CDI_VAR_MES_PLACEHOLDER</td>
-                                <td>CDI_VAR_ANO_PLACEHOLDER</td>
-                                <td>CDI_PROJ_PLACEHOLDER</td>
-                            </tr>
-                            <tr>
-                                <td>Juros Comerciais Agro</td>
-                                <td>JUROS_2025_PLACEHOLDER</td>
-                                <td>JUROS_M2_PLACEHOLDER</td>
-                                <td>JUROS_M1_PLACEHOLDER</td>
-                                <td>JUROS_M0_PLACEHOLDER</td>
-                                <td>JUROS_VAR_MES_PLACEHOLDER</td>
-                                <td>JUROS_VAR_ANO_PLACEHOLDER</td>
-                                <td>JUROS_PROJ_PLACEHOLDER</td>
-                            </tr>
-                            <tr>
-                                <td>Câmbio (USD/BRL)</td>
-                                <td>DOLAR_2025_PLACEHOLDER</td>
-                                <td>DOLAR_M2_PLACEHOLDER</td>
-                                <td>DOLAR_M1_PLACEHOLDER</td>
-                                <td>DOLAR_M0_PLACEHOLDER</td>
-                                <td>DOLAR_VAR_MES_PLACEHOLDER</td>
-                                <td>DOLAR_VAR_ANO_PLACEHOLDER</td>
-                                <td>DOLAR_PROJ_PLACEHOLDER</td>
-                            </tr>
-                            <tr>
-                                <td>IPCA (Inflação Acum. 12m)</td>
-                                <td>IPCA_2025_PLACEHOLDER</td>
-                                <td>IPCA_M2_PLACEHOLDER</td>
-                                <td>IPCA_M1_PLACEHOLDER</td>
-                                <td>IPCA_M0_PLACEHOLDER</td>
-                                <td>IPCA_VAR_MES_PLACEHOLDER</td>
-                                <td>IPCA_VAR_ANO_PLACEHOLDER</td>
-                                <td>IPCA_PROJ_PLACEHOLDER</td>
-                            </tr>
-                            <tr>
-                                <td>Crescimento PIB Brasil (a.a.)</td>
-                                <td>PIB_2025_PLACEHOLDER</td>
-                                <td>PIB_M2_PLACEHOLDER</td>
-                                <td>PIB_M1_PLACEHOLDER</td>
-                                <td>PIB_M0_PLACEHOLDER</td>
-                                <td>PIB_VAR_MES_PLACEHOLDER</td>
-                                <td>PIB_VAR_ANO_PLACEHOLDER</td>
-                                <td>PIB_PROJ_PLACEHOLDER</td>
-                            </tr>
-                            <tr>
-                                <td>Preço da Soja (Sc 60kg - Cepea/B3)</td>
-                                <td>SOJA_2025_PLACEHOLDER</td>
-                                <td>SOJA_M2_PLACEHOLDER</td>
-                                <td>SOJA_M1_PLACEHOLDER</td>
-                                <td>SOJA_M0_PLACEHOLDER</td>
-                                <td>SOJA_VAR_MES_PLACEHOLDER</td>
-                                <td>SOJA_VAR_ANO_PLACEHOLDER</td>
-                                <td>SOJA_PROJ_PLACEHOLDER</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div class="macro-source">*Fonte: AwesomeAPI, Brasil API, BCB Olinda (Focus) e Notícias Agrícolas. Processamento via AGCO Core Pipeline.</div>
-                </div>
             </div>
 
             <div id="argentina" class="tab-content"><h2 class="country-title">🇦🇷 ARGENTINA <span class="highlight-tag">MARKET & MACRO ALERTS</span></h2><div class="news-grid">[[NOTICIAS_AR]]</div></div>
@@ -526,27 +258,7 @@ def gerar_relatorio():
 </body>
 </html>"""
 
-    # Executar a injeção mapeada dos valores macro
-    substituicoes = {
-        "DATA_HOJE_PLACEHOLDER": data_hoje,
-        "M_ATRAS_PLACEHOLDER": m_atras, "M_ANTERIOR_PLACEHOLDER": m_anterior, "M_ATUAL_PLACEHOLDER": m_atual, "ANO_FUTURO_PLACEHOLDER": ANO_PROJECAO,
-        "SELIC_2025_PLACEHOLDER": CONSOLIDADO_2025["selic"], "CDI_2025_PLACEHOLDER": CONSOLIDADO_2025["cdi"], "JUROS_2025_PLACEHOLDER": CONSOLIDADO_2025["juros"], "DOLAR_2025_PLACEHOLDER": CONSOLIDADO_2025["dolar"], "IPCA_2025_PLACEHOLDER": CONSOLIDADO_2025["ipca"], "PIB_2025_PLACEHOLDER": CONSOLIDADO_2025["pib"], "SOJA_2025_PLACEHOLDER": CONSOLIDADO_2025["soja"],
-        "SELIC_M2_PLACEHOLDER": dados_m2['selic'], "CDI_M2_PLACEHOLDER": dados_m2['cdi'], "JUROS_M2_PLACEHOLDER": dados_m2['juros'], "DOLAR_M2_PLACEHOLDER": dados_m2['dolar'], "IPCA_M2_PLACEHOLDER": dados_m2['ipca'], "PIB_M2_PLACEHOLDER": dados_m2['pib'], "SOJA_M2_PLACEHOLDER": dados_m2['soja'],
-        "SELIC_M1_PLACEHOLDER": dados_m1['selic'], "CDI_M1_PLACEHOLDER": dados_m1['cdi'], "JUROS_M1_PLACEHOLDER": dados_m1['juros'], "DOLAR_M1_PLACEHOLDER": dados_m1['dolar'], "IPCA_M1_PLACEHOLDER": dados_m1['ipca'], "PIB_M1_PLACEHOLDER": dados_m1['pib'], "SOJA_M1_PLACEHOLDER": dados_m1['soja'],
-        "SELIC_M0_PLACEHOLDER": selic_oficial, "CDI_M0_PLACEHOLDER": cdi_oficial, "JUROS_M0_PLACEHOLDER": juros_agro_oficial, "DOLAR_M0_PLACEHOLDER": dolar_oficial, "IPCA_M0_PLACEHOLDER": ipca_oficial, "PIB_M0_PLACEHOLDER": pib_oficial, "SOJA_M0_PLACEHOLDER": soja_hoje,
-        "SELIC_PROJ_PLACEHOLDER": projecoes_focus["selic"], "CDI_PROJ_PLACEHOLDER": projecoes_focus["cdi"], "JUROS_PROJ_PLACEHOLDER": projecoes_focus["juros"], "DOLAR_PROJ_PLACEHOLDER": projecoes_focus["dolar"], "IPCA_PROJ_PLACEHOLDER": projecoes_focus["ipca"], "PIB_PROJ_PLACEHOLDER": projecoes_focus["pib"], "SOJA_PROJ_PLACEHOLDER": soja_proj,
-        "SELIC_VAR_MES_PLACEHOLDER": selic_var_mes, "SELIC_VAR_ANO_PLACEHOLDER": selic_var_ano,
-        "CDI_VAR_MES_PLACEHOLDER": cdi_var_mes, "CDI_VAR_ANO_PLACEHOLDER": cdi_var_ano,
-        "JUROS_VAR_MES_PLACEHOLDER": juros_var_mes, "JUROS_VAR_ANO_PLACEHOLDER": juros_var_ano,
-        "DOLAR_VAR_MES_PLACEHOLDER": dolar_var_mes, "DOLAR_VAR_ANO_PLACEHOLDER": dolar_var_ano,
-        "IPCA_VAR_MES_PLACEHOLDER": ipca_var_mes, "IPCA_VAR_ANO_PLACEHOLDER": ipca_var_ano,
-        "PIB_VAR_MES_PLACEHOLDER": pib_var_mes, "PIB_VAR_ANO_PLACEHOLDER": pib_var_ano,
-        "SOJA_VAR_MES_PLACEHOLDER": soja_var_mes, "SOJA_VAR_ANO_PLACEHOLDER": soja_var_ano
-    }
-
-    html_finalizado = layout_base
-    for k, v in substituicoes.items():
-        html_finalizado = html_finalizado.replace(k, str(v))
+    html_finalizado = layout_base.replace("DATA_HOJE_PLACEHOLDER", data_hoje)
 
     # GERAÇÃO DO PROMPT DA INTELIGÊNCIA ARTIFICIAL (GEMINI)
     client = genai.Client(api_key=os.environ.get("GEMINI_API_KEY"))
@@ -580,7 +292,7 @@ def gerar_relatorio():
     noticias_por_pais = {k: obter_noticias_fallback(k) for k in ["BR", "AR", "MX", "CO", "UY", "PE", "CL", "BO", "PY"]}
     
     try:
-        print("A solicitar à IA o processamento estruturado das 36 notícias e 216 matrizes de impacto via JSON...")
+        print("A solicitar à IA o processamento estruturado das notícias via JSON...")
         response = client.models.generate_content(model='gemini-2.5-flash', contents=prompt, config=types.GenerateContentConfig(response_mime_type="application/json"))
         dados_noticias = json.loads(response.text)
         mapa_chaves = {"BRASIL": "BR", "ARGENTINA": "AR", "MEXICO": "MX", "COLOMBIA": "CO", "URUGUAY": "UY", "PERU": "PE", "CHILE": "CL", "BOLIVIA": "BO", "PARAGUAY": "PY"}
@@ -591,7 +303,7 @@ def gerar_relatorio():
     except Exception as e:
         print(f"Aviso de IA: O sistema irá utilizar o banco de segurança robusto de contingência. Erro: {e}")
 
-    # Substituição limpa de blocos via colchetes imunes (Fim do MemoryError)
+    # Substituição limpa de blocos via colchetes imunes
     for sigla_p, codigo_p in [("BR", "BR"), ("AR", "AR"), ("MX", "MX"), ("CO", "CO"), ("UY", "UY"), ("PE", "PE"), ("CL", "CL"), ("BO", "BO"), ("PY", "PY")]:
         html_finalizado = html_finalizado.replace(f"[[NOTICIAS_{sigla_p}]]", noticias_por_pais.get(codigo_p, ""))
 
