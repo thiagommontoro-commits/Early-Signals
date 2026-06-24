@@ -1,4 +1,4 @@
-name: LATAM Executive Weekly Intelligence Pipeline
+name: LATAM Intelligence Pipeline
 
 on:
   schedule:
@@ -6,40 +6,31 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-and-update:
+  update-dashboard:
     runs-on: ubuntu-latest
-
+    permissions:
+      contents: write # Essencial para o bot conseguir editar o ficheiro
     steps:
-    - name: Checkout do Repositório
-      uses: actions/checkout@v4
-      with:
-        fetch-depth: 0
+      - name: Checkout
+        uses: actions/checkout@v4
 
-    - name: Configurar Ambiente Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: '3.10'
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
 
-    - name: Instalar Dependências Operacionais
-      run: |
-        python -m pip install --upgrade pip
-        pip install google-genai google-generativeai requests pandas
+      - name: Install dependencies
+        run: pip install google-genai requests
 
-    - name: Executar Pipeline AGCO Early Warning
-      env:
-        GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-      run: |
-        python atualizar_dados.py 
+      - name: Run Script
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python atualizar_dados.py
 
-    - name: Sincronizar, Commit e Push via Git Bot
-      run: |
-        git config --global user.name 'github-actions[bot]'
-        git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-        
-        git add .
-        
-        git commit -m "Auto-update: Painel Early Warning atualizado via Bot" || echo "Nenhuma alteração detectada no painel esta semana."
-        
-        git pull origin main --rebase
-        
-        git push origin main
+      - name: Commit and Push
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add index.html
+          git commit -m "Auto-update: Painel atualizado via Pipeline" || echo "Sem alterações para commit"
+          git push origin main
