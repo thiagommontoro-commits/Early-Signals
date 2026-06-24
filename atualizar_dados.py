@@ -59,9 +59,9 @@ def gerar_relatorio():
         dados_api = response.json()
         texto_limpo = dados_api['candidates'][0]['content']['parts'][0]['text'].strip()
         
+        # BLOCO CORRIGIDO: Limpeza de texto sem erro de quebra de linha
         if texto_limpo.startswith("```json"):
-            texto_limpo = texto_limpo.split("
-```json")[1].split("```")[0].strip()
+            texto_limpo = texto_limpo.split("```json")[1].split("```")[0].strip()
         elif texto_limpo.startswith("```"):
             texto_limpo = texto_limpo.split("
 ```")[1].split("```")[0].strip()
