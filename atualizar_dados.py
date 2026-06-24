@@ -1,15 +1,17 @@
 import os
 import datetime
 import json
-import requests
+import urllib.request
+import urllib.error
 
 def gerar_relatorio():
     data_hoje = datetime.datetime.now().strftime("%d de JUN de 2026 às %H:%M").upper()
     
     api_key = os.environ.get("GEMINI_API_KEY")
+    
     if not api_key:
-        print("Erro crítico: GEMINI_API_KEY não foi encontrada.")
-        raise ValueError("Chave da API ausente.")
+        print("ERRO: A variável de ambiente 'GEMINI_API_KEY' não foi encontrada.")
+        return
 
     prompt = """
     Você é um analista especialista em inteligência de mercado de maquinário agrícola na América Latina.
@@ -34,41 +36,41 @@ def gerar_relatorio():
     }
     """
 
-    print("A solicitar processamento ao Gemini via Conexão Direta (REST API)...")
+    print("A solicitar processamento ao Gemini 1.5 Flash via Python Nativo...")
     
-    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={api_key}"
-    headers = {'Content-Type': 'application/json'}
+    # URL 100% atualizada para o modelo que está ativo hoje nos servidores da Google
+    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key={api_key}"
+    
     payload = {
-        "contents": [{"parts": [{"text": prompt}]}],
-        "generationConfig": {"responseMimeType": "application/json"}
+        "contents": [{"parts": [{"text": prompt}]}]
     }
+    
+    data = json.dumps(payload).encode('utf-8')
+    req = urllib.request.Request(url, data=data, headers={'Content-Type': 'application/json'}, method='POST')
 
     try:
-        response = requests.post(url, headers=headers, json=payload)
-        
-        if response.status_code == 404:
-            print("Modelo Flash não encontrado, acionando modelo PRO de segurança...")
-            url_pro = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key={api_key}"
-            response = requests.post(url_pro, headers=headers, json=payload)
+        with urllib.request.urlopen(req) as response:
+            result = json.loads(response.read().decode('utf-8'))
+            texto_limpo = result['candidates'][0]['content']['parts'][0]['text'].strip()
             
-        if response.status_code != 200:
-            raise Exception(f"Falha na API do Google. Código: {response.status_code}. Detalhe: {response.text}")
+            # Limpeza matemática à prova de quebras de linha
+            crases = chr(96) * 3
+            texto_limpo = texto_limpo.replace(crases + "json", "")
+            texto_limpo = texto_limpo.replace(crases, "")
+            texto_limpo = texto_limpo.strip()
+                
+            dados = json.loads(texto_limpo)
+            print("Sucesso! JSON da IA recebido e interpretado.")
             
-        dados_api = response.json()
-        texto_limpo = dados_api['candidates'][0]['content']['parts'][0]['text'].strip()
-        
-        if texto_limpo.startswith("```json"):
-            texto_limpo = texto_limpo.split("```json")[1].split("```")[0].strip()
-        elif texto_limpo.startswith("```"):
-            texto_limpo = texto_limpo.split("```")[1].split("```")[0].strip()
-            
-        dados = json.loads(texto_limpo)
-        print("Sucesso! JSON da IA recebido e interpretado.")
-        
+    except urllib.error.HTTPError as e:
+        erro_msg = e.read().decode('utf-8')
+        print(f"Erro na API do Google: Código {e.code}\nDetalhe: {erro_msg}")
+        raise e
     except Exception as e:
         print(f"Erro crítico no processamento da IA: {e}")
         raise e
 
+    # Construção do HTML
     noticias_html_por_pais = {}
     mapa_chaves = {
         "BRASIL": "BR", "ARGENTINA": "AR", "MEXICO": "MX", "COLOMBIA": "CO", 
