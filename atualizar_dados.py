@@ -36,7 +36,6 @@ def gerar_relatorio():
 
     print("A solicitar processamento ao Gemini via Conexão Direta (REST API)...")
     
-    # URL direta do Google (não depende de pacotes instalados)
     url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={api_key}"
     headers = {'Content-Type': 'application/json'}
     payload = {
@@ -47,7 +46,6 @@ def gerar_relatorio():
     try:
         response = requests.post(url, headers=headers, json=payload)
         
-        # Se o modelo flash falhar, tentamos o modelo PRO como plano B de segurança
         if response.status_code == 404:
             print("Modelo Flash não encontrado, acionando modelo PRO de segurança...")
             url_pro = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key={api_key}"
@@ -59,21 +57,18 @@ def gerar_relatorio():
         dados_api = response.json()
         texto_limpo = dados_api['candidates'][0]['content']['parts'][0]['text'].strip()
         
-        # BLOCO CORRIGIDO: Limpeza de texto sem erro de quebra de linha
         if texto_limpo.startswith("```json"):
             texto_limpo = texto_limpo.split("```json")[1].split("```")[0].strip()
         elif texto_limpo.startswith("```"):
-            texto_limpo = texto_limpo.split("
-```")[1].split("```")[0].strip()
+            texto_limpo = texto_limpo.split("```")[1].split("```")[0].strip()
             
         dados = json.loads(texto_limpo)
         print("Sucesso! JSON da IA recebido e interpretado.")
         
     except Exception as e:
         print(f"Erro crítico no processamento da IA: {e}")
-        raise e  # Força o GitHub a mostrar o X vermelho se falhar!
+        raise e
 
-    # 3. Construir os blocos de notícias
     noticias_html_por_pais = {}
     mapa_chaves = {
         "BRASIL": "BR", "ARGENTINA": "AR", "MEXICO": "MX", "COLOMBIA": "CO", 
@@ -95,7 +90,6 @@ def gerar_relatorio():
         
         noticias_html_por_pais[sigla] = html_cards
 
-    # 4. Estrutura Visual
     layout_base = """<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -189,7 +183,6 @@ def gerar_relatorio():
 </body>
 </html>"""
 
-    # 5. Salvar o arquivo
     caminho_final = os.path.join(os.getcwd(), "index.html")
     with open(caminho_final, "w", encoding="utf-8") as f:
         f.write(layout_base.strip())
