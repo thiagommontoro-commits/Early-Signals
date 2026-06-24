@@ -2,11 +2,10 @@ name: LATAM Executive Weekly Intelligence Pipeline
 
 on:
   schedule:
-    # Agenda a execução automática para todas as segundas-feiras às 08:00 AM UTC (05:00 AM Horário de Brasília)
-    # Ajuste o cron se precisar que as 08:00 sejam no seu horário local (ex: 11:00 UTC para 08:00 de Brasília)
-    - cron: '0 8 * * 1'
+    # 11:00 UTC equivale exatamente a 08:00 da manhã no horário de Brasília
+    - cron: '0 11 * * 1'
   workflow_dispatch:
-    # Permite que você execute o script manualmente através do botão "Run workflow" no GitHub se necessário
+    # Permite rodar manualmente clicando no botão "Run workflow"
 
 jobs:
   build-and-update:
@@ -16,38 +15,38 @@ jobs:
     - name: Checkout do Repositório
       uses: actions/checkout@v4
       with:
-        fetch-depth: 0 # Garante o histórico completo para um rebase seguro
+        fetch-depth: 0 # Garante o histórico completo para não dar erro no commit
 
     - name: Configurar Ambiente Python
       uses: actions/setup-python@v5
       with:
-        python-node-version: '3.10'
+        python-version: '3.10'
 
     - name: Instalar Dependências Operacionais
       run: |
         python -m pip install --upgrade pip
-        # Adicione aqui as bibliotecas que o seu script de raspagem/geração usa, por exemplo:
-        # pip install requests beautifulsoup4 pandas
+        # Se o seu atualizar_dados.py precisar de bibliotecas específicas, tire o # da linha abaixo e coloque os nomes:
+        # pip install requests pandas beautifulsoup4
 
     - name: Executar Pipeline AGCO Early Warning
       run: |
-        # Executa o seu script que gera o ficheiro HTML do painel
-        python seu_script_gerador.py 
+        # Executa o seu script Python com o nome correto
+        python atualizar_dados.py 
 
     - name: Sincronizar, Commit e Push via Git Bot
       run: |
-        # Configura as credenciais oficiais do bot do GitHub
+        # Configura a identidade do bot do GitHub
         git config --global user.name 'github-actions[bot]'
         git config --global user.email 'github-actions[bot]@users.noreply.github.com'
         
-        # Prepara todas as alterações geradas pelo script
+        # Prepara todos os arquivos modificados
         git add .
         
-        # Faz o commit apenas se houver ficheiros alterados, evitando quebrar o workflow caso não haja notícias novas
-        git commit -m "Auto-update: Painel Early Warning atualizado via Bot" || echo "Nenhuma alteração detetada no painel esta semana."
+        # Faz o commit. Se não tiver notícia nova, ele avisa e não quebra a Action
+        git commit -m "Auto-update: Painel Early Warning atualizado via Bot" || echo "Nenhuma alteração detectada no painel esta semana."
         
-        # SOLUÇÃO DO SEU ERRO: Faz o pull com rebase para trazer as mudanças do servidor e colocar o commit do bot no topo
+        # Puxa as atualizações e alinha o histórico (a solução do seu erro de "rejected")
         git pull origin main --rebase
         
-        # Envia as atualizações com o histórico linear e sincronizado
+        # Envia as atualizações para o GitHub
         git push origin main
