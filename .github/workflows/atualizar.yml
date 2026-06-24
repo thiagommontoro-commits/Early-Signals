@@ -2,6 +2,7 @@ name: LATAM Intelligence Pipeline
 
 on:
   schedule:
+    # Dispara pontualmente toda segunda-feira às 08:00 AM de Brasília (11:00 UTC)
     - cron: '0 11 * * 1'
   workflow_dispatch:
 
@@ -9,28 +10,32 @@ jobs:
   update-dashboard:
     runs-on: ubuntu-latest
     permissions:
-      contents: write # Essencial para o bot conseguir editar o ficheiro
+      contents: write
+      
     steps:
-      - name: Checkout
+      - name: Checkout do Repositório
         uses: actions/checkout@v4
 
-      - name: Setup Python
+      - name: Configurar Ambiente Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.10'
 
-      - name: Install dependencies
-        run: pip install google-genai requests
+      - name: Instalar Dependências Estáveis
+        run: pip install google-generativeai requests pandas
 
-      - name: Run Script
+      - name: Executar Pipeline AGCO Early Warning
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: python atualizar_dados.py
 
-      - name: Commit and Push
+      - name: Sincronizar e Commitar Painel Atualizado
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git add index.html
-          git commit -m "Auto-update: Painel atualizado via Pipeline" || echo "Sem alterações para commit"
+          
+          # Força a adição do arquivo ignorando qualquer cache antigo do git
+          git add -f index.html
+          
+          git commit -m "Auto-update: Painel Early Warning atualizado via Pipeline Estável" || echo "Sem mudanças detectadas para esta execução."
           git push origin main
