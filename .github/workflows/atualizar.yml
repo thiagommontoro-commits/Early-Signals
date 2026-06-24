@@ -22,7 +22,8 @@ jobs:
           python-version: '3.10'
 
       - name: Instalar Dependências Estáveis
-        run: pip install google-generativeai requests pandas
+        # Atualizado: Usando apenas pacotes nativos para evitar quebra de versão do Google
+        run: pip install requests pandas
 
       - name: Executar Pipeline AGCO Early Warning
         env:
@@ -37,5 +38,5 @@ jobs:
           # Força a adição do arquivo ignorando qualquer cache antigo do git
           git add -f index.html
           
-          git commit -m "Auto-update: Painel Early Warning atualizado via Pipeline Estável" || echo "Sem mudanças detectadas para esta execução."
+          git commit -m "Auto-update: Painel Early Warning atualizado via REST API" || echo "Sem mudanças detectadas para esta execução."
           git push origin main
