@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Early Warning AGCO - LATAM Executive Intelligence Pipeline</title>
+<style>
+:root {
+--agco-red: #cc0000;
+--agco-black: #111111;
+--agco-dark-gray: #333333;
+--agco-light-gray: #f4f4f4;
+--text-main: #222222;
+--white: #ffffff;
+--farol-positive-bg: #e2f0d9;
+--farol-positive-text: #385723;
+--farol-positive-dot: #70ad47;
+--farol-warning-bg: #fff2cc;
+--farol-warning-text: #7f6000;
+--farol-warning-dot: #ffc000;
+--farol-critical-bg: #fce4d6;
+--farol-critical-text: #c65911;
+--farol-critical-dot: #c00000;
+/* Cores RGB para transparências */
+--farol-positive-dot-rgb: 112, 173, 71;
+--farol-warning-dot-rgb: 255, 192, 0;
+--farol-critical-dot-rgb: 192, 0, 0;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+font-family: 'Arial', sans-serif;
+background-color: #e9ecef;
+color: var(--text-main);
+margin: 0;
+padding: 20px;
+}
+
+.container {
+max-width: 1350px;
+margin: 0 auto;
+background-color: var(--white);
+box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+border-radius: 4px;
+overflow: hidden;
+}
+
+.header {
+background-color: var(--agco-black);
+color: var(--white);
+padding: 30px 40px;
+border-bottom: 6px solid var(--agco-red);
+display: flex;
+justify-content: space-between;
+align-items: center;
+gap: 20px;
+}
+
+.header-text h1 {
+margin: 0;
+font-size: 28px;
+text-transform: uppercase;
+letter-spacing: 1.5px;
+font-weight: 900;
+}
+
+.header-text p {
+margin: 5px 0 0 0;
+font-size: 12px;
+color: #b0b0b0;
+text-transform: uppercase;
+letter-spacing: 0.5px;
+}
+
+.header-controls {
+display: flex;
+align-items: center;
+gap: 20px;
+}
+
+.lang-selector {
+display: flex;
+gap: 5px;
+background-color: #2a2a2a;
+padding: 4px;
+border-radius: 4px;
+}
+
+.lang-btn {
+background-color: transparent;
+border: none;
+color: #a0a0a0;
+padding: 6px 10px;
+font-size: 12px;
+font-weight: bold;
+cursor: pointer;
+border-radius: 2px;
+transition: all 0.2s ease-in-out;
+}
+
+.lang-btn:hover {
+background-color: #444;
+color: var(--white);
+}
+
+.lang-btn.active {
+background-color: var(--agco-red);
+color: var(--white);
+}
+
+.date-badge {
+background-color: var(--agco-red);
+padding: 8px 16px;
+font-weight: bold;
+font-size: 13px;
+border-radius: 2px;
+text-transform: uppercase;
+letter-spacing: 1px;
+}
+
+.content-wrapper { padding: 25px 35px; }
+
+.alert-banner {
+background-color: var(--agco-light-gray);
+border-left: 5px solid var(--agco-red);
+padding: 12px 20px;
+margin-bottom: 25px;
+font-size: 11px;
+font-weight: bold;
+color: var(--agco-dark-gray);
+text-transform: uppercase;
+letter-spacing: 0.5px;
+}
+
+.tabs-nav {
+display: flex;
+flex-wrap: wrap;
+gap: 5px;
+margin-bottom: 25px;
+border-bottom: 3px solid var(--agco-black);
+padding-bottom: 5px;
+}
+
+.tab-btn {
+background-color: var(--agco-light-gray);
+color: var(--agco-dark-gray);
+border: none;
+padding: 12px 20px;
+font-size: 13px;
+font-weight: bold;
+cursor: pointer;
+text-transform: uppercase;
+border-radius: 4px 4px 0 0;
+transition: all 0.2s;
+}
+
+.tab-btn:hover { background-color: #e0e0e0; color: var(--agco-black); }
+.tab-btn.active {
+background-color: var(--agco-black);
+color: var(--white);
+border-bottom: 3px solid var(--agco-red);
+}
+
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+
+.country-title {
+font-size: 24px;
+color: var(--agco-black);
+margin-top: 0;
+margin-bottom: 25px;
+padding-bottom: 10px;
+border-bottom: 2px solid #dddddd;
+font-weight: 800;
+text-transform: uppercase;
+}
+
+.section-title {
+    font-size: 18px;
+    color: var(--agco-dark-gray);
+    margin-top: 0;
+    margin-bottom: 25px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e9ecef;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.news-grid {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 25px;
+}
+
+@media (max-width: 1024px) {
+.news-grid { grid-template-columns: 1fr; }
+}
+
+.news-block {
+background-color: var(--white);
+border: 1px solid #e0e0e0;
+border-radius: 4px;
+overflow: hidden;
+display: flex;
+flex-direction: column;
+box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+}
+
+.news-header {
+background-color: var(--agco-light-gray);
+padding: 15px 20px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+border-left: 5px solid var(--agco-black);
+gap: 15px;
+}
+
+.news-title {
+font-size: 14px;
+font-weight: bold;
+color: var(--agco-black);
+margin: 0;
+text-transform: uppercase;
+line-height: 1.4;
+}
+
+.news-body {
+padding: 18px 20px;
+font-size: 13px;
+color: var(--agco-dark-gray);
+line-height: 1.5;
+text-align: justify;
+flex-grow: 1;
+}
+
+.news-source {
+    font-size: 11px;
+    color: #888;
+    margin-top: 15px;
+    text-align: right;
+    font-style: italic;
+    border-top: 1px solid #f0f0f0;
+    padding-top: 8px;
+    margin-bottom: 0;
+}
+
+.farol {
+display: inline-flex;
+align-items: center;
+gap: 6px;
+padding: 4px 10px;
+font-size: 11px;
+font-weight: bold;
+border-radius: 4px;
+text-transform: uppercase;
+letter-spacing: 0.5px;
+white-space: nowrap;
+}
+
+.farol-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+.farol-positive { background-color: var(--farol-positive-bg); color: var(--farol-positive-text); }
+.farol-positive .farol-dot { background-color: var(--farol-positive-dot); }
+.farol-warning { background-color: var(--farol-warning-bg); color: var(--farol-warning-text); }
+.farol-warning .farol-dot { background-color: var(--farol-warning-dot); }
+.farol-critical { background-color: var(--farol-critical-bg); color: var(--farol-critical-text); }
+.farol-critical .farol-dot { background-color: var(--farol-critical-dot); }
+
+.machinery-analysis {
+background-color: #fafafa;
+border-top: 1px solid #e0e0e0;
+padding: 18px 20px;
+}
+
+.analysis-title {
+font-weight: bold;
+color: var(--agco-black);
+margin-bottom: 12px;
+font-size: 11px;
+text-transform: uppercase;
+border-bottom: 1px solid #e0e0e0;
+padding-bottom: 5px;
+letter-spacing: 0.5px;
+}
+
+.machinery-items {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 12px;
+}
+
+@media (max-width: 600px) {
+.machinery-items { grid-template-columns: 1fr; }
+}
+
+.m-item {
+background: var(--white);
+border: 1px solid #eaeaea;
+padding: 10px;
+border-radius: 4px;
+display: flex;
+flex-direction: column;
+gap: 6px;
+font-size: 12px;
+}
+
+.m-header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+
+.m-name {
+font-weight: bold;
+color: var(--agco-dark-gray);
+text-transform: uppercase;
+font-size: 11px;
+}
+
+.m-desc {
+color: #555;
+line-height: 1.4;
+}
+
+/* --- ESTILOS DO NOVO BLOCO DE ANÁLISES (v5 - Emoldurado) --- */
+
+.analysis-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px; /* Espaço entre os cards */
+    margin-bottom: 40px;
+}
+
+.analysis-card {
+    background-color: var(--white);
+    border: 1px solid #e9ecef; /* Borda sutil */
+    border-radius: 6px; /* Bordas levemente arredondadas */
+    padding: 24px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.04); /* Sombra discreta */
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.analysis-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.07);
+}
+
+.analysis-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 0;
+    padding-bottom: 15px; /* Linha separadora */
+    border-bottom: 1px solid #f1f3f5; /* Cor da linha */
+    margin-bottom: 15px; /* Espaço após a linha */
+}
+
+.analysis-icon {
+    font-size: 22px;
+    line-height: 1;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    flex-shrink: 0;
+}
+
+/* Fundo do ícone usa as cores do "farol" para consistência */
+.tendencia-positiva .analysis-icon { background-color: var(--farol-positive-bg); color: var(--farol-positive-text); }
+.tendencia-negativa .analysis-icon { background-color: var(--farol-critical-bg); color: var(--farol-critical-text); }
+.tendencia-neutra .analysis-icon { background-color: var(--farol-warning-bg); color: var(--farol-warning-text); }
+
+.analysis-card h3.analysis-card-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #212529;
+    margin: 0;
+}
+
+.analysis-body {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    padding-left: 0; /* Removido o alinhamento anterior */
+}
+
+.analysis-label {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    color: #6c757d;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 8px;
+}
+
+.analysis-text {
+    font-size: 13.5px;
+    color: #495057;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.footer {
+background-color: var(--agco-black);
+color: #777777;
+text-align: center;
+padding: 20px;
+font-size: 11px;
+text-transform: uppercase;
+letter-spacing: 1px;
+border-top: 4px solid var(--agco-red);
+}
+</style>
+</head>
+<body>
+
+<div id="google_translate_element" style="display:none;"></div>
+
+<div class="container">
+<div class="header">
+<div class="header-text">
+<h1 data-pt="Early Warning AGCO" data-en="AGCO Early Warning">Early Warning AGCO</h1>
+<p data-pt="LATAM Market Intelligence & Predictive Sales Demand Framework" data-en="LATAM Market Intelligence & Predictive Sales Demand Framework">LATAM Market Intelligence & Predictive Sales Demand Framework</p>
+</div>
+<div class="header-controls">
+<div class="lang-selector">
+<button class="lang-btn active" onclick="switchLanguage(event, 'pt')" title="Português">🇧🇷 PT</button>
+<button class="lang-btn" onclick="switchLanguage(event, 'en')" title="English">🇺🇸 EN</button>
+</div>
+<div class="date-badge">{{DATA_RELATORIO}}</div>
+</div>
+</div>
+
+<div class="content-wrapper">
+<div class="alert-banner" data-pt="MANDATÓRIO: Cobertura completa de 7 países da América do Sul com 4 cenários analíticos detalhados cada. Foco em impactos de frota, dinâmica cambial, renovação de frentes e gargalos logísticos." data-en="MANDATORY: Full coverage of 7 South American countries with 4 detailed analytical scenarios each. Focus on fleet impacts, currency dynamics, front renewals, and logistics bottlenecks.">
+MANDATÓRIO: Cobertura completa de 7 países da América do Sul com 4 cenários analíticos detalhados cada. Foco em impactos de frota, dinâmica cambial, renovação de frentes e gargalos logísticos.
+</div>
+
+<div class="tabs-nav">
+<button class="tab-btn active" onclick="switchTab(event, 'br')" data-pt="🇧🇷 Brasil" data-en="🇧🇷 Brazil">🇧🇷 Brasil</button>
+<button class="tab-btn" onclick="switchTab(event, 'ar')" data-pt="🇦🇷 Argentina" data-en="🇦🇷 Argentina">🇦🇷 Argentina</button>
+<button class="tab-btn" onclick="switchTab(event, 'cl')" data-pt="🇨🇱 Chile" data-en="🇨🇱 Chile">🇨🇱 Chile</button>
+<button class="tab-btn" onclick="switchTab(event, 'uy')" data-pt="🇺🇾 Uruguai" data-en="🇺🇾 Uruguay">🇺🇾 Uruguai</button>
+<button class="tab-btn" onclick="switchTab(event, 'py')" data-pt="🇵🇾 Paraguai" data-en="🇵🇾 Paraguay">🇵🇾 Paraguai</button>
+<button class="tab-btn" onclick="switchTab(event, 'pe')" data-pt="🇵🇪 Peru" data-en="🇵🇪 Peru">🇵🇪 Peru</button>
+<button class="tab-btn" onclick="switchTab(event, 'bo')" data-pt="🇧🇴 Bolívia" data-en="🇧🇴 Bolivia">🇧🇴 Bolívia</button>
+<button class="tab-btn" onclick="switchTab(event, 'mx')" data-pt="🇲🇽 México" data-en="🇲🇽 Mexico">🇲🇽 México</button>
+</div>
+
+<div id="br" class="tab-content active">
+<h2 class="country-title" data-pt="Brasil" data-en="Brazil">Brasil</h2>
+<h2 class="section-title" data-pt="Fatores Econômicos" data-en="Economic Factors">Fatores Econômicos</h2>
+{{BLOCO_ANALISES_BR}}<h2 class="section-title" data-pt="Notícias Relevantes" data-en="Relevant News">Notícias Relevantes</h2>
+{{BLOCO_NOTICIAS_BR}}
+</div>
+
+<div id="ar" class="tab-content">
+<h2 class="country-title" data-pt="Argentina" data-en="Argentina">Argentina</h2>
+<h2 class="section-title" data-pt="Fatores Econômicos" data-en="Economic Factors">Fatores Econômicos</h2>
+{{BLOCO_ANALISES_AR}}<h2 class="section-title" data-pt="Notícias Relevantes" data-en="Relevant News">Notícias Relevantes</h2>
+{{BLOCO_NOTICIAS_AR}}
+</div>
+
+<div id="cl" class="tab-content">
+<h2 class="country-title" data-pt="Chile" data-en="Chile">Chile</h2>
+<h2 class="section-title" data-pt="Fatores Econômicos" data-en="Economic Factors">Fatores Econômicos</h2>
+{{BLOCO_ANALISES_CL}}<h2 class="section-title" data-pt="Notícias Relevantes" data-en="Relevant News">Notícias Relevantes</h2>
+{{BLOCO_NOTICIAS_CL}}
+</div>
+
+<div id="uy" class="tab-content">
+<h2 class="country-title" data-pt="Uruguai" data-en="Uruguay">Uruguai</h2>
+<h2 class="section-title" data-pt="Fatores Econômicos" data-en="Economic Factors">Fatores Econômicos</h2>
+{{BLOCO_ANALISES_UY}}<h2 class="section-title" data-pt="Notícias Relevantes" data-en="Relevant News">Notícias Relevantes</h2>
+{{BLOCO_NOTICIAS_UY}}
+</div>
+
+<div id="py" class="tab-content">
+<h2 class="country-title" data-pt="Paraguai" data-en="Paraguay">Paraguai</h2>
+<h2 class="section-title" data-pt="Fatores Econômicos" data-en="Economic Factors">Fatores Econômicos</h2>
+{{BLOCO_ANALISES_PY}}<h2 class="section-title" data-pt="Notícias Relevantes" data-en="Relevant News">Notícias Relevantes</h2>
+{{BLOCO_NOTICIAS_PY}}
+</div>
+
+<div id="pe" class="tab-content">
+<h2 class="country-title" data-pt="Peru" data-en="Peru">Peru</h2>
+<h2 class="section-title" data-pt="Fatores Econômicos" data-en="Economic Factors">Fatores Econômicos</h2>
+{{BLOCO_ANALISES_PE}}<h2 class="section-title" data-pt="Notícias Relevantes" data-en="Relevant News">Notícias Relevantes</h2>
+{{BLOCO_NOTICIAS_PE}}
+</div>
+
+<div id="bo" class="tab-content">
+<h2 class="country-title" data-pt="Bolívia" data-en="Bolivia">Bolívia</h2>
+<h2 class="section-title" data-pt="Fatores Econômicos" data-en="Economic Factors">Fatores Econômicos</h2>
+{{BLOCO_ANALISES_BO}}<h2 class="section-title" data-pt="Notícias Relevantes" data-en="Relevant News">Notícias Relevantes</h2>
+{{BLOCO_NOTICIAS_BO}}
+</div>
+
+<div id="mx" class="tab-content">
+<h2 class="country-title" data-pt="México" data-en="Mexico">México</h2>
+<h2 class="section-title" data-pt="Fatores Econômicos" data-en="Economic Factors">Fatores Econômicos</h2>
+{{BLOCO_ANALISES_MX}}<h2 class="section-title" data-pt="Notícias Relevantes" data-en="Relevant News">Notícias Relevantes</h2>
+{{BLOCO_NOTICIAS_MX}}
+</div>
+
+</div>
+
+<div class="footer" data-pt="CONFIDENCIAL — ACESSO RESTRITO — PIPELINE DE COMPILAÇÃO DA INTELIGÊNCIA DE MERCADO AGCO LATAM 2026" data-en="CONFIDENTIAL — RESTRICTED ACCESS — AGCO LATAM MARKET INTELLIGENCE COMPILATION PIPELINE 2026">
+CONFIDENCIAL — ACESSO RESTRITO — PIPELINE DE COMPILAÇÃO DA INTELIGÊNCIA DE MERCADO AGCO LATAM 2026
+</div>
+</div>
+
+<script type="text/javascript">
+function switchTab(evt, countryId) {
+var i, tabcontent, tablinks;
+tabcontent = document.getElementsByClassName("tab-content");
+for (i = 0; i < tabcontent.length; i++) {
+tabcontent[i].style.display = "none";
+tabcontent[i].classList.remove("active");
+}
+tablinks = document.getElementsByClassName("tab-btn");
+for (i = 0; i < tablinks.length; i++) {
+tablinks[i].classList.remove("active");
+}
+document.getElementById(countryId).style.display = "block";
+document.getElementById(countryId).classList.add("active");
+evt.currentTarget.classList.add("active");
+}
+
+// --- LÓGICA DE TRADUÇÃO COM GOOGLE TRANSLATE ---
+
+// Esta função é chamada pelo script do Google quando ele está pronto.
+function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+        pageLanguage: 'pt', 
+        autoDisplay: false,
+        includedLanguages: 'en,pt', // Apenas inglês e português
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+    }, 'google_translate_element');
+
+    // A cada 500ms, verifica o idioma atual e atualiza o estado da UI.
+    // Isso é um "polling" necessário porque o Google Translate não oferece um evento de "tradução concluída".
+    setInterval(updateUIForLanguage, 500);
+}
+
+function switchLanguage(event, targetLang) {
+    event.preventDefault();
+    
+    // Obtém o idioma atual do cookie do Google Translate
+    const cookie = document.cookie.split('; ').find(row => row.startsWith('googtrans='));
+    const currentLang = cookie ? cookie.split('/')[2] : 'pt';
+
+    // Se já estiver no idioma certo, não faz nada
+    if (currentLang === targetLang) {
+        return;
+    }
+
+    // Para reverter para o português, a maneira mais confiável é remover o cookie e recarregar.
+    if (targetLang === 'pt') {
+        document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/;';
+    } else {
+        // Para outros idiomas, define o cookie para o idioma alvo.
+        document.cookie = `googtrans=/auto/${targetLang}; path=/`;
+    }
+    
+    // Recarrega a página para que o Google Translate aplique o novo idioma do cookie.
+    window.location.reload();
+}
+
+// Função que atualiza a UI com base no idioma detectado
+function updateUIForLanguage() {
+    // O Google adiciona um atributo 'lang' na tag <html> quando traduz.
+    const lang = document.documentElement.lang.split('-')[0] || 'pt';
+
+    // 1. ATUALIZAÇÃO DO BOTÃO DE IDIOMA ATIVO
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('onclick').includes(`'${lang}'`));
+    });
+
+    // 2. ATUALIZAÇÃO DOS TEXTOS COM ATRIBUTOS 'data-*' (para UI)
+    document.querySelectorAll(`[data-${lang}]`).forEach(element => {
+        const newText = element.getAttribute(`data-${lang}`);
+        if (newText && element.textContent.trim() !== newText.trim()) {
+            element.textContent = newText;
+        }
+    });
+}
+
+// Garante que o script rode após o carregamento completo do HTML
+document.addEventListener('DOMContentLoaded', () => {
+    // A inicialização agora é controlada pelo googleTranslateElementInit e pelo polling.
+});
+
+</script>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</body>
+</html>
