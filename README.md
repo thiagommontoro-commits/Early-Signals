@@ -15,7 +15,6 @@ O dashboard é atualizado automaticamente sempre que há uma alteração na bran
 
 ## ⚙️ Configuração
 
-1.  **Chave de API**: Para que a automação funcione, adicione sua `GEMINI_API_KEY` nos "Secrets" do repositório do GitHub com o nome `GEMINI_API_KEY`.
-    -   `Settings` > `Secrets and variables` > `Actions` > `New repository secret`.
+1.  **Chave de API**: `GEMINI_API_KEY` nos "Secrets".
 
 2.  **Execução**: O workflow do GitHub Actions (`.github/workflows/generate_dashboard.yml`) instala as dependências e executa o script `gerador_dashboard_early_signals.py` para gerar o `index.html`.
