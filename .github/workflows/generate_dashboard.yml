@@ -1,0 +1,48 @@
+# Nome do fluxo de trabalho que aparecerá na aba "Actions" do GitHub
+name: Gerar Dashboard Early Signals
+
+on:
+  # Roda automaticamente quando houver uma alteração na branch 'main' ou 'master'
+  push:
+    branches:
+      - main
+      - master
+  # Permite rodar manualmente pela interface do GitHub
+  workflow_dispatch:
+  # Novo agendamento: Roda toda primeira sexta-feira de cada mês às 08:00 UTC (05:00 no horário de Brasília)
+  schedule:
+    - cron: '0 8 1-7 * 5'
+
+permissions:
+  # Permissão necessária para que a Action possa salvar o arquivo gerado no repositório
+  contents: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 1. Baixar o código do repositório
+        uses: actions/checkout@v4
+
+      - name: 2. Configurar o Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: 3. Instalar as bibliotecas Python
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: 4. Gerar o arquivo index.html
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python gerador_dashboard_early_signals.py
+
+      - name: 5. Salvar o index.html gerado no repositório
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add index.html
+          git diff --staged --quiet || git commit -m "📊 Atualização automática do dashboard Early Signals"
+          git push
