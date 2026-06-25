@@ -1,4 +1,4 @@
-# Early Warning AGCO LATAM
+# Early Warning LATAM
 
 Este projeto utiliza a API do Google Gemini para gerar um dashboard de inteligência de mercado focado no setor de máquinas agrícolas na América Latina.
 
