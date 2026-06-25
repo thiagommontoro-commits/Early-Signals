@@ -1,1 +1,1366 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Early Warning AGCO - LATAM Executive Intelligence Pipeline</title>
+<style>
+:root {
+--agco-red: #cc0000;
+--agco-black: #111111;
+--agco-dark-gray: #333333;
+--agco-light-gray: #f4f4f4;
+--text-main: #222222;
+--white: #ffffff;
+--farol-positive-bg: #e2f0d9;
+--farol-positive-text: #385723;
+--farol-positive-dot: #70ad47;
+--farol-warning-bg: #fff2cc;
+--farol-warning-text: #7f6000;
+--farol-warning-dot: #ffc000;
+--farol-critical-bg: #fce4d6;
+--farol-critical-text: #c65911;
+--farol-critical-dot: #c00000;
+}
 
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+font-family: 'Arial', sans-serif;
+background-color: #e9ecef;
+color: var(--text-main);
+margin: 0;
+padding: 20px;
+}
+
+.container {
+max-width: 1350px;
+margin: 0 auto;
+background-color: var(--white);
+box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+border-radius: 4px;
+overflow: hidden;
+}
+
+.header {
+background-color: var(--agco-black);
+color: var(--white);
+padding: 30px 40px;
+border-bottom: 6px solid var(--agco-red);
+display: flex;
+justify-content: space-between;
+align-items: center;
+gap: 20px;
+}
+
+.header-text h1 {
+margin: 0;
+font-size: 28px;
+text-transform: uppercase;
+letter-spacing: 1.5px;
+font-weight: 900;
+}
+
+.header-text p {
+margin: 5px 0 0 0;
+font-size: 12px;
+color: #b0b0b0;
+text-transform: uppercase;
+letter-spacing: 0.5px;
+}
+
+.header-controls {
+display: flex;
+align-items: center;
+gap: 20px;
+}
+
+.lang-selector {
+display: flex;
+gap: 5px;
+background-color: #2a2a2a;
+padding: 4px;
+border-radius: 4px;
+}
+
+.lang-btn {
+background-color: transparent;
+border: none;
+color: #a0a0a0;
+padding: 6px 10px;
+font-size: 12px;
+font-weight: bold;
+cursor: pointer;
+border-radius: 2px;
+transition: all 0.2s ease-in-out;
+}
+
+.lang-btn:hover {
+background-color: #444;
+color: var(--white);
+}
+
+.lang-btn.active {
+background-color: var(--agco-red);
+color: var(--white);
+}
+
+.date-badge {
+background-color: var(--agco-red);
+padding: 8px 16px;
+font-weight: bold;
+font-size: 13px;
+border-radius: 2px;
+text-transform: uppercase;
+letter-spacing: 1px;
+}
+
+.content-wrapper { padding: 25px 35px; }
+
+.alert-banner {
+background-color: var(--agco-light-gray);
+border-left: 5px solid var(--agco-red);
+padding: 12px 20px;
+margin-bottom: 25px;
+font-size: 11px;
+font-weight: bold;
+color: var(--agco-dark-gray);
+text-transform: uppercase;
+letter-spacing: 0.5px;
+}
+
+.tabs-nav {
+display: flex;
+flex-wrap: wrap;
+gap: 5px;
+margin-bottom: 25px;
+border-bottom: 3px solid var(--agco-black);
+padding-bottom: 5px;
+}
+
+.tab-btn {
+background-color: var(--agco-light-gray);
+color: var(--agco-dark-gray);
+border: none;
+padding: 12px 20px;
+font-size: 13px;
+font-weight: bold;
+cursor: pointer;
+text-transform: uppercase;
+border-radius: 4px 4px 0 0;
+transition: all 0.2s;
+}
+
+.tab-btn:hover { background-color: #e0e0e0; color: var(--agco-black); }
+.tab-btn.active {
+background-color: var(--agco-black);
+color: var(--white);
+border-bottom: 3px solid var(--agco-red);
+}
+
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+
+.country-title {
+font-size: 24px;
+color: var(--agco-black);
+margin-top: 0;
+margin-bottom: 25px;
+padding-bottom: 10px;
+border-bottom: 2px solid #dddddd;
+font-weight: 800;
+text-transform: uppercase;
+}
+
+.news-grid {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 25px;
+}
+
+@media (max-width: 1024px) {
+.news-grid { grid-template-columns: 1fr; }
+}
+
+.news-block {
+background-color: var(--white);
+border: 1px solid #e0e0e0;
+border-radius: 4px;
+overflow: hidden;
+display: flex;
+flex-direction: column;
+box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+}
+
+.news-header {
+background-color: var(--agco-light-gray);
+padding: 15px 20px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+border-left: 5px solid var(--agco-black);
+gap: 15px;
+}
+
+.news-title {
+font-size: 14px;
+font-weight: bold;
+color: var(--agco-black);
+margin: 0;
+text-transform: uppercase;
+line-height: 1.4;
+}
+
+.news-body {
+padding: 18px 20px;
+font-size: 13px;
+color: var(--agco-dark-gray);
+line-height: 1.5;
+text-align: justify;
+flex-grow: 1;
+}
+
+.farol {
+display: inline-flex;
+align-items: center;
+gap: 6px;
+padding: 4px 10px;
+font-size: 11px;
+font-weight: bold;
+border-radius: 4px;
+text-transform: uppercase;
+letter-spacing: 0.5px;
+white-space: nowrap;
+}
+
+.farol-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+.farol-positive { background-color: var(--farol-positive-bg); color: var(--farol-positive-text); }
+.farol-positive .farol-dot { background-color: var(--farol-positive-dot); }
+.farol-warning { background-color: var(--farol-warning-bg); color: var(--farol-warning-text); }
+.farol-warning .farol-dot { background-color: var(--farol-warning-dot); }
+.farol-critical { background-color: var(--farol-critical-bg); color: var(--farol-critical-text); }
+.farol-critical .farol-dot { background-color: var(--farol-critical-dot); }
+
+.machinery-analysis {
+background-color: #fafafa;
+border-top: 1px solid #e0e0e0;
+padding: 18px 20px;
+}
+
+.analysis-title {
+font-weight: bold;
+color: var(--agco-black);
+margin-bottom: 12px;
+font-size: 11px;
+text-transform: uppercase;
+border-bottom: 1px solid #e0e0e0;
+padding-bottom: 5px;
+letter-spacing: 0.5px;
+}
+
+.machinery-items {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 12px;
+}
+
+@media (max-width: 600px) {
+.machinery-items { grid-template-columns: 1fr; }
+}
+
+.m-item {
+background: var(--white);
+border: 1px solid #eaeaea;
+padding: 10px;
+border-radius: 4px;
+display: flex;
+flex-direction: column;
+gap: 6px;
+font-size: 12px;
+}
+
+.m-header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+
+.m-name {
+font-weight: bold;
+color: var(--agco-dark-gray);
+text-transform: uppercase;
+font-size: 11px;
+}
+
+.m-desc {
+color: #555;
+line-height: 1.4;
+}
+
+.footer {
+background-color: var(--agco-black);
+color: #777777;
+text-align: center;
+padding: 20px;
+font-size: 11px;
+text-transform: uppercase;
+letter-spacing: 1px;
+border-top: 4px solid var(--agco-red);
+}
+</style>
+</head>
+<body>
+
+<div id="google_translate_element" style="display:none;"></div>
+
+<div class="container">
+<div class="header">
+<div class="header-text">
+<h1>Early Warning AGCO</h1>
+<p>LATAM Market Intelligence & Predictive Sales Demand Framework</p>
+</div>
+<div class="header-controls">
+<div class="lang-selector">
+<button class="lang-btn active" onclick="switchLanguage(event, 'pt')" title="Português">🇧🇷 PT</button>
+<button class="lang-btn" onclick="switchLanguage(event, 'en')" title="English">🇺🇸 EN</button>
+<button class="lang-btn" onclick="switchLanguage(event, 'es')" title="Español">🇪🇸 ES</button>
+</div>
+<div class="date-badge"><span id="report-date" data-pt="Junho de 2026" data-en="June 2026" data-es="Junio de 2026">Junho de 2026</span></div>
+</div>
+</div>
+
+<div class="content-wrapper">
+<div class="alert-banner">
+MANDATÓRIO: Cobertura completa de 7 países da América do Sul com 4 cenários analíticos detalhados cada. Foco em impactos de frota, dinâmica cambial, renovação de frentes e gargalos logísticos.
+</div>
+
+<div class="tabs-nav">
+<button class="tab-btn active" onclick="switchTab(event, 'br')">🇧🇷 Brasil</button>
+<button class="tab-btn" onclick="switchTab(event, 'ar')">🇦🇷 Argentina</button>
+<button class="tab-btn" onclick="switchTab(event, 'cl')">🇨🇱 Chile</button>
+<button class="tab-btn" onclick="switchTab(event, 'uy')">🇺🇾 Uruguai</button>
+<button class="tab-btn" onclick="switchTab(event, 'py')">🇵🇾 Paraguai</button>
+<button class="tab-btn" onclick="switchTab(event, 'pe')">🇵🇪 Peru</button>
+<button class="tab-btn" onclick="switchTab(event, 'bo')">🇧🇴 Bolívia</button>
+</div>
+
+<div id="br" class="tab-content active">
+<h2 class="country-title">Brasil</h2>
+<div class="news-grid">
+<div class="news-block">
+<div class="news-header">
+<h3 class="news-title">Aceleração de Embarques de Soja e Milho Eleva Liquidez no Centro-Sul</h3>
+<span class="farol farol-positive"><span class="farol-dot"></span>Positive</span>
+</div>
+<div class="news-body">
+Os volumes consolidados de exportação de soja e milho mantiveram ritmo forte nas janelas portuárias do país. A rápida vazão dos estoques remanescentes injetou fluxo de caixa imediato nas cooperativas e grandes produtores do Mato Grosso e Paraná, favorecendo a antecipação de orçamentos de entressafra.
+</div>
+<div class="machinery-analysis">
+<div class="analysis-title">Impacto por Linha de Produto</div>
+<div class="machinery-items">
+<div class="m-item">
+<div class="m-header"><span class="m-name">Tratores</span><span class="farol farol-positive"><span class="farol-dot"></span>Positive</span></div>
+<div class="m-desc">Aumento de ordens para modelos de média/alta potência para movimentação de estoques e preparo de solo.</div>
+</div>
+<div class="m-item">
+<div class="m-header"><span class="m-name">Colheitadeiras</span><span class="farol farol-warning"><span class="farol-dot"></span>Warning</span></div>
+<div class="m-desc">Investidores preferem manter frotas atuais e focar em revisões preventivas robustas em concessionárias.</div>
+</div>
+<div class="m-item">
+<div class="m-header"><span class="m-name">Pulverizadores</span><span class="farol farol-positive"><span class="farol-dot"></span>Positive</span></div>
+<div class="m-desc">Capital livre impulsiona procura por autopropelidos de alta tecnologia para combater pragas na entressafra.</div>
+</div>
+<div class="m-item">
+<div class="m-header"><span class="m-name">Plantadeiras</span><span class="farol farol-warning"><span class="farol-dot"></span>Warning</span></div>
+<div class="m-desc">Janela de vendas estável com negociações direcionadas a pacotes de reposição de discos e sulcadores.</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="news-block">
+<div class="news-header">
+<h3 class="news-title">Usinas Paulistas Mantêm Ritmo Intenso de Moagem de Cana e Colheita de Algodão</h3>
+<span class="farol farol-positive"><span class="farol-dot"></span>Positive</span>
+</div>
+<div class="news-body">
+O clima seco e firme no cinturão do Centro-Sul permitiu velocidade máxima na colheita e moagem de cana-de-açúcar, operando paralelamente à colheita do algodão no Centro-Oeste. Grupos corporativos mantêm os cronogramas plurianuais de faturamento intactos.
+</div>
+<div class="machinery-analysis">
+<div class="analysis-title">Impacto por Linha de Produto</div>
+<div class="machinery-items">
+<div class="m-item">
+<div class="m-header"><span class="m-name">Tratores</span><span class="farol farol-positive"><span class="farol-dot"></span>Positive</span></div>
+<div class="m-desc">Alta demanda corporativa por modelos pesados (>250HP) focados em operações severas de transbordo.</div>
+</div>
+<div class="m-item">
+<div class="m-header"><span class="m-name">Colheitadeiras</span><span class="farol farol-positive"><span class="farol-dot"></span>Positive</span></div>
+<div class="m-desc">Ritmo firme assegura a entrega de frotas de colhedoras de cana e algodão programadas em contratos grandes.</div>
+</div>
+<div class="m-item">
+<div class="m-header"><span class="m-name">Pulverizadores</span><span class="farol farol-positive"><span class="farol-dot"></span>Positive</span></div>
+<div class="m-desc">Autopropelidos específicos para canaviais mantêm ritmo estável em grandes frotas de usinas.</div>
+</div>
+<div class="m-item">
+<div class="m-header"><span class="m-name">Plantadeiras</span><span class="farol farol-warning"><span class="farol-dot"></span>Warning</span></div>
+<div class="m-desc">Estabilidade sazonal padrão; foco direcionado a distribuidores automatizados para cana e renovação.</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="news-block">
+<div class="news-header">
+<h3 class="news-title">Safra Recorde de Café e Preços Fortes da Laranja Capitalizam Sudeste</h3>
+<span class="farol farol-positive"><span class="farol-dot"></span>Positive</span>
+</div>
+<div class="news-body">
+A colheita de café arábica avança em Minas Gerais e São Paulo com projeção de volumes históricos e alto padrão de bebida. Paralelamente, a escassez global de suco sustenta preços recordes da laranja para os citricultores paulistas, impulsionando investimentos em áreas adensadas.
+</div>
+<div class="machinery-analysis">
+<div class="analysis-title">Impacto por Linha de Produto</div>
+<div class="machinery-items">
+<div class="m-item">
+<div class="m-header"><span class="m-name">Tratores</span><span class="farol farol-positive"><span class="farol-dot"></span>Positive</span></div>
+<div class="m-desc">Forte volume de vendas para modelos estreitos/fruteiros especializados em pomares e cafezais adensados.</div>
+</div>
+<div class="m-item">
+<div class="m-header"><span class="m-name">Colheitadeiras</span><span class="farol farol-positive"><span class="farol-dot"></span>Positive</span></div>
+<div class="m-desc">Busca expressiva por colhedoras mecânicas automotrizes de café para mitigar falta crônica de safristas.</div>
+</div>
+<div class="m-item">
+<div class="m-header"><span class="m-name">Pulverizadores</span><span class="farol farol-positive"><span class="farol-dot"></span>Positive</span></div>
+<div class="m-desc">Forte saída de atomizadores e turbinas de precisão para tratamentos preventivos pós-colheita em pomares.</div>
+</div>
+<div class="m-item">
+<div class="m-header"><span class="m-name">Plantadeiras</span><span class="farol farol-critical"><span class="farol-dot"></span>Critical</span></div>
+<div class="m-desc">Impacto severamente limitado ou inaplicável devido às características de culturas perenes (mudas).</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="news-block">
+<div class="news-header">
+<h3 class="news-title">Pecuária de Corte Registra Alívio Operacional com Queda de Insumos</h3>
+<span class="farol farol-warning"><span class="farol-dot"></span>Warning</span>
+</div>
+<div class="news-body">
+O segmento pecuário de confinamento experimenta melhora nas margens devido à redução de custos operacionais do farelo e milho de trato. Contudo, o setor mantém cautela extrema na aquisição de ativos imobilizados de longo prazo, priorizando a engorda.
+</div>
+<div class="machinery-analysis">
+<div class="analysis-title">Impacto por Linha de Produto</div>
+<div class="machinery-items">
+<div class="m-item">
+<div class="m-header"><span class="m-name">Tratores</span><span class="farol farol-positive"><span class="farol-dot"></span>Positive</span></div>
+<div class="m-desc">Procura aquecida por utilitários de pequena/média potência e pás carregadeiras para pátios de trato.</div>
+</div>
+<div class="m-item">
+<div class="m-header"><span class="m-name">Colheitadeiras</span><span class="farol farol-critical"><span class="farol-dot"></span>Critical</span></div>
+<div class="m-desc">Inaplicável para o segmento produtivo de cria, recria e confinamentos puros.</div>
+</div>
+<div class="m-item">
+<div class="m-header"><span class="m-name">Pulverizadores</span><span class="farol farol-warning"><span class="farol-dot"></span>Warning</span></div>
+<div class="m-desc">Movimentação restrita a soluções tracionadas leves para controle de invasoras em pastagens nativas.</div>
+</div>
+<div class="m-item">
+<div class="m-header"><span class="m-name">Plantadeiras</span><span class="farol farol-positive"><span class="farol-dot"></span>Positive</span></div>
+<div class="m-desc">Procura pontual por sementeiras forrageiras para projetos de rotação de pastos integrados.</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="ar" class="tab-content">
+<h2 class="country-title">Argentina</h2>
+<div class="news-grid">
+<div class="news-block">
+<div class="news-header">
+<h3 class="news-title">Margens Apertadas no Fechamento da Safra de Verão Limitam Investimentos</h3>
+<span class="farol farol-warning"><span class="farol-dot"></span>Warning</span>
+</div>
+<div class="news-body">
+O encerramento oficial da colheita de soja e milho tardio na Zona Núcleo confirmou volumes regulares, mas os preços internacionais deprimidos e taxas locais geraram margens estreitas para os "pools de siembra". O produtor foca em liquidez e adia frotas pesadas.
+</div>
+<div class="machinery-analysis">
+<div class="analysis-title">Impacto por Linha de Produto</div>
+<div class="machinery-items">
+<div class="m-item">
+<div class="m-header"><span class="m-name">Tratores</span><span class="farol farol-warning"><span class="farol-dot"></span>Warning</span></div>
+<div class="m-desc">Pedidos travados para potências extra-pesadas; mercado sustentado por peças de reposição.</div>
+</div>
+<div class="m-item">
+<div class="m-header"><span class="m-name">Colheitadeiras</span><span class="farol farol-warning"><span class="farol-dot"></span>Warning</span></div>
+<div class="m-desc">Frotas atuais serão estendidas por mais uma temporada; contratistas adiam faturamentos novos.</div>
+</div>
+<div class="m-item">
+<div class="m-header"><span class="m-name">Pulverizadores</span><span class="farol farol-warning"><span class="farol-dot"></span>Warning</span></div>
+<div class="m-desc">Foco total em manutenção e calibração fina de bicos para evitar desperdício de defensivos caros.</div>
+</div>
+<div class="m-item">
+<div class="m-header"><span class="m-name">Plantadeiras</span><span class="farol farol-positive"><span class="farol-dot"></span>Positive</span></div>
+<div class="m-desc">A busca por precisão de sementes ampara cotações estáveis para sistemas pneumáticos modernos.</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="news-block">
+<div class="news-header">
+<h3 class="news-title">Plantio de Inverno Avança com Redução Parcial de Impostos Industriais</h3>
+<span class="farol farol-positive"><span class="farol-dot"></span>Positive</span>
+</div>
+<div class="news-body">
+A redução nas alíquotas de importação para fertilizantes nitrogenados estimulou a arrancada do plantio de trigo e cevada de inverno. A medida aliviou os custos operacionais iniciais das lavouras e restabeleceu o fôlego comercial nas regiões produtoras chaves.
+</div>
+<div class="machinery-analysis">
+<div class="analysis-title">Impacto por Linha de Produto</div>
+<div class="machinery-items">
+<div class="m-item">
+<div class="m-header"><span class="m-name">Tratores</span><span class="farol farol-positive"><span class="farol-dot"></span>Positive</span></div>
+<div class="m-desc">Alta utilização de modelos médios tracionando frentes de trabalho contínuas nas propriedades.</div>
+</div>
+<div class="m-item">
+<div class="m-header"><span class="m-name">Colheitadeiras</span><span class="farol farol-warning"><span class="farol-dot"></span>Warning</span></div>
+<div class="m-desc">Mercado estável; equipes de pós-venda mobilizadas para revisões programadas de fim de ciclo.</div>
+</div>
+<div class="m-item">
+<div class="m-header"><span class="m-name">Pulverizadores</span><span class="farol farol-positive"><span class="farol-dot"></span>Positive</span></div>
+<div class="m-desc">Movimentação positiva para aplicação de herbicidas pré-emergentes e tratamentos de solo rápidos.</div>
+</div>
+<div class="m-item">
+<div class="m-header"><span class="m-name">Plantadeiras</span><span class="farol farol-positive"><span class="farol-dot"></span>Positive</span></div>
+<div class="m-desc">Excelente momento comercial para implementos do tipo Air Drill e sementeiras de plantio direto de trigo.</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="news-block">
+<div class="news-header">
+<h3 class="news-title">Gargalo Cambial Prolongado e Acesso a Divisas Prejudicam Maquinário Importado</h3>
+<span class="farol farol-critical"><span class="farol-dot"></span>Critical</span>
+</div>
+<div class="news-body">
+As restrições alfandegárias e barreiras burocráticas para o acesso ao mercado de divisas seguem dificultando a importação ágil de maquinários pesados e componentes de transmissão de alta tecnologia, gerando inflação e valorização no mercado local de usados.
+</div>
+<div class="machinery-analysis">
+<div class="analysis-title">Impacto por Linha de Produto</div>
+<div class="machinery-items">
+<div class="m-item">
+<div class="m-header"><span class="m-name">Tratores</span><span class="farol farol-critical"><span class="farol-dot"></span>Critical</span></div>
+<div class="m-desc">Severe restrição de oferta em concessionárias para modelos de alta especificação técnica estrangeira.</div>
+</div>
+<div class="m-item">
+<div class="m-header"><span class="m-name">Colheitadeiras</span><span class="farol farol-critical"><span class="farol-dot"></span>Critical</span></div>
+<div class="m-desc">Paralisia completa de faturamento de plataformas integradas importadas diretamente da matriz.</div>
+</div>
+<div class="m-item">
+<div class="m-header"><span class="m-name">Pulverizadores</span><span class="farol farol-warning"><span class="farol-dot"></span>Warning</span></div>
+<div class="m-desc">A indústria metalmecânica nacional argentina absorve parcialmente a demanda reprimida de barras.</div>
+</div>
+<div class="m-item">
+<div class="m-header"><span class="m-name">Plantadeiras</span><span class="farol farol-warning"><span class="farol-dot"></span>Warning</span></div>
+<div class="m-desc">Fabricantes locais ganham mercado frente aos competidores globais afetados pela aduana.</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="news-block">
+<div class="news-header">
+<h3 class="news-title">Exportações de Carne Bovina Amparam Balanço de Propriedades Mistas</h3>
+<span class="farol farol-positive"><span class="farol-dot"></span>Positive</span>
+</div>
+<div class="news-body">
+A retomada e firmeza nos embarques de cortes bovinos premium para a China e Europa atuaram como um estabilizador financeiro crítico ("hedge") para fazendas mistas na região de Buenos Aires e La Pampa, compensando os baixos preços dos grãos de verão.
+</div>
+<div class="machinery-analysis">
+<div class="analysis-title">Impacto por Linha de Produto</div>
+<div class="machinery-items">
+<div class="m-item">
+<div class="m-header"><span class="m-name">Tratores</span><span class="farol farol-positive"><span class="farol-dot"></span>Positive</span></div>
+<div class="m-desc">Procura por modelos utilitários e carregadores frontais permanece constante em áreas de engorda.</div>
+</div>
+<div class="m-item">
+<div class="m-header"><span class="m-name">Colheitadeiras</span><span class="farol farol-critical"><span class="farol-dot"></span>Critical</span></div>
+<div class="m-desc">Sem qualquer relevância ou aplicabilidade direta para o setor pecuário de corte extensivo.</div>
+</div>
+<div class="m-item">
+<div class="m-header"><span class="m-name">Pulverizadores</span><span class="farol farol-warning"><span class="farol-dot"></span>Warning</span></div>
+<div class="m-desc">Utilização pontual de implementos simples acoplados para manejo sanitário leve de campos.</div>
+</div>
+<div class="m-item">
+<div class="m-header"><span class="m-name">Plantadeiras</span><span class="farol farol-positive"><span class="farol-dot"></span>Positive</span></div>
+<div class="m-desc">Fechamento de pedidos estável para semeadoras mecânicas de pastagens e forragens de inverno.</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="cl" class="tab-content">
+<h2 class="country-title">Chile</h2>
+<div class="news-grid">
+<div class="news-block">
+<div class="news-header">
+<h3 class="news-title">Embarques de Citros e Frutas de Caroço para Mercados Globais Protegem Caixa</h3>
+<span class="farol farol-positive"><span class="farol-dot"></span>Positive</span>
+</div>
+<div class="news-body">
+O fluxo contínuo de exportações de laranjas de inverno e uvas tardias para os mercados asiáticos e europeus garantiu forte rentabilidade aos vales frutícolas centrais. Produtores capitalizados em dólar mantêm planos ativos de atualização mecânica intrafazenda.
+</div>
+<div class="machinery-analysis">
+<div class="analysis-title">Impacto por Linha de Produto</div>
+<div class="machinery-items">
+<div class="m-item">
+<div class="m-header"><span class="m-name">Tratores</span><span class="farol farol-positive"><span class="farol-dot"></span>Positive</span></div>
+<div class="m-desc">Excelente recepção comercial para tratores estreitos/fruteiros (<90HP) para operação entre linhas.</div>
+</div>
+<div class="m-item">
+<div class="m-header"><span class="m-name">Colheitadeiras</span><span class="farol farol-critical"><span class="farol-dot"></span>Critical</span></div>
+<div class="m-desc">Demanda inexistente ou nula dado o foco operacional em colheitas manuais delicadas para exportação.</div>
+</div>
+<div class="m-item">
+<div class="m-header"><span class="m-name">Pulverizadores</span><span class="farol farol-positive"><span class="farol-dot"></span>Positive</span></div>
+<div class="m-desc">Forte volume de consultas para turbinas de pulverização e atomizadores hidropneumáticos de precisão.</div>
+</div>
+<div class="m-item">
+<div class="m-header"><span class="m-name">Plantadeiras</span><span class="farol farol-critical"><span class="farol-dot"></span>Critical</span></div>
+<div class="m-desc">Mercado ausente devido ao manejo hortícola focado em mudas e árvores lenhosas perenes.</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="news-block">
+<div class="news-header">
+<h3 class="news-title">Regulações Severas Ambientais da União Europeia Exigem Tecnologia de Ponta</h3>
+<span class="farol farol-positive"><span class="farol-dot"></span>Positive</span>
+</div>
+<div class="news-body">
+As novas regras de resíduos máximos tolerados impostas pelo mercado europeu forçam os agroexportadores chilenos a modernizarem suas frotas antigas. Máquinas obsoletas dão lugar a sistemas computadorizados de aplicação e monitoramento.
+</div>
+<div class="machinery-analysis">
+<div class="analysis-title">Impacto por Linha de Produto</div>
+<div class="machinery-items">
+<div class="m-item">
+<div class="m-header"><span class="m-name">Tratores</span><span class="farol farol-positive"><span class="farol-dot"></span>Positive</span></div>
+<div class="m-desc">Modelos fruteiros com cabines de filtragem pressurizada de carbono encontram alta aceitação técnica.</div>
+</div>
+<div class="m-item">
+<div class="m-header"><span class="m-name">Colheitadeiras</span><span class="farol farol-critical"><span class="farol-dot"></span>Critical</span></div>
+<div class="m-desc">Inaplicável em sistemas de pomares fechados e viticultura de alta qualidade.</div>
+</div>
+<div class="m-item">
+<div class="m-header"><span class="m-name">Pulverizadores</span><span class="farol farol-positive"><span class="farol-dot"></span>Positive</span></div>
+<div class="m-desc">Vendas aquecidas para equipamentos com controle eletrônico de seções e bicos anti-deriva.</div>
+</div>
+<div class="m-item">
+<div class="m-header"><span class="m-name">Plantadeiras</span><span class="farol farol-critical"><span class="farol-dot"></span>Critical</span></div>
+<div class="m-desc">Inaplicável no perfil agronômico predominante dos vales de exportação centrais.</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="news-block">
+<div class="news-header">
+<h3 class="news-title">Pecuária Leiteira no Sul Enfrenta Altos Custos de Suplementação no Inverno</h3>
+<span class="farol farol-warning"><span class="farol-dot"></span>Warning</span>
+</div>
+<div class="news-body">
+Na bacia leiteira do sul do país (regiões de Los Ríos e Los Lagos), as margens operacionais seguem comprimidas pelo custo elevado dos concentrados energéticos para o gado confinado na estação fria, limitando investimentos pesados em mecanização.
+</div>
+<div class="machinery-analysis">
+<div class="analysis-title">Impacto por Linha de Produto</div>
+<div class="machinery-items">
+<div class="m-item">
+<div class="m-header"><span class="m-name">Tratores</span><span class="farol farol-warning"><span class="farol-dot"></span>Warning</span></div>
+<div class="m-desc">Faturamento regular focado em utilitários de pátio para mixagem e distribuição de trato diário.</div>
+</div>
+<div class="m-item">
+<div class="m-header"><span class="m-name">Colheitadeiras</span><span class="farol farol-critical"><span class="farol-dot"></span>Critical</span></div>
+<div class="m-desc">Gargalo severo; demanda restrita unicamente a picadoras de silagem forrageira autopropelidas.</div>
+</div>
+<div class="m-item">
+<div class="m-header"><span class="m-name">Pulverizadores</span><span class="farol farol-warning"><span class="farol-dot"></span>Warning</span></div>
+<div class="m-desc">Curva de demanda enfraquecida durante a janela fria de inverno nas pastagens do sul.</div>
+</div>
+<div class="m-item">
+<div class="m-header"><span class="m-name">Plantadeiras</span><span class="farol farol-warning"><span class="farol-dot"></span>Warning</span></div>
+<div class="m-desc">Procura pontual e restrita a semeadoras de pastagens robustas de pequeno porte mecânico.</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="news-block">
+<div class="news-header">
+<h3 class="news-title">Precipitações Andinas Recarregam Reservatórios Críticos para a Próxima Safra</h3>
+<span class="farol farol-positive"><span class="farol-dot"></span>Positive</span>
+</div>
+<div class="news-body">
+A consolidação de neves e chuvas regulares nas cabeceiras da Cordilheira dos Andes garantiu o reabastecimento completo das bacias de irrigação. O alívio do risco hídrico destrava o planejamento de investimentos de médio prazo e investimentos em tecnologia.
+</div>
+<div class="machinery-analysis">
+<div class="analysis-title">Impacto por Linha de Produto</div>
+<div class="machinery-items">
+<div class="m-item">
+<div class="m-header"><span class="m-name">Tratores</span><span class="farol farol-positive"><span class="farol-dot"></span>Positive</span></div>
+<div class="m-desc">Retorno gradual da confiança impulsiona faturamento planejado de modelos de média tração.</div>
+</div>
+<div class="m-item">
+<div class="m-header"><span class="m-name">Colheitadeiras</span><span class="farol farol-warning"><span class="farol-dot"></span>Warning</span></div>
+<div class="m-desc">Pequeno nicho de grãos no sul (trigo/aveia) opera estável com foco em manutenções mecânicas.</div>
+</div>
+<div class="m-item">
+<div class="m-header"><span class="m-name">Pulverizadores</span><span class="farol farol-positive"><span class="farol-dot"></span>Positive</span></div>
+<div class="m-desc">Segurança hídrica valida cronogramas agressivos de blindagem sanitária de pomares.</div>
+</div>
+<div class="m-item">
+<div class="m-header"><span class="m-name">Plantadeiras</span><span class="farol farol-warning"><span class="farol-dot"></span>Warning</span></div>
+<div class="m-desc">Nicho de sementeiras de cereais no sul demonstra estabilidade sem variações significativas.</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="uy" class="tab-content">
+<h2 class="country-title">Uruguai</h2>
+<div class="news-grid">
+<div class="news-block">
+<div class="news-header">
+<h3 class="news-title">Pecuária Premium de Exportação Atua como Hedge e Sustenta Balanços</h3>
+<span class="farol farol-positive"><span class="farol-dot"></span>Positive</span>
+</div>
+<div class="news-body">
+A forte demanda externa pela carne bovina de alta qualidade uruguaia com certificação de rastreabilidade segue gerando receitas sólidas em dólar. O fator funciona como um colchão financeiro ideal para propriedades mistas que integram pecuária e lavoura de grãos.
+</div>
+<div class="machinery-analysis">
+<div class="analysis-title">Impacto por Linha de Produto</div>
+<div class="machinery-items">
+<div class="m-item">
+<div class="m-header"><span class="m-name">Tratores</span><span class="farol farol-positive"><span class="farol-dot"></span>Positive</span></div>
+<div class="m-desc">Faturamento firme para potências médias (100-180HP) destinadas ao preparo de volumoso e confinamentos.</div>
+</div>
+<div class="m-item">
+<div class="m-header"><span class="m-name">Colheitadeiras</span><span class="farol farol-warning"><span class="farol-dot"></span>Warning</span></div>
+<div class="m-desc">Janela estável; frotas focadas em grãos não sofrem expansão imediata por este fluxo pecuário.</div>
+</div>
+<div class="m-item">
+<div class="m-header"><span class="m-name">Pulverizadores</span><span class="farol farol-positive"><span class="farol-dot"></span>Positive</span></div>
+<div class="m-desc">Demanda firme por pulverizadores de arrasto para limpeza sanitária preventiva de pastos.</div>
+</div>
+<div class="m-item">
+<div class="m-header"><span class="m-name">Plantadeiras</span><span class="farol farol-positive"><span class="farol-dot"></span>Positive</span></div>
+<div class="m-desc">Semeadoras de pastagens registram bom giro comercial nas redes de distribuição locais.</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="news-block">
+<div class="news-header">
+<h3 class="news-title">Encerramento da Lavouras de Soja Deixa Margens Líquidas Estreitas</h3>
+<span class="farol farol-warning"><span class="farol-dot"></span>Warning</span>
+</div>
+<div class="news-body">
+A colheita de soja de verão foi concluída no sudoeste com ótimos rendimentos por hectare. Contudo, a queda nos prêmios internacionais e elevados custos de frete marítimo comprimiram o ganho líquido real, induzindo cautela na renovação de grandes frotas.
+</div>
+<div class="machinery-analysis">
+<div class="analysis-title">Impacto por Linha de Produto</div>
+<div class="machinery-items">
+<div class="m-item">
+<div class="m-header"><span class="m-name">Tratores</span><span class="farol farol-warning"><span class="farol-dot"></span>Warning</span></div>
+<div class="m-desc">Modelos articulados pesados enfrentam desaceleração temporária nas intenções de compra das redes.</div>
+</div>
+<div class="m-item">
+<div class="m-header"><span class="m-name">Colheitadeiras</span><span class="farol farol-warning"><span class="farol-dot"></span>Warning</span></div>
+<div class="m-desc">Equipes técnicas focam em programas estruturados de revisões de entressafra e reformas parciais.</div>
+</div>
+<div class="m-item">
+<div class="m-header"><span class="m-name">Pulverizadores</span><span class="farol farol-warning"><span class="farol-dot"></span>Warning</span></div>
+<div class="m-desc">Grandes autopropelidos registram compasso de espera; produtores priorizam alongar vida útil de ativos.</div>
+</div>
+<div class="m-item">
+<div class="m-header"><span class="m-name">Plantadeiras</span><span class="farol farol-warning"><span class="farol-dot"></span>Warning</span></div>
+<div class="m-desc">Vendas de plantadeiras de grãos grossos suspensas até o anúncio de novas linhas de crédito.</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="news-block">
+<div class="news-header">
+<h3 class="news-title">Janela de Plantio Direto de Forragens Sob Palhada Dinamiza Redes</h3>
+<span class="farol farol-positive"><span class="farol-dot"></span>Positive</span>
+</div>
+<div class="news-body">
+A rápida transição de áreas colhedoras de soja para a cobertura de pastagens de inverno (azevém e aveia) acelerou o cronograma operacional das fazendas mistas. A necessidade de dessecação e plantio veloz em grandes extensões movimenta as frentes de trabalho.
+</div>
+<div class="machinery-analysis">
+<div class="analysis-title">Impacto por Linha de Produto</div>
+<div class="machinery-items">
+<div class="m-item">
+<div class="m-header"><span class="m-name">Tratores</span><span class="farol farol-positive"><span class="farol-dot"></span>Positive</span></div>
+<div class="m-desc">Forte atividade de frotas de média tração trabalhando em turnos contínuos nas lavouras.</div>
+</div>
+<div class="m-item">
+<div class="m-header"><span class="m-name">Colheitadeiras</span><span class="farol farol-critical"><span class="farol-dot"></span>Critical</span></div>
+<div class="m-desc">Inativo temporariamente devido à conclusão integral das colheitas de grãos de verão.</div>
+</div>
+<div class="m-item">
+<div class="m-header"><span class="m-name">Pulverizadores</span><span class="farol farol-positive"><span class="farol-dot"></span>Positive</span></div>
+<div class="m-desc">Sistemas autopropelidos registram intensa atividade na dessecação química pré-semeadura.</div>
+</div>
+<div class="m-item">
+<div class="m-header"><span class="m-name">Plantadeiras</span><span class="farol farol-positive"><span class="farol-dot"></span>Positive</span></div>
+<div class="m-desc">Excelente momento comercial para sementeiras pneumáticas e de plantio direto sob palhada.</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="news-block">
+<div class="news-header">
+<h3 class="news-title">Colheita de Milho Concluída com Destinação Prioritária para Silagem</h3>
+<span class="farol farol-warning"><span class="farol-dot"></span>Warning</span>
+</div>
+<div class="news-body">
+As últimas áreas de milho safrinha foram colhidas apresentando resultados produtivos variáveis em função de estresses hídricos pontuais. Praticamente todo o volume foi direcionado para estocagem interna e silos de cooperativas para ração animal.
+</div>
+<div class="machinery-analysis">
+<div class="analysis-title">Impacto por Linha de Produto</div>
+<div class="machinery-items">
+<div class="m-item">
+<div class="m-header"><span class="m-name">Tratores</span><span class="farol farol-warning"><span class="farol-dot"></span>Warning</span></div>
+<div class="m-desc">Movimentação básica estável sem registros extraordinários de faturamento nas revendas.</div>
+</div>
+<div class="m-item">
+<div class="m-header"><span class="m-name">Colheitadeiras</span><span class="farol farol-warning"><span class="farol-dot"></span>Warning</span></div>
+<div class="m-desc">Uso de plataformas milheiras encerrado; foco migra para limpeza e hibernação de frotas.</div>
+</div>
+<div class="m-item">
+<div class="m-header"><span class="m-name">Pulverizadores</span><span class="farol farol-warning"><span class="farol-dot"></span>Warning</span></div>
+<div class="m-desc">Uso residual mitigado ao fim do ciclo vegetativo do milho nas lavouras.</div>
+</div>
+<div class="m-item">
+<div class="m-header"><span class="m-name">Plantadeiras</span><span class="farol farol-warning"><span class="farol-dot"></span>Warning</span></div>
+<div class="m-desc">Zero procura imediata até o início dos planejamentos agronômicos do ciclo de grãos grossos.</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="py" class="tab-content">
+<h2 class="country-title">Paraguai</h2>
+<div class="news-grid">
+<div class="news-block">
+<div class="news-header">
+<h3 class="news-title">Avanço da Fronteira Agrícola no Chaco Exige Robustez Mecânica</h3>
+<span class="farol farol-positive"><span class="farol-dot"></span>Positive</span>
+</div>
+<div class="news-body">
+O desbravamento acelerado do Chaco Ocidental com a incorporação de novas áreas de soja, milho safrinha e algodão impõe condições de trabalho rústicas. Solos pesados de primeiro ano exigem frotas superdimensionadas e de engenharia resistente.
+</div>
+<div class="machinery-analysis">
+<div class="analysis-title">Impacto por Linha de Produto</div>
+<div class="machinery-items">
+<div class="m-item">
+<div class="m-header"><span class="m-name">Tratores</span><span class="farol farol-positive"><span class="farol-dot"></span>Positive</span></div>
+<div class="m-desc">Forte tração comercial para modelos articulados pesados (>220HP) cruciais para a quebra inicial do solo.</div>
+</div>
+<div class="m-item">
+<div class="m-header"><span class="m-name">Colheitadeiras</span><span class="farol farol-positive"><span class="farol-dot"></span>Positive</span></div>
+<div class="m-desc">Prospecção positiva em médio prazo acompanhando o aumento linear da área cultivada regional.</div>
+</div>
+<div class="m-item">
+<div class="m-header"><span class="m-name">Pulverizadores</span><span class="farol farol-positive"><span class="farol-dot"></span>Positive</span></div>
+<div class="m-desc">Autopropelidos robustos com alta capacidade de tanque encontram excelente vazão em grandes talhões.</div>
+</div>
+<div class="m-item">
+<div class="m-header"><span class="m-name">Plantadeiras</span><span class="farol farol-positive"><span class="farol-dot"></span>Positive</span></div>
+<div class="m-desc">Implementos reforçados mecanicamente registram forte volume de consultas pré-safra.</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="news-block">
+<div class="news-header">
+<h3 class="news-title">Estiagem Hidrológica nos Rios Paraguai e Paraná Retarda Escoamento</h3>
+<span class="farol farol-warning"><span class="farol-dot"></span>Warning</span>
+</div>
+<div class="news-body">
+A redução severa do calado utilizável nos rios Paraguai e Paraná limita a capacidade de carga das barcaças exportadoras de grãos. O atraso logístico retarda a liquidação cambial de contratos em Assunção, travando a liberação rápida de linhas de financiamento.
+</div>
+<div class="machinery-analysis">
+<div class="analysis-title">Impacto por Linha de Produto</div>
+<div class="machinery-items">
+<div class="m-item">
+<div class="m-header"><span class="m-name">Tratores</span><span class="farol farol-warning"><span class="farol-dot"></span>Warning</span></div>
+<div class="m-desc">Atrasos na liberação de créditos causam postergações pontuais de faturamentos de novos pedidos.</div>
+</div>
+<div class="m-item">
+<div class="m-header"><span class="m-name">Colheitadeiras</span><span class="farol farol-warning"><span class="farol-dot"></span>Warning</span></div>
+<div class="m-desc">A atividade no campo é firme, mas o estrangulamento portuário deforma previsões financeiras locais.</div>
+</div>
+<div class="m-item">
+<div class="m-header"><span class="m-name">Pulverizadores</span><span class="farol farol-warning"><span class="farol-dot"></span>Warning</span></div>
+<div class="m-desc">Produtores seguram orçamentos corporativos aguardando a normalização do tráfego hidroviário.</div>
+</div>
+<div class="m-item">
+<div class="m-header"><span class="m-name">Plantadeiras</span><span class="farol farol-warning"><span class="farol-dot"></span>Warning</span></div>
+<div class="m-desc">Gargalo logístico gera efeito de lentidão nas consultas iniciais do plano de financiamento de plantio.</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="news-block">
+<div class="news-header">
+<h3 class="news-title">Feedlots em Expansão Consumem Produção Interna de Milho Safrinha</h3>
+<span class="farol farol-positive"><span class="farol-dot"></span>Positive</span>
+</div>
+<div class="news-body">
+Os investimentos em grandes confinamentos avançam de forma acelerada no oeste paraguaio para absorver localmente o milho produzido na região. A verticalização da cadeia produtiva de carne bovina gera caixa robusto para pecuaristas e grandes agroindústrias.
+</div>
+<div class="machinery-analysis">
+<div class="analysis-title">Impacto por Linha de Produto</div>
+<div class="machinery-items">
+<div class="m-item">
+<div class="m-header"><span class="m-name">Tratores</span><span class="farol farol-positive"><span class="farol-dot"></span>Positive</span></div>
+<div class="m-desc">Alta liquidez e faturamento para utilitários equipados de fábrica com conchas carregadoras frontais.</div>
+</div>
+<div class="m-item">
+<div class="m-header"><span class="m-name">Colheitadeiras</span><span class="farol farol-warning"><span class="farol-dot"></span>Warning</span></div>
+<div class="m-desc">Automotrizes forrageiras de picagem de silagem ganham mercado em detrimento de graneleiras puras.</div>
+</div>
+<div class="m-item">
+<div class="m-header"><span class="m-name">Pulverizadores</span><span class="farol farol-warning"><span class="farol-dot"></span>Warning</span></div>
+<div class="m-desc">Uso simplificado; demanda contida dentro de padrões conservadores de manutenção.</div>
+</div>
+<div class="m-item">
+<div class="m-header"><span class="m-name">Plantadeiras</span><span class="farol farol-warning"><span class="farol-dot"></span>Warning</span></div>
+<div class="m-desc">Baixo interesse ou relevância tecnológica dentro do perfil de exploração confinadora intensiva.</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="news-block">
+<div class="news-header">
+<h3 class="news-title">Ondas de Calor Severas Exigem Componentes Hidráulicos Tropicalizados</h3>
+<span class="farol farol-warning"><span class="farol-dot"></span>Warning</span>
+</div>
+<div class="news-body">
+A persistência de temperaturas extremas nas principais regiões agrícolas testa os limites mecânicos dos equipamentos em campo. Concessionários registram aumento em chamados de pós-venda para sistemas de arrefecimento e fluidos de transmissão hidráulica.
+</div>
+<div class="machinery-analysis">
+<div class="analysis-title">Impacto por Linha de Produto</div>
+<div class="machinery-items">
+<div class="m-item">
+<div class="m-header"><span class="m-name">Tratores</span><span class="farol farol-warning"><span class="farol-dot"></span>Warning</span></div>
+<div class="m-desc">Decisões de compra condicionadas à inclusão de radiadores pesados e pacotes tropicais robustos.</div>
+</div>
+<div class="m-item">
+<div class="m-header"><span class="m-name">Colheitadeiras</span><span class="farol farol-warning"><span class="farol-dot"></span>Warning</span></div>
+<div class="m-desc">Riscos de incêndios operacionais exigem sistemas robustos de autolimpeza pneumática e exaustão.</div>
+</div>
+<div class="m-item">
+<div class="m-header"><span class="m-name">Pulverizadores</span><span class="farol farol-warning"><span class="farol-dot"></span>Warning</span></div>
+<div class="m-desc">Turnos de aplicação migrados para a noite geram procura por kits de iluminação em LED avançados.</div>
+</div>
+<div class="m-item">
+<div class="m-header"><span class="m-name">Plantadeiras</span><span class="farol farol-positive"><span class="farol-dot"></span>Positive</span></div>
+<div class="m-desc">Sistemas de dosagem a vácuo e componentes mecânicos não sofrem interrupções diretas por calor.</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="pe" class="tab-content">
+<h2 class="country-title">Peru</h2>
+<div class="news-grid">
+<div class="news-block">
+<div class="news-header">
+<h3 class="news-title">Agroexportação Irrigada na Costa Cresce Firme com Frutas e Citros</h3>
+<span class="farol farol-positive"><span class="farol-dot"></span>Positive</span>
+</div>
+<div class="news-body">
+As divisas geradas pelo setor de frutas e laranjas premium nos vales costeiros irrigados de Ica e Piura registraram forte incremento. Produtores capitalizados impulsionam a substituição acelerada de implementos antigos de suporte, buscando manter competitividade.
+</div>
+<div class="machinery-analysis">
+<div class="analysis-title">Impacto por Linha de Produto</div>
+<div class="machinery-items">
+<div class="m-item">
+<div class="m-header"><span class="m-name">Tratores</span><span class="farol farol-positive"><span class="farol-dot"></span>Positive</span></div>
+<div class="m-desc">Forte fluxo comercial para modelos utilitários de perfil baixo e estreitos para tráfego em pomares.</div>
+</div>
+<div class="m-item">
+<div class="m-header"><span class="m-name">Colheitadeiras</span><span class="farol farol-critical"><span class="farol-dot"></span>Critical</span></div>
+<div class="m-desc">Inaplicável operacionalmente; o destino exportador exige colheitas estritamente manuais em campo.</div>
+</div>
+<div class="m-item">
+<div class="m-header"><span class="m-name">Pulverizadores</span><span class="farol farol-positive"><span class="farol-dot"></span>Positive</span></div>
+<div class="m-desc">Demanda firme por pulverizadores de arrasto equipados com grandes turbinas direcionadoras.</div>
+</div>
+<div class="m-item">
+<div class="m-header"><span class="m-name">Plantadeiras</span><span class="farol farol-warning"><span class="farol-dot"></span>Warning</span></div>
+<div class="m-desc">Segmento inativo para implementos tradicionais de grãos grossos (foco em linhas perenes).</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="news-block">
+<div class="news-header">
+<h3 class="news-title">Cafeicultura de Altitude Andina Enfrenta Barreiras Estruturais</h3>
+<span class="farol farol-warning"><span class="farol-dot"></span>Warning</span>
+</div>
+<div class="news-body">
+Diferente da rentabilidade da costa, o cinturão cafeeiro situado nas encostas andinas sofre com a severa fragmentação de terras (minifúndios) e topografia montanhosa rústica. O cenário limita a introdução de maquinários convencionais de grande escala.
+</div>
+<div class="machinery-analysis">
+<div class="analysis-title">Impacto por Linha de Produto</div>
+<div class="machinery-items">
+<div class="m-item">
+<div class="m-header"><span class="m-name">Tratores</span><span class="farol farol-critical"><span class="farol-dot"></span>Critical</span></div>
+<div class="m-desc">Penetração bloqueada por relevo íngreme e falta crônica de capacidade financeira dos pequenos produtores.</div>
+</div>
+<div class="m-item">
+<div class="m-header"><span class="m-name">Colheitadeiras</span><span class="farol farol-critical"><span class="farol-dot"></span>Critical</span></div>
+<div class="m-desc">Volume comercial nulo; colheita de café andino realizada inteiramente de forma braçal.</div>
+</div>
+<div class="m-item">
+<div class="m-header"><span class="m-name">Pulverizadores</span><span class="farol farol-critical"><span class="farol-dot"></span>Critical</span></div>
+<div class="m-desc">Manejo resolvido via aplicações manuais por meio de pulverizadores costais individuais simples.</div>
+</div>
+<div class="m-item">
+<div class="m-header"><span class="m-name">Plantadeiras</span><span class="farol farol-critical"><span class="farol-dot"></span>Critical</span></div>
+<div class="m-desc">Mercado e viabilidade inexistentes devido à dinâmica de cultivo perene em encostas de morros.</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="news-block">
+<div class="news-header">
+<h3 class="news-title">Algodão de Alta Qualidade Mantém Recuperação Gradual nos Vales do Norte</h3>
+<span class="farol farol-warning"><span class="farol-dot"></span>Warning</span>
+</div>
+<div class="news-body">
+Os vales agrícolas tradicionais do norte (Piura) registram recuperação estável nas intenções de plantio do valioso algodão de fibra longa. Embora o cenário traga otimismo moderado, a escala total da área cultivada é insuficiente para impulsionar grandes frotas novas.
+</div>
+<div class="machinery-analysis">
+<div class="analysis-title">Impacto por Linha de Produto</div>
+<div class="machinery-items">
+<div class="m-item">
+<div class="m-header"><span class="m-name">Tratores</span><span class="farol farol-warning"><span class="farol-dot"></span>Warning</span></div>
+<div class="m-desc">Cotações limitadas a modelos de potência média para rotinas básicas de preparo e gradeamento de solo.</div>
+</div>
+<div class="m-item">
+<div class="m-header"><span class="m-name">Colheitadeiras</span><span class="farol farol-warning"><span class="farol-dot"></span>Warning</span></div>
+<div class="m-desc">Adoção corporativa restrita; a colheita em pequenas parcelas baseia-se em prestadores locais.</div>
+</div>
+<div class="m-item">
+<div class="m-header"><span class="m-name">Pulverizadores</span><span class="farol farol-warning"><span class="farol-dot"></span>Warning</span></div>
+<div class="m-desc">Público comprador foca na aquisição e aluguel pontual de barras tracionadas simples.</div>
+</div>
+<div class="m-item">
+<div class="m-header"><span class="m-name">Plantadeiras</span><span class="farol farol-warning"><span class="farol-dot"></span>Warning</span></div>
+<div class="m-desc">Produtores estendem vida útil das plantadeiras atuais, adiando compras complexas mecânicas.</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="news-block">
+<div class="news-header">
+<h3 class="news-title">Demanda Industrial por Milho Duro Mobiliza Produtores de Grãos</h3>
+<span class="farol farol-positive"><span class="farol-dot"></span>Positive</span>
+</div>
+<div class="news-body">
+O firme consumo da indústria avícola nacional sustenta a demanda e os preços internos estáveis do milho amarelo duro. Pequenos e médios produtores nos vales interandinos buscam otimizar o rendimento por meio de mecanização básica de plantio.
+</div>
+<div class="machinery-analysis">
+<div class="analysis-title">Impacto por Linha de Produto</div>
+<div class="machinery-items">
+<div class="m-item">
+<div class="m-header"><span class="m-name">Tratores</span><span class="farol farol-positive"><span class="farol-dot"></span>Positive</span></div>
+<div class="m-desc">Faturamento regular e firme para modelos de tração simples utilitários (<110HP).</div>
+</div>
+<div class="m-item">
+<div class="m-header"><span class="m-name">Colheitadeiras</span><span class="farol farol-warning"><span class="farol-dot"></span>Warning</span></div>
+<div class="m-desc">Mercado muito restrito; uso generalizado de pequenas trilhadoras estacionárias na região.</div>
+</div>
+<div class="m-item">
+<div class="m-header"><span class="m-name">Pulverizadores</span><span class="farol farol-warning"><span class="farol-dot"></span>Warning</span></div>
+<div class="m-desc">Pouca variação comercial; foco direcionado em bicos de reposição e bombas tracionadas leves.</div>
+</div>
+<div class="m-item">
+<div class="m-header"><span class="m-name">Plantadeiras</span><span class="farol farol-positive"><span class="farol-dot"></span>Positive</span></div>
+<div class="m-desc">Interesse crescente por sementeiras mecânicas de precisão de poucas linhas para pequenas áreas.</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="bo" class="tab-content">
+<h2 class="country-title">Bolívia</h2>
+<div class="news-grid">
+<div class="news-block">
+<div class="news-header">
+<h3 class="news-title">Cinturão de Santa Cruz Mantém Expansão Relevante em Lavouras</h3>
+<span class="farol farol-positive"><span class="farol-dot"></span>Positive</span>
+</div>
+<div class="news-body">
+Apesar dos desafios macroeconômicos nacionais de transportes, os relatórios da ANAPO apontam para expansão contínua das áreas de soja e milho safrinha na planície leste de Santa Cruz de la Sierra. O cenário eleva a necessidade imediata por alta potência de arrasto.
+</div>
+<div class="machinery-analysis">
+<div class="analysis-title">Impacto por Linha de Produto</div>
+<div class="machinery-items">
+<div class="m-item">
+<div class="m-header"><span class="m-name">Tratores</span><span class="farol farol-positive"><span class="farol-dot"></span>Positive</span></div>
+<div class="m-desc">Pico expressivo de interesse comercial voltado para tratores pesados (>200HP) articulados.</div>
+</div>
+<div class="m-item">
+<div class="m-header"><span class="m-name">Colheitadeiras</span><span class="farol farol-positive"><span class="farol-dot"></span>Positive</span></div>
+<div class="m-desc">Perspectivas comerciais em alta impulsionadas pela nova extensão de solos aráveis abertos.</div>
+</div>
+<div class="m-item">
+<div class="m-header"><span class="m-name">Pulverizadores</span><span class="farol farol-positive"><span class="farol-dot"></span>Positive</span></div>
+<div class="m-desc">Proteção fitossanitária inegociável garante busca firme por pulverizadores de barras longas.</div>
+</div>
+<div class="m-item">
+<div class="m-header"><span class="m-name">Plantadeiras</span><span class="farol farol-positive"><span class="farol-dot"></span>Positive</span></div>
+<div class="m-desc">Fechamento de ordens consistente para sementeiras mecânicas reforçadas contra solos rústicos.</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="news-block">
+<div class="news-header">
+<h3 class="news-title">Falta de Dólares no Mercado Oficial Bloqueia Liberações de Lotes Novos</h3>
+<span class="farol farol-critical"><span class="farol-dot"></span>Critical</span>
+</div>
+<div class="news-body">
+A escassez severa de reservas em dólares no sistema bancário boliviano e o ágio no câmbio paralelo impedem importadores de realizarem remessas normais para o exterior. O fator retém estoques nos portos e paralisa faturamentos convencionais.
+</div>
+<div class="machinery-analysis">
+<div class="analysis-title">Impacto por Linha de Produto</div>
+<div class="machinery-items">
+<div class="m-item">
+<div class="m-header"><span class="m-name">Tratores</span><span class="farol farol-critical"><span class="farol-dot"></span>Critical</span></div>
+<div class="m-desc">Imobilização de entregas em concessionárias inflaciona severamente o mercado de usados regional.</div>
+</div>
+<div class="m-item">
+<div class="m-header"><span class="m-name">Colheitadeiras</span><span class="farol farol-critical"><span class="farol-dot"></span>Critical</span></div>
+<div class="m-desc">Bloqueio cambial impede o faturamento de plataformas axiais de grande porte recém-chegadas.</div>
+</div>
+<div class="m-item">
+<div class="m-header"><span class="m-name">Pulverizadores</span><span class="farol farol-warning"><span class="farol-dot"></span>Warning</span></div>
+<div class="m-desc">Transações limitadas a lotes de autopropelidos já nacionalizados em meses anteriores.</div>
+</div>
+<div class="m-item">
+<div class="m-header"><span class="m-name">Plantadeiras</span><span class="farol farol-warning"><span class="farol-dot"></span>Warning</span></div>
+<div class="m-desc">Produtores recorrem à adaptação emergencial de chassis e reposição em oficinas locais.</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="news-block">
+<div class="news-header">
+<h3 class="news-title">Operações de Barter Físico com Soja Oxigenam Negociações de Frota</h3>
+<span class="farol farol-warning"><span class="farol-dot"></span>Warning</span>
+</div>
+<div class="news-body">
+Para contornar o travamento bancário de moedas estrangeiras, tradings multinacionais e distribuidores locais consolidaram operações de Barter físico. O agricultor liquida parcelas de máquinas diretamente em grãos de soja, viabilizando transações diretas.
+</div>
+<div class="machinery-analysis">
+<div class="analysis-title">Impacto por Linha de Produto</div>
+<div class="machinery-items">
+<div class="m-item">
+<div class="m-header"><span class="m-name">Tratores</span><span class="farol farol-positive"><span class="farol-dot"></span>Positive</span></div>
+<div class="m-desc">O barter viabiliza a entrega pontual de grandes modelos de arrasto para o polo produtor.</div>
+</div>
+<div class="m-item">
+<div class="m-header"><span class="m-name">Colheitadeiras</span><span class="farol farol-warning"><span class="farol-dot"></span>Warning</span></div>
+<div class="m-desc">A alta tonelagem física exigida para cobrir o custo de uma colhedora limita contratos a megagrupos.</div>
+</div>
+<div class="m-item">
+<div class="m-header"><span class="m-name">Pulverizadores</span><span class="farol farol-positive"><span class="farol-dot"></span>Positive</span></div>
+<div class="m-desc">Autopropelidos mecânicos de chassi simples circulam com agilidade nesse arranjo comercial de troca.</div>
+</div>
+<div class="m-item">
+<div class="m-header"><span class="m-name">Plantadeiras</span><span class="farol farol-positive"><span class="farol-dot"></span>Positive</span></div>
+<div class="m-desc">Kits de plantio e sementeiras completas mantêm giro fluido via cooperativas locais de grãos.</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="news-block">
+<div class="news-header">
+<h3 class="news-title">Pecuária de Corte em Beni Mantém Operações Orgânicas Voltadas ao Mercado Local</h3>
+<span class="farol farol-warning"><span class="farol-dot"></span>Warning</span>
+</div>
+<div class="news-body">
+O pilar pecuário bovino nas savanas de Beni e terras baixas opera de forma estável, mas voltado predominantemente ao consumo doméstico boliviano. A falta de protocolos de exportação massivos limita a injeção de grandes capitais na infraestrutura das fazendas.
+</div>
+<div class="machinery-analysis">
+<div class="analysis-title">Impacto por Linha de Produto</div>
+<div class="machinery-items">
+<div class="m-item">
+<div class="m-header"><span class="m-name">Tratores</span><span class="farol farol-warning"><span class="farol-dot"></span>Warning</span></div>
+<div class="m-desc">Movimentação lenta e orgânica de utilitários médios destinados a manutenções internas leves.</div>
+</div>
+<div class="m-item">
+<div class="m-header"><span class="m-name">Colheitadeiras</span><span class="farol farol-critical"><span class="farol-dot"></span>Critical</span></div>
+<div class="m-desc">Inaplicável operacionalmente dentro do desenho extensivo pastoril predominante na região.</div>
+</div>
+<div class="m-item">
+<div class="m-header"><span class="m-name">Pulverizadores</span><span class="farol farol-warning"><span class="farol-dot"></span>Warning</span></div>
+<div class="m-desc">Uso muito baixo, focado em atomizadores costais ou de arrasto para limpeza de cercas.</div>
+</div>
+<div class="m-item">
+<div class="m-header"><span class="m-name">Plantadeiras</span><span class="farol farol-warning"><span class="farol-dot"></span>Warning</span></div>
+<div class="m-desc">Procura pontualíssima e de baixo apelo tecnológico, restrita a reformas básicas de pasto.</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+
+<div class="footer">
+CONFIDENCIAL — ACESSO RESTRITO — PIPELINE DE COMPILAÇÃO DA INTELIGÊNCIA DE MERCADO AGCO LATAM 2026
+</div>
+</div>
+
+<script type="text/javascript">
+function switchTab(evt, countryId) {
+var i, tabcontent, tablinks;
+tabcontent = document.getElementsByClassName("tab-content");
+for (i = 0; i < tabcontent.length; i++) {
+tabcontent[i].style.display = "none";
+tabcontent[i].classList.remove("active");
+}
+tablinks = document.getElementsByClassName("tab-btn");
+for (i = 0; i < tablinks.length; i++) {
+tablinks[i].classList.remove("active");
+}
+document.getElementById(countryId).style.display = "block";
+document.getElementById(countryId).classList.add("active");
+evt.currentTarget.classList.add("active");
+}
+
+// --- LÓGICA DE TRADUÇÃO - VERSÃO PARA ARQUIVO LOCAL (SEM SERVIDOR) ---
+
+// Esta função é chamada pelo script do Google quando ele está pronto.
+function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+        pageLanguage: 'pt', 
+        autoDisplay: false,
+        includedLanguages: 'en,es,pt',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+    }, 'google_translate_element');
+
+    // A cada 500ms, verifica o idioma atual e atualiza o botão ativo.
+    // Isso é necessário porque não há um evento de "tradução concluída".
+    setInterval(setInitialLanguageState, 500);
+}
+
+function switchLanguage(event, targetLang) {
+    event.preventDefault();
+    console.log(`[Lang] Botão '${targetLang}' clicado.`);
+
+    const googleTranslateSelect = document.querySelector('select.goog-te-combo');
+    if (!googleTranslateSelect) {
+        console.error("[Lang] Seletor do Google Translate (select.goog-te-combo) não encontrado.");
+        return;
+    }
+
+    const currentLang = googleTranslateSelect.value;
+
+    // Se o idioma atual já for o alvo, não faz nada.
+    if (currentLang === targetLang) {
+        console.log(`[Lang] O idioma já é '${targetLang}'. Nenhuma ação necessária.`);
+        return;
+    }
+
+    // Para reverter para o português, a maneira mais confiável é recarregar a página,
+    // pois o Google Translate não oferece um método "revert" fácil.
+    if (targetLang === 'pt') {
+        console.log("[Lang] Revertendo para Português. Recarregando a página.");
+        window.location.reload();
+        return;
+    }
+
+    // Altera o valor do seletor e dispara o evento para o Google agir.
+    googleTranslateSelect.value = targetLang;
+    googleTranslateSelect.dispatchEvent(new Event('change'));
+    console.log(`[Lang] Evento 'change' disparado para o Google Translate com o valor '${targetLang}'.`);
+}
+
+
+function setInitialLanguageState() {
+    // O Google adiciona um atributo 'lang' na tag <html> quando traduz.
+    const lang = document.documentElement.lang || 'pt';
+
+    // --- 1. ATUALIZAÇÃO DO BOTÃO DE IDIOMA ATIVO ---
+    const currentActiveButton = document.querySelector('.lang-btn.active');
+    const newActiveButton = document.querySelector(`.lang-btn[onclick*="'${lang}'"]`);
+
+    // Apenas atualiza os botões se o estado mudou
+    if (newActiveButton && currentActiveButton !== newActiveButton) {
+        console.log(`[Lang] Mudança de idioma detectada para: ${lang}. Atualizando botão.`);
+        if (currentActiveButton) currentActiveButton.classList.remove('active');
+        newActiveButton.classList.add('active');
+    }
+
+    // --- 2. ATUALIZAÇÃO FORÇADA DA DATA DO RELATÓRIO ---
+    const dateElement = document.getElementById('report-date');
+    if (!dateElement) {
+        // Isso não deveria acontecer se o template estiver correto.
+        // console.error("[Date] Elemento com id 'report-date' não foi encontrado no DOM.");
+        return;
+    }
+
+    const newDateText = dateElement.getAttribute(`data-${lang}`);
+    if (!newDateText) {
+        // Avisa se o atributo para o idioma específico não for encontrado.
+        // console.warn(`[Date] Atributo 'data-${lang}' não encontrado no elemento #report-date.`);
+        return;
+    }
+
+    // Apenas atualiza o DOM se o texto for diferente, para evitar "flicker" e melhorar a performance.
+    if (dateElement.textContent !== newDateText) {
+        // Log para confirmar que a atualização está sendo tentada.
+        console.log(`[Date] Atualizando data para o idioma '${lang}': "${newDateText}"`);
+        dateElement.textContent = newDateText;
+    }
+}
+
+// Adiciona um listener para garantir que o estado seja definido ao carregar a página.
+window.addEventListener('load', setInitialLanguageState);
+</script>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</body>
+</html>
