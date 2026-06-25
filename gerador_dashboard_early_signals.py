@@ -406,6 +406,3 @@ if __name__ == "__main__":
         print(f"\nCausa do erro: {e}\n")
         print("Por favor, verifique a mensagem acima para entender o problema.")
         print("="*60)
-    finally:
-        print("\nPressione ENTER para fechar esta janela.")
-        input()
