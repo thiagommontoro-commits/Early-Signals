@@ -37,6 +37,15 @@ TRANSLATIONS = {
         "product_line_impact": "Impact by Product Line", "analysis_unavailable": "Analysis unavailable.",
         "no_news": "No news available for this country.",
         "months": ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+    },
+    "es": {
+        "positive": "Positivo", "critical": "Crítico", "warning": "Atención",
+        "description": "Descripción", "impacts": "Impactos", "source": "Fuente",
+        "no_analysis": "No hay análisis disponible para este país.", "unavailable_title": "Título no disponible",
+        "unavailable_body": "Cuerpo de la noticia no disponible.", "not_informed": "No informada",
+        "product_line_impact": "Impacto por Línea de Producto", "analysis_unavailable": "Análisis no disponible.",
+        "no_news": "No hay noticias disponibles para este país.",
+        "months": ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
     }
 }
 
@@ -77,6 +86,7 @@ def gerar_bloco_analises(analises_pais):
         return f'<p {i18n_attrs("no_analysis")}>{TRANSLATIONS["pt"]["no_analysis"]}</p>'
 
     for analise in analises_pais:
+        tendencia = analise.get("tendencia", "incerto")
         mapa_tendencia = {
             "restritiva": {"classe": "tendencia-negativa", "icone": "📉"},
             "alta":       {"classe": "tendencia-negativa", "icone": "📉"},
@@ -88,26 +98,42 @@ def gerar_bloco_analises(analises_pais):
             "positivo":   {"classe": "tendencia-positiva", "icone": "📈"},
         }
         
-        config_tendencia = mapa_tendencia.get(analise["tendencia"], {"classe": "tendencia-neutra", "icone": "➖"})
+        config_tendencia = mapa_tendencia.get(tendencia, {"classe": "tendencia-neutra", "icone": "➖"})
         css_class = config_tendencia["classe"]
+
+        # Adicionando a lógica do farol, similar à seção de notícias
+        farol_class = get_farol_class(tendencia)
+        translation_key = get_farol_translation_key(tendencia)
+        farol_text_attrs = i18n_attrs(translation_key)
+        farol_html = f'<span class="farol {farol_class}"><span class="farol-dot"></span><span {farol_text_attrs}>{TRANSLATIONS["pt"][translation_key]}</span></span>'
 
         html_output += f'''
         <div class="analysis-card {css_class}">
             <div class="analysis-header">
                 <span class="analysis-icon">{analise["icone"]}</span>
                 <h3 class="analysis-card-title">{analise["titulo"]}</h3>
+                {farol_html}
             </div>
             <div class="analysis-body">
-                <p class="analysis-text"><strong {i18n_attrs("description")}>{TRANSLATIONS["pt"]["description"]}:</strong> {analise["descricao"]}</p>
-                <p class="analysis-text"><strong {i18n_attrs("impacts")}>{TRANSLATIONS["pt"]["impacts"]}:</strong> {analise["impactos"]}</p>
-                <p class="analysis-text source-text"><strong {i18n_attrs("source")}>{TRANSLATIONS["pt"]["source"]}:</strong> {analise["fonte"]}</p>
+                <div>
+                    <span class="analysis-label" {i18n_attrs("description")}>{TRANSLATIONS["pt"]["description"]}</span>
+                    <p class="analysis-text">{analise["descricao"]}</p>
+                </div>
+                <div>
+                    <span class="analysis-label" {i18n_attrs("impacts")}>{TRANSLATIONS["pt"]["impacts"]}</span>
+                    <p class="analysis-text">{analise["impactos"]}</p>
+                </div>
+                <div>
+                    <span class="analysis-label" {i18n_attrs("source")}>{TRANSLATIONS["pt"]["source"]}</span>
+                    <p class="analysis-text source-text">{analise["fonte"]}</p>
+                </div>
             </div>
         </div>'''
     
     html_output += '\n</div>'
     return html_output
 
-def gerar_blocos_noticias(noticias_pais):
+def gerar_blocos_noticias(noticias_pais, codigo_pais=""):
     """
     Gera o grid HTML com os blocos de notícias e suas análises de impacto.
     """
@@ -115,16 +141,26 @@ def gerar_blocos_noticias(noticias_pais):
         return f'<div class="news-grid"><p {i18n_attrs("no_news")}>{TRANSLATIONS["pt"]["no_news"]}</p></div>'
 
     html_output = '<div class="news-grid">\n'
-    for noticia in noticias_pais:
+
+    # Mapeia os temas para ícones para o Brasil. A ordem é importante.
+    temas_brasil = [("Soja", "🌾"), ("Milho", "🌽"), ("Café", "☕"), ("Cana", "🎋")]
+
+    for i, noticia in enumerate(noticias_pais):
         tendencia_noticia = noticia.get('tendencia_noticia', 'incerto')
         farol_class = get_farol_class(tendencia_noticia)
         translation_key = get_farol_translation_key(tendencia_noticia)
         farol_text_attrs = i18n_attrs(translation_key)
 
+        icon_html = ""
+        # Adiciona ícone apenas para o Brasil, baseado na ordem das notícias
+        if codigo_pais == 'br' and i < len(temas_brasil):
+            tema, icone = temas_brasil[i]
+            icon_html = f'<span class="news-topic-icon" title="{tema}">{icone}</span>'
+
         html_output += f'''
         <div class="news-block">
             <div class="news-header">
-                <h3 class="news-title">{noticia.get('titulo_noticia', TRANSLATIONS['pt']['unavailable_title'])}</h3>
+                <h3 class="news-title">{icon_html}{noticia.get('titulo_noticia', TRANSLATIONS['pt']['unavailable_title'])}</h3>
                 <span class="farol {farol_class}"><span class="farol-dot"></span><span {farol_text_attrs}>{TRANSLATIONS['pt'][translation_key]}</span></span>
             </div>
             <div class="news-body">
@@ -207,24 +243,29 @@ def atualizar_dados_com_ia(dados_path, script_dir):
     
     prompt_json_base_obj = {}
     for pais_code, fatores in fatores_base.items():
+        base_noticia_prompt = {
+            "titulo_noticia": "...",
+            "tendencia_noticia": "positivo|negativo|incerto",
+            "corpo_noticia": "...",
+            "fonte_noticia": "...",
+            "impacto_produtos": {
+                "tratores": {"tendencia": "positivo|negativo|incerto", "descricao": "..."},
+                "colheitadeiras": {"tendencia": "positivo|negativo|incerto", "descricao": "..."},
+                "pulverizadores": {"tendencia": "positivo|negativo|incerto", "descricao": "..."},
+                "plantadeiras": {"tendencia": "positivo|negativo|incerto", "descricao": "..."}
+            }
+        }
+        
+        noticias_prompt = []
+        if pais_code == 'br':
+            for tema in ["Soja", "Milho", "Café", "Cana"]:
+                noticias_prompt.append({**base_noticia_prompt, "tema_obrigatorio": tema})
+        else:
+            noticias_prompt = [base_noticia_prompt] * 4
+
         prompt_json_base_obj[pais_code] = {
-            "fatores_economicos": [
-                {**f, "tendencia": "...", "descricao": "...", "impactos": "...", "fonte": "..."} for f in fatores
-            ],
-            "noticias": [
-                {
-                    "titulo_noticia": "...",
-                    "tendencia_noticia": "positivo|negativo|incerto",
-                    "corpo_noticia": "...",
-                    "fonte_noticia": "...",
-                    "impacto_produtos": {
-                        "tratores": {"tendencia": "positivo|negativo|incerto", "descricao": "..."},
-                        "colheitadeiras": {"tendencia": "positivo|negativo|incerto", "descricao": "..."},
-                        "pulverizadores": {"tendencia": "positivo|negativo|incerto", "descricao": "..."},
-                        "plantadeiras": {"tendencia": "positivo|negativo|incerto", "descricao": "..."}
-                    }
-                }
-            ] * 4
+            "fatores_economicos": [{**f, "tendencia": "...", "descricao": "...", "impactos": "...", "fonte": "..."} for f in fatores],
+            "noticias": noticias_prompt
         }
     prompt_json_base = json.dumps(prompt_json_base_obj, indent=2, ensure_ascii=False)
     mes_nome = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"][month - 1]
@@ -232,15 +273,14 @@ def atualizar_dados_com_ia(dados_path, script_dir):
     prompt = f"""
     Você é um Analista de Inteligência de Mercado Sênior para o setor de máquinas agrícolas na América Latina.
     Sua tarefa é gerar um relatório completo e atualizado para o mês de {mes_nome} de {year}.
-
     Para cada país, preencha DUAS seções:
     1.  `fatores_economicos`: 4 análises macroeconômicas concisas.
         - "tendencia": 'positivo', 'negativo', 'incerto', 'estavel', 'alta', 'baixa', 'restritiva', 'expansiva'.
         - "descricao": Análise curta (máx 20 palavras).
         - "impactos": Impacto direto no mercado de máquinas (máx 25 palavras).
         - "fonte": Fontes típicas.
-
     2.  `noticias`: 4 notícias REAIS e RECENTES do agronegócio do país que impactam a demanda por máquinas.
+        - **REGRA ESPECIAL PARA O BRASIL**: Para o Brasil (`br`), você DEVE retornar uma notícia para cada um dos `tema_obrigatorio` especificados no JSON (`Soja`, `Milho`, `Café`, `Cana`). Para os outros países, as 4 notícias podem ser sobre quaisquer temas relevantes.
         - "titulo_noticia": Título da notícia (máx 15 palavras).
         - "tendencia_noticia": 'positivo', 'negativo' ou 'incerto'.
         - "corpo_noticia": Resumo da notícia (máx 40 palavras).
@@ -248,9 +288,8 @@ def atualizar_dados_com_ia(dados_path, script_dir):
         - "impacto_produtos": Análise de impacto para cada linha de produto.
             - "tendencia": 'positivo', 'negativo' ou 'incerto'.
             - "descricao": Justificativa curta do impacto (máx 20 palavras).
-
     É crucial que a análise seja baseada em dados e eventos reais do mês corrente.
-    Retorne a resposta EXATAMENTE no formato JSON a seguir, preenchendo os "..." com dados reais, sem adicionar nenhum comentário ou formatação extra.
+    Retorne a resposta EXATAMENTE no formato JSON a seguir, preenchendo os "..." com dados reais, sem adicionar nenhum comentário ou formatação extra. O campo `tema_obrigatorio` é apenas uma instrução para você e não deve ser incluído na resposta JSON final.
 
     {prompt_json_base}
     """
@@ -349,6 +388,7 @@ def gerar_dashboard(template_path, output_path, dados_path):
         # Preenche os placeholders de data com as versões em português e inglês
         html_content = html_content.replace("{{DATA_RELATORIO_PT}}", f"{TRANSLATIONS['pt']['months'][month_idx]} de {year}")
         html_content = html_content.replace("{{DATA_RELATORIO_EN}}", f"{TRANSLATIONS['en']['months'][month_idx]} {year}")
+        html_content = html_content.replace("{{DATA_RELATORIO_ES}}", f"{TRANSLATIONS['es']['months'][month_idx]} de {year}")
 
         print("📊 Gerando blocos de análise e notícias para cada país...")
         for codigo_pais, dados_pais in dados_completos.items():
@@ -360,7 +400,7 @@ def gerar_dashboard(template_path, output_path, dados_path):
             html_content = html_content.replace(placeholder_analises, bloco_analises_html)
 
             # Gerar Notícias
-            bloco_noticias_html = gerar_blocos_noticias(dados_pais.get('noticias', []))
+            bloco_noticias_html = gerar_blocos_noticias(dados_pais.get('noticias', []), codigo_pais)
             placeholder_noticias = f"{{{{BLOCO_NOTICIAS_{codigo_pais.upper()}}}}}"
             html_content = html_content.replace(placeholder_noticias, bloco_noticias_html)
 
@@ -381,7 +421,7 @@ if __name__ == "__main__":
     output_arquivo = script_dir / "index.html"
     dados_arquivo = script_dir / "dados_paises.json"
     
-    print("🚀 Iniciando a geração do dashboard 'Early Warning AGCO'...")
+    print("🚀 Iniciando a geração do dashboard 'Early Signals'...")
     
     try:
         if not template_arquivo.exists():
