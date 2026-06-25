@@ -1,0 +1,11 @@
+# Arquivos de ambiente com segredos
+.env
+
+# Arquivos gerados pelo script
+index.html
+dados_paises.json
+cache_dados_ia_*.json
+
+# Arquivos de cache do Python
+__pycache__/
+*.pyc
