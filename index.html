@@ -1,0 +1,2020 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Early Warning AGCO - LATAM Executive Intelligence Pipeline</title>
+<style>
+:root {
+--agco-red: #cc0000;
+--agco-black: #111111;
+--agco-dark-gray: #333333;
+--agco-light-gray: #f4f4f4;
+--text-main: #222222;
+--white: #ffffff;
+--farol-positive-bg: #e2f0d9;
+--farol-positive-text: #385723;
+--farol-positive-dot: #70ad47;
+--farol-warning-bg: #fff2cc;
+--farol-warning-text: #7f6000;
+--farol-warning-dot: #ffc000;
+--farol-critical-bg: #fce4d6;
+--farol-critical-text: #c65911;
+--farol-critical-dot: #c00000;
+/* Cores RGB para transparências */
+--farol-positive-dot-rgb: 112, 173, 71;
+--farol-warning-dot-rgb: 255, 192, 0;
+--farol-critical-dot-rgb: 192, 0, 0;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+font-family: 'Arial', sans-serif;
+background-color: #e9ecef;
+color: var(--text-main);
+margin: 0;
+padding: 20px;
+}
+
+.container {
+max-width: 1350px;
+margin: 0 auto;
+background-color: var(--white);
+box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+border-radius: 4px;
+overflow: hidden;
+}
+
+.header {
+background-color: var(--agco-black);
+color: var(--white);
+padding: 30px 40px;
+border-bottom: 6px solid var(--agco-red);
+display: flex;
+justify-content: space-between;
+align-items: center;
+gap: 20px;
+}
+
+.header-text h1 {
+margin: 0;
+font-size: 28px;
+text-transform: uppercase;
+letter-spacing: 1.5px;
+font-weight: 900;
+}
+
+.header-text p {
+margin: 5px 0 0 0;
+font-size: 12px;
+color: #b0b0b0;
+text-transform: uppercase;
+letter-spacing: 0.5px;
+}
+
+.header-controls {
+display: flex;
+align-items: center;
+gap: 20px;
+}
+
+.lang-selector {
+display: flex;
+gap: 5px;
+background-color: #2a2a2a;
+padding: 4px;
+border-radius: 4px;
+}
+
+.lang-btn {
+background-color: transparent;
+border: none;
+color: #a0a0a0;
+padding: 6px 10px;
+font-size: 12px;
+font-weight: bold;
+cursor: pointer;
+border-radius: 2px;
+transition: all 0.2s ease-in-out;
+}
+
+.lang-btn:hover {
+background-color: #444;
+color: var(--white);
+}
+
+.lang-btn.active {
+background-color: var(--agco-red);
+color: var(--white);
+}
+
+.date-badge {
+background-color: var(--agco-red);
+padding: 8px 16px;
+font-weight: bold;
+font-size: 13px;
+border-radius: 2px;
+text-transform: uppercase;
+letter-spacing: 1px;
+}
+
+.content-wrapper { padding: 25px 35px; }
+
+.alert-banner {
+background-color: var(--agco-light-gray);
+border-left: 5px solid var(--agco-red);
+padding: 12px 20px;
+margin-bottom: 25px;
+font-size: 11px;
+font-weight: bold;
+color: var(--agco-dark-gray);
+text-transform: uppercase;
+letter-spacing: 0.5px;
+}
+
+.tabs-nav {
+display: flex;
+flex-wrap: wrap;
+gap: 5px;
+margin-bottom: 25px;
+border-bottom: 3px solid var(--agco-black);
+padding-bottom: 5px;
+}
+
+.tab-btn {
+background-color: var(--agco-light-gray);
+color: var(--agco-dark-gray);
+border: none;
+padding: 12px 20px;
+font-size: 13px;
+font-weight: bold;
+cursor: pointer;
+text-transform: uppercase;
+border-radius: 4px 4px 0 0;
+transition: all 0.2s;
+}
+
+.tab-btn:hover { background-color: #e0e0e0; color: var(--agco-black); }
+.tab-btn.active {
+background-color: var(--agco-black);
+color: var(--white);
+border-bottom: 3px solid var(--agco-red);
+}
+
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+
+.country-title {
+font-size: 24px;
+color: var(--agco-black);
+margin-top: 0;
+margin-bottom: 25px;
+padding-bottom: 10px;
+border-bottom: 2px solid #dddddd;
+font-weight: 800;
+text-transform: uppercase;
+}
+
+.section-title {
+    font-size: 18px;
+    color: var(--agco-dark-gray);
+    margin-top: 0;
+    margin-bottom: 25px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e9ecef;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.news-grid {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 25px;
+}
+
+@media (max-width: 1024px) {
+.news-grid { grid-template-columns: 1fr; }
+}
+
+.news-block {
+background-color: var(--white);
+border: 1px solid #e0e0e0;
+border-radius: 4px;
+overflow: hidden;
+display: flex;
+flex-direction: column;
+box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+}
+
+.news-header {
+background-color: var(--agco-light-gray);
+padding: 15px 20px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+border-left: 5px solid var(--agco-black);
+gap: 15px;
+}
+
+.news-title {
+font-size: 14px;
+font-weight: bold;
+color: var(--agco-black);
+margin: 0;
+text-transform: uppercase;
+line-height: 1.4;
+}
+
+.news-body {
+padding: 18px 20px;
+font-size: 13px;
+color: var(--agco-dark-gray);
+line-height: 1.5;
+text-align: justify;
+flex-grow: 1;
+}
+
+.news-source {
+    font-size: 11px;
+    color: #888;
+    margin-top: 15px;
+    text-align: right;
+    font-style: italic;
+    border-top: 1px solid #f0f0f0;
+    padding-top: 8px;
+    margin-bottom: 0;
+}
+
+.farol {
+display: inline-flex;
+align-items: center;
+gap: 6px;
+padding: 4px 10px;
+font-size: 11px;
+font-weight: bold;
+border-radius: 4px;
+text-transform: uppercase;
+letter-spacing: 0.5px;
+white-space: nowrap;
+}
+
+.farol-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+.farol-positive { background-color: var(--farol-positive-bg); color: var(--farol-positive-text); }
+.farol-positive .farol-dot { background-color: var(--farol-positive-dot); }
+.farol-warning { background-color: var(--farol-warning-bg); color: var(--farol-warning-text); }
+.farol-warning .farol-dot { background-color: var(--farol-warning-dot); }
+.farol-critical { background-color: var(--farol-critical-bg); color: var(--farol-critical-text); }
+.farol-critical .farol-dot { background-color: var(--farol-critical-dot); }
+
+.machinery-analysis {
+background-color: #fafafa;
+border-top: 1px solid #e0e0e0;
+padding: 18px 20px;
+}
+
+.analysis-title {
+font-weight: bold;
+color: var(--agco-black);
+margin-bottom: 12px;
+font-size: 11px;
+text-transform: uppercase;
+border-bottom: 1px solid #e0e0e0;
+padding-bottom: 5px;
+letter-spacing: 0.5px;
+}
+
+.machinery-items {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 12px;
+}
+
+@media (max-width: 600px) {
+.machinery-items { grid-template-columns: 1fr; }
+}
+
+.m-item {
+background: var(--white);
+border: 1px solid #eaeaea;
+padding: 10px;
+border-radius: 4px;
+display: flex;
+flex-direction: column;
+gap: 6px;
+font-size: 12px;
+}
+
+.m-header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+
+.m-name {
+font-weight: bold;
+color: var(--agco-dark-gray);
+text-transform: uppercase;
+font-size: 11px;
+}
+
+.m-desc {
+color: #555;
+line-height: 1.4;
+}
+
+/* --- ESTILOS DO NOVO BLOCO DE ANÁLISES (v5 - Emoldurado) --- */
+
+.analysis-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px; /* Espaço entre os cards */
+    margin-bottom: 40px;
+}
+
+.analysis-card {
+    background-color: var(--white);
+    border: 1px solid #e9ecef; /* Borda sutil */
+    border-radius: 6px; /* Bordas levemente arredondadas */
+    padding: 24px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.04); /* Sombra discreta */
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.analysis-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.07);
+}
+
+.analysis-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 0;
+    padding-bottom: 15px; /* Linha separadora */
+    border-bottom: 1px solid #f1f3f5; /* Cor da linha */
+    margin-bottom: 15px; /* Espaço após a linha */
+}
+
+.analysis-icon {
+    font-size: 22px;
+    line-height: 1;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    flex-shrink: 0;
+}
+
+/* Fundo do ícone usa as cores do "farol" para consistência */
+.tendencia-positiva .analysis-icon { background-color: var(--farol-positive-bg); color: var(--farol-positive-text); }
+.tendencia-negativa .analysis-icon { background-color: var(--farol-critical-bg); color: var(--farol-critical-text); }
+.tendencia-neutra .analysis-icon { background-color: var(--farol-warning-bg); color: var(--farol-warning-text); }
+
+.analysis-card h3.analysis-card-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #212529;
+    margin: 0;
+}
+
+.analysis-body {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    padding-left: 0; /* Removido o alinhamento anterior */
+}
+
+.analysis-label {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    color: #6c757d;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 8px;
+}
+
+.analysis-text {
+    font-size: 13.5px;
+    color: #495057;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.footer {
+background-color: var(--agco-black);
+color: #777777;
+text-align: center;
+padding: 20px;
+font-size: 11px;
+text-transform: uppercase;
+letter-spacing: 1px;
+border-top: 4px solid var(--agco-red);
+}
+</style>
+</head>
+<body>
+
+<div id="google_translate_element" style="display:none;"></div>
+
+<div class="container">
+<div class="header">
+<div class="header-text">
+<h1 data-pt="Early Warning AGCO" data-en="AGCO Early Warning">Early Warning AGCO</h1>
+<p data-pt="LATAM Market Intelligence & Predictive Sales Demand Framework" data-en="LATAM Market Intelligence & Predictive Sales Demand Framework">LATAM Market Intelligence & Predictive Sales Demand Framework</p>
+</div>
+<div class="header-controls">
+<div class="lang-selector">
+<button class="lang-btn active" onclick="switchLanguage(event, 'pt')" title="Português">🇧🇷 PT</button>
+<button class="lang-btn" onclick="switchLanguage(event, 'en')" title="English">🇺🇸 EN</button>
+</div>
+<div class="date-badge" data-pt="Junho de 2026" data-en="June 2026">Junho de 2026</div>
+</div>
+</div>
+
+<div class="content-wrapper">
+<div class="alert-banner" data-pt="MANDATÓRIO: Cobertura completa de 7 países da América do Sul com 4 cenários analíticos detalhados cada. Foco em impactos de frota, dinâmica cambial, renovação de frentes e gargalos logísticos." data-en="MANDATORY: Full coverage of 7 South American countries with 4 detailed analytical scenarios each. Focus on fleet impacts, currency dynamics, front renewals, and logistics bottlenecks.">
+MANDATÓRIO: Cobertura completa de 7 países da América do Sul com 4 cenários analíticos detalhados cada. Foco em impactos de frota, dinâmica cambial, renovação de frentes e gargalos logísticos.
+</div>
+
+<div class="tabs-nav">
+<button class="tab-btn active" onclick="switchTab(event, 'br')" data-pt="🇧🇷 Brasil" data-en="🇧🇷 Brazil">🇧🇷 Brasil</button>
+<button class="tab-btn" onclick="switchTab(event, 'ar')" data-pt="🇦🇷 Argentina" data-en="🇦🇷 Argentina">🇦🇷 Argentina</button>
+<button class="tab-btn" onclick="switchTab(event, 'cl')" data-pt="🇨🇱 Chile" data-en="🇨🇱 Chile">🇨🇱 Chile</button>
+<button class="tab-btn" onclick="switchTab(event, 'uy')" data-pt="🇺🇾 Uruguai" data-en="🇺🇾 Uruguay">🇺🇾 Uruguai</button>
+<button class="tab-btn" onclick="switchTab(event, 'py')" data-pt="🇵🇾 Paraguai" data-en="🇵🇾 Paraguay">🇵🇾 Paraguai</button>
+<button class="tab-btn" onclick="switchTab(event, 'pe')" data-pt="🇵🇪 Peru" data-en="🇵🇪 Peru">🇵🇪 Peru</button>
+<button class="tab-btn" onclick="switchTab(event, 'bo')" data-pt="🇧🇴 Bolívia" data-en="🇧🇴 Bolivia">🇧🇴 Bolívia</button>
+<button class="tab-btn" onclick="switchTab(event, 'mx')" data-pt="🇲🇽 México" data-en="🇲🇽 Mexico">🇲🇽 México</button>
+</div>
+
+<div id="br" class="tab-content active">
+<h2 class="country-title" data-pt="Brasil" data-en="Brazil">Brasil</h2>
+    <h2 class="section-title" data-pt="Fatores Econômicos" data-en="Economic Factors">Fatores Econômicos</h2>
+    <div class="analysis-grid">
+
+        <div class="analysis-card tendencia-positiva">
+            <div class="analysis-header">
+                <span class="analysis-icon">💳</span>
+                <h3 class="analysis-card-title">Crédito Rural</h3>
+            </div>
+            <div class="analysis-body">
+                <p class="analysis-text"><strong data-pt="Descrição" data-en="Description">Descrição:</strong> Expectativa do Plano Safra 2026/27 com volumes recordes e juros subsidiados para impulsionar a produção.</p>
+                <p class="analysis-text"><strong data-pt="Impactos" data-en="Impacts">Impactos:</strong> Impulsiona investimentos em máquinas, especialmente tratores e plantadeiras, para a próxima safra agrícola, aumentando as vendas.</p>
+                <p class="analysis-text source-text"><strong data-pt="Fonte" data-en="Source">Fonte:</strong> Banco Central do Brasil, Ministério da Agricultura</p>
+            </div>
+        </div>
+        <div class="analysis-card tendencia-neutra">
+            <div class="analysis-header">
+                <span class="analysis-icon">💰</span>
+                <h3 class="analysis-card-title">Taxa de Juros (Selic)</h3>
+            </div>
+            <div class="analysis-body">
+                <p class="analysis-text"><strong data-pt="Descrição" data-en="Description">Descrição:</strong> Selic mantida em patamar elevado para controle inflacionário, com leve expectativa de queda no longo prazo.</p>
+                <p class="analysis-text"><strong data-pt="Impactos" data-en="Impacts">Impactos:</strong> Juros de mercado altos encarecem financiamentos não subsidiados, impactando decisões de compra e desestimulando investimentos maiores.</p>
+                <p class="analysis-text source-text"><strong data-pt="Fonte" data-en="Source">Fonte:</strong> COPOM, Banco Central do Brasil</p>
+            </div>
+        </div>
+        <div class="analysis-card tendencia-neutra">
+            <div class="analysis-header">
+                <span class="analysis-icon">💵</span>
+                <h3 class="analysis-card-title">Câmbio (Dólar)</h3>
+            </div>
+            <div class="analysis-body">
+                <p class="analysis-text"><strong data-pt="Descrição" data-en="Description">Descrição:</strong> Dólar volátil frente ao Real, influenciado por cenário externo e política fiscal interna.</p>
+                <p class="analysis-text"><strong data-pt="Impactos" data-en="Impacts">Impactos:</strong> Pode reduzir custos de máquinas importadas, mas afeta a rentabilidade de exportadores de commodities, gerando cautela nos investimentos.</p>
+                <p class="analysis-text source-text"><strong data-pt="Fonte" data-en="Source">Fonte:</strong> B3, Reuters</p>
+            </div>
+        </div>
+        <div class="analysis-card tendencia-positiva">
+            <div class="analysis-header">
+                <span class="analysis-icon">🚜</span>
+                <h3 class="analysis-card-title">Produção de Grãos</h3>
+            </div>
+            <div class="analysis-body">
+                <p class="analysis-text"><strong data-pt="Descrição" data-en="Description">Descrição:</strong> Safra de verão recorde consolidada e projeções otimistas para a safrinha de milho, impulsionando a renda rural.</p>
+                <p class="analysis-text"><strong data-pt="Impactos" data-en="Impacts">Impactos:</strong> Maior capitalização dos produtores favorece a renovação e aquisição de equipamentos para colheita e preparo do solo.</p>
+                <p class="analysis-text source-text"><strong data-pt="Fonte" data-en="Source">Fonte:</strong> CONAB, IBGE</p>
+            </div>
+        </div>
+</div>
+    <h2 class="section-title" data-pt="Notícias Relevantes" data-en="Relevant News">Notícias Relevantes</h2>
+    <div class="news-grid">
+
+        <div class="news-block">
+            <div class="news-header">
+                <h3 class="news-title">Plano Safra 2026/27 supera expectativas</h3>
+                <span class="farol farol-positive"><span class="farol-dot"></span><span data-pt="Positivo" data-en="Positive">Positivo</span></span>
+            </div>
+            <div class="news-body">
+                Governo anuncia Plano Safra 2026/27 com volume histórico de recursos, R$ 500 bilhões, e novas linhas de crédito para sustentabilidade. Produtores otimistas com acesso facilitado a financiamentos.
+                <p class="news-source"><strong data-pt="Fonte" data-en="Source">Fonte:</strong> Globo Rural</p>
+            </div>
+            <div class="machinery-analysis">
+                <div class="analysis-title" data-pt="Impacto por Linha de Produto" data-en="Impact by Product Line">Impacto por Linha de Produto</div>
+                <div class="machinery-items">
+        
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Tratores</span><span class="farol farol-positive"><span class="farol-dot"></span><span data-pt="Positivo" data-en="Positive">Positivo</span></span></div>
+                        <div class="m-desc">Acesso facilitado ao crédito para compra de novos modelos, impulsionando vendas.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Colheitadeiras</span><span class="farol farol-positive"><span class="farol-dot"></span><span data-pt="Positivo" data-en="Positive">Positivo</span></span></div>
+                        <div class="m-desc">Linhas específicas para renovação de frota em regiões de alta produção, aumentando demanda.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Pulverizadores</span><span class="farol farol-positive"><span class="farol-dot"></span><span data-pt="Positivo" data-en="Positive">Positivo</span></span></div>
+                        <div class="m-desc">Incentivo a investimentos em tecnologia e precisão é maior com novos recursos.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Plantadeiras</span><span class="farol farol-positive"><span class="farol-dot"></span><span data-pt="Positivo" data-en="Positive">Positivo</span></span></div>
+                        <div class="m-desc">Demanda impulsionada pela expansão de áreas e modernização do plantio com crédito.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="news-block">
+            <div class="news-header">
+                <h3 class="news-title">Seca no Sul preocupa produtores de trigo</h3>
+                <span class="farol farol-critical"><span class="farol-dot"></span><span data-pt="Crítico" data-en="Critical">Crítico</span></span>
+            </div>
+            <div class="news-body">
+                Regiões do Sul do Brasil enfrentam estiagem severa, prejudicando o desenvolvimento do trigo e atrasando o plantio de inverno. Impacto negativo na safra esperado.
+                <p class="news-source"><strong data-pt="Fonte" data-en="Source">Fonte:</strong> Canal Rural</p>
+            </div>
+            <div class="machinery-analysis">
+                <div class="analysis-title" data-pt="Impacto por Linha de Produto" data-en="Impact by Product Line">Impacto por Linha de Produto</div>
+                <div class="machinery-items">
+        
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Tratores</span><span class="farol farol-critical"><span class="farol-dot"></span><span data-pt="Crítico" data-en="Critical">Crítico</span></span></div>
+                        <div class="m-desc">Redução da expectativa de safra diminui liquidez e investimentos em máquinas.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Colheitadeiras</span><span class="farol farol-critical"><span class="farol-dot"></span><span data-pt="Crítico" data-en="Critical">Crítico</span></span></div>
+                        <div class="m-desc">Menor volume de colheita e rentabilidade futura reduzem necessidade de novas máquinas.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Pulverizadores</span><span class="farol farol-warning"><span class="farol-dot"></span><span data-pt="Atenção" data-en="Warning">Atenção</span></span></div>
+                        <div class="m-desc">Pode haver necessidade de manejo extra, mas menor produção limita o investimento.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Plantadeiras</span><span class="farol farol-critical"><span class="farol-dot"></span><span data-pt="Crítico" data-en="Critical">Crítico</span></span></div>
+                        <div class="m-desc">Atraso no plantio e menor área cultivada reduzem a demanda por equipamentos.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="news-block">
+            <div class="news-header">
+                <h3 class="news-title">Exportações de carne bovina atingem recorde</h3>
+                <span class="farol farol-positive"><span class="farol-dot"></span><span data-pt="Positivo" data-en="Positive">Positivo</span></span>
+            </div>
+            <div class="news-body">
+                As exportações de carne bovina brasileira registraram recorde em maio, impulsionadas pela demanda asiática. O mercado pecuário está em alta e com boas margens de lucro.
+                <p class="news-source"><strong data-pt="Fonte" data-en="Source">Fonte:</strong> Scot Consultoria</p>
+            </div>
+            <div class="machinery-analysis">
+                <div class="analysis-title" data-pt="Impacto por Linha de Produto" data-en="Impact by Product Line">Impacto por Linha de Produto</div>
+                <div class="machinery-items">
+        
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Tratores</span><span class="farol farol-positive"><span class="farol-dot"></span><span data-pt="Positivo" data-en="Positive">Positivo</span></span></div>
+                        <div class="m-desc">Pecuária capitalizada investe em preparo de pastagem, silagem e infraestrutura de fazendas.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Colheitadeiras</span><span class="farol farol-warning"><span class="farol-dot"></span><span data-pt="Atenção" data-en="Warning">Atenção</span></span></div>
+                        <div class="m-desc">Impacto indireto, depende da integração lavoura-pecuária e demanda por forragens.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Pulverizadores</span><span class="farol farol-positive"><span class="farol-dot"></span><span data-pt="Positivo" data-en="Positive">Positivo</span></span></div>
+                        <div class="m-desc">Manejo de pastagens, controle de pragas e doenças na pecuária aumentam demanda.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Plantadeiras</span><span class="farol farol-positive"><span class="farol-dot"></span><span data-pt="Positivo" data-en="Positive">Positivo</span></span></div>
+                        <div class="m-desc">Aumento da área de forrageiras e integração lavoura-pecuária-floresta impulsiona vendas.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="news-block">
+            <div class="news-header">
+                <h3 class="news-title">Cresce agricultura de precisão no Centro-Oeste</h3>
+                <span class="farol farol-positive"><span class="farol-dot"></span><span data-pt="Positivo" data-en="Positive">Positivo</span></span>
+            </div>
+            <div class="news-body">
+                Produtores do Centro-Oeste intensificam investimentos em tecnologias de agricultura de precisão. O objetivo é otimizar o uso de insumos, aumentar a produtividade e reduzir custos operacionais.
+                <p class="news-source"><strong data-pt="Fonte" data-en="Source">Fonte:</strong> Embrapa</p>
+            </div>
+            <div class="machinery-analysis">
+                <div class="analysis-title" data-pt="Impacto por Linha de Produto" data-en="Impact by Product Line">Impacto por Linha de Produto</div>
+                <div class="machinery-items">
+        
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Tratores</span><span class="farol farol-positive"><span class="farol-dot"></span><span data-pt="Positivo" data-en="Positive">Positivo</span></span></div>
+                        <div class="m-desc">Demanda por tratores mais modernos, com piloto automático e telemetria, está em alta.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Colheitadeiras</span><span class="farol farol-positive"><span class="farol-dot"></span><span data-pt="Positivo" data-en="Positive">Positivo</span></span></div>
+                        <div class="m-desc">Busca por colheitadeiras com monitores de produtividade e conectividade para gestão.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Pulverizadores</span><span class="farol farol-positive"><span class="farol-dot"></span><span data-pt="Positivo" data-en="Positive">Positivo</span></span></div>
+                        <div class="m-desc">Pulverizadores de barras de carbono e bicos seletivos são procurados para eficiência.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Plantadeiras</span><span class="farol farol-positive"><span class="farol-dot"></span><span data-pt="Positivo" data-en="Positive">Positivo</span></span></div>
+                        <div class="m-desc">Plantadeiras com taxa variável e desligamento de linha em evidência para otimização.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+</div>
+
+<div id="ar" class="tab-content">
+<h2 class="country-title" data-pt="Argentina" data-en="Argentina">Argentina</h2>
+    <h2 class="section-title" data-pt="Fatores Econômicos" data-en="Economic Factors">Fatores Econômicos</h2>
+    <div class="analysis-grid">
+
+        <div class="analysis-card tendencia-negativa">
+            <div class="analysis-header">
+                <span class="analysis-icon">💳</span>
+                <h3 class="analysis-card-title">Crédito e Financiamento</h3>
+            </div>
+            <div class="analysis-body">
+                <p class="analysis-text"><strong data-pt="Descrição" data-en="Description">Descrição:</strong> Elevadas taxas de juros e incerteza econômica dificultam o acesso a financiamentos para o setor agrícola.</p>
+                <p class="analysis-text"><strong data-pt="Impactos" data-en="Impacts">Impactos:</strong> Desestimula a compra de máquinas agrícolas, forçando produtores a adiarem investimentos em renovação de frota.</p>
+                <p class="analysis-text source-text"><strong data-pt="Fonte" data-en="Source">Fonte:</strong> Banco Central da Argentina, CRA</p>
+            </div>
+        </div>
+        <div class="analysis-card tendencia-negativa">
+            <div class="analysis-header">
+                <span class="analysis-icon">📈</span>
+                <h3 class="analysis-card-title">Inflação e Câmbio</h3>
+            </div>
+            <div class="analysis-body">
+                <p class="analysis-text"><strong data-pt="Descrição" data-en="Description">Descrição:</strong> Inflação elevada e desvalorização cambial persistem, erodindo o poder de compra e gerando instabilidade.</p>
+                <p class="analysis-text"><strong data-pt="Impactos" data-en="Impacts">Impactos:</strong> Aumenta o custo de máquinas importadas e reduz a rentabilidade do produtor em pesos, dificultando o planejamento.</p>
+                <p class="analysis-text source-text"><strong data-pt="Fonte" data-en="Source">Fonte:</strong> INDEC, Reuters</p>
+            </div>
+        </div>
+        <div class="analysis-card tendencia-neutra">
+            <div class="analysis-header">
+                <span class="analysis-icon">⚖️</span>
+                <h3 class="analysis-card-title">Retenciones (Impostos)</h3>
+            </div>
+            <div class="analysis-body">
+                <p class="analysis-text"><strong data-pt="Descrição" data-en="Description">Descrição:</strong> Debate político sobre a redução das 'retenciones' (impostos sobre exportações) para commodities agrícolas.</p>
+                <p class="analysis-text"><strong data-pt="Impactos" data-en="Impacts">Impactos:</strong> Potencial alívio financeiro se reduzido, incentivando investimentos em máquinas. Incerto até decisão governamental.</p>
+                <p class="analysis-text source-text"><strong data-pt="Fonte" data-en="Source">Fonte:</strong> Confederações Rurais, Ministério da Economia</p>
+            </div>
+        </div>
+        <div class="analysis-card tendencia-positiva">
+            <div class="analysis-header">
+                <span class="analysis-icon">🚜</span>
+                <h3 class="analysis-card-title">Produção Agrícola</h3>
+            </div>
+            <div class="analysis-body">
+                <p class="analysis-text"><strong data-pt="Descrição" data-en="Description">Descrição:</strong> Safra 2025/26 de soja e milho com boa recuperação, impulsionada por chuvas e melhores condições climáticas.</p>
+                <p class="analysis-text"><strong data-pt="Impactos" data-en="Impacts">Impactos:</strong> Aumento da renda do produtor, criando margem para investimentos essenciais em máquinas pós-período de seca.</p>
+                <p class="analysis-text source-text"><strong data-pt="Fonte" data-en="Source">Fonte:</strong> Bolsa de Cereales de Buenos Aires, INTA</p>
+            </div>
+        </div>
+</div>
+    <h2 class="section-title" data-pt="Notícias Relevantes" data-en="Relevant News">Notícias Relevantes</h2>
+    <div class="news-grid">
+
+        <div class="news-block">
+            <div class="news-header">
+                <h3 class="news-title">Boa colheita de milho anima produtores</h3>
+                <span class="farol farol-positive"><span class="farol-dot"></span><span data-pt="Positivo" data-en="Positive">Positivo</span></span>
+            </div>
+            <div class="news-body">
+                A colheita de milho na Argentina está avançando com rendimentos acima da média, trazendo alívio após safras difíceis. Isso melhora a perspectiva de renda no campo.
+                <p class="news-source"><strong data-pt="Fonte" data-en="Source">Fonte:</strong> La Nación</p>
+            </div>
+            <div class="machinery-analysis">
+                <div class="analysis-title" data-pt="Impacto por Linha de Produto" data-en="Impact by Product Line">Impacto por Linha de Produto</div>
+                <div class="machinery-items">
+        
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Tratores</span><span class="farol farol-positive"><span class="farol-dot"></span><span data-pt="Positivo" data-en="Positive">Positivo</span></span></div>
+                        <div class="m-desc">Maior rentabilidade permite reinvestimento e manutenção de frota de tratores.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Colheitadeiras</span><span class="farol farol-positive"><span class="farol-dot"></span><span data-pt="Positivo" data-en="Positive">Positivo</span></span></div>
+                        <div class="m-desc">Justifica a modernização e aquisição para futuras safras de milho.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Pulverizadores</span><span class="farol farol-positive"><span class="farol-dot"></span><span data-pt="Positivo" data-en="Positive">Positivo</span></span></div>
+                        <div class="m-desc">Necessidade de manejo pós-colheita e preparo para a próxima safra.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Plantadeiras</span><span class="farol farol-positive"><span class="farol-dot"></span><span data-pt="Positivo" data-en="Positive">Positivo</span></span></div>
+                        <div class="m-desc">Produtores tendem a investir em tecnologia para otimizar plantio.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="news-block">
+            <div class="news-header">
+                <h3 class="news-title">Dólar alto e inflação freiam compras</h3>
+                <span class="farol farol-critical"><span class="farol-dot"></span><span data-pt="Crítico" data-en="Critical">Crítico</span></span>
+            </div>
+            <div class="news-body">
+                A persistente alta do dólar e a inflação descontrolada têm impactado negativamente o poder de compra dos produtores, adiando planos de investimento em máquinas e equipamentos.
+                <p class="news-source"><strong data-pt="Fonte" data-en="Source">Fonte:</strong> Clarín Rural</p>
+            </div>
+            <div class="machinery-analysis">
+                <div class="analysis-title" data-pt="Impacto por Linha de Produto" data-en="Impact by Product Line">Impacto por Linha de Produto</div>
+                <div class="machinery-items">
+        
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Tratores</span><span class="farol farol-critical"><span class="farol-dot"></span><span data-pt="Crítico" data-en="Critical">Crítico</span></span></div>
+                        <div class="m-desc">Elevado custo de aquisição e dificuldade de financiamento desestimulam compras.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Colheitadeiras</span><span class="farol farol-critical"><span class="farol-dot"></span><span data-pt="Crítico" data-en="Critical">Crítico</span></span></div>
+                        <div class="m-desc">Redução da capacidade de investimento em itens de alto valor, como colheitadeiras.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Pulverizadores</span><span class="farol farol-critical"><span class="farol-dot"></span><span data-pt="Crítico" data-en="Critical">Crítico</span></span></div>
+                        <div class="m-desc">Prioridade para gastos essenciais, adiando modernização do manejo.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Plantadeiras</span><span class="farol farol-critical"><span class="farol-dot"></span><span data-pt="Crítico" data-en="Critical">Crítico</span></span></div>
+                        <div class="m-desc">Menos recursos disponíveis para atualização tecnológica e novas aquisições.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="news-block">
+            <div class="news-header">
+                <h3 class="news-title">Governo debate retenciones para soja</h3>
+                <span class="farol farol-warning"><span class="farol-dot"></span><span data-pt="Atenção" data-en="Warning">Atenção</span></span>
+            </div>
+            <div class="news-body">
+                O governo está em negociação com setores agrícolas para uma possível redução das 'retenciones' sobre a soja. O resultado da medida ainda é incerto, gerando expectativas.
+                <p class="news-source"><strong data-pt="Fonte" data-en="Source">Fonte:</strong> Télam</p>
+            </div>
+            <div class="machinery-analysis">
+                <div class="analysis-title" data-pt="Impacto por Linha de Produto" data-en="Impact by Product Line">Impacto por Linha de Produto</div>
+                <div class="machinery-items">
+        
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Tratores</span><span class="farol farol-warning"><span class="farol-dot"></span><span data-pt="Atenção" data-en="Warning">Atenção</span></span></div>
+                        <div class="m-desc">Se aprovado, seria positivo; caso contrário, manutenção do cenário atual.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Colheitadeiras</span><span class="farol farol-warning"><span class="farol-dot"></span><span data-pt="Atenção" data-en="Warning">Atenção</span></span></div>
+                        <div class="m-desc">Potencial aumento da rentabilidade pode estimular compras futuras.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Pulverizadores</span><span class="farol farol-warning"><span class="farol-dot"></span><span data-pt="Atenção" data-en="Warning">Atenção</span></span></div>
+                        <div class="m-desc">Impacto dependerá da decisão e do real aumento da margem de lucro.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Plantadeiras</span><span class="farol farol-warning"><span class="farol-dot"></span><span data-pt="Atenção" data-en="Warning">Atenção</span></span></div>
+                        <div class="m-desc">Produtores aguardam definições para planejar investimentos em plantio.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="news-block">
+            <div class="news-header">
+                <h3 class="news-title">Aumento de área de trigo impulsiona insumos</h3>
+                <span class="farol farol-positive"><span class="farol-dot"></span><span data-pt="Positivo" data-en="Positive">Positivo</span></span>
+            </div>
+            <div class="news-body">
+                Com melhores perspectivas climáticas, produtores argentinos expandem a área plantada de trigo para a safra de inverno, gerando demanda por insumos e equipamentos para o cultivo.
+                <p class="news-source"><strong data-pt="Fonte" data-en="Source">Fonte:</strong> Agrofy News</p>
+            </div>
+            <div class="machinery-analysis">
+                <div class="analysis-title" data-pt="Impacto por Linha de Produto" data-en="Impact by Product Line">Impacto por Linha de Produto</div>
+                <div class="machinery-items">
+        
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Tratores</span><span class="farol farol-positive"><span class="farol-dot"></span><span data-pt="Positivo" data-en="Positive">Positivo</span></span></div>
+                        <div class="m-desc">Preparo de solo e manejo das lavouras de trigo demandam mais equipamentos.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Colheitadeiras</span><span class="farol farol-warning"><span class="farol-dot"></span><span data-pt="Atenção" data-en="Warning">Atenção</span></span></div>
+                        <div class="m-desc">Impacto mais sentido na colheita futura, mas gera expectativa de demanda.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Pulverizadores</span><span class="farol farol-positive"><span class="farol-dot"></span><span data-pt="Positivo" data-en="Positive">Positivo</span></span></div>
+                        <div class="m-desc">Essenciais para o manejo fitossanitário intensivo do trigo em áreas expandidas.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Plantadeiras</span><span class="farol farol-positive"><span class="farol-dot"></span><span data-pt="Positivo" data-en="Positive">Positivo</span></span></div>
+                        <div class="m-desc">Maior área de plantio de trigo aumenta a demanda por plantadeiras de grãos finos.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+</div>
+
+<div id="cl" class="tab-content">
+<h2 class="country-title" data-pt="Chile" data-en="Chile">Chile</h2>
+    <h2 class="section-title" data-pt="Fatores Econômicos" data-en="Economic Factors">Fatores Econômicos</h2>
+    <div class="analysis-grid">
+
+        <div class="analysis-card tendencia-negativa">
+            <div class="analysis-header">
+                <span class="analysis-icon">💧</span>
+                <h3 class="analysis-card-title">Cenário Hídrico</h3>
+            </div>
+            <div class="analysis-body">
+                <p class="analysis-text"><strong data-pt="Descrição" data-en="Description">Descrição:</strong> Seca estrutural persistente afeta regiões agrícolas importantes, limitando a produção e a expansão de cultivos.</p>
+                <p class="analysis-text"><strong data-pt="Impactos" data-en="Impacts">Impactos:</strong> Reduz área cultivável e demanda por máquinas, exceto as de irrigação tecnificada e eficiência hídrica.</p>
+                <p class="analysis-text source-text"><strong data-pt="Fonte" data-en="Source">Fonte:</strong> Direção Geral de Águas, ODEPA</p>
+            </div>
+        </div>
+        <div class="analysis-card tendencia-positiva">
+            <div class="analysis-header">
+                <span class="analysis-icon">🍒</span>
+                <h3 class="analysis-card-title">Exportação de Frutas</h3>
+            </div>
+            <div class="analysis-body">
+                <p class="analysis-text"><strong data-pt="Descrição" data-en="Description">Descrição:</strong> Setor frutícola chileno registra forte desempenho em exportações, impulsionado por novos mercados.</p>
+                <p class="analysis-text"><strong data-pt="Impactos" data-en="Impacts">Impactos:</strong> Maior capitalização para fruticultores, incentivando a compra de máquinas especializadas, como pulverizadores e tratores de pomar.</p>
+                <p class="analysis-text source-text"><strong data-pt="Fonte" data-en="Source">Fonte:</strong> ProChile, Fedefruta</p>
+            </div>
+        </div>
+        <div class="analysis-card tendencia-neutra">
+            <div class="analysis-header">
+                <span class="analysis-icon">📦</span>
+                <h3 class="analysis-card-title">Custo de Insumos</h3>
+            </div>
+            <div class="analysis-body">
+                <p class="analysis-text"><strong data-pt="Descrição" data-en="Description">Descrição:</strong> Preços de fertilizantes e defensivos estabilizados, mas ainda em patamar elevado, pressionando a margem.</p>
+                <p class="analysis-text"><strong data-pt="Impactos" data-en="Impacts">Impactos:</strong> Produtores buscam máquinas mais eficientes para otimizar o uso de insumos, como pulverizadores de precisão.</p>
+                <p class="analysis-text source-text"><strong data-pt="Fonte" data-en="Source">Fonte:</strong> SNA, SOFOFA</p>
+            </div>
+        </div>
+        <div class="analysis-card tendencia-negativa">
+            <div class="analysis-header">
+                <span class="analysis-icon">🌿</span>
+                <h3 class="analysis-card-title">Regulamentação Ambiental</h3>
+            </div>
+            <div class="analysis-body">
+                <p class="analysis-text"><strong data-pt="Descrição" data-en="Description">Descrição:</strong> Reforço na regulamentação ambiental sobre uso de água e defensivos, exigindo práticas mais sustentáveis.</p>
+                <p class="analysis-text"><strong data-pt="Impactos" data-en="Impacts">Impactos:</strong> Favorece máquinas de agricultura de precisão e irrigação eficiente, mas pode onerar produtores menores.</p>
+                <p class="analysis-text source-text"><strong data-pt="Fonte" data-en="Source">Fonte:</strong> Ministério do Meio Ambiente</p>
+            </div>
+        </div>
+</div>
+    <h2 class="section-title" data-pt="Notícias Relevantes" data-en="Relevant News">Notícias Relevantes</h2>
+    <div class="news-grid">
+
+        <div class="news-block">
+            <div class="news-header">
+                <h3 class="news-title">Setor frutícola projeta safra recorde</h3>
+                <span class="farol farol-positive"><span class="farol-dot"></span><span data-pt="Positivo" data-en="Positive">Positivo</span></span>
+            </div>
+            <div class="news-body">
+                Produtores chilenos de frutas esperam uma safra excepcional, impulsionada por condições climáticas favoráveis e expansão de mercados, gerando otimismo para o setor de exportação.
+                <p class="news-source"><strong data-pt="Fonte" data-en="Source">Fonte:</strong> Portal Frutícola</p>
+            </div>
+            <div class="machinery-analysis">
+                <div class="analysis-title" data-pt="Impacto por Linha de Produto" data-en="Impact by Product Line">Impacto por Linha de Produto</div>
+                <div class="machinery-items">
+        
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Tratores</span><span class="farol farol-positive"><span class="farol-dot"></span><span data-pt="Positivo" data-en="Positive">Positivo</span></span></div>
+                        <div class="m-desc">Demanda por tratores de pequeno e médio porte para manejo de pomares e vinhas.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Colheitadeiras</span><span class="farol farol-warning"><span class="farol-dot"></span><span data-pt="Atenção" data-en="Warning">Atenção</span></span></div>
+                        <div class="m-desc">Colheitadeiras especializadas em frutas podem ter alta, mas generalistas não.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Pulverizadores</span><span class="farol farol-positive"><span class="farol-dot"></span><span data-pt="Positivo" data-en="Positive">Positivo</span></span></div>
+                        <div class="m-desc">Aumento da demanda por pulverizadores especializados e eficientes para pomares.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Plantadeiras</span><span class="farol farol-positive"><span class="farol-dot"></span><span data-pt="Positivo" data-en="Positive">Positivo</span></span></div>
+                        <div class="m-desc">Expansão de novas áreas de cultivo de frutas leva a mais demanda por plantadeiras.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="news-block">
+            <div class="news-header">
+                <h3 class="news-title">Escassez de água limita cultivos</h3>
+                <span class="farol farol-critical"><span class="farol-dot"></span><span data-pt="Crítico" data-en="Critical">Crítico</span></span>
+            </div>
+            <div class="news-body">
+                A seca severa na zona central do Chile continua a impactar a agricultura, forçando produtores a reduzir áreas de plantio e a buscar alternativas de cultivo menos dependentes de água.
+                <p class="news-source"><strong data-pt="Fonte" data-en="Source">Fonte:</strong> El Mercurio Campo</p>
+            </div>
+            <div class="machinery-analysis">
+                <div class="analysis-title" data-pt="Impacto por Linha de Produto" data-en="Impact by Product Line">Impacto por Linha de Produto</div>
+                <div class="machinery-items">
+        
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Tratores</span><span class="farol farol-critical"><span class="farol-dot"></span><span data-pt="Crítico" data-en="Critical">Crítico</span></span></div>
+                        <div class="m-desc">Menor área cultivada diminui a necessidade de equipamentos novos para manejo.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Colheitadeiras</span><span class="farol farol-critical"><span class="farol-dot"></span><span data-pt="Crítico" data-en="Critical">Crítico</span></span></div>
+                        <div class="m-desc">Menor volume de produção agrícola geral reduz a demanda por colheitadeiras.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Pulverizadores</span><span class="farol farol-critical"><span class="farol-dot"></span><span data-pt="Crítico" data-en="Critical">Crítico</span></span></div>
+                        <div class="m-desc">Menos áreas e cultivos impactam negativamente o uso e a venda de pulverizadores.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Plantadeiras</span><span class="farol farol-critical"><span class="farol-dot"></span><span data-pt="Crítico" data-en="Critical">Crítico</span></span></div>
+                        <div class="m-desc">Redução das áreas a serem plantadas devido à restrição hídrica.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="news-block">
+            <div class="news-header">
+                <h3 class="news-title">Investimentos em irrigação tecnificada</h3>
+                <span class="farol farol-positive"><span class="farol-dot"></span><span data-pt="Positivo" data-en="Positive">Positivo</span></span>
+            </div>
+            <div class="news-body">
+                Produtores chilenos aumentam investimentos em sistemas de irrigação tecnificada para enfrentar a escassez hídrica, buscando eficiência no uso da água e maior resiliência.
+                <p class="news-source"><strong data-pt="Fonte" data-en="Source">Fonte:</strong> Agrícola Online</p>
+            </div>
+            <div class="machinery-analysis">
+                <div class="analysis-title" data-pt="Impacto por Linha de Produto" data-en="Impact by Product Line">Impacto por Linha de Produto</div>
+                <div class="machinery-items">
+        
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Tratores</span><span class="farol farol-positive"><span class="farol-dot"></span><span data-pt="Positivo" data-en="Positive">Positivo</span></span></div>
+                        <div class="m-desc">Necessários para instalação, manutenção de sistemas de irrigação e preparo de solo.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Colheitadeiras</span><span class="farol farol-warning"><span class="farol-dot"></span><span data-pt="Atenção" data-en="Warning">Atenção</span></span></div>
+                        <div class="m-desc">Impacto indireto, apenas se a irrigação aumentar significativamente a área de cultivo.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Pulverizadores</span><span class="farol farol-positive"><span class="farol-dot"></span><span data-pt="Positivo" data-en="Positive">Positivo</span></span></div>
+                        <div class="m-desc">Campos irrigados continuam exigindo manejo fitossanitário eficiente.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Plantadeiras</span><span class="farol farol-positive"><span class="farol-dot"></span><span data-pt="Positivo" data-en="Positive">Positivo</span></span></div>
+                        <div class="m-desc">Irrigação viabiliza plantio em áreas antes improdutivas, aumentando demanda.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="news-block">
+            <div class="news-header">
+                <h3 class="news-title">Alta nos custos de energia afeta agricultura</h3>
+                <span class="farol farol-critical"><span class="farol-dot"></span><span data-pt="Crítico" data-en="Critical">Crítico</span></span>
+            </div>
+            <div class="news-body">
+                O aumento dos preços da energia elétrica impacta diretamente os custos de produção agrícola, especialmente para culturas que dependem de irrigação e armazenamento refrigerado, reduzindo margens.
+                <p class="news-source"><strong data-pt="Fonte" data-en="Source">Fonte:</strong> Revista Agrícola</p>
+            </div>
+            <div class="machinery-analysis">
+                <div class="analysis-title" data-pt="Impacto por Linha de Produto" data-en="Impact by Product Line">Impacto por Linha de Produto</div>
+                <div class="machinery-items">
+        
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Tratores</span><span class="farol farol-critical"><span class="farol-dot"></span><span data-pt="Crítico" data-en="Critical">Crítico</span></span></div>
+                        <div class="m-desc">Redução de margem pode adiar compras de máquinas, buscando maior eficiência.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Colheitadeiras</span><span class="farol farol-critical"><span class="farol-dot"></span><span data-pt="Crítico" data-en="Critical">Crítico</span></span></div>
+                        <div class="m-desc">Menor rentabilidade geral do setor agrícola desestimula grandes investimentos.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Pulverizadores</span><span class="farol farol-critical"><span class="farol-dot"></span><span data-pt="Crítico" data-en="Critical">Crítico</span></span></div>
+                        <div class="m-desc">Produtores buscam reduzir gastos operacionais, afetando aquisição de novos.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Plantadeiras</span><span class="farol farol-critical"><span class="farol-dot"></span><span data-pt="Crítico" data-en="Critical">Crítico</span></span></div>
+                        <div class="m-desc">Impacto geral na rentabilidade agrícola, afetando capacidade de investimento.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+</div>
+
+<div id="uy" class="tab-content">
+<h2 class="country-title" data-pt="Uruguai" data-en="Uruguay">Uruguai</h2>
+    <h2 class="section-title" data-pt="Fatores Econômicos" data-en="Economic Factors">Fatores Econômicos</h2>
+    <div class="analysis-grid">
+
+        <div class="analysis-card tendencia-positiva">
+            <div class="analysis-header">
+                <span class="analysis-icon">🐄</span>
+                <h3 class="analysis-card-title">Exportação de Carne</h3>
+            </div>
+            <div class="analysis-body">
+                <p class="analysis-text"><strong data-pt="Descrição" data-en="Description">Descrição:</strong> Forte demanda global por carne bovina uruguaia, impulsionando o setor pecuário e a liquidez.</p>
+                <p class="analysis-text"><strong data-pt="Impactos" data-en="Impacts">Impactos:</strong> Favorece investimentos em máquinas para preparo de pastagem, manejo e agricultura ligada à pecuária.</p>
+                <p class="analysis-text source-text"><strong data-pt="Fonte" data-en="Source">Fonte:</strong> INAC, Ministério da Pecuária</p>
+            </div>
+        </div>
+        <div class="analysis-card tendencia-neutra">
+            <div class="analysis-header">
+                <span class="analysis-icon">📉</span>
+                <h3 class="analysis-card-title">Preço das Commodities</h3>
+            </div>
+            <div class="analysis-body">
+                <p class="analysis-text"><strong data-pt="Descrição" data-en="Description">Descrição:</strong> Flutuação nos preços internacionais da soja e milho, gerando incerteza sobre a rentabilidade futura.</p>
+                <p class="analysis-text"><strong data-pt="Impactos" data-en="Impacts">Impactos:</strong> Produtores cautelosos com grandes investimentos, preferindo manutenção ou substituição essencial de máquinas.</p>
+                <p class="analysis-text source-text"><strong data-pt="Fonte" data-en="Source">Fonte:</strong> CBOT, OPYPA</p>
+            </div>
+        </div>
+        <div class="analysis-card tendencia-negativa">
+            <div class="analysis-header">
+                <span class="analysis-icon">💵</span>
+                <h3 class="analysis-card-title">Atraso Cambial</h3>
+            </div>
+            <div class="analysis-body">
+                <p class="analysis-text"><strong data-pt="Descrição" data-en="Description">Descrição:</strong> Valorização do peso uruguaio frente ao dólar, impactando negativamente a competitividade das exportações agrícolas.</p>
+                <p class="analysis-text"><strong data-pt="Impactos" data-en="Impacts">Impactos:</strong> Reduz a rentabilidade em dólar dos produtos exportados, limitando o poder de compra de máquinas importadas.</p>
+                <p class="analysis-text source-text"><strong data-pt="Fonte" data-en="Source">Fonte:</strong> Banco Central do Uruguai</p>
+            </div>
+        </div>
+        <div class="analysis-card tendencia-positiva">
+            <div class="analysis-header">
+                <span class="analysis-icon">🌲</span>
+                <h3 class="analysis-card-title">Produção Florestal</h3>
+            </div>
+            <div class="analysis-body">
+                <p class="analysis-text"><strong data-pt="Descrição" data-en="Description">Descrição:</strong> Crescimento e investimentos contínuos no setor florestal, com novas áreas e infraestrutura.</p>
+                <p class="analysis-text"><strong data-pt="Impactos" data-en="Impacts">Impactos:</strong> Aumenta a demanda por tratores robustos e equipamentos específicos para manejo florestal e preparo de solo.</p>
+                <p class="analysis-text source-text"><strong data-pt="Fonte" data-en="Source">Fonte:</strong> MGAP, UPM</p>
+            </div>
+        </div>
+</div>
+    <h2 class="section-title" data-pt="Notícias Relevantes" data-en="Relevant News">Notícias Relevantes</h2>
+    <div class="news-grid">
+
+        <div class="news-block">
+            <div class="news-header">
+                <h3 class="news-title">Exportações de carne uruguaia em recorde</h3>
+                <span class="farol farol-positive"><span class="farol-dot"></span><span data-pt="Positivo" data-en="Positive">Positivo</span></span>
+            </div>
+            <div class="news-body">
+                As vendas de carne bovina do Uruguai para o exterior continuam em alta, impulsionadas pela China e EUA, gerando maior receita para o setor pecuário e confiança.
+                <p class="news-source"><strong data-pt="Fonte" data-en="Source">Fonte:</strong> Rurales El País</p>
+            </div>
+            <div class="machinery-analysis">
+                <div class="analysis-title" data-pt="Impacto por Linha de Produto" data-en="Impact by Product Line">Impacto por Linha de Produto</div>
+                <div class="machinery-items">
+        
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Tratores</span><span class="farol farol-positive"><span class="farol-dot"></span><span data-pt="Positivo" data-en="Positive">Positivo</span></span></div>
+                        <div class="m-desc">Essenciais para manejo de pastagens, silagem e infraestrutura de fazendas pecuárias.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Colheitadeiras</span><span class="farol farol-warning"><span class="farol-dot"></span><span data-pt="Atenção" data-en="Warning">Atenção</span></span></div>
+                        <div class="m-desc">Impacto menor, a menos que haja integração forte lavoura-pecuária forrageira.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Pulverizadores</span><span class="farol farol-positive"><span class="farol-dot"></span><span data-pt="Positivo" data-en="Positive">Positivo</span></span></div>
+                        <div class="m-desc">Controle de pragas e doenças em pastagens e forrageiras para pecuária.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Plantadeiras</span><span class="farol farol-positive"><span class="farol-dot"></span><span data-pt="Positivo" data-en="Positive">Positivo</span></span></div>
+                        <div class="m-desc">Utilizadas para estabelecimento e renovação de pastagens e cultivos para alimentação animal.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="news-block">
+            <div class="news-header">
+                <h3 class="news-title">Preço da soja em queda gera cautela</h3>
+                <span class="farol farol-critical"><span class="farol-dot"></span><span data-pt="Crítico" data-en="Critical">Crítico</span></span>
+            </div>
+            <div class="news-body">
+                A recente queda nos preços internacionais da soja tem gerado preocupação entre os produtores uruguaios, levando à cautela nos novos investimentos e aquisições.
+                <p class="news-source"><strong data-pt="Fonte" data-en="Source">Fonte:</strong> Agronegocios Sarandí</p>
+            </div>
+            <div class="machinery-analysis">
+                <div class="analysis-title" data-pt="Impacto por Linha de Produto" data-en="Impact by Product Line">Impacto por Linha de Produto</div>
+                <div class="machinery-items">
+        
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Tratores</span><span class="farol farol-critical"><span class="farol-dot"></span><span data-pt="Crítico" data-en="Critical">Crítico</span></span></div>
+                        <div class="m-desc">Produtores adiam aquisição de máquinas caras devido à incerteza da rentabilidade.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Colheitadeiras</span><span class="farol farol-critical"><span class="farol-dot"></span><span data-pt="Crítico" data-en="Critical">Crítico</span></span></div>
+                        <div class="m-desc">Menor rentabilidade desestimula a renovação de frota de colheitadeiras.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Pulverizadores</span><span class="farol farol-critical"><span class="farol-dot"></span><span data-pt="Crítico" data-en="Critical">Crítico</span></span></div>
+                        <div class="m-desc">Redução de despesas, focando apenas no essencial para manejo.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Plantadeiras</span><span class="farol farol-critical"><span class="farol-dot"></span><span data-pt="Crítico" data-en="Critical">Crítico</span></span></div>
+                        <div class="m-desc">Cautela nos investimentos em geral, incluindo novos equipamentos de plantio.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="news-block">
+            <div class="news-header">
+                <h3 class="news-title">Setor florestal anuncia novos projetos</h3>
+                <span class="farol farol-positive"><span class="farol-dot"></span><span data-pt="Positivo" data-en="Positive">Positivo</span></span>
+            </div>
+            <div class="news-body">
+                Empresas florestais no Uruguai planejam novos investimentos em expansão de áreas e infraestrutura, consolidando o crescimento do setor e gerando demanda específica.
+                <p class="news-source"><strong data-pt="Fonte" data-en="Source">Fonte:</strong> El Observador</p>
+            </div>
+            <div class="machinery-analysis">
+                <div class="analysis-title" data-pt="Impacto por Linha de Produto" data-en="Impact by Product Line">Impacto por Linha de Produto</div>
+                <div class="machinery-items">
+        
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Tratores</span><span class="farol farol-positive"><span class="farol-dot"></span><span data-pt="Positivo" data-en="Positive">Positivo</span></span></div>
+                        <div class="m-desc">Demanda por tratores pesados para preparo de solo e manejo florestal em novas áreas.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Colheitadeiras</span><span class="farol farol-warning"><span class="farol-dot"></span><span data-pt="Atenção" data-en="Warning">Atenção</span></span></div>
+                        <div class="m-desc">Não há colheitadeiras agrícolas diretas, mas impulsiona outros equipamentos.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Pulverizadores</span><span class="farol farol-warning"><span class="farol-dot"></span><span data-pt="Atenção" data-en="Warning">Atenção</span></span></div>
+                        <div class="m-desc">Uso específico para controle de pragas em florestas jovens, impacto limitado.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Plantadeiras</span><span class="farol farol-positive"><span class="farol-dot"></span><span data-pt="Positivo" data-en="Positive">Positivo</span></span></div>
+                        <div class="m-desc">Plantadeiras especializadas para florestas têm demanda aumentada com expansão.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="news-block">
+            <div class="news-header">
+                <h3 class="news-title">Seca pontual afeta lavouras de inverno</h3>
+                <span class="farol farol-critical"><span class="farol-dot"></span><span data-pt="Crítico" data-en="Critical">Crítico</span></span>
+            </div>
+            <div class="news-body">
+                Algumas regiões do interior do Uruguai registram seca pontual, prejudicando o desenvolvimento de lavouras de inverno e preocupando produtores com a produtividade e rentabilidade.
+                <p class="news-source"><strong data-pt="Fonte" data-en="Source">Fonte:</strong> Brecha</p>
+            </div>
+            <div class="machinery-analysis">
+                <div class="analysis-title" data-pt="Impacto por Linha de Produto" data-en="Impact by Product Line">Impacto por Linha de Produto</div>
+                <div class="machinery-items">
+        
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Tratores</span><span class="farol farol-critical"><span class="farol-dot"></span><span data-pt="Crítico" data-en="Critical">Crítico</span></span></div>
+                        <div class="m-desc">Condições desfavoráveis podem atrasar o preparo do solo e desestimular investimentos.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Colheitadeiras</span><span class="farol farol-critical"><span class="farol-dot"></span><span data-pt="Crítico" data-en="Critical">Crítico</span></span></div>
+                        <div class="m-desc">Perspectiva de menor colheita futura reduz necessidade de novas máquinas.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Pulverizadores</span><span class="farol farol-critical"><span class="farol-dot"></span><span data-pt="Crítico" data-en="Critical">Crítico</span></span></div>
+                        <div class="m-desc">Menor área ou menor intensidade de manejo fitossanitário.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Plantadeiras</span><span class="farol farol-critical"><span class="farol-dot"></span><span data-pt="Crítico" data-en="Critical">Crítico</span></span></div>
+                        <div class="m-desc">Atrasos no plantio ou redução de área cultivada impactam a demanda.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+</div>
+
+<div id="py" class="tab-content">
+<h2 class="country-title" data-pt="Paraguai" data-en="Paraguay">Paraguai</h2>
+    <h2 class="section-title" data-pt="Fatores Econômicos" data-en="Economic Factors">Fatores Econômicos</h2>
+    <div class="analysis-grid">
+
+        <div class="analysis-card tendencia-positiva">
+            <div class="analysis-header">
+                <span class="analysis-icon">🌱</span>
+                <h3 class="analysis-card-title">Expansão da Fronteira Agrícola</h3>
+            </div>
+            <div class="analysis-body">
+                <p class="analysis-text"><strong data-pt="Descrição" data-en="Description">Descrição:</strong> O Paraguai continua a expandir sua fronteira agrícola, incorporando novas áreas para produção de soja e milho.</p>
+                <p class="analysis-text"><strong data-pt="Impactos" data-en="Impacts">Impactos:</strong> Elevada demanda por máquinas novas e de grande porte para preparo de solo, plantio e colheita em novas áreas.</p>
+                <p class="analysis-text source-text"><strong data-pt="Fonte" data-en="Source">Fonte:</strong> CAPECO, MAG</p>
+            </div>
+        </div>
+        <div class="analysis-card tendencia-positiva">
+            <div class="analysis-header">
+                <span class="analysis-icon">🚢</span>
+                <h3 class="analysis-card-title">Logística Hidroviária</h3>
+            </div>
+            <div class="analysis-body">
+                <p class="analysis-text"><strong data-pt="Descrição" data-en="Description">Descrição:</strong> Investimentos na melhoria da hidrovia Paraguai-Paraná visam otimizar o transporte de grãos.</p>
+                <p class="analysis-text"><strong data-pt="Impactos" data-en="Impacts">Impactos:</strong> Reduz custos de escoamento, aumentando a rentabilidade do produtor e incentivando a produção e compra de máquinas.</p>
+                <p class="analysis-text source-text"><strong data-pt="Fonte" data-en="Source">Fonte:</strong> Ministério de Obras Públicas, Cappro</p>
+            </div>
+        </div>
+        <div class="analysis-card tendencia-positiva">
+            <div class="analysis-header">
+                <span class="analysis-icon">🥩</span>
+                <h3 class="analysis-card-title">Produção de Carne</h3>
+            </div>
+            <div class="analysis-body">
+                <p class="analysis-text"><strong data-pt="Descrição" data-en="Description">Descrição:</strong> O setor pecuário paraguaio mantém ritmo de crescimento, com aumento da produção e exportação de carne bovina.</p>
+                <p class="analysis-text"><strong data-pt="Impactos" data-en="Impacts">Impactos:</strong> Demanda por tratores e máquinas para manejo de pastagens, produção de forragem e integração lavoura-pecuária.</p>
+                <p class="analysis-text source-text"><strong data-pt="Fonte" data-en="Source">Fonte:</strong> SENACSA, ARP</p>
+            </div>
+        </div>
+        <div class="analysis-card tendencia-neutra">
+            <div class="analysis-header">
+                <span class="analysis-icon">🏛️</span>
+                <h3 class="analysis-card-title">Cenário Fiscal e Cambial</h3>
+            </div>
+            <div class="analysis-body">
+                <p class="analysis-text"><strong data-pt="Descrição" data-en="Description">Descrição:</strong> O Paraguai mantém estabilidade fiscal e cambial, atraindo investimentos e proporcionando segurança para negócios.</p>
+                <p class="analysis-text"><strong data-pt="Impactos" data-en="Impacts">Impactos:</strong> Ambiente propício para financiamento e importação de máquinas, com menor risco cambial para os produtores.</p>
+                <p class="analysis-text source-text"><strong data-pt="Fonte" data-en="Source">Fonte:</strong> Banco Central do Paraguai, FMI</p>
+            </div>
+        </div>
+</div>
+    <h2 class="section-title" data-pt="Notícias Relevantes" data-en="Relevant News">Notícias Relevantes</h2>
+    <div class="news-grid">
+
+        <div class="news-block">
+            <div class="news-header">
+                <h3 class="news-title">Safra de soja 2025/26 com otimismo</h3>
+                <span class="farol farol-positive"><span class="farol-dot"></span><span data-pt="Positivo" data-en="Positive">Positivo</span></span>
+            </div>
+            <div class="news-body">
+                Produtores paraguaios estão otimistas com a próxima safra de soja, com condições climáticas favoráveis e preços internacionais em recuperação. Isso incentiva investimentos no campo.
+                <p class="news-source"><strong data-pt="Fonte" data-en="Source">Fonte:</strong> Última Hora</p>
+            </div>
+            <div class="machinery-analysis">
+                <div class="analysis-title" data-pt="Impacto por Linha de Produto" data-en="Impact by Product Line">Impacto por Linha de Produto</div>
+                <div class="machinery-items">
+        
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Tratores</span><span class="farol farol-positive"><span class="farol-dot"></span><span data-pt="Positivo" data-en="Positive">Positivo</span></span></div>
+                        <div class="m-desc">Aumento da demanda para preparo de solo e manejo das lavouras de soja.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Colheitadeiras</span><span class="farol farol-positive"><span class="farol-dot"></span><span data-pt="Positivo" data-en="Positive">Positivo</span></span></div>
+                        <div class="m-desc">Expectativa de boa colheita leva à renovação e aquisição de novas máquinas.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Pulverizadores</span><span class="farol farol-positive"><span class="farol-dot"></span><span data-pt="Positivo" data-en="Positive">Positivo</span></span></div>
+                        <div class="m-desc">Essenciais para o manejo fitossanitário em grandes áreas de soja cultivadas.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Plantadeiras</span><span class="farol farol-positive"><span class="farol-dot"></span><span data-pt="Positivo" data-en="Positive">Positivo</span></span></div>
+                        <div class="m-desc">Demanda por plantadeiras modernas para otimizar o plantio em expansão.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="news-block">
+            <div class="news-header">
+                <h3 class="news-title">Investimentos em logística aceleram escoamento</h3>
+                <span class="farol farol-positive"><span class="farol-dot"></span><span data-pt="Positivo" data-en="Positive">Positivo</span></span>
+            </div>
+            <div class="news-body">
+                O governo paraguaio anuncia novos investimentos em melhoria de estradas e hidrovias, visando facilitar o escoamento da produção agrícola e reduzir custos logísticos, beneficiando o produtor.
+                <p class="news-source"><strong data-pt="Fonte" data-en="Source">Fonte:</strong> ABC Color</p>
+            </div>
+            <div class="machinery-analysis">
+                <div class="analysis-title" data-pt="Impacto por Linha de Produto" data-en="Impact by Product Line">Impacto por Linha de Produto</div>
+                <div class="machinery-items">
+        
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Tratores</span><span class="farol farol-positive"><span class="farol-dot"></span><span data-pt="Positivo" data-en="Positive">Positivo</span></span></div>
+                        <div class="m-desc">Melhora a rentabilidade, liberando capital para investimento em equipamentos agrícolas.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Colheitadeiras</span><span class="farol farol-positive"><span class="farol-dot"></span><span data-pt="Positivo" data-en="Positive">Positivo</span></span></div>
+                        <div class="m-desc">Produtores mais capitalizados tendem a investir em máquinas de alta produtividade.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Pulverizadores</span><span class="farol farol-positive"><span class="farol-dot"></span><span data-pt="Positivo" data-en="Positive">Positivo</span></span></div>
+                        <div class="m-desc">Benefício indireto da melhoria de rentabilidade geral do agronegócio.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Plantadeiras</span><span class="farol farol-positive"><span class="farol-dot"></span><span data-pt="Positivo" data-en="Positive">Positivo</span></span></div>
+                        <div class="m-desc">Melhor logística incentiva maior produção e modernização de plantio.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="news-block">
+            <div class="news-header">
+                <h3 class="news-title">Demanda por terras agrícolas mantém-se em alta</h3>
+                <span class="farol farol-positive"><span class="farol-dot"></span><span data-pt="Positivo" data-en="Positive">Positivo</span></span>
+            </div>
+            <div class="news-body">
+                A procura por terras agrícolas no Paraguai continua aquecida, refletindo a confiança no agronegócio e a expansão da produção. Isso atrai novos investidores e produtores.
+                <p class="news-source"><strong data-pt="Fonte" data-en="Source">Fonte:</strong> 5Días</p>
+            </div>
+            <div class="machinery-analysis">
+                <div class="analysis-title" data-pt="Impacto por Linha de Produto" data-en="Impact by Product Line">Impacto por Linha de Produto</div>
+                <div class="machinery-items">
+        
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Tratores</span><span class="farol farol-positive"><span class="farol-dot"></span><span data-pt="Positivo" data-en="Positive">Positivo</span></span></div>
+                        <div class="m-desc">Necessários para desmatamento, preparo inicial e manejo de novas áreas cultiváveis.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Colheitadeiras</span><span class="farol farol-positive"><span class="farol-dot"></span><span data-pt="Positivo" data-en="Positive">Positivo</span></span></div>
+                        <div class="m-desc">Aumento da área cultivada gera demanda por maior capacidade de colheita.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Pulverizadores</span><span class="farol farol-positive"><span class="farol-dot"></span><span data-pt="Positivo" data-en="Positive">Positivo</span></span></div>
+                        <div class="m-desc">Mais áreas cultivadas exigem mais máquinas para o manejo fitossanitário.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Plantadeiras</span><span class="farol farol-positive"><span class="farol-dot"></span><span data-pt="Positivo" data-en="Positive">Positivo</span></span></div>
+                        <div class="m-desc">Essenciais para o plantio em novas fronteiras agrícolas, impulsionando vendas.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="news-block">
+            <div class="news-header">
+                <h3 class="news-title">Pecuária paraguaia amplia exportações</h3>
+                <span class="farol farol-positive"><span class="farol-dot"></span><span data-pt="Positivo" data-en="Positive">Positivo</span></span>
+            </div>
+            <div class="news-body">
+                O setor de carne bovina do Paraguai tem conquistado novos mercados internacionais, impulsionando a produção e a rentabilidade para os pecuaristas do país.
+                <p class="news-source"><strong data-pt="Fonte" data-en="Source">Fonte:</strong> Canal Pro</p>
+            </div>
+            <div class="machinery-analysis">
+                <div class="analysis-title" data-pt="Impacto por Linha de Produto" data-en="Impact by Product Line">Impacto por Linha de Produto</div>
+                <div class="machinery-items">
+        
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Tratores</span><span class="farol farol-positive"><span class="farol-dot"></span><span data-pt="Positivo" data-en="Positive">Positivo</span></span></div>
+                        <div class="m-desc">Investimento em pastagens, produção de silagem e infraestrutura de fazendas.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Colheitadeiras</span><span class="farol farol-warning"><span class="farol-dot"></span><span data-pt="Atenção" data-en="Warning">Atenção</span></span></div>
+                        <div class="m-desc">Impacto indireto, depende da integração lavoura-pecuária e demanda por grãos.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Pulverizadores</span><span class="farol farol-positive"><span class="farol-dot"></span><span data-pt="Positivo" data-en="Positive">Positivo</span></span></div>
+                        <div class="m-desc">Manejo sanitário de pastagens e controle de pragas na pecuária.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Plantadeiras</span><span class="farol farol-positive"><span class="farol-dot"></span><span data-pt="Positivo" data-en="Positive">Positivo</span></span></div>
+                        <div class="m-desc">Aumento da área de forrageiras e cultivos para alimentação animal.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+</div>
+
+<div id="pe" class="tab-content">
+<h2 class="country-title" data-pt="Peru" data-en="Peru">Peru</h2>
+    <h2 class="section-title" data-pt="Fatores Econômicos" data-en="Economic Factors">Fatores Econômicos</h2>
+    <div class="analysis-grid">
+
+        <div class="analysis-card tendencia-positiva">
+            <div class="analysis-header">
+                <span class="analysis-icon">🥑</span>
+                <h3 class="analysis-card-title">Agroexportação (Costa)</h3>
+            </div>
+            <div class="analysis-body">
+                <p class="analysis-text"><strong data-pt="Descrição" data-en="Description">Descrição:</strong> Culturas como uva, abacate e mirtilo impulsionam a economia agrícola da costa, com forte demanda internacional.</p>
+                <p class="analysis-text"><strong data-pt="Impactos" data-en="Impacts">Impactos:</strong> Aumenta a capitalização dos produtores de frutas, favorecendo máquinas especializadas para pomares.</p>
+                <p class="analysis-text source-text"><strong data-pt="Fonte" data-en="Source">Fonte:</strong> MINAGRI, ADEX</p>
+            </div>
+        </div>
+        <div class="analysis-card tendencia-negativa">
+            <div class="analysis-header">
+                <span class="analysis-icon">🥔</span>
+                <h3 class="analysis-card-title">Agricultura Andina</h3>
+            </div>
+            <div class="analysis-body">
+                <p class="analysis-text"><strong data-pt="Descrição" data-en="Description">Descrição:</strong> Pequenos produtores da região andina enfrentam dificuldades devido a condições climáticas extremas e falta de crédito.</p>
+                <p class="analysis-text"><strong data-pt="Impactos" data-en="Impacts">Impactos:</strong> Baixa demanda por máquinas, foco em subsistência, pouca modernização para o setor tradicional.</p>
+                <p class="analysis-text source-text"><strong data-pt="Fonte" data-en="Source">Fonte:</strong> Sierra y Selva Exportadora, FAO</p>
+            </div>
+        </div>
+        <div class="analysis-card tendencia-positiva">
+            <div class="analysis-header">
+                <span class="analysis-icon">🏞️</span>
+                <h3 class="analysis-card-title">Projetos de Irrigação</h3>
+            </div>
+            <div class="analysis-body">
+                <p class="analysis-text"><strong data-pt="Descrição" data-en="Description">Descrição:</strong> Governo impulsiona projetos de irrigação para expandir a fronteira agrícola e otimizar o uso da água.</p>
+                <p class="analysis-text"><strong data-pt="Impactos" data-en="Impacts">Impactos:</strong> Cria demanda por máquinas para preparo de novas áreas e para o manejo em cultivos irrigados, impulsionando o mercado.</p>
+                <p class="analysis-text source-text"><strong data-pt="Fonte" data-en="Source">Fonte:</strong> Ministério da Agricultura e Irrigação</p>
+            </div>
+        </div>
+        <div class="analysis-card tendencia-neutra">
+            <div class="analysis-header">
+                <span class="analysis-icon">⚖️</span>
+                <h3 class="analysis-card-title">Instabilidade Política</h3>
+            </div>
+            <div class="analysis-body">
+                <p class="analysis-text"><strong data-pt="Descrição" data-en="Description">Descrição:</strong> Cenário político volátil gera incerteza, afetando a confiança de investidores em projetos de longo prazo.</p>
+                <p class="analysis-text"><strong data-pt="Impactos" data-en="Impacts">Impactos:</strong> Produtores podem adiar grandes compras de máquinas devido à falta de previsibilidade econômica no país.</p>
+                <p class="analysis-text source-text"><strong data-pt="Fonte" data-en="Source">Fonte:</strong> BCR, APOYO Consultoría</p>
+            </div>
+        </div>
+</div>
+    <h2 class="section-title" data-pt="Notícias Relevantes" data-en="Relevant News">Notícias Relevantes</h2>
+    <div class="news-grid">
+
+        <div class="news-block">
+            <div class="news-header">
+                <h3 class="news-title">Agroexportações peruanas batem recorde</h3>
+                <span class="farol farol-positive"><span class="farol-dot"></span><span data-pt="Positivo" data-en="Positive">Positivo</span></span>
+            </div>
+            <div class="news-body">
+                O Peru celebra um recorde nas exportações de uvas e mirtilos, impulsionadas pela demanda global e pela alta qualidade dos produtos. O setor está em expansão e com bons resultados.
+                <p class="news-source"><strong data-pt="Fonte" data-en="Source">Fonte:</strong> Gestión</p>
+            </div>
+            <div class="machinery-analysis">
+                <div class="analysis-title" data-pt="Impacto por Linha de Produto" data-en="Impact by Product Line">Impacto por Linha de Produto</div>
+                <div class="machinery-items">
+        
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Tratores</span><span class="farol farol-positive"><span class="farol-dot"></span><span data-pt="Positivo" data-en="Positive">Positivo</span></span></div>
+                        <div class="m-desc">Tratores especializados para fruticultura em pomares, atendendo à demanda crescente.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Colheitadeiras</span><span class="farol farol-warning"><span class="farol-dot"></span><span data-pt="Atenção" data-en="Warning">Atenção</span></span></div>
+                        <div class="m-desc">Colheitadeiras específicas para frutas podem ter alta, mas não as de grãos.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Pulverizadores</span><span class="farol farol-positive"><span class="farol-dot"></span><span data-pt="Positivo" data-en="Positive">Positivo</span></span></div>
+                        <div class="m-desc">Essenciais para manejo fitossanitário em culturas de alto valor e exportação.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Plantadeiras</span><span class="farol farol-positive"><span class="farol-dot"></span><span data-pt="Positivo" data-en="Positive">Positivo</span></span></div>
+                        <div class="m-desc">Demanda para novas plantações e substituição de antigas em áreas de fruticultura.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="news-block">
+            <div class="news-header">
+                <h3 class="news-title">Governo investe em irrigação no Norte</h3>
+                <span class="farol farol-positive"><span class="farol-dot"></span><span data-pt="Positivo" data-en="Positive">Positivo</span></span>
+            </div>
+            <div class="news-body">
+                O Ministério da Agricultura anunciou um pacote de investimentos para projetos de irrigação na região norte do país, visando aumentar a produtividade agrícola e a área cultivável.
+                <p class="news-source"><strong data-pt="Fonte" data-en="Source">Fonte:</strong> Andina</p>
+            </div>
+            <div class="machinery-analysis">
+                <div class="analysis-title" data-pt="Impacto por Linha de Produto" data-en="Impact by Product Line">Impacto por Linha de Produto</div>
+                <div class="machinery-items">
+        
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Tratores</span><span class="farol farol-positive"><span class="farol-dot"></span><span data-pt="Positivo" data-en="Positive">Positivo</span></span></div>
+                        <div class="m-desc">Preparo de solo em novas áreas irrigadas e manutenção de infraestrutura.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Colheitadeiras</span><span class="farol farol-positive"><span class="farol-dot"></span><span data-pt="Positivo" data-en="Positive">Positivo</span></span></div>
+                        <div class="m-desc">Aumento da produtividade pode justificar novos equipamentos de colheita no futuro.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Pulverizadores</span><span class="farol farol-positive"><span class="farol-dot"></span><span data-pt="Positivo" data-en="Positive">Positivo</span></span></div>
+                        <div class="m-desc">Necessários para o manejo de culturas em áreas irrigadas de maior valor.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Plantadeiras</span><span class="farol farol-positive"><span class="farol-dot"></span><span data-pt="Positivo" data-en="Positive">Positivo</span></span></div>
+                        <div class="m-desc">Expansão de áreas cultivadas demanda mais plantadeiras eficientes.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="news-block">
+            <div class="news-header">
+                <h3 class="news-title">Pequenos agricultores andinos pedem apoio</h3>
+                <span class="farol farol-critical"><span class="farol-dot"></span><span data-pt="Crítico" data-en="Critical">Crítico</span></span>
+            </div>
+            <div class="news-body">
+                Produtores da serra peruana sofrem com geadas severas, que destroem lavouras e gado. Eles pedem ajuda emergencial e financiamento para recuperação das perdas.
+                <p class="news-source"><strong data-pt="Fonte" data-en="Source">Fonte:</strong> La República</p>
+            </div>
+            <div class="machinery-analysis">
+                <div class="analysis-title" data-pt="Impacto por Linha de Produto" data-en="Impact by Product Line">Impacto por Linha de Produto</div>
+                <div class="machinery-items">
+        
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Tratores</span><span class="farol farol-critical"><span class="farol-dot"></span><span data-pt="Crítico" data-en="Critical">Crítico</span></span></div>
+                        <div class="m-desc">Baixa capitalização e necessidade de recursos para recuperação, não para investimento.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Colheitadeiras</span><span class="farol farol-critical"><span class="farol-dot"></span><span data-pt="Crítico" data-en="Critical">Crítico</span></span></div>
+                        <div class="m-desc">Perda de safra elimina demanda por colheitadeiras e atrasa renovação.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Pulverizadores</span><span class="farol farol-critical"><span class="farol-dot"></span><span data-pt="Crítico" data-en="Critical">Crítico</span></span></div>
+                        <div class="m-desc">Prioridade para subsistência, não para modernização de manejo ou compra.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Plantadeiras</span><span class="farol farol-critical"><span class="farol-dot"></span><span data-pt="Crítico" data-en="Critical">Crítico</span></span></div>
+                        <div class="m-desc">Redução da área cultivada e foco na recuperação de perdas.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="news-block">
+            <div class="news-header">
+                <h3 class="news-title">Instabilidade política adia investimentos</h3>
+                <span class="farol farol-critical"><span class="farol-dot"></span><span data-pt="Crítico" data-en="Critical">Crítico</span></span>
+            </div>
+            <div class="news-body">
+                A persistente instabilidade política no Peru tem levado investidores e grandes produtores a adiarem planos de expansão e aquisição de maquinário agrícola, buscando maior previsibilidade e segurança.
+                <p class="news-source"><strong data-pt="Fonte" data-en="Source">Fonte:</strong> Semana Económica</p>
+            </div>
+            <div class="machinery-analysis">
+                <div class="analysis-title" data-pt="Impacto por Linha de Produto" data-en="Impact by Product Line">Impacto por Linha de Produto</div>
+                <div class="machinery-items">
+        
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Tratores</span><span class="farol farol-critical"><span class="farol-dot"></span><span data-pt="Crítico" data-en="Critical">Crítico</span></span></div>
+                        <div class="m-desc">Cautela generalizada na aquisição de bens de capital de alto valor.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Colheitadeiras</span><span class="farol farol-critical"><span class="farol-dot"></span><span data-pt="Crítico" data-en="Critical">Crítico</span></span></div>
+                        <div class="m-desc">Decisões de compra de longo prazo são adiadas devido à incerteza.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Pulverizadores</span><span class="farol farol-critical"><span class="farol-dot"></span><span data-pt="Crítico" data-en="Critical">Crítico</span></span></div>
+                        <div class="m-desc">Desaceleração dos investimentos em modernização e eficiência de campo.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Plantadeiras</span><span class="farol farol-critical"><span class="farol-dot"></span><span data-pt="Crítico" data-en="Critical">Crítico</span></span></div>
+                        <div class="m-desc">Produtores esperam por um cenário político mais estável antes de expandir.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+</div>
+
+<div id="bo" class="tab-content">
+<h2 class="country-title" data-pt="Bolívia" data-en="Bolivia">Bolívia</h2>
+    <h2 class="section-title" data-pt="Fatores Econômicos" data-en="Economic Factors">Fatores Econômicos</h2>
+    <div class="analysis-grid">
+
+        <div class="analysis-card tendencia-positiva">
+            <div class="analysis-header">
+                <span class="analysis-icon">🌱</span>
+                <h3 class="analysis-card-title">Produção de Soja (Oriente)</h3>
+            </div>
+            <div class="analysis-body">
+                <p class="analysis-text"><strong data-pt="Descrição" data-en="Description">Descrição:</strong> Região do Oriente boliviano expande a produção de soja, impulsionada por novos mercados e boas condições climáticas.</p>
+                <p class="analysis-text"><strong data-pt="Impactos" data-en="Impacts">Impactos:</strong> Crescente demanda por máquinas de grande porte, como tratores, plantadeiras e colheitadeiras para grãos.</p>
+                <p class="analysis-text source-text"><strong data-pt="Fonte" data-en="Source">Fonte:</strong> ANAPO, INE</p>
+            </div>
+        </div>
+        <div class="analysis-card tendencia-negativa">
+            <div class="analysis-header">
+                <span class="analysis-icon">💸</span>
+                <h3 class="analysis-card-title">Escassez de Dólar</h3>
+            </div>
+            <div class="analysis-body">
+                <p class="analysis-text"><strong data-pt="Descrição" data-en="Description">Descrição:</strong> A escassez de dólares no mercado boliviano dificulta importações e operações comerciais internacionais.</p>
+                <p class="analysis-text"><strong data-pt="Impactos" data-en="Impacts">Impactos:</strong> Encarece e dificulta a aquisição de máquinas agrícolas importadas, atrasando a modernização do setor.</p>
+                <p class="analysis-text source-text"><strong data-pt="Fonte" data-en="Source">Fonte:</strong> Banco Central da Bolívia, Câmara de Indústria e Comércio</p>
+            </div>
+        </div>
+        <div class="analysis-card tendencia-positiva">
+            <div class="analysis-header">
+                <span class="analysis-icon">⛽</span>
+                <h3 class="analysis-card-title">Biocombustíveis</h3>
+            </div>
+            <div class="analysis-body">
+                <p class="analysis-text"><strong data-pt="Descrição" data-en="Description">Descrição:</strong> Governo boliviano fomenta a produção de biocombustíveis, especialmente a partir da cana-de-açúcar e sorgo.</p>
+                <p class="analysis-text"><strong data-pt="Impactos" data-en="Impacts">Impactos:</strong> Impulsiona a demanda por máquinas para o cultivo de cana e grãos, como tratores e colheitadeiras especializadas.</p>
+                <p class="analysis-text source-text"><strong data-pt="Fonte" data-en="Source">Fonte:</strong> YPFB, Ministério de Hidrocarbonetos e Energias</p>
+            </div>
+        </div>
+        <div class="analysis-card tendencia-positiva">
+            <div class="analysis-header">
+                <span class="analysis-icon">🛣️</span>
+                <h3 class="analysis-card-title">Infraestrutura Logística</h3>
+            </div>
+            <div class="analysis-body">
+                <p class="analysis-text"><strong data-pt="Descrição" data-en="Description">Descrição:</strong> Investimentos em infraestrutura rodoviária e capacidade de armazenagem de grãos no leste boliviano.</p>
+                <p class="analysis-text"><strong data-pt="Impactos" data-en="Impacts">Impactos:</strong> Reduz custos de transporte e perdas pós-colheita, aumentando a rentabilidade do produtor e capacidade de investimento.</p>
+                <p class="analysis-text source-text"><strong data-pt="Fonte" data-en="Source">Fonte:</strong> Administradora Boliviana de Carreteras</p>
+            </div>
+        </div>
+</div>
+    <h2 class="section-title" data-pt="Notícias Relevantes" data-en="Relevant News">Notícias Relevantes</h2>
+    <div class="news-grid">
+
+        <div class="news-block">
+            <div class="news-header">
+                <h3 class="news-title">Produtores de soja preveem safra recorde</h3>
+                <span class="farol farol-positive"><span class="farol-dot"></span><span data-pt="Positivo" data-en="Positive">Positivo</span></span>
+            </div>
+            <div class="news-body">
+                Com chuvas adequadas e expansão de áreas, a região oriental da Bolívia projeta uma safra histórica de soja. O otimismo impulsiona o setor e gera expectativas de bons resultados.
+                <p class="news-source"><strong data-pt="Fonte" data-en="Source">Fonte:</strong> El Deber</p>
+            </div>
+            <div class="machinery-analysis">
+                <div class="analysis-title" data-pt="Impacto por Linha de Produto" data-en="Impact by Product Line">Impacto por Linha de Produto</div>
+                <div class="machinery-items">
+        
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Tratores</span><span class="farol farol-positive"><span class="farol-dot"></span><span data-pt="Positivo" data-en="Positive">Positivo</span></span></div>
+                        <div class="m-desc">Aumento da demanda para preparo de solo e manejo das lavouras em expansão.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Colheitadeiras</span><span class="farol farol-positive"><span class="farol-dot"></span><span data-pt="Positivo" data-en="Positive">Positivo</span></span></div>
+                        <div class="m-desc">Necessidade de maior capacidade de colheita para volumes recordes de soja.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Pulverizadores</span><span class="farol farol-positive"><span class="farol-dot"></span><span data-pt="Positivo" data-en="Positive">Positivo</span></span></div>
+                        <div class="m-desc">Essenciais para manejo fitossanitário em grandes áreas de soja cultivadas.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Plantadeiras</span><span class="farol farol-positive"><span class="farol-dot"></span><span data-pt="Positivo" data-en="Positive">Positivo</span></span></div>
+                        <div class="m-desc">Demanda por plantadeiras modernas para otimizar o plantio em novas áreas.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="news-block">
+            <div class="news-header">
+                <h3 class="news-title">Escassez de dólares freia importação</h3>
+                <span class="farol farol-critical"><span class="farol-dot"></span><span data-pt="Crítico" data-en="Critical">Crítico</span></span>
+            </div>
+            <div class="news-body">
+                A falta de dólares no mercado cambial boliviano tem dificultado a importação de máquinas agrícolas, atrasando a modernização do parque de equipamentos do país e elevando custos.
+                <p class="news-source"><strong data-pt="Fonte" data-en="Source">Fonte:</strong> Los Tiempos</p>
+            </div>
+            <div class="machinery-analysis">
+                <div class="analysis-title" data-pt="Impacto por Linha de Produto" data-en="Impact by Product Line">Impacto por Linha de Produto</div>
+                <div class="machinery-items">
+        
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Tratores</span><span class="farol farol-critical"><span class="farol-dot"></span><span data-pt="Crítico" data-en="Critical">Crítico</span></span></div>
+                        <div class="m-desc">Dificuldade e encarecimento da aquisição de tratores importados para o setor.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Colheitadeiras</span><span class="farol farol-critical"><span class="farol-dot"></span><span data-pt="Crítico" data-en="Critical">Crítico</span></span></div>
+                        <div class="m-desc">Atraso na renovação e compra de novas colheitadeiras devido à escassez de moeda.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Pulverizadores</span><span class="farol farol-critical"><span class="farol-dot"></span><span data-pt="Crítico" data-en="Critical">Crítico</span></span></div>
+                        <div class="m-desc">Produtores adiam investimentos em máquinas de precisão importadas.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Plantadeiras</span><span class="farol farol-critical"><span class="farol-dot"></span><span data-pt="Crítico" data-en="Critical">Crítico</span></span></div>
+                        <div class="m-desc">Impacto na disponibilidade de novas plantadeiras no mercado boliviano.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="news-block">
+            <div class="news-header">
+                <h3 class="news-title">Governo incentiva biocombustíveis</h3>
+                <span class="farol farol-positive"><span class="farol-dot"></span><span data-pt="Positivo" data-en="Positive">Positivo</span></span>
+            </div>
+            <div class="news-body">
+                Novas políticas de incentivo à produção de etanol e biodiesel a partir de cultivos como cana e sorgo são anunciadas, visando reduzir a dependência de combustíveis fósseis e impulsionar o agro.
+                <p class="news-source"><strong data-pt="Fonte" data-en="Source">Fonte:</strong> Bolivia TV</p>
+            </div>
+            <div class="machinery-analysis">
+                <div class="analysis-title" data-pt="Impacto por Linha de Produto" data-en="Impact by Product Line">Impacto por Linha de Produto</div>
+                <div class="machinery-items">
+        
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Tratores</span><span class="farol farol-positive"><span class="farol-dot"></span><span data-pt="Positivo" data-en="Positive">Positivo</span></span></div>
+                        <div class="m-desc">Demanda por tratores para o cultivo de cana-de-açúcar e outros grãos destinados a energia.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Colheitadeiras</span><span class="farol farol-positive"><span class="farol-dot"></span><span data-pt="Positivo" data-en="Positive">Positivo</span></span></div>
+                        <div class="m-desc">Colheitadeiras de cana e grãos terão demanda impulsionada pela produção energética.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Pulverizadores</span><span class="farol farol-positive"><span class="farol-dot"></span><span data-pt="Positivo" data-en="Positive">Positivo</span></span></div>
+                        <div class="m-desc">Manejo fitossanitário nas novas áreas de cultivo para biocombustíveis.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Plantadeiras</span><span class="farol farol-positive"><span class="farol-dot"></span><span data-pt="Positivo" data-en="Positive">Positivo</span></span></div>
+                        <div class="m-desc">Aumento das áreas de plantio de cana, milho e sorgo para biocombustíveis.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="news-block">
+            <div class="news-header">
+                <h3 class="news-title">Produtores pedem soluções para estradas</h3>
+                <span class="farol farol-critical"><span class="farol-dot"></span><span data-pt="Crítico" data-en="Critical">Crítico</span></span>
+            </div>
+            <div class="news-body">
+                A má condição das estradas rurais dificulta o escoamento da safra e eleva os custos de transporte, prejudicando a rentabilidade dos produtores bolivianos e causando perdas.
+                <p class="news-source"><strong data-pt="Fonte" data-en="Source">Fonte:</strong> Red Uno</p>
+            </div>
+            <div class="machinery-analysis">
+                <div class="analysis-title" data-pt="Impacto por Linha de Produto" data-en="Impact by Product Line">Impacto por Linha de Produto</div>
+                <div class="machinery-items">
+        
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Tratores</span><span class="farol farol-critical"><span class="farol-dot"></span><span data-pt="Crítico" data-en="Critical">Crítico</span></span></div>
+                        <div class="m-desc">Menor rentabilidade geral desestimula investimentos em máquinas agrícolas.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Colheitadeiras</span><span class="farol farol-critical"><span class="farol-dot"></span><span data-pt="Crítico" data-en="Critical">Crítico</span></span></div>
+                        <div class="m-desc">Perdas no transporte e custos adicionais diminuem a lucratividade.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Pulverizadores</span><span class="farol farol-critical"><span class="farol-dot"></span><span data-pt="Crítico" data-en="Critical">Crítico</span></span></div>
+                        <div class="m-desc">Prioridade para custos operacionais básicos em detrimento de novos equipamentos.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Plantadeiras</span><span class="farol farol-critical"><span class="farol-dot"></span><span data-pt="Crítico" data-en="Critical">Crítico</span></span></div>
+                        <div class="m-desc">Impacto na capacidade de investimento e na viabilidade de novas áreas.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+</div>
+
+<div id="mx" class="tab-content">
+<h2 class="country-title" data-pt="México" data-en="Mexico">México</h2>
+    <h2 class="section-title" data-pt="Fatores Econômicos" data-en="Economic Factors">Fatores Econômicos</h2>
+    <div class="analysis-grid">
+
+        <div class="analysis-card tendencia-positiva">
+            <div class="analysis-header">
+                <span class="analysis-icon">🥑</span>
+                <h3 class="analysis-card-title">Agroexportação para EUA</h3>
+            </div>
+            <div class="analysis-body">
+                <p class="analysis-text"><strong data-pt="Descrição" data-en="Description">Descrição:</strong> Exportações de hortaliças e frutas para os EUA continuam robustas, beneficiando os produtores do norte e centro.</p>
+                <p class="analysis-text"><strong data-pt="Impactos" data-en="Impacts">Impactos:</strong> Gera capital para investimentos em máquinas de precisão e tratores para cultivos intensivos, impulsionando a demanda.</p>
+                <p class="analysis-text source-text"><strong data-pt="Fonte" data-en="Source">Fonte:</strong> SAGARPA, USDA</p>
+            </div>
+        </div>
+        <div class="analysis-card tendencia-negativa">
+            <div class="analysis-header">
+                <span class="analysis-icon">🏜️</span>
+                <h3 class="analysis-card-title">Escassez de Água (Norte)</h3>
+            </div>
+            <div class="analysis-body">
+                <p class="analysis-text"><strong data-pt="Descrição" data-en="Description">Descrição:</strong> Crise hídrica severa nas regiões agrícolas do norte, com seca prolongada e esgotamento de aquíferos.</p>
+                <p class="analysis-text"><strong data-pt="Impactos" data-en="Impacts">Impactos:</strong> Reduz a área cultivável e a demanda geral por máquinas, exceto as de irrigação eficiente e conservação.</p>
+                <p class="analysis-text source-text"><strong data-pt="Fonte" data-en="Source">Fonte:</strong> CONAGUA, FAO</p>
+            </div>
+        </div>
+        <div class="analysis-card tendencia-positiva">
+            <div class="analysis-header">
+                <span class="analysis-icon">🌵</span>
+                <h3 class="analysis-card-title">Produção de Agave</h3>
+            </div>
+            <div class="analysis-body">
+                <p class="analysis-text"><strong data-pt="Descrição" data-en="Description">Descrição:</strong> O crescimento contínuo da demanda por tequila e mezcal impulsiona o cultivo de agave, especialmente em Jalisco.</p>
+                <p class="analysis-text"><strong data-pt="Impactos" data-en="Impacts">Impactos:</strong> Aumenta a demanda por tratores e equipamentos específicos para manejo e plantio de agave, setor em alta.</p>
+                <p class="analysis-text source-text"><strong data-pt="Fonte" data-en="Source">Fonte:</strong> CRT, CNA</p>
+            </div>
+        </div>
+        <div class="analysis-card tendencia-neutra">
+            <div class="analysis-header">
+                <span class="analysis-icon">👨‍👩‍👧‍👦</span>
+                <h3 class="analysis-card-title">Remessas e Agricultura Familiar</h3>
+            </div>
+            <div class="analysis-body">
+                <p class="analysis-text"><strong data-pt="Descrição" data-en="Description">Descrição:</strong> As remessas de migrantes continuam sendo uma fonte importante de renda para famílias rurais, apoiando a agricultura de subsistência.</p>
+                <p class="analysis-text"><strong data-pt="Impactos" data-en="Impacts">Impactos:</strong> Suporte limitado para aquisição de máquinas de grande porte, mas pode financiar pequenas melhorias e manutenção de equipamentos.</p>
+                <p class="analysis-text source-text"><strong data-pt="Fonte" data-en="Source">Fonte:</strong> Banco de México, INEGI</p>
+            </div>
+        </div>
+</div>
+    <h2 class="section-title" data-pt="Notícias Relevantes" data-en="Relevant News">Notícias Relevantes</h2>
+    <div class="news-grid">
+
+        <div class="news-block">
+            <div class="news-header">
+                <h3 class="news-title">Exportações de abacate e tomate em alta</h3>
+                <span class="farol farol-positive"><span class="farol-dot"></span><span data-pt="Positivo" data-en="Positive">Positivo</span></span>
+            </div>
+            <div class="news-body">
+                O México registra um forte aumento nas exportações de abacate e tomate para o mercado dos EUA, gerando receita recorde para os produtores dessas culturas. Setor de exportação em crescimento.
+                <p class="news-source"><strong data-pt="Fonte" data-en="Source">Fonte:</strong> El Economista</p>
+            </div>
+            <div class="machinery-analysis">
+                <div class="analysis-title" data-pt="Impacto por Linha de Produto" data-en="Impact by Product Line">Impacto por Linha de Produto</div>
+                <div class="machinery-items">
+        
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Tratores</span><span class="farol farol-positive"><span class="farol-dot"></span><span data-pt="Positivo" data-en="Positive">Positivo</span></span></div>
+                        <div class="m-desc">Necessários para manejo e preparo de solos em culturas intensivas de exportação.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Colheitadeiras</span><span class="farol farol-warning"><span class="farol-dot"></span><span data-pt="Atenção" data-en="Warning">Atenção</span></span></div>
+                        <div class="m-desc">Colheitadeiras específicas para essas culturas podem ter demanda, não as de grãos.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Pulverizadores</span><span class="farol farol-positive"><span class="farol-dot"></span><span data-pt="Positivo" data-en="Positive">Positivo</span></span></div>
+                        <div class="m-desc">Essenciais para o manejo fitossanitário de alto padrão para exportação.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Plantadeiras</span><span class="farol farol-positive"><span class="farol-dot"></span><span data-pt="Positivo" data-en="Positive">Positivo</span></span></div>
+                        <div class="m-desc">Demanda por plantadeiras modernas para otimizar novas áreas de cultivo.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="news-block">
+            <div class="news-header">
+                <h3 class="news-title">Crise hídrica no norte ameaça safra</h3>
+                <span class="farol farol-critical"><span class="farol-dot"></span><span data-pt="Crítico" data-en="Critical">Crítico</span></span>
+            </div>
+            <div class="news-body">
+                A seca severa e a falta de água no norte do México colocam em risco a safra de grãos e oleaginosas, com produtores enfrentando perdas significativas e restrições de irrigação.
+                <p class="news-source"><strong data-pt="Fonte" data-en="Source">Fonte:</strong> Expansión</p>
+            </div>
+            <div class="machinery-analysis">
+                <div class="analysis-title" data-pt="Impacto por Linha de Produto" data-en="Impact by Product Line">Impacto por Linha de Produto</div>
+                <div class="machinery-items">
+        
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Tratores</span><span class="farol farol-critical"><span class="farol-dot"></span><span data-pt="Crítico" data-en="Critical">Crítico</span></span></div>
+                        <div class="m-desc">Menor área cultivada e menor renda diminuem a demanda por máquinas.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Colheitadeiras</span><span class="farol farol-critical"><span class="farol-dot"></span><span data-pt="Crítico" data-en="Critical">Crítico</span></span></div>
+                        <div class="m-desc">Perdas de safra reduzem a necessidade de equipamentos de colheita.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Pulverizadores</span><span class="farol farol-critical"><span class="farol-dot"></span><span data-pt="Crítico" data-en="Critical">Crítico</span></span></div>
+                        <div class="m-desc">Impacto direto na intensidade de manejo e aquisição de novos.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Plantadeiras</span><span class="farol farol-critical"><span class="farol-dot"></span><span data-pt="Crítico" data-en="Critical">Crítico</span></span></div>
+                        <div class="m-desc">Redução das áreas a serem plantadas devido à falta de água.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="news-block">
+            <div class="news-header">
+                <h3 class="news-title">Cultivo de agave expande-se por tequila</h3>
+                <span class="farol farol-positive"><span class="farol-dot"></span><span data-pt="Positivo" data-en="Positive">Positivo</span></span>
+            </div>
+            <div class="news-body">
+                A crescente demanda global por tequila e mezcal está levando à expansão das áreas de cultivo de agave, especialmente em Jalisco, gerando investimentos no campo e novas oportunidades.
+                <p class="news-source"><strong data-pt="Fonte" data-en="Source">Fonte:</strong> Forbes México</p>
+            </div>
+            <div class="machinery-analysis">
+                <div class="analysis-title" data-pt="Impacto por Linha de Produto" data-en="Impact by Product Line">Impacto por Linha de Produto</div>
+                <div class="machinery-items">
+        
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Tratores</span><span class="farol farol-positive"><span class="farol-dot"></span><span data-pt="Positivo" data-en="Positive">Positivo</span></span></div>
+                        <div class="m-desc">Demanda por tratores robustos para preparo de solo e manejo de agave.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Colheitadeiras</span><span class="farol farol-warning"><span class="farol-dot"></span><span data-pt="Atenção" data-en="Warning">Atenção</span></span></div>
+                        <div class="m-desc">Não há colheitadeiras agrícolas tradicionais para agave, impacto limitado.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Pulverizadores</span><span class="farol farol-positive"><span class="farol-dot"></span><span data-pt="Positivo" data-en="Positive">Positivo</span></span></div>
+                        <div class="m-desc">Manejo fitossanitário para garantir a saúde das plantações de agave.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Plantadeiras</span><span class="farol farol-positive"><span class="farol-dot"></span><span data-pt="Positivo" data-en="Positive">Positivo</span></span></div>
+                        <div class="m-desc">Equipamentos específicos para o plantio em larga escala de agave.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="news-block">
+            <div class="news-header">
+                <h3 class="news-title">Preços de fertilizantes continuam elevados</h3>
+                <span class="farol farol-critical"><span class="farol-dot"></span><span data-pt="Crítico" data-en="Critical">Crítico</span></span>
+            </div>
+            <div class="news-body">
+                Os preços dos fertilizantes permanecem em patamares altos, pressionando os custos de produção para os agricultores mexicanos e impactando a rentabilidade das culturas em todo o país.
+                <p class="news-source"><strong data-pt="Fonte" data-en="Source">Fonte:</strong> AgroSíntesis</p>
+            </div>
+            <div class="machinery-analysis">
+                <div class="analysis-title" data-pt="Impacto por Linha de Produto" data-en="Impact by Product Line">Impacto por Linha de Produto</div>
+                <div class="machinery-items">
+        
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Tratores</span><span class="farol farol-critical"><span class="farol-dot"></span><span data-pt="Crítico" data-en="Critical">Crítico</span></span></div>
+                        <div class="m-desc">Redução da margem pode adiar compras de máquinas, impactando vendas gerais.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Colheitadeiras</span><span class="farol farol-critical"><span class="farol-dot"></span><span data-pt="Crítico" data-en="Critical">Crítico</span></span></div>
+                        <div class="m-desc">Menor rentabilidade geral do setor agrícola desestimula grandes investimentos.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Pulverizadores</span><span class="farol farol-critical"><span class="farol-dot"></span><span data-pt="Crítico" data-en="Critical">Crítico</span></span></div>
+                        <div class="m-desc">Mesmo com busca por eficiência, o custo total reduz o poder de investimento.</div>
+                    </div>
+                    <div class="m-item">
+                        <div class="m-header"><span class="m-name">Plantadeiras</span><span class="farol farol-critical"><span class="farol-dot"></span><span data-pt="Crítico" data-en="Critical">Crítico</span></span></div>
+                        <div class="m-desc">Impacto na capacidade de investimento e na viabilidade de novas áreas.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+</div>
+
+</div>
+
+<div class="footer" data-pt="CONFIDENCIAL — ACESSO RESTRITO — PIPELINE DE COMPILAÇÃO DA INTELIGÊNCIA DE MERCADO AGCO LATAM 2026" data-en="CONFIDENTIAL — RESTRICTED ACCESS — AGCO LATAM MARKET INTELLIGENCE COMPILATION PIPELINE 2026">
+CONFIDENCIAL — ACESSO RESTRITO — PIPELINE DE COMPILAÇÃO DA INTELIGÊNCIA DE MERCADO AGCO LATAM 2026
+</div>
+</div>
+
+<script type="text/javascript">
+function switchTab(evt, countryId) {
+var i, tabcontent, tablinks;
+tabcontent = document.getElementsByClassName("tab-content");
+for (i = 0; i < tabcontent.length; i++) {
+tabcontent[i].style.display = "none";
+tabcontent[i].classList.remove("active");
+}
+tablinks = document.getElementsByClassName("tab-btn");
+for (i = 0; i < tablinks.length; i++) {
+tablinks[i].classList.remove("active");
+}
+document.getElementById(countryId).style.display = "block";
+document.getElementById(countryId).classList.add("active");
+evt.currentTarget.classList.add("active");
+}
+
+// --- LÓGICA DE TRADUÇÃO COM GOOGLE TRANSLATE ---
+
+// Esta função é chamada pelo script do Google quando ele está pronto.
+function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+        pageLanguage: 'pt', 
+        autoDisplay: false,
+        includedLanguages: 'en,pt', // Apenas inglês e português
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+    }, 'google_translate_element');
+
+    // A cada 500ms, verifica o idioma atual e atualiza o estado da UI.
+    // Isso é um "polling" necessário porque o Google Translate não oferece um evento de "tradução concluída".
+    setInterval(updateUIForLanguage, 500);
+}
+
+function switchLanguage(event, targetLang) {
+    event.preventDefault();
+    
+    // Obtém o idioma atual do cookie do Google Translate
+    const cookie = document.cookie.split('; ').find(row => row.startsWith('googtrans='));
+    const currentLang = cookie ? cookie.split('/')[2] : 'pt';
+
+    // Se já estiver no idioma certo, não faz nada
+    if (currentLang === targetLang) {
+        return;
+    }
+
+    // Para reverter para o português, a maneira mais confiável é remover o cookie e recarregar.
+    if (targetLang === 'pt') {
+        document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/;';
+    } else {
+        // Para outros idiomas, define o cookie para o idioma alvo.
+        document.cookie = `googtrans=/auto/${targetLang}; path=/`;
+    }
+    
+    // Recarrega a página para que o Google Translate aplique o novo idioma do cookie.
+    window.location.reload();
+}
+
+// Função que atualiza a UI com base no idioma detectado
+function updateUIForLanguage() {
+    // O Google adiciona um atributo 'lang' na tag <html> quando traduz.
+    const lang = document.documentElement.lang.split('-')[0] || 'pt';
+
+    // 1. ATUALIZAÇÃO DO BOTÃO DE IDIOMA ATIVO
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('onclick').includes(`'${lang}'`));
+    });
+
+    // 2. ATUALIZAÇÃO DOS TEXTOS COM ATRIBUTOS 'data-*' (para UI)
+    document.querySelectorAll(`[data-${lang}]`).forEach(element => {
+        const newText = element.getAttribute(`data-${lang}`);
+        if (newText && element.textContent.trim() !== newText.trim()) {
+            element.textContent = newText;
+        }
+    });
+}
+
+// Garante que o script rode após o carregamento completo do HTML
+document.addEventListener('DOMContentLoaded', () => {
+    // A inicialização agora é controlada pelo googleTranslateElementInit e pelo polling.
+});
+
+</script>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</body>
+</html>
