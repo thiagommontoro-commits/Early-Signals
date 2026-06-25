@@ -346,17 +346,9 @@ def gerar_dashboard(template_path, output_path, dados_path):
         year = now.year
         month_idx = now.month - 1
 
-        date_pt = f"{TRANSLATIONS['pt']['months'][month_idx]} de {year}"
-        date_en = f"{TRANSLATIONS['en']['months'][month_idx]} {year}"
-
-        date_element_html = (
-            f'<span id="report-date" '
-            f'data-pt="{date_pt}" '
-            f'data-en="{date_en}">'
-            f'{date_pt}'
-            f'</span>'
-        )
-        html_content = html_content.replace("{{DATA_RELATORIO}}", date_element_html)
+        # Preenche os placeholders de data com as versões em português e inglês
+        html_content = html_content.replace("{{DATA_RELATORIO_PT}}", f"{TRANSLATIONS['pt']['months'][month_idx]} de {year}")
+        html_content = html_content.replace("{{DATA_RELATORIO_EN}}", f"{TRANSLATIONS['en']['months'][month_idx]} {year}")
 
         print("📊 Gerando blocos de análise e notícias para cada país...")
         for codigo_pais, dados_pais in dados_completos.items():
