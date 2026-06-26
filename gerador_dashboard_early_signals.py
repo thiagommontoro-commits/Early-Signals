@@ -143,7 +143,7 @@ def gerar_blocos_noticias(noticias_pais, codigo_pais=""):
     html_output = '<div class="news-grid">\n'
 
     # Mapeia os temas para ícones para o Brasil. A ordem é importante.
-    temas_brasil = [("Soja", "🌾"), ("Milho", "🌽"), ("Café", "☕"), ("Cana", "🎋")]
+    temas_brasil = [("Soja", ""), ("Milho", "🌽"), ("Café", "☕"), ("Cana", "🎋"), ("Algodão", "🧺"), ("Trigo", "🌾")]
 
     for i, noticia in enumerate(noticias_pais):
         tendencia_noticia = noticia.get('tendencia_noticia', 'incerto')
@@ -261,10 +261,12 @@ def atualizar_dados_com_ia(dados_path, script_dir):
         }
         
         noticias_prompt = []
-        if pais_code == 'br':
-            for tema in ["Soja", "Milho", "Café", "Cana"]:
+        if pais_code == 'br': # Brasil com 6 notícias temáticas
+            for tema in ["Soja", "Milho", "Café", "Cana", "Algodão", "Trigo"]:
                 noticias_prompt.append({**base_noticia_prompt, "tema_obrigatorio": tema})
-        else:
+        elif pais_code == 'ar': # Argentina com 6 notícias genéricas
+            noticias_prompt = [base_noticia_prompt] * 6
+        else: # Demais países com 4 notícias
             noticias_prompt = [base_noticia_prompt] * 4
 
         prompt_json_base_obj[pais_code] = {
@@ -283,8 +285,8 @@ def atualizar_dados_com_ia(dados_path, script_dir):
         - "descricao": Análise curta (máx 20 palavras).
         - "impactos": Impacto direto no mercado de máquinas (máx 25 palavras).
         - "fonte": Fontes típicas.
-    2.  `noticias`: 4 notícias REAIS e RECENTES do agronegócio do país que impactam a demanda por máquinas.
-        - **REGRA ESPECIAL PARA O BRASIL**: Para o Brasil (`br`), você DEVE retornar uma notícia para cada um dos `tema_obrigatorio` especificados no JSON (`Soja`, `Milho`, `Café`, `Cana`). Para os outros países, as 4 notícias podem ser sobre quaisquer temas relevantes.
+    2.  `noticias`: Um número variável de notícias REAIS e RECENTES do agronegócio do país que impactam a demanda por máquinas (6 para Brasil e Argentina, 4 para os demais).
+        - **REGRA ESPECIAL PARA O BRASIL**: Para o Brasil (`br`), você DEVE retornar uma notícia para cada um dos `tema_obrigatorio` especificados no JSON (`Soja`, `Milho`, `Café`, `Cana`, `Algodão`, `Trigo`). Para os outros países, as notícias podem ser sobre quaisquer temas relevantes.
         - "titulo_noticia": Título da notícia (máx 15 palavras).
         - "tendencia_noticia": 'positivo', 'negativo' ou 'incerto'.
         - "corpo_noticia": Resumo da notícia (máx 40 palavras).
