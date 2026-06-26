@@ -178,9 +178,13 @@ def gerar_blocos_noticias(noticias_pais, codigo_pais=""):
             produto_translation_key = get_farol_translation_key(tendencia_produto)
             produto_farol_text_attrs = i18n_attrs(produto_translation_key)
             
+            # Adiciona o segmento impactado (ex: Alta Potência) se ele for retornado pela IA.
+            segmento_impactado = impacto.get('segmento_impactado')
+            segmento_html = f' <span class="m-segment">({segmento_impactado})</span>' if segmento_impactado and segmento_impactado.strip() else ''
+
             html_output += f'''
                     <div class="m-item">
-                        <div class="m-header"><span class="m-name">{produto.capitalize()}</span><span class="farol {produto_farol_class}"><span class="farol-dot"></span><span {produto_farol_text_attrs}>{TRANSLATIONS['pt'][produto_translation_key]}</span></span></div>
+                        <div class="m-header"><span class="m-name">{produto.capitalize()}{segmento_html}</span><span class="farol {produto_farol_class}"><span class="farol-dot"></span><span {produto_farol_text_attrs}>{TRANSLATIONS['pt'][produto_translation_key]}</span></span></div>
                         <div class="m-desc">{impacto.get('descricao', TRANSLATIONS['pt']['analysis_unavailable'])}</div>
                     </div>'''
 
@@ -231,14 +235,14 @@ def atualizar_dados_com_ia(dados_path, script_dir):
     print(f"🚫 Cache para {month:02d}/{year} não encontrado. Conectando à IA para gerar novas análises...")
 
     fatores_base = {
-      "br": [ { "titulo": "Crédito Rural", "icone": "💳" }, { "titulo": "Taxa de Juros (Selic)", "icone": "💰" }, { "titulo": "Câmbio (Dólar)", "icone": "💵" }, { "titulo": "Produção de Grãos", "icone": "🚜" } ],
-      "ar": [ { "titulo": "Crédito e Financiamento", "icone": "💳" }, { "titulo": "Inflação e Câmbio", "icone": "📈" }, { "titulo": "Retenciones (Impostos)", "icone": "⚖️" }, { "titulo": "Produção Agrícola", "icone": "🚜" } ],
-      "cl": [ { "titulo": "Cenário Hídrico", "icone": "💧" }, { "titulo": "Exportação de Frutas", "icone": "🍒" }, { "titulo": "Custo de Insumos", "icone": "📦" }, { "titulo": "Regulamentação Ambiental", "icone": "🌿" } ],
-      "uy": [ { "titulo": "Exportação de Carne", "icone": "🐄" }, { "titulo": "Preço das Commodities", "icone": "📉" }, { "titulo": "Atraso Cambial", "icone": "💵" }, { "titulo": "Produção Florestal", "icone": "🌲" } ],
-      "py": [ { "titulo": "Expansão da Fronteira Agrícola", "icone": "🌱" }, { "titulo": "Logística Hidroviária", "icone": "🚢" }, { "titulo": "Produção de Carne", "icone": "🥩" }, { "titulo": "Cenário Fiscal e Cambial", "icone": "🏛️" } ],
-      "pe": [ { "titulo": "Agroexportação (Costa)", "icone": "🥑" }, { "titulo": "Agricultura Andina", "icone": "🥔" }, { "titulo": "Projetos de Irrigação", "icone": "🏞️" }, { "titulo": "Instabilidade Política", "icone": "⚖️" } ],
-      "bo": [ { "titulo": "Produção de Soja (Oriente)", "icone": "🌱" }, { "titulo": "Escassez de Dólar", "icone": "💸" }, { "titulo": "Biocombustíveis", "icone": "⛽" }, { "titulo": "Infraestrutura Logística", "icone": "🛣️" } ],
-      "mx": [ { "titulo": "Agroexportação para EUA", "icone": "🥑" }, { "titulo": "Escassez de Água (Norte)", "icone": "🏜️" }, { "titulo": "Produção de Agave", "icone": "🌵" }, { "titulo": "Remessas e Agricultura Familiar", "icone": "👨‍👩‍👧‍👦" } ]
+      "br": [ { "titulo": "Crédito Rural", "icone": "💳" }, { "titulo": "Juros (Selic)", "icone": "💰" }, { "titulo": "Câmbio (Dólar)", "icone": "💵" }, { "titulo": "Prod. Grãos", "icone": "🚜" } ],
+      "ar": [ { "titulo": "Crédito/Financ.", "icone": "💳" }, { "titulo": "Inflação/Câmbio", "icone": "📈" }, { "titulo": "Retenciones", "icone": "⚖️" }, { "titulo": "Prod. Agrícola", "icone": "🚜" } ],
+      "cl": [ { "titulo": "Cenário Hídrico", "icone": "💧" }, { "titulo": "Export. Frutas", "icone": "🍒" }, { "titulo": "Custo de Insumos", "icone": "📦" }, { "titulo": "Reg. Ambiental", "icone": "🌿" } ],
+      "uy": [ { "titulo": "Export. Carne", "icone": "🐄" }, { "titulo": "Preço Commod.", "icone": "📉" }, { "titulo": "Atraso Cambial", "icone": "💵" }, { "titulo": "Prod. Florestal", "icone": "🌲" } ],
+      "py": [ { "titulo": "Expansão Agro", "icone": "🌱" }, { "titulo": "Logística Fluvial", "icone": "🚢" }, { "titulo": "Prod. Carne", "icone": "🥩" }, { "titulo": "Fiscal/Câmbio", "icone": "🏛️" } ],
+      "pe": [ { "titulo": "Agroexport (Costa)", "icone": "🥑" }, { "titulo": "Agro Andino", "icone": "🥔" }, { "titulo": "Irrigação", "icone": "🏞️" }, { "titulo": "Cenário Político", "icone": "⚖️" } ],
+      "bo": [ { "titulo": "Soja (Oriente)", "icone": "🌱" }, { "titulo": "Escassez de Dólar", "icone": "💸" }, { "titulo": "Biocombustíveis", "icone": "⛽" }, { "titulo": "Infra. Logística", "icone": "🛣️" } ],
+      "mx": [ { "titulo": "Export. p/ EUA", "icone": "🥑" }, { "titulo": "Escassez Hídrica", "icone": "🏜️" }, { "titulo": "Prod. Agave", "icone": "🌵" }, { "titulo": "Remessas/Agro Fam.", "icone": "👨‍👩‍👧‍👦" } ]
     }
     
     prompt_json_base_obj = {}
@@ -249,10 +253,10 @@ def atualizar_dados_com_ia(dados_path, script_dir):
             "corpo_noticia": "...",
             "fonte_noticia": "...",
             "impacto_produtos": {
-                "tratores": {"tendencia": "positivo|negativo|incerto", "descricao": "..."},
-                "colheitadeiras": {"tendencia": "positivo|negativo|incerto", "descricao": "..."},
-                "pulverizadores": {"tendencia": "positivo|negativo|incerto", "descricao": "..."},
-                "plantadeiras": {"tendencia": "positivo|negativo|incerto", "descricao": "..."}
+                "tratores": {"tendencia": "positivo|negativo|incerto", "descricao": "...", "segmento_impactado": "..."},
+                "colheitadeiras": {"tendencia": "positivo|negativo|incerto", "descricao": "...", "segmento_impactado": "..."},
+                "pulverizadores": {"tendencia": "positivo|negativo|incerto", "descricao": "...", "segmento_impactado": "..."},
+                "plantadeiras": {"tendencia": "positivo|negativo|incerto", "descricao": "...", "segmento_impactado": "..."}
             }
         }
         
@@ -288,8 +292,14 @@ def atualizar_dados_com_ia(dados_path, script_dir):
         - "impacto_produtos": Análise de impacto para cada linha de produto.
             - "tendencia": 'positivo', 'negativo' ou 'incerto'.
             - "descricao": Justificativa curta do impacto (máx 20 palavras).
+            - "segmento_impactado": Especifique o sub-segmento principal afetado.
+                - Para 'tratores': Use 'Baixa Potência (<80cv)', 'Média Potência (80-170cv)' ou 'Alta Potência (>170cv)'.
+                - Para 'plantadeiras': Use 'Pequeno Porte (<20 linhas)' ou 'Grande Porte (>20 linhas)'.
+                - Para 'colheitadeiras': Use 'Médio Porte (Classes 4-6)' ou 'Grande Porte (Classes 7+)'.
+                - Para 'pulverizadores': Use 'De Arrasto' ou 'Autopropelido'.
+                - Se o impacto for geral ou não específico, retorne uma string vazia "".
     É crucial que a análise seja baseada em dados e eventos reais do mês corrente.
-    Retorne a resposta EXATAMENTE no formato JSON a seguir, preenchendo os "..." com dados reais, sem adicionar nenhum comentário ou formatação extra. O campo `tema_obrigatorio` é apenas uma instrução para você e não deve ser incluído na resposta JSON final.
+    Retorne a resposta EXATAMENTE no formato JSON a seguir, preenchendo os "..." com dados reais, sem adicionar nenhum comentário ou formatação extra. O campo `tema_obrigatorio` é apenas uma instrução para você e não deve ser incluído na resposta JSON final. O campo `segmento_impactado` é obrigatório.
 
     {prompt_json_base}
     """
@@ -299,7 +309,7 @@ def atualizar_dados_com_ia(dados_path, script_dir):
         for pais_code, fatores in fatores_base.items():
             dados_erro[pais_code] = {
                 "fatores_economicos": [{**f, "tendencia": "incerto", "descricao": mensagem, "impactos": "Não foi possível carregar os impactos.", "fonte": "Sistema Interno"} for f in fatores],
-                "noticias": [{"titulo_noticia": "Falha ao Carregar Notícias", "tendencia_noticia": "incerto", "corpo_noticia": f"Não foi possível carregar as notícias: {mensagem}", "fonte_noticia": "Sistema Interno", "impacto_produtos": {p: {"tendencia": "incerto", "descricao": "Indisponível"} for p in ["tratores", "colheitadeiras", "pulverizadores", "plantadeiras"]}}]
+            "noticias": [{"titulo_noticia": "Falha ao Carregar Notícias", "tendencia_noticia": "incerto", "corpo_noticia": f"Não foi possível carregar as notícias: {mensagem}", "fonte_noticia": "Sistema Interno", "impacto_produtos": {p: {"tendencia": "incerto", "descricao": "Indisponível", "segmento_impactado": ""} for p in ["tratores", "colheitadeiras", "pulverizadores", "plantadeiras"]}}]
             }
         return dados_erro
 
@@ -385,7 +395,7 @@ def gerar_dashboard(template_path, output_path, dados_path):
         year = now.year
         month_idx = now.month - 1
 
-        # Preenche os placeholders de data com as versões em português e inglês
+        # Preenche os placeholders de data com as versões em português, inglês e espanhol.
         html_content = html_content.replace("{{DATA_RELATORIO_PT}}", f"{TRANSLATIONS['pt']['months'][month_idx]} de {year}")
         html_content = html_content.replace("{{DATA_RELATORIO_EN}}", f"{TRANSLATIONS['en']['months'][month_idx]} {year}")
         html_content = html_content.replace("{{DATA_RELATORIO_ES}}", f"{TRANSLATIONS['es']['months'][month_idx]} de {year}")
