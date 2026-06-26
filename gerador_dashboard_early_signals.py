@@ -28,6 +28,7 @@ TRANSLATIONS = {
         "product_line_impact": "Impacto por Linha de Produto", "analysis_unavailable": "Análise indisponível.",
         "no_news": "Nenhuma notícia disponível para este país.",
         "months": ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"],
+        "suggest_improvement": "Sugerir Melhoria",
     },
     "en": {
         "positive": "Positive", "critical": "Critical", "warning": "Warning",
@@ -37,6 +38,7 @@ TRANSLATIONS = {
         "product_line_impact": "Impact by Product Line", "analysis_unavailable": "Analysis unavailable.",
         "no_news": "No news available for this country.",
         "months": ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+        "suggest_improvement": "Suggest Improvement",
     },
     "es": {
         "positive": "Positivo", "critical": "Crítico", "warning": "Atención",
@@ -46,6 +48,7 @@ TRANSLATIONS = {
         "product_line_impact": "Impacto por Línea de Producto", "analysis_unavailable": "Análisis no disponible.",
         "no_news": "No hay noticias disponibles para este país.",
         "months": ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+        "suggest_improvement": "Sugerir Mejora",
     }
 }
 
@@ -235,14 +238,14 @@ def atualizar_dados_com_ia(dados_path, script_dir):
     print(f"🚫 Cache para {month:02d}/{year} não encontrado. Conectando à IA para gerar novas análises...")
 
     fatores_base = {
-      "br": [ { "titulo": "Crédito Rural", "icone": "💳" }, { "titulo": "Juros (Selic)", "icone": "💰" }, { "titulo": "Câmbio (Dólar)", "icone": "💵" }, { "titulo": "Prod. Grãos", "icone": "🚜" } ],
-      "ar": [ { "titulo": "Crédito/Financ.", "icone": "💳" }, { "titulo": "Inflação/Câmbio", "icone": "📈" }, { "titulo": "Retenciones", "icone": "⚖️" }, { "titulo": "Prod. Agrícola", "icone": "🚜" } ],
-      "cl": [ { "titulo": "Cenário Hídrico", "icone": "💧" }, { "titulo": "Export. Frutas", "icone": "🍒" }, { "titulo": "Custo de Insumos", "icone": "📦" }, { "titulo": "Reg. Ambiental", "icone": "🌿" } ],
-      "uy": [ { "titulo": "Export. Carne", "icone": "🐄" }, { "titulo": "Preço Commod.", "icone": "📉" }, { "titulo": "Atraso Cambial", "icone": "💵" }, { "titulo": "Prod. Florestal", "icone": "🌲" } ],
-      "py": [ { "titulo": "Expansão Agro", "icone": "🌱" }, { "titulo": "Logística Fluvial", "icone": "🚢" }, { "titulo": "Prod. Carne", "icone": "🥩" }, { "titulo": "Fiscal/Câmbio", "icone": "🏛️" } ],
-      "pe": [ { "titulo": "Agroexport (Costa)", "icone": "🥑" }, { "titulo": "Agro Andino", "icone": "🥔" }, { "titulo": "Irrigação", "icone": "🏞️" }, { "titulo": "Cenário Político", "icone": "⚖️" } ],
-      "bo": [ { "titulo": "Soja (Oriente)", "icone": "🌱" }, { "titulo": "Escassez de Dólar", "icone": "💸" }, { "titulo": "Biocombustíveis", "icone": "⛽" }, { "titulo": "Infra. Logística", "icone": "🛣️" } ],
-      "mx": [ { "titulo": "Export. p/ EUA", "icone": "🥑" }, { "titulo": "Escassez Hídrica", "icone": "🏜️" }, { "titulo": "Prod. Agave", "icone": "🌵" }, { "titulo": "Remessas/Agro Fam.", "icone": "👨‍👩‍👧‍👦" } ]
+      "br": [ { "titulo": "Crédito Rural", "icone": "💳" }, { "titulo": "Juros (Selic)", "icone": "💰" }, { "titulo": "Câmbio (Dólar)", "icone": "💵" }, { "titulo": "Prod. Grãos", "icone": "🚜" }, { "titulo": "Margens Produtor", "icone": "📊" } ],
+      "ar": [ { "titulo": "Crédito/Financ.", "icone": "💳" }, { "titulo": "Inflação/Câmbio", "icone": "📈" }, { "titulo": "Retenciones", "icone": "⚖️" }, { "titulo": "Prod. Agrícola", "icone": "🚜" }, { "titulo": "Margens Produtor", "icone": "📊" } ],
+      "cl": [ { "titulo": "Cenário Hídrico", "icone": "💧" }, { "titulo": "Export. Frutas", "icone": "🍒" }, { "titulo": "Custo de Insumos", "icone": "📦" }, { "titulo": "Reg. Ambiental", "icone": "🌿" }, { "titulo": "Margens Produtor", "icone": "📊" } ],
+      "uy": [ { "titulo": "Export. Carne", "icone": "🐄" }, { "titulo": "Preço Commod.", "icone": "📉" }, { "titulo": "Atraso Cambial", "icone": "💵" }, { "titulo": "Prod. Florestal", "icone": "🌲" }, { "titulo": "Margens Produtor", "icone": "📊" } ],
+      "py": [ { "titulo": "Expansão Agro", "icone": "🌱" }, { "titulo": "Logística Fluvial", "icone": "🚢" }, { "titulo": "Prod. Carne", "icone": "🥩" }, { "titulo": "Fiscal/Câmbio", "icone": "🏛️" }, { "titulo": "Margens Produtor", "icone": "📊" } ],
+      "pe": [ { "titulo": "Agroexport (Costa)", "icone": "🥑" }, { "titulo": "Agro Andino", "icone": "🥔" }, { "titulo": "Irrigação", "icone": "🏞️" }, { "titulo": "Cenário Político", "icone": "⚖️" }, { "titulo": "Margens Produtor", "icone": "📊" } ],
+      "bo": [ { "titulo": "Soja (Oriente)", "icone": "🌱" }, { "titulo": "Escassez de Dólar", "icone": "💸" }, { "titulo": "Biocombustíveis", "icone": "⛽" }, { "titulo": "Infra. Logística", "icone": "🛣️" }, { "titulo": "Margens Produtor", "icone": "📊" } ],
+      "mx": [ { "titulo": "Export. p/ EUA", "icone": "🥑" }, { "titulo": "Escassez Hídrica", "icone": "🏜️" }, { "titulo": "Prod. Agave", "icone": "🌵" }, { "titulo": "Remessas/Agro Fam.", "icone": "👨‍👩‍👧‍👦" }, { "titulo": "Margens Produtor", "icone": "📊" } ]
     }
     
     prompt_json_base_obj = {}
@@ -280,11 +283,12 @@ def atualizar_dados_com_ia(dados_path, script_dir):
     Você é um Analista de Inteligência de Mercado Sênior para o setor de máquinas agrícolas na América Latina.
     Sua tarefa é gerar um relatório completo e atualizado para o mês de {mes_nome} de {year}.
     Para cada país, preencha DUAS seções:
-    1.  `fatores_economicos`: 4 análises macroeconômicas concisas.
+    1.  `fatores_economicos`: análises macroeconômicas concisas para os fatores listados.
         - "tendencia": 'positivo', 'negativo', 'incerto', 'estavel', 'alta', 'baixa', 'restritiva', 'expansiva'.
         - "descricao": Análise curta (máx 20 palavras).
         - "impactos": Impacto direto no mercado de máquinas (máx 25 palavras).
         - "fonte": Fontes típicas.
+        - **REGRA ESPECIAL PARA "Margens Produtor"**: Na descrição, especifique quais culturas ou produtores estão com margens melhores (comprimidas ou expandidas) e quais estão piores. Ex: "Margens de soja e milho apertadas; café e cana com margens melhores."
     2.  `noticias`: Um número variável de notícias REAIS e RECENTES do agronegócio do país que impactam a demanda por máquinas (6 para Brasil e Argentina, 4 para os demais).
         - **REGRA ESPECIAL PARA O BRASIL**: Para o Brasil (`br`), você DEVE retornar uma notícia para cada um dos `tema_obrigatorio` especificados no JSON (`Soja`, `Milho`, `Café`, `Cana`, `Algodão`, `Trigo`). Para os outros países, as notícias podem ser sobre quaisquer temas relevantes.
         - "titulo_noticia": Título da notícia (máx 15 palavras).
@@ -415,6 +419,131 @@ def gerar_dashboard(template_path, output_path, dados_path):
             bloco_noticias_html = gerar_blocos_noticias(dados_pais.get('noticias', []), codigo_pais)
             placeholder_noticias = f"{{{{BLOCO_NOTICIAS_{codigo_pais.upper()}}}}}"
             html_content = html_content.replace(placeholder_noticias, bloco_noticias_html)
+
+        # Injeta o botão de feedback e o modal do formulário
+        feedback_modal_html = f"""
+<style>
+    .feedback-button {{
+        position: fixed; bottom: 25px; right: 25px; background-color: #CC0000; color: white;
+        padding: 12px 18px; border-radius: 50px; text-decoration: none; font-family: 'Roboto', sans-serif;
+        font-size: 15px; font-weight: 500; box-shadow: 0 5px 15px rgba(0,0,0,0.25); z-index: 1000;
+        display: flex; align-items: center; gap: 10px; cursor: pointer;
+        transition: transform 0.2s ease-in-out, background-color 0.3s;
+    }}
+    .feedback-button:hover {{ background-color: #A30000; transform: translateY(-3px); }}
+    .feedback-button svg {{ width: 20px; height: 20px; }}
+
+    .modal-overlay {{
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+        background: rgba(0, 0, 0, 0.6); z-index: 2000;
+        display: none; align-items: center; justify-content: center;
+    }}
+    .modal-content {{
+        background: #fff; padding: 30px; border-radius: 12px;
+        width: 90%; max-width: 550px; box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        position: relative; animation: slide-down 0.4s ease-out;
+    }}
+    @keyframes slide-down {{ from {{ transform: translateY(-30px); opacity: 0; }} to {{ transform: translateY(0); opacity: 1; }} }}
+
+    .modal-close {{
+        position: absolute; top: 15px; right: 15px; background: none; border: none;
+        font-size: 24px; color: #888; cursor: pointer; line-height: 1;
+    }}
+    .modal-close:hover {{ color: #333; }}
+
+    .modal-title {{ margin-top: 0; font-size: 22px; color: #333; }}
+    .form-group {{ margin-bottom: 20px; }}
+    .form-group label {{ display: block; margin-bottom: 8px; font-weight: 500; color: #555; }}
+    .form-group input, .form-group textarea {{
+        width: 100%; padding: 10px; border: 1px solid #ccc;
+        border-radius: 6px; font-family: 'Roboto', sans-serif; font-size: 15px;
+    }}
+    .form-group textarea {{ resize: vertical; min-height: 100px; }}
+    .submit-btn {{
+        background-color: #CC0000; color: white; border: none; padding: 12px 25px;
+        border-radius: 6px; font-size: 16px; font-weight: 500; cursor: pointer;
+        width: 100%; transition: background-color 0.3s;
+    }}
+    .submit-btn:hover {{ background-color: #A30000; }}
+    .formspree-thanks {{ display: none; text-align: center; padding: 20px; }}
+</style>
+
+<!-- Botão Flutuante -->
+<button id="openFeedbackModal" class="feedback-button">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
+      <path d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13h-5a.5.5 0 0 1-.46-.302l-.761-1.77a1.964 1.964 0 0 0-.453-.618A6 6 0 0 1 2 6zm6 8.5a.5.5 0 0 0 .5.5h.5a.5.5 0 0 0 0-1h-.5a.5.5 0 0 0-.5.5zM8 1a5 5 0 0 0-3.536 8.536L5.136 11.5h5.728l.672-1.964A5 5 0 0 0 8 1z"/>
+    </svg>
+    <span {i18n_attrs("suggest_improvement")}>{TRANSLATIONS["pt"]["suggest_improvement"]}</span>
+</button>
+
+<!-- Modal do Formulário -->
+<div id="feedbackModal" class="modal-overlay">
+    <div class="modal-content">
+        <button id="closeFeedbackModal" class="modal-close">&times;</button>
+        <h2 class="modal-title">Feedback sobre o Dashboard</h2>
+        <form id="feedbackForm" action="https://formspree.io/f/mvzjaqow" method="POST">
+            <div class="form-group">
+                <label for="satisfaction">Em uma escala de 1 a 5, quão útil é este dashboard para você?</label>
+                <input type="number" name="satisfaction" min="1" max="5" required style="width: 80px;">
+            </div>
+            <div class="form-group">
+                <label for="suggestion">Deixe sua sugestão de melhoria ou novo indicador aqui:</label>
+                <textarea id="suggestion" name="suggestion" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="email">Seu e-mail (opcional, para entrarmos em contato)</label>
+                <input type="email" id="email" name="email">
+            </div>
+            <button type="submit" class="submit-btn">Enviar Feedback</button>
+        </form>
+        <div id="formspreeThanks" class="formspree-thanks">
+            <h3>Obrigado pelo seu feedback!</h3>
+            <p>Sua sugestão foi enviada com sucesso.</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    const openBtn = document.getElementById('openFeedbackModal');
+    const closeBtn = document.getElementById('closeFeedbackModal');
+    const modal = document.getElementById('feedbackModal');
+    const form = document.getElementById('feedbackForm');
+    const thanksMessage = document.getElementById('formspreeThanks');
+
+    openBtn.addEventListener('click', () => {{ modal.style.display = 'flex'; }});
+    closeBtn.addEventListener('click', () => {{ modal.style.display = 'none'; }});
+    modal.addEventListener('click', (e) => {{
+        if (e.target === modal) {{ modal.style.display = 'none'; }}
+    }});
+
+    form.addEventListener('submit', async (e) => {{
+        e.preventDefault();
+        const data = new FormData(form);
+        try {{
+            const response = await fetch(form.action, {{
+                method: 'POST',
+                body: data,
+                headers: {{ 'Accept': 'application/json' }}
+            }});
+            if (response.ok) {{
+                form.style.display = 'none';
+                thanksMessage.style.display = 'block';
+                setTimeout(() => {{
+                    modal.style.display = 'none';
+                    form.style.display = 'block';
+                    thanksMessage.style.display = 'none';
+                    form.reset();
+                }}, 3000);
+            }} else {{
+                alert('Ocorreu um erro ao enviar o formulário. Tente novamente.');
+            }}
+        }} catch (error) {{
+            alert('Ocorreu um erro de conexão. Verifique sua internet e tente novamente.');
+        }}
+    }});
+</script>
+"""
+        html_content = html_content.replace("</body>", feedback_modal_html + "</body>")
 
         output_path.write_text(html_content, encoding="utf-8")
         print(f"✅ Dashboard '{output_path.name}' gerado com sucesso com dados de múltiplos países!")
