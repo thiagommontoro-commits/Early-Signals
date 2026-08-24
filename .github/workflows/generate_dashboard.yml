@@ -44,5 +44,6 @@ jobs:
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git add -f index.html
+          git add -f cache_dados_ia_*.json || true
           git diff --staged --quiet || git commit -m "📊 Atualização automática do dashboard Early Signals"
           git push
