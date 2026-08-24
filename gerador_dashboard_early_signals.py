@@ -16,6 +16,10 @@ try:
     from google.genai import errors as genai_errors
 except ImportError:
     genai = None
+    # --- Módulos Early Signals (Inadimplência + Commodities) ---
+from modulo_inadimplencia import obter_inadimplencia_rural
+from modulo_commodities import processar_commodities
+from render_commodities import gerar_bloco_commodities, CSS_COMMODITIES
 
 # Dicionário de traduções para os textos do dashboard
 # Re-adicionado português para suportar a tradução via Google Translate.
@@ -396,6 +400,12 @@ def gerar_dashboard(template_path, output_path, dados_path):
         dados_completos = carregar_dados_paises(dados_path)
         if not dados_completos:
             raise ValueError("Não foi possível carregar os dados dos países do arquivo JSON.")
+                    # ---- MÓDULO A: INADIMPLÊNCIA DO CRÉDITO RURAL (BR) ----
+        print("Buscando Inadimplencia do Credito Rural (BCB SGS 21148)...")
+        item_inad = obter_inadimplencia_rural()
+        if item_inad and "br" in dados_completos:
+            dados_completos["br"].setdefault("fatores_economicos", [])
+            dados_completos["br"]["fatores_economicos"].insert(0, item_inad)
         
         now = datetime.datetime.now()
         year = now.year
@@ -419,6 +429,12 @@ def gerar_dashboard(template_path, output_path, dados_path):
             bloco_noticias_html = gerar_blocos_noticias(dados_pais.get('noticias', []), codigo_pais)
             placeholder_noticias = f"{{{{BLOCO_NOTICIAS_{codigo_pais.upper()}}}}}"
             html_content = html_content.replace(placeholder_noticias, bloco_noticias_html)
+                    # ---- MÓDULO B: COMMODITY INTELLIGENCE ----
+        print("Processando Commodity Intelligence...")
+        xlsx_commodities = template_path.parent / "data" / "precos_agricolas_latest.xlsx"
+        commodities, aviso_frescor = processar_commodities(xlsx_commodities)
+        bloco_commodities_html = gerar_bloco_commodities(commodities, aviso_frescor)
+        html_content = html_content.replace("{{BLOCO_COMMODITIES}}", bloco_commodities_html)
 
         # Injeta o botão de feedback e o modal do formulário
         feedback_modal_html = f"""
