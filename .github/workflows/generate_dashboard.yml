@@ -34,12 +34,15 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      # >>> PASSO NOVO: baixa o Chromium usado pelo agrobr (conab.safras -> produtividade)
+      - name: 3b. Instalar navegador do Playwright (para dados de safra da CONAB)
+        run: python -m playwright install --with-deps chromium
+
       - name: 4. Gerar o arquivo index.html
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          # >>> ÚNICA LINHA ADICIONADA: fonte do preço da margem (CONAB · preço recebido produtor).
-          #     Para alternar para CEPEA, troque para: cepea
-          EARLY_SIGNALS_PRECO_FONTE: conab_prod
+          # Fonte do preço para a receita (CEPEA é a única exposta pelo agrobr)
+          EARLY_SIGNALS_PRECO_FONTE: cepea
         run: python gerador_dashboard_early_signals.py
 
       - name: 5. Salvar o index.html gerado no repositório
