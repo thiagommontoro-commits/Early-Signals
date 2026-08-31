@@ -1,0 +1,11 @@
+# Early Signals — dependências do pipeline
+# (reconstruído a partir dos imports do gerador_dashboard_early_signals.py
+#  + novas libs da aba Margem do Produtor)
+
+# --- já usados pelo projeto ---
+python-dotenv>=1.0
+google-genai>=0.3
+
+# --- NOVOS: aba Margem do Produtor (CONAB + CEPEA) ---
+agrobr>=1.1.0
+pandas>=2.0
