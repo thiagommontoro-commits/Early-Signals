@@ -1,6 +1,7 @@
 {
-  "schema_version": "2.1",
-  "gerado_em": "2026-08-31T17:56:03",
+  "schema_version": "2.3",
+  "n_combinacoes": 10,
+  "gerado_em": "2026-08-31T18:42:21",
   "safras": [
     "2024/25",
     "2025/26",
@@ -13,10 +14,10 @@
     "preco": "CEPEA/ESALQ"
   },
   "resumo_qualidade": {
-    "total": 24,
+    "total": 30,
     "completos": 4,
     "parciais": 4,
-    "incompletos": 16
+    "incompletos": 22
   },
   "autoria": "Global Reporting & Analytics — Thiago Montoro (AGCO)",
   "cards": [
@@ -367,6 +368,96 @@
         {
           "safra": "2026/27",
           "custo_total_ha": 11218.28,
+          "custo_status": "repetido",
+          "produtividade": null,
+          "produtividade_status": "indisponivel",
+          "preco_medio": null,
+          "preco_status": "indisponivel",
+          "receita_ha": null,
+          "margem_ha": null,
+          "status_geral": "incompleto"
+        }
+      ],
+      "tendencia": "indisponivel",
+      "delta_pct": null
+    },
+    {
+      "cultura": "Café",
+      "uf": "MG",
+      "unidade": "sc60",
+      "serie": [
+        {
+          "safra": "2024/25",
+          "custo_total_ha": 46828.89,
+          "custo_status": "oficial",
+          "produtividade": null,
+          "produtividade_status": "indisponivel",
+          "preco_medio": null,
+          "preco_status": "indisponivel",
+          "receita_ha": null,
+          "margem_ha": null,
+          "status_geral": "incompleto"
+        },
+        {
+          "safra": "2025/26",
+          "custo_total_ha": 46828.89,
+          "custo_status": "repetido",
+          "produtividade": null,
+          "produtividade_status": "indisponivel",
+          "preco_medio": 1795.03,
+          "preco_status": "oficial",
+          "receita_ha": null,
+          "margem_ha": null,
+          "status_geral": "incompleto"
+        },
+        {
+          "safra": "2026/27",
+          "custo_total_ha": 46828.89,
+          "custo_status": "repetido",
+          "produtividade": null,
+          "produtividade_status": "indisponivel",
+          "preco_medio": null,
+          "preco_status": "indisponivel",
+          "receita_ha": null,
+          "margem_ha": null,
+          "status_geral": "incompleto"
+        }
+      ],
+      "tendencia": "indisponivel",
+      "delta_pct": null
+    },
+    {
+      "cultura": "Café",
+      "uf": "ES",
+      "unidade": "sc60",
+      "serie": [
+        {
+          "safra": "2024/25",
+          "custo_total_ha": 39359.62,
+          "custo_status": "oficial",
+          "produtividade": null,
+          "produtividade_status": "indisponivel",
+          "preco_medio": null,
+          "preco_status": "indisponivel",
+          "receita_ha": null,
+          "margem_ha": null,
+          "status_geral": "incompleto"
+        },
+        {
+          "safra": "2025/26",
+          "custo_total_ha": 39359.62,
+          "custo_status": "repetido",
+          "produtividade": null,
+          "produtividade_status": "indisponivel",
+          "preco_medio": 1795.03,
+          "preco_status": "oficial",
+          "receita_ha": null,
+          "margem_ha": null,
+          "status_geral": "incompleto"
+        },
+        {
+          "safra": "2026/27",
+          "custo_total_ha": 39359.62,
           "custo_status": "repetido",
           "produtividade": null,
           "produtividade_status": "indisponivel",
