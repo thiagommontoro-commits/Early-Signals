@@ -1,0 +1,281 @@
+{
+  "gerado_em": "2026-08-31T14:47:44",
+  "safras": [
+    "2024/25",
+    "2025/26",
+    "2026/27"
+  ],
+  "metodologia": "Margem (R$/ha) = Receita (Produtividade x Preço) - Custo Total.",
+  "fontes": {
+    "custo": "CONAB - Custos de Produção (GECUP)",
+    "produtividade": "CONAB - Série Histórica de Safra (GEASA)",
+    "preco": "CONAB - Preço recebido produtor"
+  },
+  "autoria": "Global Reporting & Analytics — Thiago Montoro (AGCO)",
+  "cards": [
+    {
+      "cultura": "Soja",
+      "uf": "MT",
+      "unidade": "sc60",
+      "serie": [
+        {
+          "safra": "2024/25",
+          "custo_total_ha": null,
+          "produtividade": null,
+          "preco_medio": null,
+          "receita_ha": null,
+          "margem_ha": null
+        },
+        {
+          "safra": "2025/26",
+          "custo_total_ha": null,
+          "produtividade": null,
+          "preco_medio": null,
+          "receita_ha": null,
+          "margem_ha": null
+        },
+        {
+          "safra": "2026/27",
+          "custo_total_ha": null,
+          "produtividade": null,
+          "preco_medio": null,
+          "receita_ha": null,
+          "margem_ha": null
+        }
+      ],
+      "tendencia": "indisponivel",
+      "delta_pct": null
+    },
+    {
+      "cultura": "Soja",
+      "uf": "PR",
+      "unidade": "sc60",
+      "serie": [
+        {
+          "safra": "2024/25",
+          "custo_total_ha": null,
+          "produtividade": null,
+          "preco_medio": null,
+          "receita_ha": null,
+          "margem_ha": null
+        },
+        {
+          "safra": "2025/26",
+          "custo_total_ha": null,
+          "produtividade": null,
+          "preco_medio": null,
+          "receita_ha": null,
+          "margem_ha": null
+        },
+        {
+          "safra": "2026/27",
+          "custo_total_ha": null,
+          "produtividade": null,
+          "preco_medio": null,
+          "receita_ha": null,
+          "margem_ha": null
+        }
+      ],
+      "tendencia": "indisponivel",
+      "delta_pct": null
+    },
+    {
+      "cultura": "Soja",
+      "uf": "RS",
+      "unidade": "sc60",
+      "serie": [
+        {
+          "safra": "2024/25",
+          "custo_total_ha": null,
+          "produtividade": null,
+          "preco_medio": null,
+          "receita_ha": null,
+          "margem_ha": null
+        },
+        {
+          "safra": "2025/26",
+          "custo_total_ha": null,
+          "produtividade": null,
+          "preco_medio": null,
+          "receita_ha": null,
+          "margem_ha": null
+        },
+        {
+          "safra": "2026/27",
+          "custo_total_ha": null,
+          "produtividade": null,
+          "preco_medio": null,
+          "receita_ha": null,
+          "margem_ha": null
+        }
+      ],
+      "tendencia": "indisponivel",
+      "delta_pct": null
+    },
+    {
+      "cultura": "Soja",
+      "uf": "GO",
+      "unidade": "sc60",
+      "serie": [
+        {
+          "safra": "2024/25",
+          "custo_total_ha": null,
+          "produtividade": null,
+          "preco_medio": null,
+          "receita_ha": null,
+          "margem_ha": null
+        },
+        {
+          "safra": "2025/26",
+          "custo_total_ha": null,
+          "produtividade": null,
+          "preco_medio": null,
+          "receita_ha": null,
+          "margem_ha": null
+        },
+        {
+          "safra": "2026/27",
+          "custo_total_ha": null,
+          "produtividade": null,
+          "preco_medio": null,
+          "receita_ha": null,
+          "margem_ha": null
+        }
+      ],
+      "tendencia": "indisponivel",
+      "delta_pct": null
+    },
+    {
+      "cultura": "Milho",
+      "uf": "MT",
+      "unidade": "sc60",
+      "serie": [
+        {
+          "safra": "2024/25",
+          "custo_total_ha": null,
+          "produtividade": null,
+          "preco_medio": null,
+          "receita_ha": null,
+          "margem_ha": null
+        },
+        {
+          "safra": "2025/26",
+          "custo_total_ha": null,
+          "produtividade": null,
+          "preco_medio": null,
+          "receita_ha": null,
+          "margem_ha": null
+        },
+        {
+          "safra": "2026/27",
+          "custo_total_ha": null,
+          "produtividade": null,
+          "preco_medio": null,
+          "receita_ha": null,
+          "margem_ha": null
+        }
+      ],
+      "tendencia": "indisponivel",
+      "delta_pct": null
+    },
+    {
+      "cultura": "Milho",
+      "uf": "PR",
+      "unidade": "sc60",
+      "serie": [
+        {
+          "safra": "2024/25",
+          "custo_total_ha": null,
+          "produtividade": null,
+          "preco_medio": null,
+          "receita_ha": null,
+          "margem_ha": null
+        },
+        {
+          "safra": "2025/26",
+          "custo_total_ha": null,
+          "produtividade": null,
+          "preco_medio": null,
+          "receita_ha": null,
+          "margem_ha": null
+        },
+        {
+          "safra": "2026/27",
+          "custo_total_ha": null,
+          "produtividade": null,
+          "preco_medio": null,
+          "receita_ha": null,
+          "margem_ha": null
+        }
+      ],
+      "tendencia": "indisponivel",
+      "delta_pct": null
+    },
+    {
+      "cultura": "Algodão",
+      "uf": "MT",
+      "unidade": "arroba",
+      "serie": [
+        {
+          "safra": "2024/25",
+          "custo_total_ha": null,
+          "produtividade": null,
+          "preco_medio": null,
+          "receita_ha": null,
+          "margem_ha": null
+        },
+        {
+          "safra": "2025/26",
+          "custo_total_ha": null,
+          "produtividade": null,
+          "preco_medio": null,
+          "receita_ha": null,
+          "margem_ha": null
+        },
+        {
+          "safra": "2026/27",
+          "custo_total_ha": null,
+          "produtividade": null,
+          "preco_medio": null,
+          "receita_ha": null,
+          "margem_ha": null
+        }
+      ],
+      "tendencia": "indisponivel",
+      "delta_pct": null
+    },
+    {
+      "cultura": "Trigo",
+      "uf": "PR",
+      "unidade": "sc60",
+      "serie": [
+        {
+          "safra": "2024/25",
+          "custo_total_ha": null,
+          "produtividade": null,
+          "preco_medio": null,
+          "receita_ha": null,
+          "margem_ha": null
+        },
+        {
+          "safra": "2025/26",
+          "custo_total_ha": null,
+          "produtividade": null,
+          "preco_medio": null,
+          "receita_ha": null,
+          "margem_ha": null
+        },
+        {
+          "safra": "2026/27",
+          "custo_total_ha": null,
+          "produtividade": null,
+          "preco_medio": null,
+          "receita_ha": null,
+          "margem_ha": null
+        }
+      ],
+      "tendencia": "indisponivel",
+      "delta_pct": null
+    }
+  ]
+}
