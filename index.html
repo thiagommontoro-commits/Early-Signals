@@ -188,8 +188,16 @@ body { font-family: 'Arial', sans-serif; background-color: #e9ecef; color: var(-
 
 <style>
 /* ===== EARLY SIGNALS · Aba Margem do Produtor (CONAB + CEPEA) ===== */
-.margem-legend { font-size:12px; color:#555; background:#f4f4f4; border-left:5px solid #cc0000; border-radius:4px; padding:10px 18px; margin-bottom:22px; font-weight:600; }
+.margem-legend { font-size:12px; color:#555; background:#f4f4f4; border-left:5px solid #cc0000; border-radius:4px; padding:10px 18px; margin-bottom:14px; font-weight:600; }
 .margem-legend b { color:#111; }
+.margem-quality { display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-bottom:12px; }
+.margem-quality .qp { font-size:12px; font-weight:800; padding:4px 12px; border-radius:20px; }
+.margem-quality .qp-total { font-size:11px; color:#888; font-weight:600; }
+.q-ok { background:#e2f0d9; color:#2e7d32; }
+.q-warn { background:#fff2cc; color:#7f6000; }
+.q-off { background:#f0f0f0; color:#888; }
+.margem-legenda-prov { font-size:11px; color:#555; background:#fff; border:1px dashed #d9d9d9; border-radius:6px; padding:8px 14px; margin-bottom:18px; line-height:1.6; }
+.margem-legenda-prov .lg { font-weight:800; padding:1px 8px; border-radius:12px; }
 .margem-aviso { background:#fff2cc; border-left:5px solid #ffc000; color:#7f6000; padding:10px 16px; border-radius:4px; font-size:12px; font-weight:700; margin-bottom:18px; }
 .margem-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:18px; }
 @media(max-width:1050px){ .margem-grid { grid-template-columns:repeat(2,1fr); } }
@@ -199,7 +207,7 @@ body { font-family: 'Arial', sans-serif; background-color: #e9ecef; color: var(-
 .margem-card.pos { border-top-color:#70ad47; }
 .margem-card.neg { border-top-color:#c00000; animation:blink-critical 1.3s ease-in-out infinite; }
 .margem-card.neu { border-top-color:#ffc000; }
-.mc-head { display:flex; align-items:center; gap:10px; margin-bottom:12px; }
+.mc-head { display:flex; align-items:center; gap:10px; margin-bottom:8px; }
 .mc-ico { width:34px; height:34px; border-radius:8px; background:#f4f4f4; display:grid; place-items:center; font-size:18px; flex-shrink:0; }
 .mc-title { font-weight:800; font-size:15px; text-transform:uppercase; color:#111; }
 .mc-uf { font-size:10px; font-weight:800; color:#fff; background:#cc0000; padding:2px 7px; border-radius:3px; }
@@ -208,6 +216,10 @@ body { font-family: 'Arial', sans-serif; background-color: #e9ecef; color: var(-
 .mc-badge.pos { background:#e2f0d9; color:#385723; } .mc-badge.pos .d { background:#70ad47; }
 .mc-badge.neg { background:#fce4d6; color:#c65911; } .mc-badge.neg .d { background:#c00000; }
 .mc-badge.neu { background:#fff2cc; color:#7f6000; } .mc-badge.neu .d { background:#ffc000; }
+.mc-qual { display:inline-block; font-size:10px; font-weight:800; padding:2px 9px; border-radius:12px; margin-bottom:10px; }
+.mc-qual.q-ok { background:#e2f0d9; color:#2e7d32; }
+.mc-qual.q-warn { background:#fff2cc; color:#7f6000; }
+.mc-qual.q-off { background:#f0f0f0; color:#888; }
 .mc-kpi-label { font-size:10px; font-weight:700; letter-spacing:.6px; text-transform:uppercase; color:#888; }
 .mc-kpi { font-size:27px; font-weight:900; line-height:1.05; margin:2px 0; letter-spacing:-1px; }
 .mc-kpi.pos { color:#385723; } .mc-kpi.neg { color:#c65911; } .mc-kpi.neu { color:#111; }
@@ -218,11 +230,14 @@ body { font-family: 'Arial', sans-serif; background-color: #e9ecef; color: var(-
 .mc-safras { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
 .sf { background:#fafafa; border:1px solid #eee; border-radius:6px; padding:7px 8px; text-align:center; }
 .sf.latest { background:#e2f0d9; border-color:#bfe7cd; }
+.sf.sf-rep { background:#fff8e1; border-color:#ffe08a; }
+.sf.sf-off { background:#f5f5f5; border-color:#e6e6e6; }
 .sf .yr { font-size:10px; font-weight:700; color:#888; }
 .sf .mg { font-size:13.5px; font-weight:800; margin:2px 0; color:#385723; }
+.sf.sf-off .mg { color:#bbb; }
 .sf .dl { font-size:10px; font-weight:700; }
 .sf .dl.up { color:#2e7d32; } .sf .dl.dn { color:#c62828; }
-.mc-cost { margin-top:9px; font-size:11px; color:#777; display:flex; justify-content:space-between; border-top:1px dashed #e0e0e0; padding-top:8px; }
+.mc-cost { margin-top:9px; font-size:11px; color:#777; display:flex; justify-content:space-between; border-top:1px dashed #e0e0e0; padding-top:8px; gap:8px; }
 .mc-cost b { color:#333; }
 .margem-foot { margin-top:22px; font-size:11px; color:#999; line-height:1.6; font-style:italic; border-top:1px solid #f5f5f5; padding-top:12px; }
 </style>
@@ -2858,6 +2873,8 @@ MANDATÓRIO: Cobertura completa de 7 países da América do Sul com 4 cenários 
 <h2 class="country-title" data-pt="🌱 Brasil — Margem do Produtor" data-en="🌱 Brazil — Producer Margin">🌱 Brasil — Margem do Produtor</h2>
     
     <div class="margem-legend">Comparativo das últimas 3 safras (<b>2024/25 · 2025/26 · 2026/27</b>) · foco em <b>Margem (R$/ha)</b>, com custo total como referência.</div>
+    <div class="margem-quality"><span class="qp q-ok">● 4 oficiais</span><span class="qp q-warn">◐ 4 com dado repetido</span><span class="qp q-off">○ 16 indisponíveis</span><span class="qp-total">de 24 pontos (8 culturas × 3 safras)</span></div>
+    <div class="margem-legenda-prov"><b>Legenda de proveniência:</b> <span class="lg q-ok">● Oficial</span> = direto da fonte na safra · <span class="lg q-warn">◐ Repetido&nbsp;*</span> = herdado da safra anterior (CONAB ainda não publicou o novo ciclo) · <span class="lg q-off">○ Indisponível</span> = "—". O asterisco (*) marca o valor repetido no próprio número.</div>
     
     <div class="margem-grid">
       <div class="margem-card neu">
@@ -2867,14 +2884,16 @@ MANDATÓRIO: Cobertura completa de 7 países da América do Sul com 4 cenários 
           <span class="mc-uf">MT</span>
           <span class="mc-badge neu"><span class="d"></span>S/ dado</span>
         </div>
+        <div class="mc-qual q-off">○ Indisponível</div>
         <div class="mc-kpi-label">Margem 2026/27</div>
         <div class="mc-kpi neu">—/ha</div>
         <div class="mc-sub">Receita <b>—</b> ·
-             Custo <b>—</b> · Prod. <b>—</b></div>
+             Custo <b>R$ 9.759*</b> ·
+             Prod. <b>—</b></div>
         <div class="mc-mini">
           <div class="mc-mini-h"><span>Margem por safra</span><span>Δ a/a</span></div>
-          <div class="mc-safras"><div class="sf"><div class="yr">2024/25</div><div class="mg">—</div><div class="dl">&nbsp;</div></div><div class="sf"><div class="yr">2025/26</div><div class="mg">—</div><div class="dl">&nbsp;</div></div><div class="sf latest"><div class="yr">2026/27</div><div class="mg">—</div><div class="dl">&nbsp;</div></div></div>
-          <div class="mc-cost"><span>Custo total (ref.)</span><span><b>R$ — → — → —</b></span></div>
+          <div class="mc-safras"><div class="sf sf-off"><div class="yr">2024/25</div><div class="mg">—</div><div class="dl">&nbsp;</div></div><div class="sf"><div class="yr">2025/26</div><div class="mg">425</div><div class="dl">&nbsp;</div></div><div class="sf latest sf-off"><div class="yr">2026/27</div><div class="mg">—*</div><div class="dl">&nbsp;</div></div></div>
+          <div class="mc-cost"><span>Custo total (ref.)</span><span><b>R$ 9.039 → 9.759 → 9.759*</b></span></div>
         </div>
       </div>
       <div class="margem-card neu">
@@ -2884,14 +2903,16 @@ MANDATÓRIO: Cobertura completa de 7 países da América do Sul com 4 cenários 
           <span class="mc-uf">PR</span>
           <span class="mc-badge neu"><span class="d"></span>S/ dado</span>
         </div>
+        <div class="mc-qual q-off">○ Indisponível</div>
         <div class="mc-kpi-label">Margem 2026/27</div>
         <div class="mc-kpi neu">—/ha</div>
         <div class="mc-sub">Receita <b>—</b> ·
-             Custo <b>—</b> · Prod. <b>—</b></div>
+             Custo <b>R$ 12.563*</b> ·
+             Prod. <b>—</b></div>
         <div class="mc-mini">
           <div class="mc-mini-h"><span>Margem por safra</span><span>Δ a/a</span></div>
-          <div class="mc-safras"><div class="sf"><div class="yr">2024/25</div><div class="mg">—</div><div class="dl">&nbsp;</div></div><div class="sf"><div class="yr">2025/26</div><div class="mg">—</div><div class="dl">&nbsp;</div></div><div class="sf latest"><div class="yr">2026/27</div><div class="mg">—</div><div class="dl">&nbsp;</div></div></div>
-          <div class="mc-cost"><span>Custo total (ref.)</span><span><b>R$ — → — → —</b></span></div>
+          <div class="mc-safras"><div class="sf sf-off"><div class="yr">2024/25</div><div class="mg">—</div><div class="dl">&nbsp;</div></div><div class="sf"><div class="yr">2025/26</div><div class="mg">-2.871</div><div class="dl">&nbsp;</div></div><div class="sf latest sf-off"><div class="yr">2026/27</div><div class="mg">—*</div><div class="dl">&nbsp;</div></div></div>
+          <div class="mc-cost"><span>Custo total (ref.)</span><span><b>R$ 12.070 → 12.563 → 12.563*</b></span></div>
         </div>
       </div>
       <div class="margem-card neu">
@@ -2901,14 +2922,16 @@ MANDATÓRIO: Cobertura completa de 7 países da América do Sul com 4 cenários 
           <span class="mc-uf">RS</span>
           <span class="mc-badge neu"><span class="d"></span>S/ dado</span>
         </div>
+        <div class="mc-qual q-off">○ Indisponível</div>
         <div class="mc-kpi-label">Margem 2026/27</div>
         <div class="mc-kpi neu">—/ha</div>
         <div class="mc-sub">Receita <b>—</b> ·
-             Custo <b>—</b> · Prod. <b>—</b></div>
+             Custo <b>R$ 11.634*</b> ·
+             Prod. <b>—</b></div>
         <div class="mc-mini">
           <div class="mc-mini-h"><span>Margem por safra</span><span>Δ a/a</span></div>
-          <div class="mc-safras"><div class="sf"><div class="yr">2024/25</div><div class="mg">—</div><div class="dl">&nbsp;</div></div><div class="sf"><div class="yr">2025/26</div><div class="mg">—</div><div class="dl">&nbsp;</div></div><div class="sf latest"><div class="yr">2026/27</div><div class="mg">—</div><div class="dl">&nbsp;</div></div></div>
-          <div class="mc-cost"><span>Custo total (ref.)</span><span><b>R$ — → — → —</b></span></div>
+          <div class="mc-safras"><div class="sf sf-off"><div class="yr">2024/25</div><div class="mg">—</div><div class="dl">&nbsp;</div></div><div class="sf"><div class="yr">2025/26</div><div class="mg">-4.527</div><div class="dl">&nbsp;</div></div><div class="sf latest sf-off"><div class="yr">2026/27</div><div class="mg">—*</div><div class="dl">&nbsp;</div></div></div>
+          <div class="mc-cost"><span>Custo total (ref.)</span><span><b>R$ 10.792 → 11.634 → 11.634*</b></span></div>
         </div>
       </div>
       <div class="margem-card neu">
@@ -2918,14 +2941,16 @@ MANDATÓRIO: Cobertura completa de 7 países da América do Sul com 4 cenários 
           <span class="mc-uf">GO</span>
           <span class="mc-badge neu"><span class="d"></span>S/ dado</span>
         </div>
+        <div class="mc-qual q-off">○ Indisponível</div>
         <div class="mc-kpi-label">Margem 2026/27</div>
         <div class="mc-kpi neu">—/ha</div>
         <div class="mc-sub">Receita <b>—</b> ·
-             Custo <b>—</b> · Prod. <b>—</b></div>
+             Custo <b>R$ 9.959*</b> ·
+             Prod. <b>—</b></div>
         <div class="mc-mini">
           <div class="mc-mini-h"><span>Margem por safra</span><span>Δ a/a</span></div>
-          <div class="mc-safras"><div class="sf"><div class="yr">2024/25</div><div class="mg">—</div><div class="dl">&nbsp;</div></div><div class="sf"><div class="yr">2025/26</div><div class="mg">—</div><div class="dl">&nbsp;</div></div><div class="sf latest"><div class="yr">2026/27</div><div class="mg">—</div><div class="dl">&nbsp;</div></div></div>
-          <div class="mc-cost"><span>Custo total (ref.)</span><span><b>R$ — → — → —</b></span></div>
+          <div class="mc-safras"><div class="sf sf-off"><div class="yr">2024/25</div><div class="mg">—</div><div class="dl">&nbsp;</div></div><div class="sf"><div class="yr">2025/26</div><div class="mg">71</div><div class="dl">&nbsp;</div></div><div class="sf latest sf-off"><div class="yr">2026/27</div><div class="mg">—*</div><div class="dl">&nbsp;</div></div></div>
+          <div class="mc-cost"><span>Custo total (ref.)</span><span><b>R$ 8.955 → 9.959 → 9.959*</b></span></div>
         </div>
       </div>
       <div class="margem-card neu">
@@ -2935,14 +2960,16 @@ MANDATÓRIO: Cobertura completa de 7 países da América do Sul com 4 cenários 
           <span class="mc-uf">MT</span>
           <span class="mc-badge neu"><span class="d"></span>S/ dado</span>
         </div>
+        <div class="mc-qual q-off">○ Indisponível</div>
         <div class="mc-kpi-label">Margem 2026/27</div>
         <div class="mc-kpi neu">—/ha</div>
         <div class="mc-sub">Receita <b>—</b> ·
-             Custo <b>—</b> · Prod. <b>—</b></div>
+             Custo <b>R$ 2.628*</b> ·
+             Prod. <b>—</b></div>
         <div class="mc-mini">
           <div class="mc-mini-h"><span>Margem por safra</span><span>Δ a/a</span></div>
-          <div class="mc-safras"><div class="sf"><div class="yr">2024/25</div><div class="mg">—</div><div class="dl">&nbsp;</div></div><div class="sf"><div class="yr">2025/26</div><div class="mg">—</div><div class="dl">&nbsp;</div></div><div class="sf latest"><div class="yr">2026/27</div><div class="mg">—</div><div class="dl">&nbsp;</div></div></div>
-          <div class="mc-cost"><span>Custo total (ref.)</span><span><b>R$ — → — → —</b></span></div>
+          <div class="mc-safras"><div class="sf sf-off"><div class="yr">2024/25</div><div class="mg">—</div><div class="dl">&nbsp;</div></div><div class="sf sf-rep"><div class="yr">2025/26</div><div class="mg">6.012*</div><div class="dl">&nbsp;</div></div><div class="sf latest sf-off"><div class="yr">2026/27</div><div class="mg">—*</div><div class="dl">&nbsp;</div></div></div>
+          <div class="mc-cost"><span>Custo total (ref.)</span><span><b>R$ 2.628 → 2.628* → 2.628*</b></span></div>
         </div>
       </div>
       <div class="margem-card neu">
@@ -2952,14 +2979,16 @@ MANDATÓRIO: Cobertura completa de 7 países da América do Sul com 4 cenários 
           <span class="mc-uf">PR</span>
           <span class="mc-badge neu"><span class="d"></span>S/ dado</span>
         </div>
+        <div class="mc-qual q-off">○ Indisponível</div>
         <div class="mc-kpi-label">Margem 2026/27</div>
         <div class="mc-kpi neu">—/ha</div>
         <div class="mc-sub">Receita <b>—</b> ·
-             Custo <b>—</b> · Prod. <b>—</b></div>
+             Custo <b>R$ 20.908*</b> ·
+             Prod. <b>—</b></div>
         <div class="mc-mini">
           <div class="mc-mini-h"><span>Margem por safra</span><span>Δ a/a</span></div>
-          <div class="mc-safras"><div class="sf"><div class="yr">2024/25</div><div class="mg">—</div><div class="dl">&nbsp;</div></div><div class="sf"><div class="yr">2025/26</div><div class="mg">—</div><div class="dl">&nbsp;</div></div><div class="sf latest"><div class="yr">2026/27</div><div class="mg">—</div><div class="dl">&nbsp;</div></div></div>
-          <div class="mc-cost"><span>Custo total (ref.)</span><span><b>R$ — → — → —</b></span></div>
+          <div class="mc-safras"><div class="sf sf-off"><div class="yr">2024/25</div><div class="mg">—</div><div class="dl">&nbsp;</div></div><div class="sf sf-rep"><div class="yr">2025/26</div><div class="mg">-13.507*</div><div class="dl">&nbsp;</div></div><div class="sf latest sf-off"><div class="yr">2026/27</div><div class="mg">—*</div><div class="dl">&nbsp;</div></div></div>
+          <div class="mc-cost"><span>Custo total (ref.)</span><span><b>R$ 20.908 → 20.908* → 20.908*</b></span></div>
         </div>
       </div>
       <div class="margem-card neu">
@@ -2969,14 +2998,16 @@ MANDATÓRIO: Cobertura completa de 7 países da América do Sul com 4 cenários 
           <span class="mc-uf">MT</span>
           <span class="mc-badge neu"><span class="d"></span>S/ dado</span>
         </div>
+        <div class="mc-qual q-off">○ Indisponível</div>
         <div class="mc-kpi-label">Margem 2026/27</div>
         <div class="mc-kpi neu">—/ha</div>
         <div class="mc-sub">Receita <b>—</b> ·
-             Custo <b>—</b> · Prod. <b>—</b></div>
+             Custo <b>R$ 23.506</b> ·
+             Prod. <b>—</b></div>
         <div class="mc-mini">
           <div class="mc-mini-h"><span>Margem por safra</span><span>Δ a/a</span></div>
-          <div class="mc-safras"><div class="sf"><div class="yr">2024/25</div><div class="mg">—</div><div class="dl">&nbsp;</div></div><div class="sf"><div class="yr">2025/26</div><div class="mg">—</div><div class="dl">&nbsp;</div></div><div class="sf latest"><div class="yr">2026/27</div><div class="mg">—</div><div class="dl">&nbsp;</div></div></div>
-          <div class="mc-cost"><span>Custo total (ref.)</span><span><b>R$ — → — → —</b></span></div>
+          <div class="mc-safras"><div class="sf sf-off"><div class="yr">2024/25</div><div class="mg">—</div><div class="dl">&nbsp;</div></div><div class="sf sf-rep"><div class="yr">2025/26</div><div class="mg">118.239*</div><div class="dl">&nbsp;</div></div><div class="sf latest sf-off"><div class="yr">2026/27</div><div class="mg">—</div><div class="dl">&nbsp;</div></div></div>
+          <div class="mc-cost"><span>Custo total (ref.)</span><span><b>R$ 21.174 → 21.174* → 23.506</b></span></div>
         </div>
       </div>
       <div class="margem-card neu">
@@ -2986,17 +3017,19 @@ MANDATÓRIO: Cobertura completa de 7 países da América do Sul com 4 cenários 
           <span class="mc-uf">PR</span>
           <span class="mc-badge neu"><span class="d"></span>S/ dado</span>
         </div>
+        <div class="mc-qual q-off">○ Indisponível</div>
         <div class="mc-kpi-label">Margem 2026/27</div>
         <div class="mc-kpi neu">—/ha</div>
         <div class="mc-sub">Receita <b>—</b> ·
-             Custo <b>—</b> · Prod. <b>—</b></div>
+             Custo <b>R$ 11.218*</b> ·
+             Prod. <b>—</b></div>
         <div class="mc-mini">
           <div class="mc-mini-h"><span>Margem por safra</span><span>Δ a/a</span></div>
-          <div class="mc-safras"><div class="sf"><div class="yr">2024/25</div><div class="mg">—</div><div class="dl">&nbsp;</div></div><div class="sf"><div class="yr">2025/26</div><div class="mg">—</div><div class="dl">&nbsp;</div></div><div class="sf latest"><div class="yr">2026/27</div><div class="mg">—</div><div class="dl">&nbsp;</div></div></div>
-          <div class="mc-cost"><span>Custo total (ref.)</span><span><b>R$ — → — → —</b></span></div>
+          <div class="mc-safras"><div class="sf sf-off"><div class="yr">2024/25</div><div class="mg">—</div><div class="dl">&nbsp;</div></div><div class="sf sf-rep"><div class="yr">2025/26</div><div class="mg">66.945*</div><div class="dl">&nbsp;</div></div><div class="sf latest sf-off"><div class="yr">2026/27</div><div class="mg">—*</div><div class="dl">&nbsp;</div></div></div>
+          <div class="mc-cost"><span>Custo total (ref.)</span><span><b>R$ 11.218 → 11.218* → 11.218*</b></span></div>
         </div>
       </div></div>
-    <div class="margem-foot">Margem (R$/ha) = Receita (Produtividade × Preço) − Custo Total. Custo/Produtividade: CONAB - Custos de Produção (GECUP) · Preço: CONAB - Preço recebido produtor. Atualizado em 2026-08-31.<br><i>Global Reporting & Analytics — Thiago Montoro (AGCO)</i></div>
+    <div class="margem-foot">Margem (R$/ha) = Receita (Produtividade × Preço) − Custo Total. Custo/Produtividade: CONAB - Custos de Produção (soma valor_ha) · Preço: CEPEA/ESALQ (referência de mercado/porto; pode não descontar frete regional). Atualizado em 2026-08-31.<br><i>Global Reporting & Analytics — Thiago Montoro (AGCO)</i></div>
 </div>
 </div>
 <div class="footer" data-pt="Desenvolvido por Thiago Medea Montoro | Global Reporting & Analytics" data-en="Developed by Thiago Medea Montoro | Global Reporting & Analytics" data-es="Desarrollado por Thiago Medea Montoro | Global Reporting & Analytics">
