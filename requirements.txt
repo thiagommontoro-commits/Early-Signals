@@ -1,0 +1,15 @@
+# Early Signals — dependências do pipeline
+# ⚠️ NÃO substitua cegamente: se o seu requirements.txt atual tiver outras libs
+#    (leitura de xlsx, APIs dos módulos de commodities/inadimplência), apenas
+#    GARANTA que estas linhas estejam presentes.
+
+# --- já usados pelo projeto ---
+python-dotenv>=1.0
+google-genai>=0.3
+
+# --- aba Margem do Produtor (CONAB + CEPEA) ---
+# agrobr[browser] traz o Playwright, necessário p/ conab.safras() (produtividade)
+agrobr[browser]>=1.1.0
+pandas>=2.0
+# truststore: faz o Python usar os certificados do SO (resolve o SSL do proxy AGCO no CEPEA)
+truststore>=0.9
