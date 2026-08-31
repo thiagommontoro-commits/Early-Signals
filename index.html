@@ -182,6 +182,28 @@ body { font-family: 'Arial', sans-serif; background-color: #e9ecef; color: var(-
 .cr-hist-lbl { font-size:9.5px; color:#999; text-transform:uppercase; letter-spacing:.3px; font-weight:700; }
 .cr-fonte { font-size:11px; color:#999; font-style:italic; border-top:1px solid #f0f0f0; padding-top:14px; margin-top:6px; }
 </style>
+
+<style>
+.mg-card { margin-bottom: 0; }
+.mg-destaque { display:flex; flex-direction:column; gap:2px; margin-bottom:12px; padding-bottom:12px; border-bottom:1px solid #f1f3f5; }
+.mg-destaque-lbl { font-size:10px; color:#888; text-transform:uppercase; letter-spacing:.4px; font-weight:700; }
+.mg-destaque-val { font-size:26px; font-weight:900; color:var(--agco-black); letter-spacing:-.5px; }
+.mg-linhas { display:flex; flex-direction:column; gap:7px; }
+.mg-linha { display:flex; align-items:center; justify-content:space-between; gap:10px; }
+.mg-lbl { font-size:11px; color:#6c757d; text-transform:uppercase; letter-spacing:.4px; font-weight:600; }
+.mg-val { font-size:13px; font-weight:700; color:var(--agco-dark-gray); }
+.mg-subtitle { font-size:13px; color:#555; line-height:1.6; margin:0 0 16px; max-width:900px; }
+.mg-insight { background:#eef4ff; border-left:5px solid #1a56db; color:#1e3a8a; padding:12px 18px; margin-bottom:22px; font-size:13px; border-radius:4px; line-height:1.55; }
+.mg-gloss { background:var(--agco-light-gray); border:1px solid #e0e0e0; border-radius:6px; margin-bottom:26px; }
+.mg-gloss summary { cursor:pointer; padding:12px 18px; font-weight:700; font-size:13px; color:var(--agco-dark-gray); text-transform:uppercase; letter-spacing:.4px; user-select:none; }
+.mg-gloss summary:hover { color:var(--agco-red); }
+.mg-gloss-body { padding:6px 18px 16px; display:grid; grid-template-columns:1fr 1fr; gap:12px 22px; }
+@media (max-width:768px){ .mg-gloss-body { grid-template-columns:1fr; } }
+.mg-gloss-item { display:flex; flex-direction:column; gap:3px; }
+.mg-gloss-termo { font-size:12px; font-weight:800; color:var(--agco-red); text-transform:uppercase; letter-spacing:.3px; }
+.mg-gloss-def { font-size:12.5px; color:#555; line-height:1.5; }
+.mg-fonte { font-size:11px; color:#999; font-style:italic; border-top:1px solid #f0f0f0; padding-top:14px; margin-top:20px; }
+</style>
 </head>
 <body>
 <div id="google_translate_element" style="display:none;"></div>
@@ -215,6 +237,7 @@ MANDATÓRIO: Cobertura completa de 7 países da América do Sul com 4 cenários 
 <button class="tab-btn" onclick="switchTab(event, 'mx')" data-pt="🇲🇽 México" data-en="🇲🇽 Mexico">🇲🇽 México</button>
 <button class="tab-btn" onclick="switchTab(event, 'commodities')" data-pt="🌾 Commodities" data-en="🌾 Commodities">🌾 Commodities</button>
 <button class="tab-btn" onclick="switchTab(event, 'credito-rural')" data-pt="🇧🇷 Inadimplência Rural" data-en="🇧🇷 Rural Credit">🇧🇷 Inadimplência Rural</button>
+<button class="tab-btn" onclick="switchTab(event, 'margem')" data-pt="💰 Margem Agrícola" data-en="💰 Farm Margin">💰 Margem Agrícola</button>
 </div>
 <div id="br" class="tab-content active">
 <h2 class="country-title" data-pt="Brasil" data-en="Brazil">Brasil</h2>
@@ -2808,6 +2831,118 @@ MANDATÓRIO: Cobertura completa de 7 países da América do Sul com 4 cenários 
         </div>
         </div>
     </div><p class="cr-fonte"><strong data-pt="Fonte" data-en="Source" data-es="Fuente">Fonte:</strong> Banco Central do Brasil — Sistema Gerenciador de Séries Temporais (SGS). Séries mensais, atualizadas automaticamente.</p>
+</div>
+<div id="margem" class="tab-content">
+<h2 class="country-title" data-pt="💰 Brasil — Margem & Custo Agrícola" data-en="💰 Brazil — Farm Margin & Cost">💰 Brasil — Margem & Custo Agrícola</h2>
+    <p class="mg-subtitle" data-pt="Rentabilidade e custo de produção agrícola por cultura, região (UF) e safra. Fonte oficial: CONAB — Companhia Nacional de Abastecimento." data-en="Agricultural profitability and production cost by crop, region (state) and crop-year. Official source: CONAB (Brazil)." data-es="Rentabilidad y costo de producción por cultivo, región y zafra. Fuente: CONAB (Brasil).">Rentabilidade e custo de produção agrícola por cultura, região (UF) e safra. Fonte oficial: CONAB — Companhia Nacional de Abastecimento.</p><div class="mg-insight">ℹ️ <span data-pt="Para estas culturas a CONAB disponibiliza o CUSTO DE PRODUÇÃO oficial. A margem final depende do preço de venda praticado por cada produtor." data-en="For these crops CONAB provides the official PRODUCTION COST. Final margin depends on each farmer's selling price." data-es="Para estos cultivos CONAB publica el COSTO DE PRODUCCIÓN oficial.">Para estas culturas a CONAB disponibiliza o CUSTO DE PRODUÇÃO oficial. A margem final depende do preço de venda praticado por cada produtor.</span></div><details class="mg-gloss"><summary data-pt="Glossário — o que significa cada indicador" data-en="Glossary — what each indicator means" data-es="Glosario">📖 Glossário — o que significa cada indicador</summary><div class="mg-gloss-body"><div class="mg-gloss-item"><span class="mg-gloss-termo" data-pt="Margem líquida" data-en="Net margin" data-es="Margen neto">Margem líquida</span><span class="mg-gloss-def" data-pt="Receita menos TODOS os custos (variável + fixo). Se negativa, há prejuízo mesmo com boa colheita." data-en="Revenue minus all costs (variable + fixed). Negative = loss." data-es="Ingreso menos todos los costos.">Receita menos TODOS os custos (variável + fixo). Se negativa, há prejuízo mesmo com boa colheita.</span></div><div class="mg-gloss-item"><span class="mg-gloss-termo" data-pt="Custo total/ha" data-en="Total cost/ha" data-es="Costo total/ha">Custo total/ha</span><span class="mg-gloss-def" data-pt="Soma de todos os custos por hectare (sementes, fertilizantes, defensivos, operações) pela metodologia oficial da CONAB." data-en="Sum of all per-hectare costs per CONAB's methodology." data-es="Suma de todos los costos por hectárea (CONAB).">Soma de todos os custos por hectare (sementes, fertilizantes, defensivos, operações) pela metodologia oficial da CONAB.</span></div><div class="mg-gloss-item"><span class="mg-gloss-termo" data-pt="Safra" data-en="Crop-year" data-es="Zafra">Safra</span><span class="mg-gloss-def" data-pt="Ano-safra de referência (ex.: 2024/25). Permite comparar a mesma cultura entre anos." data-en="Reference crop-year (e.g., 2024/25)." data-es="Año-zafra de referencia.">Ano-safra de referência (ex.: 2024/25). Permite comparar a mesma cultura entre anos.</span></div><div class="mg-gloss-item"><span class="mg-gloss-termo" data-pt="Região (UF)" data-en="Region (State)" data-es="Región">Região (UF)</span><span class="mg-gloss-def" data-pt="Unidade da Federação onde o custo foi levantado (ex.: MT, PR, RS). Custos variam muito por região." data-en="State where the cost was surveyed (e.g., MT, PR, RS)." data-es="Estado donde se relevó el costo.">Unidade da Federação onde o custo foi levantado (ex.: MT, PR, RS). Custos variam muito por região.</span></div></div></details><div class="analysis-grid">
+        <div class="analysis-card tendencia-neutra mg-card">
+            <div class="analysis-header">
+                <span class="analysis-icon">🌱</span>
+                <h3 class="analysis-card-title">Soja · MT</h3>
+                <span class="farol farol-warning"><span class="farol-dot"></span><span data-pt="Neutro" data-en="Neutral" data-es="Neutral">Neutro</span></span>
+            </div>
+            <div class="mg-destaque">
+                <span class="mg-destaque-lbl" data-pt="Custo total/ha" data-en="Total cost/ha" data-es="Costo total/ha">Custo total/ha</span>
+                <span class="mg-destaque-val">R$ 9,759.05/ha</span>
+            </div>
+            <div class="mg-linhas"><div class="mg-linha"><span class="mg-lbl" data-pt="Safra" data-en="Crop-year" data-es="Zafra">Safra</span><span class="mg-val">2026/27</span></div><div class="mg-linha"><span class="mg-lbl" data-pt="Custo total/ha" data-en="Total cost/ha" data-es="Costo total/ha">Custo total/ha</span><span class="mg-val">R$ 9,759.05</span></div><div class="mg-linha"><span class="mg-lbl" data-pt="Produtividade" data-en="Yield" data-es="Productividad">Produtividade</span><span class="mg-val">—</span></div></div>
+        </div>
+        <div class="analysis-card tendencia-neutra mg-card">
+            <div class="analysis-header">
+                <span class="analysis-icon">🌱</span>
+                <h3 class="analysis-card-title">Soja · PR</h3>
+                <span class="farol farol-warning"><span class="farol-dot"></span><span data-pt="Neutro" data-en="Neutral" data-es="Neutral">Neutro</span></span>
+            </div>
+            <div class="mg-destaque">
+                <span class="mg-destaque-lbl" data-pt="Custo total/ha" data-en="Total cost/ha" data-es="Costo total/ha">Custo total/ha</span>
+                <span class="mg-destaque-val">R$ 3,152.97/ha</span>
+            </div>
+            <div class="mg-linhas"><div class="mg-linha"><span class="mg-lbl" data-pt="Safra" data-en="Crop-year" data-es="Zafra">Safra</span><span class="mg-val">2018/19</span></div><div class="mg-linha"><span class="mg-lbl" data-pt="Custo total/ha" data-en="Total cost/ha" data-es="Costo total/ha">Custo total/ha</span><span class="mg-val">R$ 3,152.97</span></div><div class="mg-linha"><span class="mg-lbl" data-pt="Produtividade" data-en="Yield" data-es="Productividad">Produtividade</span><span class="mg-val">—</span></div></div>
+        </div>
+        <div class="analysis-card tendencia-neutra mg-card">
+            <div class="analysis-header">
+                <span class="analysis-icon">🌱</span>
+                <h3 class="analysis-card-title">Soja · RS</h3>
+                <span class="farol farol-warning"><span class="farol-dot"></span><span data-pt="Neutro" data-en="Neutral" data-es="Neutral">Neutro</span></span>
+            </div>
+            <div class="mg-destaque">
+                <span class="mg-destaque-lbl" data-pt="Custo total/ha" data-en="Total cost/ha" data-es="Costo total/ha">Custo total/ha</span>
+                <span class="mg-destaque-val">R$ 11,634.10/ha</span>
+            </div>
+            <div class="mg-linhas"><div class="mg-linha"><span class="mg-lbl" data-pt="Safra" data-en="Crop-year" data-es="Zafra">Safra</span><span class="mg-val">2026/27</span></div><div class="mg-linha"><span class="mg-lbl" data-pt="Custo total/ha" data-en="Total cost/ha" data-es="Costo total/ha">Custo total/ha</span><span class="mg-val">R$ 11,634.10</span></div><div class="mg-linha"><span class="mg-lbl" data-pt="Produtividade" data-en="Yield" data-es="Productividad">Produtividade</span><span class="mg-val">—</span></div></div>
+        </div>
+        <div class="analysis-card tendencia-neutra mg-card">
+            <div class="analysis-header">
+                <span class="analysis-icon">🌱</span>
+                <h3 class="analysis-card-title">Soja · GO</h3>
+                <span class="farol farol-warning"><span class="farol-dot"></span><span data-pt="Neutro" data-en="Neutral" data-es="Neutral">Neutro</span></span>
+            </div>
+            <div class="mg-destaque">
+                <span class="mg-destaque-lbl" data-pt="Custo total/ha" data-en="Total cost/ha" data-es="Costo total/ha">Custo total/ha</span>
+                <span class="mg-destaque-val">R$ 9,959.08/ha</span>
+            </div>
+            <div class="mg-linhas"><div class="mg-linha"><span class="mg-lbl" data-pt="Safra" data-en="Crop-year" data-es="Zafra">Safra</span><span class="mg-val">2026/27</span></div><div class="mg-linha"><span class="mg-lbl" data-pt="Custo total/ha" data-en="Total cost/ha" data-es="Costo total/ha">Custo total/ha</span><span class="mg-val">R$ 9,959.08</span></div><div class="mg-linha"><span class="mg-lbl" data-pt="Produtividade" data-en="Yield" data-es="Productividad">Produtividade</span><span class="mg-val">—</span></div></div>
+        </div>
+        <div class="analysis-card tendencia-neutra mg-card">
+            <div class="analysis-header">
+                <span class="analysis-icon">🌽</span>
+                <h3 class="analysis-card-title">Milho · MT</h3>
+                <span class="farol farol-warning"><span class="farol-dot"></span><span data-pt="Neutro" data-en="Neutral" data-es="Neutral">Neutro</span></span>
+            </div>
+            <div class="mg-destaque">
+                <span class="mg-destaque-lbl" data-pt="Custo total/ha" data-en="Total cost/ha" data-es="Costo total/ha">Custo total/ha</span>
+                <span class="mg-destaque-val">R$ 2,628.38/ha</span>
+            </div>
+            <div class="mg-linhas"><div class="mg-linha"><span class="mg-lbl" data-pt="Safra" data-en="Crop-year" data-es="Zafra">Safra</span><span class="mg-val">2013/14</span></div><div class="mg-linha"><span class="mg-lbl" data-pt="Custo total/ha" data-en="Total cost/ha" data-es="Costo total/ha">Custo total/ha</span><span class="mg-val">R$ 2,628.38</span></div><div class="mg-linha"><span class="mg-lbl" data-pt="Produtividade" data-en="Yield" data-es="Productividad">Produtividade</span><span class="mg-val">—</span></div></div>
+        </div>
+        <div class="analysis-card tendencia-neutra mg-card">
+            <div class="analysis-header">
+                <span class="analysis-icon">🌽</span>
+                <h3 class="analysis-card-title">Milho · PR</h3>
+                <span class="farol farol-warning"><span class="farol-dot"></span><span data-pt="Neutro" data-en="Neutral" data-es="Neutral">Neutro</span></span>
+            </div>
+            <div class="mg-destaque">
+                <span class="mg-destaque-lbl" data-pt="Custo total/ha" data-en="Total cost/ha" data-es="Costo total/ha">Custo total/ha</span>
+                <span class="mg-destaque-val">R$ 20,908.09/ha</span>
+            </div>
+            <div class="mg-linhas"><div class="mg-linha"><span class="mg-lbl" data-pt="Safra" data-en="Crop-year" data-es="Zafra">Safra</span><span class="mg-val">2025/26</span></div><div class="mg-linha"><span class="mg-lbl" data-pt="Custo total/ha" data-en="Total cost/ha" data-es="Costo total/ha">Custo total/ha</span><span class="mg-val">R$ 20,908.09</span></div><div class="mg-linha"><span class="mg-lbl" data-pt="Produtividade" data-en="Yield" data-es="Productividad">Produtividade</span><span class="mg-val">—</span></div></div>
+        </div>
+        <div class="analysis-card tendencia-neutra mg-card">
+            <div class="analysis-header">
+                <span class="analysis-icon">🧵</span>
+                <h3 class="analysis-card-title">Algodão · MT</h3>
+                <span class="farol farol-warning"><span class="farol-dot"></span><span data-pt="Neutro" data-en="Neutral" data-es="Neutral">Neutro</span></span>
+            </div>
+            <div class="mg-destaque">
+                <span class="mg-destaque-lbl" data-pt="Custo total/ha" data-en="Total cost/ha" data-es="Costo total/ha">Custo total/ha</span>
+                <span class="mg-destaque-val">R$ 21,174.00/ha</span>
+            </div>
+            <div class="mg-linhas"><div class="mg-linha"><span class="mg-lbl" data-pt="Safra" data-en="Crop-year" data-es="Zafra">Safra</span><span class="mg-val">2025/26</span></div><div class="mg-linha"><span class="mg-lbl" data-pt="Custo total/ha" data-en="Total cost/ha" data-es="Costo total/ha">Custo total/ha</span><span class="mg-val">R$ 21,174.00</span></div><div class="mg-linha"><span class="mg-lbl" data-pt="Produtividade" data-en="Yield" data-es="Productividad">Produtividade</span><span class="mg-val">—</span></div></div>
+        </div>
+        <div class="analysis-card tendencia-neutra mg-card">
+            <div class="analysis-header">
+                <span class="analysis-icon">🌾</span>
+                <h3 class="analysis-card-title">Trigo · PR</h3>
+                <span class="farol farol-warning"><span class="farol-dot"></span><span data-pt="Neutro" data-en="Neutral" data-es="Neutral">Neutro</span></span>
+            </div>
+            <div class="mg-destaque">
+                <span class="mg-destaque-lbl" data-pt="Custo total/ha" data-en="Total cost/ha" data-es="Costo total/ha">Custo total/ha</span>
+                <span class="mg-destaque-val">R$ 11,218.28/ha</span>
+            </div>
+            <div class="mg-linhas"><div class="mg-linha"><span class="mg-lbl" data-pt="Safra" data-en="Crop-year" data-es="Zafra">Safra</span><span class="mg-val">2025/26</span></div><div class="mg-linha"><span class="mg-lbl" data-pt="Custo total/ha" data-en="Total cost/ha" data-es="Costo total/ha">Custo total/ha</span><span class="mg-val">R$ 11,218.28</span></div><div class="mg-linha"><span class="mg-lbl" data-pt="Produtividade" data-en="Yield" data-es="Productividad">Produtividade</span><span class="mg-val">—</span></div></div>
+        </div>
+        <div class="analysis-card tendencia-neutra mg-card">
+            <div class="analysis-header">
+                <span class="analysis-icon">🌾</span>
+                <h3 class="analysis-card-title">Trigo · RS</h3>
+                <span class="farol farol-warning"><span class="farol-dot"></span><span data-pt="Neutro" data-en="Neutral" data-es="Neutral">Neutro</span></span>
+            </div>
+            <div class="mg-destaque">
+                <span class="mg-destaque-lbl" data-pt="Custo total/ha" data-en="Total cost/ha" data-es="Costo total/ha">Custo total/ha</span>
+                <span class="mg-destaque-val">R$ 9,652.69/ha</span>
+            </div>
+            <div class="mg-linhas"><div class="mg-linha"><span class="mg-lbl" data-pt="Safra" data-en="Crop-year" data-es="Zafra">Safra</span><span class="mg-val">2025/26</span></div><div class="mg-linha"><span class="mg-lbl" data-pt="Custo total/ha" data-en="Total cost/ha" data-es="Costo total/ha">Custo total/ha</span><span class="mg-val">R$ 9,652.69</span></div><div class="mg-linha"><span class="mg-lbl" data-pt="Produtividade" data-en="Yield" data-es="Productividad">Produtividade</span><span class="mg-val">—</span></div></div>
+        </div></div><p class="mg-fonte"><strong data-pt="Fonte" data-en="Source" data-es="Fuente">Fonte:</strong> CONAB — Companhia Nacional de Abastecimento (Custo de Produção / Comparativo Rentabilidade). Atualização conforme divulgação oficial da CONAB.</p>
 </div>
 </div>
 <div class="footer" data-pt="Desenvolvido por Thiago Medea Montoro | Global Reporting & Analytics" data-en="Developed by Thiago Medea Montoro | Global Reporting & Analytics" data-es="Desarrollado por Thiago Medea Montoro | Global Reporting & Analytics">
