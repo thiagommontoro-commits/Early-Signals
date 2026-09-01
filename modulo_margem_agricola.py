@@ -1,32 +1,29 @@
 # -*- coding: utf-8 -*-
 """
-modulo_margem_agricola.py  (v3.2 — COE/COT/CT + Margem Bruta & Econômica)
-========================================================================
-Aba "Margem do Produtor" do Early Signals, seguindo a metodologia oficial de
-custos da CONAB (COE / COT / CT) e expondo TRÊS indicadores por safra:
+modulo_margem_agricola.py  (v3.3 — comparativo 24/25 vs 25/26 + remoção de irreais)
+==================================================================================
+Aba "Margem do Produtor" do Early Signals (metodologia CONAB COE/COT/CT):
 
     Receita Bruta (R$/ha)    = Produtividade (comercial) x Preço CEPEA
-    Margem Bruta (R$/ha)     = Receita Bruta - COE   (gera caixa?)
-    Margem Econômica (R$/ha) = Receita Bruta - CT    (remunera terra+capital?)
+    Margem Bruta (R$/ha)     = Receita Bruta - COE
+    Margem Econômica (R$/ha) = Receita Bruta - CT
 
->>> CORREÇÃO v3.2 (safra vigente): o boletim de grãos da CONAB publica a safra
-    com DEFASAGEM — a safra N/N+1 só fica completa por volta de meados de N+1,
-    e a nova (N+1/N+2) só entra no boletim por volta de out/nov. A lógica
-    anterior (rolar o ano-safra a partir de agosto) apontava para uma safra
-    FUTURA ainda sem dados, deixando os cards com "—/ha" e escondendo a safra
-    cheia no mini-histórico. Agora: (a) só rolamos o ano-safra a partir de
-    OUTUBRO; e (b) a safra "vigente" de cada card é escolhida como a ÚLTIMA
-    safra da série que realmente tem margem — nunca uma safra vazia.
-
-Hierarquia de custo CONAB (verificada empiricamente contra o 'coe' do agrobr,
-casamento exato para soja, algodão e trigo):
-    COE = custo operacional efetivo (caixa)
-    COT = COE + Depreciações + Outros Custos Fixos
-    CT  = COT + Renda de Fatores (remuneração do capital + terra própria)
-    => CT = soma de TODAS as linhas de DETALHE (exclui subtotais duplicados).
+>>> NOVIDADES v3.3 (pedidos de 01/09/2026):
+    1) COMPARATIVO ANO-A-ANO: mantém SEMPRE as 2 safras na série (24/25 e
+       25/26). A v3.2 descartava o ponto anterior quando ele vinha vazio, o
+       que apagava o comparativo — corrigido. O cartão exibe a variação da
+       Margem Econômica vs a safra anterior (Δ a/a).
+    2) REMOÇÃO DE VALORES IRREAIS: cartões cujo ponto vigente esteja marcado
+       como ALERTA (margem, COE ou CT fora de faixa plausível — sinal de preço
+       ou custo coletado errado) são REMOVIDOS do relatório (nunca exibimos
+       número irreal). Ex.: algodão com preço de pluma errado, trigo idem,
+       milho com COE ~5x o normal por erro de parse da CONAB.
+    3) EXIGIR_COMPARATIVO: por padrão o relatório prioriza cartões que têm o
+       comparativo 24/25 vs 25/26 completo; se NENHUM tiver (indisponibilidade
+       da fonte para a safra anterior), há fallback seguro para exibir a safra
+       vigente — evitando um painel vazio. Nada é inventado.
 
 Fontes: CUSTO/PRODUTIVIDADE = CONAB · PREÇO = CEPEA/ESALQ.
-Histórico: 2 safras (limite real da produtividade do boletim CONAB).
 Autoria: Global Reporting & Analytics — Thiago Montoro (AGCO)
 """
 
@@ -45,8 +42,17 @@ import datetime
 import traceback
 from pathlib import Path
 
-SCHEMA_VERSION = "3.2"
+SCHEMA_VERSION = "3.3"
 
+# --- Configurações de exibição ---
+# Remove cartões cujo ponto vigente esteja com ALERTA (valor irreal).
+REMOVER_ALERTAS = True
+# Prioriza cartões com comparativo 24/25 vs 25/26 completo (com fallback seguro).
+EXIGIR_COMPARATIVO = True
+# Auto-oculta cartões totalmente sem dado.
+OCULTAR_CARDS_VAZIOS = True
+
+# Faixas plausíveis de MARGEM ECONÔMICA (R$/ha) por cultura.
 FAIXAS_PLAUSIVEIS_MARGEM_HA = {
     "Soja":    (-6000, 9000),
     "Milho":   (-6000, 9000),
@@ -56,6 +62,20 @@ FAIXAS_PLAUSIVEIS_MARGEM_HA = {
     "Feijão":  (-6000, 12000),
     "Sorgo":   (-4000, 6000),
     "Café":    (-12000, 32000),
+}
+
+# Faixas plausíveis de CUSTO OPERACIONAL EFETIVO (COE, R$/ha) por cultura —
+# pega erros grosseiros de parse da CONAB (ex.: milho com COE ~9.000, quando
+# o normal é ~2.000-3.500). Valores FORA da faixa marcam o ponto como alerta.
+FAIXAS_PLAUSIVEIS_COE_HA = {
+    "Soja":    (2000, 7000),
+    "Milho":   (800, 5000),
+    "Algodão": (4000, 18000),
+    "Trigo":   (1200, 5500),
+    "Arroz":   (2500, 12000),
+    "Feijão":  (1500, 9000),
+    "Sorgo":   (600, 4500),
+    "Café":    (3000, 26000),
 }
 
 _ITENS_RENDA_FATORES = ("remuneração esperada sobre o capital", "terra própria")
@@ -95,8 +115,6 @@ def _combo(cultura, uf, conab, cepea, unid="sc60", sc_por_t=16.667, fator=1.0):
             "unid": unid, "sc_por_t": sc_por_t, "fator_comercial": fator}
 
 
-# Lista enxuta (11 combinações, ~25-30 min). Extras abaixo — mova para cá se
-# quiser mais cobertura (cada linha soma ~2-3 min ao Action).
 COMBINACOES = [
     _combo("Soja", "MT", "soja", "soja"),
     _combo("Soja", "PR", "soja", "soja"),
@@ -115,22 +133,13 @@ COMBINACOES_EXTRAS = [
     _combo("Soja", "RS", "soja", "soja"),
     _combo("Soja", "MS", "soja", "soja"),
     _combo("Soja", "BA", "soja", "soja"),
-    _combo("Milho", "RS", "milho", "milho"),
     _combo("Milho", "GO", "milho", "milho"),
     _combo("Milho", "MS", "milho", "milho"),
     _combo("Algodão", "BA", "algodao", "algodao", unid="arroba", sc_por_t=66.667, fator=_FATOR_PLUMA_ALGODAO),
-    _combo("Trigo", "RS", "trigo", "trigo"),
     _combo("Arroz", "TO", "arroz", "arroz"),
     _combo("Feijão", "GO", ["feijao", "feijao_cores"], ["feijao", "feijao_cores"]),
-    _combo("Girassol", "MT", "girassol", ["girassol", "soja"]),
-    _combo("Amendoim", "SP", "amendoim", ["amendoim"]),
-    _combo("Cevada", "PR", "cevada", ["cevada", "trigo"]),
-    _combo("Aveia", "RS", "aveia", ["aveia", "trigo"]),
-    _combo("Canola", "RS", "canola", ["canola", "soja"]),
     _combo("Café", "ES", _ALIASES_CAFE_ES["conab"], _ALIASES_CAFE_ES["cepea"]),
 ]
-
-OCULTAR_CARDS_VAZIOS = True
 
 N_SAFRAS = 2
 PRECO_FONTE = os.getenv("EARLY_SIGNALS_PRECO_FONTE", "cepea").lower()
@@ -138,10 +147,9 @@ SCRIPT_DIR = Path(__file__).parent
 
 
 def safra_vigente(hoje=None):
-    """Safra-referência para grãos. CORREÇÃO v3.2: só avança o ano-safra a
-    partir de OUTUBRO (mês >= 10). Antes disso, a safra do ano corrente ainda
-    é a mais recente COM dados no boletim da CONAB (a nova safra ainda não
-    tem levantamento útil). Ex.: em ago/2026 -> '2025/26' (e não '2026/27')."""
+    """Safra-referência para grãos. Só avança o ano-safra a partir de OUTUBRO
+    (mês >= 10). Antes disso, a safra do ano corrente ainda é a mais recente
+    COM dados no boletim CONAB. Ex.: ago/2026 -> '2025/26'."""
     hoje = hoje or datetime.date.today()
     ini = hoje.year if hoje.month >= 10 else hoje.year - 1
     return f"{ini}/{str(ini + 1)[-2:]}"
@@ -254,17 +262,21 @@ async def _preco_medio(cepea, produto, safra):
 
 
 def _pontos_validos(serie, chave="margem_economica_ha"):
-    """Retorna a lista de pontos que têm valor real para a chave dada."""
     return [p for p in serie if p.get(chave) is not None]
 
 
+def _pontos_confiaveis(serie):
+    """Pontos com margem real E sem alerta (base para comparativo confiável)."""
+    return [p for p in serie
+            if p.get("margem_economica_ha") is not None and not p.get("alerta_valor")]
+
+
 def _tendencia(serie, chave="margem_economica_ha"):
-    """Tendência entre os DOIS últimos pontos COM dado real (robusto a safra
-    futura vazia no fim da série)."""
-    validos = _pontos_validos(serie, chave)
-    if len(validos) < 2:
+    """Tendência entre os dois últimos pontos CONFIÁVEIS (sem alerta)."""
+    conf = _pontos_confiaveis(serie)
+    if len(conf) < 2:
         return "indisponivel", None
-    atual, ant = validos[-1].get(chave), validos[-2].get(chave)
+    atual, ant = conf[-1].get(chave), conf[-2].get(chave)
     if atual is None or ant is None or ant == 0:
         return "indisponivel", None
     delta = (atual - ant) / abs(ant) * 100.0
@@ -292,17 +304,28 @@ def _status_geral(ponto):
     return "completo"
 
 
-def _checar_sanidade(cultura, margem_ha):
+def _checar_sanidade(cultura, margem_ha, coe_ha=None, ct_ha=None):
+    """Marca alerta se MARGEM ou COE saírem da faixa plausível da cultura
+    (sinal de preço/custo coletado errado). Retorna (alerta, motivo)."""
+    # COE fora da faixa -> quase sempre erro de parse da CONAB
+    faixa_coe = FAIXAS_PLAUSIVEIS_COE_HA.get(cultura)
+    if coe_ha is not None and faixa_coe:
+        mn, mx = faixa_coe
+        if coe_ha < mn or coe_ha > mx:
+            return True, (f"COE R$ {coe_ha:,.0f}/ha fora da faixa plausível "
+                          f"[{mn:,.0f}, {mx:,.0f}] para {cultura} — provável erro de "
+                          f"coleta/parse do custo.").replace(",", ".")
+    # Margem fora da faixa -> preço ou produtividade coletados errados
     if margem_ha is None:
         return False, None
     faixa = FAIXAS_PLAUSIVEIS_MARGEM_HA.get(cultura)
     if faixa is None:
         return False, None
-    minimo, maximo = faixa
-    if margem_ha < minimo or margem_ha > maximo:
+    mn, mx = faixa
+    if margem_ha < mn or margem_ha > mx:
         return True, (f"Margem econômica R$ {margem_ha:,.0f}/ha fora da faixa plausível "
-                      f"[{minimo:,.0f}, {maximo:,.0f}] para {cultura} "
-                      f"— verificar coleta/conversão.").replace(",", ".")
+                      f"[{mn:,.0f}, {mx:,.0f}] para {cultura} — provável erro de "
+                      f"coleta/conversão (preço/produtividade).").replace(",", ".")
     return False, None
 
 
@@ -347,7 +370,7 @@ async def _montar_base_async():
             }
             ponto["status_geral"] = _status_geral(ponto)
 
-            alerta, motivo = _checar_sanidade(combo["cultura"], margem_econ)
+            alerta, motivo = _checar_sanidade(combo["cultura"], margem_econ, coe, ct)
             ponto["alerta_valor"] = alerta
             ponto["alerta_motivo"] = motivo
             if alerta:
@@ -356,31 +379,67 @@ async def _montar_base_async():
             serie.append(ponto)
             prev_ct, prev_prod, prev_preco = ct, prod, preco
 
-        # >>> v3.2: mantém na série apenas os pontos COM margem real, evitando
-        # que uma safra futura vazia (ex.: 2026/27 ainda não publicada) vire o
-        # "vigente" e deixe o card em branco. Se sobrar >=1 ponto válido, usamos
-        # só os válidos; caso contrário, o card será auto-ocultado adiante.
-        serie_validos = _pontos_validos(serie)
-        serie_final = serie_validos if serie_validos else serie
-
-        tendencia, delta_pct = _tendencia(serie_final)
+        # v3.3: mantém AMBAS as safras na série (para o comparativo a/a).
+        tendencia, delta_pct = _tendencia(serie)
         cards.append({
             "cultura": combo["cultura"], "uf": combo["uf"], "unidade": combo["unid"],
-            "serie": serie_final, "tendencia": tendencia, "delta_pct": delta_pct,
+            "serie": serie, "tendencia": tendencia, "delta_pct": delta_pct,
         })
 
-    if OCULTAR_CARDS_VAZIOS:
-        antes = len(cards)
-        cards_visiveis = [c for c in cards
-                          if any(p.get("margem_economica_ha") is not None for p in c["serie"])]
-        ocultos = antes - len(cards_visiveis)
-        if ocultos:
-            nomes = ", ".join(f"{c['cultura']}/{c['uf']}" for c in cards
-                              if all(p.get("margem_economica_ha") is None for p in c["serie"]))
-            print(f"   👁 {ocultos} cartão(ões) sem dado real ocultado(s): {nomes}")
-        cards = cards_visiveis
-
+    cards = _filtrar_cards(cards)
     return _empacotar(cards, safras)
+
+
+def _filtrar_cards(cards):
+    """Aplica as regras de exibição:
+       - remove cartões totalmente vazios;
+       - remove cartões com ponto vigente em ALERTA (valor irreal);
+       - prioriza cartões com comparativo 24/25 vs 25/26 (com fallback seguro).
+    """
+    def tem_atual(c):
+        return len(_pontos_confiaveis(c["serie"])) >= 1
+
+    def tem_comparativo(c):
+        return len(_pontos_confiaveis(c["serie"])) >= 2
+
+    antes = len(cards)
+
+    # 1) remove vazios (nenhuma margem real)
+    if OCULTAR_CARDS_VAZIOS:
+        cards = [c for c in cards if _pontos_validos(c["serie"])]
+
+    # 2) remove cartões cujo ponto vigente (última margem) é ALERTA/irreal
+    if REMOVER_ALERTAS:
+        limpos = []
+        removidos = []
+        for c in cards:
+            validos = _pontos_validos(c["serie"])
+            vigente = validos[-1] if validos else None
+            if vigente is not None and vigente.get("alerta_valor"):
+                removidos.append(f"{c['cultura']}/{c['uf']}")
+            else:
+                limpos.append(c)
+        if removidos:
+            print(f"   🗑 {len(removidos)} cartão(ões) removido(s) por valor irreal (alerta): "
+                  f"{', '.join(removidos)}")
+        cards = limpos
+
+    # 3) prioriza comparativo completo, com fallback para não esvaziar o painel
+    if EXIGIR_COMPARATIVO:
+        com_comp = [c for c in cards if tem_comparativo(c)]
+        if com_comp:
+            so_atual = [f"{c['cultura']}/{c['uf']}" for c in cards if not tem_comparativo(c)]
+            if so_atual:
+                print(f"   ℹ {len(so_atual)} cartão(ões) sem comparativo 24/25 removido(s): "
+                      f"{', '.join(so_atual)}")
+            cards = com_comp
+        else:
+            print("   ⚠ Nenhuma cultura tem comparativo 24/25 completo (fonte não retornou a "
+                  "safra anterior). Exibindo a safra vigente das culturas confiáveis.")
+            cards = [c for c in cards if tem_atual(c)]
+
+    print(f"   ✅ Cartões finais: {len(cards)} (de {antes} combinações)")
+    return cards
 
 
 def _empacotar(cards, safras):
@@ -432,21 +491,7 @@ def _cache_valido(dados):
 
 def _estrutura_vazia(motivo=""):
     safras = ultimas_safras()
-    cards = []
-    for combo in COMBINACOES:
-        serie = []
-        for s in safras:
-            serie.append({
-                "safra": s,
-                "coe_ha": None, "cot_ha": None, "ct_ha": None, "custo_status": "indisponivel",
-                "produtividade": None, "produtividade_status": "indisponivel",
-                "preco_medio": None, "preco_status": "indisponivel",
-                "receita_ha": None, "margem_bruta_ha": None, "margem_economica_ha": None,
-                "status_geral": "incompleto", "alerta_valor": False, "alerta_motivo": None,
-            })
-        cards.append({"cultura": combo["cultura"], "uf": combo["uf"], "unidade": combo["unid"],
-                      "serie": serie, "tendencia": "indisponivel", "delta_pct": None})
-    base = _empacotar(cards, safras)
+    base = _empacotar([], safras)
     if motivo:
         base["aviso"] = motivo
     return base
@@ -489,10 +534,9 @@ def processar_margem_agricola(usar_cache=True):
 
 if __name__ == "__main__":
     print("=" * 64)
-    print("EARLY SIGNALS · modulo_margem_agricola v3.2 (teste standalone)")
+    print("EARLY SIGNALS · modulo_margem_agricola v3.3 (teste standalone)")
     print("=" * 64)
     dados = processar_margem_agricola()
     r = dados["resumo_qualidade"]
-    print(f"Qualidade: {r['completos']} completos | {r['parciais']} parciais | "
-          f"{r['incompletos']} incompletos | {r.get('suspeitos',0)} suspeitos "
-          f"(de {r['total']} pontos).")
+    print(f"Cartões: {dados['n_combinacoes']} | Qualidade: {r['completos']} completos | "
+          f"{r['parciais']} parciais | {r.get('suspeitos',0)} suspeitos.")
