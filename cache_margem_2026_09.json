@@ -1,7 +1,8 @@
 {
-  "schema_version": "3.3",
+  "schema_version": "3.4",
   "n_combinacoes": 6,
-  "gerado_em": "2026-09-01T14:01:31",
+  "n_com_comparativo": 0,
+  "gerado_em": "2026-09-01T20:32:30",
   "safras": [
     "2024/25",
     "2025/26"
@@ -16,8 +17,7 @@
     "total": 12,
     "completos": 3,
     "parciais": 3,
-    "incompletos": 6,
-    "suspeitos": 0
+    "incompletos": 6
   },
   "autoria": "Global Reporting & Analytics — Thiago Montoro (AGCO)",
   "cards": [
