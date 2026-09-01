@@ -187,7 +187,7 @@ body { font-family: 'Arial', sans-serif; background-color: #e9ecef; color: var(-
 </style>
 
 <style>
-/* ===== EARLY SIGNALS · Aba Margem do Produtor v3.2 (CONAB COE/COT/CT) ===== */
+/* ===== EARLY SIGNALS · Aba Margem do Produtor v3.3 (CONAB COE/COT/CT) ===== */
 .margem-legend { font-size:12px; color:#555; background:#f4f4f4; border-left:5px solid #cc0000; border-radius:4px; padding:10px 18px; margin-bottom:14px; font-weight:600; }
 .margem-legend b { color:#111; }
 .margem-quality { display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-bottom:12px; }
@@ -196,11 +196,9 @@ body { font-family: 'Arial', sans-serif; background-color: #e9ecef; color: var(-
 .q-ok { background:#e2f0d9; color:#2e7d32; }
 .q-warn { background:#fff2cc; color:#7f6000; }
 .q-off { background:#f0f0f0; color:#888; }
-.q-sus { background:#fce4e4; color:#c00000; }
 .margem-metod { font-size:11.5px; color:#444; background:#fff; border:1px solid #eee; border-left:4px solid #cc0000; border-radius:6px; padding:10px 15px; margin-bottom:12px; line-height:1.65; }
 .margem-metod .mtag { font-weight:800; color:#cc0000; }
 .margem-legenda-prov { font-size:11px; color:#555; background:#fff; border:1px dashed #d9d9d9; border-radius:6px; padding:8px 14px; margin-bottom:18px; line-height:1.6; }
-.margem-legenda-prov .lg { font-weight:800; padding:1px 8px; border-radius:12px; }
 .margem-aviso { background:#fff2cc; border-left:5px solid #ffc000; color:#7f6000; padding:10px 16px; border-radius:4px; font-size:12px; font-weight:700; margin-bottom:18px; }
 .margem-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:18px; }
 @media(max-width:600px){ .margem-grid { grid-template-columns:1fr; } }
@@ -209,7 +207,6 @@ body { font-family: 'Arial', sans-serif; background-color: #e9ecef; color: var(-
 .margem-card.pos { border-top-color:#70ad47; }
 .margem-card.neg { border-top-color:#c00000; }
 .margem-card.neu { border-top-color:#ffc000; }
-.margem-card.sus { border-top-color:#c00000; border-color:#f5b9b9; background:#fffafa; }
 .mc-head { display:flex; align-items:center; gap:10px; margin-bottom:8px; }
 .mc-ico { width:34px; height:34px; border-radius:8px; background:#f4f4f4; display:grid; place-items:center; font-size:18px; flex-shrink:0; }
 .mc-title { font-weight:800; font-size:15px; text-transform:uppercase; color:#111; }
@@ -223,12 +220,17 @@ body { font-family: 'Arial', sans-serif; background-color: #e9ecef; color: var(-
 .mc-qual.q-ok { background:#e2f0d9; color:#2e7d32; }
 .mc-qual.q-warn { background:#fff2cc; color:#7f6000; }
 .mc-qual.q-off { background:#f0f0f0; color:#888; }
-.mc-qual.q-sus { background:#fce4e4; color:#c00000; }
-.mc-alerta { background:#fce4e4; border-left:4px solid #c00000; color:#8a0000; font-size:10.5px; font-weight:700; padding:6px 10px; border-radius:4px; margin:6px 0 8px; line-height:1.4; }
 .mc-kpi-label { font-size:10px; font-weight:700; letter-spacing:.6px; text-transform:uppercase; color:#888; }
 .mc-kpi { font-size:26px; font-weight:900; line-height:1.05; margin:2px 0; letter-spacing:-1px; }
-.mc-kpi.pos { color:#385723; } .mc-kpi.neg { color:#c65911; } .mc-kpi.neu { color:#111; } .mc-kpi.sus { color:#c00000; }
-.mc-spread { font-size:10.5px; color:#7f6000; background:#fff8e1; border:1px solid #ffe08a; border-radius:4px; padding:5px 9px; margin:4px 0 10px; line-height:1.35; }
+.mc-kpi.pos { color:#385723; } .mc-kpi.neg { color:#c65911; } .mc-kpi.neu { color:#111; }
+/* Comparativo ano-a-ano em destaque */
+.mc-yoy { display:inline-flex; align-items:center; gap:6px; font-size:12.5px; font-weight:800; padding:5px 11px; border-radius:20px; margin:4px 0 8px; }
+.mc-yoy .yoy-seta { font-size:13px; }
+.mc-yoy .yoy-abs { font-weight:700; opacity:.85; }
+.mc-yoy.yoy-up { background:#e2f0d9; color:#2e7d32; }
+.mc-yoy.yoy-dn { background:#fce4d6; color:#c0392b; }
+.mc-yoy.yoy-na { background:#f0f0f0; color:#999; font-weight:600; font-size:11px; }
+.mc-spread { font-size:10.5px; color:#7f6000; background:#fff8e1; border:1px solid #ffe08a; border-radius:4px; padding:5px 9px; margin:2px 0 10px; line-height:1.35; }
 .mc-spread b { color:#5f4a00; }
 .mc-kpis3 { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin:6px 0 12px; }
 .k3 { background:#fafafa; border:1px solid #eee; border-radius:6px; padding:8px 6px; text-align:center; display:flex; flex-direction:column; gap:3px; }
@@ -243,11 +245,9 @@ body { font-family: 'Arial', sans-serif; background-color: #e9ecef; color: var(-
 .sf { background:#fafafa; border:1px solid #eee; border-radius:6px; padding:7px 8px; text-align:center; }
 .sf.latest { background:#e2f0d9; border-color:#bfe7cd; }
 .sf.sf-off { background:#f5f5f5; border-color:#e6e6e6; }
-.sf.sf-sus { background:#fce4e4; border-color:#f5b9b9; }
 .sf .yr { font-size:10px; font-weight:700; color:#888; }
 .sf .mg { font-size:14px; font-weight:800; margin:2px 0; color:#385723; }
 .sf.sf-off .mg { color:#bbb; }
-.sf.sf-sus .mg { color:#c00000; }
 .sf .dl { font-size:10px; font-weight:700; }
 .dl.up { color:#2e7d32; } .dl.dn { color:#c62828; }
 .margem-foot { margin-top:22px; font-size:11px; color:#999; line-height:1.6; font-style:italic; border-top:1px solid #f5f5f5; padding-top:12px; }
@@ -2696,6 +2696,33 @@ MANDATÓRIO: Cobertura completa de 7 países da América do Sul com 4 cenários 
                 <span class="cr-hist-item"><span class="cr-hist-lbl" data-pt="Faixa histórica" data-en="Historical range" data-es="Rango histórico">Faixa histórica</span> 0.48 – 15.53</span>
             </div>
         </div>
+        <div class="analysis-card tendencia-negativa cr-card">
+            <div class="analysis-header">
+                <span class="analysis-icon">🏛️</span>
+                <h3 class="analysis-card-title">Reguladas</h3>
+                <span class="farol farol-critical"><span class="farol-dot"></span><span data-pt="Piorando" data-en="Worsening" data-es="Empeorando">Piorando</span></span>
+            </div>
+            <div class="cr-value-row">
+                <span class="cr-value">3.67</span>
+                <span class="cr-unit">%</span>
+                <span class="cr-ref">Jul/2026</span>
+            </div>
+            <div class="cr-deltas">
+                <div class="cr-delta-item"><span class="cr-delta-lbl" data-pt="vs mês anterior" data-en="vs prev. month" data-es="vs mes anterior">vs mês anterior</span><span class="cr-down">▲ +0.39 p.p.</span></div>
+                <div class="cr-delta-item"><span class="cr-delta-lbl" data-pt="vs ano anterior" data-en="vs prev. year" data-es="vs año anterior">vs ano anterior</span><span class="cr-down">▲ +1.84 p.p.</span></div>
+            </div>
+            <div class="cr-fech">
+                <span class="cr-fech-lbl" data-pt="Fechamento anual" data-en="Year-end close" data-es="Cierre anual">Fechamento anual</span>
+                <div class="cr-fech-vals">
+                    <span class="cr-fech-item">Dez/2024: <b>1.16%</b></span>
+                    <span class="cr-fech-item">Dez/2025: <b>2.72%</b></span>
+                </div>
+            </div>
+            <div class="cr-hist">
+                <span class="cr-hist-item"><span class="cr-hist-lbl" data-pt="Média R12" data-en="12M avg" data-es="Prom R12">Média R12</span> 2.89%</span>
+                <span class="cr-hist-item"><span class="cr-hist-lbl" data-pt="Faixa histórica" data-en="Historical range" data-es="Rango histórico">Faixa histórica</span> 0.90 – 3.67</span>
+            </div>
+        </div>
         </div>
         
         <div class="cr-coluna">
@@ -2856,10 +2883,10 @@ MANDATÓRIO: Cobertura completa de 7 países da América do Sul com 4 cenários 
 <div id="margem" class="tab-content">
 <h2 class="country-title" data-pt="🌱 Brasil — Margem do Produtor" data-en="🌱 Brazil — Producer Margin">🌱 Brasil — Margem do Produtor</h2>
     
-    <div class="margem-legend">Comparativo das últimas safras (<b>2024/25 · 2025/26</b>) · três indicadores por cultura: <b>Receita Bruta</b>, <b>Margem Bruta (−COE)</b> e <b>Margem Econômica (−CT)</b>.</div>
-    <div class="margem-quality"><span class="qp q-ok">● 3 oficiais</span><span class="qp q-warn">◐ 6 com dado repetido</span><span class="qp q-off">○ 0 indisponíveis</span><span class="qp q-sus">⚠ 2 suspeito(s)</span><span class="qp-total">de 9 pontos</span></div>
+    <div class="margem-legend">Comparativo das últimas safras (<b>2024/25 · 2025/26</b>) · foco na <b>variação da Margem Econômica ano-a-ano</b>, com Receita Bruta, Margem Bruta (−COE) e Margem Econômica (−CT).</div>
+    <div class="margem-quality"><span class="qp q-ok">● 3 oficiais</span><span class="qp q-warn">◐ 3 com dado repetido</span><span class="qp-total">de 12 pontos exibidos</span></div>
     <div class="margem-metod"><b>Metodologia (CONAB):</b> <span class="mtag">Receita Bruta</span> = Produtividade × Preço CEPEA · <span class="mtag">Margem Bruta</span> = Receita − <b>COE</b> (custo operacional efetivo, "caixa") · <span class="mtag">Margem Econômica</span> = Receita − <b>CT</b> (custo total: caixa + depreciação + remuneração de terra e capital). O <b>Aperto econômico</b> (Margem Bruta − Margem Econômica) mede quanto do resultado é consumido por terra/capital — sinal antecedente de decisão de investimento em máquinas.</div>
-    <div class="margem-legenda-prov"><b>Proveniência:</b> <span class="lg q-ok">● Oficial</span> = direto da fonte · <span class="lg q-warn">◐ Repetido&nbsp;*</span> = herdado da safra anterior · <span class="lg q-off">○ Indisponível</span> = "—" · <span class="lg q-sus">⚠ Suspeito</span> = fora da faixa plausível (checar). <i>Produtividade da CONAB cobre a safra vigente + anterior; por isso o comparativo é ano-a-ano.</i></div>
+    <div class="margem-legenda-prov"><b>Nota:</b> cada cartão traz a <b>variação da Margem Econômica vs a safra anterior</b> (comparativo ano-a-ano). Culturas com valores fora de faixa plausível (erro de preço/custo na fonte) são <b>automaticamente removidas</b> do relatório — nenhum número irreal é exibido e nada é inventado.</div>
     
     <div class="margem-grid">
       <div class="margem-card neu">
@@ -2873,7 +2900,7 @@ MANDATÓRIO: Cobertura completa de 7 países da América do Sul com 4 cenários 
 
         <div class="mc-kpi-label">Margem Econômica 2025/26 · Receita − CT</div>
         <div class="mc-kpi neu">R$ 3.916/ha</div>
-        
+        <div class="mc-yoy yoy-na">Sem comparativo da safra anterior (dado indisponível na fonte)</div>
         <div class="mc-spread">Aperto econômico (terra+capital+deprec.): <b>R$ 1.982/ha</b> · 34% da margem bruta</div>
 
         <div class="mc-kpis3">
@@ -2900,7 +2927,7 @@ MANDATÓRIO: Cobertura completa de 7 países da América do Sul com 4 cenários 
 
         <div class="mc-mini">
           <div class="mc-mini-h"><span>Margem Econômica por safra</span><span>Δ a/a</span></div>
-          <div class="mc-safras"><div class="sf latest"><div class="yr">2025/26</div><div class="mg">3.916</div><div class="dl">&nbsp;</div></div></div>
+          <div class="mc-safras"><div class="sf sf-off"><div class="yr">2024/25</div><div class="mg">—</div><div class="dl">&nbsp;</div></div><div class="sf latest"><div class="yr">2025/26</div><div class="mg">3.916</div><div class="dl"><span class="dl">&nbsp;</span></div></div></div>
         </div>
       </div>
       <div class="margem-card neu">
@@ -2914,7 +2941,7 @@ MANDATÓRIO: Cobertura completa de 7 países da América do Sul com 4 cenários 
 
         <div class="mc-kpi-label">Margem Econômica 2025/26 · Receita − CT</div>
         <div class="mc-kpi neu">R$ 2.022/ha</div>
-        
+        <div class="mc-yoy yoy-na">Sem comparativo da safra anterior (dado indisponível na fonte)</div>
         <div class="mc-spread">Aperto econômico (terra+capital+deprec.): <b>R$ 3.063/ha</b> · 60% da margem bruta</div>
 
         <div class="mc-kpis3">
@@ -2941,7 +2968,7 @@ MANDATÓRIO: Cobertura completa de 7 países da América do Sul com 4 cenários 
 
         <div class="mc-mini">
           <div class="mc-mini-h"><span>Margem Econômica por safra</span><span>Δ a/a</span></div>
-          <div class="mc-safras"><div class="sf latest"><div class="yr">2025/26</div><div class="mg">2.022</div><div class="dl">&nbsp;</div></div></div>
+          <div class="mc-safras"><div class="sf sf-off"><div class="yr">2024/25</div><div class="mg">—</div><div class="dl">&nbsp;</div></div><div class="sf latest"><div class="yr">2025/26</div><div class="mg">2.022</div><div class="dl"><span class="dl">&nbsp;</span></div></div></div>
         </div>
       </div>
       <div class="margem-card neu">
@@ -2955,7 +2982,7 @@ MANDATÓRIO: Cobertura completa de 7 países da América do Sul com 4 cenários 
 
         <div class="mc-kpi-label">Margem Econômica 2025/26 · Receita − CT</div>
         <div class="mc-kpi neu">R$ 3.962/ha</div>
-        
+        <div class="mc-yoy yoy-na">Sem comparativo da safra anterior (dado indisponível na fonte)</div>
         <div class="mc-spread">Aperto econômico (terra+capital+deprec.): <b>R$ 2.033/ha</b> · 34% da margem bruta</div>
 
         <div class="mc-kpis3">
@@ -2982,7 +3009,7 @@ MANDATÓRIO: Cobertura completa de 7 países da América do Sul com 4 cenários 
 
         <div class="mc-mini">
           <div class="mc-mini-h"><span>Margem Econômica por safra</span><span>Δ a/a</span></div>
-          <div class="mc-safras"><div class="sf latest"><div class="yr">2025/26</div><div class="mg">3.962</div><div class="dl">&nbsp;</div></div></div>
+          <div class="mc-safras"><div class="sf sf-off"><div class="yr">2024/25</div><div class="mg">—</div><div class="dl">&nbsp;</div></div><div class="sf latest"><div class="yr">2025/26</div><div class="mg">3.962</div><div class="dl"><span class="dl">&nbsp;</span></div></div></div>
         </div>
       </div>
       <div class="margem-card neu">
@@ -2996,7 +3023,7 @@ MANDATÓRIO: Cobertura completa de 7 países da América do Sul com 4 cenários 
 
         <div class="mc-kpi-label">Margem Econômica 2025/26 · Receita − CT</div>
         <div class="mc-kpi neu">R$ 6.057/ha</div>
-        
+        <div class="mc-yoy yoy-na">Sem comparativo da safra anterior (dado indisponível na fonte)</div>
         <div class="mc-spread">Aperto econômico (terra+capital+deprec.): <b>R$ 671/ha</b> · 10% da margem bruta</div>
 
         <div class="mc-kpis3">
@@ -3023,130 +3050,7 @@ MANDATÓRIO: Cobertura completa de 7 países da América do Sul com 4 cenários 
 
         <div class="mc-mini">
           <div class="mc-mini-h"><span>Margem Econômica por safra</span><span>Δ a/a</span></div>
-          <div class="mc-safras"><div class="sf latest"><div class="yr">2025/26</div><div class="mg">6.057</div><div class="dl">&nbsp;</div></div></div>
-        </div>
-      </div>
-      <div class="margem-card neu">
-        <div class="mc-head">
-          <span class="mc-ico">🌽</span>
-          <span class="mc-title">Milho</span>
-          <span class="mc-uf">PR</span>
-          <span class="mc-badge neu"><span class="d"></span>S/ dado</span>
-        </div>
-        <div class="mc-qual q-warn">◐ Contém dado repetido</div>
-
-        <div class="mc-kpi-label">Margem Econômica 2025/26 · Receita − CT</div>
-        <div class="mc-kpi neu">R$ -5.199/ha</div>
-        
-        <div class="mc-spread">Aperto econômico (terra+capital+deprec.): <b>R$ 3.563/ha</b> · 218% da margem bruta</div>
-
-        <div class="mc-kpis3">
-          <div class="k3">
-            <span class="k3l">Receita Bruta</span>
-            <span class="k3v">R$ 7.439</span>
-            <span class="k3d"><span class="dl">&nbsp;</span></span>
-          </div>
-          <div class="k3">
-            <span class="k3l">Margem Bruta (−COE)</span>
-            <span class="k3v">R$ -1.636</span>
-            <span class="k3d"><span class="dl">&nbsp;</span></span>
-          </div>
-          <div class="k3">
-            <span class="k3l">Margem Econ. (−CT)</span>
-            <span class="k3v">R$ -5.199</span>
-            <span class="k3d"><span class="dl">&nbsp;</span></span>
-          </div>
-        </div>
-
-        <div class="mc-sub">Prod. <b>109 sc/ha</b> ·
-             Preço <b>R$ 68</b> ·
-             COE <b>R$ 9.076</b> · CT <b>R$ 12.639</b></div>
-
-        <div class="mc-mini">
-          <div class="mc-mini-h"><span>Margem Econômica por safra</span><span>Δ a/a</span></div>
-          <div class="mc-safras"><div class="sf latest"><div class="yr">2025/26</div><div class="mg">-5.199</div><div class="dl">&nbsp;</div></div></div>
-        </div>
-      </div>
-      <div class="margem-card sus">
-        <div class="mc-head">
-          <span class="mc-ico">🧵</span>
-          <span class="mc-title">Algodão</span>
-          <span class="mc-uf">MT</span>
-          <span class="mc-badge neu"><span class="d"></span>S/ dado</span>
-        </div>
-        <div class="mc-qual q-sus">⚠ Verificar valor</div>
-
-        <div class="mc-kpi-label">Margem Econômica 2025/26 · Receita − CT</div>
-        <div class="mc-kpi sus">⚠ R$ 43.289/ha</div>
-        <div class="mc-alerta">⚠ Margem econômica R$ 43.289/ha fora da faixa plausível [-10.000. 22.000] para Algodão — verificar coleta/conversão.</div>
-        <div class="mc-spread">Aperto econômico (terra+capital+deprec.): <b>R$ 4.179/ha</b> · 9% da margem bruta</div>
-
-        <div class="mc-kpis3">
-          <div class="k3">
-            <span class="k3l">Receita Bruta</span>
-            <span class="k3v">R$ 55.976</span>
-            <span class="k3d"><span class="dl">&nbsp;</span></span>
-          </div>
-          <div class="k3">
-            <span class="k3l">Margem Bruta (−COE)</span>
-            <span class="k3v">R$ 47.468</span>
-            <span class="k3d"><span class="dl">&nbsp;</span></span>
-          </div>
-          <div class="k3">
-            <span class="k3l">Margem Econ. (−CT)</span>
-            <span class="k3v">R$ 43.289</span>
-            <span class="k3d"><span class="dl">&nbsp;</span></span>
-          </div>
-        </div>
-
-        <div class="mc-sub">Prod. <b>131 @/ha</b> ·
-             Preço <b>R$ 427</b> ·
-             COE <b>R$ 8.509</b> · CT <b>R$ 12.687</b></div>
-
-        <div class="mc-mini">
-          <div class="mc-mini-h"><span>Margem Econômica por safra</span><span>Δ a/a</span></div>
-          <div class="mc-safras"><div class="sf sf-sus"><div class="yr">2025/26</div><div class="mg">⚠ 43.289</div><div class="dl">&nbsp;</div></div></div>
-        </div>
-      </div>
-      <div class="margem-card sus">
-        <div class="mc-head">
-          <span class="mc-ico">🌾</span>
-          <span class="mc-title">Trigo</span>
-          <span class="mc-uf">PR</span>
-          <span class="mc-badge neu"><span class="d"></span>S/ dado</span>
-        </div>
-        <div class="mc-qual q-sus">⚠ Verificar valor</div>
-
-        <div class="mc-kpi-label">Margem Econômica 2025/26 · Receita − CT</div>
-        <div class="mc-kpi sus">⚠ R$ 72.147/ha</div>
-        <div class="mc-alerta">⚠ Margem econômica R$ 72.147/ha fora da faixa plausível [-5.000. 7.000] para Trigo — verificar coleta/conversão.</div>
-        <div class="mc-spread">Aperto econômico (terra+capital+deprec.): <b>R$ 3.113/ha</b> · 4% da margem bruta</div>
-
-        <div class="mc-kpis3">
-          <div class="k3">
-            <span class="k3l">Receita Bruta</span>
-            <span class="k3v">R$ 78.357</span>
-            <span class="k3d"><span class="dl">&nbsp;</span></span>
-          </div>
-          <div class="k3">
-            <span class="k3l">Margem Bruta (−COE)</span>
-            <span class="k3v">R$ 75.260</span>
-            <span class="k3d"><span class="dl">&nbsp;</span></span>
-          </div>
-          <div class="k3">
-            <span class="k3l">Margem Econ. (−CT)</span>
-            <span class="k3v">R$ 72.147</span>
-            <span class="k3d"><span class="dl">&nbsp;</span></span>
-          </div>
-        </div>
-
-        <div class="mc-sub">Prod. <b>56 sc/ha</b> ·
-             Preço <b>R$ 1.389</b> ·
-             COE <b>R$ 3.096</b> · CT <b>R$ 6.209</b></div>
-
-        <div class="mc-mini">
-          <div class="mc-mini-h"><span>Margem Econômica por safra</span><span>Δ a/a</span></div>
-          <div class="mc-safras"><div class="sf sf-sus"><div class="yr">2025/26</div><div class="mg">⚠ 72.147</div><div class="dl">&nbsp;</div></div></div>
+          <div class="mc-safras"><div class="sf sf-off"><div class="yr">2024/25</div><div class="mg">—</div><div class="dl">&nbsp;</div></div><div class="sf latest"><div class="yr">2025/26</div><div class="mg">6.057</div><div class="dl"><span class="dl">&nbsp;</span></div></div></div>
         </div>
       </div>
       <div class="margem-card neu">
@@ -3160,7 +3064,7 @@ MANDATÓRIO: Cobertura completa de 7 países da América do Sul com 4 cenários 
 
         <div class="mc-kpi-label">Margem Econômica 2025/26 · Receita − CT</div>
         <div class="mc-kpi neu">R$ -1.252/ha</div>
-        
+        <div class="mc-yoy yoy-na">Sem comparativo da safra anterior (dado indisponível na fonte)</div>
         <div class="mc-spread">Aperto econômico (terra+capital+deprec.): <b>R$ 3.802/ha</b> · 149% da margem bruta</div>
 
         <div class="mc-kpis3">
@@ -3187,7 +3091,7 @@ MANDATÓRIO: Cobertura completa de 7 países da América do Sul com 4 cenários 
 
         <div class="mc-mini">
           <div class="mc-mini-h"><span>Margem Econômica por safra</span><span>Δ a/a</span></div>
-          <div class="mc-safras"><div class="sf latest"><div class="yr">2025/26</div><div class="mg">-1.252</div><div class="dl">&nbsp;</div></div></div>
+          <div class="mc-safras"><div class="sf sf-off"><div class="yr">2024/25</div><div class="mg">—</div><div class="dl">&nbsp;</div></div><div class="sf latest"><div class="yr">2025/26</div><div class="mg">-1.252</div><div class="dl"><span class="dl">&nbsp;</span></div></div></div>
         </div>
       </div>
       <div class="margem-card neu">
@@ -3201,7 +3105,7 @@ MANDATÓRIO: Cobertura completa de 7 países da América do Sul com 4 cenários 
 
         <div class="mc-kpi-label">Margem Econômica 2025/26 · Receita − CT</div>
         <div class="mc-kpi neu">R$ -620/ha</div>
-        
+        <div class="mc-yoy yoy-na">Sem comparativo da safra anterior (dado indisponível na fonte)</div>
         <div class="mc-spread">Aperto econômico (terra+capital+deprec.): <b>R$ 1.689/ha</b> · 158% da margem bruta</div>
 
         <div class="mc-kpis3">
@@ -3228,7 +3132,7 @@ MANDATÓRIO: Cobertura completa de 7 países da América do Sul com 4 cenários 
 
         <div class="mc-mini">
           <div class="mc-mini-h"><span>Margem Econômica por safra</span><span>Δ a/a</span></div>
-          <div class="mc-safras"><div class="sf latest"><div class="yr">2025/26</div><div class="mg">-620</div><div class="dl">&nbsp;</div></div></div>
+          <div class="mc-safras"><div class="sf sf-off"><div class="yr">2024/25</div><div class="mg">—</div><div class="dl">&nbsp;</div></div><div class="sf latest"><div class="yr">2025/26</div><div class="mg">-620</div><div class="dl"><span class="dl">&nbsp;</span></div></div></div>
         </div>
       </div></div>
     <div class="margem-foot">COE/COT/CT conforme metodologia de custos da CONAB · Custo: CONAB - Custos de Produção (COE/COT/CT) · Produtividade: CONAB - Boletim de Safra (GEASA) — vigente + anterior · Preço: CEPEA/ESALQ. Atualizado em 2026-09-01.<br><i>Global Reporting & Analytics — Thiago Montoro (AGCO)</i></div>

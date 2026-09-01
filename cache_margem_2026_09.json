@@ -1,7 +1,7 @@
 {
-  "schema_version": "3.2",
-  "n_combinacoes": 9,
-  "gerado_em": "2026-09-01T13:05:25",
+  "schema_version": "3.3",
+  "n_combinacoes": 6,
+  "gerado_em": "2026-09-01T14:01:31",
   "safras": [
     "2024/25",
     "2025/26"
@@ -13,11 +13,11 @@
     "preco": "CEPEA/ESALQ"
   },
   "resumo_qualidade": {
-    "total": 9,
+    "total": 12,
     "completos": 3,
-    "parciais": 6,
-    "incompletos": 0,
-    "suspeitos": 2
+    "parciais": 3,
+    "incompletos": 6,
+    "suspeitos": 0
   },
   "autoria": "Global Reporting & Analytics — Thiago Montoro (AGCO)",
   "cards": [
@@ -26,6 +26,23 @@
       "uf": "MT",
       "unidade": "sc60",
       "serie": [
+        {
+          "safra": "2024/25",
+          "coe_ha": 4118.58,
+          "cot_ha": 4755.23,
+          "ct_ha": 5900.97,
+          "custo_status": "oficial",
+          "produtividade": 67.1,
+          "produtividade_status": "oficial",
+          "preco_medio": null,
+          "preco_status": "indisponivel",
+          "receita_ha": null,
+          "margem_bruta_ha": null,
+          "margem_economica_ha": null,
+          "status_geral": "incompleto",
+          "alerta_valor": false,
+          "alerta_motivo": null
+        },
         {
           "safra": "2025/26",
           "coe_ha": 4347.41,
@@ -53,6 +70,23 @@
       "unidade": "sc60",
       "serie": [
         {
+          "safra": "2024/25",
+          "coe_ha": 4468.38,
+          "cot_ha": 5311.79,
+          "ct_ha": 7381.19,
+          "custo_status": "oficial",
+          "produtividade": 62.3,
+          "produtividade_status": "oficial",
+          "preco_medio": null,
+          "preco_status": "indisponivel",
+          "receita_ha": null,
+          "margem_bruta_ha": null,
+          "margem_economica_ha": null,
+          "status_geral": "incompleto",
+          "alerta_valor": false,
+          "alerta_motivo": null
+        },
+        {
           "safra": "2025/26",
           "coe_ha": 4665.55,
           "cot_ha": 5447.74,
@@ -78,6 +112,23 @@
       "uf": "GO",
       "unidade": "sc60",
       "serie": [
+        {
+          "safra": "2024/25",
+          "coe_ha": 3876.46,
+          "cot_ha": 4823.94,
+          "ct_ha": 5602.89,
+          "custo_status": "oficial",
+          "produtividade": 69.7,
+          "produtividade_status": "oficial",
+          "preco_medio": null,
+          "preco_status": "indisponivel",
+          "receita_ha": null,
+          "margem_bruta_ha": null,
+          "margem_economica_ha": null,
+          "status_geral": "incompleto",
+          "alerta_valor": false,
+          "alerta_motivo": null
+        },
         {
           "safra": "2025/26",
           "coe_ha": 4096.23,
@@ -105,6 +156,23 @@
       "unidade": "sc60",
       "serie": [
         {
+          "safra": "2024/25",
+          "coe_ha": 1956.9,
+          "cot_ha": 2172.32,
+          "ct_ha": 2628.38,
+          "custo_status": "oficial",
+          "produtividade": 126.0,
+          "produtividade_status": "oficial",
+          "preco_medio": null,
+          "preco_status": "indisponivel",
+          "receita_ha": null,
+          "margem_bruta_ha": null,
+          "margem_economica_ha": null,
+          "status_geral": "incompleto",
+          "alerta_valor": false,
+          "alerta_motivo": null
+        },
+        {
           "safra": "2025/26",
           "coe_ha": 1956.9,
           "cot_ha": 2172.32,
@@ -126,88 +194,27 @@
       "delta_pct": null
     },
     {
-      "cultura": "Milho",
-      "uf": "PR",
-      "unidade": "sc60",
-      "serie": [
-        {
-          "safra": "2025/26",
-          "coe_ha": 9075.79,
-          "cot_ha": 11258.62,
-          "ct_ha": 12638.8,
-          "custo_status": "repetido",
-          "produtividade": 108.7,
-          "produtividade_status": "oficial",
-          "preco_medio": 68.44,
-          "preco_status": "oficial",
-          "receita_ha": 7439.43,
-          "margem_bruta_ha": -1636.36,
-          "margem_economica_ha": -5199.37,
-          "status_geral": "parcial",
-          "alerta_valor": false,
-          "alerta_motivo": null
-        }
-      ],
-      "tendencia": "indisponivel",
-      "delta_pct": null
-    },
-    {
-      "cultura": "Algodão",
-      "uf": "MT",
-      "unidade": "arroba",
-      "serie": [
-        {
-          "safra": "2025/26",
-          "coe_ha": 8508.69,
-          "cot_ha": 10367.64,
-          "ct_ha": 12687.22,
-          "custo_status": "repetido",
-          "produtividade": 131.0,
-          "produtividade_status": "oficial",
-          "preco_medio": 427.3,
-          "preco_status": "oficial",
-          "receita_ha": 55976.3,
-          "margem_bruta_ha": 47467.61,
-          "margem_economica_ha": 43289.08,
-          "status_geral": "parcial",
-          "alerta_valor": true,
-          "alerta_motivo": "Margem econômica R$ 43.289/ha fora da faixa plausível [-10.000. 22.000] para Algodão — verificar coleta/conversão."
-        }
-      ],
-      "tendencia": "indisponivel",
-      "delta_pct": null
-    },
-    {
-      "cultura": "Trigo",
-      "uf": "PR",
-      "unidade": "sc60",
-      "serie": [
-        {
-          "safra": "2025/26",
-          "coe_ha": 3096.11,
-          "cot_ha": 4399.96,
-          "ct_ha": 6209.37,
-          "custo_status": "repetido",
-          "produtividade": 56.4,
-          "produtividade_status": "oficial",
-          "preco_medio": 1389.3,
-          "preco_status": "oficial",
-          "receita_ha": 78356.52,
-          "margem_bruta_ha": 75260.41,
-          "margem_economica_ha": 72147.15,
-          "status_geral": "parcial",
-          "alerta_valor": true,
-          "alerta_motivo": "Margem econômica R$ 72.147/ha fora da faixa plausível [-5.000. 7.000] para Trigo — verificar coleta/conversão."
-        }
-      ],
-      "tendencia": "indisponivel",
-      "delta_pct": null
-    },
-    {
       "cultura": "Arroz",
       "uf": "RS",
       "unidade": "sc60",
       "serie": [
+        {
+          "safra": "2024/25",
+          "coe_ha": 8515.47,
+          "cot_ha": 11301.28,
+          "ct_ha": 12317.07,
+          "custo_status": "oficial",
+          "produtividade": 150.4,
+          "produtividade_status": "oficial",
+          "preco_medio": null,
+          "preco_status": "indisponivel",
+          "receita_ha": null,
+          "margem_bruta_ha": null,
+          "margem_economica_ha": null,
+          "status_geral": "incompleto",
+          "alerta_valor": false,
+          "alerta_motivo": null
+        },
         {
           "safra": "2025/26",
           "coe_ha": 8515.47,
@@ -234,6 +241,23 @@
       "uf": "GO",
       "unidade": "sc60",
       "serie": [
+        {
+          "safra": "2024/25",
+          "coe_ha": 2428.46,
+          "cot_ha": 3331.01,
+          "ct_ha": 4117.77,
+          "custo_status": "oficial",
+          "produtividade": 66.8,
+          "produtividade_status": "oficial",
+          "preco_medio": null,
+          "preco_status": "indisponivel",
+          "receita_ha": null,
+          "margem_bruta_ha": null,
+          "margem_economica_ha": null,
+          "status_geral": "incompleto",
+          "alerta_valor": false,
+          "alerta_motivo": null
+        },
         {
           "safra": "2025/26",
           "coe_ha": 2428.46,
