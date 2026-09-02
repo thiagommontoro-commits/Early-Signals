@@ -1,0 +1,55 @@
+{
+  "_instrucoes": "Precos medios REAIS por safra (janela set->ago), fonte CEPEA/ESALQ 'Consulta ao Banco de Dados'. Preencha o preco medio da SAFRA FECHADA (2024/25) por cultura, substituindo null pelo numero. A safra vigente (2025/26) fica null: e coletada automaticamente. Graos em R$/sc60kg; algodao em R$/@ (pluma). NADA e inventado: valores copiados da serie oficial do CEPEA.",
+  "_fonte": "CEPEA/ESALQ - https://www.cepea.org.br (Consulta ao Banco de Dados / Serie de precos)",
+  "_como_obter": "CEPEA -> Consulta ao Banco de Dados -> Produto -> Mensal -> 09/2024 a 08/2025 -> media simples das cotacoes mensais.",
+  "_chaves": "A chave deve ser o alias 'cepea' usado no COMBINACOES do modulo (ex.: soja, milho, algodao, trigo, arroz, feijao, sorgo, cafe_arabica).",
+  "_uf_override": "Culturas com indicador CEPEA REGIONAL (preco diferente por estado, ex.: Milho MT vs PR) devem usar a secao '_uf' dentro da cultura, com uma entrada por sigla de UF. Se a UF do combo nao tiver override em '_uf', o codigo usa o valor generico da cultura (fora de '_uf'); se nem esse existir, segue para a coleta automatica.",
+  "_autoria": "Global Reporting & Analytics - Thiago Montoro (AGCO)",
+  "_registro_calculos": {
+    "soja_2024_25": "media de 12 meses R$/sc60 (set/24..ago/25), indicador Esalq/Parana: [139.02,139.71,140.47,138.38,129.56,126.01,127.95,129.83,128.14,129.06,130.47,134.07] -> 132.72",
+    "algodao_2024_25": "media de 12 meses R$/@ pluma (set/24..ago/25), indicador Esalq: [131.41,132.19,131.40,138.77,135.16,139.75,138.58,142.01,146.30,136.77,135.59,128.50] -> 136.37",
+    "milho_MT_2024_25": "media de 12 meses R$/sc60 (set/24..ago/25), indicador Cepea/Esalq MT: [44.00,53.50,59.00,60.00,60.00,66.00,78.00,79.00,44.00,42.00,43.50,44.00] -> 56.08",
+    "milho_PR_2024_25": "media de 12 meses R$/sc60 (set/24..ago/25), indicador Cepea/Esalq PR: [61.50,66.00,67.50,69.00,70.00,75.00,78.50,73.00,65.00,58.00,56.00,60.00] -> 66.62",
+    "_nota_milho_regional": "Milho MT e Milho PR sao indicadores CEPEA REGIONAIS distintos (gap de ~16% no periodo), por isso usam a secao '_uf' em vez de um valor generico unico. Milho GO/MS (COMBINACOES_EXTRAS) ainda nao tem override informado; cairao na coleta automatica ate serem preenchidos.",
+    "trigo_PR_2024_25": "media de 12 meses R$/sc60 (set/24..ago/25), indicador Cepea/Esalq PR (extraido de serie mensal jan/24-ago/26): [88.87,85.48,84.78,83.60,84.96,89.09,91.62,94.77,92.24,89.67,88.44,84.53] -> 88.17",
+    "cafe_arabica_2024_25": "media de 12 meses R$/sc60 (set/24..ago/25), indicador Cepea/Esalq SP (extraido de serie mensal jan/24-ago/26): [1472.73,1500.20,2076.94,2235.00,2397.58,2480.83,2597.83,2520.65,2423.72,1877.02,1822.71,2332.86] -> 2144.84. Nota: forte alta de precos no periodo (quase 2x entre set/24 e mar/25), reflexo do boom real do cafe -- media simples mantida conforme metodologia do codigo.",
+    "arroz_RS_2024_25": "media de 12 meses (set/24..ago/25), indicador Cepea/Esalq RS Arroz em casca, ORIGINALMENTE em R$/50kg: [118.82,118.76,105.16,99.15,99.58,90.44,77.97,76.04,71.44,66.42,69.20,67.25] -> media R$88.35/50kg. CONVERTIDO para R$/sc60 (fator 60/50=1.2, pois o codigo usa sc_por_t universal em base 60kg p/ todas as culturas) -> R$106.02/sc60.",
+    "feijao_2024_25": "media de 12 meses R$/sc60 (set/24..ago/25), indicador Cepea/Esalq Feijao Cores SP: [243.27,263.29,242.33,220.31,197.50,197.14,289.24,263.89,249.57,266.45,239.05,213.75] -> 240.48. Unidade ja em R$/60kg, sem conversao necessaria."
+  },
+  "soja": {
+    "2024/25": 132.72,
+    "2025/26": null
+  },
+  "milho": {
+    "2024/25": null,
+    "2025/26": null,
+    "_uf": {
+      "MT": { "2024/25": 56.08, "2025/26": null },
+      "PR": { "2024/25": 66.62, "2025/26": null }
+    }
+  },
+  "algodao": {
+    "2024/25": 136.37,
+    "2025/26": null
+  },
+  "trigo": {
+    "2024/25": 88.17,
+    "2025/26": null
+  },
+  "arroz": {
+    "2024/25": 106.02,
+    "2025/26": null
+  },
+  "feijao": {
+    "2024/25": 240.48,
+    "2025/26": null
+  },
+  "sorgo": {
+    "2024/25": null,
+    "2025/26": null
+  },
+  "cafe_arabica": {
+    "2024/25": 2144.84,
+    "2025/26": null
+  }
+}

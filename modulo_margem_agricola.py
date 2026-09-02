@@ -1,0 +1,691 @@
+# -*- coding: utf-8 -*-
+"""
+modulo_margem_agricola.py  (v3.7 — override de preço histórico por cultura E por UF)
+===========================================================================
+Aba "Margem do Produtor" do Early Signals (metodologia CONAB COE/COT/CT):
+
+    Receita Bruta (R$/ha)    = Produtividade (comercial) x Preço CEPEA
+    Margem Bruta (R$/ha)     = Receita Bruta - COE
+    Margem Econômica (R$/ha) = Receita Bruta - CT
+
+>>> CORREÇÃO v3.4 (causa raiz do comparativo ausente):
+    A v3.3 alimentava o comparativo ano-a-ano a partir de _pontos_confiaveis(),
+    que EXCLUÍA qualquer ponto marcado com alerta. Resultado: quando 2024/25
+    recebia um alerta intermediário (ou quando a decisão de remover a cultura
+    dependia só do ponto vigente), o ponto de 2024/25 era descartado e o
+    comparativo "25/26 vs 24/25" sumia — mesmo com o dado existindo na CONAB.
+
+    Agora a lógica é separada em DUAS decisões independentes:
+      (A) MANTER OU REMOVER O CARTÃO INTEIRO: decidido SÓ pelo ponto vigente
+          (safra mais recente). Se a margem/COE/CT vigente for irreal, a
+          cultura inteira sai do relatório (ex.: Algodão MT, Trigo PR, Milho PR).
+      (B) COMPARATIVO ANO-A-ANO: dentro de um cartão MANTIDO, usa os DOIS
+          últimos pontos COM MARGEM REAL (não exige "sem alerta"), trazendo o
+          2024/25 de volta ao dash. Se o 2024/25 tiver dado, o comparativo
+          aparece; se não tiver, o cartão mostra "sem comparativo" — nada é
+          inventado.
+
+>>> CORREÇÃO v3.5 (preço por safra via série ampla):
+    _preco_medio() consultava o CEPEA com janela estreita por safra; a safra
+    anterior (janela > 1 ano no passado) voltava vazia. Passou-se a UMA consulta
+    ampla cobrindo todas as safras, fatiada localmente por janela set->ago.
+
+>>> CORREÇÃO v3.6 (override de preço histórico — safra FECHADA):
+    Em produção (GitHub Actions) o CEPEA responde 403 Forbidden e o fallback
+    (Notícias Agrícolas) só serve ~9 cotações RECENTES. Logo, a janela da safra
+    fechada (2024/25) fica sem cotações e o preço volta None -> comparativo some.
+    Solução: um arquivo 'precos_historicos.json' na raiz do projeto permite
+    informar o preço médio REAL (fonte CEPEA/ESALQ) da safra fechada por cultura.
+
+>>> CORREÇÃO v3.7 (override específico por UF quando o indicador é regional):
+    Culturas como Milho têm indicadores CEPEA REGIONAIS distintos (ex.: MT e PR
+    divergem ~16% no mesmo período) mas o código usava o MESMO alias "milho"
+    para os combos MT e PR — aplicando um preço genérico a ambos. Agora o
+    override aceita uma seção "_uf" por cultura, permitindo preço diferente por
+    estado. Se não houver override específico da UF, cai no valor genérico da
+    cultura (compatível com soja/algodão, que usam indicador nacional único).
+
+Fontes: CUSTO/PRODUTIVIDADE = CONAB · PREÇO = CEPEA/ESALQ.
+Autoria: Global Reporting & Analytics — Thiago Montoro (AGCO)
+"""
+
+# SSL corporativo (AGCO): usar certificados do SO para o CEPEA
+try:
+    import truststore
+    truststore.inject_into_ssl()
+except Exception:
+    pass
+
+import os
+import re
+import json
+import asyncio
+import datetime
+import traceback
+from pathlib import Path
+
+SCHEMA_VERSION = "3.7"  # v3.7: override de preço histórico por cultura E por UF
+
+# --- Configurações de exibição ---
+REMOVER_ALERTAS = True          # remove cartão cujo ponto VIGENTE é irreal
+OCULTAR_CARDS_VAZIOS = True     # remove cartão totalmente sem dado
+
+FAIXAS_PLAUSIVEIS_MARGEM_HA = {
+    "Soja":    (-6000, 9000),
+    "Milho":   (-6000, 9000),
+    "Algodão": (-10000, 22000),
+    "Trigo":   (-5000, 7000),
+    "Arroz":   (-6000, 10000),
+    "Feijão":  (-6000, 12000),
+    "Sorgo":   (-4000, 6000),
+    "Café":    (-12000, 32000),
+}
+
+# COE fora da faixa -> quase sempre erro de parse da CONAB.
+FAIXAS_PLAUSIVEIS_COE_HA = {
+    "Soja":    (2000, 7000),
+    "Milho":   (800, 5000),
+    "Algodão": (4000, 18000),
+    "Trigo":   (1200, 5500),
+    "Arroz":   (2500, 12000),
+    "Feijão":  (1500, 9000),
+    "Sorgo":   (600, 4500),
+    "Café":    (3000, 26000),
+}
+
+_ITENS_RENDA_FATORES = ("remuneração esperada sobre o capital", "terra própria")
+_ITENS_OUTROS_FIXOS = ("manutenção periódica", "seguro do capital fixo",
+                       "encargos sociais", "arrendamento")
+_MARCA_DEPRECIACAO = "depreciação"
+_PADRAO_ITEM_DETALHE = re.compile(r"^\s*\d+(\.\d+)?\s*-")
+
+
+def _eh_linha_de_detalhe(item_texto):
+    if not item_texto:
+        return False
+    return bool(_PADRAO_ITEM_DETALHE.match(str(item_texto)))
+
+
+def _classe_custo(item_texto):
+    t = str(item_texto).lower()
+    if any(k in t for k in _ITENS_RENDA_FATORES):
+        return "RF"
+    if _MARCA_DEPRECIACAO in t:
+        return "DEP"
+    if any(k in t for k in _ITENS_OUTROS_FIXOS):
+        return "OCF"
+    return "COE"
+
+
+_FATOR_PLUMA_ALGODAO = 0.40
+
+_ALIASES_CAFE_MG = {"conab": ["cafe", "cafe_arabica", "arabica"],
+                    "cepea": ["cafe_arabica", "cafe", "arabica"]}
+_ALIASES_CAFE_ES = {"conab": ["cafe", "cafe_conilon", "conilon", "robusta"],
+                    "cepea": ["cafe_conilon", "cafe", "conilon", "robusta"]}
+
+
+def _combo(cultura, uf, conab, cepea, unid="sc60", sc_por_t=16.667, fator=1.0):
+    return {"cultura": cultura, "uf": uf, "conab": conab, "cepea": cepea,
+            "unid": unid, "sc_por_t": sc_por_t, "fator_comercial": fator}
+
+
+COMBINACOES = [
+    _combo("Soja", "MT", "soja", "soja"),
+    _combo("Soja", "PR", "soja", "soja"),
+    _combo("Soja", "GO", "soja", "soja"),
+    _combo("Milho", "MT", "milho", "milho"),
+    _combo("Milho", "PR", "milho", "milho"),
+    _combo("Algodão", "MT", "algodao", "algodao", unid="arroba", sc_por_t=66.667, fator=_FATOR_PLUMA_ALGODAO),
+    _combo("Trigo", "PR", "trigo", "trigo"),
+    _combo("Arroz", "RS", "arroz", "arroz"),
+    _combo("Feijão", "PR", "feijao", "feijao"),
+    _combo("Sorgo", "GO", "sorgo", ["sorgo", "milho"]),
+    _combo("Café", "MG", _ALIASES_CAFE_MG["conab"], _ALIASES_CAFE_MG["cepea"]),
+]
+
+COMBINACOES_EXTRAS = [
+    _combo("Soja", "RS", "soja", "soja"),
+    _combo("Soja", "MS", "soja", "soja"),
+    _combo("Soja", "BA", "soja", "soja"),
+    _combo("Milho", "GO", "milho", "milho"),
+    _combo("Milho", "MS", "milho", "milho"),
+    _combo("Algodão", "BA", "algodao", "algodao", unid="arroba", sc_por_t=66.667, fator=_FATOR_PLUMA_ALGODAO),
+    _combo("Arroz", "TO", "arroz", "arroz"),
+    _combo("Feijão", "GO", ["feijao", "feijao_cores"], ["feijao", "feijao_cores"]),
+    _combo("Café", "ES", _ALIASES_CAFE_ES["conab"], _ALIASES_CAFE_ES["cepea"]),
+]
+
+N_SAFRAS = 2
+PRECO_FONTE = os.getenv("EARLY_SIGNALS_PRECO_FONTE", "cepea").lower()
+SCRIPT_DIR = Path(__file__).parent
+
+
+def safra_vigente(hoje=None):
+    """Só avança o ano-safra a partir de OUTUBRO (mês >= 10). Ex.: ago/2026 -> '2025/26'."""
+    hoje = hoje or datetime.date.today()
+    ini = hoje.year if hoje.month >= 10 else hoje.year - 1
+    return f"{ini}/{str(ini + 1)[-2:]}"
+
+
+def ultimas_safras(n=N_SAFRAS, hoje=None):
+    ini = int(safra_vigente(hoje).split("/")[0])
+    return [f"{ini - k}/{str(ini - k + 1)[-2:]}" for k in range(n - 1, -1, -1)]
+
+
+def _como_lista(valor):
+    return list(valor) if isinstance(valor, (list, tuple)) else [valor]
+
+
+async def _custos_coe_cot_ct(conab, cultura_conab, uf, safra):
+    candidatos = _como_lista(cultura_conab)
+    for i, nome in enumerate(candidatos):
+        try:
+            df = await conab.custo_producao(nome, uf=uf, safra=safra)
+            if df is None or len(df) == 0 or "valor_ha" not in getattr(df, "columns", []):
+                if len(candidatos) > 1:
+                    print(f"      ↳ custo: alias '{nome}' sem dados, tentando próximo...")
+                continue
+            if "item" not in getattr(df, "columns", []):
+                ct = float(df["valor_ha"].dropna().sum())
+                if ct > 0:
+                    return {"coe": None, "cot": None, "ct": round(ct, 2)}
+                continue
+
+            det = df[df["item"].apply(_eh_linha_de_detalhe)].copy()
+            n_sub = len(df) - len(det)
+            if len(det) == 0:
+                print(f"      ⚠ custo: nenhuma linha de detalhe reconhecida ('{nome}' {uf}/{safra}).")
+                continue
+            if n_sub > 0:
+                print(f"      ℹ custo: {n_sub} subtotal(is) excluído(s) ('{nome}' {uf}/{safra}).")
+
+            det["_classe"] = det["item"].apply(_classe_custo)
+            somas = det.groupby("_classe")["valor_ha"].sum().to_dict()
+            coe = float(somas.get("COE", 0.0))
+            dep = float(somas.get("DEP", 0.0))
+            ocf = float(somas.get("OCF", 0.0))
+            rf = float(somas.get("RF", 0.0))
+            ct = coe + dep + ocf + rf
+            cot = coe + dep + ocf
+            if ct <= 0:
+                continue
+            if i > 0:
+                print(f"      ✅ custo resolvido via alias '{nome}' ({uf}/{safra})")
+            return {"coe": round(coe, 2), "cot": round(cot, 2), "ct": round(ct, 2)}
+        except Exception as e:
+            print(f"      ⚠ custo indisponível via alias '{nome}' ({uf}/{safra}): {e}")
+            continue
+    if len(candidatos) > 1:
+        print(f"      ❌ custo indisponível para todos os aliases {candidatos} ({uf}/{safra})")
+    return None
+
+
+async def _produtividade_sc_ha(conab, cultura_conab, uf, safra, sc_por_t, fator_comercial=1.0):
+    candidatos = _como_lista(cultura_conab)
+    for i, nome in enumerate(candidatos):
+        try:
+            df = await conab.safras(nome, safra=safra, uf=uf)
+            if df is None or len(df) == 0 or "produtividade" not in getattr(df, "columns", []):
+                if len(candidatos) > 1:
+                    print(f"      ↳ produtividade: alias '{nome}' sem dados, tentando próximo...")
+                continue
+            valor = round(float(df.iloc[0]["produtividade"]) / 1000.0 * sc_por_t * fator_comercial, 1)
+            if fator_comercial != 1.0:
+                print(f"      ℹ produtividade ajustada (fator {fator_comercial}, caroço->pluma) "
+                      f"'{nome}' {uf}/{safra} -> {valor}")
+            if i > 0:
+                print(f"      ✅ produtividade resolvida via alias '{nome}' ({uf}/{safra})")
+            return valor
+        except Exception as e:
+            print(f"      ⚠ produtividade indisponível via alias '{nome}' ({uf}/{safra}): {e}")
+            continue
+    if len(candidatos) > 1:
+        print(f"      ❌ produtividade indisponível para todos os aliases {candidatos} ({uf}/{safra})")
+    return None
+
+
+async def _preco_medio(cepea, produto, safra):
+    candidatos = _como_lista(produto)
+    ini_ano = int(safra.split("/")[0])
+    inicio, fim = f"{ini_ano}-09-01", f"{ini_ano + 1}-08-31"
+    for i, nome in enumerate(candidatos):
+        try:
+            df = await cepea.indicador(nome, inicio=inicio, fim=fim)
+            if df is None or len(df) == 0:
+                if len(candidatos) > 1:
+                    print(f"      ↳ preço: alias '{nome}' sem dados, tentando próximo...")
+                continue
+            col = next((c for c in ("valor", "preco", "indicador", "value", "preco_medio")
+                        if c in getattr(df, "columns", [])), None)
+            if not col:
+                if len(candidatos) > 1:
+                    print(f"      ↳ preço: alias '{nome}' sem coluna reconhecida, tentando próximo...")
+                continue
+            valor = round(float(df[col].astype(float).mean()), 2)
+            if i > 0:
+                print(f"      ✅ preço resolvido via alias '{nome}' (safra {safra})")
+            return valor
+        except Exception as e:
+            print(f"      ⚠ preço indisponível via alias '{nome}' ({safra}): {e}")
+            continue
+    if len(candidatos) > 1:
+        print(f"      ❌ preço indisponível para todos os aliases {candidatos} ({safra})")
+    return None
+
+
+# ---------------------------------------------------------------------------
+# v3.5 — CORREÇÃO DA SAFRA ANTERIOR (comparativo a/a)
+# ---------------------------------------------------------------------------
+def _detectar_col_valor(df):
+    return next((c for c in ("valor", "preco", "indicador", "value", "preco_medio")
+                 if c in getattr(df, "columns", [])), None)
+
+
+def _detectar_col_data(df):
+    return next((c for c in ("data", "date", "dia", "referencia", "data_ref", "periodo")
+                 if c in getattr(df, "columns", [])), None)
+
+
+def _janela_safra(safra):
+    ini_ano = int(safra.split("/")[0])
+    return f"{ini_ano}-09-01", f"{ini_ano + 1}-08-31"
+
+
+# ---------------------------------------------------------------------------
+# v3.6/v3.7 — OVERRIDE DE PREÇO HISTÓRICO (arquivo precos_historicos.json)
+# ---------------------------------------------------------------------------
+# Em produção o CEPEA responde 403 e o fallback só traz cotações recentes, então
+# a safra FECHADA (ex.: 2024/25) fica sem preço. Este arquivo opcional permite
+# informar manualmente o preço médio REAL (fonte CEPEA) da safra fechada.
+#
+# Estrutura esperada (chave = alias 'cepea' do combo):
+#   {
+#     "soja":  {"2024/25": 132.72, "2025/26": null},
+#     "milho": {
+#         "2024/25": null, "2025/26": null,
+#         "_uf": {
+#             "MT": {"2024/25": 56.08, "2025/26": null},
+#             "PR": {"2024/25": 66.62, "2025/26": null}
+#         }
+#     }
+#   }
+#
+# Prioridade de resolução (mais específico -> mais genérico):
+#   1) overrides[produto]["_uf"][uf][safra]   (indicador REGIONAL, ex.: Milho MT/PR)
+#   2) overrides[produto][safra]              (indicador NACIONAL único, ex.: Soja/Algodão)
+# Regras: valor numérico -> usado; null/ausente -> ignora (segue coleta automática).
+
+def _carregar_precos_historicos():
+    p = SCRIPT_DIR / "precos_historicos.json"
+    if p.exists():
+        try:
+            return json.loads(p.read_text(encoding="utf-8"))
+        except Exception as e:
+            print(f"   ⚠ precos_historicos.json inválido ({e}); ignorando override.")
+    return {}
+
+
+def _preco_manual(overrides, produto, safra, uf=None):
+    """Retorna o preço manual para (produto, safra), tentando cada alias do
+    produto. Se 'uf' for informado, prioriza override regional específico
+    (overrides[produto]["_uf"][uf][safra]) antes do valor genérico da cultura.
+    Aceita chaves exatas e em minúsculas. Ignora valores não-numéricos."""
+    if not overrides:
+        return None
+    for nome in _como_lista(produto):
+        bloco = overrides.get(nome) or overrides.get(str(nome).lower())
+        if not isinstance(bloco, dict):
+            continue
+        # (1) override regional específico por UF, se existir
+        if uf:
+            bloco_uf = bloco.get("_uf")
+            if isinstance(bloco_uf, dict):
+                sub = bloco_uf.get(uf) or bloco_uf.get(str(uf).upper())
+                if isinstance(sub, dict):
+                    v = sub.get(safra)
+                    if isinstance(v, (int, float)):
+                        return float(v), "regional"
+        # (2) override genérico da cultura (indicador nacional único)
+        v = bloco.get(safra)
+        if isinstance(v, (int, float)):
+            return float(v), "generico"
+    return None, None
+
+
+async def _precos_por_safra(cepea, produto, safras, overrides=None, uf=None):
+    """Retorna {safra: preco_medio ou None}, na seguinte ordem de prioridade:
+      1) OVERRIDE regional (por UF) — quando o indicador CEPEA é regional
+         (ex.: Milho MT difere de Milho PR em ~16%);
+      2) OVERRIDE genérico da cultura — quando há um único indicador nacional
+         (ex.: Soja Paranaguá, Algodão ESALQ);
+      3) SÉRIE AMPLA do CEPEA (uma consulta) fatiada por janela set->ago;
+      4) FALLBACK estreito por safra (_preco_medio).
+    Nunca inventa: safra sem preço em nenhuma fonte fica None.
+    """
+    import pandas as pd
+
+    overrides = overrides or {}
+    resultado = {s: None for s in safras}
+
+    # (1)+(2) override manual primeiro (regional teria prioridade sobre genérico)
+    for s in safras:
+        pm, origem = _preco_manual(overrides, produto, s, uf=uf)
+        if pm is not None:
+            resultado[s] = pm
+            tag = f"regional/{uf}" if origem == "regional" else "genérico"
+            print(f"      ✅ preço {s} via override histórico ({tag}, precos_historicos.json): R$ {pm}")
+
+    faltantes = [s for s in safras if resultado[s] is None]
+    if not faltantes:
+        return resultado
+
+    # (3) série ampla do CEPEA — apenas para as safras ainda faltantes
+    candidatos = _como_lista(produto)
+    anos_ini = [int(s.split("/")[0]) for s in safras]
+    inicio_amplo = f"{min(anos_ini)}-09-01"
+    fim_amplo = f"{max(anos_ini) + 1}-08-31"
+
+    df_ok = None
+    for nome in candidatos:
+        try:
+            df = await cepea.indicador(nome, inicio=inicio_amplo, fim=fim_amplo)
+        except Exception as e:
+            print(f"      ⚠ preço (série ampla) indisponível via alias '{nome}': {e}")
+            continue
+        if df is None or len(df) == 0:
+            continue
+        col_val = _detectar_col_valor(df)
+        col_dt = _detectar_col_data(df)
+        if not col_val or not col_dt:
+            continue
+        tmp = df[[col_dt, col_val]].copy()
+        tmp.columns = ["data", "valor"]
+        tmp["data"] = pd.to_datetime(tmp["data"], errors="coerce")
+        tmp["valor"] = pd.to_numeric(tmp["valor"], errors="coerce")
+        tmp = tmp.dropna(subset=["data", "valor"])
+        if len(tmp):
+            df_ok = tmp
+            print(f"      ✅ série ampla de preço obtida via '{nome}' "
+                  f"({len(df_ok)} cotações, {inicio_amplo}..{fim_amplo})")
+            break
+
+    for s in faltantes:
+        if df_ok is not None and len(df_ok):
+            ini, fim = _janela_safra(s)
+            janela = df_ok[(df_ok["data"] >= pd.Timestamp(ini)) &
+                           (df_ok["data"] <= pd.Timestamp(fim))]
+            if len(janela):
+                resultado[s] = round(float(janela["valor"].mean()), 2)
+                continue
+        # (4) fallback estreito por safra
+        preco_fb = await _preco_medio(cepea, produto, s)
+        if preco_fb is None:
+            print(f"      ↳ preço indisponível para {s} "
+                  f"(sem cotações na janela; preencha precos_historicos.json).")
+        resultado[s] = preco_fb
+
+    return resultado
+
+
+def _pontos_com_margem(serie, chave="margem_economica_ha"):
+    """Pontos que têm margem REAL (independe de alerta) — base do comparativo."""
+    return [p for p in serie if p.get(chave) is not None]
+
+
+def _tendencia(serie, chave="margem_economica_ha"):
+    """v3.4: comparativo entre os DOIS últimos pontos COM MARGEM REAL (não
+    exige 'sem alerta'), para não perder o 2024/25."""
+    validos = _pontos_com_margem(serie, chave)
+    if len(validos) < 2:
+        return "indisponivel", None
+    atual, ant = validos[-1].get(chave), validos[-2].get(chave)
+    if atual is None or ant is None or ant == 0:
+        return "indisponivel", None
+    delta = (atual - ant) / abs(ant) * 100.0
+    if delta > 3:
+        return "alta", round(delta, 1)
+    if delta < -3:
+        return "baixa", round(delta, 1)
+    return "estavel", round(delta, 1)
+
+
+def _flag(valor, valor_anterior):
+    if valor is None:
+        return "indisponivel"
+    if valor_anterior is not None and abs(valor - valor_anterior) < 0.01:
+        return "repetido"
+    return "oficial"
+
+
+def _status_geral(ponto):
+    if ponto.get("margem_economica_ha") is None:
+        return "incompleto"
+    flags = (ponto["custo_status"], ponto["produtividade_status"], ponto["preco_status"])
+    if "repetido" in flags:
+        return "parcial"
+    return "completo"
+
+
+def _checar_sanidade(cultura, margem_ha, coe_ha=None, ct_ha=None):
+    faixa_coe = FAIXAS_PLAUSIVEIS_COE_HA.get(cultura)
+    if coe_ha is not None and faixa_coe:
+        mn, mx = faixa_coe
+        if coe_ha < mn or coe_ha > mx:
+            return True, (f"COE R$ {coe_ha:,.0f}/ha fora da faixa plausível "
+                          f"[{mn:,.0f}, {mx:,.0f}] para {cultura} — provável erro de "
+                          f"coleta/parse do custo.").replace(",", ".")
+    if margem_ha is None:
+        return False, None
+    faixa = FAIXAS_PLAUSIVEIS_MARGEM_HA.get(cultura)
+    if faixa is None:
+        return False, None
+    mn, mx = faixa
+    if margem_ha < mn or margem_ha > mx:
+        return True, (f"Margem econômica R$ {margem_ha:,.0f}/ha fora da faixa plausível "
+                      f"[{mn:,.0f}, {mx:,.0f}] para {cultura} — provável erro de "
+                      f"coleta/conversão (preço/produtividade).").replace(",", ".")
+    return False, None
+
+
+async def _montar_base_async():
+    from agrobr import conab, cepea
+
+    safras = ultimas_safras()
+    print(f"   📅 Safras comparadas: {safras}")
+    print(f"   ⏱ Processando {len(COMBINACOES)} combinações (tempo estimado ~{len(COMBINACOES)*2.5:.0f} min)")
+
+    # v3.6/3.7: carrega override de preços históricos (opcional).
+    _OVERRIDES_PRECO = _carregar_precos_historicos()
+    if _OVERRIDES_PRECO:
+        print("   🗂 Override de preços históricos carregado (precos_historicos.json).")
+
+    cards = []
+    for combo in COMBINACOES:
+        print(f"   🌱 {combo['cultura']} · {combo['uf']}")
+        serie = []
+        prev_ct = prev_prod = prev_preco = None
+        # v3.7: preços de TODAS as safras (override regional/UF -> override
+        # genérico -> série ampla -> fallback estreito).
+        precos_safra = await _precos_por_safra(cepea, combo["cepea"], safras,
+                                                _OVERRIDES_PRECO, uf=combo["uf"])
+        for safra in safras:
+            custos = await _custos_coe_cot_ct(conab, combo["conab"], combo["uf"], safra)
+            prod = await _produtividade_sc_ha(conab, combo["conab"], combo["uf"], safra,
+                                              combo["sc_por_t"], combo.get("fator_comercial", 1.0))
+            preco = precos_safra.get(safra)
+
+            coe = custos["coe"] if custos else None
+            cot = custos["cot"] if custos else None
+            ct = custos["ct"] if custos else None
+
+            custo_status = _flag(ct, prev_ct)
+            prod_status = _flag(prod, prev_prod)
+            preco_status = _flag(preco, prev_preco)
+
+            receita = round(prod * preco, 2) if (prod is not None and preco is not None) else None
+            margem_bruta = round(receita - coe, 2) if (receita is not None and coe is not None) else None
+            margem_econ = round(receita - ct, 2) if (receita is not None and ct is not None) else None
+
+            ponto = {
+                "safra": safra,
+                "coe_ha": coe, "cot_ha": cot, "ct_ha": ct, "custo_status": custo_status,
+                "produtividade": prod, "produtividade_status": prod_status,
+                "preco_medio": preco, "preco_status": preco_status,
+                "receita_ha": receita,
+                "margem_bruta_ha": margem_bruta,
+                "margem_economica_ha": margem_econ,
+            }
+            ponto["status_geral"] = _status_geral(ponto)
+
+            alerta, motivo = _checar_sanidade(combo["cultura"], margem_econ, coe, ct)
+            ponto["alerta_valor"] = alerta
+            ponto["alerta_motivo"] = motivo
+            if alerta:
+                print(f"      🚩 ALERTA ({combo['cultura']}/{combo['uf']}/{safra}): {motivo}")
+
+            serie.append(ponto)
+            prev_ct, prev_prod, prev_preco = ct, prod, preco
+
+        tendencia, delta_pct = _tendencia(serie)
+        cards.append({
+            "cultura": combo["cultura"], "uf": combo["uf"], "unidade": combo["unid"],
+            "serie": serie, "tendencia": tendencia, "delta_pct": delta_pct,
+        })
+
+    cards = _filtrar_cards(cards)
+    return _empacotar(cards, safras)
+
+
+def _ponto_vigente(serie):
+    """Último ponto COM margem real (a safra mais recente exibível)."""
+    validos = _pontos_com_margem(serie)
+    return validos[-1] if validos else None
+
+
+def _filtrar_cards(cards):
+    """Regras de exibição (v3.4):
+       - remove cartões totalmente vazios;
+       - remove um cartão APENAS se o ponto VIGENTE for irreal (alerta).
+         O comparativo com 2024/25 é preservado em todos os cartões mantidos.
+    """
+    antes = len(cards)
+
+    if OCULTAR_CARDS_VAZIOS:
+        cards = [c for c in cards if _pontos_com_margem(c["serie"])]
+
+    if REMOVER_ALERTAS:
+        limpos, removidos = [], []
+        for c in cards:
+            vig = _ponto_vigente(c["serie"])
+            if vig is not None and vig.get("alerta_valor"):
+                removidos.append(f"{c['cultura']}/{c['uf']}")
+            else:
+                limpos.append(c)
+        if removidos:
+            print(f"   🗑 {len(removidos)} cartão(ões) removido(s) por valor irreal (safra vigente): "
+                  f"{', '.join(removidos)}")
+        cards = limpos
+
+    n_comp = sum(1 for c in cards if len(_pontos_com_margem(c["serie"])) >= 2)
+    print(f"   ✅ Cartões finais: {len(cards)} (de {antes}) · {n_comp} com comparativo 24/25 vs 25/26")
+    return cards
+
+
+def _empacotar(cards, safras):
+    total = sum(len(c["serie"]) for c in cards)
+    completos = sum(1 for c in cards for p in c["serie"] if p["status_geral"] == "completo")
+    parciais = sum(1 for c in cards for p in c["serie"] if p["status_geral"] == "parcial")
+    incompletos = sum(1 for c in cards for p in c["serie"] if p["status_geral"] == "incompleto")
+    com_comparativo = sum(1 for c in cards if len(_pontos_com_margem(c["serie"])) >= 2)
+    return {
+        "schema_version": SCHEMA_VERSION,
+        "n_combinacoes": len(cards),
+        "n_com_comparativo": com_comparativo,
+        "gerado_em": datetime.datetime.now().isoformat(timespec="seconds"),
+        "safras": safras,
+        "metodologia": ("Receita Bruta = Produtividade x Preço CEPEA. "
+                        "Margem Bruta = Receita - COE. Margem Econômica = Receita - CT. "
+                        "COE/COT/CT conforme metodologia de custos da CONAB."),
+        "fontes": {
+            "custo": "CONAB - Custos de Produção (COE/COT/CT)",
+            "produtividade": "CONAB - Boletim de Safra (GEASA) — vigente + anterior",
+            "preco": "CEPEA/ESALQ",
+        },
+        "resumo_qualidade": {
+            "total": total, "completos": completos,
+            "parciais": parciais, "incompletos": incompletos,
+        },
+        "autoria": "Global Reporting & Analytics — Thiago Montoro (AGCO)",
+        "cards": cards,
+    }
+
+
+def _cache_valido(dados):
+    if not isinstance(dados, dict):
+        return False
+    if dados.get("schema_version") != SCHEMA_VERSION:
+        return False
+    cards = dados.get("cards")
+    if not isinstance(cards, list) or not cards:
+        return False
+    chaves = {"status_geral", "custo_status", "produtividade_status",
+              "preco_status", "alerta_valor", "coe_ha", "ct_ha",
+              "margem_bruta_ha", "margem_economica_ha"}
+    for c in cards:
+        for p in c.get("serie", []):
+            if not chaves.issubset(p.keys()):
+                return False
+    return True
+
+
+def _estrutura_vazia(motivo=""):
+    safras = ultimas_safras()
+    base = _empacotar([], safras)
+    if motivo:
+        base["aviso"] = motivo
+    return base
+
+
+def processar_margem_agricola(usar_cache=True):
+    now = datetime.datetime.now()
+    cache_path = SCRIPT_DIR / f"cache_margem_{now.year}_{now.month:02d}.json"
+
+    if usar_cache and cache_path.exists():
+        try:
+            dados_cache = json.loads(cache_path.read_text(encoding="utf-8"))
+            if _cache_valido(dados_cache):
+                print(f"   🧠 Usando cache de margem: {cache_path.name} (schema {SCHEMA_VERSION})")
+                return dados_cache
+            print(f"   ♻ Cache '{cache_path.name}' é de schema antigo/incompatível "
+                  f"(esperado {SCHEMA_VERSION}). Recalculando...")
+        except Exception as e:
+            print(f"   ⚠ Cache inválido ({e}). Recalculando...")
+
+    try:
+        import agrobr  # noqa
+    except ImportError:
+        print("   ❌ 'agrobr' não instalado — margem '—'. pip install \"agrobr[browser]\" pandas truststore")
+        return _estrutura_vazia("Pacote agrobr indisponível.")
+
+    try:
+        base = asyncio.run(_montar_base_async())
+        try:
+            cache_path.write_text(json.dumps(base, ensure_ascii=False, indent=2), encoding="utf-8")
+            print(f"   ✅ Cache salvo: {cache_path.name} (schema {SCHEMA_VERSION})")
+        except Exception as e:
+            print(f"   ⚠ Não foi possível salvar cache: {e}")
+        return base
+    except Exception:
+        print("   ❌ Falha ao montar base de margens (retornando '—'):")
+        traceback.print_exc()
+        return _estrutura_vazia("Falha na coleta CONAB/CEPEA.")
+
+
+if __name__ == "__main__":
+    print("=" * 64)
+    print("EARLY SIGNALS · modulo_margem_agricola v3.7 (teste standalone)")
+    print("=" * 64)
+    dados = processar_margem_agricola()
+    print(f"Cartões: {dados['n_combinacoes']} | Com comparativo 24/25 vs 25/26: "
+          f"{dados.get('n_com_comparativo', 0)}")
