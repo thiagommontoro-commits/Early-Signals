@@ -1,0 +1,15 @@
+{
+  "_instrucoes": "Precos medios REAIS por safra (janela set->ago), fonte CEPEA/ESALQ. Preencha o preco medio da SAFRA FECHADA (2024/25) para cada cultura, substituindo null pelo numero. A safra vigente (2025/26) pode ficar null: e coletada automaticamente. Graos em R$/sc60kg; algodao em R$/@ (pluma), coerente com a base atual. NADA e inventado: copie da serie oficial do CEPEA.",
+  "_fonte": "CEPEA/ESALQ - https://www.cepea.org.br (Consulta ao Banco de Dados / Serie de precos)",
+  "_como_obter": "No site do CEPEA, abra a cultura -> 'Serie de precos' -> intervalo 01/09/2024 a 31/08/2025 -> media simples das cotacoes diarias (R$/sc60) -> cole abaixo.",
+  "_chaves": "A chave deve ser o alias 'cepea' usado no COMBINACOES do modulo (ex.: soja, milho, algodao, trigo, arroz, feijao, sorgo, cafe_arabica).",
+  "_autoria": "Global Reporting & Analytics - Thiago Montoro (AGCO)",
+  "soja":         { "2024/25": null, "2025/26": null },
+  "milho":        { "2024/25": null, "2025/26": null },
+  "algodao":      { "2024/25": null, "2025/26": null },
+  "trigo":        { "2024/25": null, "2025/26": null },
+  "arroz":        { "2024/25": null, "2025/26": null },
+  "feijao":       { "2024/25": null, "2025/26": null },
+  "sorgo":        { "2024/25": null, "2025/26": null },
+  "cafe_arabica": { "2024/25": null, "2025/26": null }
+}
