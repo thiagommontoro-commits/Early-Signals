@@ -1,8 +1,8 @@
 {
-  "schema_version": "3.5",
+  "schema_version": "3.6",
   "n_combinacoes": 6,
   "n_com_comparativo": 0,
-  "gerado_em": "2026-09-02T16:34:31",
+  "gerado_em": "2026-09-02T16:58:55",
   "safras": [
     "2024/25",
     "2025/26"
