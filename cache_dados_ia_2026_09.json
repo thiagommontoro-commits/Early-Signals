@@ -1,0 +1,1418 @@
+{
+  "br": {
+    "fatores_economicos": [
+      {
+        "titulo": "Crédito Rural",
+        "icone": "💳",
+        "tendencia": "estavel",
+        "direcao": "estavel",
+        "descricao": "Plano Safra 2026/27 com recursos robustos, mas taxas de juros permanecem elevadas, impactando o custo.",
+        "impactos": "Acesso a crédito garante compras essenciais, mas juros altos freiam investimentos em máquinas mais caras.",
+        "fonte": "Banco Central, Ministério da Agricultura"
+      },
+      {
+        "titulo": "Juros (Selic)",
+        "icone": "💰",
+        "tendencia": "restritiva",
+        "direcao": "melhorando",
+        "descricao": "Selic em lento processo de queda, mas permanece em patamar elevado, afetando custo de capital.",
+        "impactos": "Juros altos encarecem financiamento de máquinas e desestimulam novos projetos de expansão.",
+        "fonte": "Banco Central do Brasil"
+      },
+      {
+        "titulo": "Câmbio (Dólar)",
+        "icone": "💵",
+        "tendencia": "alta",
+        "direcao": "piorando",
+        "descricao": "Dólar volátil frente ao Real, com tendência de leve alta, influenciado por incertezas fiscais e externas.",
+        "impactos": "Dólar alto encarece máquinas importadas e insumos, mas favorece exportadores de commodities agrícolas.",
+        "fonte": "Banco Central, Valor Econômico"
+      },
+      {
+        "titulo": "Prod. Grãos",
+        "icone": "🚜",
+        "tendencia": "positivo",
+        "direcao": "melhorando",
+        "descricao": "Projeções indicam safra recorde de grãos 2026/27, com bom volume de chuvas e adoção de tecnologia.",
+        "impactos": "Expectativa de alta produção incentiva investimentos em máquinas para plantio e colheita para a nova safra.",
+        "fonte": "Conab, USDA"
+      },
+      {
+        "titulo": "Margens Produtor",
+        "icone": "📊",
+        "tendencia": "incerto",
+        "direcao": "estavel",
+        "descricao": "Margens de soja e milho apertadas; café e cana com margens estáveis. Algodão mostra boa recuperação.",
+        "impactos": "Margens pressionadas levam produtores a postergar compra de máquinas, focando em manutenção da frota.",
+        "fonte": "Cepea, Esalq"
+      }
+    ],
+    "noticias": [
+      {
+        "titulo_noticia": "Chuvas impulsionam plantio de soja no Centro-Oeste brasileiro.",
+        "tendencia_noticia": "positivo",
+        "corpo_noticia": "Condições climáticas favoráveis em setembro aceleram o plantio da soja, com previsão de safra cheia.",
+        "fonte_noticia": "Canal Rural",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "positivo",
+            "descricao": "Demanda por tratores de maior potência para preparo do solo e plantio acelerado.",
+            "segmento_impactado": "Alta Potência (>170cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "incerto",
+            "descricao": "Impacto na demanda para colheitadeiras só será sentido em safra futura.",
+            "segmento_impactado": ""
+          },
+          "pulverizadores": {
+            "tendencia": "incerto",
+            "descricao": "Uso futuro, mas indica área plantada, gerando demanda posterior por defensivos.",
+            "segmento_impactado": ""
+          },
+          "plantadeiras": {
+            "tendencia": "positivo",
+            "descricao": "Produtores investem em plantadeiras modernas para otimizar janela de plantio e eficiência.",
+            "segmento_impactado": "Grande Porte (>20 linhas)"
+          }
+        }
+      },
+      {
+        "titulo_noticia": "Demanda chinesa por milho brasileiro cresce e sustenta preços.",
+        "tendencia_noticia": "positivo",
+        "corpo_noticia": "Exportações de milho para a China atingem recorde, dando suporte aos preços e animando produtores.",
+        "fonte_noticia": "Reuters",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "positivo",
+            "descricao": "Boa demanda e preços sustentam capacidade de investimento dos produtores de milho.",
+            "segmento_impactado": "Média Potência (80-170cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "positivo",
+            "descricao": "Expectativa de boa rentabilidade futura incentiva planejamento para safra e renovação de máquinas.",
+            "segmento_impactado": "Médio Porte (Classes 4-6)"
+          },
+          "pulverizadores": {
+            "tendencia": "positivo",
+            "descricao": "Rentabilidade permite investimento em tecnologia de aplicação de insumos para maior produtividade.",
+            "segmento_impactado": "Autopropelido"
+          },
+          "plantadeiras": {
+            "tendencia": "incerto",
+            "descricao": "Já em fase de plantio de milho verão ou safrinha, impacto mais na próxima compra.",
+            "segmento_impactado": ""
+          }
+        }
+      },
+      {
+        "titulo_noticia": "Colheita de café em Minas Gerais finaliza com produtividade acima da média.",
+        "tendencia_noticia": "positivo",
+        "corpo_noticia": "Produtores de café mineiros celebram colheita farta e de qualidade, impulsionada por condições climáticas ideais.",
+        "fonte_noticia": "Globo Rural",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "positivo",
+            "descricao": "Boa safra e renda melhoram capacidade de investimento em manutenção e novos equipamentos.",
+            "segmento_impactado": "Baixa Potência (<80cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "positivo",
+            "descricao": "Maior produtividade incentiva automação da colheita em futuras safras, visando eficiência.",
+            "segmento_impactado": ""
+          },
+          "pulverizadores": {
+            "tendencia": "positivo",
+            "descricao": "Melhor rentabilidade permite investimento em manejo de pragas e doenças, aumentando produtividade.",
+            "segmento_impactado": "De Arrasto"
+          },
+          "plantadeiras": {
+            "tendencia": "incerto",
+            "descricao": "Não é o principal equipamento para a cultura do café, impacto marginal.",
+            "segmento_impactado": ""
+          }
+        }
+      },
+      {
+        "titulo_noticia": "Setor sucroenergético projeta expansão com demanda aquecida por etanol.",
+        "tendencia_noticia": "positivo",
+        "corpo_noticia": "Preços favoráveis de etanol e açúcar impulsionam o setor, gerando otimismo para investimentos em canaviais.",
+        "fonte_noticia": "NovaCana",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "positivo",
+            "descricao": "Usinas e fornecedores buscam renovar frota para aumento da produção e eficiência operacional.",
+            "segmento_impactado": "Alta Potência (>170cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "positivo",
+            "descricao": "Demanda por colheitadeiras de cana, com foco em tecnologia e capacidade de colheita.",
+            "segmento_impactado": "Grande Porte (Classes 7+)"
+          },
+          "pulverizadores": {
+            "tendencia": "positivo",
+            "descricao": "Manejo da lavoura para maior produtividade requer pulverizadores eficientes e de alta tecnologia.",
+            "segmento_impactado": "Autopropelido"
+          },
+          "plantadeiras": {
+            "tendencia": "positivo",
+            "descricao": "Expansão de área e renovação de canaviais aumentam demanda por plantadeiras especializadas.",
+            "segmento_impactado": "Grande Porte (>20 linhas)"
+          }
+        }
+      },
+      {
+        "titulo_noticia": "Preços do algodão em alta impulsionam rentabilidade dos produtores.",
+        "tendencia_noticia": "positivo",
+        "corpo_noticia": "Cotações globais do algodão subindo, beneficiando produtores brasileiros e incentivando a próxima safra.",
+        "fonte_noticia": "Agência Safras",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "positivo",
+            "descricao": "Maiores lucros liberam capital para aquisição de tratores para o preparo e manejo da cultura.",
+            "segmento_impactado": "Média Potência (80-170cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "positivo",
+            "descricao": "Rentabilidade elevada pode antecipar a troca de colheitadeiras de algodão, buscando maior eficiência.",
+            "segmento_impactado": "Grande Porte (Classes 7+)"
+          },
+          "pulverizadores": {
+            "tendencia": "positivo",
+            "descricao": "Cultura do algodão é intensiva em defensivos, demanda pulverizadores eficientes e modernos.",
+            "segmento_impactado": "Autopropelido"
+          },
+          "plantadeiras": {
+            "tendencia": "positivo",
+            "descricao": "Expectativa de boa rentabilidade incentiva investimento em plantadeiras de precisão e alta tecnologia.",
+            "segmento_impactado": "Grande Porte (>20 linhas)"
+          }
+        }
+      },
+      {
+        "titulo_noticia": "Safra de trigo no Sul do Brasil atinge recorde com clima ideal.",
+        "tendencia_noticia": "positivo",
+        "corpo_noticia": "Colheita de trigo no Sul supera expectativas, com excelentes volumes e qualidade, gerando otimismo no setor.",
+        "fonte_noticia": "Embrapa",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "positivo",
+            "descricao": "Maior produção e boa rentabilidade estimulam investimentos em tratores para preparo e manejo.",
+            "segmento_impactado": "Média Potência (80-170cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "positivo",
+            "descricao": "Recorde de safra pode gerar necessidade de maior capacidade de colheita e renovação de frota.",
+            "segmento_impactado": "Médio Porte (Classes 4-6)"
+          },
+          "pulverizadores": {
+            "tendencia": "positivo",
+            "descricao": "Investimento em manejo sanitário para altas produtividades se torna prioritário.",
+            "segmento_impactado": "De Arrasto"
+          },
+          "plantadeiras": {
+            "tendencia": "incerto",
+            "descricao": "Plantio já foi realizado, impacto na demanda se dará na próxima safra.",
+            "segmento_impactado": ""
+          }
+        }
+      }
+    ]
+  },
+  "ar": {
+    "fatores_economicos": [
+      {
+        "titulo": "Crédito/Financ.",
+        "icone": "💳",
+        "tendencia": "restritiva",
+        "direcao": "estavel",
+        "descricao": "Acesso a crédito segue restrito por altas taxas de juros e instabilidade econômica geral.",
+        "impactos": "Dificuldade de acesso ao capital freia investimentos e compras de máquinas agrícolas.",
+        "fonte": "Banco Central da Argentina, Confederações Rurais"
+      },
+      {
+        "titulo": "Inflação/Câmbio",
+        "icone": "📈",
+        "tendencia": "negativo",
+        "direcao": "piorando",
+        "descricao": "Inflação persiste em níveis altíssimos, desvalorização cambial impacta custos e planejamento.",
+        "impactos": "Custos de insumos e máquinas disparam, corroendo margens e desestimulando investimentos.",
+        "fonte": "INDEC, Banco Central da Argentina"
+      },
+      {
+        "titulo": "Retenciones",
+        "icone": "⚖️",
+        "tendencia": "restritiva",
+        "direcao": "estavel",
+        "descricao": "Retenciones sobre exportações de grãos e carnes persistem, reduzindo a rentabilidade do produtor.",
+        "impactos": "Impostos diretos diminuem a receita, limitando a capacidade de investimento em novas máquinas.",
+        "fonte": "Ministério da Economia da Argentina"
+      },
+      {
+        "titulo": "Prod. Agrícola",
+        "icone": "🚜",
+        "tendencia": "positivo",
+        "direcao": "melhorando",
+        "descricao": "Projeções iniciais indicam recuperação na produção de grãos, após período de seca, com chuvas regulares.",
+        "impactos": "Melhor safra pode gerar maior renda, impulsionando demanda por máquinas, se houver estabilidade.",
+        "fonte": "Bolsa de Cereales de Buenos Aires, USDA"
+      },
+      {
+        "titulo": "Margens Produtor",
+        "icone": "📊",
+        "tendencia": "incerto",
+        "direcao": "estavel",
+        "descricao": "Margens de soja e milho sob pressão por retenciones e alta de custos. Trigo e girassol com leve melhora.",
+        "impactos": "Margens apertadas forçam produtores a priorizar manutenção sobre a aquisição de novos equipamentos.",
+        "fonte": "Fedecom, Bolsa de Comércio de Rosario"
+      }
+    ],
+    "noticias": [
+      {
+        "titulo_noticia": "Chuvas beneficiam plantio de grãos na Pampa Húmeda.",
+        "tendencia_noticia": "positivo",
+        "corpo_noticia": "Regiões agrícolas registram volumes significativos de chuva, melhorando condições para o plantio de soja e milho.",
+        "fonte_noticia": "La Nación",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "positivo",
+            "descricao": "Melhora das condições climáticas estimula preparo do solo e plantio, aquecendo demanda.",
+            "segmento_impactado": "Alta Potência (>170cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "incerto",
+            "descricao": "Impacto mais no futuro, mas boa perspectiva para safra.",
+            "segmento_impactado": ""
+          },
+          "pulverizadores": {
+            "tendencia": "incerto",
+            "descricao": "Uso futuro, após o estabelecimento da lavoura, demanda em breve.",
+            "segmento_impactado": ""
+          },
+          "plantadeiras": {
+            "tendencia": "positivo",
+            "descricao": "Necessidade de plantio rápido e eficiente aumenta a procura por novas plantadeiras.",
+            "segmento_impactado": "Grande Porte (>20 linhas)"
+          }
+        }
+      },
+      {
+        "titulo_noticia": "Governo discute planos para flexibilizar retenciones sobre trigo.",
+        "tendencia_noticia": "positivo",
+        "corpo_noticia": "Rumores sobre potencial redução das retenciones para o trigo geram expectativa de maior rentabilidade para produtores.",
+        "fonte_noticia": "Clarín Rural",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "positivo",
+            "descricao": "Possível melhora da margem do trigo pode liberar capital para investimentos em máquinas.",
+            "segmento_impactado": "Média Potência (80-170cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "positivo",
+            "descricao": "Produtores de trigo podem antecipar renovação de maquinário de colheita.",
+            "segmento_impactado": "Médio Porte (Classes 4-6)"
+          },
+          "pulverizadores": {
+            "tendencia": "positivo",
+            "descricao": "Melhor rentabilidade permite maior investimento em sanidade da lavoura.",
+            "segmento_impactado": "De Arrasto"
+          },
+          "plantadeiras": {
+            "tendencia": "incerto",
+            "descricao": "Plantio de trigo já concluído; o impacto seria na decisão para a próxima safra.",
+            "segmento_impactado": ""
+          }
+        }
+      },
+      {
+        "titulo_noticia": "Inflação persistente e dólar paralelo elevam custos de produção.",
+        "tendencia_noticia": "negativo",
+        "corpo_noticia": "Alta de preços e volatilidade cambial continuam pressionando os custos de insumos, combustíveis e manutenção.",
+        "fonte_noticia": "Ámbito Financiero",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "negativo",
+            "descricao": "Custos altos corroem margens, dificultando a compra de novos tratores ou peças de reposição.",
+            "segmento_impactado": ""
+          },
+          "colheitadeiras": {
+            "tendencia": "negativo",
+            "descricao": "Investimento em máquinas de alto valor fica inviável com cenário de incerteza econômica.",
+            "segmento_impactado": ""
+          },
+          "pulverizadores": {
+            "tendencia": "negativo",
+            "descricao": "Aumento do custo operacional desestimula o uso e a compra de novos equipamentos.",
+            "segmento_impactado": ""
+          },
+          "plantadeiras": {
+            "tendencia": "negativo",
+            "descricao": "Produtores adiam aquisição de plantadeiras para conter gastos e preservar capital.",
+            "segmento_impactado": ""
+          }
+        }
+      },
+      {
+        "titulo_noticia": "Argentina projeta aumento significativo na produção de carne bovina.",
+        "tendencia_noticia": "positivo",
+        "corpo_noticia": "Setor pecuário otimista com expansão de mercados e aumento do rebanho, visando maior exportação de carne.",
+        "fonte_noticia": "Infocampo",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "positivo",
+            "descricao": "Crescimento da pecuária impulsiona demanda por tratores para preparo de pastagens e forragem.",
+            "segmento_impactado": "Baixa Potência (<80cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "incerto",
+            "descricao": "Não diretamente ligado à colheita de grãos, mas pode indicar melhora econômica geral.",
+            "segmento_impactado": ""
+          },
+          "pulverizadores": {
+            "tendencia": "positivo",
+            "descricao": "Demanda por pulverizadores para controle de pragas em pastagens e sanidade animal.",
+            "segmento_impactado": "De Arrasto"
+          },
+          "plantadeiras": {
+            "tendencia": "incerto",
+            "descricao": "Uso limitado na pecuária extensiva, foco maior em tratores.",
+            "segmento_impactado": ""
+          }
+        }
+      },
+      {
+        "titulo_noticia": "Produtores buscam alternativas de financiamento privado.",
+        "tendencia_noticia": "negativo",
+        "corpo_noticia": "Dificuldade em obter crédito bancário força agricultores a procurar opções mais caras e de curto prazo.",
+        "fonte_noticia": "Agrofy News",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "negativo",
+            "descricao": "Acesso restrito a financiamento convencional limita a capacidade de compra de tratores.",
+            "segmento_impactado": ""
+          },
+          "colheitadeiras": {
+            "tendencia": "negativo",
+            "descricao": "Adia a aquisição de equipamentos de alto valor, buscando manter frota atual com manutenção.",
+            "segmento_impactado": ""
+          },
+          "pulverizadores": {
+            "tendencia": "negativo",
+            "descricao": "Dificuldade de crédito impacta a renovação e compra de tecnologia de aplicação.",
+            "segmento_impactado": ""
+          },
+          "plantadeiras": {
+            "tendencia": "negativo",
+            "descricao": "Produtores priorizam manutenção ou aluguel de plantadeiras para as safras.",
+            "segmento_impactado": ""
+          }
+        }
+      },
+      {
+        "titulo_noticia": "Investimentos em infraestrutura logística no Norte da Argentina.",
+        "tendencia_noticia": "positivo",
+        "corpo_noticia": "Melhorias em rodovias e ferrovias na região norte facilitam o escoamento da produção agrícola.",
+        "fonte_noticia": "Télam",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "positivo",
+            "descricao": "Menores custos logísticos melhoram a rentabilidade, incentivando investimentos em produtividade no campo.",
+            "segmento_impactado": ""
+          },
+          "colheitadeiras": {
+            "tendencia": "positivo",
+            "descricao": "Facilidade de escoamento indiretamente apoia a produção de grãos e a decisão de colheita.",
+            "segmento_impactado": ""
+          },
+          "pulverizadores": {
+            "tendencia": "positivo",
+            "descricao": "Melhores condições para o agronegócio em geral, impactando positivamente todos os elos.",
+            "segmento_impactado": ""
+          },
+          "plantadeiras": {
+            "tendencia": "positivo",
+            "descricao": "Otimismo com escoamento pode incentivar expansão de área cultivada e renovação de plantadeiras.",
+            "segmento_impactado": "Grande Porte (>20 linhas)"
+          }
+        }
+      }
+    ]
+  },
+  "cl": {
+    "fatores_economicos": [
+      {
+        "titulo": "Cenário Hídrico",
+        "icone": "💧",
+        "tendencia": "incerto",
+        "direcao": "estavel",
+        "descricao": "Chuvas de inverno trouxeram alívio temporário, mas gestão hídrica e seca permanecem desafios cruciais.",
+        "impactos": "Disponibilidade de água crucial para fruticultura e viticultura, definindo investimentos em máquinas de irrigação.",
+        "fonte": "Direção Geral de Águas (DGA), AgroNorte"
+      },
+      {
+        "titulo": "Export. Frutas",
+        "icone": "🍒",
+        "tendencia": "positivo",
+        "direcao": "melhorando",
+        "descricao": "Exportações de frutas frescas, como cerejas e uvas, apresentam forte demanda e bons preços.",
+        "impactos": "Alta rentabilidade na fruticultura impulsiona aquisição de tratores especializados e pulverizadores de precisão.",
+        "fonte": "ODEPA, Federação de Produtores de Frutas"
+      },
+      {
+        "titulo": "Custo de Insumos",
+        "icone": "📦",
+        "tendencia": "estavel",
+        "direcao": "melhorando",
+        "descricao": "Custos de insumos agrícolas mostram sinais de estabilização, após picos, aliviando pressão sobre produtores.",
+        "impactos": "Estabilização de custos pode liberar capital para investimento em máquinas e novas tecnologias.",
+        "fonte": "SOFOFA, Bolsa de Produtos de Chile"
+      },
+      {
+        "titulo": "Reg. Ambiental",
+        "icone": "🌿",
+        "tendencia": "restritiva",
+        "direcao": "piorando",
+        "descricao": "Novas leis ambientais e gestão da água pressionam o setor agrícola, exigindo práticas mais sustentáveis.",
+        "impactos": "Demanda por pulverizadores de precisão e tecnologias que otimizem o uso de recursos hídricos.",
+        "fonte": "Ministério do Meio Ambiente"
+      },
+      {
+        "titulo": "Margens Produtor",
+        "icone": "📊",
+        "tendencia": "estavel",
+        "direcao": "estavel",
+        "descricao": "Margens na fruticultura estão favoráveis; culturas anuais e pequenos produtores enfrentam desafios.",
+        "impactos": "Margens positivas na fruticultura impulsionam investimentos; outras culturas esperam recuperação para máquinas.",
+        "fonte": "Fedefruta, INE"
+      }
+    ],
+    "noticias": [
+      {
+        "titulo_noticia": "Exportações de cerejas chilenas para a Ásia atingem novos recordes.",
+        "tendencia_noticia": "positivo",
+        "corpo_noticia": "Forte demanda asiática por cerejas impulsiona o setor, garantindo alta rentabilidade para produtores chilenos.",
+        "fonte_noticia": "Fedefruta",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "positivo",
+            "descricao": "Alta rentabilidade gera capital para renovação de tratores em pomares e maior mecanização.",
+            "segmento_impactado": "Baixa Potência (<80cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "incerto",
+            "descricao": "A colheita de cerejas é predominantemente manual, portanto, impacto limitado.",
+            "segmento_impactado": ""
+          },
+          "pulverizadores": {
+            "tendencia": "positivo",
+            "descricao": "Investimento em pulverizadores especializados para pomares é crucial para qualidade.",
+            "segmento_impactado": "De Arrasto"
+          },
+          "plantadeiras": {
+            "tendencia": "incerto",
+            "descricao": "Para culturas perenes, o plantio inicial é feito uma vez, sem demanda contínua.",
+            "segmento_impactado": ""
+          }
+        }
+      },
+      {
+        "titulo_noticia": "Governo lança programa de subsídios para eficiência hídrica.",
+        "tendencia_noticia": "positivo",
+        "corpo_noticia": "Iniciativa governamental visa modernizar sistemas de irrigação e otimizar o uso da água em áreas agrícolas.",
+        "fonte_noticia": "Ministério da Agricultura do Chile",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "positivo",
+            "descricao": "Programas de apoio incentivam investimento em tratores para preparo de áreas com novos sistemas de irrigação.",
+            "segmento_impactado": "Baixa Potência (<80cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "incerto",
+            "descricao": "O impacto não é direto sobre colheitadeiras, mas sim na infraestrutura do campo.",
+            "segmento_impactado": ""
+          },
+          "pulverizadores": {
+            "tendencia": "incerto",
+            "descricao": "Indiretamente, melhorando a saúde geral da lavoura e a necessidade de manejo.",
+            "segmento_impactado": ""
+          },
+          "plantadeiras": {
+            "tendencia": "incerto",
+            "descricao": "Não diretamente relacionado ao plantio, mas pode abrir novas áreas para cultivo.",
+            "segmento_impactado": ""
+          }
+        }
+      },
+      {
+        "titulo_noticia": "Custos de energia para irrigação continuam sendo um desafio.",
+        "tendencia_noticia": "negativo",
+        "corpo_noticia": "Elevação nos preços da energia elétrica pressiona os custos operacionais dos sistemas de irrigação no Chile.",
+        "fonte_noticia": "Diario Financiero",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "negativo",
+            "descricao": "Aumento dos custos operacionais diminui a capacidade de investimento em novos equipamentos.",
+            "segmento_impactado": ""
+          },
+          "colheitadeiras": {
+            "tendencia": "negativo",
+            "descricao": "Redução de lucros impacta a decisão de compra de maquinário caro e de alta tecnologia.",
+            "segmento_impactado": ""
+          },
+          "pulverizadores": {
+            "tendencia": "negativo",
+            "descricao": "Produtores podem adiar compra de tecnologia para economizar em custos de produção.",
+            "segmento_impactado": ""
+          },
+          "plantadeiras": {
+            "tendencia": "negativo",
+            "descricao": "Custos elevados impactam a rentabilidade geral da safra, limitando investimentos.",
+            "segmento_impactado": ""
+          }
+        }
+      },
+      {
+        "titulo_noticia": "Setor vitivinícola chileno busca tecnologias contra mudanças climáticas.",
+        "tendencia_noticia": "positivo",
+        "corpo_noticia": "Investimentos em pesquisa e desenvolvimento de práticas agrícolas adaptadas ao clima, incluindo automação.",
+        "fonte_noticia": "El Mercurio",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "positivo",
+            "descricao": "Necessidade de tratores versáteis para manejo em novas condições climáticas e otimização.",
+            "segmento_impactado": "Baixa Potência (<80cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "incerto",
+            "descricao": "A colheita de uvas é manual em muitas regiões, limitando o impacto em colheitadeiras.",
+            "segmento_impactado": ""
+          },
+          "pulverizadores": {
+            "tendencia": "positivo",
+            "descricao": "Demanda por pulverizadores eficientes para proteção de vinhedos e manejo fitossanitário.",
+            "segmento_impactado": "De Arrasto"
+          },
+          "plantadeiras": {
+            "tendencia": "incerto",
+            "descricao": "Culturas perenes, impacto mais na implantação de novos vinhedos.",
+            "segmento_impactado": ""
+          }
+        }
+      }
+    ]
+  },
+  "uy": {
+    "fatores_economicos": [
+      {
+        "titulo": "Export. Carne",
+        "icone": "🐄",
+        "tendencia": "positivo",
+        "direcao": "estavel",
+        "descricao": "Demanda internacional por carne uruguaia permanece forte, com bons preços nos mercados globais.",
+        "impactos": "Boa rentabilidade na pecuária impulsiona investimentos em tratores para pastagens e maquinário forrageiro.",
+        "fonte": "INAC, Ministério da Pecuária"
+      },
+      {
+        "titulo": "Preço Commod.",
+        "icone": "📉",
+        "tendencia": "incerto",
+        "direcao": "estavel",
+        "descricao": "Volatilidade nos preços globais de soja e trigo impacta a rentabilidade local, gerando cautela.",
+        "impactos": "Incerteza nos preços pode levar à cautela nos investimentos em máquinas de grãos para a próxima safra.",
+        "fonte": "Bolsa de Valores de Montevidéu, USDA"
+      },
+      {
+        "titulo": "Atraso Cambial",
+        "icone": "💵",
+        "tendencia": "negativo",
+        "direcao": "piorando",
+        "descricao": "Peso uruguaio valorizado frente ao dólar, reduzindo competitividade das exportações agrícolas.",
+        "impactos": "Dólar baixo reduz receita de exportadores, impactando sua capacidade de investir em máquinas.",
+        "fonte": "Banco Central do Uruguai"
+      },
+      {
+        "titulo": "Prod. Florestal",
+        "icone": "🌲",
+        "tendencia": "expansiva",
+        "direcao": "melhorando",
+        "descricao": "Investimentos contínuos no setor florestal, com aumento de áreas cultivadas e industrialização.",
+        "impactos": "Aumento da atividade florestal gera demanda por tratores de maior potência e equipamentos específicos.",
+        "fonte": "Ministério da Indústria, Montes del Plata"
+      },
+      {
+        "titulo": "Margens Produtor",
+        "icone": "📊",
+        "tendencia": "incerto",
+        "direcao": "estavel",
+        "descricao": "Margens na pecuária e setor florestal estão razoáveis. Grãos enfrentam pressão de preços e câmbio.",
+        "impactos": "Setores com melhores margens continuarão investindo; outros podem adiar compras de máquinas.",
+        "fonte": "Ministério da Pecuária, Agricultura e Pesca (MGAP)"
+      }
+    ],
+    "noticias": [
+      {
+        "titulo_noticia": "Setor de carne uruguaia projeta recorde de exportação com novos mercados.",
+        "tendencia_noticia": "positivo",
+        "corpo_noticia": "Expansão para mercados asiáticos e europeus impulsiona a produção e a rentabilidade da carne bovina.",
+        "fonte_noticia": "INAC",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "positivo",
+            "descricao": "Maiores lucros na pecuária incentivam investimento em tratores para manejo de pastagens e alimentação.",
+            "segmento_impactado": "Baixa Potência (<80cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "incerto",
+            "descricao": "Não diretamente relacionado à colheita de grãos. O impacto é mais na pecuária.",
+            "segmento_impactado": ""
+          },
+          "pulverizadores": {
+            "tendencia": "positivo",
+            "descricao": "Demanda por pulverizadores para controle de pragas em pastagens e sanidade animal.",
+            "segmento_impactado": "De Arrasto"
+          },
+          "plantadeiras": {
+            "tendencia": "incerto",
+            "descricao": "Não diretamente ligado a plantadeiras de grãos em áreas de pecuária extensiva.",
+            "segmento_impactado": ""
+          }
+        }
+      },
+      {
+        "titulo_noticia": "Produtores de soja do Uruguai preocupados com queda de preços.",
+        "tendencia_noticia": "negativo",
+        "corpo_noticia": "Cotações da soja em baixa no mercado global pressionam a rentabilidade dos agricultores uruguaios.",
+        "fonte_noticia": "El País Agro",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "negativo",
+            "descricao": "Margens reduzidas levam à cautela na aquisição de tratores para culturas anuais.",
+            "segmento_impactado": "Média Potência (80-170cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "negativo",
+            "descricao": "Produtores adiam renovação de frota de colheitadeiras devido à incerteza sobre preços.",
+            "segmento_impactado": "Grande Porte (Classes 7+)"
+          },
+          "pulverizadores": {
+            "tendencia": "negativo",
+            "descricao": "Redução de rentabilidade pode limitar compra de tecnologia de aplicação de defensivos.",
+            "segmento_impactado": "Autopropelido"
+          },
+          "plantadeiras": {
+            "tendencia": "negativo",
+            "descricao": "Desestímulo a grandes investimentos na próxima safra de soja e outras culturas.",
+            "segmento_impactado": "Grande Porte (>20 linhas)"
+          }
+        }
+      },
+      {
+        "titulo_noticia": "Investimentos em novas fábricas de celulose impulsionam florestal.",
+        "tendencia_noticia": "positivo",
+        "corpo_noticia": "Expansão da capacidade de processamento de madeira no Uruguai gera grande otimismo para o setor florestal.",
+        "fonte_noticia": "UPM",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "positivo",
+            "descricao": "Setor florestal demanda tratores de alta potência para manejo e transporte de madeira.",
+            "segmento_impactado": "Alta Potência (>170cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "incerto",
+            "descricao": "Maquinário específico para colheita florestal, não agrícola. Impacto indireto na economia.",
+            "segmento_impactado": ""
+          },
+          "pulverizadores": {
+            "tendencia": "incerto",
+            "descricao": "Uso limitado no setor florestal, não é um equipamento de grande demanda.",
+            "segmento_impactado": ""
+          },
+          "plantadeiras": {
+            "tendencia": "incerto",
+            "descricao": "Plantio florestal usa equipamentos específicos e de nicho, não impacta o agromáquinas geral.",
+            "segmento_impactado": ""
+          }
+        }
+      },
+      {
+        "titulo_noticia": "Atraso cambial impacta exportadores de arroz, pressionando o setor.",
+        "tendencia_noticia": "negativo",
+        "corpo_noticia": "Valorização do Peso Uruguaio prejudica a competitividade do arroz uruguaio no mercado internacional.",
+        "fonte_noticia": "Agroadviser",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "negativo",
+            "descricao": "Menor rentabilidade do arroz limita investimentos em tratores e outros equipamentos.",
+            "segmento_impactado": "Média Potência (80-170cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "negativo",
+            "descricao": "Produtores podem postergar a troca de colheitadeiras para arroz devido à baixa rentabilidade.",
+            "segmento_impactado": "Médio Porte (Classes 4-6)"
+          },
+          "pulverizadores": {
+            "tendencia": "negativo",
+            "descricao": "Redução de capital disponível para novas tecnologias e equipamentos para a cultura.",
+            "segmento_impactado": "De Arrasto"
+          },
+          "plantadeiras": {
+            "tendencia": "negativo",
+            "descricao": "O plantio do arroz é afetado pela baixa rentabilidade, desestimulando a compra de máquinas.",
+            "segmento_impactado": ""
+          }
+        }
+      }
+    ]
+  },
+  "py": {
+    "fatores_economicos": [
+      {
+        "titulo": "Expansão Agro",
+        "icone": "🌱",
+        "tendencia": "expansiva",
+        "direcao": "melhorando",
+        "descricao": "Crescimento contínuo da área cultivada e da produtividade, especialmente soja e milho.",
+        "impactos": "Expansão exige mais tratores, plantadeiras e colheitadeiras, aquecendo o mercado de máquinas.",
+        "fonte": "CAPECO, Ministério da Agricultura"
+      },
+      {
+        "titulo": "Logística Fluvial",
+        "icone": "🚢",
+        "tendencia": "estavel",
+        "direcao": "estavel",
+        "descricao": "Escoamento da produção agrícola depende fortemente da hidrovia do Rio Paraguai, com desafios de calado.",
+        "impactos": "Melhoria da logística reduz custos de frete, aumentando rentabilidade e capacidade de investimento.",
+        "fonte": "Centro de Armadores Fluviales y Marítimos"
+      },
+      {
+        "titulo": "Prod. Carne",
+        "icone": "🥩",
+        "tendencia": "positivo",
+        "direcao": "melhorando",
+        "descricao": "Setor pecuário em crescimento, com aumento das exportações e investimento em genética.",
+        "impactos": "Crescimento da pecuária gera demanda por máquinas forrageiras e tratores para manejo de pastagens.",
+        "fonte": "SENACSA, Ministério da Pecuária"
+      },
+      {
+        "titulo": "Fiscal/Câmbio",
+        "icone": "🏛️",
+        "tendencia": "estavel",
+        "direcao": "estavel",
+        "descricao": "Ambiente macroeconômico estável, com câmbio controlado e políticas fiscais que apoiam o setor.",
+        "impactos": "Estabilidade cambial e fiscal favorece importação de máquinas e planejamento de investimentos.",
+        "fonte": "Banco Central do Paraguai, Ministério da Fazenda"
+      },
+      {
+        "titulo": "Margens Produtor",
+        "icone": "📊",
+        "tendencia": "positivo",
+        "direcao": "estavel",
+        "descricao": "Margens de soja e milho estão boas, impulsionadas por produtividade e custos controlados. Carne com boa rentabilidade.",
+        "impactos": "Boa rentabilidade geral incentiva a renovação e compra de máquinas agrícolas em diversos segmentos.",
+        "fonte": "CAPECO, Rural"
+      }
+    ],
+    "noticias": [
+      {
+        "titulo_noticia": "Paraguai projeta safra de soja recorde para 2026/27.",
+        "tendencia_noticia": "positivo",
+        "corpo_noticia": "Expectativas de clima ideal e investimento em tecnologia apontam para uma colheita de soja sem precedentes.",
+        "fonte_noticia": "La Nación Paraguay",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "positivo",
+            "descricao": "Boas perspectivas de safra impulsionam demanda por tratores para preparo de solo e plantio.",
+            "segmento_impactado": "Alta Potência (>170cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "positivo",
+            "descricao": "Recorde de safra exige colheitadeiras de alta capacidade e tecnologia para otimizar a colheita.",
+            "segmento_impactado": "Grande Porte (Classes 7+)"
+          },
+          "pulverizadores": {
+            "tendencia": "positivo",
+            "descricao": "Cultivo em grande escala exige pulverizadores eficientes para manejo de pragas e doenças.",
+            "segmento_impactado": "Autopropelido"
+          },
+          "plantadeiras": {
+            "tendencia": "positivo",
+            "descricao": "Expansão e renovação das áreas de soja aumentam a procura por plantadeiras de grande porte.",
+            "segmento_impactado": "Grande Porte (>20 linhas)"
+          }
+        }
+      },
+      {
+        "titulo_noticia": "Investimentos em dragagem do Rio Paraguai melhoram escoamento.",
+        "tendencia_noticia": "positivo",
+        "corpo_noticia": "Obras de infraestrutura na hidrovia garantem maior calado, otimizando o transporte da produção agrícola.",
+        "fonte_noticia": "ABC Color",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "positivo",
+            "descricao": "Redução de custos logísticos aumenta a rentabilidade e capacidade de investimento em máquinas.",
+            "segmento_impactado": ""
+          },
+          "colheitadeiras": {
+            "tendencia": "positivo",
+            "descricao": "Maior facilidade de escoamento indiretamente fomenta a produção e o agronegócio.",
+            "segmento_impactado": ""
+          },
+          "pulverizadores": {
+            "tendencia": "positivo",
+            "descricao": "Melhores condições para o agronegócio em geral, incentivando a adoção de tecnologias.",
+            "segmento_impactado": ""
+          },
+          "plantadeiras": {
+            "tendencia": "positivo",
+            "descricao": "Melhor rentabilidade incentiva expansão e modernização da lavoura e aquisição de plantadeiras.",
+            "segmento_impactado": "Grande Porte (>20 linhas)"
+          }
+        }
+      },
+      {
+        "titulo_noticia": "Setor pecuário paraguaio celebra abertura de novos mercados.",
+        "tendencia_noticia": "positivo",
+        "corpo_noticia": "Acordos comerciais impulsionam as vendas de carne, aumentando o faturamento e o otimismo dos pecuaristas.",
+        "fonte_noticia": "Revista Rural",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "positivo",
+            "descricao": "Maior rentabilidade na pecuária estimula compra de tratores para manejo de pastagens e forragem.",
+            "segmento_impactado": "Baixa Potência (<80cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "incerto",
+            "descricao": "Não diretamente relacionado a colheitadeiras de grãos, o foco é na pecuária.",
+            "segmento_impactado": ""
+          },
+          "pulverizadores": {
+            "tendencia": "positivo",
+            "descricao": "Demanda por pulverizadores para controle de pragas em pastagens e sanidade animal.",
+            "segmento_impactado": "De Arrasto"
+          },
+          "plantadeiras": {
+            "tendencia": "incerto",
+            "descricao": "Não diretamente relacionado a plantadeiras de grãos, impacta a cadeia de carne.",
+            "segmento_impactado": ""
+          }
+        }
+      },
+      {
+        "titulo_noticia": "Escassez de mão de obra rural vira desafio no interior do Paraguai.",
+        "tendencia_noticia": "negativo",
+        "corpo_noticia": "Dificuldade em encontrar trabalhadores qualificados pressiona o custo da produção e atrasa operações.",
+        "fonte_noticia": "Ultima Hora",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "positivo",
+            "descricao": "Aumenta demanda por tratores com tecnologia embarcada para compensar falta de mão de obra.",
+            "segmento_impactado": "Alta Potência (>170cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "positivo",
+            "descricao": "Automação da colheita se torna crucial diante da escassez de trabalhadores e necessidade de eficiência.",
+            "segmento_impactado": "Grande Porte (Classes 7+)"
+          },
+          "pulverizadores": {
+            "tendencia": "positivo",
+            "descricao": "Pulverizadores autopropelidos para reduzir dependência de mão de obra e otimizar aplicação.",
+            "segmento_impactado": "Autopropelido"
+          },
+          "plantadeiras": {
+            "tendencia": "positivo",
+            "descricao": "Plantadeiras de precisão e alta capacidade para otimizar o plantio e reduzir necessidade de pessoal.",
+            "segmento_impactado": "Grande Porte (>20 linhas)"
+          }
+        }
+      }
+    ]
+  },
+  "pe": {
+    "fatores_economicos": [
+      {
+        "titulo": "Agroexport (Costa)",
+        "icone": "🥑",
+        "tendencia": "positivo",
+        "direcao": "melhorando",
+        "descricao": "Exportações de superalimentos peruanos continuam em alta, impulsionando a agroindústria da costa.",
+        "impactos": "Alta demanda por tratores especializados, pulverizadores e equipamentos de pós-colheita para exportação.",
+        "fonte": "MINAGRI, ADEX"
+      },
+      {
+        "titulo": "Agro Andino",
+        "icone": "🥔",
+        "tendencia": "estavel",
+        "direcao": "estavel",
+        "descricao": "Agricultura de pequena escala nos Andes enfrenta desafios como infraestrutura e acesso a mercados.",
+        "impactos": "Demanda por máquinas de pequena e média potência, com foco em simplicidade e robustez para essa região.",
+        "fonte": "Sierra y Selva Exportadora, Ministério da Agricultura"
+      },
+      {
+        "titulo": "Irrigação",
+        "icone": "🏞️",
+        "tendencia": "expansiva",
+        "direcao": "melhorando",
+        "descricao": "Novas áreas irrigadas entram em produção, impulsionando a diversificação e expansão agrícola.",
+        "impactos": "Demanda por tratores e equipamentos para preparo de solo em novas áreas, além de tecnologia de irrigação.",
+        "fonte": "Autoridade Nacional da Água (ANA)"
+      },
+      {
+        "titulo": "Cenário Político",
+        "icone": "⚖️",
+        "tendencia": "estavel",
+        "direcao": "melhorando",
+        "descricao": "Ambiente político mais estável em comparação a anos anteriores, favorecendo o investimento privado.",
+        "impactos": "Maior confiança se traduz em mais investimentos de longo prazo no setor agrícola, incluindo máquinas.",
+        "fonte": "Reuters, El Comercio"
+      },
+      {
+        "titulo": "Margens Produtor",
+        "icone": "📊",
+        "tendencia": "positivo",
+        "direcao": "estavel",
+        "descricao": "Margens para agroexportadores na costa são boas; produtores andinos ainda enfrentam volatilidade.",
+        "impactos": "Bons retornos na agroexportação impulsionam compras, enquanto outros segmentos são mais cautelosos.",
+        "fonte": "AGAP, Sociedade Nacional de Indústrias"
+      }
+    ],
+    "noticias": [
+      {
+        "titulo_noticia": "Exportações de mirtilos peruanos batem recorde em 2026.",
+        "tendencia_noticia": "positivo",
+        "corpo_noticia": "Alta demanda por superfrutas impulsiona a produção e exportação, consolidando o Peru como líder global.",
+        "fonte_noticia": "FreshFruit",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "positivo",
+            "descricao": "Aumento da produção de mirtilos demanda tratores compactos para manejo em pomares.",
+            "segmento_impactado": "Baixa Potência (<80cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "incerto",
+            "descricao": "A colheita de mirtilos geralmente é manual, com impacto limitado nas colheitadeiras.",
+            "segmento_impactado": ""
+          },
+          "pulverizadores": {
+            "tendencia": "positivo",
+            "descricao": "Necessidade de manejo fitossanitário preciso em cultivos de alto valor para manter qualidade.",
+            "segmento_impactado": "De Arrasto"
+          },
+          "plantadeiras": {
+            "tendencia": "incerto",
+            "descricao": "Culturas perenes, o impacto é no estabelecimento de novos pomares, não contínuo.",
+            "segmento_impactado": ""
+          }
+        }
+      },
+      {
+        "titulo_noticia": "Novos projetos de irrigação em Piura ampliam fronteira agrícola.",
+        "tendencia_noticia": "positivo",
+        "corpo_noticia": "Investimentos em infraestrutura hídrica permitem o cultivo em novas áreas, focando em culturas de exportação.",
+        "fonte_noticia": "La República",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "positivo",
+            "descricao": "Novas áreas cultivadas exigem tratores para preparo de solo e manejo inicial das lavouras.",
+            "segmento_impactado": "Média Potência (80-170cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "positivo",
+            "descricao": "Expansão de áreas cultivadas, principalmente para frutas e vegetais, aumenta a demanda futura.",
+            "segmento_impactado": ""
+          },
+          "pulverizadores": {
+            "tendencia": "positivo",
+            "descricao": "Necessidade de manejo eficiente em novas áreas para garantir a produtividade.",
+            "segmento_impactado": "De Arrasto"
+          },
+          "plantadeiras": {
+            "tendencia": "positivo",
+            "descricao": "Demanda por plantadeiras para culturas temporárias nas novas áreas abertas à produção.",
+            "segmento_impactado": "Pequeno Porte (<20 linhas)"
+          }
+        }
+      },
+      {
+        "titulo_noticia": "Produtores de batata andina buscam apoio para comercialização.",
+        "tendencia_noticia": "negativo",
+        "corpo_noticia": "Pequenos agricultores dos Andes enfrentam desafios de infraestrutura e oscilação de preços para suas culturas.",
+        "fonte_noticia": "RPP Noticias",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "negativo",
+            "descricao": "Dificuldades de mercado limitam a capacidade de investimento dos pequenos produtores andinos.",
+            "segmento_impactado": "Baixa Potência (<80cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "negativo",
+            "descricao": "Adoção de tecnologia é lenta sem rentabilidade e capital disponível para investimento.",
+            "segmento_impactado": ""
+          },
+          "pulverizadores": {
+            "tendencia": "negativo",
+            "descricao": "Priorizam insumos essenciais em vez de novos equipamentos para controle de pragas.",
+            "segmento_impactado": ""
+          },
+          "plantadeiras": {
+            "tendencia": "negativo",
+            "descricao": "Produtores mantêm métodos tradicionais devido à falta de recursos para modernização.",
+            "segmento_impactado": "Pequeno Porte (<20 linhas)"
+          }
+        }
+      },
+      {
+        "titulo_noticia": "Governos regionais incentivam uso de tecnologia na agricultura familiar.",
+        "tendencia_noticia": "positivo",
+        "corpo_noticia": "Programas de capacitação e subsídio visam modernizar a agricultura familiar, aumentando produtividade e renda.",
+        "fonte_noticia": "Agraria.pe",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "positivo",
+            "descricao": "Programas de incentivo podem facilitar a aquisição de tratores de baixa potência para o setor.",
+            "segmento_impactado": "Baixa Potência (<80cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "incerto",
+            "descricao": "Foco em pequena escala, onde colheitadeiras de grande porte não são prioridade.",
+            "segmento_impactado": ""
+          },
+          "pulverizadores": {
+            "tendencia": "positivo",
+            "descricao": "Pulverizadores de menor porte para agricultura familiar tornam-se mais acessíveis e necessários.",
+            "segmento_impactado": "De Arrasto"
+          },
+          "plantadeiras": {
+            "tendencia": "positivo",
+            "descricao": "Tecnologias de plantio para pequenas propriedades para otimização da produção.",
+            "segmento_impactado": "Pequeno Porte (<20 linhas)"
+          }
+        }
+      }
+    ]
+  },
+  "bo": {
+    "fatores_economicos": [
+      {
+        "titulo": "Soja (Oriente)",
+        "icone": "🌱",
+        "tendencia": "positivo",
+        "direcao": "melhorando",
+        "descricao": "Produção de soja no leste boliviano segue em crescimento, com foco em mercados regionais e internacionais.",
+        "impactos": "Demanda robusta por tratores de alta potência, plantadeiras e colheitadeiras para a cultura da soja.",
+        "fonte": "ANAPO, Ministério de Desenvolvimento Rural"
+      },
+      {
+        "titulo": "Escassez de Dólar",
+        "icone": "💸",
+        "tendencia": "negativo",
+        "direcao": "piorando",
+        "descricao": "Escassez de dólares no sistema financeiro boliviano dificulta importação de insumos e máquinas.",
+        "impactos": "Dificulta a compra de máquinas agrícolas importadas e peças de reposição, impactando o setor.",
+        "fonte": "Banco Central da Bolívia, Câmara de Indústria e Comércio"
+      },
+      {
+        "titulo": "Biocombustíveis",
+        "icone": "⛽",
+        "tendencia": "expansiva",
+        "direcao": "melhorando",
+        "descricao": "Governo e setor privado impulsionam produção de biocombustíveis, gerando demanda por matérias-primas.",
+        "impactos": "Aumenta a demanda por máquinas para cana-de-açúcar (colheitadeiras, tratores) e soja.",
+        "fonte": "Ministério de Hidrocarbonetos e Energia"
+      },
+      {
+        "titulo": "Infra. Logística",
+        "icone": "🛣️",
+        "tendencia": "incerto",
+        "direcao": "estavel",
+        "descricao": "Desafios contínuos na infraestrutura de transporte, impactando escoamento da produção agrícola.",
+        "impactos": "Aumento dos custos logísticos corrói margens, podendo atrasar investimentos em máquinas agrícolas.",
+        "fonte": "Cámara Agropecuaria del Oriente (CAO)"
+      },
+      {
+        "titulo": "Margens Produtor",
+        "icone": "📊",
+        "tendencia": "incerto",
+        "direcao": "estavel",
+        "descricao": "Margens de soja e cana favoráveis. Produtores de milho e trigo enfrentam custos elevados.",
+        "impactos": "Segmentos com boas margens como soja e cana impulsionam vendas de máquinas. Outros, cautela.",
+        "fonte": "CAO, IBCE"
+      }
+    ],
+    "noticias": [
+      {
+        "titulo_noticia": "Produtores de soja de Santa Cruz projetam recorde de área.",
+        "tendencia_noticia": "positivo",
+        "corpo_noticia": "Otimismo com preços e condições climáticas favoráveis impulsiona a expansão da área de plantio de soja.",
+        "fonte_noticia": "El Deber",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "positivo",
+            "descricao": "Aumento da área exige mais tratores para preparo de solo e plantio eficiente da cultura.",
+            "segmento_impactado": "Alta Potência (>170cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "positivo",
+            "descricao": "Maior produção futura demanda colheitadeiras de alta capacidade para otimizar a safra.",
+            "segmento_impactado": "Grande Porte (Classes 7+)"
+          },
+          "pulverizadores": {
+            "tendencia": "positivo",
+            "descricao": "Cultivo em grande escala exige pulverizadores eficientes para manejo de pragas e doenças.",
+            "segmento_impactado": "Autopropelido"
+          },
+          "plantadeiras": {
+            "tendencia": "positivo",
+            "descricao": "Expansão de área impulsiona a compra de plantadeiras de grande porte e alta precisão.",
+            "segmento_impactado": "Grande Porte (>20 linhas)"
+          }
+        }
+      },
+      {
+        "titulo_noticia": "Escassez de dólares dificulta importação de máquinas e peças.",
+        "tendencia_noticia": "negativo",
+        "corpo_noticia": "Produtores bolivianos enfrentam entraves para adquirir equipamentos e componentes estrangeiros devido à falta de moeda.",
+        "fonte_noticia": "Página Siete",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "negativo",
+            "descricao": "Dificuldade de acesso a dólares impede a compra de tratores importados e peças de reposição.",
+            "segmento_impactado": ""
+          },
+          "colheitadeiras": {
+            "tendencia": "negativo",
+            "descricao": "Limitação na importação afeta a renovação da frota de colheitadeiras e sua manutenção.",
+            "segmento_impactado": ""
+          },
+          "pulverizadores": {
+            "tendencia": "negativo",
+            "descricao": "Equipamentos e peças importadas ficam inacessíveis, impactando a manutenção da frota.",
+            "segmento_impactado": ""
+          },
+          "plantadeiras": {
+            "tendencia": "negativo",
+            "descricao": "Atrasos na aquisição de plantadeiras modernas e importadas, impactando o plantio.",
+            "segmento_impactado": ""
+          }
+        }
+      },
+      {
+        "titulo_noticia": "Governo anuncia novos investimentos em usinas de etanol e biodiesel.",
+        "tendencia_noticia": "positivo",
+        "corpo_noticia": "Expansão da produção de biocombustíveis gera demanda por cana-de-açúcar e soja, com impacto positivo no campo.",
+        "fonte_noticia": "Agencia Boliviana de Información",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "positivo",
+            "descricao": "Incentiva o cultivo de cana e soja, demandando tratores para preparo e manejo das culturas.",
+            "segmento_impactado": "Alta Potência (>170cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "positivo",
+            "descricao": "Demanda por colheitadeiras de cana e grãos para suprir as usinas de biocombustíveis.",
+            "segmento_impactado": "Grande Porte (Classes 7+)"
+          },
+          "pulverizadores": {
+            "tendencia": "positivo",
+            "descricao": "Manejo de grandes culturas para biocombustíveis exige pulverizadores eficientes e modernos.",
+            "segmento_impactado": "Autopropelido"
+          },
+          "plantadeiras": {
+            "tendencia": "positivo",
+            "descricao": "Aumento de área plantada de cana e soja impulsiona a demanda por plantadeiras.",
+            "segmento_impactado": "Grande Porte (>20 linhas)"
+          }
+        }
+      },
+      {
+        "titulo_noticia": "Condições das estradas no leste boliviano prejudicam escoamento.",
+        "tendencia_noticia": "negativo",
+        "corpo_noticia": "Infraestrutura de transporte precária eleva custos de frete e atrasa a logística de exportação de soja e milho.",
+        "fonte_noticia": "Periódico Digital de Santa Cruz",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "negativo",
+            "descricao": "Maiores custos logísticos reduzem a rentabilidade, afetando a capacidade de investimento em tratores.",
+            "segmento_impactado": ""
+          },
+          "colheitadeiras": {
+            "tendencia": "negativo",
+            "descricao": "Dificuldade de escoamento impacta o preço recebido pelo produtor, desestimulando a produção.",
+            "segmento_impactado": ""
+          },
+          "pulverizadores": {
+            "tendencia": "negativo",
+            "descricao": "Otimismo do produtor é reduzido, impactando a decisão de compra de novos equipamentos.",
+            "segmento_impactado": ""
+          },
+          "plantadeiras": {
+            "tendencia": "negativo",
+            "descricao": "A lucratividade é afetada, desestimulando novos investimentos em campo e na aquisição de máquinas.",
+            "segmento_impactado": ""
+          }
+        }
+      }
+    ]
+  },
+  "mx": {
+    "fatores_economicos": [
+      {
+        "titulo": "Export. p/ EUA",
+        "icone": "🥑",
+        "tendencia": "positivo",
+        "direcao": "estavel",
+        "descricao": "Exportações agrícolas para os EUA, especialmente abacate, tomate e frutas, permanecem robustas.",
+        "impactos": "Alta rentabilidade impulsiona aquisição de tratores especializados, pulverizadores e tecnologia de colheita.",
+        "fonte": "SAGARPA, USDA"
+      },
+      {
+        "titulo": "Escassez Hídrica",
+        "icone": "🏜️",
+        "tendencia": "negativo",
+        "direcao": "piorando",
+        "descricao": "Crise hídrica em estados do norte e centro afeta a produção agrícola e a disponibilidade de água.",
+        "impactos": "Reduz produtividade, impacta plantio e freia investimentos em máquinas, salvo tecnologias de irrigação.",
+        "fonte": "CONAGUA, Relatório de Seca"
+      },
+      {
+        "titulo": "Prod. Agave",
+        "icone": "🌵",
+        "tendencia": "expansiva",
+        "direcao": "melhorando",
+        "descricao": "Demanda global por destilados de agave impulsiona a expansão da área cultivada e a modernização.",
+        "impactos": "Demanda por tratores de baixa e média potência para o manejo de agave e preparo do solo.",
+        "fonte": "Conselho Regulador da Tequila, Ministério da Agricultura"
+      },
+      {
+        "titulo": "Remessas/Agro Fam.",
+        "icone": "👨‍👩‍👧‍👦",
+        "tendencia": "positivo",
+        "direcao": "estavel",
+        "descricao": "Fluxo de remessas do exterior continua alto, apoiando a subsistência e pequenos investimentos no campo.",
+        "impactos": "Apoia a compra de máquinas de pequena escala e manutenção, melhorando a capacidade produtiva familiar.",
+        "fonte": "Banco de México, INEGI"
+      },
+      {
+        "titulo": "Margens Produtor",
+        "icone": "📊",
+        "tendencia": "incerto",
+        "direcao": "estavel",
+        "descricao": "Margens boas para agroexportadores. Pequenos produtores e culturas básicas (milho, feijão) enfrentam desafios.",
+        "impactos": "Setores exportadores investem mais em máquinas; outros priorizam subsistência e tecnologias acessíveis.",
+        "fonte": "FIRA, SIAP"
+      }
+    ],
+    "noticias": [
+      {
+        "titulo_noticia": "Exportações mexicanas de abacate para EUA continuam em alta.",
+        "tendencia_noticia": "positivo",
+        "corpo_noticia": "Demanda robusta nos EUA mantém a rentabilidade elevada para produtores de abacate em Michoacán.",
+        "fonte_noticia": "Proceso",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "positivo",
+            "descricao": "Lucros maiores incentivam investimento em tratores para manejo e manutenção de pomares.",
+            "segmento_impactado": "Baixa Potência (<80cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "incerto",
+            "descricao": "A colheita de abacate é predominantemente manual, portanto, impacto limitado.",
+            "segmento_impactado": ""
+          },
+          "pulverizadores": {
+            "tendencia": "positivo",
+            "descricao": "Necessidade de pulverizadores especializados para manejo fitossanitário em pomares.",
+            "segmento_impactado": "De Arrasto"
+          },
+          "plantadeiras": {
+            "tendencia": "incerto",
+            "descricao": "Culturas perenes, o impacto é no estabelecimento de novos pomares, não em demanda contínua.",
+            "segmento_impactado": ""
+          }
+        }
+      },
+      {
+        "titulo_noticia": "Seca severa atinge regiões agrícolas no norte do México.",
+        "tendencia_noticia": "negativo",
+        "corpo_noticia": "Falta de chuvas compromete o plantio de milho e trigo, gerando perdas e preocupações com segurança alimentar.",
+        "fonte_noticia": "El Universal",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "negativo",
+            "descricao": "Seca reduz a área plantada e a rentabilidade, freando a compra de tratores para o preparo.",
+            "segmento_impactado": ""
+          },
+          "colheitadeiras": {
+            "tendencia": "negativo",
+            "descricao": "Menor produtividade futura implica menor necessidade de colheitadeiras e adia investimentos.",
+            "segmento_impactado": ""
+          },
+          "pulverizadores": {
+            "tendencia": "negativo",
+            "descricao": "Menos área plantada e menor rentabilidade impactam a demanda por equipamentos de aplicação.",
+            "segmento_impactado": ""
+          },
+          "plantadeiras": {
+            "tendencia": "negativo",
+            "descricao": "Produtores adiam plantio ou reduzem área devido à escassez hídrica, afetando demanda.",
+            "segmento_impactado": ""
+          }
+        }
+      },
+      {
+        "titulo_noticia": "Indústria de tequila impulsiona o cultivo de agave e modernização.",
+        "tendencia_noticia": "positivo",
+        "corpo_noticia": "Crescimento do mercado de tequila gera demanda por agave, incentivando investimentos em novas plantações e equipamentos.",
+        "fonte_noticia": "Milenio",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "positivo",
+            "descricao": "Cultivo de agave demanda tratores para preparo de solo e manejo da cultura em expansão.",
+            "segmento_impactado": "Média Potência (80-170cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "incerto",
+            "descricao": "A colheita de agave é feita manualmente, não impactando a demanda por colheitadeiras.",
+            "segmento_impactado": ""
+          },
+          "pulverizadores": {
+            "tendencia": "positivo",
+            "descricao": "Manejo de pragas e doenças em lavouras de agave requer pulverizadores eficientes.",
+            "segmento_impactado": "De Arrasto"
+          },
+          "plantadeiras": {
+            "tendencia": "incerto",
+            "descricao": "Plantio de agave é específico, não impacta plantadeiras de grãos tradicionais.",
+            "segmento_impactado": ""
+          }
+        }
+      },
+      {
+        "titulo_noticia": "Remessas de migrantes fortalecem a economia de pequenos agricultores.",
+        "tendencia_noticia": "positivo",
+        "corpo_noticia": "Dinheiro enviado do exterior permite a pequenos produtores rurais investir em melhorias e equipamentos básicos.",
+        "fonte_noticia": "La Jornada",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "positivo",
+            "descricao": "Apoia a aquisição de tratores de pequena potência para agricultura familiar e pequenas propriedades.",
+            "segmento_impactado": "Baixa Potência (<80cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "incerto",
+            "descricao": "Não é o principal foco de investimento para pequenos produtores e agricultura familiar.",
+            "segmento_impactado": ""
+          },
+          "pulverizadores": {
+            "tendencia": "positivo",
+            "descricao": "Facilitando a compra de pulverizadores de arrasto de pequeno porte, melhorando o manejo.",
+            "segmento_impactado": "De Arrasto"
+          },
+          "plantadeiras": {
+            "tendencia": "positivo",
+            "descricao": "Permite a compra de plantadeiras simples para pequenas propriedades e otimização do plantio.",
+            "segmento_impactado": "Pequeno Porte (<20 linhas)"
+          }
+        }
+      }
+    ]
+  }
+}
