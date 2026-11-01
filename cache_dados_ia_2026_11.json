@@ -1,0 +1,1418 @@
+{
+  "br": {
+    "fatores_economicos": [
+      {
+        "titulo": "Crédito Rural",
+        "icone": "💳",
+        "tendencia": "restritiva",
+        "direcao": "piorando",
+        "descricao": "Programas de crédito rural com taxas ajustadas para Novembro, limitando volume disponível ante Outubro. Disponibilidade menor para novos financiamentos.",
+        "impactos": "A escassez de crédito adia a compra de colheitadeiras Classes 7+ e tratores alta potência, forçando produtores a manter equipamentos antigos.",
+        "fonte": "Banco do Brasil/SICOR"
+      },
+      {
+        "titulo": "Juros (Selic)",
+        "icone": "💰",
+        "tendencia": "alta",
+        "direcao": "estavel",
+        "descricao": "Selic mantida em 14.75% em Novembro, estável ante Outubro, após últimas revisões do COPOM.",
+        "impactos": "Juros estáveis, mas elevados, mantêm o custo de financiamento alto, freando decisões de aquisição de todos os tipos de máquinas, impacto neutro.",
+        "fonte": "BCB/COPOM"
+      },
+      {
+        "titulo": "Câmbio (Dólar)",
+        "icone": "💵",
+        "tendencia": "estavel",
+        "direcao": "estavel",
+        "descricao": "Dólar a R$5.20 em média em Novembro, com leve oscilação de 0.5% ante Outubro. Mantendo estabilidade.",
+        "impactos": "Câmbio estável mantém previsibilidade nos custos de importação e preços das máquinas, resultando em impacto neutro nas decisões de compra.",
+        "fonte": "BCB/Mercado"
+      },
+      {
+        "titulo": "Prod. Grãos",
+        "icone": "🚜",
+        "tendencia": "positivo",
+        "direcao": "melhorando",
+        "descricao": "Previsões para safra 2026/27 em Novembro indicam aumento de 3% no volume total ante Outubro/2026 (CONAB).",
+        "impactos": "Perspectiva de maior safra acelera decisões de compra de plantadeiras de grande porte e colheitadeiras Classes 7+, especialmente para soja e milho.",
+        "fonte": "CONAB"
+      },
+      {
+        "titulo": "Margens Produtor",
+        "icone": "📊",
+        "tendencia": "incerto",
+        "direcao": "estavel",
+        "descricao": "Ante Outubro, margens da soja recuaram devido a custos de insumos; milho e algodão estáveis; café e cana melhoraram com preços internacionais.",
+        "impactos": "Margens mistas resultam em decisão de compra neutra para tratores de média potência e pulverizadores, com foco em otimização de custos.",
+        "fonte": "CEPEA/IBGE"
+      }
+    ],
+    "noticias": [
+      {
+        "titulo_noticia": "Chuvas favorecem plantio da soja no Centro-Oeste brasileiro",
+        "tendencia_noticia": "positivo",
+        "corpo_noticia": "As chuvas de Novembro no Centro-Oeste aceleraram o plantio da safra 2026/27 de soja, com 70% da área concluída. Boas condições hídricas indicam potencial para alta produtividade.",
+        "fonte_noticia": "Canal Rural",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "positivo",
+            "descricao": "Boas condições climáticas aceleram o plantio, mantendo alta demanda por tratores de média e alta potência.",
+            "segmento_impactado": "Alta Potência (>170cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "incerto",
+            "descricao": "Acelera o plantio, mas o impacto na colheita é futuro, mantendo neutra a demanda imediata por colheitadeiras.",
+            "segmento_impactado": ""
+          },
+          "pulverizadores": {
+            "tendencia": "positivo",
+            "descricao": "Plantio concluído, demanda por pulverizadores tende a se estabilizar, mas com foco em proteção futura da lavoura.",
+            "segmento_impactado": "De Arrasto"
+          },
+          "plantadeiras": {
+            "tendencia": "positivo",
+            "descricao": "Clima favorável impulsiona o uso de plantadeiras de grande porte para rápida semeadura, acelerando compra.",
+            "segmento_impactado": "Grande Porte (>20 linhas)"
+          }
+        }
+      },
+      {
+        "titulo_noticia": "Preços do milho em alta com demanda aquecida para ração",
+        "tendencia_noticia": "positivo",
+        "corpo_noticia": "Preços do milho subiram 2.5% em Novembro ante Outubro, impulsionados pela forte demanda do setor de proteína animal. Exportações também contribuem para valorização.",
+        "fonte_noticia": "Agência Safras",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "positivo",
+            "descricao": "Margens melhores incentivam investimentos, acelerando a demanda por tratores para preparo e cultivo.",
+            "segmento_impactado": "Média Potência (80-170cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "positivo",
+            "descricao": "Perspectiva de maior rentabilidade acelera decisão de compra para renovação de colheitadeiras de médio porte.",
+            "segmento_impactado": "Médio Porte (Classes 4-6)"
+          },
+          "pulverizadores": {
+            "tendencia": "positivo",
+            "descricao": "Rentabilidade maior estimula a aquisição de pulverizadores para proteção da lavoura e aumento de produtividade.",
+            "segmento_impactado": "De Arrasto"
+          },
+          "plantadeiras": {
+            "tendencia": "positivo",
+            "descricao": "Com preços em alta, produtores tendem a investir em tecnologia para maximizar o plantio, acelerando a compra.",
+            "segmento_impactado": "Grande Porte (>20 linhas)"
+          }
+        }
+      },
+      {
+        "titulo_noticia": "Exportações de café atingem recorde em Novembro; preços firmes",
+        "tendencia_noticia": "positivo",
+        "corpo_noticia": "Brasil exportou volume recorde de café em Novembro, com preços internacionais em alta, gerando receita superior a Outubro para os produtores.",
+        "fonte_noticia": "Cecafé",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "positivo",
+            "descricao": "Boa rentabilidade impulsiona a renovação e compra de tratores especializados para cafeicultura, acelerando a decisão.",
+            "segmento_impactado": "Baixa Potência (<80cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "positivo",
+            "descricao": "Preços elevados do café incentivam a modernização da colheita, favorecendo colheitadeiras de café, acelerando a compra.",
+            "segmento_impactado": ""
+          },
+          "pulverizadores": {
+            "tendencia": "positivo",
+            "descricao": "Produtores investem em tecnologia para otimizar tratos culturais, acelerando a compra de pulverizadores.",
+            "segmento_impactado": "De Arrasto"
+          },
+          "plantadeiras": {
+            "tendencia": "neutro",
+            "descricao": "Embora rentável, o ciclo do café não demanda plantadeiras frequentemente, mantendo a demanda estável.",
+            "segmento_impactado": ""
+          }
+        }
+      },
+      {
+        "titulo_noticia": "Moagem de cana-de-açúcar acima do esperado em Novembro",
+        "tendencia_noticia": "positivo",
+        "corpo_noticia": "A moagem de cana-de-açúcar na safra 2026/27 superou as expectativas em Novembro, com bom rendimento. Preços do açúcar e etanol se mantiveram firmes.",
+        "fonte_noticia": "UNICA",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "positivo",
+            "descricao": "Moagem robusta e preços firmes aceleram a compra de tratores de alta potência para preparo e transporte de cana.",
+            "segmento_impactado": "Alta Potência (>170cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "positivo",
+            "descricao": "Rentabilidade alta impulsiona investimentos em colheitadeiras de cana, visando maior eficiência na colheita mecanizada.",
+            "segmento_impactado": "Grande Porte (Classes 7+)"
+          },
+          "pulverizadores": {
+            "tendencia": "positivo",
+            "descricao": "Otimismo no setor acelera a aquisição de pulverizadores autopropelidos para manejo da lavoura canavieira.",
+            "segmento_impactado": "Autopropelido"
+          },
+          "plantadeiras": {
+            "tendencia": "neutro",
+            "descricao": "Aumento na moagem impacta mais colheita, mantendo a demanda por plantadeiras de cana estável.",
+            "segmento_impactado": ""
+          }
+        }
+      },
+      {
+        "titulo_noticia": "Projeção de safra recorde de algodão anima produtores em MT",
+        "tendencia_noticia": "positivo",
+        "corpo_noticia": "As projeções para a safra de algodão 2026/27 no Mato Grosso apontam para um novo recorde. Preços sustentados por boa demanda global.",
+        "fonte_noticia": "ABRAPA",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "positivo",
+            "descricao": "Perspectiva de safra recorde acelera investimentos em tratores de alta potência para preparo de solo e manejo.",
+            "segmento_impactado": "Alta Potência (>170cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "positivo",
+            "descricao": "Produtores buscam otimizar a colheita da grande safra, acelerando a compra de colheitadeiras de algodão.",
+            "segmento_impactado": "Grande Porte (Classes 7+)"
+          },
+          "pulverizadores": {
+            "tendencia": "positivo",
+            "descricao": "Alta demanda por proteção da lavoura acelera a aquisição de pulverizadores autopropelidos para aplicações precisas.",
+            "segmento_impactado": "Autopropelido"
+          },
+          "plantadeiras": {
+            "tendencia": "positivo",
+            "descricao": "Aumento da área e otimismo com a safra aceleram a compra de plantadeiras de grande porte para algodão.",
+            "segmento_impactado": "Grande Porte (>20 linhas)"
+          }
+        }
+      },
+      {
+        "titulo_noticia": "Colheita de trigo 2026 finaliza com queda de produtividade no Sul",
+        "tendencia_noticia": "negativo",
+        "corpo_noticia": "A colheita de trigo no Sul do Brasil em Novembro foi marcada por quebra de produtividade de 8% ante o esperado, devido a chuvas excessivas no final do ciclo.",
+        "fonte_noticia": "Embrapa",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "negativo",
+            "descricao": "Queda na produtividade reduz a rentabilidade do produtor, adiando decisões de investimento em novos tratores.",
+            "segmento_impactado": "Média Potência (80-170cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "negativo",
+            "descricao": "Margens apertadas com safra ruim adiam a compra e renovação de colheitadeiras de médio porte para trigo.",
+            "segmento_impactado": "Médio Porte (Classes 4-6)"
+          },
+          "pulverizadores": {
+            "tendencia": "neutro",
+            "descricao": "Impacto focado na colheita; demanda por pulverizadores mantém-se estável para tratos futuros.",
+            "segmento_impactado": ""
+          },
+          "plantadeiras": {
+            "tendencia": "negativo",
+            "descricao": "Resultados abaixo do esperado podem frear investimentos em plantadeiras para a próxima safra.",
+            "segmento_impactado": "Pequeno Porte (<20 linhas)"
+          }
+        }
+      }
+    ]
+  },
+  "ar": {
+    "fatores_economicos": [
+      {
+        "titulo": "Crédito/Financ.",
+        "icone": "💳",
+        "tendencia": "restritiva",
+        "direcao": "piorando",
+        "descricao": "Crédito para o setor agro segue restritivo em Novembro, com taxas de juros elevadas em 75% e volumes limitados ante Outubro.",
+        "impactos": "A alta dos juros e pouca oferta de financiamento adiam a compra de todas as linhas de máquinas, especialmente tratores de alta potência.",
+        "fonte": "BCRA/Setor Bancário"
+      },
+      {
+        "titulo": "Inflação/Câmbio",
+        "icone": "📈",
+        "tendencia": "alta",
+        "direcao": "piorando",
+        "descricao": "Inflação em alta de 7.5% em Outubro (último dado), com desvalorização do peso de 10% ante Outubro. Cenário macroeconômico volátil.",
+        "impactos": "Volatilidade cambial e inflação desestimulam investimentos, adiando compra de tratores e colheitadeiras, favorecendo mercado de usados.",
+        "fonte": "INDEC/BCRA"
+      },
+      {
+        "titulo": "Retenciones",
+        "icone": "⚖️",
+        "tendencia": "estavel",
+        "direcao": "estavel",
+        "descricao": "Retenciones sobre grãos mantidas nos patamares de Outubro, sem alterações para Novembro, conforme política fiscal atual.",
+        "impactos": "Estabilidade nas retenciones mantém a previsibilidade de custos, resultando em impacto neutro, mas não estimulante, na aquisição de máquinas.",
+        "fonte": "Ministério da Economia"
+      },
+      {
+        "titulo": "Prod. Agrícola",
+        "icone": "🚜",
+        "tendencia": "positivo",
+        "direcao": "melhorando",
+        "descricao": "Previsões de safra de grãos 2026/27 melhoraram em Novembro, com chuvas benéficas e expectativas de recuperação de produtividade ante Outubro.",
+        "impactos": "Boas perspectivas de safra aceleram planejamento para renovação de frota de plantadeiras de grande porte e colheitadeiras Classes 7+.",
+        "fonte": "Bolsa de Cereales"
+      },
+      {
+        "titulo": "Margens Produtor",
+        "icone": "📊",
+        "tendencia": "incerto",
+        "direcao": "estavel",
+        "descricao": "Margens da soja e milho estáveis ante Outubro, beneficiadas por preços globais, mas pressionadas por custos internos elevados e impostos.",
+        "impactos": "Margens apertadas, mesmo com recuperação de preços, levam a uma decisão de compra neutra ou adiada para máquinas como tratores e pulverizadores.",
+        "fonte": "CREA/AAPRESID"
+      }
+    ],
+    "noticias": [
+      {
+        "titulo_noticia": "Plantio de soja avança com umidade no centro da Argentina",
+        "tendencia_noticia": "positivo",
+        "corpo_noticia": "As recentes chuvas em Novembro permitiram um bom avanço no plantio de soja na zona central da Argentina, com boa umidade de solo, melhorando as perspectivas de safra.",
+        "fonte_noticia": "Bolsa de Comercio de Rosario",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "positivo",
+            "descricao": "Boas condições para plantio aceleram a demanda por tratores de média e alta potência para o preparo e semeadura.",
+            "segmento_impactado": "Média Potência (80-170cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "incerto",
+            "descricao": "Impacto no plantio é futuro para colheita, mantendo a demanda por colheitadeiras estável.",
+            "segmento_impactado": ""
+          },
+          "pulverizadores": {
+            "tendencia": "neutro",
+            "descricao": "Demanda por pulverizadores mantém-se estável após o plantio, aguardando próximas fases do cultivo.",
+            "segmento_impactado": ""
+          },
+          "plantadeiras": {
+            "tendencia": "positivo",
+            "descricao": "Umidade do solo e clima favorável impulsionam a utilização e eventual compra de plantadeiras de grande porte.",
+            "segmento_impactado": "Grande Porte (>20 linhas)"
+          }
+        }
+      },
+      {
+        "titulo_noticia": "Exportações de milho sobem, mas retenciones ainda preocupam",
+        "tendencia_noticia": "incerto",
+        "corpo_noticia": "Volume de exportações de milho em Outubro/2026 (último dado) subiu 5% ante Setembro, mas a manutenção das retenciones impede maior rentabilidade.",
+        "fonte_noticia": "CIARA-CEC",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "incerto",
+            "descricao": "Exportações positivas, mas retenciones reduzem margem, tornando neutra a decisão de compra de tratores de média potência.",
+            "segmento_impactado": "Média Potência (80-170cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "incerto",
+            "descricao": "Margens apertadas por retenções freiam decisões de renovação de colheitadeiras de médio porte.",
+            "segmento_impactado": "Médio Porte (Classes 4-6)"
+          },
+          "pulverizadores": {
+            "tendencia": "neutro",
+            "descricao": "O cenário misto não acelera nem adia, mantendo a demanda por pulverizadores de arrasto estável.",
+            "segmento_impactado": "De Arrasto"
+          },
+          "plantadeiras": {
+            "tendencia": "incerto",
+            "descricao": "Previsibilidade fiscal incerta adia investimentos em plantadeiras de grande porte.",
+            "segmento_impactado": "Grande Porte (>20 linhas)"
+          }
+        }
+      },
+      {
+        "titulo_noticia": "Banco Central mantém taxas altas; crédito agro restrito",
+        "tendencia_noticia": "negativo",
+        "corpo_noticia": "O Banco Central da Argentina manteve as taxas de juros de referência em 75% em Novembro, ante 72% em Outubro, dificultando o acesso a financiamento para o agronegócio.",
+        "fonte_noticia": "BCRA",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "negativo",
+            "descricao": "Juros elevados e crédito escasso adiam massivamente a compra de tratores de todas as potências.",
+            "segmento_impactado": "Alta Potência (>170cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "negativo",
+            "descricao": "Dificuldade de financiamento adia a renovação e aquisição de colheitadeiras de grande porte.",
+            "segmento_impactado": "Grande Porte (Classes 7+)"
+          },
+          "pulverizadores": {
+            "tendencia": "negativo",
+            "descricao": "Custo do capital adia a compra de pulverizadores autopropelidos, incentivando opções mais baratas.",
+            "segmento_impactado": "Autopropelido"
+          },
+          "plantadeiras": {
+            "tendencia": "negativo",
+            "descricao": "Produtores adiam investimentos em plantadeiras de grande porte devido à falta de crédito acessível.",
+            "segmento_impactado": "Grande Porte (>20 linhas)"
+          }
+        }
+      },
+      {
+        "titulo_noticia": "Evento La Niña mais fraco beneficia cultivo na região central",
+        "tendencia_noticia": "positivo",
+        "corpo_noticia": "A dissipação do La Niña, mais fraco em Novembro que em Outubro, trouxe chuvas regulares e melhor distribuição hídrica, beneficiando as lavouras de verão.",
+        "fonte_noticia": "SMN (Servicio Meteorológico Nacional)",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "positivo",
+            "descricao": "Melhores condições climáticas impulsionam a demanda por tratores para preparo e cultivo intensivo, acelerando a compra.",
+            "segmento_impactado": "Média Potência (80-170cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "positivo",
+            "descricao": "Perspectivas de boa safra podem acelerar a decisão de compra de colheitadeiras de médio e grande porte.",
+            "segmento_impactado": "Grande Porte (Classes 7+)"
+          },
+          "pulverizadores": {
+            "tendencia": "positivo",
+            "descricao": "Cenário positivo motiva investimento em pulverizadores para garantir o potencial produtivo.",
+            "segmento_impactado": "De Arrasto"
+          },
+          "plantadeiras": {
+            "tendencia": "positivo",
+            "descricao": "Condições hídricas favoráveis aceleram o plantio e a potencial demanda por novas plantadeiras.",
+            "segmento_impactado": "Grande Porte (>20 linhas)"
+          }
+        }
+      },
+      {
+        "titulo_noticia": "Setor pecuário busca recuperação com alta nas exportações",
+        "tendencia_noticia": "positivo",
+        "corpo_noticia": "Exportações de carne bovina aumentaram 4% em Outubro (último dado) vs Setembro, impulsionando a confiança no setor pecuário e incentivando investimentos.",
+        "fonte_noticia": "IPCVA",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "positivo",
+            "descricao": "Otimismo na pecuária acelera a demanda por tratores de baixa e média potência para manejo de pastagens e alimentação.",
+            "segmento_impactado": "Baixa Potência (<80cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "neutro",
+            "descricao": "Impacto indireto na pecuária, a demanda por colheitadeiras permanece estável.",
+            "segmento_impactado": ""
+          },
+          "pulverizadores": {
+            "tendencia": "neutro",
+            "descricao": "Impacto indireto na pecuária, a demanda por pulverizadores permanece estável.",
+            "segmento_impactado": ""
+          },
+          "plantadeiras": {
+            "tendencia": "neutro",
+            "descricao": "Impacto indireto na pecuária, a demanda por plantadeiras permanece estável.",
+            "segmento_impactado": ""
+          }
+        }
+      },
+      {
+        "titulo_noticia": "Custos de fertilizantes sobem 3% em Novembro, pressionando produtores",
+        "tendencia_noticia": "negativo",
+        "corpo_noticia": "O custo dos fertilizantes importados aumentou 3% em Novembro ante Outubro, devido à desvalorização do peso e ao cenário internacional, pressionando as margens de lucro.",
+        "fonte_noticia": "FAA (Federación Agraria Argentina)",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "negativo",
+            "descricao": "Aumento de custos reduz a liquidez do produtor, adiando decisões de compra de tratores de média e alta potência.",
+            "segmento_impactado": "Média Potência (80-170cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "negativo",
+            "descricao": "Margens apertadas devido a custos mais altos adiam a renovação de colheitadeiras de médio e grande porte.",
+            "segmento_impactado": "Médio Porte (Classes 4-6)"
+          },
+          "pulverizadores": {
+            "tendencia": "negativo",
+            "descricao": "Produtores podem adiar investimentos em pulverizadores autopropelidos, optando por aluguel ou uso mais intenso.",
+            "segmento_impactado": "Autopropelido"
+          },
+          "plantadeiras": {
+            "tendencia": "negativo",
+            "descricao": "Custos mais altos podem levar a adiar investimentos em plantadeiras de grande porte para maximizar eficiência.",
+            "segmento_impactado": "Grande Porte (>20 linhas)"
+          }
+        }
+      }
+    ]
+  },
+  "cl": {
+    "fatores_economicos": [
+      {
+        "titulo": "Cenário Hídrico",
+        "icone": "💧",
+        "tendencia": "incerto",
+        "direcao": "piorando",
+        "descricao": "Escassez hídrica persistente em Novembro, com níveis de reservatórios 10% abaixo de Outubro, afetando regiões centrais e norte.",
+        "impactos": "A seca adia investimentos em máquinas para cultivos de irrigação, como pulverizadores e tratores de baixa potência para frutíferas.",
+        "fonte": "DGA (Dirección General de Aguas)"
+      },
+      {
+        "titulo": "Export. Frutas",
+        "icone": "🍒",
+        "tendencia": "positivo",
+        "direcao": "melhorando",
+        "descricao": "Exportações de frutas (uvas, cerejas) registraram alta de 5% em volume em Outubro (último dado) ante Setembro, com bons preços internacionais.",
+        "impactos": "Boa performance das exportações acelera investimentos em tratores de baixa potência e pulverizadores especializados para pomares.",
+        "fonte": "Odepa"
+      },
+      {
+        "titulo": "Custo de Insumos",
+        "icone": "📦",
+        "tendencia": "alta",
+        "direcao": "piorando",
+        "descricao": "Custo de fertilizantes e defensivos aumentou 2% em Novembro ante Outubro, impactando os custos de produção agrícola.",
+        "impactos": "Aumento dos custos de insumos pressiona margens, adiando a decisão de compra de pulverizadores e tratores de média potência.",
+        "fonte": "SNA (Sociedad Nacional de Agricultura)"
+      },
+      {
+        "titulo": "Reg. Ambiental",
+        "icone": "🌿",
+        "tendencia": "restritiva",
+        "direcao": "estavel",
+        "descricao": "Novas regulamentações para uso da água e pesticidas entraram em vigor em Novembro, estáveis ante Outubro, mas exigem adaptação.",
+        "impactos": "Regulamentações mais rígidas podem acelerar a demanda por pulverizadores de precisão e tratores modernos, adaptados às novas normas.",
+        "fonte": "Ministério do Meio Ambiente"
+      },
+      {
+        "titulo": "Margens Produtor",
+        "icone": "📊",
+        "tendencia": "incerto",
+        "direcao": "estavel",
+        "descricao": "Margens para frutas de exportação estáveis a ligeiramente melhores ante Outubro; cereais e hortaliças pressionadas por custos e água.",
+        "impactos": "Margens mistas resultam em cautela. Decisões de compra de máquinas como tratores de média potência e plantadeiras permanecem neutras.",
+        "fonte": "Odepa/Mercado"
+      }
+    ],
+    "noticias": [
+      {
+        "titulo_noticia": "Governo anuncia medidas para combater seca em regiões agrícolas",
+        "tendencia_noticia": "incerto",
+        "corpo_noticia": "Em Novembro, o governo chileno detalhou medidas emergenciais para regiões afetadas pela seca, incluindo subsídios para irrigação e forragem, buscando mitigar perdas.",
+        "fonte_noticia": "Ministério da Agricultura",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "negativo",
+            "descricao": "A seca e incertezas hídricas adiam a compra de tratores de média e alta potência para culturas de sequeiro.",
+            "segmento_impactado": "Média Potência (80-170cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "negativo",
+            "descricao": "Redução da produtividade devido à seca adia a renovação de colheitadeiras para cereais e culturas de inverno.",
+            "segmento_impactado": ""
+          },
+          "pulverizadores": {
+            "tendencia": "incerto",
+            "descricao": "Subsídios para irrigação podem compensar, mantendo a demanda por pulverizadores estável, mas cautelosa.",
+            "segmento_impactado": ""
+          },
+          "plantadeiras": {
+            "tendencia": "negativo",
+            "descricao": "Falta de água adia a decisão de compra de novas plantadeiras para as próximas safras.",
+            "segmento_impactado": ""
+          }
+        }
+      },
+      {
+        "titulo_noticia": "Otimismo na safra de uva de mesa com boas condições climáticas",
+        "tendencia_noticia": "positivo",
+        "corpo_noticia": "As condições climáticas de Novembro são favoráveis ao desenvolvimento da uva de mesa, com expectativa de boa qualidade e volume para exportação.",
+        "fonte_noticia": "Fedefruta",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "positivo",
+            "descricao": "Boas perspectivas de safra aceleram investimentos em tratores de baixa potência e pulverizadores para o manejo de vinhedos.",
+            "segmento_impactado": "Baixa Potência (<80cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "neutro",
+            "descricao": "Colheita de uva de mesa é manual ou semimecanizada, impactando menos a demanda por colheitadeiras padrão.",
+            "segmento_impactado": ""
+          },
+          "pulverizadores": {
+            "tendencia": "positivo",
+            "descricao": "Produtores investem em pulverizadores para garantir a qualidade da fruta, acelerando a decisão de compra.",
+            "segmento_impactado": "De Arrasto"
+          },
+          "plantadeiras": {
+            "tendencia": "neutro",
+            "descricao": "O foco é na produção atual, mantendo estável a demanda por plantadeiras.",
+            "segmento_impactado": ""
+          }
+        }
+      },
+      {
+        "titulo_noticia": "Escassez de mão de obra rural persiste e eleva custos",
+        "tendencia_noticia": "negativo",
+        "corpo_noticia": "A falta de trabalhadores rurais em Novembro, mais acentuada que em Outubro, continua a elevar os custos operacionais para produtores de frutas e hortaliças.",
+        "fonte_noticia": "SNA (Sociedad Nacional de Agricultura)",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "positivo",
+            "descricao": "Escassez de mão de obra acelera a busca por mecanização, impulsionando a demanda por tratores para diversas tarefas.",
+            "segmento_impactado": "Média Potência (80-170cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "positivo",
+            "descricao": "Produtores buscam máquinas para reduzir dependência de mão de obra, acelerando a compra de colheitadeiras especializadas.",
+            "segmento_impactado": ""
+          },
+          "pulverizadores": {
+            "tendencia": "positivo",
+            "descricao": "Acelera a adoção de pulverizadores autopropelidos para otimizar a aplicação e reduzir necessidade de pessoal.",
+            "segmento_impactado": "Autopropelido"
+          },
+          "plantadeiras": {
+            "tendencia": "positivo",
+            "descricao": "Escassez de mão de obra impulsiona a compra de plantadeiras modernas para maior eficiência.",
+            "segmento_impactado": "Pequeno Porte (<20 linhas)"
+          }
+        }
+      },
+      {
+        "titulo_noticia": "Novas tecnologias de irrigação ganham espaço na agricultura chilena",
+        "tendencia_noticia": "positivo",
+        "corpo_noticia": "Produtores chilenos estão adotando sistemas de irrigação mais eficientes em Novembro, buscando otimizar o uso da água e aumentar a produtividade.",
+        "fonte_noticia": "ProChile",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "positivo",
+            "descricao": "Adoção de novas tecnologias de irrigação pode acelerar a demanda por tratores para instalação e manutenção de sistemas.",
+            "segmento_impactado": "Baixa Potência (<80cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "neutro",
+            "descricao": "Impacto indireto na demanda por colheitadeiras, que permanece estável.",
+            "segmento_impactado": ""
+          },
+          "pulverizadores": {
+            "tendencia": "positivo",
+            "descricao": "Sistemas de irrigação eficientes complementam o uso de pulverizadores, acelerando a compra para manejo preciso.",
+            "segmento_impactado": "De Arrasto"
+          },
+          "plantadeiras": {
+            "tendencia": "positivo",
+            "descricao": "Aumenta a eficiência da produção, acelerando a decisão de compra de plantadeiras que se beneficiam de melhor manejo hídrico.",
+            "segmento_impactado": "Pequeno Porte (<20 linhas)"
+          }
+        }
+      }
+    ]
+  },
+  "uy": {
+    "fatores_economicos": [
+      {
+        "titulo": "Export. Carne",
+        "icone": "🐄",
+        "tendencia": "estavel",
+        "direcao": "estavel",
+        "descricao": "Exportações de carne bovina mantiveram volume estável em Outubro (último dado) ante Setembro, com preços internacionais firmes.",
+        "impactos": "Setor pecuário com desempenho estável, resultando em impacto neutro na demanda por tratores de baixa/média potência para manejo de pastagens.",
+        "fonte": "INAC (Instituto Nacional de Carnes)"
+      },
+      {
+        "titulo": "Preço Commod.",
+        "icone": "📉",
+        "tendencia": "incerto",
+        "direcao": "estavel",
+        "descricao": "Preços de commodities agrícolas (soja, milho) flutuaram em Novembro, com leve recuo em soja e estabilidade em milho ante Outubro.",
+        "impactos": "Volatilidade nos preços das commodities gera cautela, resultando em decisão de compra neutra para colheitadeiras e plantadeiras de grande porte.",
+        "fonte": "MGAP (Ministerio de Ganadería, Agricultura y Pesca)"
+      },
+      {
+        "titulo": "Atraso Cambial",
+        "icone": "💵",
+        "tendencia": "restritiva",
+        "direcao": "piorando",
+        "descricao": "O peso uruguaio valorizou-se em 1.5% ante o dólar em Novembro, intensificando o atraso cambial e penalizando as exportações.",
+        "impactos": "Atraso cambial reduz a competitividade das exportações, diminuindo a rentabilidade e adiando a compra de todas as linhas de máquinas.",
+        "fonte": "BCU (Banco Central del Uruguay)"
+      },
+      {
+        "titulo": "Prod. Florestal",
+        "icone": "🌲",
+        "tendencia": "expansiva",
+        "direcao": "melhorando",
+        "descricao": "Setor florestal manteve crescimento em Novembro, com novos investimentos e aumento da demanda por madeira em pé ante Outubro.",
+        "impactos": "Expansão florestal acelera a demanda por tratores de alta potência e máquinas especializadas para preparo de solo e manejo florestal.",
+        "fonte": "MGAP/UPM"
+      },
+      {
+        "titulo": "Margens Produtor",
+        "icone": "📊",
+        "tendencia": "negativo",
+        "direcao": "piorando",
+        "descricao": "Margens da soja e milho recuaram em Novembro ante Outubro, pressionadas por custos elevados e atraso cambial; pecuária estável.",
+        "impactos": "Margens comprimidas para culturas agrícolas adiam decisões de compra de colheitadeiras de médio porte e plantadeiras.",
+        "fonte": "FAGRO/DIEA"
+      }
+    ],
+    "noticias": [
+      {
+        "titulo_noticia": "Risco de seca preocupa produtores no verão uruguaio",
+        "tendencia_noticia": "negativo",
+        "corpo_noticia": "Previsões indicam menor volume de chuvas para o verão 2026/27, aumentando a preocupação com uma possível seca e afetando o plantio em Novembro.",
+        "fonte_noticia": "INUMET (Instituto Uruguayo de Meteorología)",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "negativo",
+            "descricao": "Perspectiva de seca adia o planejamento de plantio, freando a demanda por tratores de média potência.",
+            "segmento_impactado": "Média Potência (80-170cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "neutro",
+            "descricao": "Impacto futuro na colheita, mantendo estável a demanda por colheitadeiras.",
+            "segmento_impactado": ""
+          },
+          "pulverizadores": {
+            "tendencia": "neutro",
+            "descricao": "A incerteza climática não altera significativamente a demanda por pulverizadores de arrasto.",
+            "segmento_impactado": "De Arrasto"
+          },
+          "plantadeiras": {
+            "tendencia": "negativo",
+            "descricao": "Risco de seca adia a decisão de compra de plantadeiras de grande porte para as culturas de verão.",
+            "segmento_impactado": "Grande Porte (>20 linhas)"
+          }
+        }
+      },
+      {
+        "titulo_noticia": "Exportações agropecuárias em leve queda em Outubro/2026",
+        "tendencia_noticia": "negativo",
+        "corpo_noticia": "O volume total das exportações agropecuárias do Uruguai em Outubro (último dado) recuou 1.2% ante Setembro, impactado pela queda nos preços da carne.",
+        "fonte_noticia": "Uruguay XXI",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "negativo",
+            "descricao": "Queda nas exportações e preços afeta a rentabilidade, adiando a compra de tratores de média e alta potência.",
+            "segmento_impactado": "Alta Potência (>170cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "negativo",
+            "descricao": "Cenário de exportações em queda adia a decisão de renovação de colheitadeiras de grande porte.",
+            "segmento_impactado": "Grande Porte (Classes 7+)"
+          },
+          "pulverizadores": {
+            "tendencia": "negativo",
+            "descricao": "Menor receita leva à cautela, adiando investimentos em pulverizadores autopropelidos.",
+            "segmento_impactado": "Autopropelido"
+          },
+          "plantadeiras": {
+            "tendencia": "negativo",
+            "descricao": "Rentabilidade menor devido às exportações em queda adia a compra de plantadeiras de grande porte.",
+            "segmento_impactado": "Grande Porte (>20 linhas)"
+          }
+        }
+      },
+      {
+        "titulo_noticia": "Preços da soja recuam; produtores buscam otimização de custos",
+        "tendencia_noticia": "negativo",
+        "corpo_noticia": "Os preços internacionais da soja recuaram 2% em Novembro ante Outubro, impactando diretamente as margens dos produtores uruguaios e a rentabilidade esperada.",
+        "fonte_noticia": "Bloomberg Agro",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "negativo",
+            "descricao": "Queda nos preços da soja adiamento a compra de tratores de média e alta potência, priorizando manutenção.",
+            "segmento_impactado": "Média Potência (80-170cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "negativo",
+            "descricao": "Margens apertadas com preços baixos adiam a decisão de compra de colheitadeiras de grande porte.",
+            "segmento_impactado": "Grande Porte (Classes 7+)"
+          },
+          "pulverizadores": {
+            "tendencia": "negativo",
+            "descricao": "Produtores podem adiar a compra de pulverizadores, buscando maior eficiência nos equipamentos existentes.",
+            "segmento_impactado": "Autopropelido"
+          },
+          "plantadeiras": {
+            "tendencia": "negativo",
+            "descricao": "Cenário de preços desfavoráveis adia a aquisição de plantadeiras de grande porte.",
+            "segmento_impactado": "Grande Porte (>20 linhas)"
+          }
+        }
+      },
+      {
+        "titulo_noticia": "Setor leiteiro uruguaio comemora aumento nas exportações",
+        "tendencia_noticia": "positivo",
+        "corpo_noticia": "As exportações de lácteos do Uruguai cresceram 3% em Outubro (último dado) ante Setembro, impulsionadas pela demanda asiática, gerando otimismo no setor.",
+        "fonte_noticia": "INALE (Instituto Nacional de la Leche)",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "positivo",
+            "descricao": "Otimismo no setor leiteiro acelera a demanda por tratores de baixa e média potência para manejo de pastagens e forragem.",
+            "segmento_impactado": "Baixa Potência (<80cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "neutro",
+            "descricao": "Demanda por colheitadeiras não é diretamente impactada pela exportação de lácteos.",
+            "segmento_impactado": ""
+          },
+          "pulverizadores": {
+            "tendencia": "neutro",
+            "descricao": "Impacto indireto; a demanda por pulverizadores permanece estável no setor leiteiro.",
+            "segmento_impactado": ""
+          },
+          "plantadeiras": {
+            "tendencia": "neutro",
+            "descricao": "Impacto indireto; a demanda por plantadeiras permanece estável no setor leiteiro.",
+            "segmento_impactado": ""
+          }
+        }
+      }
+    ]
+  },
+  "py": {
+    "fatores_economicos": [
+      {
+        "titulo": "Expansão Agro",
+        "icone": "🌱",
+        "tendencia": "expansiva",
+        "direcao": "melhorando",
+        "descricao": "Setor agropecuário paraguaio continua em expansão em Novembro, com aumento de 2% na área de plantio de soja e milho ante Outubro.",
+        "impactos": "A expansão de área acelera a demanda por tratores de alta potência e plantadeiras de grande porte para o preparo de novas terras.",
+        "fonte": "CAPECO"
+      },
+      {
+        "titulo": "Logística Fluvial",
+        "icone": "🚢",
+        "tendencia": "estavel",
+        "direcao": "estavel",
+        "descricao": "Níveis dos rios para transporte fluvial em patamares estáveis em Novembro, ante Outubro, garantindo o escoamento da produção.",
+        "impactos": "Boa logística fluvial garante o escoamento de safras, resultando em impacto neutro, mas positivo, na confiança para investir em colheitadeiras.",
+        "fonte": "Armada Paraguaya"
+      },
+      {
+        "titulo": "Prod. Carne",
+        "icone": "🥩",
+        "tendencia": "positivo",
+        "direcao": "melhorando",
+        "descricao": "Produção e exportação de carne bovina com crescimento de 3% em Outubro (último dado) ante Setembro, impulsionando a pecuária paraguaia.",
+        "impactos": "O bom desempenho da pecuária acelera a demanda por tratores de média e baixa potência para manejo de pastagens e feno.",
+        "fonte": "SENACSA"
+      },
+      {
+        "titulo": "Fiscal/Câmbio",
+        "icone": "🏛️",
+        "tendencia": "estavel",
+        "direcao": "estavel",
+        "descricao": "Política fiscal e cambial mantida estável em Novembro ante Outubro, gerando um ambiente de maior previsibilidade econômica.",
+        "impactos": "Estabilidade macroeconômica reduz incertezas, resultando em impacto neutro a ligeiramente positivo na decisão de compra de máquinas.",
+        "fonte": "BCP (Banco Central del Paraguay)"
+      },
+      {
+        "titulo": "Margens Produtor",
+        "icone": "📊",
+        "tendencia": "positivo",
+        "direcao": "melhorando",
+        "descricao": "Margens da soja e milho melhoraram em Novembro ante Outubro, beneficiadas por preços globais e custos internos controlados.",
+        "impactos": "Margens mais favoráveis aceleram a decisão de compra de colheitadeiras de grande porte e pulverizadores autopropelidos.",
+        "fonte": "CAPECO/FAE"
+      }
+    ],
+    "noticias": [
+      {
+        "titulo_noticia": "Plantio de soja 2026/27 avança e cobre 75% da área",
+        "tendencia_noticia": "positivo",
+        "corpo_noticia": "O plantio da safra de soja 2026/27 atingiu 75% da área em Novembro, com condições climáticas favoráveis. A expectativa é de safra recorde.",
+        "fonte_noticia": "CAPECO",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "positivo",
+            "descricao": "Avanço do plantio e boas expectativas de safra aceleram a demanda por tratores de alta potência.",
+            "segmento_impactado": "Alta Potência (>170cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "incerto",
+            "descricao": "Impacto no plantio é futuro para colheita, mantendo a demanda por colheitadeiras estável.",
+            "segmento_impactado": ""
+          },
+          "pulverizadores": {
+            "tendencia": "positivo",
+            "descricao": "Boas perspectivas incentivam investimento em pulverizadores para proteção da lavoura e maximizar rendimento.",
+            "segmento_impactado": "De Arrasto"
+          },
+          "plantadeiras": {
+            "tendencia": "positivo",
+            "descricao": "O ritmo acelerado do plantio impulsiona a demanda por plantadeiras de grande porte para otimizar o processo.",
+            "segmento_impactado": "Grande Porte (>20 linhas)"
+          }
+        }
+      },
+      {
+        "titulo_noticia": "Indústria de etanol busca expandir produção no Paraguai",
+        "tendencia_noticia": "positivo",
+        "corpo_noticia": "Setor de etanol no Paraguai planeja expansão, impulsionado pela demanda interna e potencial de exportação. Novos investimentos previstos em Novembro.",
+        "fonte_noticia": "UPIP (Unión de Productores de Caña de Azúcar)",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "positivo",
+            "descricao": "Expansão do etanol acelera a demanda por tratores de média e alta potência para o cultivo de cana-de-açúcar.",
+            "segmento_impactado": "Alta Potência (>170cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "positivo",
+            "descricao": "Otimismo no setor impulsiona a compra de colheitadeiras de cana e de grãos para matéria-prima do etanol.",
+            "segmento_impactado": "Grande Porte (Classes 7+)"
+          },
+          "pulverizadores": {
+            "tendencia": "positivo",
+            "descricao": "Aumento da área cultivada para etanol acelera a aquisição de pulverizadores para manejo e proteção.",
+            "segmento_impactado": "Autopropelido"
+          },
+          "plantadeiras": {
+            "tendencia": "positivo",
+            "descricao": "Expansão da área de cultivo acelera a demanda por plantadeiras específicas para cana e milho.",
+            "segmento_impactado": "Grande Porte (>20 linhas)"
+          }
+        }
+      },
+      {
+        "titulo_noticia": "Banco de Fomento lança linha de crédito para pequenos produtores",
+        "tendencia_noticia": "positivo",
+        "corpo_noticia": "O Banco Nacional de Fomento (BNF) liberou em Novembro nova linha de crédito com juros subsidiados, visando pequenos e médios produtores rurais.",
+        "fonte_noticia": "BNF",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "positivo",
+            "descricao": "Crédito facilitado acelera a compra de tratores de baixa e média potência para pequenos e médios produtores.",
+            "segmento_impactado": "Baixa Potência (<80cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "neutro",
+            "descricao": "Linha de crédito foca mais em pequenos/médios, mantendo a demanda por colheitadeiras de grande porte estável.",
+            "segmento_impactado": ""
+          },
+          "pulverizadores": {
+            "tendencia": "positivo",
+            "descricao": "Acesso a crédito acelera a compra de pulverizadores de arrasto para otimização de pequenas lavouras.",
+            "segmento_impactado": "De Arrasto"
+          },
+          "plantadeiras": {
+            "tendencia": "positivo",
+            "descricao": "Crédito para pequenos produtores acelera a decisão de compra de plantadeiras de pequeno porte.",
+            "segmento_impactado": "Pequeno Porte (<20 linhas)"
+          }
+        }
+      },
+      {
+        "titulo_noticia": "Chuvas regulares beneficiam pastagens e gado em Novembro",
+        "tendencia_noticia": "positivo",
+        "corpo_noticia": "As chuvas bem distribuídas em Novembro, em volume superior a Outubro, favoreceram o crescimento das pastagens, resultando em boas condições para o gado.",
+        "fonte_noticia": "Dirección de Meteorología e Hidrología",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "positivo",
+            "descricao": "Boas pastagens incentivam o manejo do gado, acelerando a demanda por tratores de baixa potência para tarefas diversas.",
+            "segmento_impactado": "Baixa Potência (<80cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "neutro",
+            "descricao": "Condições de pastagem impactam indiretamente, mantendo a demanda por colheitadeiras estável.",
+            "segmento_impactado": ""
+          },
+          "pulverizadores": {
+            "tendencia": "neutro",
+            "descricao": "Impacto indireto na demanda por pulverizadores, que se mantém estável.",
+            "segmento_impactado": ""
+          },
+          "plantadeiras": {
+            "tendencia": "neutro",
+            "descricao": "Impacto indireto na demanda por plantadeiras, que se mantém estável.",
+            "segmento_impactado": ""
+          }
+        }
+      }
+    ]
+  },
+  "pe": {
+    "fatores_economicos": [
+      {
+        "titulo": "Agroexport (Costa)",
+        "icone": "🥑",
+        "tendencia": "positivo",
+        "direcao": "melhorando",
+        "descricao": "Exportações de frutas e vegetais da costa (uva, abacate) cresceram 4% em Outubro (último dado) ante Setembro, com forte demanda internacional.",
+        "impactos": "O bom desempenho das agroexportações acelera investimentos em tratores de baixa potência e pulverizadores especializados para frutas.",
+        "fonte": "MINAGRI"
+      },
+      {
+        "titulo": "Agro Andino",
+        "icone": "🥔",
+        "tendencia": "estavel",
+        "direcao": "estavel",
+        "descricao": "Produção de culturas andinas (batata, quinoa) manteve-se estável em Novembro, com preços razoáveis e condições climáticas regulares ante Outubro.",
+        "impactos": "Estabilidade na produção andina resulta em demanda neutra por tratores de baixa potência e máquinas para pequenas propriedades.",
+        "fonte": "INEI/MINAGRI"
+      },
+      {
+        "titulo": "Irrigação",
+        "icone": "🏞️",
+        "tendencia": "expansiva",
+        "direcao": "melhorando",
+        "descricao": "Projetos de irrigação avançam em diversas regiões, com novos investimentos e obras em Novembro, impulsionando a produtividade agrícola.",
+        "impactos": "A expansão da irrigação acelera a demanda por tratores de média potência e plantadeiras para novas áreas cultiváveis.",
+        "fonte": "Autoridad Nacional del Agua (ANA)"
+      },
+      {
+        "titulo": "Cenário Político",
+        "icone": "⚖️",
+        "tendencia": "incerto",
+        "direcao": "estavel",
+        "descricao": "Cenário político peruano em relativa estabilidade em Novembro ante Outubro, mas com incertezas latentes que geram cautela.",
+        "impactos": "Instabilidade política, mesmo que controlada, pode adiar grandes investimentos em máquinas de alta tecnologia, mantendo cautela.",
+        "fonte": "El Comercio"
+      },
+      {
+        "titulo": "Margens Produtor",
+        "icone": "📊",
+        "tendencia": "incerto",
+        "direcao": "estavel",
+        "descricao": "Margens para agroexportadores da costa estáveis; produtores andinos com margens apertadas por custos e infraestrutura deficiente ante Outubro.",
+        "impactos": "Margens heterogêneas resultam em decisão de compra neutra para a maioria das máquinas, com investimentos focados em modernização pontual.",
+        "fonte": "MINAGRI/AGAP"
+      }
+    ],
+    "noticias": [
+      {
+        "titulo_noticia": "Exportações de abacate alcançam novo recorde em 2026",
+        "tendencia_noticia": "positivo",
+        "corpo_noticia": "As exportações peruanas de abacate atingiram volume recorde em 2026, com forte desempenho de Novembro ante Outubro, consolidando a fruta como principal agroexportação.",
+        "fonte_noticia": "AGAP",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "positivo",
+            "descricao": "Sucesso do abacate acelera a demanda por tratores de baixa e média potência para manejo de pomares e transporte.",
+            "segmento_impactado": "Baixa Potência (<80cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "neutro",
+            "descricao": "A colheita de abacate é predominantemente manual, mantendo a demanda por colheitadeiras estável.",
+            "segmento_impactado": ""
+          },
+          "pulverizadores": {
+            "tendencia": "positivo",
+            "descricao": "Rentabilidade alta impulsiona investimentos em pulverizadores para garantir a qualidade e sanidade da lavoura.",
+            "segmento_impactado": "De Arrasto"
+          },
+          "plantadeiras": {
+            "tendencia": "neutro",
+            "descricao": "A demanda por plantadeiras para abacate é sazonal e não diretamente impactada mensalmente.",
+            "segmento_impactado": ""
+          }
+        }
+      },
+      {
+        "titulo_noticia": "Projeto de irrigação Chavimochic III retoma obras em Novembro",
+        "tendencia_noticia": "positivo",
+        "corpo_noticia": "O projeto Chavimochic III, crucial para a agroexportação, retomou obras em Novembro após paralisação, prometendo expandir área agrícola em La Libertad.",
+        "fonte_noticia": "MINAGRI",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "positivo",
+            "descricao": "Retomada das obras acelera a demanda por tratores de alta potência para preparo de solo em novas áreas irrigadas.",
+            "segmento_impactado": "Alta Potência (>170cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "positivo",
+            "descricao": "A expansão de áreas produtivas acelera a decisão de compra de colheitadeiras de grande porte para futuras safras.",
+            "segmento_impactado": "Grande Porte (Classes 7+)"
+          },
+          "pulverizadores": {
+            "tendencia": "positivo",
+            "descricao": "Novas áreas irrigadas aumentam a demanda por pulverizadores autopropelidos para manejo de grandes cultivos.",
+            "segmento_impactado": "Autopropelido"
+          },
+          "plantadeiras": {
+            "tendencia": "positivo",
+            "descricao": "Expansão da área cultivável acelera a demanda por plantadeiras de grande porte para as novas terras.",
+            "segmento_impactado": "Grande Porte (>20 linhas)"
+          }
+        }
+      },
+      {
+        "titulo_noticia": "Aumento global de fertilizantes pressiona produtores peruanos",
+        "tendencia_noticia": "negativo",
+        "corpo_noticia": "Os preços internacionais de fertilizantes subiram 3% em Novembro ante Outubro, impactando os custos de produção no Peru e reduzindo as margens dos agricultores.",
+        "fonte_noticia": "Banco Mundial (data recente)",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "negativo",
+            "descricao": "Aumento nos custos de insumos reduz a liquidez do produtor, adiando a compra de tratores de média e alta potência.",
+            "segmento_impactado": "Média Potência (80-170cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "negativo",
+            "descricao": "Margens apertadas com custos elevados adiam a renovação ou compra de colheitadeiras de médio porte.",
+            "segmento_impactado": "Médio Porte (Classes 4-6)"
+          },
+          "pulverizadores": {
+            "tendencia": "negativo",
+            "descricao": "Produtores podem adiar investimentos em pulverizadores, otimizando o uso dos equipamentos existentes.",
+            "segmento_impactado": "De Arrasto"
+          },
+          "plantadeiras": {
+            "tendencia": "negativo",
+            "descricao": "Custos maiores podem levar a adiar investimentos em plantadeiras, buscando eficiência máxima com o que já possuem.",
+            "segmento_impactado": "Pequeno Porte (<20 linhas)"
+          }
+        }
+      },
+      {
+        "titulo_noticia": "Café peruano enfrenta desafios climáticos e pragas",
+        "tendencia_noticia": "negativo",
+        "corpo_noticia": "Produtores de café nos Andes relatam perdas em Novembro devido a variações climáticas e aumento de pragas, afetando a qualidade e volume da colheita.",
+        "fonte_noticia": "Junta Nacional del Café",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "negativo",
+            "descricao": "Perdas na safra de café reduzem a rentabilidade, adiando a compra de tratores de baixa potência para o setor.",
+            "segmento_impactado": "Baixa Potência (<80cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "neutro",
+            "descricao": "Colheita de café é manual, impactando pouco a demanda por colheitadeiras padrão.",
+            "segmento_impactado": ""
+          },
+          "pulverizadores": {
+            "tendencia": "positivo",
+            "descricao": "Aumento de pragas pode acelerar a demanda por pulverizadores para controle e manejo fitossanitário.",
+            "segmento_impactado": "De Arrasto"
+          },
+          "plantadeiras": {
+            "tendencia": "negativo",
+            "descricao": "Resultados abaixo do esperado podem frear investimentos em novas plantadeiras para café.",
+            "segmento_impactado": ""
+          }
+        }
+      }
+    ]
+  },
+  "bo": {
+    "fatores_economicos": [
+      {
+        "titulo": "Soja (Oriente)",
+        "icone": "🌱",
+        "tendencia": "positivo",
+        "direcao": "melhorando",
+        "descricao": "Plantio de soja no oriente boliviano avança em Novembro, com chuvas regulares e perspectivas de boa safra 2026/27, ante Outubro.",
+        "impactos": "Boas condições de plantio aceleram a demanda por tratores de alta potência e plantadeiras de grande porte para a expansão da cultura.",
+        "fonte": "ANAPO (Asociación Nacional de Productores de Oleaginosas)"
+      },
+      {
+        "titulo": "Escassez de Dólar",
+        "icone": "💸",
+        "tendencia": "restritiva",
+        "direcao": "piorando",
+        "descricao": "A escassez de dólar persiste em Novembro, com dificuldade de acesso à moeda estrangeira, encarecendo importações ante Outubro.",
+        "impactos": "A falta de dólares dificulta a importação de máquinas e peças, adiando a compra de todos os produtos e favorecendo o mercado de usados.",
+        "fonte": "BCB (Banco Central de Bolivia)/Cainco"
+      },
+      {
+        "titulo": "Biocombustíveis",
+        "icone": "⛽",
+        "tendencia": "expansiva",
+        "direcao": "melhorando",
+        "descricao": "Política de incentivo a biocombustíveis ganha força em Novembro, com planos para aumentar a produção de etanol e biodiesel.",
+        "impactos": "O avanço dos biocombustíveis acelera a demanda por tratores de média potência e colheitadeiras para cana e soja.",
+        "fonte": "YPFB (Yacimientos Petrolíferos Fiscales Bolivianos)"
+      },
+      {
+        "titulo": "Infra. Logística",
+        "icone": "🛣️",
+        "tendencia": "estavel",
+        "direcao": "estavel",
+        "descricao": "Obras em infraestrutura logística (estradas, portos secos) em ritmo estável em Novembro, sem grandes avanços ante Outubro.",
+        "impactos": "Infraestrutura estável, mas ainda deficitária, resulta em impacto neutro na demanda por máquinas que exigem agilidade no transporte.",
+        "fonte": "ABC (Administradora Boliviana de Carreteras)"
+      },
+      {
+        "titulo": "Margens Produtor",
+        "icone": "📊",
+        "tendencia": "incerto",
+        "direcao": "estavel",
+        "descricao": "Margens da soja estáveis a melhores ante Outubro, impulsionadas por produtividade; milho e trigo pressionados por custos e câmbio.",
+        "impactos": "Margens mistas, combinadas com a escassez de dólar, geram decisão de compra neutra ou adiada para tratores e colheitadeiras.",
+        "fonte": "ANAPO/IBCE"
+      }
+    ],
+    "noticias": [
+      {
+        "titulo_noticia": "Plantio de soja avança com força no leste boliviano",
+        "tendencia_noticia": "positivo",
+        "corpo_noticia": "O plantio da safra de verão de soja 2026/27 no leste da Bolívia alcançou 60% da área em Novembro, impulsionado por chuvas e boas condições de solo.",
+        "fonte_noticia": "ANAPO",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "positivo",
+            "descricao": "Plantio acelerado impulsiona a demanda por tratores de alta potência para preparo do solo e semeadura.",
+            "segmento_impactado": "Alta Potência (>170cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "incerto",
+            "descricao": "Impacto na colheita é futuro, mantendo a demanda por colheitadeiras estável.",
+            "segmento_impactado": ""
+          },
+          "pulverizadores": {
+            "tendencia": "positivo",
+            "descricao": "Boas perspectivas incentivam investimento em pulverizadores autopropelidos para garantir a sanidade da lavoura.",
+            "segmento_impactado": "Autopropelido"
+          },
+          "plantadeiras": {
+            "tendencia": "positivo",
+            "descricao": "O rápido avanço do plantio acelera a demanda por plantadeiras de grande porte para otimizar a semeadura.",
+            "segmento_impactado": "Grande Porte (>20 linhas)"
+          }
+        }
+      },
+      {
+        "titulo_noticia": "Setor agroindustrial preocupa-se com falta de dólares",
+        "tendencia_noticia": "negativo",
+        "corpo_noticia": "A persistente escassez de dólares em Novembro, pior que em Outubro, dificulta a importação de insumos e maquinário para o setor agroindustrial boliviano.",
+        "fonte_noticia": "Cainco (Cámara de Industria, Comercio y Servicios de Santa Cruz)",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "negativo",
+            "descricao": "Escassez de dólar adia a importação e compra de tratores novos, afetando todos os segmentos.",
+            "segmento_impactado": ""
+          },
+          "colheitadeiras": {
+            "tendencia": "negativo",
+            "descricao": "A dificuldade em obter dólares adia a aquisição de colheitadeiras de grande porte e suas peças.",
+            "segmento_impactado": "Grande Porte (Classes 7+)"
+          },
+          "pulverizadores": {
+            "tendencia": "negativo",
+            "descricao": "Importação restrita de peças e máquinas adia a compra de pulverizadores autopropelidos.",
+            "segmento_impactado": "Autopropelido"
+          },
+          "plantadeiras": {
+            "tendencia": "negativo",
+            "descricao": "A falta de dólar impede a compra de plantadeiras modernas, freando investimentos em tecnologia.",
+            "segmento_impactado": "Grande Porte (>20 linhas)"
+          }
+        }
+      },
+      {
+        "titulo_noticia": "Governo acelera planos para aumentar produção de biodiesel",
+        "tendencia_noticia": "positivo",
+        "corpo_noticia": "O governo boliviano anunciou em Novembro medidas para acelerar a produção de biodiesel, visando reduzir a importação de combustíveis e fortalecer o setor agrícola.",
+        "fonte_noticia": "Ministerio de Hidrocarburos y Energías",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "positivo",
+            "descricao": "Otimismo no biodiesel acelera a demanda por tratores para o cultivo de oleaginosas (soja, girassol).",
+            "segmento_impactado": "Média Potência (80-170cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "positivo",
+            "descricao": "Aumenta a demanda por colheitadeiras para as culturas usadas na produção de biocombustíveis.",
+            "segmento_impactado": "Grande Porte (Classes 7+)"
+          },
+          "pulverizadores": {
+            "tendencia": "positivo",
+            "descricao": "Necessidade de alta produtividade impulsiona a compra de pulverizadores para lavouras de matéria-prima.",
+            "segmento_impactado": "Autopropelido"
+          },
+          "plantadeiras": {
+            "tendencia": "positivo",
+            "descricao": "Planos de expansão aceleram a aquisição de plantadeiras para o cultivo de oleaginosas.",
+            "segmento_impactado": "Grande Porte (>20 linhas)"
+          }
+        }
+      },
+      {
+        "titulo_noticia": "Setor pecuário de Santa Cruz busca maior exportação",
+        "tendencia_noticia": "positivo",
+        "corpo_noticia": "Produtores de gado em Santa Cruz buscam expandir mercados externos. O setor apresentou leve alta na produção em Outubro (último dado) ante Setembro.",
+        "fonte_noticia": "Fegasacruz",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "positivo",
+            "descricao": "Expansão da pecuária acelera a demanda por tratores de baixa potência para manejo de pastagens e forragem.",
+            "segmento_impactado": "Baixa Potência (<80cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "neutro",
+            "descricao": "Impacto indireto na pecuária; a demanda por colheitadeiras permanece estável.",
+            "segmento_impactado": ""
+          },
+          "pulverizadores": {
+            "tendencia": "neutro",
+            "descricao": "Impacto indireto na pecuária; a demanda por pulverizadores permanece estável.",
+            "segmento_impactado": ""
+          },
+          "plantadeiras": {
+            "tendencia": "neutro",
+            "descricao": "Impacto indireto na pecuária; a demanda por plantadeiras permanece estável.",
+            "segmento_impactado": ""
+          }
+        }
+      }
+    ]
+  },
+  "mx": {
+    "fatores_economicos": [
+      {
+        "titulo": "Export. p/ EUA",
+        "icone": "🥑",
+        "tendencia": "positivo",
+        "direcao": "melhorando",
+        "descricao": "Exportações agrícolas para os EUA (abacate, tomate) cresceram 3% em Outubro (último dado) ante Setembro, impulsionando o setor.",
+        "impactos": "O forte desempenho das exportações acelera a compra de tratores de média e alta potência e pulverizadores autopropelidos para otimizar a produção.",
+        "fonte": "SAGARPA"
+      },
+      {
+        "titulo": "Escassez Hídrica",
+        "icone": "🏜️",
+        "tendencia": "negativo",
+        "direcao": "piorando",
+        "descricao": "Escassez de água se agravou em Novembro, especialmente no norte e centro do México, com reservatórios em níveis críticos ante Outubro.",
+        "impactos": "A seca adia investimentos em novas áreas e em máquinas para culturas de irrigação, como pulverizadores e plantadeiras.",
+        "fonte": "CONAGUA"
+      },
+      {
+        "titulo": "Prod. Agave",
+        "icone": "🌵",
+        "tendencia": "expansiva",
+        "direcao": "melhorando",
+        "descricao": "Produção de agave para tequila segue em expansão em Novembro, impulsionada pela demanda global, com novos plantios ante Outubro.",
+        "impactos": "A expansão do agave acelera a demanda por tratores de baixa potência e máquinas para o preparo de solo e manejo das plantações.",
+        "fonte": "CRT (Consejo Regulador del Tequila)"
+      },
+      {
+        "titulo": "Remessas/Agro Fam.",
+        "icone": "👨‍👩‍👧‍👦",
+        "tendencia": "estavel",
+        "direcao": "estavel",
+        "descricao": "Remessas de mexicanos no exterior mantiveram-se estáveis em Outubro (último dado) ante Setembro, suportando investimentos na agricultura familiar.",
+        "impactos": "As remessas mantêm a capacidade de investimento da agricultura familiar, resultando em demanda estável por tratores de baixa potência e implementos.",
+        "fonte": "Banco de México"
+      },
+      {
+        "titulo": "Margens Produtor",
+        "icone": "📊",
+        "tendencia": "incerto",
+        "direcao": "estavel",
+        "descricao": "Margens para culturas de exportação (abacate, tomate) estáveis e boas ante Outubro; milho e feijão pressionados por custos e seca.",
+        "impactos": "Margens heterogêneas resultam em decisão de compra neutra para a maioria das máquinas, com investimentos focados em modernização pontual e regional.",
+        "fonte": "FIRA/ASERCA"
+      }
+    ],
+    "noticias": [
+      {
+        "titulo_noticia": "Demanda por tomate mexicano em alta nos EUA impulsiona setor",
+        "tendencia_noticia": "positivo",
+        "corpo_noticia": "A forte demanda dos EUA por tomate mexicano em Novembro, com preços acima de Outubro, anima produtores e projeta aumento de exportações.",
+        "fonte_noticia": "SNIIM (Sistema Nacional de Información e Integración de Mercados)",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "positivo",
+            "descricao": "Preços elevados do tomate aceleram investimentos em tratores de média potência para cultivo e manejo.",
+            "segmento_impactado": "Média Potência (80-170cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "neutro",
+            "descricao": "A colheita de tomate para exportação é majoritariamente manual, impactando pouco a demanda por colheitadeiras padrão.",
+            "segmento_impactado": ""
+          },
+          "pulverizadores": {
+            "tendencia": "positivo",
+            "descricao": "Produtores investem em pulverizadores para garantir a qualidade e sanidade da lavoura, acelerando a compra.",
+            "segmento_impactado": "De Arrasto"
+          },
+          "plantadeiras": {
+            "tendencia": "positivo",
+            "descricao": "Otimismo no setor acelera a decisão de compra de plantadeiras para novas áreas de cultivo.",
+            "segmento_impactado": "Pequeno Porte (<20 linhas)"
+          }
+        }
+      },
+      {
+        "titulo_noticia": "Seca extrema afeta cultivos no norte do México em Novembro",
+        "tendencia_noticia": "negativo",
+        "corpo_noticia": "Regiões produtoras no norte do México sofrem com seca severa em Novembro, mais intensa que em Outubro, comprometendo as safras de milho e feijão.",
+        "fonte_noticia": "CONAGUA",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "negativo",
+            "descricao": "A seca adia investimentos em tratores de média potência e preparo de solo para as próximas safras.",
+            "segmento_impactado": "Média Potência (80-170cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "negativo",
+            "descricao": "Perdas de safra devido à seca adiam a renovação de colheitadeiras para cereais.",
+            "segmento_impactado": "Médio Porte (Classes 4-6)"
+          },
+          "pulverizadores": {
+            "tendencia": "negativo",
+            "descricao": "A incerteza hídrica adia a compra de pulverizadores, com produtores priorizando a sobrevivência da lavoura.",
+            "segmento_impactado": ""
+          },
+          "plantadeiras": {
+            "tendencia": "negativo",
+            "descricao": "A seca extrema adia a decisão de compra de plantadeiras para milho e feijão.",
+            "segmento_impactado": "Pequeno Porte (<20 linhas)"
+          }
+        }
+      },
+      {
+        "titulo_noticia": "Preços do café valorizam e beneficiam produtores do sul",
+        "tendencia_noticia": "positivo",
+        "corpo_noticia": "Os preços internacionais do café apresentaram valorização em Novembro, gerando melhores margens para os pequenos produtores do sul do México ante Outubro.",
+        "fonte_noticia": "AMEC (Asociación Mexicana de la Cadena Productiva del Café)",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "positivo",
+            "descricao": "Rentabilidade maior acelera a demanda por tratores de baixa potência para manejo de pequenas propriedades cafeeiras.",
+            "segmento_impactado": "Baixa Potência (<80cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "neutro",
+            "descricao": "Colheita de café é manual no México, mantendo a demanda por colheitadeiras padrão estável.",
+            "segmento_impactado": ""
+          },
+          "pulverizadores": {
+            "tendencia": "positivo",
+            "descricao": "Produtores podem investir em pulverizadores para melhorar a qualidade e produtividade das lavouras de café.",
+            "segmento_impactado": "De Arrasto"
+          },
+          "plantadeiras": {
+            "tendencia": "neutro",
+            "descricao": "Demanda por plantadeiras de café é menos frequente, mantendo-se estável.",
+            "segmento_impactado": ""
+          }
+        }
+      },
+      {
+        "titulo_noticia": "Cultivo de agave continua em expansão para atender demanda",
+        "tendencia_noticia": "positivo",
+        "corpo_noticia": "A área cultivada com agave no México segue em crescimento em Novembro, impulsionada pela demanda global por tequila e derivados. Novas plantações em andamento.",
+        "fonte_noticia": "CRT (Consejo Regulador del Tequila)",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "positivo",
+            "descricao": "Expansão do agave acelera a demanda por tratores de média potência para preparo de solo e plantio.",
+            "segmento_impactado": "Média Potência (80-170cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "neutro",
+            "descricao": "A colheita de agave é manual, não afetando diretamente a demanda por colheitadeiras agrícolas.",
+            "segmento_impactado": ""
+          },
+          "pulverizadores": {
+            "tendencia": "positivo",
+            "descricao": "Aumento da área cultivada impulsiona a demanda por pulverizadores para manejo e proteção da lavoura.",
+            "segmento_impactado": "De Arrasto"
+          },
+          "plantadeiras": {
+            "tendencia": "positivo",
+            "descricao": "Novos plantios de agave aceleram a decisão de compra de plantadeiras específicas para a cultura.",
+            "segmento_impactado": "Pequeno Porte (<20 linhas)"
+          }
+        }
+      }
+    ]
+  }
+}
