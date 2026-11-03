@@ -2,7 +2,10 @@
 """
 gerador_dashboard_early_signals.py   ←←← SUBSTITUI o arquivo que já existe
 ==========================================================================
-VERSÃO: v4 (dados oficiais + IA com pesquisa web)
+VERSÃO: v5 (dados oficiais + IA com pesquisa web, um país por vez)
+
+  v5: CORRIGE NOTÍCIAS SUMINDO — a IA passa a gerar um país por vez, com
+      validação (cada país precisa ter notícias) e cache v5 novo.
 
   1. "Juros (Selic)" e "Câmbio (Dólar)" do Brasil vêm do Banco Central
      (arquivo 'modulo_indicadores_oficiais.py' — séries SGS 432 e 1).
@@ -40,7 +43,7 @@ from render_commodities import gerar_bloco_commodities, CSS_COMMODITIES
 from modulo_credito_rural_deepdive import processar_credito_rural
 from render_credito_rural import gerar_bloco_credito_rural, CSS_CREDITO_RURAL
 
-CACHE_VERSAO = "v4"
+CACHE_VERSAO = "v5"
 
 TRANSLATIONS = {
     "pt": {
@@ -261,10 +264,144 @@ def _extrair_json(texto):
     return json.loads(t[ini:fim + 1])
 
 
-def atualizar_dados_com_ia(dados_path, script_dir, contexto_oficial=None):
-    now = datetime.datetime.now()
+FATORES_BASE = {
+  "br": [ { "titulo": "Crédito Rural", "icone": "💳" }, { "titulo": "Prod. Grãos", "icone": "🚜" }, { "titulo": "Margens Produtor", "icone": "📊" } ],
+  "ar": [ { "titulo": "Crédito/Financ.", "icone": "💳" }, { "titulo": "Inflação/Câmbio", "icone": "📈" }, { "titulo": "Retenciones", "icone": "⚖️" }, { "titulo": "Prod. Agrícola", "icone": "🚜" }, { "titulo": "Margens Produtor", "icone": "📊" } ],
+  "cl": [ { "titulo": "Cenário Hídrico", "icone": "💧" }, { "titulo": "Export. Frutas", "icone": "🍒" }, { "titulo": "Custo de Insumos", "icone": "📦" }, { "titulo": "Reg. Ambiental", "icone": "🌿" }, { "titulo": "Margens Produtor", "icone": "📊" } ],
+  "uy": [ { "titulo": "Export. Carne", "icone": "🐄" }, { "titulo": "Preço Commod.", "icone": "📉" }, { "titulo": "Atraso Cambial", "icone": "💵" }, { "titulo": "Prod. Florestal", "icone": "🌲" }, { "titulo": "Margens Produtor", "icone": "📊" } ],
+  "py": [ { "titulo": "Expansão Agro", "icone": "🌱" }, { "titulo": "Logística Fluvial", "icone": "🚢" }, { "titulo": "Prod. Carne", "icone": "🥩" }, { "titulo": "Fiscal/Câmbio", "icone": "🏛️" }, { "titulo": "Margens Produtor", "icone": "📊" } ],
+  "pe": [ { "titulo": "Agroexport (Costa)", "icone": "🥑" }, { "titulo": "Agro Andino", "icone": "🥔" }, { "titulo": "Irrigação", "icone": "🏞️" }, { "titulo": "Cenário Político", "icone": "⚖️" }, { "titulo": "Margens Produtor", "icone": "📊" } ],
+  "bo": [ { "titulo": "Soja (Oriente)", "icone": "🌱" }, { "titulo": "Escassez de Dólar", "icone": "💸" }, { "titulo": "Biocombustíveis", "icone": "⛽" }, { "titulo": "Infra. Logística", "icone": "🛣️" }, { "titulo": "Margens Produtor", "icone": "📊" } ],
+  "mx": [ { "titulo": "Export. p/ EUA", "icone": "🥑" }, { "titulo": "Escassez Hídrica", "icone": "🏜️" }, { "titulo": "Prod. Agave", "icone": "🌵" }, { "titulo": "Remessas/Agro Fam.", "icone": "👨‍👩‍👧‍👦" }, { "titulo": "Margens Produtor", "icone": "📊" } ]
+}
+NOMES_PAISES = {"br": "Brasil", "ar": "Argentina", "cl": "Chile", "uy": "Uruguai",
+                "py": "Paraguai", "pe": "Peru", "bo": "Bolívia", "mx": "México"}
+TEMAS_BR = ["Soja", "Milho", "Café", "Cana", "Algodão", "Trigo"]
+
+
+def _n_noticias(pais):
+    return 6 if pais in ("br", "ar") else 4
+
+
+def _prompt_pais(pais, contexto_oficial, now):
+    """Prompt de UM país (resposta menor = sem truncamento do JSON)."""
+    meses_pt = TRANSLATIONS["pt"]["months"]
     year, month = now.year, now.month
-    cache_path = script_dir / f"cache_dados_ia_{CACHE_VERSAO}_{year}_{month:02d}.json"
+    mes_nome, mes_ant = meses_pt[month - 1], meses_pt[(month - 2) % 12]
+    ano_ant = year if month > 1 else year - 1
+    hoje_txt = now.strftime("%d/%m/%Y")
+
+    base_noticia = {
+        "titulo_noticia": "...", "tendencia_noticia": "positivo|negativo|incerto",
+        "corpo_noticia": "...", "fonte_noticia": "...",
+        "impacto_produtos": {p: {"tendencia": "positivo|negativo|incerto", "descricao": "...", "segmento_impactado": "..."}
+                             for p in ["tratores", "colheitadeiras", "pulverizadores", "plantadeiras"]}
+    }
+    if pais == "br":
+        noticias = [{**base_noticia, "tema": t} for t in TEMAS_BR]
+    else:
+        noticias = [base_noticia] * _n_noticias(pais)
+    estrutura = {
+        "fatores_economicos": [{**f, "tendencia": "...", "direcao": "melhorando|piorando|estavel",
+                                "descricao": "...", "impactos": "...", "fonte": "..."} for f in FATORES_BASE[pais]],
+        "noticias": noticias,
+    }
+
+    bloco_oficial = ""
+    if pais == "br":
+        linhas = "\n".join(f"    - {l}" for l in (contexto_oficial or [])) or "    - (indisponíveis)"
+        bloco_oficial = f"""
+    DADOS OFICIAIS DO BANCO CENTRAL DO BRASIL (coletados hoje):
+{linhas}
+    - Se mencionar Selic, dólar, inadimplência rural ou juros do crédito rural, use
+      EXATAMENTE estes números. É PROIBIDO citar outro valor.
+    - NÃO crie cards de "Juros (Selic)" nem de "Câmbio (Dólar)".
+"""
+    regra_br = ("Retorne EXATAMENTE 6 notícias, uma para cada valor do campo `tema` "
+                "(Soja, Milho, Café, Cana, Algodão, Trigo), nessa ordem."
+                if pais == "br" else f"Retorne EXATAMENTE {_n_noticias(pais)} notícias.")
+
+    return f"""
+    Você é Analista de Inteligência de Mercado Sênior do setor de máquinas agrícolas.
+    HOJE É {hoje_txt}. País: {NOMES_PAISES[pais].upper()}. Relatório de {mes_nome}/{year}.
+{bloco_oficial}
+    PESQUISA E ATUALIDADE:
+    - Use a pesquisa Google para fatores e notícias. Não escreva números de memória;
+      sem número confiável e recente, descreva o fato sem número.
+    - Apenas informações dos últimos 45 dias. "fonte" = veículo/órgão real.
+
+    COMPARAÇÃO MÊS A MÊS: compare {mes_nome}/{year} com {mes_ant}/{ano_ant}. Se o dado oficial
+    mais recente for anterior, compare os dois últimos meses publicados e diga o mês.
+
+    1. fatores_economicos:
+       - "tendencia": 'positivo','negativo','incerto','estavel','alta','baixa','restritiva','expansiva'.
+       - "direcao": 'melhorando'|'piorando'|'estavel' vs mês anterior, sob a ótica da demanda por máquinas.
+       - "descricao": máx 25 palavras, com a comparação ("ante {mes_ant}") e o número.
+       - "impactos": máx 30 palavras, citando tratores/colheitadeiras/pulverizadores/plantadeiras
+         e se a compra tende a ACELERAR, ADIAR ou ficar NEUTRA.
+       - "Margens Produtor": quais culturas melhoraram e quais pioraram ante {mes_ant}.
+    2. noticias: REAIS e RECENTES. {regra_br}
+       - "titulo_noticia" (máx 15 palavras), "corpo_noticia" (máx 40 palavras), "fonte_noticia" (veículo real).
+       - "impacto_produtos": "tendencia", "descricao" (máx 20 palavras), "segmento_impactado":
+         tratores 'Baixa Potência (<80cv)'|'Média Potência (80-170cv)'|'Alta Potência (>170cv)';
+         plantadeiras 'Pequeno Porte (<20 linhas)'|'Grande Porte (>20 linhas)';
+         colheitadeiras 'Médio Porte (Classes 4-6)'|'Grande Porte (Classes 7+)';
+         pulverizadores 'De Arrasto'|'Autopropelido'; ou "".
+
+    Responda SOMENTE com o JSON abaixo preenchido, sem texto antes/depois e sem markdown.
+
+    {json.dumps(estrutura, indent=2, ensure_ascii=False)}
+    """
+
+
+def _resposta_valida(dados, pais):
+    if not isinstance(dados, dict):
+        return False, "resposta não é objeto JSON"
+    if not dados.get("fatores_economicos"):
+        return False, "sem fatores_economicos"
+    noticias = [n for n in dados.get("noticias", []) if isinstance(n, dict) and n.get("titulo_noticia")]
+    if not noticias:
+        return False, "sem notícias"
+    return True, f"{len(dados['fatores_economicos'])} fatores, {len(noticias)} notícias"
+
+
+def _gerar_pais(client, pais, contexto_oficial, now):
+    """Gera UM país. 1º com pesquisa Google, 2º sem pesquisa. Retorna dict ou None."""
+    prompt = _prompt_pais(pais, contexto_oficial, now)
+    modos = [
+        ("com pesquisa Google", types.GenerateContentConfig(
+            tools=[types.Tool(google_search=types.GoogleSearch())],
+            temperature=0.2, max_output_tokens=16384)),
+        ("sem pesquisa", types.GenerateContentConfig(
+            response_mime_type="application/json", temperature=0.2, max_output_tokens=16384)),
+    ]
+    for rotulo, config in modos:
+        for tentativa in range(1, 3):
+            try:
+                resp = client.models.generate_content(model='gemini-2.5-flash', contents=prompt, config=config)
+                dados = _extrair_json(resp.text or "")
+                ok, motivo = _resposta_valida(dados, pais)
+                if ok:
+                    print(f"   ✅ {pais.upper()} ({rotulo}): {motivo}")
+                    return dados
+                print(f"   ⚠ {pais.upper()} ({rotulo}, tentativa {tentativa}): resposta incompleta — {motivo}")
+            except Exception as e:
+                print(f"   ⚠ {pais.upper()} ({rotulo}, tentativa {tentativa}): {e}")
+            time.sleep(5 * tentativa)
+    print(f"   ❌ {pais.upper()}: IA falhou em todos os modos.")
+    return None
+
+
+def atualizar_dados_com_ia(dados_path, script_dir, contexto_oficial=None):
+    """
+    v5: gera UM PAÍS POR VEZ. Na v4 era uma única chamada gigante (8 países +
+    40 notícias); com a pesquisa Google ativada a resposta era cortada no meio
+    e as notícias se perdiam. Agora cada país é validado (precisa ter notícias)
+    e, se um falhar, os demais continuam. O cache só é gravado com TODOS os
+    países completos — senão a próxima execução tenta de novo.
+    """
+    now = datetime.datetime.now()
+    cache_path = script_dir / f"cache_dados_ia_{CACHE_VERSAO}_{now.year}_{now.month:02d}.json"
 
     if cache_path.exists():
         print(f"🧠 Usando cache {cache_path.name}.")
@@ -275,163 +412,43 @@ def atualizar_dados_com_ia(dados_path, script_dir, contexto_oficial=None):
         except Exception as e:
             print(f"⚠️ Cache inválido ({e}). Gerando novamente.")
 
-    print(f"🚫 Cache {cache_path.name} não encontrado. Conectando à IA...")
-
-    # Brasil: Selic e Câmbio saíram da lista da IA (vêm do BCB).
-    fatores_base = {
-      "br": [ { "titulo": "Crédito Rural", "icone": "💳" }, { "titulo": "Prod. Grãos", "icone": "🚜" }, { "titulo": "Margens Produtor", "icone": "📊" } ],
-      "ar": [ { "titulo": "Crédito/Financ.", "icone": "💳" }, { "titulo": "Inflação/Câmbio", "icone": "📈" }, { "titulo": "Retenciones", "icone": "⚖️" }, { "titulo": "Prod. Agrícola", "icone": "🚜" }, { "titulo": "Margens Produtor", "icone": "📊" } ],
-      "cl": [ { "titulo": "Cenário Hídrico", "icone": "💧" }, { "titulo": "Export. Frutas", "icone": "🍒" }, { "titulo": "Custo de Insumos", "icone": "📦" }, { "titulo": "Reg. Ambiental", "icone": "🌿" }, { "titulo": "Margens Produtor", "icone": "📊" } ],
-      "uy": [ { "titulo": "Export. Carne", "icone": "🐄" }, { "titulo": "Preço Commod.", "icone": "📉" }, { "titulo": "Atraso Cambial", "icone": "💵" }, { "titulo": "Prod. Florestal", "icone": "🌲" }, { "titulo": "Margens Produtor", "icone": "📊" } ],
-      "py": [ { "titulo": "Expansão Agro", "icone": "🌱" }, { "titulo": "Logística Fluvial", "icone": "🚢" }, { "titulo": "Prod. Carne", "icone": "🥩" }, { "titulo": "Fiscal/Câmbio", "icone": "🏛️" }, { "titulo": "Margens Produtor", "icone": "📊" } ],
-      "pe": [ { "titulo": "Agroexport (Costa)", "icone": "🥑" }, { "titulo": "Agro Andino", "icone": "🥔" }, { "titulo": "Irrigação", "icone": "🏞️" }, { "titulo": "Cenário Político", "icone": "⚖️" }, { "titulo": "Margens Produtor", "icone": "📊" } ],
-      "bo": [ { "titulo": "Soja (Oriente)", "icone": "🌱" }, { "titulo": "Escassez de Dólar", "icone": "💸" }, { "titulo": "Biocombustíveis", "icone": "⛽" }, { "titulo": "Infra. Logística", "icone": "🛣️" }, { "titulo": "Margens Produtor", "icone": "📊" } ],
-      "mx": [ { "titulo": "Export. p/ EUA", "icone": "🥑" }, { "titulo": "Escassez Hídrica", "icone": "🏜️" }, { "titulo": "Prod. Agave", "icone": "🌵" }, { "titulo": "Remessas/Agro Fam.", "icone": "👨‍👩‍👧‍👦" }, { "titulo": "Margens Produtor", "icone": "📊" } ]
-    }
-
-    base_noticia = {
-        "titulo_noticia": "...", "tendencia_noticia": "positivo|negativo|incerto",
-        "corpo_noticia": "...", "fonte_noticia": "...",
-        "impacto_produtos": {p: {"tendencia": "positivo|negativo|incerto", "descricao": "...", "segmento_impactado": "..."}
-                             for p in ["tratores", "colheitadeiras", "pulverizadores", "plantadeiras"]}
-    }
-    estrutura = {}
-    for pais, fatores in fatores_base.items():
-        if pais == 'br':
-            noticias = [{**base_noticia, "tema_obrigatorio": t} for t in ["Soja", "Milho", "Café", "Cana", "Algodão", "Trigo"]]
-        else:
-            noticias = [base_noticia] * (6 if pais == 'ar' else 4)
-        estrutura[pais] = {
-            "fatores_economicos": [{**f, "tendencia": "...", "direcao": "melhorando|piorando|estavel",
-                                    "descricao": "...", "impactos": "...", "fonte": "..."} for f in fatores],
-            "noticias": noticias,
-        }
-    prompt_json_base = json.dumps(estrutura, indent=2, ensure_ascii=False)
-
-    meses_pt = TRANSLATIONS["pt"]["months"]
-    mes_nome = meses_pt[month - 1]
-    mes_ant = meses_pt[(month - 2) % 12]
-    ano_ant = year if month > 1 else year - 1
-    hoje_txt = now.strftime("%d/%m/%Y")
-
-    if contexto_oficial:
-        bloco_oficial = "\n".join(f"    - {l}" for l in contexto_oficial)
-    else:
-        bloco_oficial = "    - (dados oficiais indisponíveis nesta execução)"
-
-    prompt = f"""
-    Você é um Analista de Inteligência de Mercado Sênior para o setor de máquinas agrícolas na América Latina.
-    HOJE É {hoje_txt}. Gere um relatório atualizado para {mes_nome}/{year}.
-
-    ############################################################
-    # DADOS OFICIAIS DO BANCO CENTRAL DO BRASIL (coletados hoje)
-    ############################################################
-{bloco_oficial}
-
-    REGRAS SOBRE ESTES DADOS:
-    - Se mencionar Selic, dólar, inadimplência rural ou juros do crédito rural do
-      Brasil, use EXATAMENTE os números acima. É PROIBIDO citar outro valor.
-    - NÃO crie cards de "Juros (Selic)" nem de "Câmbio (Dólar)" para o Brasil.
-
-    ############################################################
-    # PESQUISA OBRIGATÓRIA E ATUALIDADE
-    ############################################################
-    - Use a pesquisa (Google Search) para TODOS os demais fatores e notícias.
-      NÃO escreva números de memória. Sem número confiável e recente, descreva o
-      fato sem número em vez de inventar.
-    - Considere apenas informações publicadas nos últimos 45 dias (até {hoje_txt}).
-    - "fonte" deve indicar o veículo/órgão REAL encontrado na pesquisa.
-
-    ############################################################
-    # BASE DE COMPARAÇÃO MÊS A MÊS
-    ############################################################
-    Toda análise de `fatores_economicos` compara {mes_nome}/{year} com {mes_ant}/{ano_ant}.
-    Se o dado oficial mais recente for anterior a {mes_nome}, compare os DOIS ÚLTIMOS
-    meses realmente publicados e diga a que mês o número se refere.
-
-    1. `fatores_economicos`:
-       - "tendencia": 'positivo','negativo','incerto','estavel','alta','baixa','restritiva','expansiva'.
-       - "direcao": 'melhorando' | 'piorando' | 'estavel' — variação vs mês anterior, sob a ótica
-         da DEMANDA POR MÁQUINAS AGRÍCOLAS.
-       - "descricao": máx 25 palavras, explicitando a comparação ("ante {mes_ant}") e o número.
-       - "impactos": máx 30 palavras, citando tratores/colheitadeiras/pulverizadores/plantadeiras
-         (e segmento quando possível) e se a compra tende a ACELERAR, ADIAR ou ficar NEUTRA.
-       - "fonte": órgão/veículo real.
-       - "Margens Produtor": quais culturas melhoraram e quais pioraram ante {mes_ant}.
-    2. `noticias`: notícias REAIS e RECENTES (6 para Brasil e Argentina, 4 para os demais).
-       Para o Brasil, uma notícia por `tema_obrigatorio` (Soja, Milho, Café, Cana, Algodão, Trigo).
-       - "titulo_noticia" (máx 15 palavras), "tendencia_noticia", "corpo_noticia" (máx 40 palavras),
-         "fonte_noticia" (veículo real).
-       - "impacto_produtos": para cada linha, "tendencia", "descricao" (máx 20 palavras) e
-         "segmento_impactado": tratores 'Baixa Potência (<80cv)'|'Média Potência (80-170cv)'|'Alta Potência (>170cv)';
-         plantadeiras 'Pequeno Porte (<20 linhas)'|'Grande Porte (>20 linhas)';
-         colheitadeiras 'Médio Porte (Classes 4-6)'|'Grande Porte (Classes 7+)';
-         pulverizadores 'De Arrasto'|'Autopropelido'; ou "" se geral.
-
-    Responda SOMENTE com o JSON abaixo preenchido (sem texto antes ou depois, sem markdown).
-    Não inclua o campo `tema_obrigatorio` na resposta.
-
-    {prompt_json_base}
-    """
-
-    def dados_erro(msg):
-        return {p: {"fatores_economicos": [{**f, "tendencia": "incerto", "descricao": msg,
-                                             "impactos": "Não foi possível carregar os impactos.",
-                                             "fonte": "Sistema Interno"} for f in fs],
-                    "noticias": []} for p, fs in fatores_base.items()}
-
-    def salvar(dados):
-        dados_path.write_text(json.dumps(dados, ensure_ascii=False, indent=2), encoding="utf-8")
+    def erro_pais(pais, msg):
+        return {"fatores_economicos": [{**f, "tendencia": "incerto", "direcao": "estavel", "descricao": msg,
+                                         "impactos": "Não foi possível carregar os impactos.",
+                                         "fonte": "Sistema Interno"} for f in FATORES_BASE[pais]],
+                "noticias": []}
 
     if not genai or not os.environ.get("GEMINI_API_KEY"):
         msg = "IA indisponível (biblioteca google-genai ou GEMINI_API_KEY ausente)."
         print(f"❌ {msg}")
-        salvar(dados_erro(msg))
+        dados_path.write_text(json.dumps({p: erro_pais(p, msg) for p in FATORES_BASE},
+                                         ensure_ascii=False, indent=2), encoding="utf-8")
         return False
 
     client = genai.Client(api_key=os.environ.get("GEMINI_API_KEY"))
-    MODELO_IA = 'gemini-2.5-flash'
+    print(f"🤖 Gerando análises da IA país a país ({len(FATORES_BASE)} países)...")
 
-    # 1º: COM pesquisa Google (grounding). 2º: sem pesquisa (fallback).
-    modos = [
-        ("com pesquisa Google", types.GenerateContentConfig(
-            tools=[types.Tool(google_search=types.GoogleSearch())], temperature=0.2)),
-        ("sem pesquisa (fallback)", types.GenerateContentConfig(
-            response_mime_type="application/json", temperature=0.2)),
-    ]
+    resultado, falhas = {}, []
+    for pais in FATORES_BASE:
+        dados_pais = _gerar_pais(client, pais, contexto_oficial, now)
+        if dados_pais is None:
+            falhas.append(pais)
+            dados_pais = erro_pais(pais, "Falha na comunicação com a IA nesta execução.")
+        if pais == "br":
+            dados_pais["fatores_economicos"] = [f for f in dados_pais.get("fatores_economicos", [])
+                                                if f.get("titulo") not in TITULOS_OFICIAIS_BR]
+            for n in dados_pais.get("noticias", []):
+                n.pop("tema", None)
+        resultado[pais] = dados_pais
+        time.sleep(4)  # respeita limite de requisições por minuto do Gemini
 
-    novos_dados = None
-    for rotulo, config in modos:
-        for attempt in range(3):
-            try:
-                print(f"🤖 IA {rotulo} — tentativa {attempt + 1}/3 "
-                      f"(comparação {mes_nome}/{year} vs {mes_ant}/{ano_ant})")
-                resp = client.models.generate_content(model=MODELO_IA, contents=prompt, config=config)
-                novos_dados = _extrair_json(resp.text or "")
-                if "br" not in novos_dados or "ar" not in novos_dados:
-                    raise ValueError("JSON sem a árvore de países esperada.")
-                print(f"✅ IA respondeu ({rotulo}).")
-                break
-            except Exception as e:
-                novos_dados = None
-                print(f"⚠️ Falha ({rotulo}): {e}")
-                time.sleep(5 * (2 ** attempt))
-        if novos_dados:
-            break
-
-    if not novos_dados:
-        print("❌ Todas as tentativas com a IA falharam.")
-        salvar(dados_erro("Falha na comunicação com a IA."))
+    dados_path.write_text(json.dumps(resultado, ensure_ascii=False, indent=2), encoding="utf-8")
+    if falhas:
+        print(f"⚠️ Países sem análise completa: {', '.join(p.upper() for p in falhas)}. "
+              f"Cache NÃO gravado — a próxima execução tenta novamente.")
         return False
-
-    # Defesa: remove do Brasil qualquer card de Selic/Câmbio criado pela IA.
-    br = novos_dados.get("br", {})
-    br["fatores_economicos"] = [f for f in br.get("fatores_economicos", [])
-                                if f.get("titulo") not in TITULOS_OFICIAIS_BR]
-
-    cache_path.write_text(json.dumps(novos_dados, ensure_ascii=False, indent=2), encoding="utf-8")
-    salvar(novos_dados)
-    print(f"✅ Análises da IA salvas em {cache_path.name}.")
+    cache_path.write_text(json.dumps(resultado, ensure_ascii=False, indent=2), encoding="utf-8")
+    print(f"✅ Análises de todos os países salvas em {cache_path.name}.")
     return True
 
 
@@ -557,7 +574,7 @@ if __name__ == "__main__":
     output_arquivo = script_dir / "index.html"
     dados_arquivo = script_dir / "dados_paises.json"
 
-    print("🚀 Iniciando a geração do dashboard 'Early Signals' (v4)...")
+    print("🚀 Iniciando a geração do dashboard 'Early Signals' (v5)...")
     try:
         if not template_arquivo.exists():
             raise FileNotFoundError(f"Template '{template_arquivo.name}' não encontrado em '{script_dir}'")
