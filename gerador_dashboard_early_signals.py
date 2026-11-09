@@ -2,14 +2,15 @@
 """
 gerador_dashboard_early_signals.py   ←←← SUBSTITUI o arquivo que já existe
 ==========================================================================
-VERSÃO: v9 (corrige notícias vazias / cache não atualizado)
-  v9 — CORREÇÕES:
-  • Não descarta TODAS as notícias quando o SDK não devolve grounding_metadata
-    (era a causa principal de "0 válidas" -> cache não gravado -> dashboard vazio).
-  • Data ausente: tenta extrair da URL (/2026/11/09/); notícia com URL não é perdida.
-  • Cache gravado mesmo com 1 notícia; se a nova rodada vier pior, MANTÉM as notícias
-    do cache anterior (dashboard nunca fica vazio).
-  • Diagnóstico no terminal: caminho do cache, motivos de descarte agrupados.
+VERSÃO: v10
+  v10 — COTA DIÁRIA / GITHUB ACTIONS:
+  • Detecta "cota diária esgotada" (429 per day) e PARA na hora — não fica 15+ min
+    repetindo chamadas que não vão funcionar. Tenta 1x o modelo reserva (GEMINI_MODEL_RESERVA).
+  • Nunca apaga o que já existia: se a IA falha, reaproveita o país do cache OU do
+    dados_paises.json anterior (o que está no repositório).
+  • Menos chamadas por execução (economiza a cota do Free Tier).
+  v9 — notícias não são mais todas descartadas sem grounding_metadata; data via URL;
+    cache gravado com >=1 notícia e fallback ao cache anterior.
 
   v8 — VELOCIDADE (v7 levava ~30 min):
   • Países em PARALELO (PAISES_EM_PARALELO = 4) em vez de um por vez.
@@ -53,7 +54,7 @@ from render_commodities import gerar_bloco_commodities, CSS_COMMODITIES
 from modulo_credito_rural_deepdive import processar_credito_rural
 from render_credito_rural import gerar_bloco_credito_rural, CSS_CREDITO_RURAL
 
-CACHE_VERSAO = "v8"   # mantido: reaproveita o cache existente
+CACHE_VERSAO = "v8"
 
 TRANSLATIONS = {
     "pt": {
@@ -438,15 +439,46 @@ def _n_noticias(pais):
 # CONFIGURAÇÃO DA IA / NOTÍCIAS
 # =============================================================================
 MODELO_GEMINI = os.environ.get("GEMINI_MODEL", "gemini-2.5-flash")
+MODELO_RESERVA = os.environ.get("GEMINI_MODEL_RESERVA", "gemini-2.5-flash-lite")  # cota separada
+import threading
+_COTA = {"esgotada": False, "modelo": MODELO_GEMINI, "lock": threading.Lock()}
+
+
+class CotaDiariaEsgotada(Exception):
+    pass
+
+
+def _cota_diaria(e):
+    m = str(e).lower()
+    return ("429" in m or "resource_exhausted" in m) and ("per day" in m or "perday" in m)
+
+
+def _modelo_atual():
+    return _COTA["modelo"]
+
+
+def _registrar_cota_esgotada(modelo_que_falhou):
+    """Troca para o modelo reserva uma vez; se o reserva também esgotou, para tudo."""
+    with _COTA["lock"]:
+        if _COTA["modelo"] != modelo_que_falhou:
+            return                       # outra thread já trocou
+        if MODELO_RESERVA and modelo_que_falhou != MODELO_RESERVA:
+            print(f"   🔁 Cota diária de {modelo_que_falhou} esgotada. Trocando para {MODELO_RESERVA}.")
+            _COTA["modelo"] = MODELO_RESERVA
+        else:
+            if not _COTA["esgotada"]:
+                print("   🛑 Cota diária do Gemini esgotada em todos os modelos. Parando a IA e "
+                      "mantendo os dados anteriores.")
+            _COTA["esgotada"] = True
 JANELA_NOTICIAS_DIAS = 30        # notícia só entra se publicada nos últimos N dias
-MINIMO_NOTICIAS_RECENTES = 2     # abaixo disso o país não vai para o cache
+MINIMO_NOTICIAS_RECENTES = 2     # alvo mínimo (cache é gravado a partir de 1)
 CACHE_VALIDADE_DIAS = 3          # país em cache é reaproveitado por no máx. N dias
 FORCAR_ATUALIZACAO = ("--forcar" in sys.argv) or os.environ.get("FORCAR_IA") == "1"
 DEBUG_IA = True                  # grava as respostas brutas da IA em /debug_ia
 
 # --- v8: VELOCIDADE ----------------------------------------------------------
-PAISES_EM_PARALELO = 4           # países processados ao mesmo tempo (1 = sequencial)
-TENTATIVAS_COM_PESQUISA = 2      # era 3
+PAISES_EM_PARALELO = 2           # países processados ao mesmo tempo (1 = sequencial)
+TENTATIVAS_COM_PESQUISA = 2
 ACEITAR_PERCENTUAL = 0.6         # aceita a 1ª resposta com >= 60% das notícias pedidas
                                  # (v7 exigia quase 100% -> refazia quase sempre)
 ORCAMENTO_RACIOCINIO = 1024      # "thinking" do Gemini 2.5 (tokens). 0 = desliga; -1 = automático
@@ -576,16 +608,16 @@ def _parse_data(valor):
 
 
 def _data_da_url(url):
-    m = re.search(r"/(20\d{2})[/-](\d{1,2})[/-](\d{1,2})(?:/|-|$)", str(url or ""))
-    if not m:
-        m2 = re.search(r"(20\d{2})(\d{2})(\d{2})", str(url or ""))
-        m = m2
+    m = re.search(r"/(20\d{2})[/-](\d{1,2})[/-](\d{1,2})(?:/|-|$)", str(url or "")) \
+        or re.search(r"(20\d{2})(\d{2})(\d{2})", str(url or ""))
     if m:
         try:
             return datetime.date(int(m.group(1)), int(m.group(2)), int(m.group(3)))
         except ValueError:
             return None
     return None
+
+
 def _filtrar_noticias_recentes(noticias, now):
     hoje = now.date()
     corte = hoje - datetime.timedelta(days=JANELA_NOTICIAS_DIAS)
@@ -597,7 +629,7 @@ def _filtrar_noticias_recentes(noticias, now):
         d = _parse_data(n.get("data_publicacao")) or _data_da_url(n.get("url_noticia"))
         titulo = str(n.get("titulo_noticia"))[:60]
         if d is None and str(n.get("url_noticia", "")).startswith("http"):
-            d = hoje          # tem link verificável, mas sem data: aceita como "recente"
+            d = hoje
             n["data_aproximada"] = True
         if d is None:
             descartadas.append((titulo, f"sem data e sem URL ('{n.get('data_publicacao')}')"))
@@ -646,6 +678,17 @@ def _salvar_debug(script_dir, pais, rotulo, tentativa, texto):
         pass
 
 
+def _tratar_erro(e, pais, rotulo, tentativa, modelo):
+    """Retorna False se deve abandonar o país (cota diária)."""
+    if _cota_diaria(e):
+        print(f"   ⚠ {pais.upper()} ({rotulo}, {modelo}): cota DIÁRIA esgotada (429).")
+        _registrar_cota_esgotada(modelo)
+        return not _COTA["esgotada"]
+    print(f"   ⚠ {pais.upper()} ({rotulo}, tentativa {tentativa}): {str(e)[:200]}")
+    time.sleep(_espera_erro(e, tentativa, pais))
+    return True
+
+
 def _espera_erro(e, tentativa, pais=""):
     msg = str(e)
     if "429" in msg or "RESOURCE_EXHAUSTED" in msg or "quota" in msg.lower():
@@ -684,9 +727,12 @@ def _gerar_pais(client, pais, contexto_oficial, now, script_dir):
     cfg_pesquisa = _config_ia(True)
 
     for tentativa in range(1, TENTATIVAS_COM_PESQUISA + 1):
+        if _COTA["esgotada"]:
+            return None, {"modo": "cota", "validas": 0}
+        modelo = _modelo_atual()
         try:
             t1 = time.time()
-            resp = client.models.generate_content(model=MODELO_GEMINI, contents=prompt, config=cfg_pesquisa)
+            resp = client.models.generate_content(model=modelo, contents=prompt, config=cfg_pesquisa)
             texto = resp.text or ""
             _salvar_debug(script_dir, pais, "pesquisa", tentativa, texto)
             if "MAX_TOKENS" in _finish_reason(resp):
@@ -699,8 +745,6 @@ def _gerar_pais(client, pais, contexto_oficial, now, script_dir):
             brutas = dados.get("noticias", []) or []
             validas, descartadas = _filtrar_noticias_recentes(brutas, now)
             if not consultas and not fontes:
-                # v9: o SDK às vezes não devolve grounding_metadata mesmo pesquisando.
-                # Antes isso zerava TODAS as notícias. Agora só exige URL + data recente.
                 print(f"      ℹ {pais.upper()}: sem metadados de pesquisa; validando por URL/data.")
                 com_url = [n for n in validas if str(n.get("url_noticia", "")).startswith("http")]
                 descartadas += [(str(n.get("titulo_noticia", ""))[:60], "sem URL e sem prova de pesquisa")
@@ -721,8 +765,8 @@ def _gerar_pais(client, pais, contexto_oficial, now, script_dir):
             if len(validas) >= aceitar:
                 break
         except Exception as e:
-            print(f"   ⚠ {pais.upper()} (pesquisa, tentativa {tentativa}): {e}")
-            time.sleep(_espera_erro(e, tentativa, pais))
+            if not _tratar_erro(e, pais, "pesquisa", tentativa, modelo):
+                return None, {"modo": "cota", "validas": 0}
 
     if melhor is not None:
         n = len(melhor["noticias"])
@@ -731,9 +775,12 @@ def _gerar_pais(client, pais, contexto_oficial, now, script_dir):
         return melhor, melhor_status
 
     cfg_sem = _config_ia(False)
-    for tentativa in range(1, 3):
+    for tentativa in range(1, 2):          # v10: 1 tentativa (economiza cota)
+        if _COTA["esgotada"]:
+            return None, {"modo": "cota", "validas": 0}
+        modelo = _modelo_atual()
         try:
-            resp = client.models.generate_content(model=MODELO_GEMINI, contents=prompt, config=cfg_sem)
+            resp = client.models.generate_content(model=modelo, contents=prompt, config=cfg_sem)
             _salvar_debug(script_dir, pais, "sem_pesquisa", tentativa, resp.text)
             dados = _extrair_json(resp.text or "")
             if isinstance(dados, dict) and dados.get("fatores_economicos"):
@@ -742,8 +789,8 @@ def _gerar_pais(client, pais, contexto_oficial, now, script_dir):
                 print(f"   ⚠ {pais.upper()}: fatores sem pesquisa; notícias NÃO exibidas (sem fonte verificável)")
                 return dados, {"modo": "sem_pesquisa", "validas": 0}
         except Exception as e:
-            print(f"   ⚠ {pais.upper()} (sem pesquisa, tentativa {tentativa}): {e}")
-            time.sleep(_espera_erro(e, tentativa, pais))
+            if not _tratar_erro(e, pais, "sem pesquisa", tentativa, modelo):
+                return None, {"modo": "cota", "validas": 0}
     print(f"   ❌ {pais.upper()}: IA falhou em todos os modos.")
     return None, {"modo": "falha", "validas": 0}
 
@@ -782,6 +829,13 @@ def atualizar_dados_com_ia(dados_path, script_dir, contexto_oficial=None):
             cache_disco = json.loads(cache_path.read_text(encoding="utf-8"))
         except Exception:
             cache_disco = {}
+    # v10: dados da execução anterior (arquivo versionado no repositório) = rede de segurança
+    anteriores = {}
+    if dados_path.exists():
+        try:
+            anteriores = json.loads(dados_path.read_text(encoding="utf-8")) or {}
+        except Exception:
+            anteriores = {}
     if cache_path.exists() and not FORCAR_ATUALIZACAO:
         try:
             cache = json.loads(cache_path.read_text(encoding="utf-8"))
@@ -790,10 +844,13 @@ def atualizar_dados_com_ia(dados_path, script_dir, contexto_oficial=None):
     elif FORCAR_ATUALIZACAO:
         print("♻️  --forcar ativo: cache ignorado, todos os países serão regerados.")
 
-    def noticias_cache_antigo(pais):
-        item = cache.get(pais) or cache_disco.get(pais) or {}
-        validas, _ = _filtrar_noticias_recentes((item.get("dados") or {}).get("noticias", []), now)
-        return validas, item.get("dados")
+    def dados_anteriores(pais):
+        """Melhor versão anterior do país: cache (mesmo vencido) ou dados_paises.json."""
+        for fonte in ((cache.get(pais) or cache_disco.get(pais) or {}).get("dados"), anteriores.get(pais)):
+            if isinstance(fonte, dict) and fonte.get("noticias"):
+                return fonte
+        return None
+
     def cache_valido(pais):
         item = cache.get(pais)
         if not item:
@@ -855,20 +912,22 @@ def atualizar_dados_com_ia(dados_path, script_dir, contexto_oficial=None):
                 except Exception as e:
                     print(f"   ❌ {pais.upper()}: erro inesperado {e}")
                     dados_pais, status = None, {"modo": "falha"}
+                antigo = dados_anteriores(pais)
                 if dados_pais is None:
                     falhas.append(pais)
-                    dados_pais = erro_pais(pais, "Falha na comunicação com a IA nesta execução.")
+                    if antigo:
+                        print(f"   ↩ {pais.upper()}: IA indisponível; mantendo dados anteriores "
+                              f"({len(antigo.get('noticias', []))} notícias).")
+                        dados_pais, status = antigo, {"modo": "anterior"}
+                    else:
+                        dados_pais = erro_pais(pais, "Falha na comunicação com a IA nesta execução.")
                 else:
                     dados_pais = _pos_processar_pais(pais, dados_pais)
-                    novas = dados_pais.get("noticias", [])
-                    antigas, dados_antigos = noticias_cache_antigo(pais)
-                    if len(novas) < len(antigas):
-                        # v9: rodada pior que a anterior -> mantém notícias/radar do cache
-                        print(f"   ↩ {pais.upper()}: {len(novas)} nova(s) < {len(antigas)} no cache; "
-                              f"mantendo notícias anteriores.")
-                        dados_pais["noticias"] = antigas
-                        if dados_antigos and dados_antigos.get("sintese_estrategica"):
-                            dados_pais["sintese_estrategica"] = dados_antigos["sintese_estrategica"]
+                    if antigo and len(dados_pais.get("noticias", [])) < len(antigo.get("noticias", [])):
+                        print(f"   ↩ {pais.upper()}: rodada nova trouxe menos notícias; mantendo as anteriores.")
+                        dados_pais["noticias"] = antigo["noticias"]
+                        if antigo.get("sintese_estrategica"):
+                            dados_pais["sintese_estrategica"] = antigo["sintese_estrategica"]
                     if dados_pais.get("noticias"):
                         if FORCAR_ATUALIZACAO and not cache:
                             cache.update({k: v for k, v in cache_disco.items() if k != pais})
@@ -1023,7 +1082,7 @@ if __name__ == "__main__":
     output_arquivo = script_dir / "index.html"
     dados_arquivo = script_dir / "dados_paises.json"
 
-    print("🚀 Iniciando a geração do dashboard 'Early Signals' (v9)...")
+    print("🚀 Iniciando a geração do dashboard 'Early Signals' (v10)...")
     try:
         if not template_arquivo.exists():
             raise FileNotFoundError(f"Template '{template_arquivo.name}' não encontrado em '{script_dir}'")
