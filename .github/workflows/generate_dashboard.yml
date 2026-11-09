@@ -7,7 +7,7 @@ on:
     branches:
       - main
       - master
-    # v10: não roda de novo quando só o cache/dados/index mudaram (economiza cota do Gemini)
+    # Não roda de novo quando só o cache/dados/index mudaram (economiza cota do Gemini)
     paths-ignore:
       - 'index.html'
       - 'dados_paises.json'
@@ -28,7 +28,7 @@ permissions:
   # Permissão necessária para salvar os arquivos gerados no repositório
   contents: write
 
-# v10: evita duas execuções ao mesmo tempo (dobraria o gasto de cota)
+# Evita duas execuções ao mesmo tempo (dobraria o gasto de cota)
 concurrency:
   group: early-signals
   cancel-in-progress: false
@@ -62,20 +62,20 @@ jobs:
           GEMINI_MODEL: gemini-2.5-flash
           GEMINI_MODEL_RESERVA: gemini-3.5-flash-lite   # usado quando o principal esgota a cota ou sai do ar
           FORCAR_IA: ${{ github.event.inputs.forcar == 'true' && '1' || '0' }}
+          PYTHONUNBUFFERED: "1"                          # log aparece em tempo real
           # Fonte do preço para a receita (CEPEA é a única exposta pelo agrobr)
           EARLY_SIGNALS_PRECO_FONTE: cepea
         run: python gerador_dashboard_early_signals.py
 
-      # v10: salva MESMO se o passo 4 falhar, para não perder o cache já gerado
+      # Salva MESMO se o passo 4 falhar, para não perder o cache já gerado
       - name: 5. Salvar index.html, dados e cache no repositório
         if: always()
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git add -f index.html || true
-          git add -f dados_paises.json || true
-          git add -f cache_dados_ia_*.json || true
-          git add -f cache_margem_*.json || true
+          for f in index.html dados_paises.json cache_*.json; do
+            [ -e "$f" ] && git add -f "$f"
+          done
           if git diff --staged --quiet; then
             echo "Nada para salvar."
           else
