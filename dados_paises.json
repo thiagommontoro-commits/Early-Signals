@@ -1,0 +1,384 @@
+{
+  "br": {
+    "fatores_economicos": [
+      {
+        "titulo": "Crédito Rural",
+        "icone": "💳",
+        "tendencia": "incerto",
+        "direcao": "estavel",
+        "descricao": "Falha na comunicação com a IA nesta execução.",
+        "impactos": "Não foi possível carregar os impactos.",
+        "fonte": "Sistema Interno"
+      },
+      {
+        "titulo": "Prod. Grãos",
+        "icone": "🚜",
+        "tendencia": "incerto",
+        "direcao": "estavel",
+        "descricao": "Falha na comunicação com a IA nesta execução.",
+        "impactos": "Não foi possível carregar os impactos.",
+        "fonte": "Sistema Interno"
+      },
+      {
+        "titulo": "Margens Produtor",
+        "icone": "📊",
+        "tendencia": "incerto",
+        "direcao": "estavel",
+        "descricao": "Falha na comunicação com a IA nesta execução.",
+        "impactos": "Não foi possível carregar os impactos.",
+        "fonte": "Sistema Interno"
+      }
+    ],
+    "noticias": []
+  },
+  "ar": {
+    "fatores_economicos": [
+      {
+        "titulo": "Crédito/Financ.",
+        "icone": "💳",
+        "tendencia": "incerto",
+        "direcao": "estavel",
+        "descricao": "Falha na comunicação com a IA nesta execução.",
+        "impactos": "Não foi possível carregar os impactos.",
+        "fonte": "Sistema Interno"
+      },
+      {
+        "titulo": "Inflação/Câmbio",
+        "icone": "📈",
+        "tendencia": "incerto",
+        "direcao": "estavel",
+        "descricao": "Falha na comunicação com a IA nesta execução.",
+        "impactos": "Não foi possível carregar os impactos.",
+        "fonte": "Sistema Interno"
+      },
+      {
+        "titulo": "Retenciones",
+        "icone": "⚖️",
+        "tendencia": "incerto",
+        "direcao": "estavel",
+        "descricao": "Falha na comunicação com a IA nesta execução.",
+        "impactos": "Não foi possível carregar os impactos.",
+        "fonte": "Sistema Interno"
+      },
+      {
+        "titulo": "Prod. Agrícola",
+        "icone": "🚜",
+        "tendencia": "incerto",
+        "direcao": "estavel",
+        "descricao": "Falha na comunicação com a IA nesta execução.",
+        "impactos": "Não foi possível carregar os impactos.",
+        "fonte": "Sistema Interno"
+      },
+      {
+        "titulo": "Margens Produtor",
+        "icone": "📊",
+        "tendencia": "incerto",
+        "direcao": "estavel",
+        "descricao": "Falha na comunicação com a IA nesta execução.",
+        "impactos": "Não foi possível carregar os impactos.",
+        "fonte": "Sistema Interno"
+      }
+    ],
+    "noticias": []
+  },
+  "cl": {
+    "fatores_economicos": [
+      {
+        "titulo": "Cenário Hídrico",
+        "icone": "💧",
+        "tendencia": "incerto",
+        "direcao": "estavel",
+        "descricao": "Falha na comunicação com a IA nesta execução.",
+        "impactos": "Não foi possível carregar os impactos.",
+        "fonte": "Sistema Interno"
+      },
+      {
+        "titulo": "Export. Frutas",
+        "icone": "🍒",
+        "tendencia": "incerto",
+        "direcao": "estavel",
+        "descricao": "Falha na comunicação com a IA nesta execução.",
+        "impactos": "Não foi possível carregar os impactos.",
+        "fonte": "Sistema Interno"
+      },
+      {
+        "titulo": "Custo de Insumos",
+        "icone": "📦",
+        "tendencia": "incerto",
+        "direcao": "estavel",
+        "descricao": "Falha na comunicação com a IA nesta execução.",
+        "impactos": "Não foi possível carregar os impactos.",
+        "fonte": "Sistema Interno"
+      },
+      {
+        "titulo": "Reg. Ambiental",
+        "icone": "🌿",
+        "tendencia": "incerto",
+        "direcao": "estavel",
+        "descricao": "Falha na comunicação com a IA nesta execução.",
+        "impactos": "Não foi possível carregar os impactos.",
+        "fonte": "Sistema Interno"
+      },
+      {
+        "titulo": "Margens Produtor",
+        "icone": "📊",
+        "tendencia": "incerto",
+        "direcao": "estavel",
+        "descricao": "Falha na comunicação com a IA nesta execução.",
+        "impactos": "Não foi possível carregar os impactos.",
+        "fonte": "Sistema Interno"
+      }
+    ],
+    "noticias": []
+  },
+  "uy": {
+    "fatores_economicos": [
+      {
+        "titulo": "Export. Carne",
+        "icone": "🐄",
+        "tendencia": "incerto",
+        "direcao": "estavel",
+        "descricao": "Falha na comunicação com a IA nesta execução.",
+        "impactos": "Não foi possível carregar os impactos.",
+        "fonte": "Sistema Interno"
+      },
+      {
+        "titulo": "Preço Commod.",
+        "icone": "📉",
+        "tendencia": "incerto",
+        "direcao": "estavel",
+        "descricao": "Falha na comunicação com a IA nesta execução.",
+        "impactos": "Não foi possível carregar os impactos.",
+        "fonte": "Sistema Interno"
+      },
+      {
+        "titulo": "Atraso Cambial",
+        "icone": "💵",
+        "tendencia": "incerto",
+        "direcao": "estavel",
+        "descricao": "Falha na comunicação com a IA nesta execução.",
+        "impactos": "Não foi possível carregar os impactos.",
+        "fonte": "Sistema Interno"
+      },
+      {
+        "titulo": "Prod. Florestal",
+        "icone": "🌲",
+        "tendencia": "incerto",
+        "direcao": "estavel",
+        "descricao": "Falha na comunicação com a IA nesta execução.",
+        "impactos": "Não foi possível carregar os impactos.",
+        "fonte": "Sistema Interno"
+      },
+      {
+        "titulo": "Margens Produtor",
+        "icone": "📊",
+        "tendencia": "incerto",
+        "direcao": "estavel",
+        "descricao": "Falha na comunicação com a IA nesta execução.",
+        "impactos": "Não foi possível carregar os impactos.",
+        "fonte": "Sistema Interno"
+      }
+    ],
+    "noticias": []
+  },
+  "py": {
+    "fatores_economicos": [
+      {
+        "titulo": "Expansão Agro",
+        "icone": "🌱",
+        "tendencia": "incerto",
+        "direcao": "estavel",
+        "descricao": "Falha na comunicação com a IA nesta execução.",
+        "impactos": "Não foi possível carregar os impactos.",
+        "fonte": "Sistema Interno"
+      },
+      {
+        "titulo": "Logística Fluvial",
+        "icone": "🚢",
+        "tendencia": "incerto",
+        "direcao": "estavel",
+        "descricao": "Falha na comunicação com a IA nesta execução.",
+        "impactos": "Não foi possível carregar os impactos.",
+        "fonte": "Sistema Interno"
+      },
+      {
+        "titulo": "Prod. Carne",
+        "icone": "🥩",
+        "tendencia": "incerto",
+        "direcao": "estavel",
+        "descricao": "Falha na comunicação com a IA nesta execução.",
+        "impactos": "Não foi possível carregar os impactos.",
+        "fonte": "Sistema Interno"
+      },
+      {
+        "titulo": "Fiscal/Câmbio",
+        "icone": "🏛️",
+        "tendencia": "incerto",
+        "direcao": "estavel",
+        "descricao": "Falha na comunicação com a IA nesta execução.",
+        "impactos": "Não foi possível carregar os impactos.",
+        "fonte": "Sistema Interno"
+      },
+      {
+        "titulo": "Margens Produtor",
+        "icone": "📊",
+        "tendencia": "incerto",
+        "direcao": "estavel",
+        "descricao": "Falha na comunicação com a IA nesta execução.",
+        "impactos": "Não foi possível carregar os impactos.",
+        "fonte": "Sistema Interno"
+      }
+    ],
+    "noticias": []
+  },
+  "pe": {
+    "fatores_economicos": [
+      {
+        "titulo": "Agroexport (Costa)",
+        "icone": "🥑",
+        "tendencia": "incerto",
+        "direcao": "estavel",
+        "descricao": "Falha na comunicação com a IA nesta execução.",
+        "impactos": "Não foi possível carregar os impactos.",
+        "fonte": "Sistema Interno"
+      },
+      {
+        "titulo": "Agro Andino",
+        "icone": "🥔",
+        "tendencia": "incerto",
+        "direcao": "estavel",
+        "descricao": "Falha na comunicação com a IA nesta execução.",
+        "impactos": "Não foi possível carregar os impactos.",
+        "fonte": "Sistema Interno"
+      },
+      {
+        "titulo": "Irrigação",
+        "icone": "🏞️",
+        "tendencia": "incerto",
+        "direcao": "estavel",
+        "descricao": "Falha na comunicação com a IA nesta execução.",
+        "impactos": "Não foi possível carregar os impactos.",
+        "fonte": "Sistema Interno"
+      },
+      {
+        "titulo": "Cenário Político",
+        "icone": "⚖️",
+        "tendencia": "incerto",
+        "direcao": "estavel",
+        "descricao": "Falha na comunicação com a IA nesta execução.",
+        "impactos": "Não foi possível carregar os impactos.",
+        "fonte": "Sistema Interno"
+      },
+      {
+        "titulo": "Margens Produtor",
+        "icone": "📊",
+        "tendencia": "incerto",
+        "direcao": "estavel",
+        "descricao": "Falha na comunicação com a IA nesta execução.",
+        "impactos": "Não foi possível carregar os impactos.",
+        "fonte": "Sistema Interno"
+      }
+    ],
+    "noticias": []
+  },
+  "bo": {
+    "fatores_economicos": [
+      {
+        "titulo": "Soja (Oriente)",
+        "icone": "🌱",
+        "tendencia": "incerto",
+        "direcao": "estavel",
+        "descricao": "Falha na comunicação com a IA nesta execução.",
+        "impactos": "Não foi possível carregar os impactos.",
+        "fonte": "Sistema Interno"
+      },
+      {
+        "titulo": "Escassez de Dólar",
+        "icone": "💸",
+        "tendencia": "incerto",
+        "direcao": "estavel",
+        "descricao": "Falha na comunicação com a IA nesta execução.",
+        "impactos": "Não foi possível carregar os impactos.",
+        "fonte": "Sistema Interno"
+      },
+      {
+        "titulo": "Biocombustíveis",
+        "icone": "⛽",
+        "tendencia": "incerto",
+        "direcao": "estavel",
+        "descricao": "Falha na comunicação com a IA nesta execução.",
+        "impactos": "Não foi possível carregar os impactos.",
+        "fonte": "Sistema Interno"
+      },
+      {
+        "titulo": "Infra. Logística",
+        "icone": "🛣️",
+        "tendencia": "incerto",
+        "direcao": "estavel",
+        "descricao": "Falha na comunicação com a IA nesta execução.",
+        "impactos": "Não foi possível carregar os impactos.",
+        "fonte": "Sistema Interno"
+      },
+      {
+        "titulo": "Margens Produtor",
+        "icone": "📊",
+        "tendencia": "incerto",
+        "direcao": "estavel",
+        "descricao": "Falha na comunicação com a IA nesta execução.",
+        "impactos": "Não foi possível carregar os impactos.",
+        "fonte": "Sistema Interno"
+      }
+    ],
+    "noticias": []
+  },
+  "mx": {
+    "fatores_economicos": [
+      {
+        "titulo": "Export. p/ EUA",
+        "icone": "🥑",
+        "tendencia": "incerto",
+        "direcao": "estavel",
+        "descricao": "Falha na comunicação com a IA nesta execução.",
+        "impactos": "Não foi possível carregar os impactos.",
+        "fonte": "Sistema Interno"
+      },
+      {
+        "titulo": "Escassez Hídrica",
+        "icone": "🏜️",
+        "tendencia": "incerto",
+        "direcao": "estavel",
+        "descricao": "Falha na comunicação com a IA nesta execução.",
+        "impactos": "Não foi possível carregar os impactos.",
+        "fonte": "Sistema Interno"
+      },
+      {
+        "titulo": "Prod. Agave",
+        "icone": "🌵",
+        "tendencia": "incerto",
+        "direcao": "estavel",
+        "descricao": "Falha na comunicação com a IA nesta execução.",
+        "impactos": "Não foi possível carregar os impactos.",
+        "fonte": "Sistema Interno"
+      },
+      {
+        "titulo": "Remessas/Agro Fam.",
+        "icone": "👨‍👩‍👧‍👦",
+        "tendencia": "incerto",
+        "direcao": "estavel",
+        "descricao": "Falha na comunicação com a IA nesta execução.",
+        "impactos": "Não foi possível carregar os impactos.",
+        "fonte": "Sistema Interno"
+      },
+      {
+        "titulo": "Margens Produtor",
+        "icone": "📊",
+        "tendencia": "incerto",
+        "direcao": "estavel",
+        "descricao": "Falha na comunicação com a IA nesta execução.",
+        "impactos": "Não foi possível carregar os impactos.",
+        "fonte": "Sistema Interno"
+      }
+    ],
+    "noticias": []
+  }
+}
