@@ -6,379 +6,2360 @@
         "icone": "💳",
         "tendencia": "restritiva",
         "direcao": "melhorando",
-        "descricao": "Inadimplência PF recuou para 8,68% em Set/2026 (-0,99 p.p. ante Agosto). Juros em 10,81% a.a. (PF) e 12,03% a.a. (PJ).",
-        "impactos": "A queda na inadimplência ajuda, mas os juros elevados fazem produtores adiarem a compra de tratores, colheitadeiras, pulverizadores e plantadeiras, mantendo o mercado cauteloso.",
-        "fonte": "Banco Central do Brasil"
+        "descricao": "Inadimplência PF recuou para 8,68% em Set/2026 (▼ −0,99 p.p. ante Agosto). Juros PF em 10,81% a.a. e PJ em 12,03% a.a.",
+        "impactos": "Juros elevados e inadimplência ainda acima da média histórica fazem produtores adiarem compras de tratores e plantadeiras de alta potência.",
+        "fonte": "BCB"
       },
       {
         "titulo": "Prod. Grãos",
         "icone": "🚜",
         "tendencia": "incerto",
-        "direcao": "estavel",
-        "descricao": "Câmbio PTAX em R$ 5,5146 e Selic a 13,75% a.a. em Novembro/2026 moldam o ritmo do plantio da safra de verão.",
-        "impactos": "A volatilidade cambial e o custo financeiro levam produtores a uma postura neutra, focando apenas na reposição essencial de tratores e plantadeiras.",
-        "fonte": "BCB / CONAB"
+        "direcao": "piorando",
+        "descricao": "Plantio de soja atinge 64% do Brasil em novembro, mas chuvas irregulares no Cerrado preocupam o desenvolvimento inicial das lavouras.",
+        "impactos": "Atrasos e instabilidade climática levam produtores a adotar postura de cautela, desacelerando aquisições imediatas de pulverizadores e colheitadeiras.",
+        "fonte": "Notícias Agrícolas"
       },
       {
         "titulo": "Margens Produtor",
         "icone": "📊",
-        "tendencia": "negativo",
+        "tendencia": "baixa",
         "direcao": "piorando",
-        "descricao": "Custos de produção pressionam as margens da soja e milho ante Outubro, enquanto o café mantém rentabilidade favorável.",
-        "impactos": "Margens apertadas nos grãos forçam o adiamento de investimentos em colheitadeiras e pulverizadores de grande porte, direcionando o orçamento para manutenção.",
-        "fonte": "CONAB / CEPEA"
+        "descricao": "Preços internacionais pressionados por safra americana e demanda fraca comprimem as margens da soja e do milho ante Outubro.",
+        "impactos": "Com rentabilidade menor, investimentos em maquinário agrícola de grande porte tendem a desacelerar nos próximos meses.",
+        "fonte": "BiodieselBR"
       }
     ],
-    "noticias": []
+    "sintese_estrategica": {
+      "manchete": "Cautela no campo: inadimplência em queda e clima irregular freiam investimentos em máquinas.",
+      "termometro": "incerto",
+      "leitura": "Com a inadimplência do crédito rural PF em 8,68% em Set/2026 e juros em 10,81% a.a., somados ao clima irregular no plantio da soja, o produtor adia compras de novos equipamentos. A pressão externa sobre os grãos limita a expansão de frota, exigindo foco em suporte pós-venda.",
+      "riscos": [
+        "Quebra de safra por chuvas irregulares no Cerrado",
+        "Manutenção de juros elevados e restrição de crédito"
+      ],
+      "oportunidades": [
+        "Negociação de financiamentos via Barter e recursos próprios",
+        "Demanda por manutenção e peças de reposição"
+      ],
+      "monitorar": [
+        "Evolução do plantio de soja em novembro",
+        "Decisões do governo sobre ajuste fiscal e crédito"
+      ]
+    },
+    "noticias": [
+      {
+        "tema": "Política & Eleições",
+        "id_noticia": "N2",
+        "titulo_noticia": "Agro: Governo não vê espaço para ampla reforma na política agrícola",
+        "tendencia_noticia": "neutro",
+        "corpo_noticia": "Governo descarta espaço para ampla reforma na política agrícola atual, mantendo diretrizes fiscais restritivas e foco em ajustes pontuais no crédito.",
+        "relevancia": "media",
+        "horizonte": "3-6 meses",
+        "por_que_importa": "Mantém o ambiente de crédito atual sem grandes mudanças estruturais, exigindo planejamento financeiro rigoroso do produtor.",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "incerto",
+            "descricao": "Demanda estável sem novos estímulos oficiais.",
+            "segmento_impactado": "Média Potência (80-170cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "neutro",
+            "descricao": "Sem impacto direto imediato.",
+            "segmento_impactado": ""
+          },
+          "pulverizadores": {
+            "tendencia": "neutro",
+            "descricao": "Sem impacto direto.",
+            "segmento_impactado": ""
+          },
+          "plantadeiras": {
+            "tendencia": "neutro",
+            "descricao": "Sem impacto direto.",
+            "segmento_impactado": ""
+          }
+        },
+        "url_noticia": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxPeE1ndHdYU0F5dFZZd3dpOW5XVzM4Z2hmdXhXcFhLRXFsajF6RjJ0V2hNRUczdzBEYk5vVFVVTXNybEUtVjFFNlpESnZBcXFQalFZVXdaZWVkZHB4QjIwc1BoTU5lUHNBMTFYNzhFb2hnbGREUzVBcjlGRjEtZFR1UFNLeXdzRnZjSklqQXhWU3JXa1NUMzQyT0poNXZmRzlSVzJYQ0g5VlpIbEFDSUpNTnhMS2RCZWVvckRtLWp0dDHSAc8BQVVfeXFMTVFYZERKU2lTU0RiaVVXWDdvTFllczkwOHJNNjhEbm1DOUZPUVl3eTFfWWhkM1lQTm9RMXdEM2hmODNITUNiOXphanZmMzNtYXkwXzVNRVBnaDRZTXdQalBMbW50YWd1WHpkaUVhMENmUkxVdGFfdmVNWEJxNnE4SWRmTVBCbUtOVWo5T2lST0M4ejNRdWp2TkxCX0IwYzVDTGhUejVOcm4tQmVMamNNWlBDeVdRMlR1WkxIMVVUVE9TaHRIYjFKSmZPMmxMVmZn?oc=5",
+        "fonte_noticia": "<a href=\"https://news.google.com/rss/articles/CBMiwAFBVV95cUxPeE1ndHdYU0F5dFZZd3dpOW5XVzM4Z2hmdXhXcFhLRXFsajF6RjJ0V2hNRUczdzBEYk5vVFVVTXNybEUtVjFFNlpESnZBcXFQalFZVXdaZWVkZHB4QjIwc1BoTU5lUHNBMTFYNzhFb2hnbGREUzVBcjlGRjEtZFR1UFNLeXdzRnZjSklqQXhWU3JXa1NUMzQyT0poNXZmRzlSVzJYQ0g5VlpIbEFDSUpNTnhMS2RCZWVvckRtLWp0dDHSAc8BQVVfeXFMTVFYZERKU2lTU0RiaVVXWDdvTFllczkwOHJNNjhEbm1DOUZPUVl3eTFfWWhkM1lQTm9RMXdEM2hmODNITUNiOXphanZmMzNtYXkwXzVNRVBnaDRZTXdQalBMbW50YWd1WHpkaUVhMENmUkxVdGFfdmVNWEJxNnE4SWRmTVBCbUtOVWo5T2lST0M4ejNRdWp2TkxCX0IwYzVDTGhUejVOcm4tQmVMamNNWlBDeVdRMlR1WkxIMVVUVE9TaHRIYjFKSmZPMmxMVmZn?oc=5\" target=\"_blank\" rel=\"noopener\">Valor Econômico · 08/11/2026</a>",
+        "data_publicacao": "2026-11-08"
+      },
+      {
+        "tema": "Política Agrícola & Crédito",
+        "id_noticia": "N3",
+        "titulo_noticia": "Com inadimplência em alta, governo aposta no ajuste fiscal para baratear o crédito",
+        "tendencia_noticia": "incerto",
+        "corpo_noticia": "Com inadimplência rural em patamares elevados, o governo aposta no ajuste fiscal para tentar reduzir o custo do crédito rural futuramente.",
+        "relevancia": "alta",
+        "horizonte": "3-6 meses",
+        "por_que_importa": "O custo e a disponibilidade de recursos definem o ritmo de liberação de financiamentos para aquisição de máquinas.",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "negativo",
+            "descricao": "Crédito restrito desestimula novas aquisições.",
+            "segmento_impactado": "Alta Potência (>170cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "negativo",
+            "descricao": "Financiamento caro adia trocas de frota.",
+            "segmento_impactado": "Grande Porte (Classes 7+)"
+          },
+          "pulverizadores": {
+            "tendencia": "neutro",
+            "descricao": "Retração moderada.",
+            "segmento_impactado": ""
+          },
+          "plantadeiras": {
+            "tendencia": "negativo",
+            "descricao": "Investimentos postergados.",
+            "segmento_impactado": "Grande Porte (>20 linhas)"
+          }
+        },
+        "url_noticia": "https://news.google.com/rss/articles/CBMivgFBVV95cUxQdWRHM2ViVExLYVdNNFRReG5peWxHeWlCamM5SjlUOEo0Y2RaeFlrdlRMaDZQbTlSN0hzZUpndlVkQnVWUkxNRk56M0h2WktjVWNFUDgwb2JOUm50Y05NY2NIMWVpNnF1UzdfYk43NHphOGV0RlhTOVFSUHVfam10aHVEUEtWY1FXLTBoaFIzbU54OThDbHBNTmVMdU9pSG9LSERlZ0hMdF9aa1RXeVk0LW5yX3hkLWlFTXJSWFdR?oc=5",
+        "fonte_noticia": "<a href=\"https://news.google.com/rss/articles/CBMivgFBVV95cUxQdWRHM2ViVExLYVdNNFRReG5peWxHeWlCamM5SjlUOEo0Y2RaeFlrdlRMaDZQbTlSN0hzZUpndlVkQnVWUkxNRk56M0h2WktjVWNFUDgwb2JOUm50Y05NY2NIMWVpNnF1UzdfYk43NHphOGV0RlhTOVFSUHVfam10aHVEUEtWY1FXLTBoaFIzbU54OThDbHBNTmVMdU9pSG9LSERlZ0hMdF9aa1RXeVk0LW5yX3hkLWlFTXJSWFdR?oc=5\" target=\"_blank\" rel=\"noopener\">o estado de rondônia · 08/11/2026</a>",
+        "data_publicacao": "2026-11-08"
+      },
+      {
+        "tema": "Comércio Exterior & Geopolítica",
+        "id_noticia": "N17",
+        "titulo_noticia": "Exportação de carne bovina caiu 35,5% em outubro com recuo para a China",
+        "tendencia_noticia": "negativo",
+        "corpo_noticia": "As exportações de carne bovina registraram queda expressiva de 35,5% em outubro, puxadas pela menor demanda e compras por parte da China.",
+        "relevancia": "media",
+        "horizonte": "3-6 meses",
+        "por_que_importa": "Reduz a receita de pecuaristas e produtores integrados, impactando investimentos em infraestrutura e máquinas pecuárias.",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "negativo",
+            "descricao": "Menor poder de compra na pecuária.",
+            "segmento_impactado": "Baixa Potência (<80cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "neutro",
+            "descricao": "Sem impacto.",
+            "segmento_impactado": ""
+          },
+          "pulverizadores": {
+            "tendencia": "neutro",
+            "descricao": "Sem impacto.",
+            "segmento_impactado": ""
+          },
+          "plantadeiras": {
+            "tendencia": "neutro",
+            "descricao": "Sem impacto.",
+            "segmento_impactado": ""
+          }
+        },
+        "url_noticia": "https://news.google.com/rss/articles/CBMisAFBVV95cUxORENDd1FkU1RkM0RQTWY3amtnRTZfSjBrU2ZucnNlWk85aVpaeGNmVVQ3V25YOUNQbjktVmpuOGlRUlI1RGdJWnR2MmdCMWptSWJkSGc2SEJfa1B0TDZzS0JpZG5hanNyUG1hMnAtMTN2WVhyTXRvbW1nTjVJcDJZeVJhY2h1WVBRQV9VaF9PcUQ0Um1rN1dxZHhCNWdibFhZdWxxcmphbkRaVGpmTXloSw?oc=5",
+        "fonte_noticia": "<a href=\"https://news.google.com/rss/articles/CBMisAFBVV95cUxORENDd1FkU1RkM0RQTWY3amtnRTZfSjBrU2ZucnNlWk85aVpaeGNmVVQ3V25YOUNQbjktVmpuOGlRUlI1RGdJWnR2MmdCMWptSWJkSGc2SEJfa1B0TDZzS0JpZG5hanNyUG1hMnAtMTN2WVhyTXRvbW1nTjVJcDJZeVJhY2h1WVBRQV9VaF9PcUQ0Um1rN1dxZHhCNWdibFhZdWxxcmphbkRaVGpmTXloSw?oc=5\" target=\"_blank\" rel=\"noopener\">Webtv Paracatu · 07/11/2026</a>",
+        "data_publicacao": "2026-11-07"
+      },
+      {
+        "tema": "Clima & Safra",
+        "id_noticia": "N19",
+        "titulo_noticia": "AgRural: Com plantio de soja em 64% no Brasil, chuva segue manchada no Cerrado",
+        "tendencia_noticia": "incerto",
+        "corpo_noticia": "O plantio de soja atinge 64% da área nacional, mas a distribuição irregular de chuvas no Cerrado gera apreensão quanto ao estabelecimento das lavouras.",
+        "relevancia": "alta",
+        "horizonte": "imediato",
+        "por_que_importa": "Incerteza climática no plantio paralisa decisões de compra de máquinas para operações de safra.",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "incerto",
+            "descricao": "Cautela nas aquisições de suporte.",
+            "segmento_impactado": "Média Potência (80-170cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "neutro",
+            "descricao": "Decisões aguardam definição climática.",
+            "segmento_impactado": ""
+          },
+          "pulverizadores": {
+            "tendencia": "negativo",
+            "descricao": "Aplicações iniciais revisadas.",
+            "segmento_impactado": "Autopropelido"
+          },
+          "plantadeiras": {
+            "tendencia": "negativo",
+            "descricao": "Ritmo de plantio afetado.",
+            "segmento_impactado": "Grande Porte (>20 linhas)"
+          }
+        },
+        "url_noticia": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxQX2haNzFPREw5SlZJQlZhbGotVVBJUFJjXy1TQzhsODhLRVk0QklDQXV5M2FoOW1uOGUzUVhGYnpGVnN6ZFdCZ3liTjFwSHdFT1FfUVpkUUtaclJ3TUc1Y1FmcG9mVk85NW9RWUlVQWphcE13MFN5OFBsY2kxcUR3Q3p2aUpTM3RBUjc0aEFZRndPS0pmeVV6OXdBYk43a3VBdTZmTGtfWVlHbEZyUVU5S2R5ajdQX2JIT3lrZlRoZFRaaHdoTjJ0NjlaTDl6czZ0aG5oQm130gHbAUFVX3lxTFBmYzdfVDlrRW9ieGgyOERRaFRLRWxFWFAweGp1am1IT3VpQTZ0aFFVYTZnLW5QSk5OVDNCaVVHd1VncXNtc0hCOHMwZEJ2U0lIYXAwRnpWX1V0X1VCcEZjUFg4ZEQ5aUI5MVI3eDlMUFpWeG1DUUhhXzcwcmhEVUxPYUZpMWJHRUxrdVYwOG9nZWtjb2RhYTdPVFdkUkd4MHUzcGhwYXZiTFAwR1ZGeDFKQ1FLLXFQME5VWnRvN1dROTZZcjJSLTV6QmxvT3g0bzJhM3NVWWp4cVJ5OA?oc=5",
+        "fonte_noticia": "<a href=\"https://news.google.com/rss/articles/CBMi1gFBVV95cUxQX2haNzFPREw5SlZJQlZhbGotVVBJUFJjXy1TQzhsODhLRVk0QklDQXV5M2FoOW1uOGUzUVhGYnpGVnN6ZFdCZ3liTjFwSHdFT1FfUVpkUUtaclJ3TUc1Y1FmcG9mVk85NW9RWUlVQWphcE13MFN5OFBsY2kxcUR3Q3p2aUpTM3RBUjc0aEFZRndPS0pmeVV6OXdBYk43a3VBdTZmTGtfWVlHbEZyUVU5S2R5ajdQX2JIT3lrZlRoZFRaaHdoTjJ0NjlaTDl6czZ0aG5oQm130gHbAUFVX3lxTFBmYzdfVDlrRW9ieGgyOERRaFRLRWxFWFAweGp1am1IT3VpQTZ0aFFVYTZnLW5QSk5OVDNCaVVHd1VncXNtc0hCOHMwZEJ2U0lIYXAwRnpWX1V0X1VCcEZjUFg4ZEQ5aUI5MVI3eDlMUFpWeG1DUUhhXzcwcmhEVUxPYUZpMWJHRUxrdVYwOG9nZWtjb2RhYTdPVFdkUkd4MHUzcGhwYXZiTFAwR1ZGeDFKQ1FLLXFQME5VWnRvN1dROTZZcjJSLTV6QmxvT3g0bzJhM3NVWWp4cVJ5OA?oc=5\" target=\"_blank\" rel=\"noopener\">Notícias Agrícolas · 09/11/2026</a>",
+        "data_publicacao": "2026-11-09"
+      },
+      {
+        "tema": "Soja",
+        "id_noticia": "N25",
+        "titulo_noticia": "Soja recua em Chicago após USDA elevar previsão de produção dos EUA",
+        "tendencia_noticia": "negativo",
+        "corpo_noticia": "Os preços da soja em Chicago registraram baixa após o USDA elevar a estimativa de safra americana, pressionando as cotações globais.",
+        "relevancia": "alta",
+        "horizonte": "3-6 meses",
+        "por_que_importa": "Preços internacionais menores comprimem a margem do produtor brasileiro, reduzindo o apetite por investimentos em novas frotas.",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "negativo",
+            "descricao": "Retração na demanda por novos tratores.",
+            "segmento_impactado": "Alta Potência (>170cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "negativo",
+            "descricao": "Adiantamento de renovação de colheitadeiras.",
+            "segmento_impactado": "Grande Porte (Classes 7+)"
+          },
+          "pulverizadores": {
+            "tendencia": "neutro",
+            "descricao": "Demanda contida.",
+            "segmento_impactado": ""
+          },
+          "plantadeiras": {
+            "tendencia": "negativo",
+            "descricao": "Menor investimento em novas áreas.",
+            "segmento_impactado": "Grande Porte (>20 linhas)"
+          }
+        },
+        "url_noticia": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxNTjVfRUNmQTF6UzU5T2NNTHg3ZlI5TDRTQ25kQ3F3eUg4bm9rUGZ3cGQzNXpZc2JSZ0x3VWdrQjF5Rld1TkRYZ1ZkVkV1cmhqZHVvM182TkV3WGpiZFZYRDZYMDMxVm9pRHcydjRQU3N1TnctWl9va2VSV081eW1oZEFrTFVPMmpoQmF3Mkg5di03UU9xWHpZNHVsTjkxdGJHcUZlUkJpRnhQQnA4NkktT0txM2RqX0w4NEFpWlNaNl9EQQ?oc=5",
+        "fonte_noticia": "<a href=\"https://news.google.com/rss/articles/CBMiwgFBVV95cUxNTjVfRUNmQTF6UzU5T2NNTHg3ZlI5TDRTQ25kQ3F3eUg4bm9rUGZ3cGQzNXpZc2JSZ0x3VWdrQjF5Rld1TkRYZ1ZkVkV1cmhqZHVvM182TkV3WGpiZFZYRDZYMDMxVm9pRHcydjRQU3N1TnctWl9va2VSV081eW1oZEFrTFVPMmpoQmF3Mkg5di03UU9xWHpZNHVsTjkxdGJHcUZlUkJpRnhQQnA4NkktT0txM2RqX0w4NEFpWlNaNl9EQQ?oc=5\" target=\"_blank\" rel=\"noopener\">BiodieselBR · 09/11/2026</a>",
+        "data_publicacao": "2026-11-09"
+      },
+      {
+        "tema": "Milho",
+        "id_noticia": "N35",
+        "titulo_noticia": "Câmbio ajuda a sustentar preços do milho no Brasil e limita baixas",
+        "tendencia_noticia": "positivo",
+        "corpo_noticia": "A alta do dólar (PTAX R$ 5,5146) atua como suporte para os preços do milho no mercado interno, limitando desvalorizações mais acentuadas.",
+        "relevancia": "media",
+        "horizonte": "3-6 meses",
+        "por_que_importa": "A sustentação nos preços do cereal protege parcialmente a receita do agricultor, mantendo alguma liquidez para manutenção.",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "estavel",
+            "descricao": "Demanda sustentada em regiões milheiras.",
+            "segmento_impactado": "Média Potência (80-170cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "estavel",
+            "descricao": "Manutenção de compras pontuais.",
+            "segmento_impactado": "Médio Porte (Classes 4-6)"
+          },
+          "pulverizadores": {
+            "tendencia": "neutro",
+            "descricao": "Estável.",
+            "segmento_impactado": ""
+          },
+          "plantadeiras": {
+            "tendencia": "estavel",
+            "descricao": "Planejamento mantido.",
+            "segmento_impactado": "Pequeno Porte (<20 linhas)"
+          }
+        },
+        "url_noticia": "https://news.google.com/rss/articles/CBMi_AFBVV95cUxNLVNDUDhjbEJzUVFVVXRhYlBBSE9qZm0zZzcxNGtwc0hnd054R1lCaXhxSFpoQlFmTGFTYm14VGFNMWpCcVpiU0hfWklBczBhMnJQZEg0WUVPMXlUQUtjd212ZkFyWmF1MWx6QTBiUl9kM0k4YWRBZE90Sk5JZ0RsYk5JaDBTYzdLUFJ4VXBUVGJ6amJKQlVqUmFDOEhJZWc1M0s3aTc1QlAyeGV0N2FRZGVmd09ramxMWGU3eVVMQkdCenI2VWNBaWd6cmZtU19pbDdMd3N6QlZJOUdiSnZTY3lSR3Z2dXN4MWVuZ3QwQXFjRFdmQkptdFhTRmvSAYICQVVfeXFMT1RLWlloR3FqMWN2c09kQ1BEcEc4YnZJRTktX0g1WmQxYUMxMXdYY3JnZW9PWjV1SmJaWUJVSzRseE5MNlRqQTVhYzU0cjhKWENFci1ZMmJnZWVSbnd6Y1hmbUtIeFlCc0thMDRhejYySHhfTHU3Z21Kb1FaLWMxR05zVlNlR2VKYUlGNE82MkdhUHlYcW84Vy1fVFB2TFBlRHlPbUk3SkFoUnFLZzdUenZ5MkY5Z2JybXJBWWRwUXJHNTRxblhVcU9DaE85MVlDR2dKeFVPZ01zWFpIUHAwYTJ1U0dCNmZhUUV0Z1JqblZPLVRqZFlQTjh0a3VsbENDcEhn?oc=5",
+        "fonte_noticia": "<a href=\"https://news.google.com/rss/articles/CBMi_AFBVV95cUxNLVNDUDhjbEJzUVFVVXRhYlBBSE9qZm0zZzcxNGtwc0hnd054R1lCaXhxSFpoQlFmTGFTYm14VGFNMWpCcVpiU0hfWklBczBhMnJQZEg0WUVPMXlUQUtjd212ZkFyWmF1MWx6QTBiUl9kM0k4YWRBZE90Sk5JZ0RsYk5JaDBTYzdLUFJ4VXBUVGJ6amJKQlVqUmFDOEhJZWc1M0s3aTc1QlAyeGV0N2FRZGVmd09ramxMWGU3eVVMQkdCenI2VWNBaWd6cmZtU19pbDdMd3N6QlZJOUdiSnZTY3lSR3Z2dXN4MWVuZ3QwQXFjRFdmQkptdFhTRmvSAYICQVVfeXFMT1RLWlloR3FqMWN2c09kQ1BEcEc4YnZJRTktX0g1WmQxYUMxMXdYY3JnZW9PWjV1SmJaWUJVSzRseE5MNlRqQTVhYzU0cjhKWENFci1ZMmJnZWVSbnd6Y1hmbUtIeFlCc0thMDRhejYySHhfTHU3Z21Kb1FaLWMxR05zVlNlR2VKYUlGNE82MkdhUHlYcW84Vy1fVFB2TFBlRHlPbUk3SkFoUnFLZzdUenZ5MkY5Z2JybXJBWWRwUXJHNTRxblhVcU9DaE85MVlDR2dKeFVPZ01zWFpIUHAwYTJ1U0dCNmZhUUV0Z1JqblZPLVRqZFlQTjh0a3VsbENDcEhn?oc=5\" target=\"_blank\" rel=\"noopener\">Notícias Agrícolas · 06/11/2026</a>",
+        "data_publicacao": "2026-11-06"
+      },
+      {
+        "tema": "Café",
+        "id_noticia": "N39",
+        "titulo_noticia": "Café fica quase 30% mais barato no campo, mas preço da xícara sobe",
+        "tendencia_noticia": "negativo",
+        "corpo_noticia": "Os preços recebidos pelos produtores de café recuaram cerca de 30% no campo, gerando descompasso com os custos de produção elevados.",
+        "relevancia": "media",
+        "horizonte": "3-6 meses",
+        "por_que_importa": "A queda na receita no campo restringe o investimento em renovação de lavouras e mecanização cafeeira.",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "negativo",
+            "descricao": "Redução na compra de tratores cafeeiros.",
+            "segmento_impactado": "Baixa Potência (<80cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "neutro",
+            "descricao": "Sem impacto direto expressivo.",
+            "segmento_impactado": ""
+          },
+          "pulverizadores": {
+            "tendencia": "negativo",
+            "descricao": "Menor investimento em defensivos.",
+            "segmento_impactado": "De Arrasto"
+          },
+          "plantadeiras": {
+            "tendencia": "neutro",
+            "descricao": "Estável.",
+            "segmento_impactado": ""
+          }
+        },
+        "url_noticia": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxNOEt0Mi1KTEtnajRmaE82djBOV2NVMWdRM3QzekdYdlN4YWtwNlI3UktmaEE5YUpvTjVGQXhuOEtlcmhqQzNmQ3R1bVpuMUFUUlpJQWJ0cUlEd1pUOUtqM19VdHBSMTIxV2doUXRPMlFFaU1BbEFyd3IyNEVUOWV5Mk1qTEVac2p1anU2Q2Vyb3c0LXhMN1R1bHMxMGRia2FRRzdsTzlBTmhSU3MxXzZtMnFTTHBIaTB1?oc=5",
+        "fonte_noticia": "<a href=\"https://news.google.com/rss/articles/CBMiuAFBVV95cUxNOEt0Mi1KTEtnajRmaE82djBOV2NVMWdRM3QzekdYdlN4YWtwNlI3UktmaEE5YUpvTjVGQXhuOEtlcmhqQzNmQ3R1bVpuMUFUUlpJQWJ0cUlEd1pUOUtqM19VdHBSMTIxV2doUXRPMlFFaU1BbEFyd3IyNEVUOWV5Mk1qTEVac2p1anU2Q2Vyb3c0LXhMN1R1bHMxMGRia2FRRzdsTzlBTmhSU3MxXzZtMnFTTHBIaTB1?oc=5\" target=\"_blank\" rel=\"noopener\">Lavras24Horas · 09/11/2026</a>",
+        "data_publicacao": "2026-11-09"
+      },
+      {
+        "tema": "Cana",
+        "id_noticia": "N47",
+        "titulo_noticia": "Excesso de chuva atrasa safra de cana e pode deixar 37 mi de t para 2027",
+        "tendencia_noticia": "incerto",
+        "corpo_noticia": "Chuvas excessivas atrasaram a colheita de cana-de-açúcar, empurrando um volume estimado em 37 milhões de toneladas para a safra de 2027.",
+        "relevancia": "alta",
+        "horizonte": "3-6 meses",
+        "por_que_importa": "O atraso operacional exige maior intensidade de colheita futura e sobrecarrega o parque sucroenergético.",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "neutro",
+            "descricao": "Demanda por tratores de transbordo estável.",
+            "segmento_impactado": "Alta Potência (>170cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "positivo",
+            "descricao": "Necessidade futura de alta eficiência na colheita.",
+            "segmento_impactado": "Grande Porte (Classes 7+)"
+          },
+          "pulverizadores": {
+            "tendencia": "neutro",
+            "descricao": "Sem alteração.",
+            "segmento_impactado": ""
+          },
+          "plantadeiras": {
+            "tendencia": "neutro",
+            "descricao": "Sem alteração.",
+            "segmento_impactado": ""
+          }
+        },
+        "url_noticia": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxPYmpJd05oNXlZVFNDQS1OZHpGeE9PX1kwMm9TekdQbFRobEZRMGhZblpDeU85eTlMc3dqYjhwS3U1emFBNUZwYzI4eXl6Zmg1SW43d3R5NFFrRHNucUhWc0huVEtkMEZFMXB1dXVkdEYyb19ieU9tREtRaVd2QXNZSWhUdHNXTk94TlpXUHdVb29oT2QweDNOQllvMG9tUDZMelZfQVF3aWlqdUJoYU1JUXBpMUlZbHY3bXd2S3BIU1g?oc=5",
+        "fonte_noticia": "<a href=\"https://news.google.com/rss/articles/CBMiwAFBVV95cUxPYmpJd05oNXlZVFNDQS1OZHpGeE9PX1kwMm9TekdQbFRobEZRMGhZblpDeU85eTlMc3dqYjhwS3U1emFBNUZwYzI4eXl6Zmg1SW43d3R5NFFrRHNucUhWc0huVEtkMEZFMXB1dXVkdEYyb19ieU9tREtRaVd2QXNZSWhUdHNXTk94TlpXUHdVb29oT2QweDNOQllvMG9tUDZMelZfQVF3aWlqdUJoYU1JUXBpMUlZbHY3bXd2S3BIU1g?oc=5\" target=\"_blank\" rel=\"noopener\">CBN Ribeirão · 06/11/2026</a>",
+        "data_publicacao": "2026-11-06"
+      },
+      {
+        "tema": "Algodão",
+        "id_noticia": "N50",
+        "titulo_noticia": "Exportações brasileiras de algodão batem recorde para outubro com 338,3 mil t",
+        "tendencia_noticia": "positivo",
+        "corpo_noticia": "As exportações de algodão do Brasil alcançaram recorde histórico para o mês de outubro, somando 338,3 mil toneladas.",
+        "relevancia": "alta",
+        "horizonte": "3-6 meses",
+        "por_que_importa": "O desempenho robusto garante alta rentabilidade aos cotonicultores, mantendo forte o apetite por máquinas de alta tecnologia.",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "positivo",
+            "descricao": "Investimentos sólidos na cotonicultura.",
+            "segmento_impactado": "Alta Potência (>170cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "positivo",
+            "descricao": "Forte demanda por colhedoras de algodão.",
+            "segmento_impactado": "Grande Porte (Classes 7+)"
+          },
+          "pulverizadores": {
+            "tendencia": "positivo",
+            "descricao": "Alta demanda por pulverizadores de grande porte.",
+            "segmento_impactado": "Autopropelido"
+          },
+          "plantadeiras": {
+            "tendencia": "positivo",
+            "descricao": "Renovação de plantadeiras de precisão.",
+            "segmento_impactado": "Grande Porte (>20 linhas)"
+          }
+        },
+        "url_noticia": "https://news.google.com/rss/articles/CBMi5gFBVV95cUxQNWdZMTJrYzAycjdLM1psT2FTWGZVa1BaU0tOLU42SThsR3dQM0kycU5YVjBwNjlQQjdfeXdTWlhmX2QzWlhLS2IydUdLMm92SHplNU5HdVRORDdPSm40SzJUOFF2eENLSzhkYUhEYmtBdXo1Z1oyVUg5ZW13UjdsMTJXTzlzalYxeU1GX21EdjNtQnF1NmJvUXRjZ3FUQjlXZUxmMFlRZk82b1UtTmh4V2tIcVZvcE9IdGFLUVBVZkxPVnR4SEtiWGlrOUxCV2ZXWGI2UWxrSmlOUElsWVhsMmV4SUxSd9IB6wFBVV95cUxOZ3FFelI3Y193SW1NMGRrTEhHRWQ1azhQSVoyRDNhT0g0Q3YtbDY3THVfblkzajR1enZ6UEl4X1BoOVVkdzlGNjJjNXNMeUQtR3ZMd3Rsa29mQXVaTTJueVFQUXZsOGdZZm5td1RzOGNieEN3OGExOUlpVmZfRlVNZlljSDVxblNpZE83R214Qlp0aFR0eGJmNkQ4RVBLNHZZYXBJSWtXNE8xUnBvS2tlYjB2QzZGZU9sX3FrOTVPRFpNQmpORGJTU2otSWVDUjFzNERBekFVNUhfanFGaTljaEV0UDZLa3dJaWw4?oc=5",
+        "fonte_noticia": "<a href=\"https://news.google.com/rss/articles/CBMi5gFBVV95cUxQNWdZMTJrYzAycjdLM1psT2FTWGZVa1BaU0tOLU42SThsR3dQM0kycU5YVjBwNjlQQjdfeXdTWlhmX2QzWlhLS2IydUdLMm92SHplNU5HdVRORDdPSm40SzJUOFF2eENLSzhkYUhEYmtBdXo1Z1oyVUg5ZW13UjdsMTJXTzlzalYxeU1GX21EdjNtQnF1NmJvUXRjZ3FUQjlXZUxmMFlRZk82b1UtTmh4V2tIcVZvcE9IdGFLUVBVZkxPVnR4SEtiWGlrOUxCV2ZXWGI2UWxrSmlOUElsWVhsMmV4SUxSd9IB6wFBVV95cUxOZ3FFelI3Y193SW1NMGRrTEhHRWQ1azhQSVoyRDNhT0g0Q3YtbDY3THVfblkzajR1enZ6UEl4X1BoOVVkdzlGNjJjNXNMeUQtR3ZMd3Rsa29mQXVaTTJueVFQUXZsOGdZZm5td1RzOGNieEN3OGExOUlpVmZfRlVNZlljSDVxblNpZE83R214Qlp0aFR0eGJmNkQ4RVBLNHZZYXBJSWtXNE8xUnBvS2tlYjB2QzZGZU9sX3FrOTVPRFpNQmpORGJTU2otSWVDUjFzNERBekFVNUhfanFGaTljaEV0UDZLa3dJaWw4?oc=5\" target=\"_blank\" rel=\"noopener\">Notícias Agrícolas · 09/11/2026</a>",
+        "data_publicacao": "2026-11-09"
+      },
+      {
+        "tema": "Trigo",
+        "id_noticia": "N60",
+        "titulo_noticia": "Mercado de trigo: safra brasileira recua 37% e importações podem bater recorde",
+        "tendencia_noticia": "negativo",
+        "corpo_noticia": "A safra brasileira de trigo recuou 37% devido a quebras climáticas, elevando projeções de importação para recorde histórico de 9,75 milhões de toneladas.",
+        "relevancia": "media",
+        "horizonte": "3-6 meses",
+        "por_que_importa": "A quebra acentuada na safra de inverno na região Sul compromete a liquidez dos produtores locais para novas compras de máquinas.",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "negativo",
+            "descricao": "Retração de investimentos no Sul.",
+            "segmento_impactado": "Média Potência (80-170cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "negativo",
+            "descricao": "Demanda adiada por quebra de safra.",
+            "segmento_impactado": "Médio Porte (Classes 4-6)"
+          },
+          "pulverizadores": {
+            "tendencia": "neutro",
+            "descricao": "Contido.",
+            "segmento_impactado": ""
+          },
+          "plantadeiras": {
+            "tendencia": "negativo",
+            "descricao": "Menor interesse em renovação.",
+            "segmento_impactado": "Pequeno Porte (<20 linhas)"
+          }
+        },
+        "url_noticia": "https://news.google.com/rss/articles/CBMinwJBVV95cUxOVmlsRzFjRFJUekNfakpZYTloOE0wNjgwbEs1ejBna3UyaUdLUnAybzdQbm1TbExhZWVWVF9JcTRCc3liQWdPMFQwZVhmb3RFXzM0NHJpOFB0MmNhRjhWVktTaWUwSjY1MEVQSFMxc2ZNd3N2Q1djeTZsWU9CZm02VEJZdWxsMERMS3lCR3MyZG4wbmNwdmdmZk5NSkJzZHpEQzJXVkxIRXRrN3dFQmV1TDdwSm5vcElMYkpkOG1zUnBqcU11REc2dFVKcUJVOW1xS0FVeU9CVFNFa0NCVzdJX1ZVd0wtUVQwSnBDZVBzRGtUX0ZOT05sZnVFaUhZekFCY0JqTjJqUGZpWmhJcnZ5bXVkZnZhdWFScWYxaGpOUQ?oc=5",
+        "fonte_noticia": "<a href=\"https://news.google.com/rss/articles/CBMinwJBVV95cUxOVmlsRzFjRFJUekNfakpZYTloOE0wNjgwbEs1ejBna3UyaUdLUnAybzdQbm1TbExhZWVWVF9JcTRCc3liQWdPMFQwZVhmb3RFXzM0NHJpOFB0MmNhRjhWVktTaWUwSjY1MEVQSFMxc2ZNd3N2Q1djeTZsWU9CZm02VEJZdWxsMERMS3lCR3MyZG4wbmNwdmdmZk5NSkJzZHpEQzJXVkxIRXRrN3dFQmV1TDdwSm5vcElMYkpkOG1zUnBqcU11REc2dFVKcUJVOW1xS0FVeU9CVFNFa0NCVzdJX1ZVd0wtUVQwSnBDZVBzRGtUX0ZOT05sZnVFaUhZekFCY0JqTjJqUGZpWmhJcnZ5bXVkZnZhdWFScWYxaGpOUQ?oc=5\" target=\"_blank\" rel=\"noopener\">Portal do Agronegócio · 30/10/2026</a>",
+        "data_publicacao": "2026-10-30"
+      }
+    ]
   },
   "ar": {
     "fatores_economicos": [
       {
         "titulo": "Crédito/Financ.",
         "icone": "💳",
-        "tendencia": "restritiva",
-        "direcao": "estavel",
-        "descricao": "Taxas de juros reais permanecem elevadas ante Outubro, limitando o acesso a linhas de financiamento bancário de longo prazo para maquinário.",
-        "impactos": "Produtores adiam a aquisição de tratores e colheitadeiras de alta potência, priorizando financiamentos curtos via feiras e parcerias com revendas.",
-        "fonte": "Banco Central da República Argentina"
+        "tendencia": "expansiva",
+        "direcao": "melhorando",
+        "descricao": "Novas soluções fintech convertem grãos e gado em garantias reais, ampliando o acesso ao crédito ante Outubro.",
+        "impactos": "Facilita a aquisição de tratores e plantadeiras, acelerando negócios via crédito privado.",
+        "fonte": "Forbes Argentina"
       },
       {
         "titulo": "Inflação/Câmbio",
         "icone": "📈",
-        "tendencia": "incerto",
-        "direcao": "melhorando",
-        "descricao": "Desaceleração inflacionária moderada ante Outubro e breves ajustes cambiais trazem previsibilidade parcial, mas custos operacionais seguem pressionando margens.",
-        "impactos": "Demanda por pulverizadores e plantadeiras fica neutra, com compradores negociando prazos maiores antes de fechar novos pedidos de máquinas.",
-        "fonte": "INDEC"
+        "tendencia": "estavel",
+        "direcao": "estavel",
+        "descricao": "Cenário macroeconômico sem grandes volatilidades cambiais ou inflacionárias bruscas comparado a Outubro.",
+        "impactos": "Mantém neutra a tomada de decisão para compra de pulverizadores e colheitadeiras.",
+        "fonte": "BCB"
       },
       {
         "titulo": "Retenciones",
         "icone": "⚖️",
-        "tendencia": "estavel",
+        "tendencia": "restritiva",
         "direcao": "estavel",
-        "descricao": "Mantidas as alíquotas de retenção às exportações agrícolas ante Outubro, sem reduções significativas na carga tributária sobre soja e milho.",
-        "impactos": "A retração na renda disponível mantém o ritmo de investimento em colheitadeiras de grande porte em patamar cauteloso e adiado.",
-        "fonte": "Ministerio de Economía"
+        "descricao": "Pressão tributária e debates sobre retenciones continuam pesando sobre o caixa do produtor ante Outubro.",
+        "impactos": "Adia investimentos pesados em tratores de alta potência e colheitadeiras de grande porte.",
+        "fonte": "NewsDigitales"
       },
       {
         "titulo": "Prod. Agrícola",
         "icone": "🚜",
-        "tendencia": "positivo",
-        "direcao": "melhorando",
-        "descricao": "Avanço do plantio da safra grossa 2026/27 ante Outubro, impulsionado por um regime de chuvas mais favorável na zona núcleo.",
-        "impactos": "Aceleração pontual na busca por plantadeiras de grande porte e tratores de média potência para garantir a janela de plantio.",
-        "fonte": "Bolsa de Comercio de Rosario"
+        "tendencia": "incerto",
+        "direcao": "piorando",
+        "descricao": "Efeitos do El Niño trazem chuvas excessivas e atrasos na siembra ante o cenário de Outubro.",
+        "impactos": "Demanda por plantadeiras e colheitadeiras sofre desaceleração temporária devido ao clima.",
+        "fonte": "Primicias Rurales"
       },
       {
         "titulo": "Margens Produtor",
         "icone": "📊",
-        "tendencia": "estavel",
-        "direcao": "melhorando",
-        "descricao": "Melhora leve nas margens de milho e trigo ante Outubro, enquanto soja oscila negativamente devido aos preços internacionais pressionados.",
-        "impactos": "Produtores de grãos finos aceleram compras de peças e manutenção de pulverizadores, mantendo a aquisição de novas máquinas em compasso de espera.",
-        "fonte": "SAGYP"
+        "tendencia": "negativo",
+        "direcao": "piorando",
+        "descricao": "Altos impostos e custos elevados comprimem a rentabilidade das lavouras comparado a Outubro.",
+        "impactos": "Produtores priorizam manutenção de frotas e reduzem compras de novas máquinas.",
+        "fonte": "Bichos de Campo"
       }
     ],
-    "noticias": []
+    "sintese_estrategica": {
+      "manchete": "El Niño e carga tributária freiam investimentos, contrabalançados por crédito alternativo de fintechs.",
+      "termometro": "incerto",
+      "leitura": "As chuvas intensas do El Niño atrasam o plantio e a colheita de trigo, gerando cautela operacional. Somado a isso, a alta carga tributária comprime as margens do produtor. Por outro lado, inovações em crédito via fintechs e o crescimento das exportações para a Europa sustentam uma demanda seletiva por maquinário.",
+      "riscos": [
+        "Atrasos prolongados no plantio devido excesso de chuvas do El Niño.",
+        "Margens espremidas travando a renovação de frotas.",
+        "Incertezas políticas em torno de tributos e retenciones."
+      ],
+      "oportunidades": [
+        "Novas opções de financiamento privado lastreadas em grãos e gado.",
+        "Demanda por tecnologia voltada à eficiência e ganho de quilos na pecuária.",
+        "Aumento das exportações agropecuárias para o mercado europeu."
+      ],
+      "monitorar": [
+        "Evolução volumétrica das chuvas do El Niño nas principais regiões produtoras.",
+        "Progresso da colheita de trigo e avanço da siembra.",
+        "Discussões políticas e fiscais sobre retenções e impostos agrícolas."
+      ]
+    },
+    "noticias": [
+      {
+        "tema": "Política & Eleições",
+        "id_noticia": "N5",
+        "titulo_noticia": "La semana del agro, entre Milei, las retenciones y la pelea entre CRA y la SRA",
+        "tendencia_noticia": "incerto",
+        "corpo_noticia": "O cenário político do agro é marcado por debates sobre retenciones e atritos entre entidades representativas (CRA e SRA) e o governo de Javier Milei.",
+        "relevancia": "alta",
+        "horizonte": "3-6 meses",
+        "por_que_importa": "Incertezas regulatórias e tributárias geram cautela nos produtores na hora de fechar compras de máquinas de longo prazo.",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "incerto",
+            "descricao": "Cautela na aquisição de tratores de alta potência devido ao cenário político e fiscal.",
+            "segmento_impactado": "Alta Potência (>170cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "incerto",
+            "descricao": "Decisões de compra adiadas aguardando definição sobre impostos.",
+            "segmento_impactado": "Grande Porte (Classes 7+)"
+          },
+          "pulverizadores": {
+            "tendencia": "estavel",
+            "descricao": "Demanda pontual para tratamentos necessários.",
+            "segmento_impactado": "Autopropelido"
+          },
+          "plantadeiras": {
+            "tendencia": "incerto",
+            "descricao": "Retração temporária nos investimentos em novos equipamentos.",
+            "segmento_impactado": "Grande Porte (>20 linhas)"
+          }
+        },
+        "url_noticia": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxNQ0ZYOGJtdHBsV0xGS2NwSVc4ODhoQTlfWjNEb3M0S0lnUmo5ak9rMzNPWGVXZi02SVFPNDBjeWE4amJ3M0ljTkptc3laSWd2TjJDWWJ6SzE3bTByaUhhUEdyY3BSaDFOSE1rR3AwQjdsTVU2RFNBR3Ewd1pvVWUzT2dlSS13b1BjdE1wcXVPZy1xVDhEdVdmcWNUY3NjTDhDUGN2ekxOV3luNE9nSlQ2d1VDclBVZDhSNDNN?oc=5",
+        "fonte_noticia": "<a href=\"https://news.google.com/rss/articles/CBMiuwFBVV95cUxNQ0ZYOGJtdHBsV0xGS2NwSVc4ODhoQTlfWjNEb3M0S0lnUmo5ak9rMzNPWGVXZi02SVFPNDBjeWE4amJ3M0ljTkptc3laSWd2TjJDWWJ6SzE3bTByaUhhUEdyY3BSaDFOSE1rR3AwQjdsTVU2RFNBR3Ewd1pvVWUzT2dlSS13b1BjdE1wcXVPZy1xVDhEdVdmcWNUY3NjTDhDUGN2ekxOV3luNE9nSlQ2d1VDclBVZDhSNDNN?oc=5\" target=\"_blank\" rel=\"noopener\">NewsDigitales · 08/11/2026</a>",
+        "data_publicacao": "2026-11-08"
+      },
+      {
+        "tema": "Política Agrícola & Crédito",
+        "id_noticia": "N12",
+        "titulo_noticia": "Cómo esta Fintech convierte granos y ganado en garantías",
+        "tendencia_noticia": "positivo",
+        "corpo_noticia": "Soluções fintech inovadoras permitem que produtores utilizem estoques de grãos e gado como garantias reais para acessar linhas de crédito privado.",
+        "relevancia": "alta",
+        "horizonte": "imediato",
+        "por_que_importa": "Amplia o acesso ao financiamento fora do sistema bancário tradicional, facilitando a aquisição imediata de maquinário.",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "positivo",
+            "descricao": "Facilidade de crédito impulsiona vendas de tratores médios.",
+            "segmento_impactado": "Média Potência (80-170cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "positivo",
+            "descricao": "Novas garantias viabilizam negócios de máquinas maiores.",
+            "segmento_impactado": "Grande Porte (Classes 7+)"
+          },
+          "pulverizadores": {
+            "tendencia": "positivo",
+            "descricao": "Acesso a capital fomenta a compra de autopropelidos.",
+            "segmento_impactado": "Autopropelido"
+          },
+          "plantadeiras": {
+            "tendencia": "positivo",
+            "descricao": "Financiamento alternativo estimula o plantio.",
+            "segmento_impactado": "Grande Porte (>20 linhas)"
+          }
+        },
+        "url_noticia": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxOeUVCYkgxR1htVDlweld3WkU1SjEyVUJ4dVZSWmVQRkxjS0FONmNjQ19nX3RVQlU0WWUwUGhUZ0x6LTFDSktzN2dydUc1dmVLelBHSDBxZkpBQlVBdW15TmItQVRGVWFWTFhBMHJ3R20tV0JFdmpGbGM1aHhkc21nYTlDSS0ybl9TRHRYZDlIbG0zU3lZTVVLdlJkdkpLNE9PMm5FRzlLN1NzRWdHX2J3ekRQM0FDZDl3WGlPOHd6Vzl5bUHSAcgBQVVfeXFMTVRIYkUzdTNwdkFQNzV3M2lKN0hZRTlsRUNYNE4zSmFKemVfdmdQSVlEa0F4QjVhM0ptalNPdjA5QU5qUjBleWZMTEFVMFNTZGc0RVVEUFFpS0VraDM1Y0ZGcWN2bG5SWXJmdDFyRlZEZThQMXFFSFgwZDdkQjhrcHoxV3ZyQ1BxOXJfZndGcFJXejNUZ1VHel9QVUFjb0d2NVBWa3o1QTdaX1ZGLWFxZmx6eXFIV3JDUWpCb3FDVUZlQmJFZUp4MlU?oc=5",
+        "fonte_noticia": "<a href=\"https://news.google.com/rss/articles/CBMiwwFBVV95cUxOeUVCYkgxR1htVDlweld3WkU1SjEyVUJ4dVZSWmVQRkxjS0FONmNjQ19nX3RVQlU0WWUwUGhUZ0x6LTFDSktzN2dydUc1dmVLelBHSDBxZkpBQlVBdW15TmItQVRGVWFWTFhBMHJ3R20tV0JFdmpGbGM1aHhkc21nYTlDSS0ybl9TRHRYZDlIbG0zU3lZTVVLdlJkdkpLNE9PMm5FRzlLN1NzRWdHX2J3ekRQM0FDZDl3WGlPOHd6Vzl5bUHSAcgBQVVfeXFMTVRIYkUzdTNwdkFQNzV3M2lKN0hZRTlsRUNYNE4zSmFKemVfdmdQSVlEa0F4QjVhM0ptalNPdjA5QU5qUjBleWZMTEFVMFNTZGc0RVVEUFFpS0VraDM1Y0ZGcWN2bG5SWXJmdDFyRlZEZThQMXFFSFgwZDdkQjhrcHoxV3ZyQ1BxOXJfZndGcFJXejNUZ1VHel9QVUFjb0d2NVBWa3o1QTdaX1ZGLWFxZmx6eXFIV3JDUWpCb3FDVUZlQmJFZUp4MlU?oc=5\" target=\"_blank\" rel=\"noopener\">Forbes Argentina · 29/10/2026</a>",
+        "data_publicacao": "2026-10-29"
+      },
+      {
+        "tema": "Comércio Exterior & Geopolítica",
+        "id_noticia": "N14",
+        "titulo_noticia": "Las exportaciones del agro argentino a la UE crecen un 21%",
+        "tendencia_noticia": "positivo",
+        "corpo_noticia": "O acordo entre Mercosul e União Europeia impulsiona as exportações agropecuárias argentinas, registrando um crescimento de 21% para o bloco europeu.",
+        "relevancia": "media",
+        "horizonte": "6-12 meses",
+        "por_que_importa": "O incremento nas exportações melhora o fluxo de caixa dos grandes produtores e exportadores, estimulando investimentos futuros em tecnologia.",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "positivo",
+            "descricao": "Maiores receitas impulsionam a renovação de frotas.",
+            "segmento_impactado": "Alta Potência (>170cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "positivo",
+            "descricao": "Exportadores capitalizados buscam maior capacidade de colheita.",
+            "segmento_impactado": "Grande Porte (Classes 7+)"
+          },
+          "pulverizadores": {
+            "tendencia": "positivo",
+            "descricao": "Investimento em pulverizadores de alta tecnologia.",
+            "segmento_impactado": "Autopropelido"
+          },
+          "plantadeiras": {
+            "tendencia": "estavel",
+            "descricao": "Demanda estável atrelada ao planejamento de safra.",
+            "segmento_impactado": "Grande Porte (>20 linhas)"
+          }
+        },
+        "url_noticia": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxONUlzWVhVUGtPMDk5NF9GQ0p3cG14bUJvT2FackFpc2FvTXJuRlBMU2ZXTjRaRklZbTc4U180WE5GZnVEaHFZTTU5b0pyWUtiSi15dUppQ1ZlUi1BdkUwaHdaa3VXODFXbVg1SGxieENFdTNJMzdOTWgtVFF5X04tMjVzNUJlLU9rVzBkR3lLWWtrVjZ1SXFLZGs1QjRXRGZRZXZNeWQyM19mTkRwVnM3QnpEaXRYdWlJOWo1aWVCYXJLV0pLaHVkU1pQUERwQkFMZ2dLTG1GRHRSQVVRVGJBbg?oc=5",
+        "fonte_noticia": "<a href=\"https://news.google.com/rss/articles/CBMi4AFBVV95cUxONUlzWVhVUGtPMDk5NF9GQ0p3cG14bUJvT2FackFpc2FvTXJuRlBMU2ZXTjRaRklZbTc4U180WE5GZnVEaHFZTTU5b0pyWUtiSi15dUppQ1ZlUi1BdkUwaHdaa3VXODFXbVg1SGxieENFdTNJMzdOTWgtVFF5X04tMjVzNUJlLU9rVzBkR3lLWWtrVjZ1SXFLZGs1QjRXRGZRZXZNeWQyM19mTkRwVnM3QnpEaXRYdWlJOWo1aWVCYXJLV0pLaHVkU1pQUERwQkFMZ2dLTG1GRHRSQVVRVGJBbg?oc=5\" target=\"_blank\" rel=\"noopener\">Interempresas Media · 05/11/2026</a>",
+        "data_publicacao": "2026-11-05"
+      },
+      {
+        "tema": "Clima & Safra",
+        "id_noticia": "N20",
+        "titulo_noticia": "El Niño complica la campaña agrícola: las lluvias frenan la siembra",
+        "tendencia_noticia": "negativo",
+        "corpo_noticia": "O fenômeno El Niño se instala com chuvas intensas e frequentes, gerando atrasos de até 20 dias na siembra e nas operações agrícolas do sul bonaerense.",
+        "relevancia": "alta",
+        "horizonte": "imediato",
+        "por_que_importa": "O excesso de água paralisa o campo, reduzindo temporariamente a urgência e a utilização operacional de plantadeiras e colheitadeiras.",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "negativo",
+            "descricao": "Operações paralisadas reduzem a demanda por uso e novas aquisições.",
+            "segmento_impactado": "Média Potência (80-170cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "negativo",
+            "descricao": "Atrasos na colheita de trigo desaquecem o mercado.",
+            "segmento_impactado": "Grande Porte (Classes 7+)"
+          },
+          "pulverizadores": {
+            "tendencia": "negativo",
+            "descricao": "Condições climáticas impedem aplicações em campo.",
+            "segmento_impactado": "Autopropelido"
+          },
+          "plantadeiras": {
+            "tendencia": "negativo",
+            "descricao": "Chuvas constantes travam o andamento da siembra.",
+            "segmento_impactado": "Grande Porte (>20 linhas)"
+          }
+        },
+        "url_noticia": "https://news.google.com/rss/articles/CBMi7AFBVV95cUxNUVd5am5ZeERBbVNhbTBOWmNxeDRmQlExeFFoc2k1Yy12bl9wT2hTbE9FTmpJdTJmS2tsY1l0empUMjQwR3J4bGN2UVcyQTNaSUFQTV8tRzZCUGU1NnJmOFAtZXl3ZW9Vb3UyZmE0dGV5Z1YtLXNMZ08wZ2gtWk5ONUNZeFNTV3JVS3o1aXJZVTd4clJYR0laSUd2SVRSUGctWEQ4SW0xTkNoSG1jMGJkR2RULUZBNDgwOW15ZGRpY0p5aHE4TGF0ejNEZEdveDM0dWMwU2owa0wtamZtT0NFZ3Zld3VWYWR4d2ZaZg?oc=5",
+        "fonte_noticia": "<a href=\"https://news.google.com/rss/articles/CBMi7AFBVV95cUxNUVd5am5ZeERBbVNhbTBOWmNxeDRmQlExeFFoc2k1Yy12bl9wT2hTbE9FTmpJdTJmS2tsY1l0empUMjQwR3J4bGN2UVcyQTNaSUFQTV8tRzZCUGU1NnJmOFAtZXl3ZW9Vb3UyZmE0dGV5Z1YtLXNMZ08wZ2gtWk5ONUNZeFNTV3JVS3o1aXJZVTd4clJYR0laSUd2SVRSUGctWEQ4SW0xTkNoSG1jMGJkR2RULUZBNDgwOW15ZGRpY0p5aHE4TGF0ejNEZEdveDM0dWMwU2owa0wtamZtT0NFZ3Zld3VWYWR4d2ZaZg?oc=5\" target=\"_blank\" rel=\"noopener\">Primicias Rurales · 08/11/2026</a>",
+        "data_publicacao": "2026-11-08"
+      },
+      {
+        "tema": "Mercado & Produção",
+        "id_noticia": "N28",
+        "titulo_noticia": "Mismos precios, el doble de impuestos: La maquinaria agrícola",
+        "tendencia_noticia": "negativo",
+        "corpo_noticia": "A indústria nacional de máquinas agrícolas compara sua alta carga tributária com Brasil e México, alertando para o risco de anos de desinversão devido à baixa rentabilidade.",
+        "relevancia": "alta",
+        "horizonte": "3-6 meses",
+        "por_que_importa": "Margens espremidas na indústria e no campo reduzem a competitividade local e desestimulam investimentos em novos parques fabris e frotas.",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "negativo",
+            "descricao": "Fábricas reduzem produção diante da baixa rentabilidade.",
+            "segmento_impactado": "Média Potência (80-170cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "negativo",
+            "descricao": "Retração na oferta de novos equipamentos nacionais.",
+            "segmento_impactado": "Médio Porte (Classes 4-6)"
+          },
+          "pulverizadores": {
+            "tendencia": "negativo",
+            "descricao": "Investimentos em novos modelos são adiados pela indústria.",
+            "segmento_impactado": "De Arrasto"
+          },
+          "plantadeiras": {
+            "tendencia": "negativo",
+            "descricao": "Baixa margem desestimula a compra de tecnologia nova.",
+            "segmento_impactado": "Pequeno Porte (<20 linhas)"
+          }
+        },
+        "url_noticia": "https://news.google.com/rss/articles/CBMiqgJBVV95cUxNZGluU2lEU1A1bEZaNTVRMjV3ZDVJeks3blRwRU1razBEYTNEaF9veklaRFE5dHdkSWpPUnhPSmtTZThFNjNUbjF4WjdHQy1FLU9ielA5Zjd5VDNKbkZ5cU1HQVRVU05CYW94SHJ2UU1JaVNtZzhoTFNURjJCUk9CMTQxM0ZzLWE2Z1NOX3U5Y3F4eUdIT1VXWFUtc2lKLXcxS2ZPOUQ3VGVzMzM5Qzg3STNNMURrTllEeEl5Zm5aZFdUczVRSlc4Q1dxSHlJVndoYk01R3VSR3hqWXdGVHVaLXh0UFJ6NWVydDVwSjE2TmhNTTdJbkVqMW1XZTFBek1RUnB3NGRVUG42RFFVUjAtWFJIaTNBdmRJbGxiSXdtNmNSeEYwejF3dkxB?oc=5",
+        "fonte_noticia": "<a href=\"https://news.google.com/rss/articles/CBMiqgJBVV95cUxNZGluU2lEU1A1bEZaNTVRMjV3ZDVJeks3blRwRU1razBEYTNEaF9veklaRFE5dHdkSWpPUnhPSmtTZThFNjNUbjF4WjdHQy1FLU9ielA5Zjd5VDNKbkZ5cU1HQVRVU05CYW94SHJ2UU1JaVNtZzhoTFNURjJCUk9CMTQxM0ZzLWE2Z1NOX3U5Y3F4eUdIT1VXWFUtc2lKLXcxS2ZPOUQ3VGVzMzM5Qzg3STNNMURrTllEeEl5Zm5aZFdUczVRSlc4Q1dxSHlJVndoYk01R3VSR3hqWXdGVHVaLXh0UFJ6NWVydDVwSjE2TmhNTTdJbkVqMW1XZTFBek1RUnB3NGRVUG42RFFVUjAtWFJIaTNBdmRJbGxiSXdtNmNSeEYwejF3dkxB?oc=5\" target=\"_blank\" rel=\"noopener\">Bichos de Campo · 06/11/2026</a>",
+        "data_publicacao": "2026-11-06"
+      },
+      {
+        "tema": "Mercado & Produção",
+        "id_noticia": "N26",
+        "titulo_noticia": "Más kilos y mejor carne: el cambio que busca la ganadería argentina",
+        "tendencia_noticia": "positivo",
+        "corpo_noticia": "A cadeia pecuária busca transicionar para um modelo de maior eficiência produtiva, focando em mais quilos por animal e novilhos pesados para atender exigências internacionais.",
+        "relevancia": "media",
+        "horizonte": "6-12 meses",
+        "por_que_importa": "A intensificação da pecuária exige investimentos em infraestrutura nas fazendas, abrindo espaço para tratores e equipamentos voltados ao manejo de pastagens e ração.",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "positivo",
+            "descricao": "Demanda por tratores utilitários para manejo de gado e pastagem.",
+            "segmento_impactado": "Baixa Potência (<80cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "estavel",
+            "descricao": "Sem impacto direto expressivo na pecuária de corte.",
+            "segmento_impactado": ""
+          },
+          "pulverizadores": {
+            "tendencia": "estavel",
+            "descricao": "Uso voltado para controle de pastagens e forrageiras.",
+            "segmento_impactado": "De Arrasto"
+          },
+          "plantadeiras": {
+            "tendencia": "positivo",
+            "descricao": "Cresce o plantio de pastagens para engorda intensiva.",
+            "segmento_impactado": "Pequeno Porte (<20 linhas)"
+          }
+        },
+        "url_noticia": "https://news.google.com/rss/articles/CBMiakFVX3lxTE9rdm9iZ0lYVlg3OXd5V2xRc1FyLXBudmlYY2tRY29GT3BLNnV2YmRjYlVoeUFjV1JVMVdmVUZqVDdPUUFrVXdQZFh0Q1ZEMUFjVTdkSnNVV2taTmEwNi13WXBvS1ppeWNwaHc?oc=5",
+        "fonte_noticia": "<a href=\"https://news.google.com/rss/articles/CBMiakFVX3lxTE9rdm9iZ0lYVlg3OXd5V2xRc1FyLXBudmlYY2tRY29GT3BLNnV2YmRjYlVoeUFjV1JVMVdmVUZqVDdPUUFrVXdQZFh0Q1ZEMUFjVTdkSnNVV2taTmEwNi13WXBvS1ppeWNwaHc?oc=5\" target=\"_blank\" rel=\"noopener\">Ruralnet · 07/11/2026</a>",
+        "data_publicacao": "2026-11-07"
+      }
+    ]
   },
   "cl": {
     "fatores_economicos": [
       {
         "titulo": "Cenário Hídrico",
         "icone": "💧",
-        "tendencia": "estavel",
-        "direcao": "estavel",
-        "descricao": "Reservatórios na zona central mantêm níveis estáveis ante Outubro, garantindo segurança hídrica para a safra de frutas.",
-        "impactos": "Demanda por pulverizadores e tratores de média potência permanece firme, com compra neutra a acelerar.",
-        "fonte": "Dirección General de Aguas"
+        "tendencia": "incerto",
+        "direcao": "piorando",
+        "descricao": "El Niño ameaça safra ante Outubro, elevando riscos climáticos.",
+        "impactos": "Adiar investimentos em tratores e colheitadeiras devido à incerteza hídrica.",
+        "fonte": "Portal Agro Chile"
       },
       {
         "titulo": "Export. Frutas",
         "icone": "🍒",
-        "tendencia": "positivo",
-        "direcao": "melhorando",
-        "descricao": "Exportações de cerejas e uvas mostram alta de 4% ante Outubro, impulsionando a liquidez dos produtores frutícolas.",
-        "impactos": "Produtores aceleram investimentos em tratores especializados e pulverizadores de arrasto.",
-        "fonte": "ODEPA"
+        "tendencia": "negativo",
+        "direcao": "piorando",
+        "descricao": "Paro portuário complica exportações de cerezas ante Outubro.",
+        "impactos": "Atrasar compra de pulverizadores e tratores especializados na fruticultura.",
+        "fonte": "AgroLatam"
       },
       {
         "titulo": "Custo de Insumos",
         "icone": "📦",
-        "tendencia": "incerto",
+        "tendencia": "estavel",
         "direcao": "estavel",
-        "descricao": "Preços de fertilizantes e defensivos registram leve estabilidade ante Outubro, aliviando parcialmente o caixa.",
-        "impactos": "Decisões de compra de plantadeiras e tratores mantêm-se em compasso de espera.",
-        "fonte": "FUCOA"
+        "descricao": "Estabilidade nos custos operacionais comparado a Outubro.",
+        "impactos": "Manter neutra a aquisição de plantadeiras e tratores de média potência.",
+        "fonte": "INDAP"
       },
       {
         "titulo": "Reg. Ambiental",
         "icone": "🌿",
-        "tendencia": "restritiva",
-        "direcao": "estavel",
-        "descricao": "Novas exigências de eficiência hídrica continuam em vigor, sem alterações expressivas ante Outubro.",
-        "impactos": "Demanda voltada para renovação de frotas de pulverizadores mais precisos e econômicos.",
-        "fonte": "Ministerio de Agricultura"
+        "tendencia": "positivo",
+        "direcao": "melhorando",
+        "descricao": "Aportes para irrigação e incentivos produtivos ante Outubro.",
+        "impactos": "Acelerar compra de equipamentos de irrigação e tratores utilitários.",
+        "fonte": "Ciencia en Chile"
       },
       {
         "titulo": "Margens Produtor",
         "icone": "📊",
-        "tendencia": "positivo",
-        "direcao": "melhorando",
-        "descricao": "Margens da fruticultura melhoraram 3% ante Outubro devido aos preços internacionais firmes das frutas frescas.",
-        "impactos": "Aceleração moderada na aquisição de tratores e colheitadeiras de pequeno porte.",
-        "fonte": "SOCEX"
+        "tendencia": "incerto",
+        "direcao": "estavel",
+        "descricao": "Fruticultura sob pressão climática; grãos estáveis ante Outubro.",
+        "impactos": "Produtores tendem a adiar substituição de colheitadeiras e tratores grandes.",
+        "fonte": "Portal Agro Chile"
       }
     ],
-    "noticias": []
+    "sintese_estrategica": {
+      "manchete": "El Niño e gargalos logísticos desafiam o agro chileno em novembro de 2026.",
+      "termometro": "incerto",
+      "leitura": "O avanço do fenômeno El Niño e os recentes paros portuários geram incerteza para a fruticultura chilena, impactando o fluxo de caixa dos produtores. Embora existam linhas de crédito e incentivos públicos para irrigação, a cautela prevalece na aquisição de novas máquinas, adiando decisões de investimento para os próximos meses.",
+      "riscos": [
+        "Ameaça do El Niño nas safras de frutas",
+        "Paradas portuárias e logísticas em andamento",
+        "Restrições temporárias de fluxo de caixa"
+      ],
+      "oportunidades": [
+        "Crédito de curto prazo do INDAP",
+        "Adoção de tecnologias autônomas",
+        "Projetos de riego tecnificado regionais"
+      ],
+      "monitorar": [
+        "Evolução climática do Pacífico",
+        "Acordos portuários em San Antonio",
+        "Demanda de exportação para a China"
+      ]
+    },
+    "noticias": [
+      {
+        "tema": "Política & Eleições",
+        "id_noticia": "N2",
+        "titulo_noticia": "Gobierno destaca avance del Plan Chile Despega en La Araucanía",
+        "tendencia_noticia": "positivo",
+        "corpo_noticia": "Governo destaca avanço do Plano Chile Despega com investimentos bilionários em infraestrutura e projeção de empregos, impulsionando a economia regional na Araucanía.",
+        "relevancia": "media",
+        "horizonte": "3-6 meses",
+        "por_que_importa": "Melhoria na infraestrutura regional facilita o escoamento agrícola e estimula o investimento de médio prazo em maquinário.",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "positivo",
+            "descricao": "Demanda por tratores utilitários deve crescer com novos projetos.",
+            "segmento_impactado": "Média Potência (80-170cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "estavel",
+            "descricao": "Sem impacto direto imediato nas colheitadeiras.",
+            "segmento_impactado": ""
+          },
+          "pulverizadores": {
+            "tendencia": "estavel",
+            "descricao": "Demanda estável para pulverizadores.",
+            "segmento_impactado": ""
+          },
+          "plantadeiras": {
+            "tendencia": "estavel",
+            "descricao": "Sem alteração relevante no curto prazo.",
+            "segmento_impactado": ""
+          }
+        },
+        "url_noticia": "https://news.google.com/rss/articles/CBMiggJBVV95cUxNRmpiX3F4OVdZNFQwQllvOFlsUkdmZ1FCMFlGOU5CMm9DUHFTYy05NzMtQVZsVXBJaXpGZnJyWFFNRGRGcHlSQWJSWDlOOGFMd3BxQ3ptNTB3dWJMZ1k5QlNLWGhkcUlyM3VNQVpsRjVQQy05c01uN1NPcXpkWWZUNUV1Mm41V3Q2RGdlakh3OWR3dTNXX0s5VEh2MHJGaVlFR3hZZFJNQ0Y3SUF6UnpMLW5laUgtekh0VXpJdXkzMGVCTEF2VWp5VndJSnp3cnZKdUxMcHZOSnJCQ2FQX1ZWS2Z5a3ltUjJMejYyVjdRQm5xQ2JDYjBQcGdGdWlnNlItd2c?oc=5",
+        "fonte_noticia": "<a href=\"https://news.google.com/rss/articles/CBMiggJBVV95cUxNRmpiX3F4OVdZNFQwQllvOFlsUkdmZ1FCMFlGOU5CMm9DUHFTYy05NzMtQVZsVXBJaXpGZnJyWFFNRGRGcHlSQWJSWDlOOGFMd3BxQ3ptNTB3dWJMZ1k5QlNLWGhkcUlyM3VNQVpsRjVQQy05c01uN1NPcXpkWWZUNUV1Mm41V3Q2RGdlakh3OWR3dTNXX0s5VEh2MHJGaVlFR3hZZFJNQ0Y3SUF6UnpMLW5laUgtekh0VXpJdXkzMGVCTEF2VWp5VndJSnp3cnZKdUxMcHZOSnJCQ2FQX1ZWS2Z5a3ltUjJMejYyVjdRQm5xQ2JDYjBQcGdGdWlnNlItd2c?oc=5\" target=\"_blank\" rel=\"noopener\">TemucoDiario.cl · 09/11/2026</a>",
+        "data_publicacao": "2026-11-09"
+      },
+      {
+        "tema": "Política Agrícola & Crédito",
+        "id_noticia": "N10",
+        "titulo_noticia": "INDAP abre postulaciones a Crédito de Corto Plazo para pequeños agricultores",
+        "tendencia_noticia": "positivo",
+        "corpo_noticia": "O INDAP abriu novas linhas de crédito de curto prazo para pequenos agricultores financiarem suas atividades produtivas nesta temporada.",
+        "relevancia": "alta",
+        "horizonte": "imediato",
+        "por_que_importa": "Facilita o acesso a capital de giro, permitindo pequenos produtores realizarem manutenções e pequenas aquisições.",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "positivo",
+            "descricao": "Estímulo à compra de tratores de menor potência.",
+            "segmento_impactado": "Baixa Potência (<80cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "estavel",
+            "descricao": "Sem impacto para colheitadeiras.",
+            "segmento_impactado": ""
+          },
+          "pulverizadores": {
+            "tendencia": "positivo",
+            "descricao": "Facilita aquisição de pulverizadores de arrasto.",
+            "segmento_impactado": "De Arrasto"
+          },
+          "plantadeiras": {
+            "tendencia": "estavel",
+            "descricao": "Impacto neutro.",
+            "segmento_impactado": ""
+          }
+        },
+        "url_noticia": "https://news.google.com/rss/articles/CBMifEFVX3lxTFBsWGI2aHl5WUVQaE5LSGhXRGF2bFlfenBzRVVrS09jTWQya25JVUhfQ3JySlV4TXAwYUZ1OERKd1NMa0plRWJYQkhuWlBfMVVKc1dVSHlaRWhaQXZZUV9ZSGd3cHl0TEZuQWJfSTRrZFF6STgzWmtLVnJ1WG8?oc=5",
+        "fonte_noticia": "<a href=\"https://news.google.com/rss/articles/CBMifEFVX3lxTFBsWGI2aHl5WUVQaE5LSGhXRGF2bFlfenBzRVVrS09jTWQya25JVUhfQ3JySlV4TXAwYUZ1OERKd1NMa0plRWJYQkhuWlBfMVVKc1dVSHlaRWhaQXZZUV9ZSGd3cHl0TEZuQWJfSTRrZFF6STgzWmtLVnJ1WG8?oc=5\" target=\"_blank\" rel=\"noopener\">Paislobo Prensa · 29/10/2026</a>",
+        "data_publicacao": "2026-10-29"
+      },
+      {
+        "tema": "Comércio Exterior & Geopolítica",
+        "id_noticia": "N16",
+        "titulo_noticia": "Chile: un paro portuario complica el inicio de las exportaciones de cerezas a China",
+        "tendencia_noticia": "negativo",
+        "corpo_noticia": "Paralisação nos portos chilenos afeta o início das exportações de cerejas para o mercado chinês, gerando alerta no setor frutícola.",
+        "relevancia": "alta",
+        "horizonte": "imediato",
+        "por_que_importa": "Gera retenção de caixa nos produtores de frutas, levando à cautela na aquisição de novas máquinas e equipamentos.",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "negativo",
+            "descricao": "Retração temporária na compra de tratores especializados.",
+            "segmento_impactado": "Média Potência (80-170cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "estavel",
+            "descricao": "Sem impacto direto.",
+            "segmento_impactado": ""
+          },
+          "pulverizadores": {
+            "tendencia": "negativo",
+            "descricao": "Adiantamento na aquisição de pulverizadores autopropelidos.",
+            "segmento_impactado": "Autopropelido"
+          },
+          "plantadeiras": {
+            "tendencia": "estavel",
+            "descricao": "Sem impacto.",
+            "segmento_impactado": ""
+          }
+        },
+        "url_noticia": "https://news.google.com/rss/articles/CBMiygFBVV95cUxQY1hyZUItV0FUNnpQVlRxdm9HX3Y2cmtfbUxrLXpyN3A5WDVaUjZaN2EzeWhKM0k1NlJnRnVPMzdZdFpEMmFQeXFPbFREOTloSWdHUjMxSmdaVEV6R2g3ZEJ3dWVYR1dkZDlpaFB2c0FmVXp6RTV1d3lRZjVJeFZ0eV9JeGkzVFJCZVJzODlTOTRkMzFmZml0OHhsUktES0pfZU9TZjE0MHZMUzhiMjVzV291bXN6V0NOeWtTLW51c1RyS01hX1owVXJB?oc=5",
+        "fonte_noticia": "<a href=\"https://news.google.com/rss/articles/CBMiygFBVV95cUxQY1hyZUItV0FUNnpQVlRxdm9HX3Y2cmtfbUxrLXpyN3A5WDVaUjZaN2EzeWhKM0k1NlJnRnVPMzdZdFpEMmFQeXFPbFREOTloSWdHUjMxSmdaVEV6R2g3ZEJ3dWVYR1dkZDlpaFB2c0FmVXp6RTV1d3lRZjVJeFZ0eV9JeGkzVFJCZVJzODlTOTRkMzFmZml0OHhsUktES0pfZU9TZjE0MHZMUzhiMjVzV291bXN6V0NOeWtTLW51c1RyS01hX1owVXJB?oc=5\" target=\"_blank\" rel=\"noopener\">AgroLatam · 05/11/2026</a>",
+        "data_publicacao": "2026-11-05"
+      },
+      {
+        "tema": "Clima & Safra",
+        "id_noticia": "N19",
+        "titulo_noticia": "Chile mira con preocupación al Pacífico: El Niño amenaza una temporada clave para las frutas",
+        "tendencia_noticia": "negativo",
+        "corpo_noticia": "O retorno do fenômeno El Niño traz preocupações para a agricultura chilena, ameaçando a safra de frutas durante um período crítico.",
+        "relevancia": "alta",
+        "horizonte": "3-6 meses",
+        "por_que_importa": "Riscos climáticos reduzem a confiança do produtor, adiando investimentos pesados em renovação de frotas.",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "negativo",
+            "descricao": "Retração na demanda por novos tratores.",
+            "segmento_impactado": "Média Potência (80-170cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "incerto",
+            "descricao": "Incerteza sobre rendimento de colheitas.",
+            "segmento_impactado": "Médio Porte (Classes 4-6)"
+          },
+          "pulverizadores": {
+            "tendencia": "negativo",
+            "descricao": "Produtores evitam gastos extras com pulverizadores.",
+            "segmento_impactado": "Autopropelido"
+          },
+          "plantadeiras": {
+            "tendencia": "estavel",
+            "descricao": "Impacto limitado.",
+            "segmento_impactado": ""
+          }
+        },
+        "url_noticia": "https://news.google.com/rss/articles/CBMinAFBVV95cUxPaGIwTmplSlFBbXF6aDUtUjRVRDdfZ3V0TEN4NjV1TXBOZjZDeXFVQzhaYjN5QllEanF0cHhpbmpiRmJjellva2xzQ010WUF5alNVQi1BMFp4S1N5UzRYdjRIS1VYamo5OGdEX1JzcnNOcjVtNEl3XzFBaU5qaTVuYlI1QU1aNTZDeXROcnR3Q1Z3RkNFM29TYWRPblk?oc=5",
+        "fonte_noticia": "<a href=\"https://news.google.com/rss/articles/CBMinAFBVV95cUxPaGIwTmplSlFBbXF6aDUtUjRVRDdfZ3V0TEN4NjV1TXBOZjZDeXFVQzhaYjN5QllEanF0cHhpbmpiRmJjellva2xzQ010WUF5alNVQi1BMFp4S1N5UzRYdjRIS1VYamo5OGdEX1JzcnNOcjVtNEl3XzFBaU5qaTVuYlI1QU1aNTZDeXROcnR3Q1Z3RkNFM29TYWRPblk?oc=5\" target=\"_blank\" rel=\"noopener\">AgroLatam · 06/11/2026</a>",
+        "data_publicacao": "2026-11-06"
+      },
+      {
+        "tema": "Mercado & Produção",
+        "id_noticia": "N28",
+        "titulo_noticia": "Salfa y John Deere preparan la llegada a Chile de pulverizadores autónomos para la fruticultura",
+        "tendencia_noticia": "positivo",
+        "corpo_noticia": "Salfa e John Deere anunciam a chegada de pulverizadores autônomos ao Chile, focando na inovação tecnológica para a fruticultura.",
+        "relevancia": "alta",
+        "horizonte": "3-6 meses",
+        "por_que_importa": "Estimula a modernização tecnológica e o interesse por agricultura de precisão, mesmo em cenários desafiadores.",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "estavel",
+            "descricao": "Foco voltado para novas tecnologias de pulverização.",
+            "segmento_impactado": ""
+          },
+          "colheitadeiras": {
+            "tendencia": "estavel",
+            "descricao": "Sem impacto.",
+            "segmento_impactado": ""
+          },
+          "pulverizadores": {
+            "tendencia": "positivo",
+            "descricao": "Forte impulso para tecnologia de ponta autônoma.",
+            "segmento_impactado": "Autopropelido"
+          },
+          "plantadeiras": {
+            "tendencia": "estavel",
+            "descricao": "Sem impacto direto.",
+            "segmento_impactado": ""
+          }
+        },
+        "url_noticia": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxQTGNhWGg5YXNaejBXYjBUT3FleXFSR3FDQkRTZXpPOW9YdERTUHc1VEtDQ2pJWXN3OW83N0t4elN2QTlrLVdrT19kOFA0UXAxU1hGRWFKUUpPMHVjTGVkODVYdVVJR0pUajRwdnpaeXlUdE1uZmpnaE9zSl9uOHZZU3VZU2dzWGR0ZHBaYVFmdzFxSjVHWjg0V01iMVBGZHVheXhPWjl1ZFQ4bUN4TFozVmNaalZZMnZiZl8tQWJOU2t5RVcyS2Nja0dtdk9ONFZ2alk2eA?oc=5",
+        "fonte_noticia": "<a href=\"https://news.google.com/rss/articles/CBMi1AFBVV95cUxQTGNhWGg5YXNaejBXYjBUT3FleXFSR3FDQkRTZXpPOW9YdERTUHc1VEtDQ2pJWXN3OW83N0t4elN2QTlrLVdrT19kOFA0UXAxU1hGRWFKUUpPMHVjTGVkODVYdVVJR0pUajRwdnpaeXlUdE1uZmpnaE9zSl9uOHZZU3VZU2dzWGR0ZHBaYVFmdzFxSjVHWjg0V01iMVBGZHVheXhPWjl1ZFQ4bUN4TFozVmNaalZZMnZiZl8tQWJOU2t5RVcyS2Nja0dtdk9ONFZ2alk2eA?oc=5\" target=\"_blank\" rel=\"noopener\">Portal Agro Chile · 06/11/2026</a>",
+        "data_publicacao": "2026-11-06"
+      },
+      {
+        "tema": "Mercado & Produção",
+        "id_noticia": "N25",
+        "titulo_noticia": "CNR destaca proyecto de riego tecnificado que impulsa la producción agrícola en San Fabián",
+        "tendencia_noticia": "positivo",
+        "corpo_noticia": "A Comissão Nacional de Riego destaca projeto de irrigação tecnificada em San Fabián, melhorando a eficiência produtiva local.",
+        "relevancia": "media",
+        "horizonte": "3-6 meses",
+        "por_que_importa": "Incentiva investimentos em infraestrutura agrícola e equipamentos complementares de manejo.",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "positivo",
+            "descricao": "Demanda por tratores para suporte a obras de irrigação.",
+            "segmento_impactado": "Baixa Potência (<80cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "estavel",
+            "descricao": "Sem impacto.",
+            "segmento_impactado": ""
+          },
+          "pulverizadores": {
+            "tendencia": "estavel",
+            "descricao": "Demanda estável.",
+            "segmento_impactado": ""
+          },
+          "plantadeiras": {
+            "tendencia": "estavel",
+            "descricao": "Sem alteração.",
+            "segmento_impactado": ""
+          }
+        },
+        "url_noticia": "https://news.google.com/rss/articles/CBMivgFBVV95cUxQNHp0NjZjNURvNVZ4SGdIQjlYdDQ1VDhMRk5kNlhPT2tWLUdKYVlCVm5ra0wtWlFoMklzc1hKUGRmREUwU0VfTWFDU1NsdW42WEUybUtSeFUzbVlxNl9iRjhLZHF2VTA0YkJhVHlPNVVQRlZYQWswaktPcm13ckJkUFNTTkxaTTZmcGRHYnNyRlBFVkRFTTE3V3lFdTV2X0pHV09VYVhLem1UT2ZHeUx0NWxDQmlKWkNJUHN3OFhn?oc=5",
+        "fonte_noticia": "<a href=\"https://news.google.com/rss/articles/CBMivgFBVV95cUxQNHp0NjZjNURvNVZ4SGdIQjlYdDQ1VDhMRk5kNlhPT2tWLUdKYVlCVm5ra0wtWlFoMklzc1hKUGRmREUwU0VfTWFDU1NsdW42WEUybUtSeFUzbVlxNl9iRjhLZHF2VTA0YkJhVHlPNVVQRlZYQWswaktPcm13ckJkUFNTTkxaTTZmcGRHYnNyRlBFVkRFTTE3V3lFdTV2X0pHV09VYVhLem1UT2ZHeUx0NWxDQmlKWkNJUHN3OFhn?oc=5\" target=\"_blank\" rel=\"noopener\">Ciencia en Chile · 09/11/2026</a>",
+        "data_publicacao": "2026-11-09"
+      }
+    ]
   },
   "uy": {
     "fatores_economicos": [
       {
         "titulo": "Export. Carne",
         "icone": "🐄",
-        "tendencia": "positivo",
+        "tendencia": "alta",
         "direcao": "melhorando",
-        "descricao": "Exportações de carne bovina avançaram 4% ante Outubro, impulsionadas pela forte demanda asiática e preços firmes no mercado internacional.",
-        "impactos": "Demanda aquecida sustenta investimentos em tratores e pulverizadores para melhoria de pastagens. Compra tende a acelerar.",
-        "fonte": "INAC"
+        "descricao": "Celulosa e carne bovina impulsionaram as vendas externas uruguaias para mais de US$ 1 bilhão em outubro, superando setembro.",
+        "impactos": "Acelera investimentos em tratores e pulverizadores voltados à pecuária sustentável e forragem ante o bom momento da carne bovina.",
+        "fonte": "Cadena del Mar / Prensa Mercosur"
       },
       {
         "titulo": "Preço Commod.",
         "icone": "📉",
         "tendencia": "estavel",
         "direcao": "estavel",
-        "descricao": "Preços da soja mantiveram-se estáveis ante Outubro, oscilando em torno de US$ 400 por tonelada na bolsa de Chicago.",
-        "impactos": "Cenário neutro para aquisição de colheitadeiras e plantadeiras de grande porte; produtores mantêm cautela. Compra neutra.",
-        "fonte": "Agrouy"
+        "descricao": "Cenário de preços internacionais estável em relação a Outubro, com flutuações moderadas para grãos e demanda firme na UE.",
+        "impactos": "Mantém neutra a decisão de compra de colheitadeiras e plantadeiras de grande porte até confirmação da safra.",
+        "fonte": "Ambito / Interempresas Media"
       },
       {
         "titulo": "Atraso Cambial",
         "icone": "💵",
-        "tendencia": "restritiva",
-        "direcao": "piorando",
-        "descricao": "Apreciação do peso uruguaio frente ao dólar reduziu a competitividade das exportações agrícolas em relação a Outubro.",
-        "impactos": "Margens apertadas levam produtores a adiar a renovação de frotas de tratores e pulverizadores autopropelidos.",
-        "fonte": "BCU"
+        "tendencia": "incerto",
+        "direcao": "estavel",
+        "descricao": "Pressões cambiais sem grandes alterações significativas ante Outubro, mantendo cautela nos custos de importação de insumos.",
+        "impactos": "Produtores adotam postura de cautela na aquisição de tratores e pulverizadores importados, optando por adiar negociações.",
+        "fonte": "BCB"
       },
       {
         "titulo": "Prod. Florestal",
         "icone": "🌲",
         "tendencia": "alta",
         "direcao": "melhorando",
-        "descricao": "Setor florestal e de celulose cresceu 6% ante Outubro, mantendo ritmo intenso de escoamento e colheita.",
-        "impactos": "Demanda robusta por tratores de alta potência e máquinas florestais especializadas. Aceleração nas compras.",
-        "fonte": "DIEA"
+        "descricao": "Celulosa lidera as exportações de outubro junto com a carne, mantendo o setor florestal em ritmo forte ante Outubro.",
+        "impactos": "Acelera a demanda por tratores de alta potência e equipamentos de apoio logístico para o manejo florestal.",
+        "fonte": "Cadena del Mar"
       },
       {
         "titulo": "Margens Produtor",
         "icone": "📊",
-        "tendencia": "incerto",
-        "direcao": "estavel",
-        "descricao": "Margens da soja estáveis ante Outubro, enquanto pecuária apresentou melhora expressiva nos ganhos por arroba.",
-        "impactos": "Pecuaristas aceleram investimentos; agricultores adotam postura neutra ou adiam compras de plantadeiras.",
-        "fonte": "Fucrea"
+        "tendencia": "positivo",
+        "direcao": "melhorando",
+        "descricao": "Pecuária e setor florestal melhoraram suas margens em outubro, enquanto grãos mantêm estabilidade de custos ante o mês anterior.",
+        "impactos": "Melhora o fluxo para aquisição de tratores e pulverizadores; plantadeiras e colheitadeiras seguem com compras moderadas.",
+        "fonte": "El Observador / Cadena del Mar"
       }
     ],
-    "noticias": []
+    "sintese_estrategica": {
+      "manchete": "Exportações recordes de carne e celulosa impulsionam a demanda por maquinário agrícola no Uruguai.",
+      "termometro": "positivo",
+      "leitura": "As exportações uruguaias superaram US$ 1 bilhão em outubro, impulsionadas pela celulosa e carne bovina. Aliado a novas linhas de financiamento via fintechs com apoio do BID e à entrada em vigor de normas de zero desdeflorestamento, o ambiente para o agronegócio fortalece-se, gerando perspectivas positivas para a aquisição de tratores e equipamentos pecuários nos próximos meses.",
+      "riscos": [
+        "Volatilidade nas taxas de juros e restrições de crédito local.",
+        "Incertezas climáticas regionais afetando o plantio de grãos.",
+        "Barreiras sanitárias ou ambientais internacionais para exportação."
+      ],
+      "oportunidades": [
+        "Novas linhas de financiamento fintech apoiadas pelo BID.",
+        "Expansão da pecuária sustentável e demanda por tratores.",
+        "Aproveitamento da nova regulamentação de zero desmatamento."
+      ],
+      "monitorar": [
+        "Seminário Científico Internacional Ganadería sostenible Latam 2050 em 23/11.",
+        "Evolução das negociações de crédito rural no BROU.",
+        "Dados de exportação do comércio exterior no final de novembro."
+      ]
+    },
+    "noticias": [
+      {
+        "tema": "Política & Eleições",
+        "id_noticia": "N6",
+        "titulo_noticia": "Elecciones en Perú: cómo votaron los residentes en Uruguay",
+        "tendencia_noticia": "incerto",
+        "corpo_noticia": "Acompanhamento do processo eleitoral peruano por residentes no Uruguai e o uso da valija diplomática, refletindo o cenário de integrações políticas na região.",
+        "relevancia": "baixa",
+        "horizonte": "6-12 meses",
+        "por_que_importa": "Eleições na região geram debates diplomáticos, mas possuem impacto indireto e limitado sobre a decisão imediata de investimento em máquinas.",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "incerto",
+            "descricao": "Sem impacto direto na demanda de tratores.",
+            "segmento_impactado": ""
+          },
+          "colheitadeiras": {
+            "tendencia": "incerto",
+            "descricao": "Sem impacto direto na demanda.",
+            "segmento_impactado": ""
+          },
+          "pulverizadores": {
+            "tendencia": "incerto",
+            "descricao": "Sem impacto direto na demanda.",
+            "segmento_impactado": ""
+          },
+          "plantadeiras": {
+            "tendencia": "incerto",
+            "descricao": "Sem impacto direto na demanda.",
+            "segmento_impactado": ""
+          }
+        },
+        "url_noticia": "https://news.google.com/rss/articles/CBMixAFBVV95cUxPVVRFQVFVRkczQVNRQzFrZUpZOU9wUVFDRmlmeThLakZsZHVKbWFmbUtSSHhCX05vT1dmaFBjV1lfNVhNY0JKVWFDTUFLT0lCd0ZRalpOblYxQnV4VlZkWDF2UFlhOTFSUnZZMlFUbVdyRm03XzBxZERjdGtPZEZfcW5yUXRDdzIzMzAyV3FPMHY0N3pGeFJmSVRCSlJMN2ctUkk0TzUyOXh2X2xNOHNDaFJVcHVkVkoyeURCWVVnUGdXbjNy?oc=5",
+        "fonte_noticia": "<a href=\"https://news.google.com/rss/articles/CBMixAFBVV95cUxPVVRFQVFVRkczQVNRQzFrZUpZOU9wUVFDRmlmeThLakZsZHVKbWFmbUtSSHhCX05vT1dmaFBjV1lfNVhNY0JKVWFDTUFLT0lCd0ZRalpOblYxQnV4VlZkWDF2UFlhOTFSUnZZMlFUbVdyRm03XzBxZERjdGtPZEZfcW5yUXRDdzIzMzAyV3FPMHY0N3pGeFJmSVRCSlJMN2ctUkk0TzUyOXh2X2xNOHNDaFJVcHVkVkoyeURCWVVnUGdXbjNy?oc=5\" target=\"_blank\" rel=\"noopener\">EL PAÍS Uruguay · 06/11/2026</a>",
+        "data_publicacao": "2026-11-06"
+      },
+      {
+        "tema": "Política Agrícola & Crédito",
+        "id_noticia": "N12",
+        "titulo_noticia": "La fintech uruguaya que recibe financiamiento del BID",
+        "tendencia_noticia": "positivo",
+        "corpo_noticia": "Fintech uruguaya capta recursos do BID para desobstruir barreiras e facilitar o acesso de produtores e pequenas empresas ao crédito formal.",
+        "relevancia": "alta",
+        "horizonte": "imediato",
+        "por_que_importa": "A ampliação do crédito via canais alternativos e digitais reduz gargalos financeiros, facilitando o financiamento de máquinas de menor porte.",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "positivo",
+            "descricao": "Facilita o financiamento de tratores de média potência.",
+            "segmento_impactado": "Média Potência (80-170cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "neutro",
+            "descricao": "Crédito focado em operações menores.",
+            "segmento_impactado": ""
+          },
+          "pulverizadores": {
+            "tendencia": "positivo",
+            "descricao": "Estímulo à compra de pulverizadores de arrasto.",
+            "segmento_impactado": "De Arrasto"
+          },
+          "plantadeiras": {
+            "tendencia": "neutro",
+            "descricao": "Sem impacto expressivo inicial.",
+            "segmento_impactado": ""
+          }
+        },
+        "url_noticia": "https://news.google.com/rss/articles/CBMixAFBVV95cUxOcVh6ZzI4Z3dEcTd1Y0NTNWlxT24zem1ZXzRsTkN3WkFEWjMweXVaRENOcnY3Nm8yOUtRalFKNHZJQmxiaHJwdVM4b1JWb2ljVXZYMmZPT1RLajlQbThnaVE2V2l3RHk1dVdyYkktd2ZwU0dDT1lBcUJqc0Y0Mmw2VDhNVXJXcXVYWnlLTmdUcmpmaVRlOEVIR3d1bnhxRWRyRzFEREZFWXNTalJjck55UmFMSWRyUGhRRHl6QWsxRFhqb3lK?oc=5",
+        "fonte_noticia": "<a href=\"https://news.google.com/rss/articles/CBMixAFBVV95cUxOcVh6ZzI4Z3dEcTd1Y0NTNWlxT24zem1ZXzRsTkN3WkFEWjMweXVaRENOcnY3Nm8yOUtRalFKNHZJQmxiaHJwdVM4b1JWb2ljVXZYMmZPT1RLajlQbThnaVE2V2l3RHk1dVdyYkktd2ZwU0dDT1lBcUJqc0Y0Mmw2VDhNVXJXcXVYWnlLTmdUcmpmaVRlOEVIR3d1bnhxRWRyRzFEREZFWXNTalJjck55UmFMSWRyUGhRRHl6QWsxRFhqb3lK?oc=5\" target=\"_blank\" rel=\"noopener\">EL PAÍS Uruguay · 02/11/2026</a>",
+        "data_publicacao": "2026-11-02"
+      },
+      {
+        "tema": "Comércio Exterior & Geopolítica",
+        "id_noticia": "N16",
+        "titulo_noticia": "Uruguay: Exportaciones superaron los US$ 1.000 millones en octubre",
+        "tendencia_noticia": "positivo",
+        "corpo_noticia": "As exportações uruguaias ultrapassaram a marca de US$ 1 bilhão em outubro, registrando alta de 1% interanual com forte impulso da celulosa e carne.",
+        "relevancia": "alta",
+        "horizonte": "imediato",
+        "por_que_importa": "O superávit nas exportações injeta liquidez no setor agropecuário, encorajando produtores a renovar frotas e investir em tecnologia.",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "positivo",
+            "descricao": "Aumento da liquidez impulsiona compra de tratores.",
+            "segmento_impactado": "Alta Potência (>170cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "positivo",
+            "descricao": "Demanda aquecida para renovação de frota.",
+            "segmento_impactado": "Grande Porte (Classes 7+)"
+          },
+          "pulverizadores": {
+            "tendencia": "positivo",
+            "descricao": "Investimentos em autopropelidos.",
+            "segmento_impactado": "Autopropelido"
+          },
+          "plantadeiras": {
+            "tendencia": "positivo",
+            "descricao": "Renovação de plantadeiras de grande porte.",
+            "segmento_impactado": "Grande Porte (>20 linhas)"
+          }
+        },
+        "url_noticia": "https://news.google.com/rss/articles/CBMixwFBVV95cUxPWUdSMnR6RmRkV3F6ZzlEYzlnaGFHMDhFSXAxTVhuQUhNbW5nRHBjWmp5eDV6bzk4Zi1oOTBHYk42dHhzUUFHa1Z5dHBWWG5YZTNjNWNRMk4wSkt5Y1JvR1IyRzd1cHlMdU02NjU0bjF5bDFYcHN1LUh5eTZiR1otcEZEdklDQWFaanZneHgwVzdsZzV2RFg2bmJPS1VSX2F4WXp4UW5rRF9OeGJ2dFRyZzY0Mlc2aE51RVRXVnVvT3EtTU8xemVj?oc=5",
+        "fonte_noticia": "<a href=\"https://news.google.com/rss/articles/CBMixwFBVV95cUxPWUdSMnR6RmRkV3F6ZzlEYzlnaGFHMDhFSXAxTVhuQUhNbW5nRHBjWmp5eDV6bzk4Zi1oOTBHYk42dHhzUUFHa1Z5dHBWWG5YZTNjNWNRMk4wSkt5Y1JvR1IyRzd1cHlMdU02NjU0bjF5bDFYcHN1LUh5eTZiR1otcEZEdklDQWFaanZneHgwVzdsZzV2RFg2bmJPS1VSX2F4WXp4UW5rRF9OeGJ2dFRyZzY0Mlc2aE51RVRXVnVvT3EtTU8xemVj?oc=5\" target=\"_blank\" rel=\"noopener\">Prensa Mercosur · 06/11/2026</a>",
+        "data_publicacao": "2026-11-06"
+      },
+      {
+        "tema": "Clima & Safra",
+        "id_noticia": "N21",
+        "titulo_noticia": "Siembra de soja y maíz: ¿cómo avança la campaña 2026/27?",
+        "tendencia_noticia": "incerto",
+        "corpo_noticia": "O andamento da safra de soja e milho 2026/27 segue monitorado de perto por produtores diante das variações climáticas da primavera.",
+        "relevancia": "media",
+        "horizonte": "3-6 meses",
+        "por_que_importa": "O ritmo de plantio de grãos define a necessidade de utilização intensiva de plantadeiras e pulverizadores nos próximos meses.",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "estavel",
+            "descricao": "Uso normal nas operações de preparo de solo.",
+            "segmento_impactado": "Média Potência (80-170cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "incerto",
+            "descricao": "Dependência do clima para o resultado final.",
+            "segmento_impactado": ""
+          },
+          "pulverizadores": {
+            "tendencia": "positivo",
+            "descricao": "Necessidade de aplicações pós-plantio.",
+            "segmento_impactado": "Autopropelido"
+          },
+          "plantadeiras": {
+            "tendencia": "positivo",
+            "descricao": "Operação ativa no período de semeadura.",
+            "segmento_impactado": "Grande Porte (>20 linhas)"
+          }
+        },
+        "url_noticia": "https://news.google.com/rss/articles/CBMinwFBVV95cUxOcTB5ZEFjM1F3UXRxSlZHb20yN2dqeVQxVi1MeE1maENEMENQT0RWUGZUNzFOWm5fWmY5Z2lnWXRkWnp6aExSMndwaGtuMDFpaGs2czlJYmNpeXlkR3ZMbFduMHByaWV3a0RjZ0JNcW43VVdWaDE5MUR2LWlCa1Q3bnhfN09vdExia0I4NGNYYU9TdTVqa2VVX1pXd2QyRnc?oc=5",
+        "fonte_noticia": "<a href=\"https://news.google.com/rss/articles/CBMinwFBVV95cUxOcTB5ZEFjM1F3UXRxSlZHb20yN2dqeVQxVi1MeE1maENEMENQT0RWUGZUNzFOWm5fWmY5Z2lnWXRkWnp6aExSMndwaGtuMDFpaGs2czlJYmNpeXlkR3ZMbFduMHByaWV3a0RjZ0JNcW43VVdWaDE5MUR2LWlCa1Q3bnhfN09vdExia0I4NGNYYU9TdTVqa2VVX1pXd2QyRnc?oc=5\" target=\"_blank\" rel=\"noopener\">AgroLatam · 05/11/2026</a>",
+        "data_publicacao": "2026-11-05"
+      },
+      {
+        "tema": "Mercado & Produção",
+        "id_noticia": "N26",
+        "titulo_noticia": "Entra en vigencia la ausencia de deforestación: un gol de media cancha",
+        "tendencia_noticia": "positivo",
+        "corpo_noticia": "A entrada em vigor das normas de ausência de desmatamento beneficia o Uruguai, atestando a sustentabilidade de sua produção agropecuária e florestal.",
+        "relevancia": "alta",
+        "horizonte": "3-6 meses",
+        "por_que_importa": "Garante acesso facilitado a mercados exigentes como a Europa, valorizando os produtos locais e estimulando investimentos em tecnologia sustentável.",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "positivo",
+            "descricao": "Demanda por tratores eficientes e alinhados às normas.",
+            "segmento_impactado": "Alta Potência (>170cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "estavel",
+            "descricao": "Sem impacto direto imediato.",
+            "segmento_impactado": ""
+          },
+          "pulverizadores": {
+            "tendencia": "positivo",
+            "descricao": "Uso de pulverizadores com agricultura de precisão.",
+            "segmento_impactado": "Autopropelido"
+          },
+          "plantadeiras": {
+            "tendencia": "estavel",
+            "descricao": "Manutenção das compras regulares.",
+            "segmento_impactado": ""
+          }
+        },
+        "url_noticia": "https://news.google.com/rss/articles/CBMitAFBVV95cUxNYlBybXBpYnhNZzViTk8yRnVKN2JnYVc0WWxOd3dzMy1mR0t3dm11MUtoVENrczBJeE9YUmc4dGUzME1Bdmc2VlZUY3plN1NiSjduQVNrS2FWZEJ6eHFLYWdUTVhjYXQ5a2pPX2t3Vlh3UFM3UjM5YWJLbkJlRDBKbnM1X0VpQk0tRE93bTZ5VmFKd1dlZG9oczFMYTJLanh4Ym1OV0dzZ3gwVHMyOVdQTmk4Vkg?oc=5",
+        "fonte_noticia": "<a href=\"https://news.google.com/rss/articles/CBMitAFBVV95cUxNYlBybXBpYnhNZzViTk8yRnVKN2JnYVc0WWxOd3dzMy1mR0t3dm11MUtoVENrczBJeE9YUmc4dGUzME1Bdmc2VlZUY3plN1NiSjduQVNrS2FWZEJ6eHFLYWdUTVhjYXQ5a2pPX2t3Vlh3UFM3UjM5YWJLbkJlRDBKbnM1X0VpQk0tRE93bTZ5VmFKd1dlZG9oczFMYTJLanh4Ym1OV0dzZ3gwVHMyOVdQTmk4Vkg?oc=5\" target=\"_blank\" rel=\"noopener\">El Observador · 09/11/2026</a>",
+        "data_publicacao": "2026-11-09"
+      },
+      {
+        "tema": "Mercado & Produção",
+        "id_noticia": "N27",
+        "titulo_noticia": "Gustavo Aberastegui, presidente de CUFMA: Los fabricantes de maquinaria uruguayos somos competitivos",
+        "tendencia_noticia": "positivo",
+        "corpo_noticia": "O presidente da CUFMA destaca que a indústria nacional de máquinas agrícolas possui competitividade e capacidade para atender às demandas do setor.",
+        "relevancia": "media",
+        "horizonte": "3-6 meses",
+        "por_que_importa": "Fortalece a cadeia de suprimentos local de implementos, oferecendo alternativas competitivas em relação aos equipamentos importados.",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "estavel",
+            "descricao": "Foco principal em implementos locais.",
+            "segmento_impactado": ""
+          },
+          "colheitadeiras": {
+            "tendencia": "estavel",
+            "descricao": "Mercado dominado por importados de grande porte.",
+            "segmento_impactado": ""
+          },
+          "pulverizadores": {
+            "tendencia": "positivo",
+            "descricao": "Estímulo à fabricação e venda de pulverizadores locais.",
+            "segmento_impactado": "De Arrasto"
+          },
+          "plantadeiras": {
+            "tendencia": "positivo",
+            "descricao": "Valorização de plantadeiras de fabricação nacional.",
+            "segmento_impactado": "Pequeno Porte (<20 linhas)"
+          }
+        },
+        "url_noticia": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxPUWh3SGhmZzlqNkNpT0JUYnVWN2xaNDRsb21LaEhhQ01IZXZ6Wm9Ta0tHU0lkSEQ0UmpVLURHMzV2Q2ZxX0UzQUZvSjI1Y0I2cDVJeHFrbHlNb2x0QmV4QWwtZWh4OW8yMGx2US15cmM3S2gzWE9XRnA3bjJEaWwxX0paT1BEeXVjVnFzb2E5Uno0aGFpVGMzZnNuX2FYaVRCVzBmUHVNZno4ckluN0Q0UV96S2duOC1scy1pQVU2SW5EVkl5WExObU1sZDgxb2VVZWk1aNIB2gFBVV95cUxNRFRJcDVrTm5nZFlYTlhnTnBQSnF1YWtFQS1BWWhrS0EybWZtOWhYTXBGOG9yV04wdzlHdGlQbjBid3JZM0dhVHlMSk9FZlN3Z2xsTDZ5REtiS2tWWW1FM1NiTXVrMTFTcUx6UGs0RUhyb1lmZWpHRnFzeFdreS1JWUtMbU4wRWVTVF9pcFYwY1FNRnpZT0kzRXptY2xJd01zd2xCNnVVWW5IWC00VzIwZHFkLWhzWDgteTZJNmJIMUdycDVuXzRFcnRrTHBWU1FaSUhIMk5VTFFlQQ?oc=5",
+        "fonte_noticia": "<a href=\"https://news.google.com/rss/articles/CBMi1AFBVV95cUxPUWh3SGhmZzlqNkNpT0JUYnVWN2xaNDRsb21LaEhhQ01IZXZ6Wm9Ta0tHU0lkSEQ0UmpVLURHMzV2Q2ZxX0UzQUZvSjI1Y0I2cDVJeHFrbHlNb2x0QmV4QWwtZWh4OW8yMGx2US15cmM3S2gzWE9XRnA3bjJEaWwxX0paT1BEeXVjVnFzb2E5Uno0aGFpVGMzZnNuX2FYaVRCVzBmUHVNZno4ckluN0Q0UV96S2duOC1scy1pQVU2SW5EVkl5WExObU1sZDgxb2VVZWk1aNIB2gFBVV95cUxNRFRJcDVrTm5nZFlYTlhnTnBQSnF1YWtFQS1BWWhrS0EybWZtOWhYTXBGOG9yV04wdzlHdGlQbjBid3JZM0dhVHlMSk9FZlN3Z2xsTDZ5REtiS2tWWW1FM1NiTXVrMTFTcUx6UGs0RUhyb1lmZWpHRnFzeFdreS1JWUtMbU4wRWVTVF9pcFYwY1FNRnpZT0kzRXptY2xJd01zd2xCNnVVWW5IWC00VzIwZHFkLWhzWDgteTZJNmJIMUdycDVuXzRFcnRrTHBWU1FaSUhIMk5VTFFlQQ?oc=5\" target=\"_blank\" rel=\"noopener\">El Observador · 07/11/2026</a>",
+        "data_publicacao": "2026-11-07"
+      }
+    ]
   },
   "py": {
     "fatores_economicos": [
       {
         "titulo": "Expansão Agro",
         "icone": "🌱",
-        "tendencia": "positivo",
-        "direcao": "melhorando",
-        "descricao": "Plantio de soja avança bem ante Outubro, atingindo 65% da área com excelentes condições de umidade no solo paraguaio.",
-        "impactos": "Acelera a demanda por plantadeiras e tratores de alta potência para entrega imediata.",
-        "fonte": "CAPECO"
+        "tendencia": "alta",
+        "direcao": "estavel",
+        "descricao": "Campanha agrícola avança com meta ambiciosa de 45 milhões de toneladas de grãos ante Outubro.",
+        "impactos": "Demanda por plantadeiras e tratores de alta potência tende a acelerar com o ritmo de plantio.",
+        "fonte": "Agrofy News"
       },
       {
         "titulo": "Logística Fluvial",
         "icone": "🚢",
-        "tendencia": "estavel",
+        "tendencia": "incerto",
         "direcao": "estavel",
-        "descricao": "Nível dos rios Paraná e Paraguai estabilizado ante Outubro, garantindo fluxo normal de escoamento de grãos.",
-        "impactos": "Mantém neutra a decisão de compra de novos equipamentos logísticos e rodoviários.",
-        "fonte": "Centro Fluvial"
+        "descricao": "Nível do rio Paraguai monitorado de perto para escoamento da safra ante Outubro.",
+        "impactos": "Sem impactos imediatos em colheitadeiras, mas logística restrita pode postergar investimentos pontuais.",
+        "fonte": "Agrofy News"
       },
       {
         "titulo": "Prod. Carne",
         "icone": "🥩",
         "tendencia": "positivo",
         "direcao": "melhorando",
-        "descricao": "Exportações de carne bovina crescem 8% ante Outubro, sustentando preços firmes e liquidez para os pecuaristas.",
-        "impactos": "Estimula a aquisição de tratores de média potência e implementos voltados à pecuária.",
-        "fonte": "Senacsa"
+        "descricao": "Exportações e integração regional mantêm o setor pecuário estável ante Outubro.",
+        "impactos": "Demanda neutra para tratores de baixa potência na pecuária regenerativa.",
+        "fonte": "Prensa Mercosur"
       },
       {
         "titulo": "Fiscal/Câmbio",
         "icone": "🏛️",
-        "tendencia": "estavel",
-        "direcao": "estavel",
-        "descricao": "Banco Central mantém taxa de política monetária inalterada ante Outubro, fixada em 6,0% ao ano.",
-        "impactos": "Mantém as condições de crédito estáveis, gerando decisão neutra para financiamentos de longo prazo.",
-        "fonte": "BCP"
+        "tendencia": "restritiva",
+        "direcao": "piorando",
+        "descricao": "Crise política e do Ueno Bank geram cautela no crédito ante Outubro.",
+        "impactos": "Compra de tratores e pulverizadores tende a ser adiada devido à incerteza financeira.",
+        "fonte": "France 24 / TN"
       },
       {
         "titulo": "Margens Produtor",
         "icone": "📊",
-        "tendencia": "positivo",
-        "direcao": "melhorando",
-        "descricao": "Margens da soja melhoraram ante Outubro devido à retração nos preços dos fertilizantes importados.",
-        "impactos": "Acelera a renovação de frotas de colheitadeiras e pulverizadores autopropelidos.",
-        "fonte": "UGP"
+        "tendencia": "incerto",
+        "direcao": "piorando",
+        "descricao": "Preços internacionais e custos de produção pressionam margens da soja e milho ante Outubro.",
+        "impactos": "Produtores adotam postura cautelosa, adiando aquisição de novas colheitadeiras e plantadeiras.",
+        "fonte": "5Días Paraguay"
       }
     ],
-    "noticias": []
+    "sintese_estrategica": {
+      "manchete": "Crise política e fechamento de banco geram cautela, mas avanço do plantio sustenta demanda por máquinas.",
+      "termometro": "incerto",
+      "leitura": "A prisão do presidente e a crise no Ueno Bank geram apreensão e restrição de crédito no curto prazo, elevando a cautela dos produtores. Em contrapartida, o ritmo da safra e as metas de produção sustentam a necessidade de renovação de maquinário, exigindo monitoramento rigoroso das linhas de financiamento agrícola.",
+      "riscos": [
+        "Escalada da crise política paraguaia",
+        "Restrição de crédito no sistema financeiro",
+        "Pressão de custos e preços de grãos"
+      ],
+      "oportunidades": [
+        "Demanda reprimida por novas tecnologias de plantio",
+        "Parcerias de financiamento alternativo para o agro"
+      ],
+      "monitorar": [
+        "Evolução da devolução de poupanças do Ueno Bank",
+        "Desdobramentos políticos da transição de governo"
+      ]
+    },
+    "noticias": [
+      {
+        "tema": "Política & Eleições",
+        "id_noticia": "N6",
+        "titulo_noticia": "Santiago Peña va a prisión preventiva por el caso Ueno Bank",
+        "tendencia_noticia": "negativo",
+        "corpo_noticia": "O presidente Santiago Peña foi colocado em prisão preventiva devido ao caso Ueno Bank, gerando turbulência institucional enquanto o país busca estabilidade com o novo governo.",
+        "relevancia": "alta",
+        "horizonte": "imediato",
+        "por_que_importa": "A instabilidade política abala a confiança do produtor e pode retrair investimentos de médio prazo no campo.",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "negativo",
+            "descricao": "Demanda por alta potência desacelera.",
+            "segmento_impactado": "Alta Potência (>170cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "negativo",
+            "descricao": "Investimentos em grandes frotas adiados.",
+            "segmento_impactado": "Grande Porte (Classes 7+)"
+          },
+          "pulverizadores": {
+            "tendencia": "incerto",
+            "descricao": "Aquisições mantidas em compasso de espera.",
+            "segmento_impactado": "Autopropelido"
+          },
+          "plantadeiras": {
+            "tendencia": "negativo",
+            "descricao": "Retração na compra de novas plantadeiras.",
+            "segmento_impactado": "Grande Porte (>20 linhas)"
+          }
+        },
+        "url_noticia": "https://news.google.com/rss/articles/CBMi2gFBVV95cUxPTTEzYTBNdE0xVW9lRWtBLS1jLXFCV3lyUUNUeXBaSjNQeVVxdklSNl9McHlOMlF0N1MzejZOaGZiNlpfWXF0Ul83bENIZ2lqZ3dRVnhmRVVBUllmWW14NUJhSHF5YW1MVEpxQmxybWcyemNYeXdOLXZ3dl9tMWVGZWljeTU4U20tWFg2NVBEandueGFyUGU2NzI3RDNXYVc5S05iRmp5NHlnaUNnQjl5cGg5R1FQalRKa2tpZVd5Tkp0WWtpWGhfUW1jN2F3bjJFaDQxOHYxVGs2QQ?oc=5",
+        "fonte_noticia": "<a href=\"https://news.google.com/rss/articles/CBMi2gFBVV95cUxPTTEzYTBNdE0xVW9lRWtBLS1jLXFCV3lyUUNUeXBaSjNQeVVxdklSNl9McHlOMlF0N1MzejZOaGZiNlpfWXF0Ul83bENIZ2lqZ3dRVnhmRVVBUllmWW14NUJhSHF5YW1MVEpxQmxybWcyemNYeXdOLXZ3dl9tMWVGZWljeTU4U20tWFg2NVBEandueGFyUGU2NzI3RDNXYVc5S05iRmp5NHlnaUNnQjl5cGg5R1FQalRKa2tpZVd5Tkp0WWtpWGhfUW1jN2F3bjJFaDQxOHYxVGs2QQ?oc=5\" target=\"_blank\" rel=\"noopener\">eju.tv · 08/11/2026</a>",
+        "data_publicacao": "2026-11-08"
+      },
+      {
+        "tema": "Política Agrícola & Crédito",
+        "id_noticia": "N8",
+        "titulo_noticia": "Banco Central devolve poupanças do Ueno Bank",
+        "tendencia_noticia": "incerto",
+        "corpo_noticia": "O Banco Central do Paraguai iniciou a devolução dos recursos aos correntistas afetados pela liquidação do Ueno Bank, buscando mitigar a crise financeira.",
+        "relevancia": "alta",
+        "horizonte": "imediato",
+        "por_que_importa": "A recuperação de liquidez é vital para liberar o fluxo de crédito voltado ao custeio e investimento em maquinário.",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "incerto",
+            "descricao": "Crédito restrito segura novas compras.",
+            "segmento_impactado": "Média Potência (80-170cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "incerto",
+            "descricao": "Negociações aguardam normalização bancária.",
+            "segmento_impactado": "Médio Porte (Classes 4-6)"
+          },
+          "pulverizadores": {
+            "tendencia": "incerto",
+            "descricao": "Demanda travada pela falta de liquidez.",
+            "segmento_impactado": "De Arrasto"
+          },
+          "plantadeiras": {
+            "tendencia": "incerto",
+            "descricao": "Aguardando reabertura de linhas de crédito.",
+            "segmento_impactado": "Pequeno Porte (<20 linhas)"
+          }
+        },
+        "url_noticia": "https://news.google.com/rss/articles/CBMihwJBVV95cUxPNHVsVW01VktMMmJHZ1FkRTh2UFVOTENTY05mTXJsWEduOFpNUEdLYkxxNmpVMXBjcURvbUoyZkI5YWU2RGdRRkxPOEZGcjJyWE9IQXZ5MDJuenFZQy1WNzZDUG5jRmNjV3o4dDZMbFhjMl9xakNNYjlZVmc2a0ZlVVNDZ1dGQ003a2RFLXVUaXZlMGtUNnBQVEpvUmdXWTdqYlRZcjFyU0ZUdDQ0TWFGNVpBakE1Z21OR19NcjMtd090alpaZldsN2JoMU94RzRSbXRCTVhJTG4ta24temdmQnpBVERleWgwVzRLbzZ6ZFNMNlF5Sko1cnM1b0NDS0UweDlMbmJWVdIBhwJBVV95cUxPNHVsVW01VktMMmJHZ1FkRTh2UFVOTENTY05mTXJsWEduOFpNUEdLYkxxNmpVMXBjcURvbUoyZkI5YWU2RGdRRkxPOEZGcjJyWE9IQXZ5MDJuenFZQy1WNzZDUG5jRmNjV3o4dDZMbFhjMl9xakNNYjlZVmc2a0ZlVVNDZ1dGQ003a2RFLXVUaXZlMGtUNnBQVEpvUmdXWTdqYlRZcjFyU0ZUdDQ0TWFGNVpBakE1Z21OR19NcjMtd090alpaZldsN2JoMU94RzRSbXRCTVhJTG4ta24temdmQnpBVERleWgwVzRLbzZ6ZFNMNlF5Sko1cnM1b0NDS0UweDlMbmJWVQ?oc=5",
+        "fonte_noticia": "<a href=\"https://news.google.com/rss/articles/CBMihwJBVV95cUxPNHVsVW01VktMMmJHZ1FkRTh2UFVOTENTY05mTXJsWEduOFpNUEdLYkxxNmpVMXBjcURvbUoyZkI5YWU2RGdRRkxPOEZGcjJyWE9IQXZ5MDJuenFZQy1WNzZDUG5jRmNjV3o4dDZMbFhjMl9xakNNYjlZVmc2a0ZlVVNDZ1dGQ003a2RFLXVUaXZlMGtUNnBQVEpvUmdXWTdqYlRZcjFyU0ZUdDQ0TWFGNVpBakE1Z21OR19NcjMtd090alpaZldsN2JoMU94RzRSbXRCTVhJTG4ta24temdmQnpBVERleWgwVzRLbzZ6ZFNMNlF5Sko1cnM1b0NDS0UweDlMbmJWVdIBhwJBVV95cUxPNHVsVW01VktMMmJHZ1FkRTh2UFVOTENTY05mTXJsWEduOFpNUEdLYkxxNmpVMXBjcURvbUoyZkI5YWU2RGdRRkxPOEZGcjJyWE9IQXZ5MDJuenFZQy1WNzZDUG5jRmNjV3o4dDZMbFhjMl9xakNNYjlZVmc2a0ZlVVNDZ1dGQ003a2RFLXVUaXZlMGtUNnBQVEpvUmdXWTdqYlRZcjFyU0ZUdDQ0TWFGNVpBakE1Z21OR19NcjMtd090alpaZldsN2JoMU94RzRSbXRCTVhJTG4ta24temdmQnpBVERleWgwVzRLbzZ6ZFNMNlF5Sko1cnM1b0NDS0UweDlMbmJWVQ?oc=5\" target=\"_blank\" rel=\"noopener\">TN · 08/11/2026</a>",
+        "data_publicacao": "2026-11-08"
+      },
+      {
+        "tema": "Comércio Exterior & Geopolítica",
+        "id_noticia": "N1",
+        "titulo_noticia": "Bolivia voltará a exportar algodão ao Paraguai",
+        "tendencia_noticia": "positivo",
+        "corpo_noticia": "Após 15 anos, a Bolívia retomará as exportações de algodão para o mercado paraguaio, ampliando o intercâmbio comercial regional e abrindo novas rotas.",
+        "relevancia": "media",
+        "horizonte": "3-6 meses",
+        "por_que_importa": "O incremento na cadeia do algodão fomenta o uso de maquinário específico para a cultura no país.",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "positivo",
+            "descricao": "Maior uso em lavouras de algodão.",
+            "segmento_impactado": "Média Potência (80-170cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "incerto",
+            "descricao": "Segmento focado em grãos tradicionais.",
+            "segmento_impactado": ""
+          },
+          "pulverizadores": {
+            "tendencia": "positivo",
+            "descricao": "Demanda por aplicação em algodão.",
+            "segmento_impactado": "Autopropelido"
+          },
+          "plantadeiras": {
+            "tendencia": "incerto",
+            "descricao": "Sem impacto direto imediato.",
+            "segmento_impactado": ""
+          }
+        },
+        "url_noticia": "https://news.google.com/rss/articles/CBMiogFBVV95cUxOWE1VbmJGWTdxUi10QUIyYmM1ekJWYWlmOTZhS0prYzRFamJ2RHZRWHRxcDJQOXZCeDhqZjhuZFhoblVIUUlqYjNPU2F2Uko3WUJndWs5NzhNS3J4djhFOExCQjhlal9Nck5rRWd0cEJYS0JhaGdoQm9UeF9FMjVwS2VEd3oxXzhmdUtRdWRuTnpBOFVlVk9fOU0waEhmQkhBMmc?oc=5",
+        "fonte_noticia": "<a href=\"https://news.google.com/rss/articles/CBMiogFBVV95cUxOWE1VbmJGWTdxUi10QUIyYmM1ekJWYWlmOTZhS0prYzRFamJ2RHZRWHRxcDJQOXZCeDhqZjhuZFhoblVIUUlqYjNPU2F2Uko3WUJndWs5NzhNS3J4djhFOExCQjhlal9Nck5rRWd0cEJYS0JhaGdoQm9UeF9FMjVwS2VEd3oxXzhmdUtRdWRuTnpBOFVlVk9fOU0waEhmQkhBMmc?oc=5\" target=\"_blank\" rel=\"noopener\">ABI - Agencia Boliviana de Información · 09/11/2026</a>",
+        "data_publicacao": "2026-11-09"
+      },
+      {
+        "tema": "Clima & Safra",
+        "id_noticia": "N19",
+        "titulo_noticia": "Clima e preços pressionam campanha agrícola",
+        "tendencia_noticia": "negativo",
+        "corpo_noticia": "Fatores climáticos adversos e oscilação nos preços internacionais colocam pressão adicional sobre a safra agrícola em andamento no Paraguai.",
+        "relevancia": "alta",
+        "horizonte": "imediato",
+        "por_que_importa": "Margens apertadas reduzem a propensão do agricultor a assumir novos financiamentos de longo prazo para máquinas.",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "negativo",
+            "descricao": "Renovação de frota adiada.",
+            "segmento_impactado": "Alta Potência (>170cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "negativo",
+            "descricao": "Baixo apetite para aquisição de colheitadeiras.",
+            "segmento_impactado": "Grande Porte (Classes 7+)"
+          },
+          "pulverizadores": {
+            "tendencia": "negativo",
+            "descricao": "Corte de gastos operacionais e defensivos.",
+            "segmento_impactado": "Autopropelido"
+          },
+          "plantadeiras": {
+            "tendencia": "negativo",
+            "descricao": "Queda na demanda por plantio direto.",
+            "segmento_impactado": "Grande Porte (>20 linhas)"
+          }
+        },
+        "url_noticia": "https://news.google.com/rss/articles/CBMilgFBVV95cUxOQ053V2JramRLekR2RGl5aElRR182R1BmNHk1NmJQNkNtLUZJRjR3NVBIcVhlTENaeWdzX0JuQnRpeW43dmxScUh2Z2tzVFJRa2gwTVJ4OVZCN1gwc3NvS0ctMXVWOXFSbFJSOVNUX1JKcGVkaFl1MG5JcnZIelRkV0pMY2ViVkJzcTRoNUtVT2JTYU9kckE?oc=5",
+        "fonte_noticia": "<a href=\"https://news.google.com/rss/articles/CBMilgFBVV95cUxOQ053V2JramRLekR2RGl5aElRR182R1BmNHk1NmJQNkNtLUZJRjR3NVBIcVhlTENaeWdzX0JuQnRpeW43dmxScUh2Z2tzVFJRa2gwTVJ4OVZCN1gwc3NvS0ctMXVWOXFSbFJSOVNUX1JKcGVkaFl1MG5JcnZIelRkV0pMY2ViVkJzcTRoNUtVT2JTYU9kckE?oc=5\" target=\"_blank\" rel=\"noopener\">5Días Paraguay · 09/11/2026</a>",
+        "data_publicacao": "2026-11-09"
+      },
+      {
+        "tema": "Mercado & Produção",
+        "id_noticia": "N28",
+        "titulo_noticia": "Fechamento de banco retém recursos de produtores",
+        "tendencia_noticia": "negativo",
+        "corpo_noticia": "O fechamento de um banco no Paraguai deixou diversos produtores agropecuários com recursos financeiros retidos, afetando diretamente o capital de giro.",
+        "relevancia": "alta",
+        "horizonte": "imediato",
+        "por_que_importa": "A perda de capital de giro paralisa a capacidade de investimento imediato em novos implementos e tratores.",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "negativo",
+            "descricao": "Falta de capital paralisa aquisições.",
+            "segmento_impactado": "Média Potência (80-170cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "negativo",
+            "descricao": "Vendas paralisadas por falta de liquidez.",
+            "segmento_impactado": "Médio Porte (Classes 4-6)"
+          },
+          "pulverizadores": {
+            "tendencia": "negativo",
+            "descricao": "Adiantamento de manutenções no lugar de compras.",
+            "segmento_impactado": "De Arrasto"
+          },
+          "plantadeiras": {
+            "tendencia": "negativo",
+            "descricao": "Investimentos em plantio congelados.",
+            "segmento_impactado": "Pequeno Porte (<20 linhas)"
+          }
+        },
+        "url_noticia": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxNT05kcFJXUmV6LXhxRmJDYUlJZk9XNDlJZ2VuSzBOYkRzOE12c2pJM05RaXR0NHlHRU1kZ0hEbUZJVVhIa1VBM1RuckNlZHhPYW5raXh5UGhZRzZiWXFKYXZXN0k0Mk1PdVhEUURVdTNpRUtMTjhIR240Y01OSDdUQ2RzUU1LRHAzUHRQYjI3T2FhMENFMFptd1NmNFMxVEkxQ09SeDAzU2FSeHBYb2taVUxMNGZZQWRQYWZXTXhtRzd3RnlReVptOWkzWms3eS1oZTBzNW1SOVhqSEk?oc=5",
+        "fonte_noticia": "<a href=\"https://news.google.com/rss/articles/CBMi2wFBVV95cUxNT05kcFJXUmV6LXhxRmJDYUlJZk9XNDlJZ2VuSzBOYkRzOE12c2pJM05RaXR0NHlHRU1kZ0hEbUZJVVhIa1VBM1RuckNlZHhPYW5raXh5UGhZRzZiWXFKYXZXN0k0Mk1PdVhEUURVdTNpRUtMTjhIR240Y01OSDdUQ2RzUU1LRHAzUHRQYjI3T2FhMENFMFptd1NmNFMxVEkxQ09SeDAzU2FSeHBYb2taVUxMNGZZQWRQYWZXTXhtRzd3RnlReVptOWkzWms3eS1oZTBzNW1SOVhqSEk?oc=5\" target=\"_blank\" rel=\"noopener\">AgroLatam · 05/11/2026</a>",
+        "data_publicacao": "2026-11-05"
+      },
+      {
+        "tema": "Mercado & Produção",
+        "id_noticia": "N29",
+        "titulo_noticia": "Red de postos Gulf inicia venda de tratores",
+        "tendencia_noticia": "positivo",
+        "corpo_noticia": "A rede de postos Gulf diversifica sua atuação no Paraguai e passa a comercializar tratores, inaugurando uma nova via de distribuição no mercado.",
+        "relevancia": "media",
+        "horizonte": "3-6 meses",
+        "por_que_importa": "A entrada de novos players na comercialização pode aumentar a competitividade e facilitar o acesso a máquinas.",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "positivo",
+            "descricao": "Novo canal de vendas de tratores.",
+            "segmento_impactado": "Média Potência (80-170cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "incerto",
+            "descricao": "Fora do escopo inicial de comercialização.",
+            "segmento_impactado": ""
+          },
+          "pulverizadores": {
+            "tendencia": "incerto",
+            "descricao": "Sem oferta direta anunciada.",
+            "segmento_impactado": ""
+          },
+          "plantadeiras": {
+            "tendencia": "incerto",
+            "descricao": "Sem oferta direta anunciada.",
+            "segmento_impactado": ""
+          }
+        },
+        "url_noticia": "https://news.google.com/rss/articles/CBMitgFBVV95cUxNbWFtSjUyblE4eW5uTkF4Ynd0RUM3amZxaHYtZjVyc2dWN1ZOVVZ4eUMxZmVMZVJ5NWJYOWtJLXR0clN5MW5reXBDSU5sRkl6V2hadmpDZFBKbllQOXdrNDBBcUVJTXh5RXFGUEI2RUF2b1NMdldvT0MyRnNxT3dnQkhXMEdscHVTbE9qb29Hc0FGLUtpb0NSakl4SzRBVFc3RmVBUTBid1JCek4wNkJwUmlybGJoQQ?oc=5",
+        "fonte_noticia": "<a href=\"https://news.google.com/rss/articles/CBMitgFBVV95cUxNbWFtSjUyblE4eW5uTkF4Ynd0RUM3amZxaHYtZjVyc2dWN1ZOVVZ4eUMxZmVMZVJ5NWJYOWtJLXR0clN5MW5reXBDSU5sRkl6V2hadmpDZFBKbllQOXdrNDBBcUVJTXh5RXFGUEI2RUF2b1NMdldvT0MyRnNxT3dnQkhXMEdscHVTbE9qb29Hc0FGLUtpb0NSakl4SzRBVFc3RmVBUTBid1JCek4wNkJwUmlybGJoQQ?oc=5\" target=\"_blank\" rel=\"noopener\">Agrofy News · 04/11/2026</a>",
+        "data_publicacao": "2026-11-04"
+      }
+    ]
   },
   "pe": {
     "fatores_economicos": [
       {
         "titulo": "Agroexport (Costa)",
         "icone": "🥑",
-        "tendencia": "positivo",
-        "direcao": "melhorando",
-        "descricao": "Ante Outubro, exportações de uva e abacate cresceram 8% impulsionadas por preços firmes no mercado internacional.",
-        "impactos": "Demanda por tratores de média potência e pulverizadores tende a acelerar na costa norte peruana.",
-        "fonte": "Midagri Peru"
+        "tendencia": "negativo",
+        "direcao": "piorando",
+        "descricao": "Perdas expressivas em uvas e mangas ante Outubro devido ao avanço severo do fenômeno El Niño.",
+        "impactos": "Produtores reduzem o apetite por investimentos, optando por adiar a compra de colheitadeiras e pulverizadores de alta tecnologia.",
+        "fonte": "AgroLatam"
       },
       {
         "titulo": "Agro Andino",
         "icone": "🥔",
-        "tendencia": "incerto",
-        "direcao": "estavel",
-        "descricao": "Ante Outubro, chuvas irregulares na serra central mantiveram o plantio de batata estável, mas com cautela.",
-        "impactos": "Compra de tratores de baixa potência e plantadeiras permanece neutra entre os pequenos produtores andinos.",
-        "fonte": "SENAMHI"
+        "tendencia": "negativo",
+        "direcao": "piorando",
+        "descricao": "Atraso acentuado no plantio de batata ante Outubro pelo impacto direto do clima adverso.",
+        "impactos": "Retração na demanda por tratores de média potência e plantadeiras de pequeno porte na região serrana.",
+        "fonte": "Infobae"
       },
       {
         "titulo": "Irrigação",
         "icone": "🏞️",
-        "tendencia": "expansiva",
-        "direcao": "melhorando",
-        "descricao": "Ante Outubro, avanço em projetos de irrigação no norte injetou investimentos, com alta de 5% em repasses.",
-        "impactos": "Acelera a aquisição de equipamentos de bombeamento e tratores para preparo de novas áreas agrícolas.",
-        "fonte": "Autoridad Nacional del Agua"
+        "tendencia": "estavel",
+        "direcao": "estavel",
+        "descricao": "Obras de infraestrutura e armazenamento de água avançam ante Outubro para mitigar a seca.",
+        "impactos": "Mantém neutra a demanda por equipamentos voltados a obras hidráulicas e tratores de apoio.",
+        "fonte": "Agencia Andina"
       },
       {
         "titulo": "Cenário Político",
         "icone": "⚖️",
-        "tendencia": "estavel",
+        "tendencia": "incerto",
         "direcao": "estavel",
-        "descricao": "Ante Outubro, o Congresso manteve agenda neutra para o agronegócio, sem novas taxações ao setor exportador.",
-        "impactos": "Decisões de investimento em frotas de grande porte seguem neutras, aguardando definições fiscais futuras.",
-        "fonte": "Congreso de la República"
+        "descricao": "Governo sob fortes críticas nos primeiros 100 dias ante Outubro, buscando parcerias comerciais internacionais.",
+        "impactos": "Clima de cautela institucional gera decisões neutras ou adiadas na aquisição de frotas agrícolas.",
+        "fonte": "RCR Peru"
       },
       {
         "titulo": "Margens Produtor",
         "icone": "📊",
-        "tendencia": "positivo",
-        "direcao": "melhorando",
-        "descricao": "Ante Outubro, margens melhoraram na agroexportação (frutas) e pioraram ligeiramente nos grãos andinos.",
-        "impactos": "Produtores de frutas aceleram renovação de maquinário; produtores de grãos adiam compras de colheitadeiras.",
-        "fonte": "BCRP"
+        "tendencia": "negativo",
+        "direcao": "piorando",
+        "descricao": "Quebras de safra e custos elevados reduzem a rentabilidade do produtor ante Outubro.",
+        "impactos": "Falta de caixa restringe a compra à vista de tratores e implementos, elevando a inadimplência.",
+        "fonte": "Infobae"
       }
     ],
-    "noticias": []
+    "sintese_estrategica": {
+      "manchete": "Fenômeno El Niño pressiona safras e adia investimentos em máquinas agrícolas no Peru.",
+      "termometro": "negativo",
+      "leitura": "O avanço severo do El Niño afeta plantios de batata, uva e manga, elevando incertezas para a safra de alimentos. Embora o comércio exterior exiba números elevados puxados pela mineração, o agro enfrenta perdas produtivas e margens estreitas, levando produtores a adiar a renovação de frotas e compras de tratores e implementos.",
+      "riscos": [
+        "Intensificação da seca e escassez hídrica a partir de dezembro",
+        "Quebra expressiva na produção de uvas, mangas e batatas",
+        "Atraso generalizado no cronograma de plantio das safras"
+      ],
+      "oportunidades": [
+        "Crédito subsidiado para mitigação de riscos climáticos",
+        "Demanda pontual por infraestrutura de irrigação e reservatórios",
+        "Financiamento em feiras agrícolas regionais"
+      ],
+      "monitorar": [
+        "Evolução dos impactos do El Niño nas lavouras em dezembro",
+        "Resultados da missão comercial do governo à China",
+        "Atrasos persistentes no plantio de batata e arroz"
+      ]
+    },
+    "noticias": [
+      {
+        "tema": "Política & Eleições",
+        "id_noticia": "N5",
+        "titulo_noticia": "Keiko Fujimori pede autorização para viajar à China e APEC",
+        "tendencia_noticia": "positivo",
+        "corpo_noticia": "A presidente Keiko Fujimori solicitou permissão ao Congresso para viajar à China, participar da APEC e reunir-se com Xi Jinping, buscando fortalecer acordos.",
+        "relevancia": "media",
+        "horizonte": "6-12 meses",
+        "por_que_importa": "Aproximação com a China pode destravar investimentos em infraestrutura e agroexportação, sustentando a demanda futura por maquinário pesado.",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "positivo",
+            "descricao": "Estímulo à expansão agrícola na Costa",
+            "segmento_impactado": "Alta Potência (>170cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "incerto",
+            "descricao": "",
+            "segmento_impactado": ""
+          },
+          "pulverizadores": {
+            "tendencia": "incerto",
+            "descricao": "",
+            "segmento_impactado": ""
+          },
+          "plantadeiras": {
+            "tendencia": "incerto",
+            "descricao": "",
+            "segmento_impactado": ""
+          }
+        },
+        "url_noticia": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxNUVBGaDgwcmpKTktHbHdaUjEtVnczMkdvQTk2RExGWkd5dWZ1UkVnbFBobjBaLTYyUXh4QlFna3Z4ZnhFUXQ0QkliNHpWQTBCbHNIMlBMVWxaSmg1S3REcTBmVW5FNUFPd3NwUVJxS1FvQjVmajY5U09EcHhTWlNzc3BjOC1OMFl3c25aVHdtemxkYWxMd3VvTnFGNVk3cGFzQ0hEMTItY205Qk5hQmd5eGR5VGgtZnB4TnZPaDJmMXlBTjJJcEx0dU9YTGstcVUwUlZudw?oc=5",
+        "fonte_noticia": "<a href=\"https://news.google.com/rss/articles/CBMi1AFBVV95cUxNUVBGaDgwcmpKTktHbHdaUjEtVnczMkdvQTk2RExGWkd5dWZ1UkVnbFBobjBaLTYyUXh4QlFna3Z4ZnhFUXQ0QkliNHpWQTBCbHNIMlBMVWxaSmg1S3REcTBmVW5FNUFPd3NwUVJxS1FvQjVmajY5U09EcHhTWlNzc3BjOC1OMFl3c25aVHdtemxkYWxMd3VvTnFGNVk3cGFzQ0hEMTItY205Qk5hQmd5eGR5VGgtZnB4TnZPaDJmMXlBTjJJcEx0dU9YTGstcVUwUlZudw?oc=5\" target=\"_blank\" rel=\"noopener\">AP Noticias · 09/11/2026</a>",
+        "data_publicacao": "2026-11-09"
+      },
+      {
+        "tema": "Política Agrícola & Crédito",
+        "id_noticia": "N10",
+        "titulo_noticia": "Midagri fortalece prevenção contra El Niño e financiamento",
+        "tendencia_noticia": "positivo",
+        "corpo_noticia": "O Ministério do Desenvolvimento Agrário intensifica ações de prevenção climática e amplia linhas de crédito emergencial para proteger o campo.",
+        "relevancia": "alta",
+        "horizonte": "3-6 meses",
+        "por_que_importa": "Crédito direcionado ajuda produtores a manter capital de giro, viabilizando investimentos pontuais em tratores e equipamentos de menor porte.",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "positivo",
+            "descricao": "Crédito subsidiado fomenta aquisições",
+            "segmento_impactado": "Baixa Potência (<80cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "incerto",
+            "descricao": "",
+            "segmento_impactado": ""
+          },
+          "pulverizadores": {
+            "tendencia": "incerto",
+            "descricao": "",
+            "segmento_impactado": ""
+          },
+          "plantadeiras": {
+            "tendencia": "incerto",
+            "descricao": "",
+            "segmento_impactado": ""
+          }
+        },
+        "url_noticia": "https://news.google.com/rss/articles/CBMivgFBVV95cUxQeVMxb0xodWcyVFJOVHZsbGExbjE1US1wUDYyNXpyb0NBNndKbnR4TFhYNm5ldmd2LUZlQkhFNlhmYW1reDA0NThzczNScVZhZ19qVU9HZlN2Y2hwN05hcUJ6Q3AtbTFja2NMa3N6azNGQjZybnlHOFNYMmRIZnRBczF6dUtjSXl3MC1jY1dVdDBva3JHOWZHSDZxbkpUb2oyRmJ6UjBCbDF2cWctSHhESGRtRzhZOUxDbGg5aDN3?oc=5",
+        "fonte_noticia": "<a href=\"https://news.google.com/rss/articles/CBMivgFBVV95cUxQeVMxb0xodWcyVFJOVHZsbGExbjE1US1wUDYyNXpyb0NBNndKbnR4TFhYNm5ldmd2LUZlQkhFNlhmYW1reDA0NThzczNScVZhZ19qVU9HZlN2Y2hwN05hcUJ6Q3AtbTFja2NMa3N6azNGQjZybnlHOFNYMmRIZnRBczF6dUtjSXl3MC1jY1dVdDBva3JHOWZHSDZxbkpUb2oyRmJ6UjBCbDF2cWctSHhESGRtRzhZOUxDbGg5aDN3?oc=5\" target=\"_blank\" rel=\"noopener\">Agencia Andina · 07/11/2026</a>",
+        "data_publicacao": "2026-11-07"
+      },
+      {
+        "tema": "Comércio Exterior & Geopolítica",
+        "id_noticia": "N16",
+        "titulo_noticia": "Perú e China renovam aliança comercial para exportações",
+        "tendencia_noticia": "positivo",
+        "corpo_noticia": "O Peru formalizou a renovação de sua aliança comercial com a China, abrindo novas oportunidades para escoar produtos agrícolas ao mercado asiático.",
+        "relevancia": "alta",
+        "horizonte": "6-12 meses",
+        "por_que_importa": "Incentiva a ampliação de áreas irrigadas na Costa, impulsionando a demanda por tratores de alta potência e pulverizadores modernos.",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "positivo",
+            "descricao": "Demanda para expansão na Costa",
+            "segmento_impactado": "Alta Potência (>170cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "incerto",
+            "descricao": "",
+            "segmento_impactado": ""
+          },
+          "pulverizadores": {
+            "tendencia": "positivo",
+            "descricao": "Necessidade fitossanitária de exportação",
+            "segmento_impactado": "Autopropelido"
+          },
+          "plantadeiras": {
+            "tendencia": "incerto",
+            "descricao": "",
+            "segmento_impactado": ""
+          }
+        },
+        "url_noticia": "https://news.google.com/rss/articles/CBMizAFBVV95cUxPMUEwcExsZXlhSUZtcERqVUZ1UGx1alBzNExuUXUzN1UtNG5EbE9PMzlSZlhPelV1Ykp1dVR4bmF4S3dFS0tJUHhqcy1RbVdyUDdZVmpVOHJjX3ZfaXhqRW5oNkxGeHZ4cjk1QW11NjdhVFFQcU0zaWRUcXdpQnpMZjVtY0hrcnFtYzYyQnFaSDB4SUNrQjZPNmNGUDZOajNVSjJrWUdwR2N6V0pzczBnZlF4NjdWeHh0ZDFWTEhBZUdmWGRWUWlTV2xlR04?oc=5",
+        "fonte_noticia": "<a href=\"https://news.google.com/rss/articles/CBMizAFBVV95cUxPMUEwcExsZXlhSUZtcERqVUZ1UGx1alBzNExuUXUzN1UtNG5EbE9PMzlSZlhPelV1Ykp1dVR4bmF4S3dFS0tJUHhqcy1RbVdyUDdZVmpVOHJjX3ZfaXhqRW5oNkxGeHZ4cjk1QW11NjdhVFFQcU0zaWRUcXdpQnpMZjVtY0hrcnFtYzYyQnFaSDB4SUNrQjZPNmNGUDZOajNVSjJrWUdwR2N6V0pzczBnZlF4NjdWeHh0ZDFWTEhBZUdmWGRWUWlTV2xlR04?oc=5\" target=\"_blank\" rel=\"noopener\">AgroLatam · 06/11/2026</a>",
+        "data_publicacao": "2026-11-06"
+      },
+      {
+        "tema": "Clima & Safra",
+        "id_noticia": "N19",
+        "titulo_noticia": "El Niño golpeia uvas do Peru com perda milionária",
+        "tendencia_noticia": "negativo",
+        "corpo_noticia": "O fenômeno El Niño afeta severamente os parreirais peruanos, com estimativa de perda de até 22 milhões de caixas na safra atual.",
+        "relevancia": "alta",
+        "horizonte": "imediato",
+        "por_que_importa": "Quebras drásticas de receita reduzem o fluxo de caixa dos produtores, paralisando investimentos em maquinário especializado.",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "negativo",
+            "descricao": "Retração por quebra de safra",
+            "segmento_impactado": "Média Potência (80-170cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "negativo",
+            "descricao": "Perdas reduzem investimentos",
+            "segmento_impactado": "Grande Porte (Classes 7+)"
+          },
+          "pulverizadores": {
+            "tendencia": "negativo",
+            "descricao": "Redução no uso de defensivos",
+            "segmento_impactado": "Autopropelido"
+          },
+          "plantadeiras": {
+            "tendencia": "incerto",
+            "descricao": "",
+            "segmento_impactado": ""
+          }
+        },
+        "url_noticia": "https://news.google.com/rss/articles/CBMizAFBVV95cUxNTFJWdWxmZ1A2djVwT2ZOVzJ0cGp6Tm1GcHVueU9CRjdaYl93LUMzRFROUU9oQ2Y2RGlrSUFnNXU4dlpCXzY3RG1Vem1lalI1US02SUpHQUc5dmFYZjZqNFF6M3BCRWR2UnpPSXctd1Y4V3VmYzRGN0pJcU1BMmRydjhvcGFfTjlGbTlMWnRIaWZDa0t2eFhqd3NFdkROcEJJMzNvdzRKR1RheTEtRlJsd0FSR0lpdXF3N0Z3MlZPbHdMVldaTnFBQUpMdUc?oc=5",
+        "fonte_noticia": "<a href=\"https://news.google.com/rss/articles/CBMizAFBVV95cUxNTFJWdWxmZ1A2djVwT2ZOVzJ0cGp6Tm1GcHVueU9CRjdaYl93LUMzRFROUU9oQ2Y2RGlrSUFnNXU4dlpCXzY3RG1Vem1lalI1US02SUpHQUc5dmFYZjZqNFF6M3BCRWR2UnpPSXctd1Y4V3VmYzRGN0pJcU1BMmRydjhvcGFfTjlGbTlMWnRIaWZDa0t2eFhqd3NFdkROcEJJMzNvdzRKR1RheTEtRlJsd0FSR0lpdXF3N0Z3MlZPbHdMVldaTnFBQUpMdUc?oc=5\" target=\"_blank\" rel=\"noopener\">AgroLatam · 09/11/2026</a>",
+        "data_publicacao": "2026-11-09"
+      },
+      {
+        "tema": "Mercado & Produção",
+        "id_noticia": "N23",
+        "titulo_noticia": "Atraso em plantios de batata e arroz ameaça oferta",
+        "tendencia_noticia": "negativo",
+        "corpo_noticia": "O atraso no ciclo de semeadura de batata e arroz devido a fatores climáticos gera forte alerta nos mercados para o abastecimento em 2027.",
+        "relevancia": "alta",
+        "horizonte": "3-6 meses",
+        "por_que_importa": "Ciclos de plantio desregulados desorganizam a janela operacional, adiando a aquisição de tratores e plantadeiras.",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "negativo",
+            "descricao": "Atraso nas operações de preparo",
+            "segmento_impactado": "Média Potência (80-170cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "incerto",
+            "descricao": "",
+            "segmento_impactado": ""
+          },
+          "pulverizadores": {
+            "tendencia": "incerto",
+            "descricao": "",
+            "segmento_impactado": ""
+          },
+          "plantadeiras": {
+            "tendencia": "negativo",
+            "descricao": "Plantio suspenso ou adiado",
+            "segmento_impactado": "Pequeno Porte (<20 linhas)"
+          }
+        },
+        "url_noticia": "https://news.google.com/rss/articles/CBMi9AFBVV95cUxOa3NNSWNrdGgybVVER0t0VDZnbUlVenpXZkxGd2hTcmU4ZDF6aWtEQ3QtVUlFSlBzQkU1WFJpWDhobWI5Nm5Cc3diZjRzbkptNjdCc2cwZWtyeHJncEF0Y2d1VFpjRWdXcXA3Q2JBdTQwakgwSEoxMmVEUHFMaUhXZWpBbUtFbnFWQTRyd203N21aS0NoQ0pqMGNxclVoOWhKbkRQQjFNWEdqdklCN1RVYzNlTjZ0THd1ek1vdFFpSkZSMzFmelBSQjU4My1DUUdJN0xVNWFQNUxTUjFHY3JqVzlEMmFnS1BGSWU3U0xXanRvVDlX0gGPAkFVX3lxTE1FQ2l1WjBuVFlmbFFOMVgxX2tBQkhMMDRVUVVVeWJtTll2OUtSM3dNclNZdnFKazFadlc4VlpqS2Q4UHprcWl2Y3o1YzBtTHlyWDAybDRCdzFRLXFvOFAxMHpkUDcyQnFKU05BV3FhZjJ1dUp0Qmt2WVJWQURkUHEzWVpwY1ZjNlhQZlVTS0VnZUNFTENMVFhkemZpV0todjJUTmFmQWgwWmYtcWkxQVJ0aWMyLUlZbDhDQUZsZjViSldOSUEtZ05wY2N6Zm9FQVdrdk5ZcDZ5eXJtUHBTSFRiSERJTUhPanVQQjZoY3hZRmk0dW9iWUlQTGxJTEp4OHF6dnVKeGtiRzh0bUVNbWs?oc=5",
+        "fonte_noticia": "<a href=\"https://news.google.com/rss/articles/CBMi9AFBVV95cUxOa3NNSWNrdGgybVVER0t0VDZnbUlVenpXZkxGd2hTcmU4ZDF6aWtEQ3QtVUlFSlBzQkU1WFJpWDhobWI5Nm5Cc3diZjRzbkptNjdCc2cwZWtyeHJncEF0Y2d1VFpjRWdXcXA3Q2JBdTQwakgwSEoxMmVEUHFMaUhXZWpBbUtFbnFWQTRyd203N21aS0NoQ0pqMGNxclVoOWhKbkRQQjFNWEdqdklCN1RVYzNlTjZ0THd1ek1vdFFpSkZSMzFmelBSQjU4My1DUUdJN0xVNWFQNUxTUjFHY3JqVzlEMmFnS1BGSWU3U0xXanRvVDlX0gGPAkFVX3lxTE1FQ2l1WjBuVFlmbFFOMVgxX2tBQkhMMDRVUVVVeWJtTll2OUtSM3dNclNZdnFKazFadlc4VlpqS2Q4UHprcWl2Y3o1YzBtTHlyWDAybDRCdzFRLXFvOFAxMHpkUDcyQnFKU05BV3FhZjJ1dUp0Qmt2WVJWQURkUHEzWVpwY1ZjNlhQZlVTS0VnZUNFTENMVFhkemZpV0todjJUTmFmQWgwWmYtcWkxQVJ0aWMyLUlZbDhDQUZsZjViSldOSUEtZ05wY2N6Zm9FQVdrdk5ZcDZ5eXJtUHBTSFRiSERJTUhPanVQQjZoY3hZRmk0dW9iWUlQTGxJTEp4OHF6dnVKeGtiRzh0bUVNbWs?oc=5\" target=\"_blank\" rel=\"noopener\">Infobae · 08/11/2026</a>",
+        "data_publicacao": "2026-11-08"
+      },
+      {
+        "tema": "Mercado & Produção",
+        "id_noticia": "N27",
+        "titulo_noticia": "Escassez de água por El Niño vai se intensificar em dezembro",
+        "tendencia_noticia": "negativo",
+        "corpo_noticia": "Autoridades projetam agravamento severo da seca e escassez hídrica a partir de dezembro no Peru, ameaçando lavouras e pecuária.",
+        "relevancia": "alta",
+        "horizonte": "imediato",
+        "por_que_importa": "A falta de água paralisa o preparo do solo e desestimula severamente a compra de novos implementos agrícolas e tratores.",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "negativo",
+            "descricao": "Seca paralisa preparo do solo",
+            "segmento_impactado": "Média Potência (80-170cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "incerto",
+            "descricao": "",
+            "segmento_impactado": ""
+          },
+          "pulverizadores": {
+            "tendencia": "incerto",
+            "descricao": "",
+            "segmento_impactado": ""
+          },
+          "plantadeiras": {
+            "tendencia": "negativo",
+            "descricao": "Ausência de umidade inviabiliza plantio",
+            "segmento_impactado": "Pequeno Porte (<20 linhas)"
+          }
+        },
+        "url_noticia": "https://news.google.com/rss/articles/CBMiswFBVV95cUxORVotOFdRVHBETU1oMFRRc3NWV05GSzNDbTdlQng2YjJYTHcwVUdGU19PY084RlB3UHJwNDRISXh3S0lFbXZnVmd6T2R3ZWZLcmo4aUVZYnNKb3I1VmwyUmZ1UFVkUUwtN2lYUVVYWmVjQllpYnJMT0d4TjktYTFlcnBkLU1WTEc1MFVlV1JMNWlNRWZxdFlTUmRBeVJFaVhncUtlSE9BNUxDb1ZNX2Q0eG5LZw?oc=5",
+        "fonte_noticia": "<a href=\"https://news.google.com/rss/articles/CBMiswFBVV95cUxORVotOFdRVHBETU1oMFRRc3NWV05GSzNDbTdlQng2YjJYTHcwVUdGU19PY084RlB3UHJwNDRISXh3S0lFbXZnVmd6T2R3ZWZLcmo4aUVZYnNKb3I1VmwyUmZ1UFVkUUwtN2lYUVVYWmVjQllpYnJMT0d4TjktYTFlcnBkLU1WTEc1MFVlV1JMNWlNRWZxdFlTUmRBeVJFaVhncUtlSE9BNUxDb1ZNX2Q0eG5LZw?oc=5\" target=\"_blank\" rel=\"noopener\">Gestión · 06/11/2026</a>",
+        "data_publicacao": "2026-11-06"
+      }
+    ]
   },
   "bo": {
     "fatores_economicos": [
       {
         "titulo": "Soja (Oriente)",
         "icone": "🌱",
-        "tendencia": "incerto",
-        "direcao": "estavel",
-        "descricao": "Ante Outubro, preços internacionais estáveis e clima irregular no Oriente mantêm cautela na safra.",
-        "impactos": "Produtores adiam aquisição de colheitadeiras e plantadeiras de grande porte, mantendo postura neutra.",
-        "fonte": "CAO"
+        "tendencia": "alta",
+        "direcao": "melhorando",
+        "descricao": "IBCE cobra do governo eliminação de restrições às exportações de soya ante Outubro.",
+        "impactos": "Acelera intenção de compra de colheitadeiras e tratores de alta potência no oriente boliviano.",
+        "fonte": "eju.tv"
       },
       {
         "titulo": "Escassez de Dólar",
         "icone": "💸",
-        "tendencia": "negativo",
-        "direcao": "piorando",
-        "descricao": "Ante Outubro, restrições cambiais se agravam, dificultando a importação de maquinário agrícola e insumos.",
-        "impactos": "Compra de tratores e pulverizadores autopropelidos tende a adiar devido ao alto custo cambial.",
-        "fonte": "BCB"
+        "tendencia": "restritiva",
+        "direcao": "estavel",
+        "descricao": "Governo autoriza cartões com dólar referencial ante Outubro, mas escassez de divisas persiste.",
+        "impactos": "Adia investimentos pesados em plantadeiras e pulverizadores importados devido ao câmbio.",
+        "fonte": "Economy Bolivia"
       },
       {
         "titulo": "Biocombustíveis",
         "icone": "⛽",
-        "tendencia": "positivo",
+        "tendencia": "expansiva",
         "direcao": "melhorando",
-        "descricao": "Ante Outubro, avanço na política de biocombustíveis impulsiona demanda por matérias-primas locais.",
-        "impactos": "Acelera investimentos pontuais em plantadeiras e tratores para expansão de área cultivada.",
-        "fonte": "ANH"
+        "descricao": "Governo e CAO preparam nova lei de biotecnologia ante Outubro, ampliando horizontes produtivos.",
+        "impactos": "Acelera demanda por tratores e plantadeiras voltadas à expansão de áreas produtivas.",
+        "fonte": "Visión 360"
       },
       {
         "titulo": "Infra. Logística",
         "icone": "🛣️",
-        "tendencia": "estavel",
+        "tendencia": "incerto",
         "direcao": "estavel",
-        "descricao": "Ante Outubro, gargalos de escoamento nas fronteiras mantêm-se sem alterações logísticas significativas.",
-        "impactos": "Demanda por renovação de frota de transporte e logística permanece neutra.",
-        "fonte": "INE"
+        "descricao": "Retomada de exportações de algodão e inspeções para banano chileno ante Outubro.",
+        "impactos": "Impacto neutro na frota agrícola de grande porte, focada em rotas tradicionais.",
+        "fonte": "ABI, AgroLatam"
       },
       {
         "titulo": "Margens Produtor",
         "icone": "📊",
-        "tendencia": "negativo",
-        "direcao": "piorando",
-        "descricao": "Ante Outubro, custos de insumos importados sobem, espremendo as margens operacionais do produtor.",
-        "impactos": "Produtores optam por adiar compras de novas máquinas, priorizando manutenção.",
-        "fonte": "Anapo"
+        "tendencia": "misto",
+        "direcao": "melhorando",
+        "descricao": "Soja e algodão com perspectivas melhores, enquanto arrocedores sofrem perdas climáticas ante Outubro.",
+        "impactos": "Produtores de grãos mantêm planos de aquisição; setor arrozeiro adia novas colheitadeiras.",
+        "fonte": "AgroLatam"
       }
     ],
-    "noticias": []
+    "sintese_estrategica": {
+      "manchete": "Avanço biotecnológico e retomada exportadora impulsionam o agro, mas clima extremo gera cautela.",
+      "termometro": "incerto",
+      "leitura": "A articulação da lei de biotecnologia e a abertura para exportar algodão e soya melhoram o ânimo do produtor no Oriente. No entanto, a intensificação do Super El Niño e a persistente escassez de dólares mantêm o freio de mão puxado para investimentos em máquinas de alto valor, polarizando a demanda.",
+      "riscos": [
+        "Perdas severas de safra devido ao Super El Niño.",
+        "Manutenção da escassez de divisas e crédito restrito.",
+        "Frustração na regulamentação da biotecnologia."
+      ],
+      "oportunidades": [
+        "Nova lei de biotecnologia destravando investimentos.",
+        "Expansão do crédito produtivo anunciado pelo BCB.",
+        "Demanda reprimida por renovação de frotas no Oriente."
+      ],
+      "monitorar": [
+        "Regulamentação e aprovação da lei de biotecnologia em dezembro.",
+        "Efeitos práticos do crédito produtivo ampliado pelo BCB.",
+        "Evolução climática do Super El Niño nas lavouras."
+      ]
+    },
+    "noticias": [
+      {
+        "tema": "Política & Eleições",
+        "id_noticia": "N1",
+        "titulo_noticia": "Gobierno y CAO alistan ley de biotecnología",
+        "tendencia_noticia": "positivo",
+        "corpo_noticia": "Governo boliviano e a CAO articulam lei de biotecnologia, buscando destravar o uso de novas tecnologias para o setor produtivo agrícola.",
+        "relevancia": "alta",
+        "horizonte": "3-6 meses",
+        "por_que_importa": "A liberação de biotecnologia eleva a produtividade esperada, estimulando o produtor a investir em maquinário de maior porte tecnológico.",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "positivo",
+            "descricao": "Demanda por preparo de solo avançado",
+            "segmento_impactado": "Alta Potência (>170cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "positivo",
+            "descricao": "Maior volume colhido exige capacidade",
+            "segmento_impactado": "Grande Porte (Classes 7+)"
+          },
+          "pulverizadores": {
+            "tendencia": "positivo",
+            "descricao": "Necessidade de manejo tecnológico intensivo",
+            "segmento_impactado": "Autopropelido"
+          },
+          "plantadeiras": {
+            "tendencia": "positivo",
+            "descricao": "Plantio de sementes geneticamente melhoradas",
+            "segmento_impactado": "Grande Porte (>20 linhas)"
+          }
+        },
+        "url_noticia": "https://news.google.com/rss/articles/CBMi7AFBVV95cUxQTU9MQTlkclcyUGtrV2hWWTBIM0FWaXFER3Nnc3gtWmVWWFM4Njltc2JQZDNXbTJDTHNRSVB2am01d29GTUxidWFoYUF6WmlSU0ZTZ1pwMzYzemZRZVlaWXAwUWJVSGozRlVRT1Y2TnNMWjZrdG1Bd2ljN1BMaDBnLUpGMFZkMHhuRHJlWmNDMUNTVlBXUzJrTHJPQTBKVDVTWEV3QWlFLURMVTdOSGZZS0JvaDZ0WkY3Zy04cW5oSmxCVW9fd3VCQTJaVm9DdkdoLVM3ZUF1UkxiQ0ZvX0pQU1BPVDlsMVpOUmltddIB7AFBVV95cUxQTU9MQTlkclcyUGtrV2hWWTBIM0FWaXFER3Nnc3gtWmVWWFM4Njltc2JQZDNXbTJDTHNRSVB2am01d29GTUxidWFoYUF6WmlSU0ZTZ1pwMzYzemZRZVlaWXAwUWJVSGozRlVRT1Y2TnNMWjZrdG1Bd2ljN1BMaDBnLUpGMFZkMHhuRHJlWmNDMUNTVlBXUzJrTHJPQTBKVDVTWEV3QWlFLURMVTdOSGZZS0JvaDZ0WkY3Zy04cW5oSmxCVW9fd3VCQTJaVm9DdkdoLVM3ZUF1UkxiQ0ZvX0pQU1BPVDlsMVpOUmltdQ?oc=5",
+        "fonte_noticia": "<a href=\"https://news.google.com/rss/articles/CBMi7AFBVV95cUxQTU9MQTlkclcyUGtrV2hWWTBIM0FWaXFER3Nnc3gtWmVWWFM4Njltc2JQZDNXbTJDTHNRSVB2am01d29GTUxidWFoYUF6WmlSU0ZTZ1pwMzYzemZRZVlaWXAwUWJVSGozRlVRT1Y2TnNMWjZrdG1Bd2ljN1BMaDBnLUpGMFZkMHhuRHJlWmNDMUNTVlBXUzJrTHJPQTBKVDVTWEV3QWlFLURMVTdOSGZZS0JvaDZ0WkY3Zy04cW5oSmxCVW9fd3VCQTJaVm9DdkdoLVM3ZUF1UkxiQ0ZvX0pQU1BPVDlsMVpOUmltddIB7AFBVV95cUxQTU9MQTlkclcyUGtrV2hWWTBIM0FWaXFER3Nnc3gtWmVWWFM4Njltc2JQZDNXbTJDTHNRSVB2am01d29GTUxidWFoYUF6WmlSU0ZTZ1pwMzYzemZRZVlaWXAwUWJVSGozRlVRT1Y2TnNMWjZrdG1Bd2ljN1BMaDBnLUpGMFZkMHhuRHJlWmNDMUNTVlBXUzJrTHJPQTBKVDVTWEV3QWlFLURMVTdOSGZZS0JvaDZ0WkY3Zy04cW5oSmxCVW9fd3VCQTJaVm9DdkdoLVM3ZUF1UkxiQ0ZvX0pQU1BPVDlsMVpOUmltdQ?oc=5\" target=\"_blank\" rel=\"noopener\">Visión 360 · 09/11/2026</a>",
+        "data_publicacao": "2026-11-09"
+      },
+      {
+        "tema": "Política Agrícola & Crédito",
+        "id_noticia": "N11",
+        "titulo_noticia": "BCB anuncia ampliación de medidas de crédito productivo",
+        "tendencia_noticia": "positivo",
+        "corpo_noticia": "Banco Central da Bolívia anuncia expansão de medidas para impulsionar o crédito produtivo, facilitando o acesso a recursos no setor.",
+        "relevancia": "alta",
+        "horizonte": "imediato",
+        "por_que_importa": "Facilita o financiamento, destravando a aquisição imediata de máquinas agrícolas travadas pela falta de liquidez.",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "positivo",
+            "descricao": "Linhas de crédito facilitam aquisições",
+            "segmento_impactado": "Média Potência (80-170cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "positivo",
+            "descricao": "Financiamento viabiliza frotas maiores",
+            "segmento_impactado": "Grande Porte (Classes 7+)"
+          },
+          "pulverizadores": {
+            "tendencia": "positivo",
+            "descricao": "Crédito direcionado impulsiona pulverizadores",
+            "segmento_impactado": "Autopropelido"
+          },
+          "plantadeiras": {
+            "tendencia": "positivo",
+            "descricao": "Renovação de plantadeiras via crédito",
+            "segmento_impactado": "Grande Porte (>20 linhas)"
+          }
+        },
+        "url_noticia": "https://news.google.com/rss/articles/CBMiZEFVX3lxTFBpRnlRbkpoLWl5b3k2MzZCTVIzZE1pcFJBZWlmOWlHYkt3NHBHUjFHaUE5ZTlTNWhUaWtmNU5meFVrNmo5Q3k1d0VhbW9fUGNQMk9sbXJ4VjNZOUNBS1pSaXZCMGM?oc=5",
+        "fonte_noticia": "<a href=\"https://news.google.com/rss/articles/CBMiZEFVX3lxTFBpRnlRbkpoLWl5b3k2MzZCTVIzZE1pcFJBZWlmOWlHYkt3NHBHUjFHaUE5ZTlTNWhUaWtmNU5meFVrNmo5Q3k1d0VhbW9fUGNQMk9sbXJ4VjNZOUNBS1pSaXZCMGM?oc=5\" target=\"_blank\" rel=\"noopener\">Economy Bolivia · 08/11/2026</a>",
+        "data_publicacao": "2026-11-08"
+      },
+      {
+        "tema": "Comércio Exterior & Geopolítica",
+        "id_noticia": "N2",
+        "titulo_noticia": "Bolivia volverá a exportar algodón tras 15 años",
+        "tendencia_noticia": "positivo",
+        "corpo_noticia": "Após 15 anos, a Bolívia retoma as exportações de algodão para o Paraguai e abre o mercado peruano, projetando receitas milionárias.",
+        "relevancia": "media",
+        "horizonte": "3-6 meses",
+        "por_que_importa": "A diversificação de culturas exportadas gera receita extra para produtores investirem em equipamentos específicos de nicho.",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "positivo",
+            "descricao": "Apoio ao preparo de lavouras de algodão",
+            "segmento_impactado": "Média Potência (80-170cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "incerto",
+            "descricao": "Uso restrito a colhedoras específicas",
+            "segmento_impactado": "Médio Porte (Classes 4-6)"
+          },
+          "pulverizadores": {
+            "tendencia": "positivo",
+            "descricao": "Aplicação intensiva na cultura algodoeira",
+            "segmento_impactado": "Autopropelido"
+          },
+          "plantadeiras": {
+            "tendencia": "positivo",
+            "descricao": "Plantio especializado de algodão",
+            "segmento_impactado": "Pequeno Porte (<20 linhas)"
+          }
+        },
+        "url_noticia": "https://news.google.com/rss/articles/CBMiogFBVV95cUxOWE1VbmJGWTdxUi10QUIyYmM1ekJWYWlmOTZhS0prYzRFamJ2RHZRWHRxcDJQOXZCeDhqZjhuZFhoblVIUUlqYjNPU2F2Uko3WUJndWs5NzhNS3J4djhFOExCQjhlal9Nck5rRWd0cEJYS0JhaGdoQm9UeF9FMjVwS2VEd3oxXzhmdUtRdWRuTnpBOFVlVk9fOU0waEhmQkhBMmc?oc=5",
+        "fonte_noticia": "<a href=\"https://news.google.com/rss/articles/CBMiogFBVV95cUxOWE1VbmJGWTdxUi10QUIyYmM1ekJWYWlmOTZhS0prYzRFamJ2RHZRWHRxcDJQOXZCeDhqZjhuZFhoblVIUUlqYjNPU2F2Uko3WUJndWs5NzhNS3J4djhFOExCQjhlal9Nck5rRWd0cEJYS0JhaGdoQm9UeF9FMjVwS2VEd3oxXzhmdUtRdWRuTnpBOFVlVk9fOU0waEhmQkhBMmc?oc=5\" target=\"_blank\" rel=\"noopener\">ABI - Agencia Boliviana de Información · 09/11/2026</a>",
+        "data_publicacao": "2026-11-09"
+      },
+      {
+        "tema": "Clima & Safra",
+        "id_noticia": "N21",
+        "titulo_noticia": "Un Super El Niño se intensifica en el Pacífico",
+        "tendencia_noticia": "negativo",
+        "corpo_noticia": "Intensificação do fenômeno Super El Niño no Pacífico traz alertas extremos para o agro latino-americano, com risco de secas severas.",
+        "relevancia": "alta",
+        "horizonte": "3-6 meses",
+        "por_que_importa": "Incertezas climáticas extremas fazem produtores adiarem investimentos pesados em novas máquinas por receio de quebra de safra.",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "negativo",
+            "descricao": "Retração preventiva na compra de tratores",
+            "segmento_impactado": "Média Potência (80-170cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "negativo",
+            "descricao": "Risco de quebra de safra reduz demanda",
+            "segmento_impactado": "Grande Porte (Classes 7+)"
+          },
+          "pulverizadores": {
+            "tendencia": "neutro",
+            "descricao": "Manutenção apenas do básico preventivo",
+            "segmento_impactado": "De Arrasto"
+          },
+          "plantadeiras": {
+            "tendencia": "negativo",
+            "descricao": "Adiamento na renovação de plantadeiras",
+            "segmento_impactado": "Grande Porte (>20 linhas)"
+          }
+        },
+        "url_noticia": "https://news.google.com/rss/articles/CBMilgFBVV95cUxOYXVJT1d3RGxHcnN1ZTA3aGs3c3FOVjBEQzQ2aEo4SDh6eUZ3bHVld2NNbFNEdGVEUmhnZnJjdHRJTDIta2FXS2V1MWlhSEZOaHV1UzNxOGtTMVJPY0FzQjZOZVMwUVZkM2trVjZfbDJFYjdXZEo4TFRqMXlQSHZ0cDlPazhsblBSQ1RqdVpvRU0tN1pUTWc?oc=5",
+        "fonte_noticia": "<a href=\"https://news.google.com/rss/articles/CBMilgFBVV95cUxOYXVJT1d3RGxHcnN1ZTA3aGs3c3FOVjBEQzQ2aEo4SDh6eUZ3bHVld2NNbFNEdGVEUmhnZnJjdHRJTDIta2FXS2V1MWlhSEZOaHV1UzNxOGtTMVJPY0FzQjZOZVMwUVZkM2trVjZfbDJFYjdXZEo4TFRqMXlQSHZ0cDlPazhsblBSQ1RqdVpvRU0tN1pUTWc?oc=5\" target=\"_blank\" rel=\"noopener\">AgroLatam · 06/11/2026</a>",
+        "data_publicacao": "2026-11-06"
+      },
+      {
+        "tema": "Mercado & Produção",
+        "id_noticia": "N20",
+        "titulo_noticia": "Bolivia pierde 60.000 hectáreas por el clima",
+        "tendencia_noticia": "negativo",
+        "corpo_noticia": "Problemas climáticos já resultam na perda de 60 mil hectares, gerando forte preocupação entre os produtores de arroz bolivianos.",
+        "relevancia": "alta",
+        "horizonte": "imediato",
+        "por_que_importa": "A perda direta de área cultivada estrangula a liquidez dos agricultores afetados, paralisando aquisições de maquinário local.",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "negativo",
+            "descricao": "Queda na demanda por preparo de solo",
+            "segmento_impactado": "Média Potência (80-170cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "negativo",
+            "descricao": "Menor área colhida reduz necessidade",
+            "segmento_impactado": "Médio Porte (Classes 4-6)"
+          },
+          "pulverizadores": {
+            "tendencia": "negativo",
+            "descricao": "Redução de aplicações fitossanitárias",
+            "segmento_impactado": "De Arrasto"
+          },
+          "plantadeiras": {
+            "tendencia": "negativo",
+            "descricao": "Frustração nas operações de plantio",
+            "segmento_impactado": "Pequeno Porte (<20 linhas)"
+          }
+        },
+        "url_noticia": "https://news.google.com/rss/articles/CBMixwFBVV95cUxQU1h2d1JSaWsxVlBVUGRyQWVuV3p0cEU1V0hwdEpfcEEtZTN6Qk9xVUxkRFpGTXh2ejhOREZQbEhRYi13czdqU2Jwd0VQSWtUR0RWTmxsUGRmaGRGMU1HbUVLZDJOUkdwTk1XT1l5ZW1yR1pXV3c1MUpjTm80ZFNmZndUS1ZDVHd5aTNPaUpTNXpnQ0puMmhFYVhUN3FMcHJHUFNVejRvTWVKSXdmaUw4QXJQLVhSODZGcjFEZ2ozbVVxNWpsOGJV?oc=5",
+        "fonte_noticia": "<a href=\"https://news.google.com/rss/articles/CBMixwFBVV95cUxQU1h2d1JSaWsxVlBVUGRyQWVuV3p0cEU1V0hwdEpfcEEtZTN6Qk9xVUxkRFpGTXh2ejhOREZQbEhRYi13czdqU2Jwd0VQSWtUR0RWTmxsUGRmaGRGMU1HbUVLZDJOUkdwTk1XT1l5ZW1yR1pXV3c1MUpjTm80ZFNmZndUS1ZDVHd5aTNPaUpTNXpnQ0puMmhFYVhUN3FMcHJHUFNVejRvTWVKSXdmaUw4QXJQLVhSODZGcjFEZ2ozbVVxNWpsOGJV?oc=5\" target=\"_blank\" rel=\"noopener\">AgroLatam · 06/11/2026</a>",
+        "data_publicacao": "2026-11-06"
+      },
+      {
+        "tema": "Mercado & Produção",
+        "id_noticia": "N25",
+        "titulo_noticia": "Censo Agropecuario busca información productiva",
+        "tendencia_noticia": "incerto",
+        "corpo_noticia": "Governo lança o Censo Agropecuário para coletar dados estruturais e produtivos detalhados em todo o território nacional.",
+        "relevancia": "baixa",
+        "horizonte": "6-12 meses",
+        "por_que_importa": "Fornece dados estruturais importantes de longo prazo para o planejamento estratégico da indústria, sem efeito imediato nas vendas.",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "incerto",
+            "descricao": "Sem impacto direto nas vendas",
+            "segmento_impactado": "Média Potência (80-170cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "incerto",
+            "descricao": "Sem impacto direto nas vendas",
+            "segmento_impactado": "Grande Porte (Classes 7+)"
+          },
+          "pulverizadores": {
+            "tendencia": "incerto",
+            "descricao": "Sem impacto direto nas vendas",
+            "segmento_impactado": "Autopropelido"
+          },
+          "plantadeiras": {
+            "tendencia": "incerto",
+            "descricao": "Sem impacto direto nas vendas",
+            "segmento_impactado": "Grande Porte (>20 linhas)"
+          }
+        },
+        "url_noticia": "https://news.google.com/rss/articles/CBMilgFBVV95cUxPMUh0WUpzU3ZiZndRRUlBQVBBS1JhNlBLMU5sQ0tLNlRPZHFEUnBDRWtFTzIyTnRBQjA0MTZrVkRPSGl5YXFGejl0WDBNVm1MZk01MDZmZUhJREx0bmlicC1Bcm5SdGRwZlJuQlBadnotbmFQLUpSdlJVeHRfSXlPSWdrMmJoR0g4QVpKQ2VRa1N6S1dialE?oc=5",
+        "fonte_noticia": "<a href=\"https://news.google.com/rss/articles/CBMilgFBVV95cUxPMUh0WUpzU3ZiZndRRUlBQVBBS1JhNlBLMU5sQ0tLNlRPZHFEUnBDRWtFTzIyTnRBQjA0MTZrVkRPSGl5YXFGejl0WDBNVm1MZk01MDZmZUhJREx0bmlicC1Bcm5SdGRwZlJuQlBadnotbmFQLUpSdlJVeHRfSXlPSWdrMmJoR0g4QVpKQ2VRa1N6S1dialE?oc=5\" target=\"_blank\" rel=\"noopener\">El Diario - Bolivia · 09/11/2026</a>",
+        "data_publicacao": "2026-11-09"
+      }
+    ]
   },
   "mx": {
     "fatores_economicos": [
       {
         "titulo": "Export. p/ EUA",
         "icone": "🥑",
-        "tendencia": "positivo",
+        "tendencia": "incerto",
         "direcao": "melhorando",
-        "descricao": "Exportações de abacate e hortaliças cresceram 4% ante Outubro impulsionadas pela sólida demanda norte-americana.",
-        "impactos": "Acelera a compra de pulverizadores de arrasto e tratores médios para atender a expansão da horticultura.",
-        "fonte": "El Economista"
+        "descricao": "Recuperação lenta na exportação de gado para os EUA ante Outubro.",
+        "impactos": "Demanda por tratores deve adiar compras até estabilização do fluxo nas fronteiras.",
+        "fonte": "Medios OBSON"
       },
       {
         "titulo": "Escassez Hídrica",
         "icone": "🏜️",
         "tendencia": "negativo",
         "direcao": "piorando",
-        "descricao": "Reservatórios no norte caíram para 28% da capacidade ante Outubro, limitando severamente a irrigação.",
-        "impactos": "Adia investimentos em plantadeiras e tratores de alta potência nas zonas agrícolas afetadas pela seca.",
-        "fonte": "La Jornada"
+        "descricao": "Queda severa na produção de feijão e grãos por falta de chuvas ante Outubro.",
+        "impactos": "Redução drástica na aquisição de colheitadeiras e plantadeiras nas regiões afetadas.",
+        "fonte": "El Sol de México"
       },
       {
         "titulo": "Prod. Agave",
         "icone": "🌵",
         "tendencia": "estavel",
         "direcao": "estavel",
-        "descricao": "Preços do agave azul estabilizaram após queda em Outubro, mantendo a área plantada inalterada no período.",
-        "impactos": "A compra de tratores especializados permanece neutra, sem novos aportes significativos de expansão.",
-        "fonte": "El Financiero"
+        "descricao": "Demandas locais mantêm estabilidade na produção regional sem grandes variações ante Outubro.",
+        "impactos": "Demanda neutra para tratores de média potência e implementos locais.",
+        "fonte": "SDPnoticias.com"
       },
       {
         "titulo": "Remessas/Agro Fam.",
         "icone": "👨‍👩‍👧‍👦",
         "tendencia": "positivo",
         "direcao": "melhorando",
-        "descricao": "Remessas familiares bateram recorde em Outubro, injetando liquidez direta na agricultura familiar local.",
-        "impactos": "Acelera a aquisição de tratores de baixa potência e implementos básicos para pequenos produtores.",
-        "fonte": "Banco de México"
+        "descricao": "Apoios governamentais no campo impulsionam pequenos produtores ante Outubro.",
+        "impactos": "Acelera compras pontuais de tratores de baixa potência e insumos.",
+        "fonte": "Urbano Puebla"
       },
       {
         "titulo": "Margens Produtor",
         "icone": "📊",
-        "tendencia": "incerto",
-        "direcao": "estavel",
-        "descricao": "Custos de insumos subiram 2% ante Outubro, compensados parcialmente pelos preços firmes do milho branco.",
-        "impactos": "Produtores mantêm postura neutra na substituição de frotas e colheitadeiras de grande porte.",
-        "fonte": "SIAP"
+        "tendencia": "negativo",
+        "direcao": "piorando",
+        "descricao": "Crise no campo e margens comprimidas frente a Outubro geram cautela.",
+        "impactos": "Produtores tendem a adiar investimentos em frotas novas de tratores e pulverizadores.",
+        "fonte": "Imagen Radio"
       }
     ],
-    "noticias": []
+    "sintese_estrategica": {
+      "manchete": "Crise hídrica e endividamento desafiam o campo mexicano, exigindo cautela na frota.",
+      "termometro": "incerto",
+      "leitura": "A combinação de severas secas, restrições de crédito em regiões como Tamaulipas e lenta recuperação nas exportações de carne pressiona as margens dos produtores. Embora existam apoios governamentais pontuais e financiamentos municipais para tratores, a cautela predomina. A demanda por máquinas deve desacelerar no curto prazo.",
+      "riscos": [
+        "Aprofundamento da crise hídrica",
+        "Endividamento rural sem reestruturação",
+        "Lenta retomada das exportações"
+      ],
+      "oportunidades": [
+        "Programas municipais de financiamento de tratores",
+        "Apoios a pequenos produtores"
+      ],
+      "monitorar": [
+        "Protestos de produtores em 17 de novembro",
+        "Efeitos do El Niño nas safras"
+      ]
+    },
+    "noticias": [
+      {
+        "tema": "Política & Eleições",
+        "id_noticia": "N1",
+        "titulo_noticia": "Gobierno de Puebla entrega apoyos para campo",
+        "tendencia_noticia": "positivo",
+        "corpo_noticia": "Governo de Puebla entrega mais de 1.400 apoios a produtores rurais, estimulando a economia agrícola local.",
+        "relevancia": "media",
+        "horizonte": "imediato",
+        "por_que_importa": "Injeta ânimo e recursos em pequenos produtores, favorecendo o mercado de máquinas leves.",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "positivo",
+            "descricao": "Apoio foca em maquinário leve.",
+            "segmento_impactado": "Baixa Potência (<80cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "incerto",
+            "descricao": "",
+            "segmento_impactado": ""
+          },
+          "pulverizadores": {
+            "tendencia": "incerto",
+            "descricao": "",
+            "segmento_impactado": ""
+          },
+          "plantadeiras": {
+            "tendencia": "incerto",
+            "descricao": "",
+            "segmento_impactado": ""
+          }
+        },
+        "url_noticia": "https://news.google.com/rss/articles/CBMizAFBVV95cUxNMXRUSG92RE5XdXE4QU4zY1Z5UWtTNllXTHFJd2pWNm5QbE9saDl0cTJKd2Nza3JsU3R5Q3laYl9TMjh6V2psbDl0MTZiLVNFUnpoQk9jbjZkaFFUV1VoYlpvN0U2LVkzLTRINzBqaFZSZWJXQmxjMTdqdUcxSTZibkNacWlMYkNfMXotU3pMZDc1SXlyNUhPZ2taN1ZfRlJrMmhzQVpBd0RPZzczcDgtMFZSQkZLVEdvUGFvazBwd29CUElIWlpvSWVBWFk?oc=5",
+        "fonte_noticia": "<a href=\"https://news.google.com/rss/articles/CBMizAFBVV95cUxNMXRUSG92RE5XdXE4QU4zY1Z5UWtTNllXTHFJd2pWNm5QbE9saDl0cTJKd2Nza3JsU3R5Q3laYl9TMjh6V2psbDl0MTZiLVNFUnpoQk9jbjZkaFFUV1VoYlpvN0U2LVkzLTRINzBqaFZSZWJXQmxjMTdqdUcxSTZibkNacWlMYkNfMXotU3pMZDc1SXlyNUhPZ2taN1ZfRlJrMmhzQVpBd0RPZzczcDgtMFZSQkZLVEdvUGFvazBwd29CUElIWlpvSWVBWFk?oc=5\" target=\"_blank\" rel=\"noopener\">Urbano Puebla · 09/11/2026</a>",
+        "data_publicacao": "2026-11-09"
+      },
+      {
+        "tema": "Política Agrícola & Crédito",
+        "id_noticia": "N10",
+        "titulo_noticia": "Productores sin reestructurar deudas en Tamaulipas",
+        "tendencia_noticia": "negativo",
+        "corpo_noticia": "Milhares de produtores em Tamaulipas continuam sem conseguir reestruturar suas dívidas agrícolas, limitando novos investimentos.",
+        "relevancia": "alta",
+        "horizonte": "3-6 meses",
+        "por_que_importa": "O endividamento bloqueia o acesso a novas linhas de crédito para aquisição de maquinário pesado.",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "negativo",
+            "descricao": "Corte de investimentos em frotas.",
+            "segmento_impactado": "Alta Potência (>170cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "negativo",
+            "descricao": "Adiamento de compras.",
+            "segmento_impactado": "Grande Porte (Classes 7+)"
+          },
+          "pulverizadores": {
+            "tendencia": "incerto",
+            "descricao": "",
+            "segmento_impactado": ""
+          },
+          "plantadeiras": {
+            "tendencia": "incerto",
+            "descricao": "",
+            "segmento_impactado": ""
+          }
+        },
+        "url_noticia": "https://news.google.com/rss/articles/CBMisgFBVV95cUxOZWEwSFRoMzFHSEZnaGhhWl84VXpCb0RsNmRfTmJaMlNFWF8yajZ0bkx0b3dScndUb2RuRzgtVDQ4UHU3NDg3SGZ2cVVnb0ZFSm9XS2h3ZUlGUV9XZzkyUUtmOW1wZUk5eG9MTzFYeVIxZDFzaXNvYTJXQkVoVjRkWWNUTWVCeWx4My1aTDBiOWZGc1BVcDM0Ukt2VFp2SXV0VlZLVVRDT2ZnZjFOejBkRWZn0gG3AUFVX3lxTE1ETm1yNmlvcEN5SU1HdmN1N2NnRmZ1dmNiYVhCUUI3djI0MnVjZjdRa1Q1VFFmOXRnYmhTanVsNVdjQTJWZnZOR25KMWlRMk1LRzQzZGw1WVlFUk9vZlpDcE5ZamJCaEc3QjM2YlpuYTR3V202cllLNW5mb1JoSmZYUS1lb09pQU8wSTZYRzc1alNJUUVoUTBKN3BLWHZJSF9GYWRkV1gxUjdUaE9yLWt1NDZGMWxsOA?oc=5",
+        "fonte_noticia": "<a href=\"https://news.google.com/rss/articles/CBMisgFBVV95cUxOZWEwSFRoMzFHSEZnaGhhWl84VXpCb0RsNmRfTmJaMlNFWF8yajZ0bkx0b3dScndUb2RuRzgtVDQ4UHU3NDg3SGZ2cVVnb0ZFSm9XS2h3ZUlGUV9XZzkyUUtmOW1wZUk5eG9MTzFYeVIxZDFzaXNvYTJXQkVoVjRkWWNUTWVCeWx4My1aTDBiOWZGc1BVcDM0Ukt2VFp2SXV0VlZLVVRDT2ZnZjFOejBkRWZn0gG3AUFVX3lxTE1ETm1yNmlvcEN5SU1HdmN1N2NnRmZ1dmNiYVhCUUI3djI0MnVjZjdRa1Q1VFFmOXRnYmhTanVsNVdjQTJWZnZOR25KMWlRMk1LRzQzZGw1WVlFUk9vZlpDcE5ZamJCaEc3QjM2YlpuYTR3V202cllLNW5mb1JoSmZYUS1lb09pQU8wSTZYRzc1alNJUUVoUTBKN3BLWHZJSF9GYWRkV1gxUjdUaE9yLWt1NDZGMWxsOA?oc=5\" target=\"_blank\" rel=\"noopener\">PostaMx · 08/11/2026</a>",
+        "data_publicacao": "2026-11-08"
+      },
+      {
+        "tema": "Comércio Exterior & Geopolítica",
+        "id_noticia": "N15",
+        "titulo_noticia": "Exportación de ganado mexicano a EU avanza lento",
+        "tendencia_noticia": "incerto",
+        "corpo_noticia": "A exportação de gado para os Estados Unidos registra recuperação lenta após a recente reabertura da fronteira.",
+        "relevancia": "media",
+        "horizonte": "3-6 meses",
+        "por_que_importa": "Reduz a entrada de divisas para pecuaristas, postergando investimentos em infraestrutura e tratores.",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "incerto",
+            "descricao": "Demanda contida no setor.",
+            "segmento_impactado": "Média Potência (80-170cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "incerto",
+            "descricao": "",
+            "segmento_impactado": ""
+          },
+          "pulverizadores": {
+            "tendencia": "incerto",
+            "descricao": "",
+            "segmento_impactado": ""
+          },
+          "plantadeiras": {
+            "tendencia": "incerto",
+            "descricao": "",
+            "segmento_impactado": ""
+          }
+        },
+        "url_noticia": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxPMW8tdGN5b09SZFJENHdsVTR1dlpEZEFLVzFVdzVuTUhOdTBpMTVxdE1lT0ZEQzhsRGlPdFJhdzdSMExhZVBzQWx2bVlDYVNUUFgyWUtJWkZ2REI3YjlqYnlNZm14Rkh1QUlxMld1X2V0RnBFRlc4Q29MajJ0TjBPMXVnaUpkVUtjUmpQWi16VUJHeW16REpNYWRfX2prOU1zSldFX2FsaWtUd1Y1WU8yeGN6RjhzaTZ6?oc=5",
+        "fonte_noticia": "<a href=\"https://news.google.com/rss/articles/CBMiuAFBVV95cUxPMW8tdGN5b09SZFJENHdsVTR1dlpEZEFLVzFVdzVuTUhOdTBpMTVxdE1lT0ZEQzhsRGlPdFJhdzdSMExhZVBzQWx2bVlDYVNUUFgyWUtJWkZ2REI3YjlqYnlNZm14Rkh1QUlxMld1X2V0RnBFRlc4Q29MajJ0TjBPMXVnaUpkVUtjUmpQWi16VUJHeW16REpNYWRfX2prOU1zSldFX2FsaWtUd1Y1WU8yeGN6RjhzaTZ6?oc=5\" target=\"_blank\" rel=\"noopener\">Medios OBSON · 06/11/2026</a>",
+        "data_publicacao": "2026-11-06"
+      },
+      {
+        "tema": "Clima & Safra",
+        "id_noticia": "N20",
+        "titulo_noticia": "Cae 63% la producción de frijol por sequía",
+        "tendencia_noticia": "negativo",
+        "corpo_noticia": "A falta de chuvas na região de Jiménez derrubou a produção de feijão em 63%, agravando a crise hídrica.",
+        "relevancia": "alta",
+        "horizonte": "imediato",
+        "por_que_importa": "Perdas drásticas de safra eliminam o caixa do produtor para compra de novas plantadeiras.",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "negativo",
+            "descricao": "Menor uso de tratores.",
+            "segmento_impactado": "Média Potência (80-170cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "negativo",
+            "descricao": "Demanda suspensa.",
+            "segmento_impactado": "Médio Porte (Classes 4-6)"
+          },
+          "pulverizadores": {
+            "tendencia": "negativo",
+            "descricao": "Redução de defensivos.",
+            "segmento_impactado": "Autopropelido"
+          },
+          "plantadeiras": {
+            "tendencia": "negativo",
+            "descricao": "Queda drástica de vendas.",
+            "segmento_impactado": "Pequeno Porte (<20 linhas)"
+          }
+        },
+        "url_noticia": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxPNTJZYzM2c2ZHYWZZN3NteURwcnp4STk3WVBUd0hWSHlBNGdUem9xZERvcTlScmhXcHhILVFVa2tXRGxwQUxldTJySEJkQjQ4azBXWVN1YXFGMkc5YWZHNkhWTWQtWnZ4MUJIM294SkVWYmdZUnJkaklSdnI0WnBfOTVHSlJZWDJjTmtRR2RnZF9aSmNBdEJtM2xaeWljVXhQY0dZMTNoTWdoMjV2bWxvdi1ydFU3Q2VlQW42N00tNnY?oc=5",
+        "fonte_noticia": "<a href=\"https://news.google.com/rss/articles/CBMiwAFBVV95cUxPNTJZYzM2c2ZHYWZZN3NteURwcnp4STk3WVBUd0hWSHlBNGdUem9xZERvcTlScmhXcHhILVFVa2tXRGxwQUxldTJySEJkQjQ4azBXWVN1YXFGMkc5YWZHNkhWTWQtWnZ4MUJIM294SkVWYmdZUnJkaklSdnI0WnBfOTVHSlJZWDJjTmtRR2RnZF9aSmNBdEJtM2xaeWljVXhQY0dZMTNoTWdoMjV2bWxvdi1ydFU3Q2VlQW42N00tNnY?oc=5\" target=\"_blank\" rel=\"noopener\">El Sol de México · 08/11/2026</a>",
+        "data_publicacao": "2026-11-08"
+      },
+      {
+        "tema": "Mercado & Produção",
+        "id_noticia": "N30",
+        "titulo_noticia": "Soledad financiará tractores y maquinaria agrícola",
+        "tendencia_noticia": "positivo",
+        "corpo_noticia": "O município de Soledad de Graciano Sánchez financiará a aquisição de tratores e maquinário para produtores.",
+        "relevancia": "alta",
+        "horizonte": "imediato",
+        "por_que_importa": "Cria uma linha de financiamento direta e localizada, impulsionando a venda de tratores.",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "positivo",
+            "descricao": "Financiamento direto impulsiona vendas.",
+            "segmento_impactado": "Média Potência (80-170cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "incerto",
+            "descricao": "",
+            "segmento_impactado": ""
+          },
+          "pulverizadores": {
+            "tendencia": "incerto",
+            "descricao": "",
+            "segmento_impactado": ""
+          },
+          "plantadeiras": {
+            "tendencia": "incerto",
+            "descricao": "",
+            "segmento_impactado": ""
+          }
+        },
+        "url_noticia": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxOYjB2cmdxTjktTHRmemdDdHMtOG96al9FSWVieWJaR2poXy00cXJMeEJOTmlmVjl5M0JXZUItUGI5d3lDYm1Wa0djYU9CYTdxUnVHanVLdjAzZHhUdEJtWTFtcVQ3dkhPM1NyNjhtaV9DWkFoTmhQWFFuUmlDUjZnYnl6MkNDLUNDMGQ4cURJVndiSGVOVmF1OTlXSTV0c0pjbFY4Ukx5eEVTWXlOMlJUQkZCWnlWcFY5aFJBM2VpWU5jcHdSNGxGanlndUV1VWpncVhR?oc=5",
+        "fonte_noticia": "<a href=\"https://news.google.com/rss/articles/CBMi0wFBVV95cUxOYjB2cmdxTjktTHRmemdDdHMtOG96al9FSWVieWJaR2poXy00cXJMeEJOTmlmVjl5M0JXZUItUGI5d3lDYm1Wa0djYU9CYTdxUnVHanVLdjAzZHhUdEJtWTFtcVQ3dkhPM1NyNjhtaV9DWkFoTmhQWFFuUmlDUjZnYnl6MkNDLUNDMGQ4cURJVndiSGVOVmF1OTlXSTV0c0pjbFY4Ukx5eEVTWXlOMlJUQkZCWnlWcFY5aFJBM2VpWU5jcHdSNGxGanlndUV1VWpncVhR?oc=5\" target=\"_blank\" rel=\"noopener\">El Sol de México · 05/11/2026</a>",
+        "data_publicacao": "2026-11-05"
+      },
+      {
+        "tema": "Mercado & Produção",
+        "id_noticia": "N28",
+        "titulo_noticia": "Maquinaria agrícola compara carga tributaria",
+        "tendencia_noticia": "incerto",
+        "corpo_noticia": "Associações comparam a carga tributária da maquinaria argentina com Brasil e México, alertando sobre baixa rentabilidade.",
+        "relevancia": "media",
+        "horizonte": "6-12 meses",
+        "por_que_importa": "Discute a competitividade de preços e a carga de impostos que afeta a renovação de frotas.",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "incerto",
+            "descricao": "Cautela na importação.",
+            "segmento_impactado": "Alta Potência (>170cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "incerto",
+            "descricao": "",
+            "segmento_impactado": ""
+          },
+          "pulverizadores": {
+            "tendencia": "incerto",
+            "descricao": "",
+            "segmento_impactado": ""
+          },
+          "plantadeiras": {
+            "tendencia": "incerto",
+            "descricao": "",
+            "segmento_impactado": ""
+          }
+        },
+        "url_noticia": "https://news.google.com/rss/articles/CBMiqgJBVV95cUxNZGluU2lEU1A1bEZaNTVRMjV3ZDVJeks3blRwRU1razBEYTNEaF9veklaRFE5dHdkSWpPUnhPSmtTZThFNjNUbjF4WjdHQy1FLU9ielA5Zjd5VDNKbkZ5cU1HQVRVU05CYW94SHJ2UU1JaVNtZzhoTFNURjJCUk9CMTQxM0ZzLWE2Z1NOX3U5Y3F4eUdIT1VXWFUtc2lKLXcxS2ZPOUQ3VGVzMzM5Qzg3STNNMURrTllEeEl5Zm5aZFdUczVRSlc4Q1dxSHlJVndoYk01R3VSR3hqWXdGVHVaLXh0UFJ6NWVydDVwSjE2TmhNTTdJbkVqMW1XZTFBek1RUnB3NGRVUG42RFFVUjAtWFJIaTNBdmRJbGxiSXdtNmNSeEYwejF3dkxB?oc=5",
+        "fonte_noticia": "<a href=\"https://news.google.com/rss/articles/CBMiqgJBVV95cUxNZGluU2lEU1A1bEZaNTVRMjV3ZDVJeks3blRwRU1razBEYTNEaF9veklaRFE5dHdkSWpPUnhPSmtTZThFNjNUbjF4WjdHQy1FLU9ielA5Zjd5VDNKbkZ5cU1HQVRVU05CYW94SHJ2UU1JaVNtZzhoTFNURjJCUk9CMTQxM0ZzLWE2Z1NOX3U5Y3F4eUdIT1VXWFUtc2lKLXcxS2ZPOUQ3VGVzMzM5Qzg3STNNMURrTllEeEl5Zm5aZFdUczVRSlc4Q1dxSHlJVndoYk01R3VSR3hqWXdGVHVaLXh0UFJ6NWVydDVwSjE2TmhNTTdJbkVqMW1XZTFBek1RUnB3NGRVUG42RFFVUjAtWFJIaTNBdmRJbGxiSXdtNmNSeEYwejF3dkxB?oc=5\" target=\"_blank\" rel=\"noopener\">Bichos de Campo · 06/11/2026</a>",
+        "data_publicacao": "2026-11-06"
+      }
+    ]
   }
 }
