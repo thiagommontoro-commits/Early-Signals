@@ -60,7 +60,7 @@ jobs:
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GEMINI_MODEL: gemini-2.5-flash
-          GEMINI_MODEL_RESERVA: gemini-2.5-flash-lite   # usado quando a cota diária do principal acaba
+          GEMINI_MODEL_RESERVA: gemini-3.5-flash-lite   # usado quando o principal esgota a cota ou sai do ar
           FORCAR_IA: ${{ github.event.inputs.forcar == 'true' && '1' || '0' }}
           # Fonte do preço para a receita (CEPEA é a única exposta pelo agrobr)
           EARLY_SIGNALS_PRECO_FONTE: cepea
