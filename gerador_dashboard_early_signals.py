@@ -2,7 +2,14 @@
 """
 gerador_dashboard_early_signals.py   ←←← SUBSTITUI o arquivo que já existe
 ==========================================================================
-VERSÃO: v8 (mais rápido)
+VERSÃO: v9 (corrige notícias vazias / cache não atualizado)
+  v9 — CORREÇÕES:
+  • Não descarta TODAS as notícias quando o SDK não devolve grounding_metadata
+    (era a causa principal de "0 válidas" -> cache não gravado -> dashboard vazio).
+  • Data ausente: tenta extrair da URL (/2026/11/09/); notícia com URL não é perdida.
+  • Cache gravado mesmo com 1 notícia; se a nova rodada vier pior, MANTÉM as notícias
+    do cache anterior (dashboard nunca fica vazio).
+  • Diagnóstico no terminal: caminho do cache, motivos de descarte agrupados.
 
   v8 — VELOCIDADE (v7 levava ~30 min):
   • Países em PARALELO (PAISES_EM_PARALELO = 4) em vez de um por vez.
@@ -46,7 +53,7 @@ from render_commodities import gerar_bloco_commodities, CSS_COMMODITIES
 from modulo_credito_rural_deepdive import processar_credito_rural
 from render_credito_rural import gerar_bloco_credito_rural, CSS_CREDITO_RURAL
 
-CACHE_VERSAO = "v8"
+CACHE_VERSAO = "v8"   # mantido: reaproveita o cache existente
 
 TRANSLATIONS = {
     "pt": {
@@ -568,6 +575,17 @@ def _parse_data(valor):
     return None
 
 
+def _data_da_url(url):
+    m = re.search(r"/(20\d{2})[/-](\d{1,2})[/-](\d{1,2})(?:/|-|$)", str(url or ""))
+    if not m:
+        m2 = re.search(r"(20\d{2})(\d{2})(\d{2})", str(url or ""))
+        m = m2
+    if m:
+        try:
+            return datetime.date(int(m.group(1)), int(m.group(2)), int(m.group(3)))
+        except ValueError:
+            return None
+    return None
 def _filtrar_noticias_recentes(noticias, now):
     hoje = now.date()
     corte = hoje - datetime.timedelta(days=JANELA_NOTICIAS_DIAS)
@@ -576,10 +594,13 @@ def _filtrar_noticias_recentes(noticias, now):
         if not isinstance(n, dict) or not str(n.get("titulo_noticia", "")).strip() \
                 or n.get("titulo_noticia") == "...":
             continue
-        d = _parse_data(n.get("data_publicacao"))
+        d = _parse_data(n.get("data_publicacao")) or _data_da_url(n.get("url_noticia"))
         titulo = str(n.get("titulo_noticia"))[:60]
+        if d is None and str(n.get("url_noticia", "")).startswith("http"):
+            d = hoje          # tem link verificável, mas sem data: aceita como "recente"
+            n["data_aproximada"] = True
         if d is None:
-            descartadas.append((titulo, f"sem data ('{n.get('data_publicacao')}')"))
+            descartadas.append((titulo, f"sem data e sem URL ('{n.get('data_publicacao')}')"))
         elif d > hoje + datetime.timedelta(days=1):
             descartadas.append((titulo, f"data futura {d:%d/%m/%Y}"))
         elif d < corte:
@@ -676,11 +697,15 @@ def _gerar_pais(client, pais, contexto_oficial, now, script_dir):
 
             consultas, fontes = _info_pesquisa(resp)
             brutas = dados.get("noticias", []) or []
+            validas, descartadas = _filtrar_noticias_recentes(brutas, now)
             if not consultas and not fontes:
-                validas, descartadas = [], [(str(n.get("titulo_noticia", ""))[:60], "IA não pesquisou no Google")
-                                             for n in brutas if isinstance(n, dict)]
-            else:
-                validas, descartadas = _filtrar_noticias_recentes(brutas, now)
+                # v9: o SDK às vezes não devolve grounding_metadata mesmo pesquisando.
+                # Antes isso zerava TODAS as notícias. Agora só exige URL + data recente.
+                print(f"      ℹ {pais.upper()}: sem metadados de pesquisa; validando por URL/data.")
+                com_url = [n for n in validas if str(n.get("url_noticia", "")).startswith("http")]
+                descartadas += [(str(n.get("titulo_noticia", ""))[:60], "sem URL e sem prova de pesquisa")
+                                for n in validas if n not in com_url]
+                validas = com_url
 
             print(f"   {pais.upper()} tentativa {tentativa}: {time.time() - t1:.0f}s | {len(consultas)} buscas | "
                   f"{len(brutas)} recebidas | {len(validas)} válidas (aceita com {aceitar})")
@@ -750,6 +775,13 @@ def atualizar_dados_com_ia(dados_path, script_dir, contexto_oficial=None):
     cache_path = script_dir / f"cache_dados_ia_{CACHE_VERSAO}.json"
 
     cache = {}
+    print(f"🗂  Cache: {cache_path}  (existe: {cache_path.exists()})")
+    cache_disco = {}
+    if cache_path.exists():
+        try:
+            cache_disco = json.loads(cache_path.read_text(encoding="utf-8"))
+        except Exception:
+            cache_disco = {}
     if cache_path.exists() and not FORCAR_ATUALIZACAO:
         try:
             cache = json.loads(cache_path.read_text(encoding="utf-8"))
@@ -758,6 +790,10 @@ def atualizar_dados_com_ia(dados_path, script_dir, contexto_oficial=None):
     elif FORCAR_ATUALIZACAO:
         print("♻️  --forcar ativo: cache ignorado, todos os países serão regerados.")
 
+    def noticias_cache_antigo(pais):
+        item = cache.get(pais) or cache_disco.get(pais) or {}
+        validas, _ = _filtrar_noticias_recentes((item.get("dados") or {}).get("noticias", []), now)
+        return validas, item.get("dados")
     def cache_valido(pais):
         item = cache.get(pais)
         if not item:
@@ -824,10 +860,22 @@ def atualizar_dados_com_ia(dados_path, script_dir, contexto_oficial=None):
                     dados_pais = erro_pais(pais, "Falha na comunicação com a IA nesta execução.")
                 else:
                     dados_pais = _pos_processar_pais(pais, dados_pais)
-                    if len(dados_pais.get("noticias", [])) >= MINIMO_NOTICIAS_RECENTES:
+                    novas = dados_pais.get("noticias", [])
+                    antigas, dados_antigos = noticias_cache_antigo(pais)
+                    if len(novas) < len(antigas):
+                        # v9: rodada pior que a anterior -> mantém notícias/radar do cache
+                        print(f"   ↩ {pais.upper()}: {len(novas)} nova(s) < {len(antigas)} no cache; "
+                              f"mantendo notícias anteriores.")
+                        dados_pais["noticias"] = antigas
+                        if dados_antigos and dados_antigos.get("sintese_estrategica"):
+                            dados_pais["sintese_estrategica"] = dados_antigos["sintese_estrategica"]
+                    if dados_pais.get("noticias"):
+                        if FORCAR_ATUALIZACAO and not cache:
+                            cache.update({k: v for k, v in cache_disco.items() if k != pais})
                         cache[pais] = {"gerado_em": now.isoformat(timespec="seconds"), "dados": dados_pais}
                         cache_path.write_text(json.dumps(cache, ensure_ascii=False, indent=2), encoding="utf-8")
-                    else:
+                        print(f"   💾 {pais.upper()}: cache gravado ({len(dados_pais['noticias'])} notícias)")
+                    if len(dados_pais.get("noticias", [])) < MINIMO_NOTICIAS_RECENTES:
                         falhas.append(pais)
                 resultado[pais] = dados_pais
                 resumo[pais] = (status.get("modo"), len(dados_pais.get("noticias", [])))
@@ -975,7 +1023,7 @@ if __name__ == "__main__":
     output_arquivo = script_dir / "index.html"
     dados_arquivo = script_dir / "dados_paises.json"
 
-    print("🚀 Iniciando a geração do dashboard 'Early Signals' (v8)...")
+    print("🚀 Iniciando a geração do dashboard 'Early Signals' (v9)...")
     try:
         if not template_arquivo.exists():
             raise FileNotFoundError(f"Template '{template_arquivo.name}' não encontrado em '{script_dir}'")
