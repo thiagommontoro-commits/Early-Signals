@@ -2,39 +2,23 @@
 """
 gerador_dashboard_early_signals.py   ←←← SUBSTITUI o arquivo que já existe
 ==========================================================================
-VERSÃO: v7 (notícias estratégicas + Radar Estratégico)
+VERSÃO: v8 (mais rápido)
 
-  v7 — notícias mais inteligentes:
-  • Pauta por tema: 4 ESTRATÉGICOS em todos os países (Política & Eleições,
-    Política Agrícola & Crédito, Comércio Exterior & Geopolítica, Clima & Safra)
-    + culturas no Brasil (Soja, Milho, Café, Cana, Algodão, Trigo) ou
-    2 de "Mercado & Produção" nos demais países. Edite TEMAS_ESTRATEGICOS.
-  • Cada notícia traz: "Por que importa" (efeito de 2ª ordem p/ máquinas),
-    relevância (alta/média/baixa) e horizonte (imediato / 3-6 / 6-12 meses);
-    cards ordenados por relevância.
-  • Radar Estratégico por país (acima das notícias): manchete, termômetro de
-    demanda 6 meses, leitura causa->efeito, riscos, oportunidades, o que monitorar.
-  • Política tratada de forma factual e apartidária.
+  v8 — VELOCIDADE (v7 levava ~30 min):
+  • Países em PARALELO (PAISES_EM_PARALELO = 4) em vez de um por vez.
+  • "Thinking" do Gemini 2.5 limitado (ORCAMENTO_RACIOCINIO = 1024 tokens).
+  • Aceita a 1ª resposta com >= 60% das notícias (v7 exigia quase todas e refazia).
+  • Máx. 2 tentativas com pesquisa (eram 3); pausas fixas removidas.
+  • Timeout de 240s por chamada; tempo de cada país e total no terminal.
+  • Cache por país vale 3 dias: rodar de novo no mesmo período é quase instantâneo.
 
-VERSÃO anterior: v6 (corrige notícias do mês corrente não aparecendo)
+  v7 — notícias estratégicas: temas Política & Eleições, Política Agrícola &
+  Crédito, Comércio Exterior & Geopolítica, Clima & Safra (+ culturas no BR);
+  "Por que importa", relevância, horizonte; Radar Estratégico por país.
 
-  v6 — causas encontradas na v5 e correções:
-  1. Cache MENSAL ('cache_dados_ia_v5_AAAA_MM.json'): a 1ª execução do mês
-     congelava as notícias até o fim do mês. -> Agora cache POR PAÍS, válido por
-     CACHE_VALIDADE_DIAS e só gravado se o país tiver notícias recentes.
-  2. Fallback "sem pesquisa" deixava a IA escrever notícias de MEMÓRIA (antigas).
-     -> Esse modo agora só gera fatores; notícias dele são descartadas.
-  3. Nenhuma checagem de data/pesquisa. -> Cada notícia precisa de
-     'data_publicacao' dentro de JANELA_NOTICIAS_DIAS e a resposta precisa
-     comprovar busca Google (grounding_metadata).
-  4. Ícones do Brasil por posição (desalinhavam se faltasse um tema). -> por 'tema'.
-  5. Diagnóstico: resumo por país no terminal, respostas brutas em debug_ia/,
-     aviso se placeholders {{BLOCO_NOTICIAS_XX}} não existirem no template.
-  6. Forçar regeração: python gerador_dashboard_early_signals.py --forcar
-     (ou variável de ambiente FORCAR_IA=1).
-
-  Mantidos da v5: dados oficiais BCB no prompt, um país por vez, comparação
-  mês a mês, selo "vs <mês>", impactos por linha de máquinas.
+  v6 — notícias do mês: data de publicação obrigatória (janela 30 dias),
+  prova de pesquisa Google, sem notícias "de memória", pasta debug_ia/.
+  Forçar regeração: python gerador_dashboard_early_signals.py --forcar
 """
 import os
 import re
@@ -62,7 +46,7 @@ from render_commodities import gerar_bloco_commodities, CSS_COMMODITIES
 from modulo_credito_rural_deepdive import processar_credito_rural
 from render_credito_rural import gerar_bloco_credito_rural, CSS_CREDITO_RURAL
 
-CACHE_VERSAO = "v7"
+CACHE_VERSAO = "v8"
 
 TRANSLATIONS = {
     "pt": {
@@ -213,7 +197,6 @@ _TXT = {
 
 
 def _span_i18n(d):
-    """<span> com data-pt/en/es a partir de um dict; idiomas ausentes caem no PT."""
     pt = d.get("pt", "")
     attrs = " ".join(f'data-{l}="{d.get(l, pt)}"' for l in ("pt", "en", "es"))
     return f"<span {attrs}>{pt}</span>"
@@ -228,7 +211,6 @@ def _selo_tema(tema):
 
 
 def gerar_bloco_sintese(sintese):
-    """Radar Estratégico (resumo executivo do país) — fica acima das notícias."""
     if not isinstance(sintese, dict) or not str(sintese.get("manchete", "")).strip() \
             or sintese.get("manchete") == "...":
         return ""
@@ -259,7 +241,6 @@ def gerar_blocos_noticias(noticias_pais, codigo_pais="", sintese=None):
     radar = gerar_bloco_sintese(sintese)
     if not noticias_pais:
         return radar + f'<div class="news-grid"><p {i18n_attrs("no_news")}>{TRANSLATIONS["pt"]["no_news"]}</p></div>'
-    # Ordem: relevância alta primeiro; empate mantém a ordem pedida (estratégicos -> culturas).
     ordenadas = sorted(enumerate(noticias_pais),
                        key=lambda x: (_ORDEM_RELEVANCIA.get(str(x[1].get("relevancia", "")).lower(), 1), x[0]))
     html_output = radar + '<div class="news-grid">\n'
@@ -384,7 +365,6 @@ def _extrair_json(texto):
     try:
         return json.loads(bruto)
     except json.JSONDecodeError:
-        # v6: com pesquisa Google o Gemini às vezes deixa vírgula antes de } ou ]
         return json.loads(re.sub(r",\s*([}\]])", r"\1", bruto))
 
 
@@ -402,8 +382,7 @@ NOMES_PAISES = {"br": "Brasil", "ar": "Argentina", "cl": "Chile", "uy": "Uruguai
                 "py": "Paraguai", "pe": "Peru", "bo": "Bolívia", "mx": "México"}
 TEMAS_BR = ["Soja", "Milho", "Café", "Cana", "Algodão", "Trigo"]
 
-# v7: pauta ESTRATÉGICA — além das culturas, o que mexe com a decisão de compra
-# de máquinas: política, política agrícola, comércio global, clima.
+# Pauta ESTRATÉGICA — o que mexe com a decisão de compra de máquinas.
 # (tema, foco de pesquisa para o Gemini)
 TEMAS_ESTRATEGICOS = [
     ("Política & Eleições",
@@ -425,7 +404,7 @@ ICONES_TEMA = {
     "Política & Eleições": "🗳️", "Política Agrícola & Crédito": "🏦",
     "Comércio Exterior & Geopolítica": "🌐", "Clima & Safra": "🌦️", "Mercado & Produção": "🚜",
 }
-ROTULOS_TEMA = {  # i18n dos selos de tema
+ROTULOS_TEMA = {
     "Política & Eleições": {"en": "Politics & Elections", "es": "Política y Elecciones"},
     "Política Agrícola & Crédito": {"en": "Ag Policy & Credit", "es": "Política Agrícola y Crédito"},
     "Comércio Exterior & Geopolítica": {"en": "Trade & Geopolitics", "es": "Comercio Exterior y Geopolítica"},
@@ -439,11 +418,9 @@ TEMAS_ESTRATEGICOS_NOMES = [t for t, _ in TEMAS_ESTRATEGICOS]
 
 
 def _temas_pais(pais):
-    """Lista ordenada de temas pedidos à IA para o país."""
-    estrategicos = TEMAS_ESTRATEGICOS_NOMES
     if pais == "br":
-        return estrategicos + TEMAS_BR
-    return estrategicos + ["Mercado & Produção"] * N_NOTICIAS_MERCADO_OUTROS
+        return TEMAS_ESTRATEGICOS_NOMES + TEMAS_BR
+    return TEMAS_ESTRATEGICOS_NOMES + ["Mercado & Produção"] * N_NOTICIAS_MERCADO_OUTROS
 
 
 def _n_noticias(pais):
@@ -451,19 +428,26 @@ def _n_noticias(pais):
 
 
 # =============================================================================
-# CONFIGURAÇÃO DAS NOTÍCIAS (v6)
+# CONFIGURAÇÃO DA IA / NOTÍCIAS
 # =============================================================================
 MODELO_GEMINI = os.environ.get("GEMINI_MODEL", "gemini-2.5-flash")
 JANELA_NOTICIAS_DIAS = 30        # notícia só entra se publicada nos últimos N dias
-MINIMO_NOTICIAS_RECENTES = 2     # abaixo disso o país é tentado de novo
+MINIMO_NOTICIAS_RECENTES = 2     # abaixo disso o país não vai para o cache
 CACHE_VALIDADE_DIAS = 3          # país em cache é reaproveitado por no máx. N dias
-TENTATIVAS_COM_PESQUISA = 3
-DEBUG_IA = True                  # grava as respostas brutas da IA em /debug_ia
 FORCAR_ATUALIZACAO = ("--forcar" in sys.argv) or os.environ.get("FORCAR_IA") == "1"
+DEBUG_IA = True                  # grava as respostas brutas da IA em /debug_ia
+
+# --- v8: VELOCIDADE ----------------------------------------------------------
+PAISES_EM_PARALELO = 4           # países processados ao mesmo tempo (1 = sequencial)
+TENTATIVAS_COM_PESQUISA = 2      # era 3
+ACEITAR_PERCENTUAL = 0.6         # aceita a 1ª resposta com >= 60% das notícias pedidas
+                                 # (v7 exigia quase 100% -> refazia quase sempre)
+ORCAMENTO_RACIOCINIO = 1024      # "thinking" do Gemini 2.5 (tokens). 0 = desliga; -1 = automático
+TIMEOUT_CHAMADA_SEG = 240        # corta chamada travada em vez de esperar indefinidamente
+MAX_TOKENS_RESPOSTA = 16384
 
 
 def _prompt_pais(pais, contexto_oficial, now):
-    """Prompt de UM país. v6: exige data de publicação e URL de cada notícia."""
     meses_pt = TRANSLATIONS["pt"]["months"]
     year, month = now.year, now.month
     mes_nome, mes_ant = meses_pt[month - 1], meses_pt[(month - 2) % 12]
@@ -480,8 +464,6 @@ def _prompt_pais(pais, contexto_oficial, now):
         "impacto_produtos": {p: {"tendencia": "positivo|negativo|incerto", "descricao": "...", "segmento_impactado": "..."}
                              for p in ["tratores", "colheitadeiras", "pulverizadores", "plantadeiras"]}
     }
-    noticias = [{"tema": t, **base_noticia} for t in _temas_pais(pais)]
-
     estrutura = {
         "fatores_economicos": [{**f, "tendencia": "...", "direcao": "melhorando|piorando|estavel",
                                 "descricao": "...", "impactos": "...", "fonte": "..."} for f in FATORES_BASE[pais]],
@@ -489,7 +471,7 @@ def _prompt_pais(pais, contexto_oficial, now):
             "manchete": "...", "termometro": "positivo|negativo|incerto", "leitura": "...",
             "riscos": ["..."], "oportunidades": ["..."], "monitorar": ["..."]
         },
-        "noticias": noticias,
+        "noticias": [{"tema": t, **base_noticia} for t in _temas_pais(pais)],
     }
 
     bloco_oficial = ""
@@ -505,14 +487,14 @@ def _prompt_pais(pais, contexto_oficial, now):
 
     focos = "\n".join(f"         • {t}: {f}" for t, f in TEMAS_ESTRATEGICOS)
     if pais == "br":
-        regra_br = ("Retorne uma notícia para cada `tema` do JSON, na ordem, mantendo o campo `tema`: "
-                    "primeiro os 4 temas estratégicos, depois as culturas (Soja, Milho, Café, Cana, "
-                    "Algodão, Trigo). Nas culturas, prefira o fato que muda a renda/decisão do produtor "
-                    "(preço, custo, safra, demanda externa) e não a cotação do dia.")
+        regra = ("Retorne uma notícia para cada `tema` do JSON, na ordem, mantendo o campo `tema`: "
+                 "primeiro os 4 temas estratégicos, depois as culturas (Soja, Milho, Café, Cana, "
+                 "Algodão, Trigo). Nas culturas, prefira o fato que muda a renda/decisão do produtor "
+                 "(preço, custo, safra, demanda externa) e não a cotação do dia.")
     else:
-        regra_br = (f"Retorne uma notícia por `tema` do JSON, mantendo o campo `tema`: os 4 temas "
-                    f"estratégicos e {N_NOTICIAS_MERCADO_OUTROS} de 'Mercado & Produção' (culturas e "
-                    f"cadeias mais relevantes de {NOMES_PAISES[pais]}, sem repetir assunto).")
+        regra = (f"Retorne uma notícia por `tema` do JSON, mantendo o campo `tema`: os 4 temas "
+                 f"estratégicos e {N_NOTICIAS_MERCADO_OUTROS} de 'Mercado & Produção' (culturas e "
+                 f"cadeias mais relevantes de {NOMES_PAISES[pais]}, sem repetir assunto).")
 
     return f"""
     Você é Analista de Inteligência de Mercado Sênior do setor de máquinas agrícolas
@@ -522,12 +504,12 @@ def _prompt_pais(pais, contexto_oficial, now):
     HOJE É {hoje_txt}. País: {NOMES_PAISES[pais].upper()}. Relatório de {mes_nome}/{year}.
 {bloco_oficial}
     PESQUISA E ATUALIDADE (OBRIGATÓRIO):
-    - FAÇA PESQUISAS NO GOOGLE antes de responder, incluindo "{mes_nome} {year}" nos termos
-      de busca (ex.: "{NOMES_PAISES[pais]} soja {mes_nome.lower()} {year}").
+    - FAÇA PESQUISAS NO GOOGLE antes de responder, incluindo "{mes_nome} {year}" nos termos de busca.
+      Seja objetivo: poucas buscas bem direcionadas por tema.
     - Use SOMENTE notícias publicadas entre {data_corte} e {hoje_txt}, priorizando {mes_nome}/{year}.
       NÃO use seu conhecimento de memória: notícias sem data comprovada serão descartadas.
     - "data_publicacao" = data real da publicação no formato AAAA-MM-DD.
-    - "url_noticia" = link da matéria encontrada na pesquisa. "fonte_noticia" = veículo real.
+    - "url_noticia" = link da matéria encontrada. "fonte_noticia" = veículo real.
     - Se não achar notícia recente para um tema, OMITA essa notícia (não invente, não use antiga).
 
     COMPARAÇÃO MÊS A MÊS: compare {mes_nome}/{year} com {mes_ant}/{ano_ant}. Se o dado oficial
@@ -541,34 +523,32 @@ def _prompt_pais(pais, contexto_oficial, now):
          e se a compra tende a ACELERAR, ADIAR ou ficar NEUTRA.
        - "Margens Produtor": quais culturas melhoraram e quais pioraram ante {mes_ant}.
 
-    2. noticias: REAIS, RECENTES e ESTRATÉGICAS. {regra_br}
+    2. noticias: REAIS, RECENTES e ESTRATÉGICAS. {regra}
        Foco de pesquisa dos temas estratégicos:
 {focos}
-       CRITÉRIO DE ESCOLHA: entre as notícias do período, escolha a que MAIS altera a decisão de
-       investimento do produtor em máquinas (renda, crédito, confiança, custo, prazo). Evite notícia
-       repetida, institucional, nota de evento ou cotação diária sem consequência.
+       CRITÉRIO DE ESCOLHA: escolha a notícia que MAIS altera a decisão de investimento do
+       produtor em máquinas (renda, crédito, confiança, custo, prazo). Evite notícia repetida,
+       institucional, nota de evento ou cotação diária sem consequência.
        Política: relate FATOS e consequências econômicas para o agro de forma NEUTRA e apartidária
        (sem opinião sobre partidos/candidatos). Se não houver eleição no período, use o tema
        para a agenda política/fiscal/regulatória que mais afeta o agro.
        - "titulo_noticia" (máx 15 palavras), "corpo_noticia" (máx 40 palavras, o fato + número-chave).
-       - "por_que_importa": máx 30 palavras — efeito de 2ª ordem para a indústria de máquinas
-         (ex.: "renegociação libera limite de crédito -> destrava compras de plantadeiras no 1º tri").
+       - "por_que_importa": máx 30 palavras — efeito de 2ª ordem para a indústria de máquinas.
        - "relevancia": 'alta' | 'media' | 'baixa' para a demanda de máquinas.
-       - "horizonte": quando o efeito chega na venda: 'imediato' | '3-6 meses' | '6-12 meses'.
+       - "horizonte": 'imediato' | '3-6 meses' | '6-12 meses'.
        - "impacto_produtos": "tendencia", "descricao" (máx 20 palavras), "segmento_impactado":
          tratores 'Baixa Potência (<80cv)'|'Média Potência (80-170cv)'|'Alta Potência (>170cv)';
          plantadeiras 'Pequeno Porte (<20 linhas)'|'Grande Porte (>20 linhas)';
          colheitadeiras 'Médio Porte (Classes 4-6)'|'Grande Porte (Classes 7+)';
          pulverizadores 'De Arrasto'|'Autopropelido'; ou "".
 
-    3. sintese_estrategica (escreva DEPOIS de pesquisar tudo; é o resumo executivo do país):
+    3. sintese_estrategica (resumo executivo do país, escrito DEPOIS de pesquisar):
        - "manchete": máx 15 palavras, a mensagem central do mês para quem vende máquinas.
-       - "termometro": 'positivo'|'negativo'|'incerto' para a demanda de máquinas nos próximos 6 meses.
+       - "termometro": 'positivo'|'negativo'|'incerto' para a demanda nos próximos 6 meses.
        - "leitura": máx 60 palavras conectando política, crédito, clima, preços e câmbio (causa -> efeito).
        - "riscos", "oportunidades", "monitorar": 2 a 3 itens cada, máx 15 palavras por item;
-         "monitorar" = eventos/datas dos próximos 30-60 dias (votações, Plano Safra, relatórios de
-         safra, decisões de juros, negociações comerciais).
-       - Use apenas fatos das notícias/fatores pesquisados; nada de memória.
+         "monitorar" = eventos/datas dos próximos 30-60 dias.
+       - Use apenas fatos pesquisados; nada de memória.
 
     Responda SOMENTE com o JSON abaixo preenchido, sem texto antes/depois e sem markdown.
     {json.dumps(estrutura, indent=2, ensure_ascii=False)}
@@ -576,10 +556,9 @@ def _prompt_pais(pais, contexto_oficial, now):
 
 
 # -----------------------------------------------------------------------------
-# Validações v6
+# Validações
 # -----------------------------------------------------------------------------
 def _parse_data(valor):
-    """Aceita AAAA-MM-DD, DD/MM/AAAA ou DD-MM-AAAA. Retorna date ou None."""
     s = str(valor or "").strip()[:10]
     for fmt in ("%Y-%m-%d", "%d/%m/%Y", "%d-%m-%Y", "%Y/%m/%d"):
         try:
@@ -590,7 +569,6 @@ def _parse_data(valor):
 
 
 def _filtrar_noticias_recentes(noticias, now):
-    """Mantém só notícias com data válida dentro da janela. Retorna (validas, descartadas)."""
     hoje = now.date()
     corte = hoje - datetime.timedelta(days=JANELA_NOTICIAS_DIAS)
     validas, descartadas = [], []
@@ -613,7 +591,6 @@ def _filtrar_noticias_recentes(noticias, now):
 
 
 def _info_pesquisa(resp):
-    """Lê o grounding_metadata: quais buscas o Gemini realmente fez e quantas fontes usou."""
     consultas, fontes = [], []
     try:
         for cand in (resp.candidates or []):
@@ -643,49 +620,56 @@ def _salvar_debug(script_dir, pais, rotulo, tentativa, texto):
     try:
         pasta = script_dir / "debug_ia"
         pasta.mkdir(exist_ok=True)
-        nome = f"{pais}_{rotulo.replace(' ', '_')}_{tentativa}.txt"
-        (pasta / nome).write_text(texto or "(resposta vazia)", encoding="utf-8")
+        (pasta / f"{pais}_{rotulo}_{tentativa}.txt").write_text(texto or "(resposta vazia)", encoding="utf-8")
     except Exception:
         pass
 
 
-def _espera_erro(e, tentativa):
-    """429 / cota esgotada pede espera longa; outros erros, espera curta."""
+def _espera_erro(e, tentativa, pais=""):
     msg = str(e)
     if "429" in msg or "RESOURCE_EXHAUSTED" in msg or "quota" in msg.lower():
-        print("      ⏳ Limite de requisições do Gemini (429). Aguardando 60s...")
+        print(f"      ⏳ {pais.upper()}: limite de requisições do Gemini (429). Aguardando 60s... "
+              f"(se acontecer sempre, reduza PAISES_EM_PARALELO)")
         return 60
-    return 5 * tentativa
+    return 3 * tentativa
+
+
+def _config_ia(com_pesquisa):
+    """Monta a config; o 'thinking' limitado é o maior ganho de tempo do Gemini 2.5."""
+    kw = dict(temperature=0.2, max_output_tokens=MAX_TOKENS_RESPOSTA)
+    if com_pesquisa:
+        kw["tools"] = [types.Tool(google_search=types.GoogleSearch())]
+    else:
+        kw["response_mime_type"] = "application/json"
+    try:
+        kw["thinking_config"] = types.ThinkingConfig(thinking_budget=ORCAMENTO_RACIOCINIO)
+        return types.GenerateContentConfig(**kw)
+    except Exception:          # biblioteca antiga sem ThinkingConfig
+        kw.pop("thinking_config", None)
+        return types.GenerateContentConfig(**kw)
 
 
 def _gerar_pais(client, pais, contexto_oficial, now, script_dir):
     """
-    v6: gera UM país.
-      1) Até 3 tentativas COM pesquisa Google. Cada resposta precisa:
-         - ter JSON válido com fatores;
-         - comprovar que a pesquisa foi feita (grounding_metadata);
-         - ter notícias com data_publicacao dentro da janela.
-         Fica com a MELHOR tentativa (mais notícias recentes).
-      2) Só se nada vier com pesquisa: chamada SEM pesquisa apenas para os fatores.
-         Notícias desse modo são DESCARTADAS (eram inventadas/antigas — causa do bug).
-    Retorna (dados | None, status_dict).
+    Gera UM país: até TENTATIVAS_COM_PESQUISA chamadas com Google; para na 1ª resposta
+    com >= ACEITAR_PERCENTUAL das notícias válidas. Se nada vier com pesquisa, gera só
+    os fatores sem pesquisa (notícias e radar descartados). Retorna (dados|None, status).
     """
+    t0 = time.time()
     prompt = _prompt_pais(pais, contexto_oficial, now)
     alvo = _n_noticias(pais)
+    aceitar = max(MINIMO_NOTICIAS_RECENTES, int(alvo * ACEITAR_PERCENTUAL + 0.999))
     melhor, melhor_status = None, None
-
-    cfg_pesquisa = types.GenerateContentConfig(
-        tools=[types.Tool(google_search=types.GoogleSearch())],
-        temperature=0.2, max_output_tokens=32768)
+    cfg_pesquisa = _config_ia(True)
 
     for tentativa in range(1, TENTATIVAS_COM_PESQUISA + 1):
         try:
+            t1 = time.time()
             resp = client.models.generate_content(model=MODELO_GEMINI, contents=prompt, config=cfg_pesquisa)
             texto = resp.text or ""
             _salvar_debug(script_dir, pais, "pesquisa", tentativa, texto)
-            fr = _finish_reason(resp)
-            if "MAX_TOKENS" in fr:
-                print(f"      ⚠ resposta cortada por limite de tokens (finish_reason={fr})")
+            if "MAX_TOKENS" in _finish_reason(resp):
+                print(f"      ⚠ {pais.upper()}: resposta cortada por limite de tokens")
             dados = _extrair_json(texto)
             if not isinstance(dados, dict) or not dados.get("fatores_economicos"):
                 raise ValueError("JSON sem fatores_economicos")
@@ -693,42 +677,35 @@ def _gerar_pais(client, pais, contexto_oficial, now, script_dir):
             consultas, fontes = _info_pesquisa(resp)
             brutas = dados.get("noticias", []) or []
             if not consultas and not fontes:
-                # Sem grounding = o modelo respondeu de memória -> notícias não confiáveis.
                 validas, descartadas = [], [(str(n.get("titulo_noticia", ""))[:60], "IA não pesquisou no Google")
                                              for n in brutas if isinstance(n, dict)]
             else:
                 validas, descartadas = _filtrar_noticias_recentes(brutas, now)
 
-            status = {"modo": "pesquisa", "tentativa": tentativa, "buscas": len(consultas),
-                      "fontes": len(fontes), "recebidas": len(brutas), "validas": len(validas),
-                      "descartadas": descartadas}
-            print(f"   {pais.upper()} tentativa {tentativa}: {len(consultas)} buscas Google, "
-                  f"{len(brutas)} notícias recebidas, {len(validas)} recentes válidas")
+            print(f"   {pais.upper()} tentativa {tentativa}: {time.time() - t1:.0f}s | {len(consultas)} buscas | "
+                  f"{len(brutas)} recebidas | {len(validas)} válidas (aceita com {aceitar})")
             for t, motivo in descartadas:
-                print(f"      ✂ descartada: {t} → {motivo}")
+                print(f"      ✂ {pais.upper()} descartada: {t} → {motivo}")
 
             dados["noticias"] = validas
             if not validas:
                 dados.pop("sintese_estrategica", None)
+            status = {"modo": "pesquisa", "validas": len(validas)}
             if melhor is None or len(validas) > len(melhor["noticias"]):
                 melhor, melhor_status = dados, status
-            if len(validas) >= min(alvo, MINIMO_NOTICIAS_RECENTES) and len(validas) >= alvo - 1:
-                break  # bom o suficiente
+            if len(validas) >= aceitar:
+                break
         except Exception as e:
             print(f"   ⚠ {pais.upper()} (pesquisa, tentativa {tentativa}): {e}")
-            time.sleep(_espera_erro(e, tentativa))
-            continue
-        time.sleep(5)
+            time.sleep(_espera_erro(e, tentativa, pais))
 
     if melhor is not None:
         n = len(melhor["noticias"])
         icone = "✅" if n >= MINIMO_NOTICIAS_RECENTES else "⚠"
-        print(f"   {icone} {pais.upper()}: {len(melhor['fatores_economicos'])} fatores, {n} notícias recentes")
+        print(f"   {icone} {pais.upper()} concluído em {time.time() - t0:.0f}s: {n} notícias recentes")
         return melhor, melhor_status
 
-    # Fallback: só fatores, SEM notícias (nunca mais notícia de memória no dashboard).
-    cfg_sem = types.GenerateContentConfig(response_mime_type="application/json",
-                                          temperature=0.2, max_output_tokens=32768)
+    cfg_sem = _config_ia(False)
     for tentativa in range(1, 3):
         try:
             resp = client.models.generate_content(model=MODELO_GEMINI, contents=prompt, config=cfg_sem)
@@ -738,16 +715,15 @@ def _gerar_pais(client, pais, contexto_oficial, now, script_dir):
                 dados["noticias"] = []
                 dados.pop("sintese_estrategica", None)
                 print(f"   ⚠ {pais.upper()}: fatores sem pesquisa; notícias NÃO exibidas (sem fonte verificável)")
-                return dados, {"modo": "sem_pesquisa", "validas": 0, "descartadas": []}
+                return dados, {"modo": "sem_pesquisa", "validas": 0}
         except Exception as e:
             print(f"   ⚠ {pais.upper()} (sem pesquisa, tentativa {tentativa}): {e}")
-            time.sleep(_espera_erro(e, tentativa))
+            time.sleep(_espera_erro(e, tentativa, pais))
     print(f"   ❌ {pais.upper()}: IA falhou em todos os modos.")
-    return None, {"modo": "falha", "validas": 0, "descartadas": []}
+    return None, {"modo": "falha", "validas": 0}
 
 
 def _pos_processar_pais(pais, dados_pais):
-    """Remove cards oficiais duplicados (BR) e põe a data na linha de fonte da notícia."""
     if pais == "br":
         dados_pais["fatores_economicos"] = [f for f in dados_pais.get("fatores_economicos", [])
                                             if f.get("titulo") not in TITULOS_OFICIAIS_BR]
@@ -765,16 +741,11 @@ def _pos_processar_pais(pais, dados_pais):
 
 def atualizar_dados_com_ia(dados_path, script_dir, contexto_oficial=None):
     """
-    v6 — por que as notícias de novembro não apareciam na v5:
-      (a) cache MENSAL: o 1º arquivo gerado no mês era reaproveitado em todas as
-          execuções seguintes, mesmo que tivesse notícias velhas/vazias;
-      (b) fallback "sem pesquisa": quando a busca falhava, o Gemini escrevia
-          notícias de MEMÓRIA (2024/2025) e elas passavam na validação;
-      (c) nenhuma checagem de data da notícia nem se a busca Google ocorreu;
-      (d) país que falhava ficava com notícias = [] -> "Nenhuma notícia disponível".
-    Agora: cache por país com validade em dias, só guarda país com notícias
-    recentes, exige data_publicacao e grounding, e aceita --forcar.
+    v8: países em PARALELO (PAISES_EM_PARALELO), 'thinking' limitado, aceita a 1ª
+    resposta boa, timeout por chamada. Cache por país (CACHE_VALIDADE_DIAS).
     """
+    from concurrent.futures import ThreadPoolExecutor, as_completed
+    inicio = time.time()
     now = datetime.datetime.now()
     cache_path = script_dir / f"cache_dados_ia_{CACHE_VERSAO}.json"
 
@@ -784,7 +755,6 @@ def atualizar_dados_com_ia(dados_path, script_dir, contexto_oficial=None):
             cache = json.loads(cache_path.read_text(encoding="utf-8"))
         except Exception as e:
             print(f"⚠️ Cache inválido ({e}). Ignorando.")
-            cache = {}
     elif FORCAR_ATUALIZACAO:
         print("♻️  --forcar ativo: cache ignorado, todos os países serão regerados.")
 
@@ -816,39 +786,59 @@ def atualizar_dados_com_ia(dados_path, script_dir, contexto_oficial=None):
                                          ensure_ascii=False, indent=2), encoding="utf-8")
         return False
 
-    client = genai.Client(api_key=os.environ.get("GEMINI_API_KEY"))
-    print(f"🤖 Gerando análises país a país ({len(FATORES_BASE)} países) | modelo {MODELO_GEMINI} | "
-          f"janela de notícias: {JANELA_NOTICIAS_DIAS} dias")
+    try:
+        client = genai.Client(api_key=os.environ.get("GEMINI_API_KEY"),
+                              http_options=types.HttpOptions(timeout=TIMEOUT_CHAMADA_SEG * 1000))
+    except Exception:
+        client = genai.Client(api_key=os.environ.get("GEMINI_API_KEY"))
 
-    resultado, resumo, falhas = {}, [], []
+    resultado, resumo, falhas = {}, {}, []
+    pendentes = []
     for pais in FATORES_BASE:
         em_cache = cache_valido(pais)
         if em_cache is not None:
             print(f"   🧠 {pais.upper()}: cache recente reaproveitado.")
             resultado[pais] = em_cache
-            resumo.append((pais, "cache", len(em_cache.get("noticias", []))))
-            continue
-
-        dados_pais, status = _gerar_pais(client, pais, contexto_oficial, now, script_dir)
-        if dados_pais is None:
-            falhas.append(pais)
-            dados_pais = erro_pais(pais, "Falha na comunicação com a IA nesta execução.")
+            resumo[pais] = ("cache", len(em_cache.get("noticias", [])))
         else:
-            dados_pais = _pos_processar_pais(pais, dados_pais)
-            if len(dados_pais.get("noticias", [])) >= MINIMO_NOTICIAS_RECENTES:
-                cache[pais] = {"gerado_em": now.isoformat(timespec="seconds"), "dados": dados_pais}
-                cache_path.write_text(json.dumps(cache, ensure_ascii=False, indent=2), encoding="utf-8")
-            else:
-                falhas.append(pais)
-        resultado[pais] = dados_pais
-        resumo.append((pais, status.get("modo"), len(dados_pais.get("noticias", []))))
-        time.sleep(4)  # respeita limite de requisições por minuto do Gemini
+            pendentes.append(pais)
 
+    if pendentes:
+        print(f"🤖 Gerando {len(pendentes)} país(es) | {PAISES_EM_PARALELO} em paralelo | modelo {MODELO_GEMINI} | "
+              f"janela {JANELA_NOTICIAS_DIAS} dias")
+        with ThreadPoolExecutor(max_workers=max(1, PAISES_EM_PARALELO)) as ex:
+            futuros = {}
+            for i, pais in enumerate(pendentes):
+                futuros[ex.submit(_gerar_pais, client, pais, contexto_oficial, now, script_dir)] = pais
+                if i < PAISES_EM_PARALELO:
+                    time.sleep(1)   # escalona o arranque para não estourar o limite por minuto
+            for fut in as_completed(futuros):
+                pais = futuros[fut]
+                try:
+                    dados_pais, status = fut.result()
+                except Exception as e:
+                    print(f"   ❌ {pais.upper()}: erro inesperado {e}")
+                    dados_pais, status = None, {"modo": "falha"}
+                if dados_pais is None:
+                    falhas.append(pais)
+                    dados_pais = erro_pais(pais, "Falha na comunicação com a IA nesta execução.")
+                else:
+                    dados_pais = _pos_processar_pais(pais, dados_pais)
+                    if len(dados_pais.get("noticias", [])) >= MINIMO_NOTICIAS_RECENTES:
+                        cache[pais] = {"gerado_em": now.isoformat(timespec="seconds"), "dados": dados_pais}
+                        cache_path.write_text(json.dumps(cache, ensure_ascii=False, indent=2), encoding="utf-8")
+                    else:
+                        falhas.append(pais)
+                resultado[pais] = dados_pais
+                resumo[pais] = (status.get("modo"), len(dados_pais.get("noticias", [])))
+
+    resultado = {p: resultado[p] for p in FATORES_BASE if p in resultado}   # ordem original
     dados_path.write_text(json.dumps(resultado, ensure_ascii=False, indent=2), encoding="utf-8")
 
-    print("\n📋 RESUMO DAS NOTÍCIAS")
+    print(f"\n📋 RESUMO DAS NOTÍCIAS (IA em {(time.time() - inicio) / 60:.1f} min)")
     print("   País | Origem       | Notícias recentes")
-    for pais, modo, n in resumo:
+    for pais in FATORES_BASE:
+        modo, n = resumo.get(pais, ("?", 0))
         print(f"   {pais.upper():4} | {str(modo):12} | {n}")
     if falhas:
         print(f"⚠️ Países com poucas/nenhuma notícia recente: {', '.join(p.upper() for p in falhas)}. "
@@ -985,7 +975,7 @@ if __name__ == "__main__":
     output_arquivo = script_dir / "index.html"
     dados_arquivo = script_dir / "dados_paises.json"
 
-    print("🚀 Iniciando a geração do dashboard 'Early Signals' (v7)...")
+    print("🚀 Iniciando a geração do dashboard 'Early Signals' (v8)...")
     try:
         if not template_arquivo.exists():
             raise FileNotFoundError(f"Template '{template_arquivo.name}' não encontrado em '{script_dir}'")
