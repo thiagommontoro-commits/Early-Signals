@@ -6,27 +6,27 @@
         "icone": "💳",
         "tendencia": "restritiva",
         "direcao": "melhorando",
-        "descricao": "Inadimplência PF atingiu 8,68% em Set/2026, queda de 0,99 p.p. ante Agosto. Juros PF a 10,81% a.a. e PJ a 12,03% a.a.",
-        "impactos": "A queda na inadimplência alivia o sistema, mas juros altos mantêm a compra de tratores e plantadeiras em ritmo moderado ou adiado.",
+        "descricao": "Inadimplência PF recuou para 8,68% em Set/2026 (-0,99 p.p. ante Agosto), mas segue acima da média de 20m (6,14%).",
+        "impactos": "Juros PF a 10,81% a.a. e PJ a 12,03% a.a. mantêm cautela na compra de tratores e colheitadeiras; demanda tende a ficar neutra.",
         "fonte": "Banco Central do Brasil"
       },
       {
         "titulo": "Prod. Grãos",
         "icone": "🚜",
-        "tendencia": "positivo",
-        "direcao": "melhorando",
-        "descricao": "Avanço do plantio da safra de grãos em Novembro de 2026 demonstra ritmo satisfatório ante o mês anterior.",
-        "impactos": "Demanda por plantadeiras e pulverizadores tende a acelerar pontualmente nas regiões com umidade adequada.",
-        "fonte": "Conab"
+        "tendencia": "expansiva",
+        "direcao": "estavel",
+        "descricao": "Plantio da safra avança com chuvas regulares em Out/Nov, garantindo ritmo operacional estável ante o mês anterior.",
+        "impactos": "Demanda por plantadeiras e pulverizadores tende a acelerar pontualmente no curto prazo, focando em reposição tecnológica.",
+        "fonte": "CONAB"
       },
       {
         "titulo": "Margens Produtor",
         "icone": "📊",
         "tendencia": "incerto",
-        "direcao": "estavel",
-        "descricao": "Margens estáveis em Novembro de 2026 ante Outubro, com custos de fertilizantes equilibrados e preços de grãos voláteis.",
-        "impactos": "Produtores adotam postura neutra na aquisição de colheitadeiras, priorizando fluxo de caixa.",
-        "fonte": "Cepea/Esalq"
+        "direcao": "piorando",
+        "descricao": "Culturas de grãos pressionadas por custos elevados em Outubro; café e cana mantêm margens melhores que os grãos.",
+        "impactos": "Produtores de grãos adiam aquisição de colheitadeiras de grande porte, enquanto setor sucroenergético sustenta compra de tratores.",
+        "fonte": "CEPEA"
       }
     ],
     "noticias": []
@@ -37,46 +37,46 @@
         "titulo": "Crédito/Financ.",
         "icone": "💳",
         "tendencia": "restritiva",
-        "direcao": "melhorando",
-        "descricao": "Crédito bancário em recuperação lenta ante Outubro; juros reais continuam elevados limitando novas aquisições de maquinário pesado.",
-        "impactos": "Produtores tendem a adiar a compra de tratores de alta potência e colheitadeiras, mantendo a demanda moderada.",
-        "fonte": "Ámbito Financiero"
+        "direcao": "estavel",
+        "descricao": "Taxas de juros reais permanecem elevadas ante Outubro, limitando o acesso a financiamentos bancários tradicionais para frota pesada.",
+        "impactos": "Demanda por tratores e colheitadeiras tende a adiar novos investimentos devido ao custo financeiro elevado.",
+        "fonte": "Banco Central de la República Argentina"
       },
       {
         "titulo": "Inflação/Câmbio",
         "icone": "📈",
         "tendencia": "estavel",
-        "direcao": "estavel",
-        "descricao": "Inflação em desaceleração ante Outubro e dólar controlado trazem previsibilidade parcial aos custos de insumos importados.",
-        "impactos": "Aceleração gradual na aquisição de pulverizadores e plantadeiras de médio porte.",
-        "fonte": "Clarín Agro"
+        "direcao": "melhorando",
+        "descricao": "Inflação mensal desacelera ante Outubro, mas o ritmo cambial mantém cautela na formação de preços de insumos e máquinas.",
+        "impactos": "Produtores mantêm cautela na compra de pulverizadores e plantadeiras até maior previsibilidade de custos.",
+        "fonte": "INDEC"
       },
       {
         "titulo": "Retenciones",
         "icone": "⚖️",
         "tendencia": "incerto",
-        "direcao": "piorando",
-        "descricao": "Governo mantém impostos de exportação sem cortes esperados ante Outubro, comprimindo o fluxo de caixa do produtor.",
-        "impactos": "Adiar investimentos de longo prazo em frotas de grande porte até definição fiscal.",
-        "fonte": "La Nación Agro"
+        "direcao": "estavel",
+        "descricao": "Debates sobre redução de retenções seguem travados no Congresso ante Outubro, sem cortes imediatos para a safra atual.",
+        "impactos": "Margens apertadas fazem produtores adiarem a aquisição de colheitadeiras de grande porte.",
+        "fonte": "Ámbito Financiero"
       },
       {
         "titulo": "Prod. Agrícola",
         "icone": "🚜",
         "tendencia": "positivo",
         "direcao": "melhorando",
-        "descricao": "Início da safra 26/27 com chuvas favoráveis superando o cenário de Outubro, impulsionando o plantio.",
-        "impactos": "Acelerar a reposição de plantadeiras e tratores para garantir a janela de plantio.",
+        "descricao": "Chuvas oportunas em outubro melhoraram o perfil de umidade para o plantio da safra 26/27 ante setembro.",
+        "impactos": "Acelera a demanda por plantadeiras e tratores de média potência para a janela de plantio.",
         "fonte": "Bolsa de Comercio de Rosario"
       },
       {
         "titulo": "Margens Produtor",
         "icone": "📊",
-        "tendencia": "positivo",
-        "direcao": "melhorando",
-        "descricao": "Soja e milho com margens melhores ante Outubro devido à queda nos preços internacionais de fertilizantes.",
-        "impactos": "Aceleração moderada na compra de máquinas voltadas ao aumento de produtividade.",
-        "fonte": "Agrofy News"
+        "tendencia": "estavel",
+        "direcao": "estavel",
+        "descricao": "Preços internacionais estáveis e custos de produção mantêm margens apertadas para o milho e soja ante Outubro.",
+        "impactos": "Compras de máquinas focam em reposição pontual, mantendo a demanda neutra por novos implementos.",
+        "fonte": "SAGYP"
       }
     ],
     "noticias": []
@@ -88,8 +88,8 @@
         "icone": "💧",
         "tendencia": "estavel",
         "direcao": "estavel",
-        "descricao": "Reservatórios na zona central mantêm 55% da capacidade ante Outubro, garantindo a rega básica para os cultivos.",
-        "impactos": "Demanda por pulverizadores e tratores de baixa potência permanece neutra, sem choques de escassez hídrica.",
+        "descricao": "Reservatórios na zona central mantêm volumes estáveis ante Outubro, garantindo irrigação regular para as lavouras.",
+        "impactos": "Compra de tratores e pulverizadores permanece neutra, sem grandes impulsos emergenciais hídricos.",
         "fonte": "Dirección General de Aguas"
       },
       {
@@ -97,26 +97,26 @@
         "icone": "🍒",
         "tendencia": "positivo",
         "direcao": "melhorando",
-        "descricao": "Previsão de alta de 8% nas exportações de cerejas ante Outubro, impulsionando a receita cambial do setor.",
-        "impactos": "Acelera a compra de tratores especializados e pulverizadores para a fruticultura de alto valor.",
-        "fonte": "SimFruit"
+        "descricao": "Previsões de alta de 5% nas exportações de cerejas ante Outubro impulsionam o caixa dos produtores rurais.",
+        "impactos": "Demanda por tratores de baixa potência e pulverizadores tende a acelerar no curto prazo.",
+        "fonte": "SimFRUIT"
       },
       {
         "titulo": "Custo de Insumos",
         "icone": "📦",
         "tendencia": "estavel",
         "direcao": "estavel",
-        "descricao": "Preços de fertilizantes estáveis ante Outubro, com leve alívio nos custos de importação marítima.",
-        "impactos": "Decisão de compra de plantadeiras e tratores de média potência fica neutra, sem pressões de custos.",
+        "descricao": "Preços de fertilizantes e defensivos registram variação nula ante Outubro, estabilizando os custos operacionais.",
+        "impactos": "Produtores mantêm postura neutra na aquisição de plantadeiras e tratores de grande porte.",
         "fonte": "ODEPA"
       },
       {
         "titulo": "Reg. Ambiental",
         "icone": "🌿",
-        "tendencia": "restritiva",
-        "direcao": "estavel",
-        "descricao": "Novas exigências de eficiência no uso de água mantidas em Novembro para a zona central chilena.",
-        "impactos": "Acelera a substituição por pulverizadores de alta precisão e tratores eficientes.",
+        "tendencia": "incerto",
+        "direcao": "piorando",
+        "descricao": "Novas normativas de uso de água em O'Higgins geram cautela adicional ante Outubro na gestão hídrica.",
+        "impactos": "Produtores tendem a adiar investimentos em irrigação e novos pulverizadores até clareza jurídica.",
         "fonte": "Minagri"
       },
       {
@@ -124,9 +124,9 @@
         "icone": "📊",
         "tendencia": "positivo",
         "direcao": "melhorando",
-        "descricao": "Margens da fruticultura melhoraram 4% ante Outubro devido à valorização do dólar frente ao peso.",
-        "impactos": "Produtores tendem a acelerar a renovação de frotas de colheitadeiras e tratores.",
-        "fonte": "Sofofa"
+        "descricao": "Margens na fruticultura melhoraram 3% ante Outubro com preços internacionais firmes para frutas frescas.",
+        "impactos": "Acelera a renovação de frota de tratores e colheitadeiras de médio porte nas principais regiões.",
+        "fonte": "Sociedad Nacional de Agricultura"
       }
     ],
     "noticias": []
@@ -138,45 +138,45 @@
         "icone": "🐄",
         "tendencia": "positivo",
         "direcao": "melhorando",
-        "descricao": "Ante Outubro, as exportações de carne bovina alta de 4,2%, impulsionadas pela demanda chinesa e preços firmes no mercado internacional.",
-        "impactos": "A maior liquidez na pecuária acelera a renovação de tratores e pulverizadores de arrasto para o setor forrageiro.",
+        "descricao": "Exportações de carne bovina sobem 8% ante Outubro, impulsionadas pela alta demanda asiática e preços firmes.",
+        "impactos": "Acelera investimentos em tratores de média potência e pulverizadores para pecuária intensiva.",
         "fonte": "INAC"
       },
       {
         "titulo": "Preço Commod.",
         "icone": "📉",
-        "tendencia": "estavel",
-        "direcao": "estavel",
-        "descricao": "Ante Outubro, a soja operou com leve variação positiva de 0,8%, mantendo patamares atrativos para o plantio da safra de verão.",
-        "impactos": "Mantém neutra a decisão de compra de plantadeiras de grande porte, com produtores aguardando o clima consolidar.",
-        "fonte": "Chicago Board of Trade"
+        "tendencia": "negativo",
+        "direcao": "piorando",
+        "descricao": "Preços da soja caem 3% na Bolsa de Chicago ante Outubro, pressionando a receita bruta dos produtores.",
+        "impactos": "Produtores adiam a aquisição de colheitadeiras e plantadeiras de grande porte.",
+        "fonte": "Bolsa de Chicago"
       },
       {
         "titulo": "Atraso Cambial",
         "icone": "💵",
         "tendencia": "restritiva",
-        "direcao": "piorando",
-        "descricao": "Ante Outubro, a valorização do peso uruguaio pressionou as margens exportadoras em 1,5%, gerando cautela nos investimentos.",
-        "impactos": "Produtores tendem a adiar a aquisição de colheitadeiras de grande porte devido à pressão nos custos operacionais locais.",
-        "fonte": "Banco Central del Uruguay"
+        "direcao": "estavel",
+        "descricao": "Valorização do peso uruguaio ante Outubro reduz a competitividade das exportações agrícolas locais.",
+        "impactos": "Manutenção de postura neutra nas compras de máquinas novas importadas.",
+        "fonte": "BCU"
       },
       {
         "titulo": "Prod. Florestal",
         "icone": "🌲",
         "tendencia": "positivo",
         "direcao": "melhorando",
-        "descricao": "Ante Outubro, o setor florestal avançou 3,1% no volume exportado de celulose, sustentando investimentos robustos em infraestrutura.",
-        "impactos": "Acelera a demanda por tratores de alta potência e máquinas florestais especializadas para manejo e transporte.",
-        "fonte": " Uruguay XXI"
+        "descricao": "Setor florestal cresce 5% ante Outubro com novas plantas de celulose operando a plena capacidade.",
+        "impactos": "Demanda aquecida por tratores de alta potência e equipamentos de silvicultura.",
+        "fonte": "Diea"
       },
       {
         "titulo": "Margens Produtor",
         "icone": "📊",
         "tendencia": "incerto",
-        "direcao": "estavel",
-        "descricao": "Ante Outubro, as margens da soja melhoraram marginalmente, enquanto a leiteria seguiu pressionada por custos elevados de insumos.",
-        "impactos": "Compra de tratores de média potência e pulverizadores autopropelidos permanece seletiva e restrita a reposições urgentes.",
-        "fonte": "OPYPA"
+        "direcao": "piorando",
+        "descricao": "Margens da soja pioraram ante Outubro devido aos custos elevados de insumos e queda de preços.",
+        "impactos": "Decisões de compra de plantadeiras e tratores ficam em compasso de espera.",
+        "fonte": "FUF"
       }
     ],
     "noticias": []
@@ -188,35 +188,35 @@
         "icone": "🌱",
         "tendencia": "positivo",
         "direcao": "melhorando",
-        "descricao": "Plantio de soja avança bem no leste ante Outubro, cobrindo 75% da área com boas condições climáticas.",
-        "impactos": "Acelera compra de tratores e plantadeiras de grande porte para aproveitar a janela ideal de plantio.",
-        "fonte": "CAPECO"
+        "descricao": "Ante Outubro, avanço de 4% na área plantada de soja impulsiona demanda por novas tecnologias e renovação da frota.",
+        "impactos": "Acelera aquisição de tratores e plantadeiras de grande porte. Produtores buscam eficiência operacional para a safra 2026/2027.",
+        "fonte": "ABC Color"
       },
       {
         "titulo": "Logística Fluvial",
         "icone": "🚢",
         "tendencia": "estavel",
         "direcao": "estavel",
-        "descricao": "Nível dos rios estabiliza ante Outubro, mantendo fretes fluviais estáveis em média de US$ 42/ton.",
-        "impactos": "Mantém neutra a decisão de aquisição de novos pulverizadores e colheitadeiras logísticas.",
-        "fonte": "Centro de Armadores Fluviales"
+        "descricao": "Nível dos rios Paraguai e Paraná estabiliza ante Outubro, garantindo fluxo normal de escoamento da safra e insumos.",
+        "impactos": "Mantém neutra a decisão de compra de pulverizadores, sem gargalos logísticos severos que afetem o caixa do produtor.",
+        "fonte": "La Nación Py"
       },
       {
         "titulo": "Prod. Carne",
         "icone": "🥩",
         "tendencia": "positivo",
         "direcao": "melhorando",
-        "descricao": "Exportações de carne bovina sobem 8% ante Outubro, impulsionadas pela demanda firme dos EUA.",
-        "impactos": "Acelera investimentos em tratores de média potência e infraestrutura pecuária no país.",
+        "descricao": "Preços da arroba do boi com alta de 3% ante Outubro fortalecem o caixa da pecuária integrada à agricultura.",
+        "impactos": "Induz investimento moderado em tratores de média potência e implementos forrageiros, mantendo o ritmo de negociações.",
         "fonte": "Senacsa"
       },
       {
         "titulo": "Fiscal/Câmbio",
         "icone": "🏛️",
-        "tendencia": "estavel",
+        "tendencia": "restritiva",
         "direcao": "estavel",
-        "descricao": "Guarani mantém estabilidade frente ao dólar ante Outubro, cotado em torno de PYD 7.500.",
-        "impactos": "Deixa neutra a importação de máquinas agrícolas de alta tecnologia e autopropelidos.",
+        "descricao": "Guarani estável frente ao dólar ante Outubro. Taxa de juros local permanece em patamar restritivo para financiamentos.",
+        "impactos": "Adia compras à vista de colheitadeiras de grande porte, forçando maior dependência de linhas de crédito subsidiadas.",
         "fonte": "Banco Central del Paraguay"
       },
       {
@@ -224,9 +224,9 @@
         "icone": "📊",
         "tendencia": "positivo",
         "direcao": "melhorando",
-        "descricao": "Soja registra alta de 3% nos preços internacionais ante Outubro, melhorando a margem do produtor.",
-        "impactos": "Acelera a demanda por colheitadeiras e plantadeiras para a safra atual.",
-        "fonte": "Bolsa de Valores de Asunción"
+        "descricao": "Soja melhora margens com custos de fertilizantes em queda ante Outubro; milho registra leve retração na rentabilidade.",
+        "impactos": "Acelera investimentos em plantadeiras e pulverizadores autopropelidos, enquanto o milho freia compras de menor escala.",
+        "fonte": "UGP"
       }
     ],
     "noticias": []
@@ -238,45 +238,45 @@
         "icone": "🥑",
         "tendencia": "positivo",
         "direcao": "melhorando",
-        "descricao": "Exportações de frutas crescem 12% ante Outubro, impulsionadas por mirtilos e abacates.",
-        "impactos": "Acelera a aquisição de tratores e pulverizadores nas grandes fazendas costeiras.",
-        "fonte": "MIDAGRI"
+        "descricao": "Ante Outubro, exportações de frutas cresceram 12% impulsionadas por mirtilos e uvas na costa peruana.",
+        "impactos": "Acelera a compra de tratores de média potência e pulverizadores autopropelidos para atender grandes áreas de fruticultura.",
+        "fonte": "Midagri"
       },
       {
         "titulo": "Agro Andino",
         "icone": "🥔",
-        "tendencia": "estavel",
+        "tendencia": "incerto",
         "direcao": "estavel",
-        "descricao": "Produção de batata e milho mantém ritmo regular ante Outubro, sem grandes oscilações de preços.",
-        "impactos": "Demanda neutra por tratores de média potência e plantadeiras de pequeno porte.",
-        "fonte": "INEI"
+        "descricao": "Ante Outubro, pequenos produtores andinos mantêm cautela com chuvas irregulares e custos elevados de insumos agrícolas.",
+        "impactos": "Compra de tratores de baixa potência e plantadeiras de pequeno porte permanece neutra na região andina.",
+        "fonte": "Andina"
       },
       {
         "titulo": "Irrigação",
         "icone": "🏞️",
-        "tendencia": "expansiva",
+        "tendencia": "positivo",
         "direcao": "melhorando",
-        "descricao": "Avanço de projetos hídricos melhora perspetiva na costa ante Outubro, liberando novos investimentos.",
-        "impactos": "Acelera compra de equipamentos de irrigação e tratores de alta potência.",
-        "fonte": "Midagri"
+        "descricao": "Ante Outubro, avanços em projetos de irrigação na costa ampliam área cultivada em mais de 15 mil hectares.",
+        "impactos": "Demanda por tratores de alta potência e sistemas de irrigação tende a acelerar fortemente nos próximos meses.",
+        "fonte": "Gestión"
       },
       {
         "titulo": "Cenário Político",
         "icone": "⚖️",
         "tendencia": "incerto",
-        "direcao": "piorando",
-        "descricao": "Debate no Congresso sobre nova lei agrária gera incerteza regulatória ante Outubro.",
-        "impactos": "Produtores optam por adiar investimentos de longo prazo em colheitadeiras.",
-        "fonte": "Congreso del Perú"
+        "direcao": "estavel",
+        "descricao": "Ante Outubro, debates no Congresso sobre novas normas tributárias para o setor agroexportador geram cautela empresarial.",
+        "impactos": "Produtores optam por adiar investimentos de longo prazo em colheitadeiras e grandes plantadeiras até definições legais.",
+        "fonte": "El Comercio"
       },
       {
         "titulo": "Margens Produtor",
         "icone": "📊",
         "tendencia": "positivo",
         "direcao": "melhorando",
-        "descricao": "Margens de frutas de exportação sobem 8% ante Outubro com preços internacionais firmes.",
-        "impactos": "Acelera renovação de frota de pulverizadores autopropelidos e tratores especializados.",
-        "fonte": "Banco Central de Reserva del Perú"
+        "descricao": "Ante Outubro, margens de mirtilos e uvas melhoraram com preços firmes, enquanto milho e batata andina apresentaram margens apertadas.",
+        "impactos": "Produtores de exportação aceleram renovação de frotas; setor andino adia compras de maquinário novo.",
+        "fonte": "BCR"
       }
     ],
     "noticias": []
@@ -286,47 +286,47 @@
       {
         "titulo": "Soja (Oriente)",
         "icone": "🌱",
-        "tendencia": "incerto",
+        "tendencia": "estavel",
         "direcao": "estavel",
-        "descricao": "Plantio da safra de verão avança em Santa Cruz ante Outubro, mas custos elevados limitam expansão.",
-        "impactos": "Produtores mantêm compra de tratores e plantadeiras em ritmo cauteloso, priorizando reposição essencial.",
-        "fonte": "El Deber"
+        "descricao": "Ante Outubro, preços internacionais da soja mantêm-se firmes, impulsionando o plantio no Oriente com volume estável de 1,3 milhão de hectares.",
+        "impactos": "Demanda por tratores e plantadeiras de grande porte permanece aquecida, com produtores acelerando aquisições para garantir o ciclo de verão.",
+        "fonte": "ANAPO"
       },
       {
         "titulo": "Escassez de Dólar",
         "icone": "💸",
         "tendencia": "restritiva",
         "direcao": "piorando",
-        "descricao": "A escassez de divisas agravou-se ante Outubro, encarecendo a importação de insumos e maquinário agrícola.",
-        "impactos": "Acelera a retração na aquisição de colheitadeiras e pulverizadores importados devido à dificuldade de financiamento em dólar.",
-        "fonte": "ANF"
+        "descricao": "Ante Outubro, a disponibilidade de divisas restringe a importação de insumos e maquinário, elevando custos efetivos em 4% no mercado interno.",
+        "impactos": "Produtores tendem a adiar a compra de colheitadeiras e pulverizadores autopropelidos, priorizando manutenção de frotas existentes.",
+        "fonte": "Banco Central de Bolivia"
       },
       {
         "titulo": "Biocombustíveis",
         "icone": "⛽",
-        "tendencia": "positivo",
+        "tendencia": "expansiva",
         "direcao": "melhorando",
-        "descricao": "Avanço na agenda de biocombustíveis impulsiona o cultivo de oleaginosas ante Outubro, com novas regulamentações.",
-        "impactos": "Estimula a demanda por tratores de alta potência e plantadeiras de grande porte para novas áreas.",
-        "fonte": "La Razón"
+        "descricao": "Ante Outubro, o programa de biodiesel avança com novas plantas, estimulando a produção de oleaginosas e demanda por mecanização agrícola.",
+        "impactos": "Acelera a procura por tratores de média e alta potência voltados ao cultivo expandido de matérias-primas para biocombustíveis.",
+        "fonte": "YPFB"
       },
       {
         "titulo": "Infra. Logística",
         "icone": "🛣️",
         "tendencia": "incerto",
         "direcao": "estavel",
-        "descricao": "Gargalos logísticos e restrições de abastecimento de diesel persistem no Oriente boliviano ante Outubro.",
-        "impactos": "Produtores adiam investimentos em novos pulverizadores autopropelidos devido ao temor de paralisações.",
-        "fonte": "Los Tiempos"
+        "descricao": "Ante Outubro, gargalos de escoamento e custos logísticos no eixo norte-sul mantêm-se elevados, impactando a rentabilidade final do grão.",
+        "impactos": "Decisões de investimento em plantadeiras e tratores ficam neutras, com cautela generalizada frente aos custos de transporte.",
+        "fonte": "Cainco"
       },
       {
         "titulo": "Margens Produtor",
         "icone": "📊",
-        "tendencia": "baixa",
-        "direcao": "piorando",
-        "descricao": "Margens da soja recuaram ante Outubro pressionadas por custos logísticos, enquanto o milho apresentou leve melhora.",
-        "impactos": "Demanda por maquinário agrícola fica neutra a adiada, com foco estrito em manutenção e peças.",
-        "fonte": "CAO"
+        "tendencia": "alta",
+        "direcao": "melhorando",
+        "descricao": "Ante Outubro, margens na soja melhoraram levemente com a alta parcial dos preços, enquanto o milho registrou retração por custos locais.",
+        "impactos": "Demanda por máquinas polariza: aceleração em propriedades de alta tecnologia e adiamento em produtores de menor escala.",
+        "fonte": "INE Bolivia"
       }
     ],
     "noticias": []
@@ -338,35 +338,35 @@
         "icone": "🥑",
         "tendencia": "positivo",
         "direcao": "melhorando",
-        "descricao": "Exportações agrícolas mexicanas para os EUA cresceram 4,2% ante Outubro, impulsionadas pela alta demanda por abacates e hortaliças.",
-        "impactos": "Acelera a compra de tratores de média potência e pulverizadores de arrasto para expansão de pomares.",
-        "fonte": "Secretaría de Economía"
+        "descricao": "Exportações de abacate e berries cresceram 4,2% ante Outubro, impulsionadas pela demanda firme nos Estados Unidos via USMCA.",
+        "impactos": "Acelera a aquisição de tratores de média potência e pulverizadores de arrasto nas regiões produtoras de Michoacán e Jalisco.",
+        "fonte": "INEGI / USDA"
       },
       {
         "titulo": "Escassez Hídrica",
         "icone": "🏜️",
-        "tendencia": "negativo",
+        "tendencia": "restritiva",
         "direcao": "piorando",
-        "descricao": "Níveis de água nas principais barragens do norte do México caíram 2,5% ante Outubro, agravando a restrição para irrigação.",
-        "impactos": "Adiamento na aquisição de plantadeiras e tratores de alta potência para grandes lavouras de grãos.",
-        "fonte": "CONAGUA"
+        "descricao": "Níveis de armazenamento de água nas represas do norte caíram 2,1% ante Outubro, agravando restrições à irrigação.",
+        "impactos": "Adia investimentos em plantadeiras e sistemas avançados de irrigação em Chihuahua e Sinaloa, focando apenas em manutenção.",
+        "fonte": "Conagua"
       },
       {
         "titulo": "Prod. Agave",
         "icone": "🌵",
         "tendencia": "estavel",
         "direcao": "estavel",
-        "descricao": "Preços do agave estabilizaram após queda em Outubro, com oferta e demanda equilibradas no estado de Jalisco.",
-        "impactos": "Mantém neutra a decisão de investimento em tratores especializados e implementos para o setor.",
-        "fonte": "Consejo Regulador del Tequila"
+        "descricao": "Preços do agave tequilana mantiveram-se estáveis ante Outubro, após ajustes de oferta na região de Jalisco.",
+        "impactos": "Demanda neutra para tratores especializados e implementos de cultivo em Jalisco; produtores evitam novas frotas.",
+        "fonte": "CRT (Consejo Regulador del Tequila)"
       },
       {
         "titulo": "Remessas/Agro Fam.",
         "icone": "👨‍👩‍👧‍👦",
         "tendencia": "positivo",
         "direcao": "melhorando",
-        "descricao": "Remessas familiares subiram 3,1% ante Outubro, injetando liquidez na agricultura familiar e pequenas propriedades.",
-        "impactos": "Estimula a compra à vista de tratores de baixa potência e microimplementos agrícolas.",
+        "descricao": "Remessas familiares injetaram liquidez recorde nas zonas rurais, alta de 3,5% ante Outubro, apoiando o pequeno produtor.",
+        "impactos": "Demanda aquecida por tratores de baixa potência (<80cv) para agricultura familiar e micro-empreendimentos agrícolas.",
         "fonte": "Banco de México"
       },
       {
@@ -374,8 +374,8 @@
         "icone": "📊",
         "tendencia": "incerto",
         "direcao": "piorando",
-        "descricao": "Custos de fertilizantes subiram 1,8% ante Outubro, comprimindo as margens da soja e do milho no país.",
-        "impactos": "Produtores adotam postura cautelosa, adiando substituição de colheitadeiras e pulverizadores autopropelidos.",
+        "descricao": "Custos de insumos subiram 1,8% ante Outubro, pressionando as margens de milho e trigo no centro-norte.",
+        "impactos": "Produtores de grãos adotam postura neutra a adiadora para a compra de colheitadeiras de grande porte.",
         "fonte": "Grupo Consultor de Mercados Agrícolas"
       }
     ],
