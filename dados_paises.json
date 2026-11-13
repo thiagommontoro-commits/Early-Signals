@@ -2088,19 +2088,19 @@
       {
         "titulo": "Export. p/ EUA",
         "icone": "🥑",
-        "tendencia": "incerto",
-        "direcao": "melhorando",
-        "descricao": "Recuperação lenta na exportação de gado para os EUA ante Outubro.",
-        "impactos": "Demanda por tratores deve adiar compras até estabilização do fluxo nas fronteiras.",
-        "fonte": "Medios OBSON"
+        "tendencia": "restritiva",
+        "direcao": "piorando",
+        "descricao": "Medidas comerciais contra morango e tomate geram alertas para exportações agrícolas mexicanas ante Outubro.",
+        "impactos": "Produtores adiam aquisição de tratores e pulverizadores devido à incerteza nas receitas de exportação.",
+        "fonte": "El Sol de México"
       },
       {
         "titulo": "Escassez Hídrica",
         "icone": "🏜️",
         "tendencia": "negativo",
         "direcao": "piorando",
-        "descricao": "Queda severa na produção de feijão e grãos por falta de chuvas ante Outubro.",
-        "impactos": "Redução drástica na aquisição de colheitadeiras e plantadeiras nas regiões afetadas.",
+        "descricao": "Chihuahua enfrenta três anos de seca e El Niño ameaça safras de milho, agravando o cenário ante Outubro.",
+        "impactos": "Demanda por colheitadeiras e plantadeiras despenca nas regiões afetadas; compras totalmente paralisadas.",
         "fonte": "El Sol de México"
       },
       {
@@ -2108,257 +2108,259 @@
         "icone": "🌵",
         "tendencia": "estavel",
         "direcao": "estavel",
-        "descricao": "Demandas locais mantêm estabilidade na produção regional sem grandes variações ante Outubro.",
-        "impactos": "Demanda neutra para tratores de média potência e implementos locais.",
-        "fonte": "SDPnoticias.com"
+        "descricao": "Setor mantém ritmo estável de produção, mas sem grandes inovações ou injeções de capital ante Outubro.",
+        "impactos": "Demanda por tratores de média potência permanece neutra, sem aceleração de compras.",
+        "fonte": "Contexto Setorial"
       },
       {
         "titulo": "Remessas/Agro Fam.",
         "icone": "👨‍👩‍👧‍👦",
-        "tendencia": "positivo",
+        "tendencia": "expansiva",
         "direcao": "melhorando",
-        "descricao": "Apoios governamentais no campo impulsionam pequenos produtores ante Outubro.",
-        "impactos": "Acelera compras pontuais de tratores de baixa potência e insumos.",
-        "fonte": "Urbano Puebla"
+        "descricao": "Governo anuncia aumento de 10% no orçamento de 2027 para o campo, melhorando expectativas ante Outubro.",
+        "impactos": "Acelera investimentos em tecnologia agrícola de pequeno porte, como drones e tratores leves.",
+        "fonte": "NODAL"
       },
       {
         "titulo": "Margens Produtor",
         "icone": "📊",
         "tendencia": "negativo",
         "direcao": "piorando",
-        "descricao": "Crise no campo e margens comprimidas frente a Outubro geram cautela.",
-        "impactos": "Produtores tendem a adiar investimentos em frotas novas de tratores e pulverizadores.",
-        "fonte": "Imagen Radio"
+        "descricao": "Intermediários financeiros duplicam o custo do crédito ao campo, estrangulando as margens ante Outubro.",
+        "impactos": "Produtores optam por adiar a substituição de frotas de colheitadeiras e tratores de alta potência.",
+        "fonte": "Debate"
       }
     ],
     "sintese_estrategica": {
-      "manchete": "Crise hídrica e endividamento desafiam o campo mexicano, exigindo cautela na frota.",
-      "termometro": "incerto",
-      "leitura": "A combinação de severas secas, restrições de crédito em regiões como Tamaulipas e lenta recuperação nas exportações de carne pressiona as margens dos produtores. Embora existam apoios governamentais pontuais e financiamentos municipais para tratores, a cautela predomina. A demanda por máquinas deve desacelerar no curto prazo.",
+      "manchete": "Seca severa e crédito caro sufocam margens, paralisando investimentos em máquinas no México.",
+      "termometro": "negativo",
+      "leitura": "A persistência da seca em regiões chaves como Chihuahua e a ameaça do fenômeno El Niño reduzem a área colhida. Somado a isso, intermediários financeiros duplicam o custo do crédito rural, restringindo o acesso a financiamentos. Embora o orçamento federal para 2027 traga alta, a pressão de custos e as barreiras de exportação mantêm o produtor cauteloso, adiando a compra de novos equipamentos.",
       "riscos": [
-        "Aprofundamento da crise hídrica",
-        "Endividamento rural sem reestruturação",
-        "Lenta retomada das exportações"
+        "Aprofundamento da crise hídrica em áreas produtoras de grãos.",
+        "Manutenção de taxas de juros elevadas por intermediários financeiros.",
+        "Novas barreiras comerciais dos EUA contra produtos agrícolas."
       ],
       "oportunidades": [
-        "Programas municipais de financiamento de tratores",
-        "Apoios a pequenos produtores"
+        "Aporte governamental em novas tecnologias e automação agrícola.",
+        "Investimentos na pecuária na região de Yucatán.",
+        "Parcerias para transferência de tecnologia agrícola internacional."
       ],
       "monitorar": [
-        "Protestos de produtores em 17 de novembro",
-        "Efeitos do El Niño nas safras"
+        "Votação e desdobramentos do PEF 2027 no Congresso.",
+        "Evolução climática do El Niño para os próximos ciclos.",
+        "Protestos de produtores com tratores em rodovias."
       ]
     },
     "noticias": [
       {
         "tema": "Política & Eleições",
-        "id_noticia": "N1",
-        "titulo_noticia": "Gobierno de Puebla entrega apoyos para campo",
+        "id_noticia": "N4",
+        "titulo_noticia": "Sheinbaum anuncia aumento no orçamento de 2027 para o campo",
         "tendencia_noticia": "positivo",
-        "corpo_noticia": "Governo de Puebla entrega mais de 1.400 apoios a produtores rurais, estimulando a economia agrícola local.",
+        "corpo_noticia": "O governo anunciou um acréscimo de 10% no orçamento de 2027 direcionado a setores estratégicos, incluindo o campo, visando impulsionar a infraestrutura e o desenvolvimento rural.",
         "relevancia": "media",
-        "horizonte": "imediato",
-        "por_que_importa": "Injeta ânimo e recursos em pequenos produtores, favorecendo o mercado de máquinas leves.",
+        "horizonte": "6-12 meses",
+        "por_que_importa": "Maior recurso fiscal pode destravar programas de subvenção para modernização de frotas agrícolas a médio prazo.",
         "impacto_produtos": {
           "tratores": {
             "tendencia": "positivo",
-            "descricao": "Apoio foca em maquinário leve.",
-            "segmento_impactado": "Baixa Potência (<80cv)"
+            "descricao": "Aumento de recursos pode estimular aquisição de unidades leves.",
+            "segmento_impactado": "Média Potência (80-170cv)"
           },
           "colheitadeiras": {
             "tendencia": "incerto",
-            "descricao": "",
+            "descricao": "Efeito indireto e de longo prazo.",
             "segmento_impactado": ""
           },
           "pulverizadores": {
-            "tendencia": "incerto",
-            "descricao": "",
-            "segmento_impactado": ""
+            "tendencia": "positivo",
+            "descricao": "Incentivos governamentais ajudam na tecnologia.",
+            "segmento_impactado": "Autopropelido"
           },
           "plantadeiras": {
             "tendencia": "incerto",
-            "descricao": "",
+            "descricao": "Sem impacto imediato.",
             "segmento_impactado": ""
           }
         },
-        "url_noticia": "https://news.google.com/rss/articles/CBMizAFBVV95cUxNMXRUSG92RE5XdXE4QU4zY1Z5UWtTNllXTHFJd2pWNm5QbE9saDl0cTJKd2Nza3JsU3R5Q3laYl9TMjh6V2psbDl0MTZiLVNFUnpoQk9jbjZkaFFUV1VoYlpvN0U2LVkzLTRINzBqaFZSZWJXQmxjMTdqdUcxSTZibkNacWlMYkNfMXotU3pMZDc1SXlyNUhPZ2taN1ZfRlJrMmhzQVpBd0RPZzczcDgtMFZSQkZLVEdvUGFvazBwd29CUElIWlpvSWVBWFk?oc=5",
-        "fonte_noticia": "<a href=\"https://news.google.com/rss/articles/CBMizAFBVV95cUxNMXRUSG92RE5XdXE4QU4zY1Z5UWtTNllXTHFJd2pWNm5QbE9saDl0cTJKd2Nza3JsU3R5Q3laYl9TMjh6V2psbDl0MTZiLVNFUnpoQk9jbjZkaFFUV1VoYlpvN0U2LVkzLTRINzBqaFZSZWJXQmxjMTdqdUcxSTZibkNacWlMYkNfMXotU3pMZDc1SXlyNUhPZ2taN1ZfRlJrMmhzQVpBd0RPZzczcDgtMFZSQkZLVEdvUGFvazBwd29CUElIWlpvSWVBWFk?oc=5\" target=\"_blank\" rel=\"noopener\">Urbano Puebla · 09/11/2026</a>",
-        "data_publicacao": "2026-11-09"
+        "url_noticia": "https://news.google.com/rss/articles/CBMi-gFBVV95cUxNVi16TmFoaVB0OWxfdnFIYjJZbG1OZWVqYjdUTXhVMmxLR1BEZC1RYXR1Z1JreUxTR21XMDI1QjZMWEVjS3FLdGFRNmFPeC02YmFwdC1XM3lGZGFLdFAtX3FiVUhZYVhtVXhzNTREOTR4MU5tM3JTQUhsTVViV2lkVEFuaW9pcUZNXzgzTkJxVjJUdG4zRG5kczR0WGJPcFNTSHNkV3JkWlMxUS05Mmw1bURxUzNKZXRCRENLZmh5Y0s4NkFQVjM0MnJkUUd5STdaWW5wcjRSZENCTVgxcUlmQk5oSWsxVHFWU1BLQko5aVo1M3JjeUFlV19n?oc=5",
+        "fonte_noticia": "<a href=\"https://news.google.com/rss/articles/CBMi-gFBVV95cUxNVi16TmFoaVB0OWxfdnFIYjJZbG1OZWVqYjdUTXhVMmxLR1BEZC1RYXR1Z1JreUxTR21XMDI1QjZMWEVjS3FLdGFRNmFPeC02YmFwdC1XM3lGZGFLdFAtX3FiVUhZYVhtVXhzNTREOTR4MU5tM3JTQUhsTVViV2lkVEFuaW9pcUZNXzgzTkJxVjJUdG4zRG5kczR0WGJPcFNTSHNkV3JkWlMxUS05Mmw1bURxUzNKZXRCRENLZmh5Y0s4NkFQVjM0MnJkUUd5STdaWW5wcjRSZENCTVgxcUlmQk5oSWsxVHFWU1BLQko5aVo1M3JjeUFlV19n?oc=5\" target=\"_blank\" rel=\"noopener\">NODAL - Noticias de América Latina y el Caribe · 12/11/2026</a>",
+        "data_publicacao": "2026-11-12"
       },
       {
         "tema": "Política Agrícola & Crédito",
-        "id_noticia": "N10",
-        "titulo_noticia": "Productores sin reestructurar deudas en Tamaulipas",
+        "id_noticia": "N12",
+        "titulo_noticia": "Intermediarios financieros duplican costo del crédito al campo",
         "tendencia_noticia": "negativo",
-        "corpo_noticia": "Milhares de produtores em Tamaulipas continuam sem conseguir reestruturar suas dívidas agrícolas, limitando novos investimentos.",
+        "corpo_noticia": "Representantes apontam que intermediários financeiros duplicaram o custo efetivo do crédito direcionado ao setor agropecuário, dificultando o acesso ao financiamento formal.",
         "relevancia": "alta",
-        "horizonte": "3-6 meses",
-        "por_que_importa": "O endividamento bloqueia o acesso a novas linhas de crédito para aquisição de maquinário pesado.",
+        "horizonte": "imediato",
+        "por_que_importa": "Crédito caro inviabiliza o financiamento de máquinas de alto valor, travando as vendas das concessionárias.",
         "impacto_produtos": {
           "tratores": {
             "tendencia": "negativo",
-            "descricao": "Corte de investimentos em frotas.",
+            "descricao": "Queda na busca por financiamentos de novos tratores.",
             "segmento_impactado": "Alta Potência (>170cv)"
           },
           "colheitadeiras": {
             "tendencia": "negativo",
-            "descricao": "Adiamento de compras.",
+            "descricao": "Financiamentos paralisados devido aos juros.",
             "segmento_impactado": "Grande Porte (Classes 7+)"
           },
           "pulverizadores": {
-            "tendencia": "incerto",
-            "descricao": "",
-            "segmento_impactado": ""
-          },
-          "plantadeiras": {
-            "tendencia": "incerto",
-            "descricao": "",
-            "segmento_impactado": ""
-          }
-        },
-        "url_noticia": "https://news.google.com/rss/articles/CBMisgFBVV95cUxOZWEwSFRoMzFHSEZnaGhhWl84VXpCb0RsNmRfTmJaMlNFWF8yajZ0bkx0b3dScndUb2RuRzgtVDQ4UHU3NDg3SGZ2cVVnb0ZFSm9XS2h3ZUlGUV9XZzkyUUtmOW1wZUk5eG9MTzFYeVIxZDFzaXNvYTJXQkVoVjRkWWNUTWVCeWx4My1aTDBiOWZGc1BVcDM0Ukt2VFp2SXV0VlZLVVRDT2ZnZjFOejBkRWZn0gG3AUFVX3lxTE1ETm1yNmlvcEN5SU1HdmN1N2NnRmZ1dmNiYVhCUUI3djI0MnVjZjdRa1Q1VFFmOXRnYmhTanVsNVdjQTJWZnZOR25KMWlRMk1LRzQzZGw1WVlFUk9vZlpDcE5ZamJCaEc3QjM2YlpuYTR3V202cllLNW5mb1JoSmZYUS1lb09pQU8wSTZYRzc1alNJUUVoUTBKN3BLWHZJSF9GYWRkV1gxUjdUaE9yLWt1NDZGMWxsOA?oc=5",
-        "fonte_noticia": "<a href=\"https://news.google.com/rss/articles/CBMisgFBVV95cUxOZWEwSFRoMzFHSEZnaGhhWl84VXpCb0RsNmRfTmJaMlNFWF8yajZ0bkx0b3dScndUb2RuRzgtVDQ4UHU3NDg3SGZ2cVVnb0ZFSm9XS2h3ZUlGUV9XZzkyUUtmOW1wZUk5eG9MTzFYeVIxZDFzaXNvYTJXQkVoVjRkWWNUTWVCeWx4My1aTDBiOWZGc1BVcDM0Ukt2VFp2SXV0VlZLVVRDT2ZnZjFOejBkRWZn0gG3AUFVX3lxTE1ETm1yNmlvcEN5SU1HdmN1N2NnRmZ1dmNiYVhCUUI3djI0MnVjZjdRa1Q1VFFmOXRnYmhTanVsNVdjQTJWZnZOR25KMWlRMk1LRzQzZGw1WVlFUk9vZlpDcE5ZamJCaEc3QjM2YlpuYTR3V202cllLNW5mb1JoSmZYUS1lb09pQU8wSTZYRzc1alNJUUVoUTBKN3BLWHZJSF9GYWRkV1gxUjdUaE9yLWt1NDZGMWxsOA?oc=5\" target=\"_blank\" rel=\"noopener\">PostaMx · 08/11/2026</a>",
-        "data_publicacao": "2026-11-08"
-      },
-      {
-        "tema": "Comércio Exterior & Geopolítica",
-        "id_noticia": "N15",
-        "titulo_noticia": "Exportación de ganado mexicano a EU avanza lento",
-        "tendencia_noticia": "incerto",
-        "corpo_noticia": "A exportação de gado para os Estados Unidos registra recuperação lenta após a recente reabertura da fronteira.",
-        "relevancia": "media",
-        "horizonte": "3-6 meses",
-        "por_que_importa": "Reduz a entrada de divisas para pecuaristas, postergando investimentos em infraestrutura e tratores.",
-        "impacto_produtos": {
-          "tratores": {
-            "tendencia": "incerto",
-            "descricao": "Demanda contida no setor.",
-            "segmento_impactado": "Média Potência (80-170cv)"
-          },
-          "colheitadeiras": {
-            "tendencia": "incerto",
-            "descricao": "",
-            "segmento_impactado": ""
-          },
-          "pulverizadores": {
-            "tendencia": "incerto",
-            "descricao": "",
-            "segmento_impactado": ""
-          },
-          "plantadeiras": {
-            "tendencia": "incerto",
-            "descricao": "",
-            "segmento_impactado": ""
-          }
-        },
-        "url_noticia": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxPMW8tdGN5b09SZFJENHdsVTR1dlpEZEFLVzFVdzVuTUhOdTBpMTVxdE1lT0ZEQzhsRGlPdFJhdzdSMExhZVBzQWx2bVlDYVNUUFgyWUtJWkZ2REI3YjlqYnlNZm14Rkh1QUlxMld1X2V0RnBFRlc4Q29MajJ0TjBPMXVnaUpkVUtjUmpQWi16VUJHeW16REpNYWRfX2prOU1zSldFX2FsaWtUd1Y1WU8yeGN6RjhzaTZ6?oc=5",
-        "fonte_noticia": "<a href=\"https://news.google.com/rss/articles/CBMiuAFBVV95cUxPMW8tdGN5b09SZFJENHdsVTR1dlpEZEFLVzFVdzVuTUhOdTBpMTVxdE1lT0ZEQzhsRGlPdFJhdzdSMExhZVBzQWx2bVlDYVNUUFgyWUtJWkZ2REI3YjlqYnlNZm14Rkh1QUlxMld1X2V0RnBFRlc4Q29MajJ0TjBPMXVnaUpkVUtjUmpQWi16VUJHeW16REpNYWRfX2prOU1zSldFX2FsaWtUd1Y1WU8yeGN6RjhzaTZ6?oc=5\" target=\"_blank\" rel=\"noopener\">Medios OBSON · 06/11/2026</a>",
-        "data_publicacao": "2026-11-06"
-      },
-      {
-        "tema": "Clima & Safra",
-        "id_noticia": "N20",
-        "titulo_noticia": "Cae 63% la producción de frijol por sequía",
-        "tendencia_noticia": "negativo",
-        "corpo_noticia": "A falta de chuvas na região de Jiménez derrubou a produção de feijão em 63%, agravando a crise hídrica.",
-        "relevancia": "alta",
-        "horizonte": "imediato",
-        "por_que_importa": "Perdas drásticas de safra eliminam o caixa do produtor para compra de novas plantadeiras.",
-        "impacto_produtos": {
-          "tratores": {
             "tendencia": "negativo",
-            "descricao": "Menor uso de tratores.",
-            "segmento_impactado": "Média Potência (80-170cv)"
-          },
-          "colheitadeiras": {
-            "tendencia": "negativo",
-            "descricao": "Demanda suspensa.",
-            "segmento_impactado": "Médio Porte (Classes 4-6)"
-          },
-          "pulverizadores": {
-            "tendencia": "negativo",
-            "descricao": "Redução de defensivos.",
+            "descricao": "Retração nas vendas a prazo.",
             "segmento_impactado": "Autopropelido"
           },
           "plantadeiras": {
             "tendencia": "negativo",
-            "descricao": "Queda drástica de vendas.",
-            "segmento_impactado": "Pequeno Porte (<20 linhas)"
+            "descricao": "Adiamento de investimentos em novas plantadeiras.",
+            "segmento_impactado": "Grande Porte (>20 linhas)"
           }
         },
-        "url_noticia": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxPNTJZYzM2c2ZHYWZZN3NteURwcnp4STk3WVBUd0hWSHlBNGdUem9xZERvcTlScmhXcHhILVFVa2tXRGxwQUxldTJySEJkQjQ4azBXWVN1YXFGMkc5YWZHNkhWTWQtWnZ4MUJIM294SkVWYmdZUnJkaklSdnI0WnBfOTVHSlJZWDJjTmtRR2RnZF9aSmNBdEJtM2xaeWljVXhQY0dZMTNoTWdoMjV2bWxvdi1ydFU3Q2VlQW42N00tNnY?oc=5",
-        "fonte_noticia": "<a href=\"https://news.google.com/rss/articles/CBMiwAFBVV95cUxPNTJZYzM2c2ZHYWZZN3NteURwcnp4STk3WVBUd0hWSHlBNGdUem9xZERvcTlScmhXcHhILVFVa2tXRGxwQUxldTJySEJkQjQ4azBXWVN1YXFGMkc5YWZHNkhWTWQtWnZ4MUJIM294SkVWYmdZUnJkaklSdnI0WnBfOTVHSlJZWDJjTmtRR2RnZF9aSmNBdEJtM2xaeWljVXhQY0dZMTNoTWdoMjV2bWxvdi1ydFU3Q2VlQW42N00tNnY?oc=5\" target=\"_blank\" rel=\"noopener\">El Sol de México · 08/11/2026</a>",
-        "data_publicacao": "2026-11-08"
+        "url_noticia": "https://news.google.com/rss/articles/CBMixgFBVV95cUxPR183Z1dldHJJZ2w4VjVTVTNHRXdFY0gzdi1VX3l0ZnRNcU1rbkk3SVlEMHNLYTI5M0VINlA2UjVncElkMGlyZmRnWHd0V0szLThUVjhXeGVXZjdxWjFSOXNNNFV3UlhUYTlrV0lRdHRhZ3VIYjd2M3RlUTJiai0tcGtfUU5mQWlJTXFndXRKOVJLVk1kZlBWZUhEZDZaamx4MURzMUcwWFZ6UzJRdG9ST1RlZk5kTFNtOEs3cnlLUzBQelN0eUE?oc=5",
+        "fonte_noticia": "<a href=\"https://news.google.com/rss/articles/CBMixgFBVV95cUxPR183Z1dldHJJZ2w4VjVTVTNHRXdFY0gzdi1VX3l0ZnRNcU1rbkk3SVlEMHNLYTI5M0VINlA2UjVncElkMGlyZmRnWHd0V0szLThUVjhXeGVXZjdxWjFSOXNNNFV3UlhUYTlrV0lRdHRhZ3VIYjd2M3RlUTJiai0tcGtfUU5mQWlJTXFndXRKOVJLVk1kZlBWZUhEZDZaamx4MURzMUcwWFZ6UzJRdG9ST1RlZk5kTFNtOEs3cnlLUzBQelN0eUE?oc=5\" target=\"_blank\" rel=\"noopener\">Debate · 11/11/2026</a>",
+        "data_publicacao": "2026-11-11"
       },
       {
-        "tema": "Mercado & Produção",
-        "id_noticia": "N30",
-        "titulo_noticia": "Soledad financiará tractores y maquinaria agrícola",
-        "tendencia_noticia": "positivo",
-        "corpo_noticia": "O município de Soledad de Graciano Sánchez financiará a aquisição de tratores e maquinário para produtores.",
+        "tema": "Comércio Exterior & Geopolítica",
+        "id_noticia": "N17",
+        "titulo_noticia": "CNA advierte riesgos para más exportaciones agrícolas de México",
+        "tendencia_noticia": "negativo",
+        "corpo_noticia": "Após medidas restritivas contra morango e tomate mexicano nos EUA, o Conselho Nacional Agropecuário alerta sobre riscos iminentes para outras commodities de exportação.",
         "relevancia": "alta",
-        "horizonte": "imediato",
-        "por_que_importa": "Cria uma linha de financiamento direta e localizada, impulsionando a venda de tratores.",
+        "horizonte": "3-6 meses",
+        "por_que_importa": "A perda de receita externa reduz a liquidez dos grandes produtores exportadores, principais compradores de máquinas pesadas.",
         "impacto_produtos": {
           "tratores": {
-            "tendencia": "positivo",
-            "descricao": "Financiamento direto impulsiona vendas.",
-            "segmento_impactado": "Média Potência (80-170cv)"
-          },
-          "colheitadeiras": {
-            "tendencia": "incerto",
-            "descricao": "",
-            "segmento_impactado": ""
-          },
-          "pulverizadores": {
-            "tendencia": "incerto",
-            "descricao": "",
-            "segmento_impactado": ""
-          },
-          "plantadeiras": {
-            "tendencia": "incerto",
-            "descricao": "",
-            "segmento_impactado": ""
-          }
-        },
-        "url_noticia": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxOYjB2cmdxTjktTHRmemdDdHMtOG96al9FSWVieWJaR2poXy00cXJMeEJOTmlmVjl5M0JXZUItUGI5d3lDYm1Wa0djYU9CYTdxUnVHanVLdjAzZHhUdEJtWTFtcVQ3dkhPM1NyNjhtaV9DWkFoTmhQWFFuUmlDUjZnYnl6MkNDLUNDMGQ4cURJVndiSGVOVmF1OTlXSTV0c0pjbFY4Ukx5eEVTWXlOMlJUQkZCWnlWcFY5aFJBM2VpWU5jcHdSNGxGanlndUV1VWpncVhR?oc=5",
-        "fonte_noticia": "<a href=\"https://news.google.com/rss/articles/CBMi0wFBVV95cUxOYjB2cmdxTjktTHRmemdDdHMtOG96al9FSWVieWJaR2poXy00cXJMeEJOTmlmVjl5M0JXZUItUGI5d3lDYm1Wa0djYU9CYTdxUnVHanVLdjAzZHhUdEJtWTFtcVQ3dkhPM1NyNjhtaV9DWkFoTmhQWFFuUmlDUjZnYnl6MkNDLUNDMGQ4cURJVndiSGVOVmF1OTlXSTV0c0pjbFY4Ukx5eEVTWXlOMlJUQkZCWnlWcFY5aFJBM2VpWU5jcHdSNGxGanlndUV1VWpncVhR?oc=5\" target=\"_blank\" rel=\"noopener\">El Sol de México · 05/11/2026</a>",
-        "data_publicacao": "2026-11-05"
-      },
-      {
-        "tema": "Mercado & Produção",
-        "id_noticia": "N28",
-        "titulo_noticia": "Maquinaria agrícola compara carga tributaria",
-        "tendencia_noticia": "incerto",
-        "corpo_noticia": "Associações comparam a carga tributária da maquinaria argentina com Brasil e México, alertando sobre baixa rentabilidade.",
-        "relevancia": "media",
-        "horizonte": "6-12 meses",
-        "por_que_importa": "Discute a competitividade de preços e a carga de impostos que afeta a renovação de frotas.",
-        "impacto_produtos": {
-          "tratores": {
-            "tendencia": "incerto",
-            "descricao": "Cautela na importação.",
+            "tendencia": "negativo",
+            "descricao": "Redução de investimentos por parte de exportadores.",
             "segmento_impactado": "Alta Potência (>170cv)"
           },
           "colheitadeiras": {
             "tendencia": "incerto",
-            "descricao": "",
+            "descricao": "Demanda voltada apenas para reposição essencial.",
             "segmento_impactado": ""
           },
           "pulverizadores": {
+            "tendencia": "negativo",
+            "descricao": "Menor adoção de tecnologia avançada.",
+            "segmento_impactado": "Autopropelido"
+          },
+          "plantadeiras": {
+            "tendencia": "negativo",
+            "descricao": "Retração na compra de equipamentos de grande porte.",
+            "segmento_impactado": "Grande Porte (>20 linhas)"
+          }
+        },
+        "url_noticia": "https://news.google.com/rss/articles/CBMi4gFBVV95cUxPczlIQ0pIN1R6OVRTbWdDajdfTWZqTHF1MHhGeHMxdk0tQndqOHI2RWc0eDN4WlRhQ19TS1IyS0h4dFh0U0sxZ0M2XzFVQkQySUNzczBGUHMyRFlsbnVWSjR4VndmSTRhNlhsLVRHNU1hZ0o3aGM3YnFNM3JtYXNVNGJpdmxJSWdOcEljTV92bTdvUy00SzZleXVQYmgwd2hFRlptNFNyMTlJVzlBeUlfY1VCQVRaZ1NHbDU5SkUzS1NyejBXWFNhS3JfT0gzU3dnZUVIUkUtWlgwNWdBb0R4WjN3?oc=5",
+        "fonte_noticia": "<a href=\"https://news.google.com/rss/articles/CBMi4gFBVV95cUxPczlIQ0pIN1R6OVRTbWdDajdfTWZqTHF1MHhGeHMxdk0tQndqOHI2RWc0eDN4WlRhQ19TS1IyS0h4dFh0U0sxZ0M2XzFVQkQySUNzczBGUHMyRFlsbnVWSjR4VndmSTRhNlhsLVRHNU1hZ0o3aGM3YnFNM3JtYXNVNGJpdmxJSWdOcEljTV92bTdvUy00SzZleXVQYmgwd2hFRlptNFNyMTlJVzlBeUlfY1VCQVRaZ1NHbDU5SkUzS1NyejBXWFNhS3JfT0gzU3dnZUVIUkUtWlgwNWdBb0R4WjN3?oc=5\" target=\"_blank\" rel=\"noopener\">El Sol de México · 10/11/2026</a>",
+        "data_publicacao": "2026-11-10"
+      },
+      {
+        "tema": "Clima & Safra",
+        "id_noticia": "N19",
+        "titulo_noticia": "Chihuahua enfrenta tres años de sequía y peligra el ciclo agrícola",
+        "tendencia_noticia": "negativo",
+        "corpo_noticia": "O estado de Chihuahua acumula três anos consecutivos de seca severa, com barragens sem recuperação, colocando em risco iminente o ciclo agrícola de 2027.",
+        "relevancia": "alta",
+        "horizonte": "imediato",
+        "por_que_importa": "A quebra de safra e a falta de água paralisam o uso de maquinário pesado na região afetada.",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "negativo",
+            "descricao": "Demanda estagnada nas áreas de seca extrema.",
+            "segmento_impactado": "Média Potência (80-170cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "negativo",
+            "descricao": "Ausência de colheita anula a necessidade de novas máquinas.",
+            "segmento_impactado": "Grande Porte (Classes 7+)"
+          },
+          "pulverizadores": {
+            "tendencia": "negativo",
+            "descricao": "Redução drástica nas aplicações.",
+            "segmento_impactado": "De Arrasto"
+          },
+          "plantadeiras": {
+            "tendencia": "negativo",
+            "descricao": "Sem plantio, vendas zeradas no setor de grãos local.",
+            "segmento_impactado": "Grande Porte (>20 linhas)"
+          }
+        },
+        "url_noticia": "https://news.google.com/rss/articles/CBMi4wFBVV95cUxNemNaNDdCSVp5T09TRFlMMFliWTVXTXh3YVg5clJTMW5QVUJZSzVZbEdmaEFtV0ZMdzFJdWxHZjh2Q3ZfcmlySzJoT2MxY0h4dHlyOWxKTTlGY3RZSk5CdTEzeVBENWd0WlFqQ1NDWUFSUHIwWWdES2RESzlqR3gzaGRFNjBlNUJicERGdy1TYkZIVUloSFBIN0M3a2E0SE1yM0ZlZXR5VG9WaklWVEwxRUlxYUxTUmxJXzU2NS1CS0l3VVpfLURzb1lMVVBCR21aalpOVnB6YnJiTkV6X0ZaUEhJOA?oc=5",
+        "fonte_noticia": "<a href=\"https://news.google.com/rss/articles/CBMi4wFBVV95cUxNemNaNDdCSVp5T09TRFlMMFliWTVXTXh3YVg5clJTMW5QVUJZSzVZbEdmaEFtV0ZMdzFJdWxHZjh2Q3ZfcmlySzJoT2MxY0h4dHlyOWxKTTlGY3RZSk5CdTEzeVBENWd0WlFqQ1NDWUFSUHIwWWdES2RESzlqR3gzaGRFNjBlNUJicERGdy1TYkZIVUloSFBIN0M3a2E0SE1yM0ZlZXR5VG9WaklWVEwxRUlxYUxTUmxJXzU2NS1CS0l3VVpfLURzb1lMVVBCR21aalpOVnB6YnJiTkV6X0ZaUEhJOA?oc=5\" target=\"_blank\" rel=\"noopener\">El Sol de México · 12/11/2026</a>",
+        "data_publicacao": "2026-11-12"
+      },
+      {
+        "tema": "Mercado & Produção",
+        "id_noticia": "N25",
+        "titulo_noticia": "Productores agropecuarios protestarán con tractores en SLP",
+        "tendencia_noticia": "negativo",
+        "corpo_noticia": "Produtores agropecuários anunciam protestos com bloqueios de estradas usando tratores em San Luis Potosí, motivados pela grave crise econômica enfrentada no campo.",
+        "relevancia": "alta",
+        "horizonte": "imediato",
+        "por_que_importa": "Reflete o alto nível de insatisfação do setor produtivo, sinalizando inadimplência e aversão total a novos investimentos.",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "negativo",
+            "descricao": "Conflito e insatisfação travam novas negociações.",
+            "segmento_impactado": "Média Potência (80-170cv)"
+          },
+          "colheitadeiras": {
             "tendencia": "incerto",
-            "descricao": "",
+            "descricao": "Sem impacto direto no volume.",
             "segmento_impactado": ""
+          },
+          "pulverizadores": {
+            "tendencia": "negativo",
+            "descricao": "Paralisação de investimentos em defensivos.",
+            "segmento_impactado": "Autopropelido"
           },
           "plantadeiras": {
             "tendencia": "incerto",
-            "descricao": "",
+            "descricao": "Mercado travado por protestos.",
             "segmento_impactado": ""
           }
         },
-        "url_noticia": "https://news.google.com/rss/articles/CBMiqgJBVV95cUxNZGluU2lEU1A1bEZaNTVRMjV3ZDVJeks3blRwRU1razBEYTNEaF9veklaRFE5dHdkSWpPUnhPSmtTZThFNjNUbjF4WjdHQy1FLU9ielA5Zjd5VDNKbkZ5cU1HQVRVU05CYW94SHJ2UU1JaVNtZzhoTFNURjJCUk9CMTQxM0ZzLWE2Z1NOX3U5Y3F4eUdIT1VXWFUtc2lKLXcxS2ZPOUQ3VGVzMzM5Qzg3STNNMURrTllEeEl5Zm5aZFdUczVRSlc4Q1dxSHlJVndoYk01R3VSR3hqWXdGVHVaLXh0UFJ6NWVydDVwSjE2TmhNTTdJbkVqMW1XZTFBek1RUnB3NGRVUG42RFFVUjAtWFJIaTNBdmRJbGxiSXdtNmNSeEYwejF3dkxB?oc=5",
-        "fonte_noticia": "<a href=\"https://news.google.com/rss/articles/CBMiqgJBVV95cUxNZGluU2lEU1A1bEZaNTVRMjV3ZDVJeks3blRwRU1razBEYTNEaF9veklaRFE5dHdkSWpPUnhPSmtTZThFNjNUbjF4WjdHQy1FLU9ielA5Zjd5VDNKbkZ5cU1HQVRVU05CYW94SHJ2UU1JaVNtZzhoTFNURjJCUk9CMTQxM0ZzLWE2Z1NOX3U5Y3F4eUdIT1VXWFUtc2lKLXcxS2ZPOUQ3VGVzMzM5Qzg3STNNMURrTllEeEl5Zm5aZFdUczVRSlc4Q1dxSHlJVndoYk01R3VSR3hqWXdGVHVaLXh0UFJ6NWVydDVwSjE2TmhNTTdJbkVqMW1XZTFBek1RUnB3NGRVUG42RFFVUjAtWFJIaTNBdmRJbGxiSXdtNmNSeEYwejF3dkxB?oc=5\" target=\"_blank\" rel=\"noopener\">Bichos de Campo · 06/11/2026</a>",
-        "data_publicacao": "2026-11-06"
+        "url_noticia": "https://news.google.com/rss/articles/CBMi6wFBVV95cUxOTldReVhHeEdpRG1sUmRmeDc5ZGRHNmQ2OEZjQ004TlRyMVZrUHg5Z1VRa2JFNmF1VWYzcDZOOFR3ZTVqUUJmZ1JIdXhwY0xIZV8yaWFINTMtSkJwVFl3eFZ6V3ZITUZyQXc5cWdIMHFPaGRsSnMwNUlNeEhXMGJoNHl1cjNaOXZ5NVhCQXpRTFMtQU9JellvMU94Nkp4MThuZFRvZW1xQnBucG8xQWJFal9pdkljenFlNERRYlBhVEhqeUlQWWhBUlRES2huQllpWEE2ZS15SlVCUXd4WVhaX1lFT092aWdOWTlj?oc=5",
+        "fonte_noticia": "<a href=\"https://news.google.com/rss/articles/CBMi6wFBVV95cUxOTldReVhHeEdpRG1sUmRmeDc5ZGRHNmQ2OEZjQ004TlRyMVZrUHg5Z1VRa2JFNmF1VWYzcDZOOFR3ZTVqUUJmZ1JIdXhwY0xIZV8yaWFINTMtSkJwVFl3eFZ6V3ZITUZyQXc5cWdIMHFPaGRsSnMwNUlNeEhXMGJoNHl1cjNaOXZ5NVhCQXpRTFMtQU9JellvMU94Nkp4MThuZFRvZW1xQnBucG8xQWJFal9pdkljenFlNERRYlBhVEhqeUlQWWhBUlRES2huQllpWEE2ZS15SlVCUXd4WVhaX1lFT092aWdOWTlj?oc=5\" target=\"_blank\" rel=\"noopener\">El Sol de México · 12/11/2026</a>",
+        "data_publicacao": "2026-11-12"
+      },
+      {
+        "tema": "Mercado & Produção",
+        "id_noticia": "N26",
+        "titulo_noticia": "China compartirá tecnología agrícola con México",
+        "tendencia_noticia": "positivo",
+        "corpo_noticia": "Acordo recente prevê cooperação mútua e compartilhamento de tecnologia agrícola entre China e México para otimizar a produção local.",
+        "relevancia": "media",
+        "horizonte": "6-12 meses",
+        "por_que_importa": "A entrada de novas tecnologias pode estimular a demanda por maquinário modernizado e agricultura de precisão.",
+        "impacto_produtos": {
+          "tratores": {
+            "tendencia": "positivo",
+            "descricao": "Demanda por tratores equipados com tecnologia avançada.",
+            "segmento_impactado": "Alta Potência (>170cv)"
+          },
+          "colheitadeiras": {
+            "tendencia": "incerto",
+            "descricao": "Impacto focado em implementos e tecnologia.",
+            "segmento_impactado": ""
+          },
+          "pulverizadores": {
+            "tendencia": "positivo",
+            "descricao": "Incentivo à pulverização inteligente.",
+            "segmento_impactado": "Autopropelido"
+          },
+          "plantadeiras": {
+            "tendencia": "positivo",
+            "descricao": "Demanda por plantadeiras de alta precisão.",
+            "segmento_impactado": "Grande Porte (>20 linhas)"
+          }
+        },
+        "url_noticia": "https://news.google.com/rss/articles/CBMiggFBVV95cUxORVFXbkhwb19kdnpWOU01R256WC1kcGoxTlFyYmhjZG0wQmlYRUdoYWV2eVF0czFPLXRsN21vRnFFai1tSTg2TFVYWUFHVEw3b3hvT0Vta2xZZlUxUm1SYTdhOGtvNm5MZ1d6Qzktb0c3eUNBb2daSEVJOERmZEVZek930gGHAUFVX3lxTE5aRjdFSzlxZmNQeTZzbkx2dFFKVTRzekY2ajM4ay1GcFY4THh1SWFnblpRWnRhMXVwTkQzcW5BMExnVUloUUhVTGtVQUdvZHBmR3pZdkFiUjFIVENxbGZBcmRzSUVFYWJDR3A0RlNHb2dodW0xX3JiZlY1U2o4SkJJQ0JCbXJwaw?oc=5",
+        "fonte_noticia": "<a href=\"https://news.google.com/rss/articles/CBMiggFBVV95cUxORVFXbkhwb19kdnpWOU01R256WC1kcGoxTlFyYmhjZG0wQmlYRUdoYWV2eVF0czFPLXRsN21vRnFFai1tSTg2TFVYWUFHVEw3b3hvT0Vta2xZZlUxUm1SYTdhOGtvNm5MZ1d6Qzktb0c3eUNBb2daSEVJOERmZEVZek930gGHAUFVX3lxTE5aRjdFSzlxZmNQeTZzbkx2dFFKVTRzekY2ajM4ay1GcFY4THh1SWFnblpRWnRhMXVwTkQzcW5BMExnVUloUUhVTGtVQUdvZHBmR3pZdkFiUjFIVENxbGZBcmRzSUVFYWJDR3A0RlNHb2dodW0xX3JiZlY1U2o4SkJJQ0JCbXJwaw?oc=5\" target=\"_blank\" rel=\"noopener\">Mundo Tech · 12/11/2026</a>",
+        "data_publicacao": "2026-11-12"
       }
     ]
   }
